@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 
 import gspread
+from gspread.utils import rowcol_to_a1
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
@@ -248,6 +249,7 @@ def push_tab(
     worksheet.clear()
     worksheet.update(values, "A1", value_input_option="USER_ENTERED")
     worksheet.freeze(rows=1)
+    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(len(values), len(columns))}")
     worksheet.format(
         "1:1",
         {
