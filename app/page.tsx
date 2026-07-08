@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
-import { dDay, getFlatRows, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
+import { dDay, getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
 
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
 export const revalidate = 3600;
@@ -78,6 +78,7 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
 export default function Home() {
   const upcoming = getUpcomingEvents(30);
   const rows = getFlatRows();
+  const { updated } = getSiteData();
 
   return (
     <main className="mx-auto max-w-[1480px] px-5 py-8">
@@ -113,7 +114,7 @@ export default function Home() {
             Vericap 콘텐츠 보러가기
           </Link>
 
-          <CalendarTable rows={rows} />
+          <CalendarTable rows={rows} priceDate={updated} />
         </section>
       </div>
     </main>

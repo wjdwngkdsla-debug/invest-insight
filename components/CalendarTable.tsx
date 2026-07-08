@@ -81,7 +81,8 @@ function statusClass(status: string): string {
   return status === "예정" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-600";
 }
 
-function downloadCsv(rows: FlatRow[], filter: FilterKey) {
+function downloadCsv(rows: FlatRow[], filter: FilterKey, priceDate?: string) {
+  const marketCapHeader = priceDate ? `시가총액(${priceDate.slice(2)})` : "시가총액";
   const headers = [
     "종목",
     "종목코드",
@@ -90,10 +91,9 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey) {
     "구분",
     "기간",
     "해제일",
-    "실제거래가능일",
     "락업 해제 물량",
     "비중(상장 주식 대비 %)",
-    "시가총액",
+    marketCapHeader,
     "상태",
   ];
   const lines = [
@@ -107,7 +107,6 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey) {
         r.category,
         r.period,
         r.date_display,
-        r.tradable_date,
         r.qty,
         r.pct,
         r.marketCap,
@@ -128,7 +127,7 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey) {
 
 const PAGE_SIZE = 20;
 
-export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string }) {
+export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate?: string }) {
   const [filter, setFilter] = useState<FilterKey>("전체");
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("tradable_date");
@@ -199,7 +198,7 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
         </div>
 
         <button
-          onClick={() => downloadCsv(sorted, filter)}
+          onClick={() => downloadCsv(sorted, filter, priceDate)}
           className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           CSV 다운로드

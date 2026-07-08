@@ -165,9 +165,33 @@ def write_csv_dicts(path: Path, rows: list[dict[str, str]], columns: list[str]) 
         writer.writerows({column: row.get(column, "") for column in columns} for row in rows)
 
 
+def price_date_suffix() -> str:
+    """종가 기준일(예: '26-07-08'). site_data.json의 updated 값에서 가져온다."""
+    try:
+        data = json.loads((ROOT_DIR / "data" / "site_data.json").read_text(encoding="utf-8"))
+        updated = str(data.get("updated", ""))
+        return updated[2:] if len(updated) == 10 else ""
+    except Exception:
+        return ""
+
+
+def header_label(column: str) -> str:
+    label = HEADER_KO.get(column, column)
+    if column == "close_price":
+        suffix = price_date_suffix()
+        if suffix:
+            return f"{label}({suffix})"
+    return label
+
+
 def internal_header(value: str) -> str:
     cleaned = value.strip()
-    return HEADER_INTERNAL.get(cleaned, cleaned)
+    if cleaned in HEADER_INTERNAL:
+        return HEADER_INTERNAL[cleaned]
+    # "종가(26-07-08)"처럼 기준일이 붙은 종가 헤더도 인식
+    if cleaned.startswith("종가("):
+        return "close_price"
+    return cleaned
 
 
 def worksheet_records(ws: gspread.Worksheet) -> list[dict[str, str]]:
@@ -295,7 +319,7 @@ def push_rows(
     rows: list[dict],
     columns: list[str],
 ) -> None:
-    values = [[HEADER_KO.get(column, column) for column in columns]]
+    values = [[header_label(column) for column in columns]]
     values.extend([[row.get(column, "") for column in columns] for row in rows])
 
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 10, len(columns))
