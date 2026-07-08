@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "name": "엔비알모션",
+    "code": "0004V0",
+    "market": "코스닥",
+    "listing_date": "2026-01-14",
+    "shares": "10404468",
+    "close_price": "17710",
+    "classification": "수동확인",
+    "classification_reason": "비공모(스팩합병·이전상장 등)",
+    "review_decision": "비IPO",
+    "review_memo": "",
+    "rcp": "20251223000480",
+    "detected_bas_dd": "20260114"
+  },
+  {
+    "name": "지에프아이",
+    "code": "493330",
+    "market": "코스닥",
+    "listing_date": "2026-01-14",
+    "shares": "7682146",
+    "close_price": "17990",
+    "classification": "수동확인",
+    "classification_reason": "비공모(스팩합병·이전상장 등)",
+    "review_decision": "비IPO",
+    "review_memo": "",
+    "rcp": "20251226000449",
+    "detected_bas_dd": "20260114"
+  },
+  {
+    "name": "보원케미칼",
+    "code": "0010F0",
+    "market": "코스닥",
+    "listing_date": "2026-04-03",
+    "shares": "11143601",
+    "close_price": "9070",
+    "classification": "수동확인",
+    "classification_reason": "비공모(스팩합병·이전상장 등)",
+    "review_decision": "비IPO",
+    "review_memo": "",
+    "rcp": "20260317000494",
+    "detected_bas_dd": "20260403"
+  },
+  {
+    "name": "케이피항공산업",
+    "code": "288180",
+    "market": "코스닥",
+    "listing_date": "2026-05-19",
+    "shares": "7393262",
+    "close_price": "43850",
+    "classification": "수동확인",
+    "classification_reason": "비공모(스팩합병·이전상장 등)",
+    "review_decision": "비IPO",
+    "review_memo": "",
+    "rcp": "20260428000161",
+    "detected_bas_dd": "20260519"
+  },
+  {
+    "name": "세미티에스",
+    "code": "0017J0",
+    "market": "코스닥",
+    "listing_date": "2026-06-10",
+    "shares": "30136623",
+    "close_price": "5440",
+    "classification": "수동확인",
+    "classification_reason": "비공모(스팩합병·이전상장 등)",
+    "review_decision": "IPO",
+    "review_memo": "",
+    "rcp": "20260520000165",
+    "detected_bas_dd": "20260610"
+  }
+]
