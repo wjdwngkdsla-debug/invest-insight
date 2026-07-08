@@ -345,10 +345,11 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
     if REVIEW_DECISIONS_PATH.exists():
         decisions = json.loads(REVIEW_DECISIONS_PATH.read_text(encoding="utf-8"))
     decision_by_code = {row.get("code", ""): row for row in decisions if row.get("code")}
+    # 이미 운영_락업일정에 편입되어 관리 중인 종목은 검토가 끝난 것이므로 후보 탭에서 제외
     admin_codes = {
         row.get("code", "")
         for row in read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
-        if row.get("category") == "IPO기관"
+        if row.get("code")
     }
 
     merged_rows = []
@@ -358,7 +359,7 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
             "review_decision": saved.get("review_decision", ""),
             "review_memo": saved.get("review_memo", ""),
         }}
-        if merged.get("review_decision") == "IPO" and merged.get("code") in admin_codes:
+        if merged.get("code") in admin_codes:
             continue
         merged_rows.append(merged)
 
