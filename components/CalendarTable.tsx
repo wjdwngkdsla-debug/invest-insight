@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import type { FlatRow, LockupCategory } from "@/lib/data";
+import { displayStatus, type FlatRow, type LockupCategory } from "@/lib/data";
 
 type FilterKey = "전체" | LockupCategory;
 type SortKey =
@@ -33,7 +33,7 @@ const PERIOD_ORDER: Record<string, number> = {
   "3년": 11,
 };
 
-const FILTERS: FilterKey[] = ["전체", "IPO기관", "구주·보호예수"];
+const FILTERS: FilterKey[] = ["전체", "IPO기관", "기존주주"];
 
 const COLUMNS: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "name", label: "종목" },
@@ -74,10 +74,7 @@ function compare(a: FlatRow, b: FlatRow, key: SortKey): number {
 }
 
 function statusClass(status: string): string {
-  if (status === "예정") return "bg-blue-100 text-blue-700";
-  if (status === "반환확인" || status === "반환확인_API수정") return "bg-green-100 text-green-700";
-  if (status === "수동확인" || status === "수동/API불일치") return "bg-amber-100 text-amber-700";
-  return "bg-gray-100 text-gray-600";
+  return status === "예정" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-600";
 }
 
 function downloadCsv(rows: FlatRow[], filter: FilterKey) {
@@ -110,7 +107,7 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey) {
         r.qty,
         r.pct,
         r.marketCap,
-        r.status,
+        displayStatus(r.tradable_date),
       ]
         .map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`)
         .join(",")
@@ -203,18 +200,15 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
                 <td className="px-4 py-3 text-gray-500">{row.market}</td>
                 <td className="px-4 py-3 text-gray-500">{row.listing_date}</td>
                 <td className="px-4 py-3 text-gray-700">{row.category}</td>
-                <td className="px-4 py-3 text-gray-500">
-                  <div>{row.period}</div>
-                  {row.category === "구주·보호예수" && (row.holder_name || row.reason) && (
-                    <div className="mt-0.5 max-w-[180px] truncate text-xs text-gray-400">{row.holder_name || row.reason}</div>
-                  )}
-                </td>
+                <td className="px-4 py-3 text-gray-500">{row.period}</td>
                 <td className="px-4 py-3 text-gray-500">{row.date_display}</td>
                 <td className="px-4 py-3 text-right">{row.qty.toLocaleString("ko-KR")}주</td>
                 <td className="px-4 py-3 text-right">{row.pct}%</td>
                 <td className="px-4 py-3 text-right">{formatEok(row.marketCap)}</td>
                 <td className="px-4 py-3">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(row.status)}`}>{row.status}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(displayStatus(row.tradable_date))}`}>
+                    {displayStatus(row.tradable_date)}
+                  </span>
                 </td>
               </tr>
             ))}

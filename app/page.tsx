@@ -2,6 +2,9 @@ import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
 import { dDay, getFlatRows, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
 
+// D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
+export const revalidate = 3600;
+
 function formatQty(qty: number): string {
   return qty.toLocaleString("ko-KR");
 }

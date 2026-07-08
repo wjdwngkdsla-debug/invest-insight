@@ -1,7 +1,7 @@
 import siteData from "@/data/site_data.json";
 import type { SiteData, StockLockup, LockupEvent } from "./types";
 
-export type LockupCategory = "IPO기관" | "구주·보호예수";
+export type LockupCategory = "IPO기관" | "기존주주";
 
 export function getSiteData(): SiteData {
   return siteData as SiteData;
@@ -12,7 +12,7 @@ export function getStockByCode(code: string): StockLockup | undefined {
 }
 
 export function getEventCategory(ev: Pick<LockupEvent, "type">): LockupCategory {
-  return ev.type === "보호예수" ? "구주·보호예수" : "IPO기관";
+  return ev.type === "보호예수" ? "기존주주" : "IPO기관";
 }
 
 export interface EventBreakdown {
@@ -37,11 +37,19 @@ export interface UpcomingGroup {
   breakdown: EventBreakdown[];
 }
 
+// 절대시간(ms)을 한국시간 기준 날짜 번호로 변환 — 서버(UTC)/브라우저 어디서 돌아도 같은 결과
+function kstDayNumber(ms: number): number {
+  return Math.floor((ms + 9 * 60 * 60 * 1000) / 86400000);
+}
+
 export function dDay(dateStr: string, today = new Date()): number {
-  const target = new Date(dateStr);
-  const t0 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const diffMs = target.getTime() - t0.getTime();
-  return Math.round(diffMs / (1000 * 60 * 60 * 24));
+  const target = kstDayNumber(Date.parse(`${dateStr}T00:00:00+09:00`));
+  return target - kstDayNumber(today.getTime());
+}
+
+// 사용자에게 보여줄 상태 — 운영용 세부 상태(반환확인_API수정 등) 대신 날짜 기준 두 가지로 단순화
+export function displayStatus(tradableDate: string, today = new Date()): "예정" | "해제완료" {
+  return dDay(tradableDate, today) >= 0 ? "예정" : "해제완료";
 }
 
 function statusOrder(status: string): number {
@@ -72,7 +80,7 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
       breakdownMap.set(category, current);
     }
 
-    const breakdown: EventBreakdown[] = (["IPO기관", "구주·보호예수"] as LockupCategory[])
+    const breakdown: EventBreakdown[] = (["IPO기관", "기존주주"] as LockupCategory[])
       .map((category) => {
         const items = breakdownMap.get(category) || [];
         const categoryQty = items.reduce((sum, ev) => sum + ev.qty, 0);
