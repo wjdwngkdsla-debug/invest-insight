@@ -1,0 +1,4 @@
+# pnpm 네이티브 빌드 스크립트 승인 (Next.js에 필요한 두 개만 허용)
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
