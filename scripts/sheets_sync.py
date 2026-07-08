@@ -54,6 +54,11 @@ LOG_COLUMNS = [
     "time", "event_id", "code", "name", "field", "old_value", "new_value", "reason",
 ]
 
+UNIVERSE_REVIEW_COLUMNS = [
+    "name", "code", "market", "listing_date", "shares", "close_price",
+    "classification", "classification_reason", "rcp", "detected_bas_dd",
+]
+
 HEADER_KO = {
     "event_id": "이벤트ID",
     "code": "종목코드",
@@ -95,6 +100,10 @@ HEADER_KO = {
     "old_value": "이전값",
     "new_value": "변경값",
     "reason": "변경사유",
+    "classification": "판정상태",
+    "classification_reason": "판정사유",
+    "rcp": "DART접수번호",
+    "detected_bas_dd": "상장감지기준일",
 }
 HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
@@ -242,6 +251,15 @@ def push_tab(
     columns: list[str],
 ) -> None:
     rows = read_csv_dicts(ROOT_DIR / "data" / filename)
+    push_rows(spreadsheet, title, rows, columns)
+
+
+def push_rows(
+    spreadsheet: gspread.Spreadsheet,
+    title: str,
+    rows: list[dict],
+    columns: list[str],
+) -> None:
     values = [[HEADER_KO.get(column, column) for column in columns]]
     values.extend([[row.get(column, "") for column in columns] for row in rows])
 
@@ -261,11 +279,18 @@ def push_tab(
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
 
 
+def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
+    candidates = sorted((ROOT_DIR / "data").glob("review_candidates_*.json"))
+    rows = json.loads(candidates[-1].read_text(encoding="utf-8")) if candidates else []
+    push_rows(spreadsheet, "상장후보_검토", rows, UNIVERSE_REVIEW_COLUMNS)
+
+
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     if reset:
         reset_worksheets(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
+    push_universe_review(spreadsheet)
 
 
 def main() -> None:
