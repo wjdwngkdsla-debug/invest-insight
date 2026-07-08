@@ -172,14 +172,14 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-        <table className="w-full min-w-[1120px] text-sm">
+        <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50 text-left text-gray-500">
               {COLUMNS.map((column) => (
                 <th
                   key={column.key}
                   onClick={() => handleSort(column.key)}
-                  className={`cursor-pointer select-none whitespace-nowrap px-4 py-3 font-semibold hover:text-gray-800 ${
+                  className={`cursor-pointer select-none whitespace-nowrap px-3 py-3 font-semibold hover:text-gray-800 ${
                     column.align === "right" ? "text-right" : ""
                   }`}
                 >
@@ -192,20 +192,20 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
           <tbody>
             {sorted.map((row, index) => (
               <tr key={`${row.code}-${row.category}-${row.period}-${row.tradable_date}-${index}`} className="border-b border-gray-100 last:border-0">
-                <td className="px-4 py-3">
+                <td className="whitespace-nowrap px-3 py-3">
                   <Link href={`/stock/${row.code}`} className="font-medium text-blue-600 hover:underline">
                     {row.name}
                   </Link>
                 </td>
-                <td className="px-4 py-3 text-gray-500">{row.market}</td>
-                <td className="px-4 py-3 text-gray-500">{row.listing_date}</td>
-                <td className="px-4 py-3 text-gray-700">{row.category}</td>
-                <td className="px-4 py-3 text-gray-500">{row.period}</td>
-                <td className="px-4 py-3 text-gray-500">{row.date_display}</td>
-                <td className="px-4 py-3 text-right">{row.qty.toLocaleString("ko-KR")}주</td>
-                <td className="px-4 py-3 text-right">{row.pct}%</td>
-                <td className="px-4 py-3 text-right">{formatEok(row.marketCap)}</td>
-                <td className="px-4 py-3">
+                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.market}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.listing_date}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-gray-700">{row.category}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.period}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.date_display}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right">{row.qty.toLocaleString("ko-KR")}주</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right">{row.pct}%</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right">{formatEok(row.marketCap)}</td>
+                <td className="whitespace-nowrap px-3 py-3">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(displayStatus(row.tradable_date))}`}>
                     {displayStatus(row.tradable_date)}
                   </span>

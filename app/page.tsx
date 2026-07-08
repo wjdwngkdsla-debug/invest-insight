@@ -16,40 +16,28 @@ function groupTitle(group: UpcomingGroup): string {
 
 function EventHoverCard({ event }: { event: UpcomingGroup }) {
   return (
-    <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] w-[360px] opacity-0 transition-opacity duration-150">
+    <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] w-[320px] opacity-0 transition-opacity duration-150">
       <Link
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-5 shadow-xl hover:border-gray-300"
       >
-        <div className="flex items-start justify-between gap-5">
-          <p className="min-w-0 text-lg font-bold text-gray-900">{event.stockName}</p>
-          <div className="shrink-0 text-right">
-            <p className="font-semibold text-gray-900">{formatQty(event.qty)}주</p>
-            <p className="text-sm text-gray-500">({event.pct}%)</p>
-          </div>
-        </div>
-
-        <div className="mt-4 space-y-1 text-sm text-gray-500">
-          <p>
-            {event.tradable_date} · {groupTitle(event)}
-          </p>
-          <p>
-            {event.market} · 상장일 {event.listing_date}
+        <div className="flex items-center justify-between gap-4">
+          <p className="min-w-0 truncate text-lg font-bold text-gray-900">{event.stockName}</p>
+          <p className="shrink-0 whitespace-nowrap font-semibold text-gray-900">
+            {formatQty(event.qty)}주 ({event.pct}%)
           </p>
         </div>
 
-        <div className="mt-5 space-y-2 border-t border-gray-100 pt-4 text-sm">
+        <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
           {event.breakdown.map((item) => (
             <div key={item.category} className="flex items-center justify-between gap-4">
               <span className="font-medium text-gray-700">{item.category}</span>
-              <span className="text-right text-gray-600">
+              <span className="whitespace-nowrap text-right text-gray-600">
                 {formatQty(item.qty)}주 ({item.pct}%)
               </span>
             </div>
           ))}
         </div>
-
-        <p className="mt-5 text-sm font-medium text-blue-600">클릭하면 종목 상세 페이지로 이동</p>
       </Link>
     </div>
   );
@@ -65,12 +53,17 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-gray-300 hover:bg-gray-50"
       >
-        <span
-          className={`inline-flex rounded px-2 py-1 text-xs font-bold ${
-            isNear ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"
-          }`}
-        >
-          D-{days}
+        <span className="flex items-center gap-2">
+          <span
+            className={`inline-flex shrink-0 rounded px-2 py-1 text-xs font-bold ${
+              isNear ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"
+            }`}
+          >
+            D-{days}
+          </span>
+          <span className="min-w-0 truncate text-xs text-gray-500">
+            {event.tradable_date} · {groupTitle(event)}
+          </span>
         </span>
         <p className="mt-3 font-semibold text-gray-900">{event.stockName}</p>
         <p className="mt-1 text-sm text-gray-500">
