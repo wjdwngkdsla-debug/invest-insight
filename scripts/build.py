@@ -4,7 +4,7 @@ import argparse
 import csv
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +13,7 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from scripts.config import require_env
-from scripts.sources.krx import find_stock_by_name
+from scripts.sources.krx import find_stock_by_name, krx_snapshot
 from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import parse_float_summary_lockups
 from scripts.sources.ipo_universe import load_or_build_ipo_universe
@@ -483,7 +483,32 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     return row, reviews, logs
 
 
-def rows_to_site_data(rows: list[dict]) -> dict:
+def refresh_close_prices(rows: list[dict]) -> str | None:
+    """편입된 전 종목의 종가를 최근 거래일 KRX 스냅샷으로 갱신한다.
+
+    신규 감지 대상(올해 universe)에 없는 과거 연도 종목도 포함해 전부 갱신.
+    반환값은 종가 기준일(YYYY-MM-DD), 최근 10일 내 거래일이 없으면 None.
+    """
+    today = datetime.today()
+    for back in range(0, 10):
+        bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
+        snap = krx_snapshot(bas_dd)
+        if not snap:
+            continue
+        updated = 0
+        for row in rows:
+            meta = snap.get(str(row.get("code") or ""))
+            if meta and meta.get("close_price"):
+                row["close_price"] = meta["close_price"]
+                updated += 1
+        close_date = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:8]}"
+        print(f"[KRX] 종가 갱신: {updated}개 행 / 기준일 {close_date}", file=sys.stderr)
+        return close_date
+    print("[KRX] 최근 10일 내 거래일 스냅샷을 찾지 못해 종가 갱신을 건너뜁니다.", file=sys.stderr)
+    return None
+
+
+def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
     stocks_map: dict[str, dict] = {}
     for r in rows:
         final_qty = _to_int(r.get("final_qty"))
@@ -524,7 +549,8 @@ def rows_to_site_data(rows: list[dict]) -> dict:
         })
     for stock in stocks_map.values():
         stock["events"] = sorted(stock["events"], key=lambda e: e["tradable_date"])
-    return {"updated": datetime.today().strftime("%Y-%m-%d"), "stocks": list(stocks_map.values())}
+    # updated = 종가 기준일 (시가총액 표기의 기준). 종가 갱신 실패 시에만 실행일로 대체.
+    return {"updated": price_date or datetime.today().strftime("%Y-%m-%d"), "stocks": list(stocks_map.values())}
 
 
 def main() -> None:
@@ -543,6 +569,7 @@ def main() -> None:
     all_logs: list[dict] = []
 
     print(f"[BUILD] 대상 IPO 종목 {len(targets)}개", file=sys.stderr)
+    processed_codes: set[str] = set()
     for idx, target in enumerate(targets, start=1):
         name = target["name"]
         listing_date = target["listing_date"]
@@ -551,6 +578,7 @@ def main() -> None:
         if not code or not meta:
             print(f"  [KRX] 종목 검색 실패: {name}", file=sys.stderr)
             continue
+        processed_codes.add(code)
         shares = int(meta.get("shrs") or target.get("shares") or 0)
         existing_stock_rows = rows_for_stock(existing_rows, code)
 
@@ -597,12 +625,48 @@ def main() -> None:
             all_logs.extend(logs)
             all_rows_by_id[finalized["event_id"]] = finalized
 
+    # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
+    leftover_by_code: dict[str, list[dict]] = {}
+    for row in existing_rows:
+        code = str(row.get("code") or "")
+        if code and code not in processed_codes:
+            leftover_by_code.setdefault(code, []).append(row)
+
+    for code, rows_for_code in leftover_by_code.items():
+        if all(_to_int(r.get("api_return_qty")) for r in rows_for_code):
+            continue  # 모든 이벤트가 이미 반환확인 완료 → 더 확인할 것 없음
+        first = rows_for_code[0]
+        name = first.get("name") or ""
+        target = {"name": name}
+        meta = {
+            "name": name,
+            "market": first.get("market"),
+            "shrs": _to_int(first.get("shares")),
+            "close_price": _to_int(first.get("close_price")),
+        }
+        listing_date = first.get("listing_date") or ""
+        shares = _to_int(first.get("shares"))
+        stock_rows = [dict(r) for r in rows_for_code]
+        print(f"[BUILD] (스캔 연도 외 기존 종목) {name} → API 반환확인 갱신", file=sys.stderr)
+        stock_rows, api_reviews, api_logs = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+        all_reviews.extend(api_reviews)
+        all_logs.extend(api_logs)
+        for row in stock_rows:
+            finalized, reviews, logs = finalize_row(row)
+            all_reviews.extend(reviews)
+            all_logs.extend(logs)
+            all_rows_by_id[finalized["event_id"]] = finalized
+
     all_rows = sorted(all_rows_by_id.values(), key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""))
+
+    # 편입된 전 종목(연도 무관)의 종가를 최근 거래일 기준으로 갱신 — 시가총액 최신화
+    close_date = refresh_close_prices(all_rows)
+
     _write_csv(admin_path, all_rows, ADMIN_COLUMNS)
     _write_csv(review_path, all_reviews, REVIEW_COLUMNS)
     _append_csv(log_path, all_logs, LOG_COLUMNS)
 
-    site_data = rows_to_site_data(all_rows)
+    site_data = rows_to_site_data(all_rows, close_date)
     out_path = data_dir / "site_data.json"
     out_path.write_text(json.dumps(site_data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[SAVE] admin={admin_path}", file=sys.stderr)
