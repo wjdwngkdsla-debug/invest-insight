@@ -4,16 +4,33 @@ import io
 import re
 import requests
 import pdfplumber
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from scripts.config import USER_AGENT
 from scripts.utils.parser import parse_lockup_from_pdf
+
+
+def _dart_session() -> requests.Session:
+    retry = Retry(
+        total=5,
+        connect=5,
+        read=5,
+        status=5,
+        backoff_factor=1,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset({"GET", "POST"}),
+    )
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=retry))
+    return session
 
 
 def dart_find_report(corp_name: str, report_kw: str = "증권발행실적보고서", d0: str = "20250101", d1: str | None = None) -> str | None:
     from datetime import datetime
 
     d1 = d1 or datetime.today().strftime("%Y%m%d")
-    session = requests.Session()
+    session = _dart_session()
     session.headers.update({**USER_AGENT, "Referer": "https://dart.fss.or.kr/dsab007/main.do"})
     res = session.post(
         "https://dart.fss.or.kr/dsab007/detailSearch.ax",
@@ -33,7 +50,7 @@ def dart_find_report(corp_name: str, report_kw: str = "증권발행실적보고�
 
 
 def dart_pdf(rcp: str):
-    session = requests.Session()
+    session = _dart_session()
     session.headers.update(USER_AGENT)
     res = session.get(f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcp}", timeout=20)
     match = re.search(r'viewDoc\("' + rcp + r'",\s*"(\d+)"', res.text)
