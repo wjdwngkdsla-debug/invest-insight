@@ -53,7 +53,7 @@ function buildColumns(priceDate: string, showCategory: boolean): { key: SortKey;
         <>
           비중
           <br />
-          <span className="font-normal text-gray-400">(상장 주식 대비)</span>
+          <span className="font-normal text-ink-muted">(상장 주식 대비)</span>
         </>
       ),
     },
@@ -64,7 +64,7 @@ function buildColumns(priceDate: string, showCategory: boolean): { key: SortKey;
         <>
           시가총액
           <br />
-          <span className="font-normal text-gray-400">{formatPriceDate(priceDate)} 종가 기준</span>
+          <span className="font-normal text-ink-muted">{formatPriceDate(priceDate)} 종가 기준</span>
         </>
       ),
     },
@@ -94,7 +94,11 @@ function statusClass(status: string): string {
   if (status === "예정") return "bg-blue-100 text-blue-700";
   if (status === "반환확인" || status === "반환확인_API수정") return "bg-green-100 text-green-700";
   if (status === "수동확인" || status === "수동/API불일치") return "bg-amber-100 text-amber-700";
-  return "bg-gray-100 text-gray-600";
+  return "bg-cream-deep text-ink-soft";
+}
+
+function categoryClass(category: LockupCategory): string {
+  return category === "IPO기관" ? "bg-[#eef7d2] text-[#4a6510]" : "bg-cream-deep text-ink-soft";
 }
 
 function downloadCsv(rows: FlatRow[], priceDate: string, filter: FilterKey) {
@@ -120,7 +124,7 @@ function downloadCsv(rows: FlatRow[], priceDate: string, filter: FilterKey) {
         .join(",")
     ),
   ];
-  const blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -159,14 +163,14 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
 
   return (
     <div>
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex rounded-lg border border-gray-200 bg-white p-1 text-sm">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex rounded-full border border-hairline bg-card p-1 text-sm">
           {FILTERS.map((item) => (
             <button
               key={item}
               onClick={() => setFilter(item)}
-              className={`rounded-md px-3 py-1.5 font-medium transition-colors ${
-                filter === item ? "bg-gray-900 text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+              className={`rounded-full px-4 py-1.5 font-medium transition-colors ${
+                filter === item ? "bg-ink text-white" : "text-ink-soft hover:bg-cream hover:text-ink"
               }`}
             >
               {item}
@@ -176,56 +180,67 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
 
         <button
           onClick={() => downloadCsv(sorted, priceDate, filter)}
-          className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-full border border-hairline bg-card px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-cream-deep hover:text-ink"
         >
           ⬇ 엑셀(CSV) 다운로드
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-        <table className="w-full min-w-[980px] text-sm">
-          <thead>
-            <tr className="border-b border-gray-200 bg-gray-50 text-left text-gray-500">
-              <th className="whitespace-nowrap px-4 py-3 font-semibold">종목</th>
-              <th className="whitespace-nowrap px-4 py-3 font-semibold">시장</th>
-              {columns.map((col) => (
-                <th
-                  key={col.key}
-                  onClick={() => handleSort(col.key)}
-                  className={`cursor-pointer select-none whitespace-nowrap px-4 py-3 font-semibold hover:text-gray-800 ${col.align === "right" ? "text-right" : ""}`}
-                >
-                  {col.label}
-                  {sortKey === col.key && <span className="ml-1">{sortDir === "asc" ? "▲" : "▼"}</span>}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((r, i) => (
-              <tr key={`${r.code}-${r.category}-${r.period}-${r.tradable_date}-${i}`} className="border-b border-gray-100 last:border-0">
-                <td className="px-4 py-3">
-                  <Link href={`/stock/${r.code}`} className="font-medium text-blue-600 hover:underline">{r.name}</Link>
-                </td>
-                <td className="px-4 py-3 text-gray-500">{r.market}</td>
-                <td className="px-4 py-3 text-gray-500">{r.listing_date}</td>
-                {showCategory && <td className="px-4 py-3 text-gray-700">{r.category}</td>}
-                <td className="px-4 py-3 text-gray-500">
-                  <div>{r.period}</div>
-                  {r.category === "구주·보호예수" && (r.holder_name || r.reason) && (
-                    <div className="mt-0.5 max-w-[180px] truncate text-xs text-gray-400">{r.holder_name || r.reason}</div>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-gray-500">{r.date_display}</td>
-                <td className="px-4 py-3 text-right">{r.qty.toLocaleString("ko-KR")}주</td>
-                <td className="px-4 py-3 text-right">{r.pct}%</td>
-                <td className="px-4 py-3 text-right">{formatEok(r.marketCap)}</td>
-                <td className="px-4 py-3">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(r.status)}`}>{r.status}</span>
-                </td>
+      <div className="card overflow-hidden rounded-2xl">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[980px] text-sm">
+            <thead>
+              <tr className="border-b border-hairline bg-cream-deep/60 text-left text-ink-muted">
+                <th className="whitespace-nowrap px-4 py-3 font-semibold">종목</th>
+                <th className="whitespace-nowrap px-4 py-3 font-semibold">시장</th>
+                {columns.map((col) => (
+                  <th
+                    key={col.key}
+                    onClick={() => handleSort(col.key)}
+                    className={`cursor-pointer select-none whitespace-nowrap px-4 py-3 font-semibold hover:text-ink ${col.align === "right" ? "text-right" : ""}`}
+                  >
+                    {col.label}
+                    {sortKey === col.key && <span className="ml-1">{sortDir === "asc" ? "▲" : "▼"}</span>}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sorted.map((r, i) => (
+                <tr
+                  key={`${r.code}-${r.category}-${r.period}-${r.tradable_date}-${i}`}
+                  className="border-b border-hairline/60 transition-colors last:border-0 hover:bg-cream/50"
+                >
+                  <td className="whitespace-nowrap px-4 py-3">
+                    <Link href={`/stock/${r.code}`} className="font-semibold text-ink hover:underline">{r.name}</Link>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 text-ink-muted">{r.market}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-ink-muted tabular-nums">{r.listing_date}</td>
+                  {showCategory && (
+                    <td className="px-4 py-3">
+                      <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${categoryClass(r.category)}`}>
+                        {r.category}
+                      </span>
+                    </td>
+                  )}
+                  <td className="whitespace-nowrap px-4 py-3 text-ink-soft">
+                    <div>{r.period}</div>
+                    {r.category === "구주·보호예수" && (r.holder_name || r.reason) && (
+                      <div className="mt-0.5 max-w-[180px] truncate text-xs text-ink-muted">{r.holder_name || r.reason}</div>
+                    )}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 text-ink-soft tabular-nums">{r.date_display}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{r.qty.toLocaleString("ko-KR")}주</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{r.pct}%</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{formatEok(r.marketCap)}</td>
+                  <td className="px-4 py-3">
+                    <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(r.status)}`}>{r.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

@@ -11,21 +11,33 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko" className="h-full antialiased">
-      <body className="flex min-h-full flex-col bg-gray-50 text-gray-900">
-        <header className="border-b border-gray-200 bg-white">
-          <div className="mx-auto flex max-w-5xl items-center gap-6 px-4 py-4">
-            <Link href="/" className="text-lg font-bold">📅 락업해제 캘린더</Link>
-            <nav className="flex gap-4 text-sm font-medium text-gray-600">
-              <Link href="/" className="hover:text-gray-900">홈</Link>
-              <Link href="/calendar" className="hover:text-gray-900">전체 일정</Link>
+      <body className="flex min-h-full flex-col bg-cream text-ink">
+        <link
+          rel="stylesheet"
+          precedence="default"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+        <header>
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+            <Link href="/" className="flex items-center gap-2 text-[17px] font-extrabold tracking-tight">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-lime ring-1 ring-black/10" aria-hidden />
+              락업해제 캘린더
+            </Link>
+            <nav className="flex items-center gap-1 rounded-full border border-hairline bg-card p-1 text-sm font-medium text-ink-soft">
+              <Link href="/" className="rounded-full px-4 py-1.5 transition-colors hover:bg-cream hover:text-ink">
+                홈
+              </Link>
+              <Link href="/calendar" className="rounded-full px-4 py-1.5 transition-colors hover:bg-cream hover:text-ink">
+                전체 일정
+              </Link>
             </nav>
           </div>
         </header>
 
         <div className="flex-1">{children}</div>
 
-        <footer className="border-t border-gray-200 bg-white px-4 py-8">
-          <div className="mx-auto max-w-5xl space-y-2 text-xs leading-relaxed text-gray-500">
+        <footer className="border-t border-hairline px-6 py-10">
+          <div className="mx-auto max-w-6xl space-y-2 text-xs leading-relaxed text-ink-muted">
             <p>
               해제일은 매도 가능 시점이며 실제 매도 여부와 무관합니다. 본 정보는 투자 권유를 목적으로 하지 않으며,
               투자 판단의 책임은 이용자 본인에게 있습니다.

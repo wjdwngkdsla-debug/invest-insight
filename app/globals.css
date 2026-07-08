@@ -1,19 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Superpower 스타일 라이트 팔레트 */
+  --color-cream: #f5f3ec; /* 페이지 배경 (웜 아이보리) */
+  --color-cream-deep: #efece2; /* 배경 위 살짝 가라앉은 면 (테이블 헤더 등) */
+  --color-card: #ffffff;
+  --color-hairline: #e7e4da;
+  --color-ink: #17150f;
+  --color-ink-soft: #55524a;
+  --color-ink-muted: #8b877c;
+  --color-lime: #d9f24b; /* 포인트 칩 */
+  --color-lime-ink: #2a2e0e;
+  --color-alert: #d1490f; /* 대량 물량/임박 경고 텍스트 */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-cream-deep: var(--color-cream-deep);
+  --color-card: var(--color-card);
+  --color-hairline: var(--color-hairline);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-lime: var(--color-lime);
+  --color-lime-ink: var(--color-lime-ink);
+  --color-alert: var(--color-alert);
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.011em;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+/* 공용 카드: 흰 면 + 헤어라인 + 부드러운 확산 그림자 */
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 2px rgba(23, 21, 15, 0.03),
+    0 12px 32px -18px rgba(23, 21, 15, 0.12);
+}
+
+/* 히어로 스탯 타일 그라디언트 (Superpower 스코어 카드 무드) */
+.tile-green {
+  background: radial-gradient(140% 130% at 50% -20%, #eec282 0%, #9ccb64 45%, #3f9e3b 95%);
+}
+.tile-orange {
+  background: radial-gradient(140% 130% at 12% -20%, #ccd4ec 0%, #ecbe75 48%, #e07d2c 95%);
 }
