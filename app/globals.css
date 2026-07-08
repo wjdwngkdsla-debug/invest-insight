@@ -1,56 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  /* Apple 스타일 라이트 팔레트 + 하늘색 포인트
-     (토큰 이름은 이전 크림 팔레트 시절 그대로 유지 — 값만 교체) */
-  --color-cream: #f4f6f9; /* 페이지 배경: 쿨 그레이에 하늘색 기운 */
-  --color-cream-deep: #e9eef5; /* 배경 위 살짝 가라앉은 면 (테이블 헤더 등) */
-  --color-card: #ffffff;
-  --color-hairline: #e2e6ec;
-  --color-ink: #1d1d1f; /* Apple 잉크 */
-  --color-ink-soft: #3f4247;
-  --color-ink-muted: #7d838c;
-  --color-sky: #e8f2ff; /* 하늘색 칩 배경 */
-  --color-sky-ink: #0b62c4; /* 하늘색 칩 텍스트 */
-  --color-accent: #0071e3; /* Apple 블루 — 링크/포인트 */
-  --color-alert: #d70015; /* 대량 물량/임박 경고 텍스트 */
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @theme inline {
-  --color-cream: var(--color-cream);
-  --color-cream-deep: var(--color-cream-deep);
-  --color-card: var(--color-card);
-  --color-hairline: var(--color-hairline);
-  --color-ink: var(--color-ink);
-  --color-ink-soft: var(--color-ink-soft);
-  --color-ink-muted: var(--color-ink-muted);
-  --color-sky: var(--color-sky);
-  --color-sky-ink: var(--color-sky-ink);
-  --color-accent: var(--color-accent);
-  --color-alert: var(--color-alert);
-
-  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  letter-spacing: -0.011em;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1,
-h2,
-h3 {
-  letter-spacing: -0.02em;
-}
+@layer utilities {
+  .upcoming-event:hover .event-popover,
+  .event-popover:hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-/* 공용 카드: 흰 면 + 헤어라인 + 부드러운 확산 그림자 */
-.card {
-  background: var(--color-card);
-  border: 1px solid var(--color-hairline);
-  border-radius: 20px;
-  box-shadow:
-    0 1px 2px rgba(29, 29, 31, 0.03),
-    0 12px 32px -18px rgba(29, 29, 31, 0.1);
+  .event-popover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 10px;
+    height: 100%;
+  }
 }

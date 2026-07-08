@@ -1,0 +1,98 @@
+name: Update lockup data
+
+on:
+  schedule:
+    # 00:00 Asia/Seoul = 15:00 UTC on the previous calendar day.
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+    inputs:
+      year:
+        description: "IPO 조회 연도 (비워두면 한국시간 기준 현재 연도)"
+        required: false
+        type: string
+      reset_sheet:
+        description: "Google Sheet의 기존 탭을 지우고 한글 헤더로 초기화"
+        required: true
+        default: false
+        type: boolean
+      reparse_existing:
+        description: "기존 종목도 DART에서 다시 파싱"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-lockup-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      KRX_API_KEY: ${{ secrets.KRX_API_KEY }}
+      DATA_GO_KR_API_KEY: ${{ secrets.DATA_GO_KR_API_KEY }}
+      DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install parser dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Select target year
+        id: options
+        shell: bash
+        run: |
+          YEAR="${{ github.event.inputs.year }}"
+          if [ -z "$YEAR" ]; then
+            YEAR="$(TZ=Asia/Seoul date +%Y)"
+          fi
+          echo "year=$YEAR" >> "$GITHUB_OUTPUT"
+
+      - name: Pull manual edits from Google Sheet
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.reset_sheet != 'true' }}
+        run: python -m scripts.sheets_sync pull-admin
+
+      - name: Build lockup data
+        shell: bash
+        run: |
+          ARGS=(--year "${{ steps.options.outputs.year }}")
+          if [ "${{ github.event.inputs.reparse_existing }}" = "true" ]; then
+            ARGS+=(--reparse-existing)
+          fi
+          python -m scripts.build "${ARGS[@]}"
+
+      - name: Update Google Sheet
+        shell: bash
+        run: |
+          if [ "${{ github.event.inputs.reset_sheet }}" = "true" ]; then
+            python -m scripts.sheets_sync reset-all
+          else
+            python -m scripts.sheets_sync push-all
+          fi
+
+      - name: Commit generated data
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -m "chore: update lockup data"
+          git push

@@ -1,61 +1,283 @@
-"""운영 CSV(lockup_admin/review_needed/lockup_log)를 구글시트로 업로드한다.
+"""Google Sheets and local CSV synchronization.
 
-- 시트가 엑셀 대신 운영자 검증용 서버 역할을 한다.
-- 인증: 프로젝트 루트의 구글 서비스계정 키(project-*.json). 시트에 해당
-  서비스계정 이메일이 편집자로 공유되어 있어야 한다.
-- 실행: python -m scripts.sheets_sync  (scripts.build 실행 후)
+Commands:
+  python -m scripts.sheets_sync pull-admin
+  python -m scripts.sheets_sync push-all
+  python -m scripts.sheets_sync reset-all
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import glob
+import json
+import os
 import sys
 from pathlib import Path
 
 import gspread
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
 
-SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
-
-# (시트 탭 이름, data/ 아래 CSV 파일명)
-TAB_FILES = [
-    ("락업이벤트", "lockup_admin.csv"),
-    ("검토필요", "review_needed.csv"),
-    ("로그", "lockup_log.csv"),
+ADMIN_COLUMNS = [
+    "event_id", "code", "name", "market", "listing_date", "shares", "close_price",
+    "category", "type", "period",
+    "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
+    "dart_rcp", "dart_source", "parse_note",
+    "api_return_date", "api_return_qty", "api_reason",
+    "manual_date", "manual_qty", "manual_lock",
+    "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct",
+    "status", "review_needed", "memo", "updated_at",
 ]
 
+ADMIN_SHEET_COLUMNS = [
+    "name", "code", "market", "category", "period",
+    "listing_date", "close_price", "shares",
+    "planned_date", "planned_qty", "planned_pct",
+    "api_return_date", "api_return_qty", "api_reason",
+    "manual_lock", "manual_date", "manual_qty", "memo",
+    "final_date", "final_tradable_date", "final_qty", "final_pct",
+    "status", "review_needed",
+    "event_id", "type", "planned_tradable_date", "planned_date_display",
+    "dart_rcp", "dart_source", "parse_note", "final_date_display", "updated_at",
+]
 
-def find_service_account() -> str:
+REVIEW_COLUMNS = [
+    "detected_at", "event_id", "code", "name", "category", "period", "issue",
+    "planned_date", "planned_qty", "api_return_date", "api_return_qty",
+    "manual_date", "manual_qty", "memo",
+]
+
+LOG_COLUMNS = [
+    "time", "event_id", "code", "name", "field", "old_value", "new_value", "reason",
+]
+
+HEADER_KO = {
+    "event_id": "이벤트ID",
+    "code": "종목코드",
+    "name": "종목명",
+    "market": "시장",
+    "listing_date": "상장일",
+    "shares": "상장주식수",
+    "close_price": "종가",
+    "category": "구분",
+    "type": "원본유형",
+    "period": "락업기간",
+    "planned_date": "예정해제일",
+    "planned_tradable_date": "예정거래가능일",
+    "planned_date_display": "예정일표시",
+    "planned_qty": "예정물량",
+    "planned_pct": "예정비중(%)",
+    "dart_rcp": "DART접수번호",
+    "dart_source": "DART출처",
+    "parse_note": "파싱메모",
+    "api_return_date": "API반환일",
+    "api_return_qty": "API반환물량",
+    "api_reason": "API사유",
+    "manual_date": "수동해제일",
+    "manual_qty": "수동물량",
+    "manual_lock": "수동값사용(Y/N)",
+    "final_date": "최종해제일",
+    "final_tradable_date": "최종거래가능일",
+    "final_date_display": "최종일표시",
+    "final_qty": "최종물량",
+    "final_pct": "최종비중(%)",
+    "status": "상태",
+    "review_needed": "검토필요(Y/N)",
+    "memo": "운영자메모",
+    "updated_at": "갱신시각",
+    "detected_at": "감지시각",
+    "issue": "검토사유",
+    "time": "변경시각",
+    "field": "변경필드",
+    "old_value": "이전값",
+    "new_value": "변경값",
+    "reason": "변경사유",
+}
+HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
+
+TAB_CONFIG = [
+    ("운영_락업일정", "lockup_admin.csv", ADMIN_SHEET_COLUMNS),
+    ("검토필요", "review_needed.csv", REVIEW_COLUMNS),
+    ("변경로그", "lockup_log.csv", LOG_COLUMNS),
+]
+
+MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Google Sheets 동기화")
+    parser.add_argument("command", choices=["pull-admin", "push-all", "reset-all"])
+    return parser.parse_args()
+
+
+def build_client() -> gspread.Client:
+    raw_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
+    if raw_json:
+        return gspread.service_account_from_dict(json.loads(raw_json))
+
+    configured_file = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "").strip()
+    if configured_file:
+        return gspread.service_account(filename=configured_file)
+
     hits = sorted(glob.glob(str(ROOT_DIR / "project-*.json")))
+    hits.extend(sorted(glob.glob(str(ROOT_DIR / "*service-account*.json"))))
     if not hits:
-        raise FileNotFoundError("구글 서비스계정 키(project-*.json)가 프로젝트 루트에 없습니다.")
-    return hits[0]
+        raise FileNotFoundError(
+            "Google 서비스 계정 인증정보가 없습니다. "
+            "GOOGLE_SERVICE_ACCOUNT_JSON 또는 GOOGLE_SERVICE_ACCOUNT_FILE을 설정하세요."
+        )
+    return gspread.service_account(filename=hits[0])
 
 
-def read_rows(path: Path) -> list[list[str]]:
+def sheet_id() -> str:
+    return os.getenv("GOOGLE_SHEET_ID", DEFAULT_SHEET_ID).strip()
+
+
+def read_csv_dicts(path: Path) -> list[dict[str, str]]:
     if not path.exists():
         return []
-    with path.open("r", encoding="utf-8-sig", newline="") as f:
-        return [row for row in csv.reader(f)]
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return [dict(row) for row in csv.DictReader(handle)]
+
+
+def write_csv_dicts(path: Path, rows: list[dict[str, str]], columns: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows({column: row.get(column, "") for column in columns} for row in rows)
+
+
+def internal_header(value: str) -> str:
+    cleaned = value.strip()
+    return HEADER_INTERNAL.get(cleaned, cleaned)
+
+
+def worksheet_records(ws: gspread.Worksheet) -> list[dict[str, str]]:
+    values = ws.get_all_values()
+    if len(values) < 2:
+        return []
+    headers = [internal_header(value) for value in values[0]]
+    records: list[dict[str, str]] = []
+    for row in values[1:]:
+        padded = row + [""] * max(0, len(headers) - len(row))
+        record = {headers[index]: padded[index] for index in range(len(headers))}
+        if any(value.strip() for value in record.values()):
+            records.append(record)
+    return records
+
+
+def admin_worksheet(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
+    for title in ("운영_락업일정", "락업이벤트", "lockup_admin"):
+        try:
+            return spreadsheet.worksheet(title)
+        except gspread.WorksheetNotFound:
+            pass
+    return spreadsheet.get_worksheet(0)
+
+
+def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
+    csv_path = ROOT_DIR / "data" / "lockup_admin.csv"
+    local_rows = read_csv_dicts(csv_path)
+    if not local_rows:
+        print("[SHEET] 로컬 lockup_admin.csv가 없어 내려받기를 건너뜁니다.", file=sys.stderr)
+        return
+
+    sheet_rows = worksheet_records(admin_worksheet(spreadsheet))
+    sheet_by_id = {row.get("event_id", ""): row for row in sheet_rows if row.get("event_id")}
+    updated = 0
+
+    for local in local_rows:
+        sheet_row = sheet_by_id.get(local.get("event_id", ""))
+        if not sheet_row:
+            continue
+        changed = False
+        for column in MANUAL_COLUMNS:
+            value = sheet_row.get(column, "")
+            if local.get(column, "") != value:
+                local[column] = value
+                changed = True
+        if changed:
+            updated += 1
+
+    write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
+    print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
+
+
+def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
+    worksheets = spreadsheet.worksheets()
+    first_title = TAB_CONFIG[0][0]
+    primary = worksheets[0]
+    primary.clear()
+    primary.update_title(first_title)
+    for worksheet in worksheets[1:]:
+        spreadsheet.del_worksheet(worksheet)
+
+
+def get_or_create_worksheet(
+    spreadsheet: gspread.Spreadsheet,
+    title: str,
+    row_count: int,
+    column_count: int,
+) -> gspread.Worksheet:
+    try:
+        worksheet = spreadsheet.worksheet(title)
+    except gspread.WorksheetNotFound:
+        worksheet = spreadsheet.add_worksheet(
+            title=title,
+            rows=max(row_count, 100),
+            cols=max(column_count, 20),
+        )
+    worksheet.resize(rows=max(row_count, 100), cols=max(column_count, 20))
+    return worksheet
+
+
+def push_tab(
+    spreadsheet: gspread.Spreadsheet,
+    title: str,
+    filename: str,
+    columns: list[str],
+) -> None:
+    rows = read_csv_dicts(ROOT_DIR / "data" / filename)
+    values = [[HEADER_KO.get(column, column) for column in columns]]
+    values.extend([[row.get(column, "") for column in columns] for row in rows])
+
+    worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 10, len(columns))
+    worksheet.clear()
+    worksheet.update(values, "A1", value_input_option="USER_ENTERED")
+    worksheet.freeze(rows=1)
+    worksheet.format(
+        "1:1",
+        {
+            "backgroundColor": {"red": 0.91, "green": 0.94, "blue": 1.0},
+            "textFormat": {"bold": True},
+            "horizontalAlignment": "CENTER",
+        },
+    )
+    print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
+
+
+def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
+    if reset:
+        reset_worksheets(spreadsheet)
+    for title, filename, columns in TAB_CONFIG:
+        push_tab(spreadsheet, title, filename, columns)
 
 
 def main() -> None:
-    gc = gspread.service_account(filename=find_service_account())
-    sh = gc.open_by_key(SHEET_ID)
+    args = parse_args()
+    spreadsheet = build_client().open_by_key(sheet_id())
 
-    for tab, fname in TAB_FILES:
-        rows = read_rows(ROOT_DIR / "data" / fname)
-        try:
-            ws = sh.worksheet(tab)
-        except gspread.WorksheetNotFound:
-            ws = sh.add_worksheet(title=tab, rows=max(len(rows) + 10, 100), cols=40)
-        ws.clear()
-        if rows:
-            ws.update(rows, "A1", value_input_option="USER_ENTERED")
-        print(f"[SHEET] {tab}: {len(rows)}행 업로드", file=sys.stderr)
+    if args.command == "pull-admin":
+        pull_admin(spreadsheet)
+    elif args.command == "push-all":
+        push_all(spreadsheet, reset=False)
+    else:
+        push_all(spreadsheet, reset=True)
 
-    print("[SHEET] 업로드 완료", file=sys.stderr)
+    print("[SHEET] 동기화 완료", file=sys.stderr)
 
 
 if __name__ == "__main__":

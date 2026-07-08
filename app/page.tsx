@@ -1,38 +1,123 @@
-import { getUpcomingEvents, getFlatRows, getSiteData } from "@/lib/data";
-import { UpcomingList } from "@/components/UpcomingList";
+import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
+import { dDay, getFlatRows, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
+
+function formatQty(qty: number): string {
+  return qty.toLocaleString("ko-KR");
+}
+
+function groupTitle(group: UpcomingGroup): string {
+  if (group.periods.length === 1) return `${group.periods[0]} 락업 해제`;
+  return "락업 해제";
+}
+
+function EventHoverCard({ event }: { event: UpcomingGroup }) {
+  return (
+    <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] w-[360px] opacity-0 transition-opacity duration-150">
+      <Link
+        href={`/stock/${event.stockCode}`}
+        className="block rounded-lg border border-gray-200 bg-white p-5 shadow-xl hover:border-gray-300"
+      >
+        <div className="flex items-start justify-between gap-5">
+          <p className="min-w-0 text-lg font-bold text-gray-900">{event.stockName}</p>
+          <div className="shrink-0 text-right">
+            <p className="font-semibold text-gray-900">{formatQty(event.qty)}주</p>
+            <p className="text-sm text-gray-500">({event.pct}%)</p>
+          </div>
+        </div>
+
+        <div className="mt-4 space-y-1 text-sm text-gray-500">
+          <p>
+            {event.tradable_date} · {groupTitle(event)}
+          </p>
+          <p>
+            {event.market} · 상장일 {event.listing_date}
+          </p>
+        </div>
+
+        <div className="mt-5 space-y-2 border-t border-gray-100 pt-4 text-sm">
+          {event.breakdown.map((item) => (
+            <div key={item.category} className="flex items-center justify-between gap-4">
+              <span className="font-medium text-gray-700">{item.category}</span>
+              <span className="text-right text-gray-600">
+                {formatQty(item.qty)}주 ({item.pct}%)
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-5 text-sm font-medium text-blue-600">클릭하면 종목 상세 페이지로 이동</p>
+      </Link>
+    </div>
+  );
+}
+
+function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
+  const days = dDay(event.tradable_date);
+  const isNear = days <= 3;
+
+  return (
+    <li className="upcoming-event relative z-10">
+      <Link
+        href={`/stock/${event.stockCode}`}
+        className="block rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-gray-300 hover:bg-gray-50"
+      >
+        <span
+          className={`inline-flex rounded px-2 py-1 text-xs font-bold ${
+            isNear ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"
+          }`}
+        >
+          D-{days}
+        </span>
+        <p className="mt-3 font-semibold text-gray-900">{event.stockName}</p>
+        <p className="mt-1 text-sm text-gray-500">
+          {formatQty(event.qty)}주 ({event.pct}%)
+        </p>
+      </Link>
+      <EventHoverCard event={event} />
+    </li>
+  );
+}
 
 export default function Home() {
   const upcoming = getUpcomingEvents(30);
   const rows = getFlatRows();
-  const { updated } = getSiteData();
 
   return (
-    <main className="mx-auto max-w-[1440px] px-6 py-6">
-      <div className="flex flex-col gap-6 lg:flex-row">
-        {/* 왼쪽: 임박 이벤트 (PC 기준 20%) */}
-        <aside className="shrink-0 lg:w-1/5">
-          <div className="mb-3 flex items-baseline justify-between">
-            <h2 className="text-lg font-bold">임박 이벤트</h2>
-            <span className="text-[11px] text-ink-muted tabular-nums">{updated}</span>
-          </div>
-          <UpcomingList events={upcoming} />
+    <main className="mx-auto max-w-[1480px] px-5 py-8">
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold">IPO 락업 캘린더</h1>
+      </header>
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
+        <aside className="relative">
+          {upcoming.length === 0 ? (
+            <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">
+              30일 이내 예정된 해제 이벤트가 없습니다.
+            </p>
+          ) : (
+            <ul className="flex gap-3 overflow-x-auto pb-2 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0">
+              {upcoming.map((event, index) => (
+                <UpcomingEventCard
+                  key={`${event.stockCode}-${event.tradable_date}-${index}`}
+                  event={event}
+                />
+              ))}
+            </ul>
+          )}
         </aside>
 
-        {/* 오른쪽: Vericap 배너 + 전체 일정 (PC 기준 80%) */}
-        <section className="min-w-0 flex-1">
-          <a
+        <section className="min-w-0">
+          <Link
             href="https://blog.naver.com/vericap"
             target="_blank"
             rel="noopener noreferrer"
-            className="card block rounded-2xl px-6 py-6 text-center transition-shadow hover:shadow-[0_2px_4px_rgba(23,21,15,0.04),0_16px_40px_-18px_rgba(23,21,15,0.18)]"
+            className="mb-6 flex min-h-24 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-6 text-center text-2xl font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-100"
           >
-            <span className="text-xl font-bold tracking-tight">Vericap 콘텐츠 보러가기</span>
-          </a>
+            Vericap 콘텐츠 보러가기
+          </Link>
 
-          <div className="mt-8">
-            <CalendarTable rows={rows} priceDate={updated} />
-          </div>
+          <CalendarTable rows={rows} />
         </section>
       </div>
     </main>

@@ -31,11 +31,14 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+/.python-deps/
 
 # generated/debug
 scripts/real_run_output.json
 /data/cache/
 /data/ipo_universe_*.json
+/data/excluded_listings_*.json
+/data/review_candidates_*.json
 
 # secrets — 구글 서비스계정 키 등 자격증명 파일 (절대 커밋 금지)
 project-*.json

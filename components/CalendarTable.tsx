@@ -5,7 +5,17 @@ import Link from "next/link";
 import type { FlatRow, LockupCategory } from "@/lib/data";
 
 type FilterKey = "전체" | LockupCategory;
-type SortKey = "listing_date" | "category" | "period" | "tradable_date" | "qty" | "pct" | "marketCap" | "status";
+type SortKey =
+  | "name"
+  | "market"
+  | "listing_date"
+  | "category"
+  | "period"
+  | "tradable_date"
+  | "qty"
+  | "pct"
+  | "marketCap"
+  | "status";
 type SortDir = "asc" | "desc";
 
 const PERIOD_ORDER: Record<string, number> = {
@@ -25,60 +35,33 @@ const PERIOD_ORDER: Record<string, number> = {
 
 const FILTERS: FilterKey[] = ["전체", "IPO기관", "구주·보호예수"];
 
-function formatPriceDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  return `${y}.${m}.${d}`;
-}
+const COLUMNS: { key: SortKey; label: string; align?: "right" }[] = [
+  { key: "name", label: "종목" },
+  { key: "market", label: "시장" },
+  { key: "listing_date", label: "상장일" },
+  { key: "category", label: "구분" },
+  { key: "period", label: "기간" },
+  { key: "tradable_date", label: "해제일" },
+  { key: "qty", label: "락업 해제 물량", align: "right" },
+  { key: "pct", label: "비중", align: "right" },
+  { key: "marketCap", label: "시가총액", align: "right" },
+  { key: "status", label: "상태" },
+];
 
 function formatEok(won: number): string {
   return `${Math.round(won / 1e8).toLocaleString("ko-KR")}억원`;
 }
 
-function buildColumns(priceDate: string, showCategory: boolean): { key: SortKey; label: React.ReactNode; align?: "right" }[] {
-  const base: { key: SortKey; label: React.ReactNode; align?: "right" }[] = [
-    { key: "listing_date", label: "상장일" },
-  ];
-
-  if (showCategory) base.push({ key: "category", label: "구분" });
-
-  return [
-    ...base,
-    { key: "period", label: "기간" },
-    { key: "tradable_date", label: "해제일" },
-    { key: "qty", label: "락업 해제 물량", align: "right" },
-    {
-      key: "pct",
-      align: "right",
-      label: (
-        <>
-          비중
-          <br />
-          <span className="font-normal text-ink-muted">(상장 주식 대비)</span>
-        </>
-      ),
-    },
-    {
-      key: "marketCap",
-      align: "right",
-      label: (
-        <>
-          시가총액
-          <br />
-          <span className="font-normal text-ink-muted">{formatPriceDate(priceDate)} 종가 기준</span>
-        </>
-      ),
-    },
-    { key: "status", label: "상태" },
-  ];
-}
-
 function compare(a: FlatRow, b: FlatRow, key: SortKey): number {
   switch (key) {
+    case "name":
+      return a.name.localeCompare(b.name, "ko-KR");
+    case "market":
     case "listing_date":
     case "category":
     case "tradable_date":
     case "status":
-      return String(a[key] || "").localeCompare(String(b[key] || ""));
+      return String(a[key] || "").localeCompare(String(b[key] || ""), "ko-KR");
     case "period":
       return (PERIOD_ORDER[a.period] ?? 999) - (PERIOD_ORDER[b.period] ?? 999);
     case "qty":
@@ -94,14 +77,10 @@ function statusClass(status: string): string {
   if (status === "예정") return "bg-blue-100 text-blue-700";
   if (status === "반환확인" || status === "반환확인_API수정") return "bg-green-100 text-green-700";
   if (status === "수동확인" || status === "수동/API불일치") return "bg-amber-100 text-amber-700";
-  return "bg-cream-deep text-ink-soft";
+  return "bg-gray-100 text-gray-600";
 }
 
-function categoryClass(category: LockupCategory): string {
-  return category === "IPO기관" ? "bg-sky text-sky-ink" : "bg-cream-deep text-ink-soft";
-}
-
-function downloadCsv(rows: FlatRow[], priceDate: string, filter: FilterKey) {
+function downloadCsv(rows: FlatRow[], filter: FilterKey) {
   const headers = [
     "종목",
     "종목코드",
@@ -112,35 +91,44 @@ function downloadCsv(rows: FlatRow[], priceDate: string, filter: FilterKey) {
     "해제일",
     "실제거래가능일",
     "락업 해제 물량",
-    "비중(상장 주식 대비)(%)",
-    `시가총액(원, ${formatPriceDate(priceDate)} 종가 기준)`,
+    "비중(상장 주식 대비 %)",
+    "시가총액",
     "상태",
   ];
   const lines = [
     headers.join(","),
     ...rows.map((r) =>
-      [r.name, r.code, r.market, r.listing_date, r.category, r.period, r.date_display, r.tradable_date, r.qty, r.pct, r.marketCap, r.status]
+      [
+        r.name,
+        r.code,
+        r.market,
+        r.listing_date,
+        r.category,
+        r.period,
+        r.date_display,
+        r.tradable_date,
+        r.qty,
+        r.pct,
+        r.marketCap,
+        r.status,
+      ]
         .map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`)
         .join(",")
     ),
   ];
-  const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  const suffix = filter === "전체" ? "전체" : filter;
-  a.download = `락업해제일정_${suffix}_${new Date().toISOString().slice(0, 10)}.csv`;
+  a.download = `락업해제일정_${filter}_${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
 
-export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate: string }) {
+export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string }) {
   const [filter, setFilter] = useState<FilterKey>("전체");
   const [sortKey, setSortKey] = useState<SortKey>("tradable_date");
-  const [sortDir, setSortDir] = useState<SortDir>("desc");
-
-  const showCategory = filter === "전체";
-  const columns = useMemo(() => buildColumns(priceDate, showCategory), [priceDate, showCategory]);
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
 
   const filtered = useMemo(() => {
     if (filter === "전체") return rows;
@@ -154,7 +142,7 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
   }, [filtered, sortKey, sortDir]);
 
   function handleSort(key: SortKey) {
-    if (key === sortKey) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    if (key === sortKey) setSortDir((dir) => (dir === "asc" ? "desc" : "asc"));
     else {
       setSortKey(key);
       setSortDir("asc");
@@ -163,14 +151,14 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex rounded-full border border-hairline bg-card p-1 text-sm">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex rounded-lg border border-gray-200 bg-white p-1 text-sm">
           {FILTERS.map((item) => (
             <button
               key={item}
               onClick={() => setFilter(item)}
-              className={`rounded-full px-4 py-1.5 font-medium transition-colors ${
-                filter === item ? "bg-ink text-white" : "text-ink-soft hover:bg-cream hover:text-ink"
+              className={`rounded-md px-3 py-1.5 font-medium transition-colors ${
+                filter === item ? "bg-gray-900 text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
               }`}
             >
               {item}
@@ -179,68 +167,59 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
         </div>
 
         <button
-          onClick={() => downloadCsv(sorted, priceDate, filter)}
-          className="rounded-full border border-hairline bg-card px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-cream-deep hover:text-ink"
+          onClick={() => downloadCsv(sorted, filter)}
+          className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           CSV 다운로드
         </button>
       </div>
 
-      <div className="card overflow-hidden rounded-2xl">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] text-sm">
-            <thead>
-              <tr className="border-b border-hairline bg-cream-deep/60 text-left text-ink-muted">
-                <th className="whitespace-nowrap px-4 py-3 font-semibold">종목</th>
-                <th className="whitespace-nowrap px-4 py-3 font-semibold">시장</th>
-                {columns.map((col) => (
-                  <th
-                    key={col.key}
-                    onClick={() => handleSort(col.key)}
-                    className={`cursor-pointer select-none whitespace-nowrap px-4 py-3 font-semibold hover:text-ink ${col.align === "right" ? "text-right" : ""}`}
-                  >
-                    {col.label}
-                    {sortKey === col.key && <span className="ml-1">{sortDir === "asc" ? "▲" : "▼"}</span>}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sorted.map((r, i) => (
-                <tr
-                  key={`${r.code}-${r.category}-${r.period}-${r.tradable_date}-${i}`}
-                  className="border-b border-hairline/60 transition-colors last:border-0 hover:bg-cream/50"
+      <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+        <table className="w-full min-w-[1120px] text-sm">
+          <thead>
+            <tr className="border-b border-gray-200 bg-gray-50 text-left text-gray-500">
+              {COLUMNS.map((column) => (
+                <th
+                  key={column.key}
+                  onClick={() => handleSort(column.key)}
+                  className={`cursor-pointer select-none whitespace-nowrap px-4 py-3 font-semibold hover:text-gray-800 ${
+                    column.align === "right" ? "text-right" : ""
+                  }`}
                 >
-                  <td className="whitespace-nowrap px-4 py-3">
-                    <Link href={`/stock/${r.code}`} className="font-semibold text-accent hover:underline">{r.name}</Link>
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-ink-muted">{r.market}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-ink-muted tabular-nums">{r.listing_date}</td>
-                  {showCategory && (
-                    <td className="px-4 py-3">
-                      <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${categoryClass(r.category)}`}>
-                        {r.category}
-                      </span>
-                    </td>
-                  )}
-                  <td className="whitespace-nowrap px-4 py-3 text-ink-soft">
-                    <div>{r.period}</div>
-                    {r.category === "구주·보호예수" && (r.holder_name || r.reason) && (
-                      <div className="mt-0.5 max-w-[180px] truncate text-xs text-ink-muted">{r.holder_name || r.reason}</div>
-                    )}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-ink-soft tabular-nums">{r.date_display}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{r.qty.toLocaleString("ko-KR")}주</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{r.pct}%</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{formatEok(r.marketCap)}</td>
-                  <td className="px-4 py-3">
-                    <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(r.status)}`}>{r.status}</span>
-                  </td>
-                </tr>
+                  {column.label}
+                  {sortKey === column.key && <span className="ml-1">{sortDir === "asc" ? "▲" : "▼"}</span>}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((row, index) => (
+              <tr key={`${row.code}-${row.category}-${row.period}-${row.tradable_date}-${index}`} className="border-b border-gray-100 last:border-0">
+                <td className="px-4 py-3">
+                  <Link href={`/stock/${row.code}`} className="font-medium text-blue-600 hover:underline">
+                    {row.name}
+                  </Link>
+                </td>
+                <td className="px-4 py-3 text-gray-500">{row.market}</td>
+                <td className="px-4 py-3 text-gray-500">{row.listing_date}</td>
+                <td className="px-4 py-3 text-gray-700">{row.category}</td>
+                <td className="px-4 py-3 text-gray-500">
+                  <div>{row.period}</div>
+                  {row.category === "구주·보호예수" && (row.holder_name || row.reason) && (
+                    <div className="mt-0.5 max-w-[180px] truncate text-xs text-gray-400">{row.holder_name || row.reason}</div>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-gray-500">{row.date_display}</td>
+                <td className="px-4 py-3 text-right">{row.qty.toLocaleString("ko-KR")}주</td>
+                <td className="px-4 py-3 text-right">{row.pct}%</td>
+                <td className="px-4 py-3 text-right">{formatEok(row.marketCap)}</td>
+                <td className="px-4 py-3">
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(row.status)}`}>{row.status}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
