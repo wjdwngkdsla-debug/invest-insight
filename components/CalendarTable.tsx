@@ -182,7 +182,7 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
           onClick={() => downloadCsv(sorted, priceDate, filter)}
           className="rounded-full border border-hairline bg-card px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-cream-deep hover:text-ink"
         >
-          ⬇ 엑셀(CSV) 다운로드
+          CSV 다운로드
         </button>
       </div>
 
