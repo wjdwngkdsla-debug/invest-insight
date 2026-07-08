@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getStockByCode, getGroupedEventsByStock, dDay, displayStatus, type UpcomingGroup } from "@/lib/data";
+import { getStockByCode, getGroupedEventsByStock, getSiteData, dDay, displayStatus, type UpcomingGroup } from "@/lib/data";
 
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
 export const revalidate = 3600;
@@ -17,6 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
 
 function formatQty(qty: number): string {
   return qty.toLocaleString("ko-KR");
+}
+
+function formatEok(won: number): string {
+  return `${Math.round(won / 1e8).toLocaleString("ko-KR")}억원`;
 }
 
 const PERIOD_PRIORITY = ["15일", "1개월", "2개월", "3개월", "6개월", "12개월", "1년", "24개월", "2년", "30개월", "36개월", "3년"];
@@ -99,6 +103,14 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
 
   const today = new Date();
   const { upcoming, past } = getGroupedEventsByStock(stock, today);
+  const { updated } = getSiteData();
+
+  const marketCapLabel = (
+    <p className="text-lg font-bold text-gray-900">
+      시가총액 {formatEok(stock.shares * stock.close_price)}
+      <span className="ml-1.5 text-xs font-normal text-gray-400">{updated} 종가 기준</span>
+    </p>
+  );
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-8">
@@ -114,13 +126,19 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
 
       {upcoming.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3 text-lg font-bold">예정된 해제</h2>
+          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="text-lg font-bold">예정된 해제</h2>
+            {marketCapLabel}
+          </div>
           <ul className="space-y-3">{upcoming.map((group, i) => renderGroup(group, i, "upcoming", today))}</ul>
         </section>
       )}
 
       <section>
-        <h2 className="mb-3 text-lg font-bold">지난 해제 내역</h2>
+        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="text-lg font-bold">지난 해제 내역</h2>
+          {upcoming.length === 0 && marketCapLabel}
+        </div>
         {past.length === 0 ? (
           <p className="text-sm text-gray-400">아직 지난 해제 내역이 없습니다.</p>
         ) : (

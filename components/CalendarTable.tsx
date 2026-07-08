@@ -60,8 +60,12 @@ function compare(a: FlatRow, b: FlatRow, key: SortKey): number {
     case "listing_date":
     case "category":
     case "tradable_date":
-    case "status":
       return String(a[key] || "").localeCompare(String(b[key] || ""), "ko-KR");
+    case "status": {
+      // 화면에 보이는 상태(예정/해제완료) 기준으로 정렬하고, 같은 상태끼리는 해제일순
+      const s = displayStatus(a.tradable_date).localeCompare(displayStatus(b.tradable_date), "ko-KR");
+      return s !== 0 ? s : a.tradable_date.localeCompare(b.tradable_date);
+    }
     case "period":
       return (PERIOD_ORDER[a.period] ?? 999) - (PERIOD_ORDER[b.period] ?? 999);
     case "qty":
@@ -122,15 +126,21 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey) {
   URL.revokeObjectURL(url);
 }
 
+const PAGE_SIZE = 20;
+
 export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string }) {
   const [filter, setFilter] = useState<FilterKey>("전체");
+  const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("tradable_date");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
-    if (filter === "전체") return rows;
-    return rows.filter((row) => row.category === filter);
-  }, [rows, filter]);
+    const q = query.trim();
+    let out = filter === "전체" ? rows : rows.filter((row) => row.category === filter);
+    if (q) out = out.filter((row) => row.name.includes(q));
+    return out;
+  }, [rows, filter, query]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -138,29 +148,54 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
     return copy;
   }, [filtered, sortKey, sortDir]);
 
+  // 페이지 자르기는 필터·정렬이 모두 끝난 결과에 마지막으로 적용 — 정렬/필터와 충돌하지 않는다
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paged = useMemo(
+    () => sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE),
+    [sorted, safePage]
+  );
+
   function handleSort(key: SortKey) {
     if (key === sortKey) setSortDir((dir) => (dir === "asc" ? "desc" : "asc"));
     else {
       setSortKey(key);
       setSortDir("asc");
     }
+    setPage(1);
   }
 
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex rounded-lg border border-gray-200 bg-white p-1 text-sm">
-          {FILTERS.map((item) => (
-            <button
-              key={item}
-              onClick={() => setFilter(item)}
-              className={`rounded-md px-3 py-1.5 font-medium transition-colors ${
-                filter === item ? "bg-gray-900 text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-              }`}
-            >
-              {item}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex rounded-lg border border-gray-200 bg-white p-1 text-sm">
+            {FILTERS.map((item) => (
+              <button
+                key={item}
+                onClick={() => {
+                  setFilter(item);
+                  setPage(1);
+                }}
+                className={`rounded-md px-3 py-1.5 font-medium transition-colors ${
+                  filter === item ? "bg-gray-900 text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setPage(1);
+            }}
+            placeholder="종목명 검색"
+            className="w-40 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+          />
         </div>
 
         <button
@@ -190,7 +225,7 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
             </tr>
           </thead>
           <tbody>
-            {sorted.map((row, index) => (
+            {paged.map((row, index) => (
               <tr key={`${row.code}-${row.category}-${row.period}-${row.tradable_date}-${index}`} className="border-b border-gray-100 last:border-0">
                 <td className="whitespace-nowrap px-3 py-3">
                   <Link href={`/stock/${row.code}`} className="font-medium text-blue-600 hover:underline">
@@ -214,6 +249,29 @@ export function CalendarTable({ rows }: { rows: FlatRow[]; priceDate?: string })
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-gray-500">
+        <span>총 {sorted.length}건</span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setPage(safePage - 1)}
+            disabled={safePage <= 1}
+            className="rounded-md border border-gray-300 bg-white px-3 py-1.5 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+          >
+            이전
+          </button>
+          <span className="min-w-14 text-center tabular-nums">
+            {safePage} / {totalPages}
+          </span>
+          <button
+            onClick={() => setPage(safePage + 1)}
+            disabled={safePage >= totalPages}
+            className="rounded-md border border-gray-300 bg-white px-3 py-1.5 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+          >
+            다음
+          </button>
+        </div>
       </div>
     </div>
   );
