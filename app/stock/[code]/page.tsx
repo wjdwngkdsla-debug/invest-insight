@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getStockByCode, getGroupedEventsByStock, getSiteData, dDay, displayStatus, type UpcomingGroup } from "@/lib/data";
+import { BackButton } from "@/components/BackButton";
 
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
 export const revalidate = 3600;
@@ -115,6 +116,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
   return (
     <main className="mx-auto max-w-4xl px-6 py-8">
       <div className="mb-8">
+        <BackButton />
         <span className="inline-flex rounded-full border border-gray-200 bg-white px-2.5 py-0.5 text-xs font-medium text-gray-500">
           {stock.market}
         </span>
