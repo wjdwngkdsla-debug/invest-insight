@@ -16,7 +16,7 @@ function groupTitle(group: UpcomingGroup): string {
 
 function EventHoverCard({ event }: { event: UpcomingGroup }) {
   return (
-    <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] w-[320px] opacity-0 transition-opacity duration-150">
+    <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] hidden w-[320px] opacity-0 transition-opacity duration-150 lg:block">
       <Link
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-5 shadow-xl hover:border-gray-300"
@@ -48,7 +48,7 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
   const isNear = days <= 3;
 
   return (
-    <li className="upcoming-event relative z-10">
+    <li className="upcoming-event relative z-10 w-60 shrink-0 lg:w-auto">
       <Link
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-gray-300 hover:bg-gray-50"
@@ -86,7 +86,7 @@ export default function Home() {
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
-        <aside className="relative">
+        <aside className="relative min-w-0">
           {upcoming.length === 0 ? (
             <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">
               30일 이내 예정된 해제 이벤트가 없습니다.
