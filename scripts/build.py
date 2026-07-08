@@ -483,29 +483,165 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     return row, reviews, logs
 
 
+_SNAPSHOT_CACHE: tuple[str | None, dict] | None = None
+
+
+def latest_krx_snapshot() -> tuple[str | None, dict]:
+    """최근 거래일의 KRX 전 종목 스냅샷. 한 배치에서 한 번만 조회해 재사용한다."""
+    global _SNAPSHOT_CACHE
+    if _SNAPSHOT_CACHE is not None:
+        return _SNAPSHOT_CACHE
+    today = datetime.today()
+    for back in range(0, 10):
+        bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
+        snap = krx_snapshot(bas_dd)
+        if snap:
+            close_date = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:8]}"
+            _SNAPSHOT_CACHE = (close_date, snap)
+            return _SNAPSHOT_CACHE
+    _SNAPSHOT_CACHE = (None, {})
+    return _SNAPSHOT_CACHE
+
+
 def refresh_close_prices(rows: list[dict]) -> str | None:
     """편입된 전 종목의 종가를 최근 거래일 KRX 스냅샷으로 갱신한다.
 
     신규 감지 대상(올해 universe)에 없는 과거 연도 종목도 포함해 전부 갱신.
     반환값은 종가 기준일(YYYY-MM-DD), 최근 10일 내 거래일이 없으면 None.
     """
-    today = datetime.today()
-    for back in range(0, 10):
-        bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
-        snap = krx_snapshot(bas_dd)
-        if not snap:
+    close_date, snap = latest_krx_snapshot()
+    if not close_date:
+        print("[KRX] 최근 10일 내 거래일 스냅샷을 찾지 못해 종가 갱신을 건너뜁니다.", file=sys.stderr)
+        return None
+    updated = 0
+    for row in rows:
+        meta = snap.get(str(row.get("code") or ""))
+        if meta and meta.get("close_price"):
+            row["close_price"] = meta["close_price"]
+            updated += 1
+    print(f"[KRX] 종가 갱신: {updated}개 행 / 기준일 {close_date}", file=sys.stderr)
+    return close_date
+
+
+MANUAL_CATEGORY_MAP = {
+    "IPO기관": CATEGORY_IPO,
+    "기존주주": CATEGORY_FLOAT,
+    "구주·보호예수": CATEGORY_FLOAT,
+}
+
+
+def load_manual_events() -> list[dict]:
+    path = ROOT_DIR / "data" / "manual_events.json"
+    if not path.exists():
+        return []
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def apply_manual_events(
+    entries: list[dict],
+    existing_rows: list[dict],
+    existing_by_id: dict[str, dict],
+    all_rows_by_id: dict[str, dict],
+) -> tuple[list[dict], list[dict]]:
+    """시트 수기입력 탭의 필수값(종목코드/구분/기간/해제일/물량)으로 이벤트를 편입한다.
+
+    종목명·시장·상장주식수·종가는 KRX에서 자동 보강. 같은 입력은 event_id가
+    동일해 재실행 시 중복 없이 갱신되고, 운영_락업일정의 수동 컬럼 수정도 유지된다.
+    """
+    import re
+
+    reviews: list[dict] = []
+    logs: list[dict] = []
+
+    def review(entry: dict, issue: str) -> None:
+        reviews.append({
+            "detected_at": _now(), "event_id": "", "code": entry.get("code", ""), "name": entry.get("code", ""),
+            "category": entry.get("category", ""), "period": entry.get("period", ""),
+            "issue": f"수기입력 오류: {issue}",
+            "planned_date": entry.get("date", ""), "planned_qty": entry.get("qty", ""), "memo": "수기입력 탭 확인 필요",
+        })
+
+    listing_by_code = {
+        str(r.get("code") or ""): r.get("listing_date") or ""
+        for r in existing_rows
+        if r.get("code") and r.get("listing_date")
+    }
+
+    for entry in entries:
+        code = str(entry.get("code") or "").strip()
+        category = MANUAL_CATEGORY_MAP.get(str(entry.get("category") or "").strip())
+        period = str(entry.get("period") or "").strip()
+        date = str(entry.get("date") or "").strip()
+        qty = _to_int(entry.get("qty"))
+
+        if not code:
+            review(entry, "종목코드가 비어 있음")
             continue
-        updated = 0
-        for row in rows:
-            meta = snap.get(str(row.get("code") or ""))
-            if meta and meta.get("close_price"):
-                row["close_price"] = meta["close_price"]
-                updated += 1
-        close_date = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:8]}"
-        print(f"[KRX] 종가 갱신: {updated}개 행 / 기준일 {close_date}", file=sys.stderr)
-        return close_date
-    print("[KRX] 최근 10일 내 거래일 스냅샷을 찾지 못해 종가 갱신을 건너뜁니다.", file=sys.stderr)
-    return None
+        if not category:
+            review(entry, "구분은 IPO기관 또는 기존주주여야 함")
+            continue
+        if not period:
+            review(entry, "락업기간이 비어 있음")
+            continue
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+            review(entry, "해제일은 YYYY-MM-DD 형식이어야 함")
+            continue
+        if qty <= 0:
+            review(entry, "물량은 0보다 큰 숫자여야 함")
+            continue
+
+        _, snap = latest_krx_snapshot()
+        meta = snap.get(code)
+        if not meta:
+            review(entry, "KRX에서 종목코드를 찾지 못함 (코드 확인)")
+            continue
+
+        shares = _to_int(meta.get("shrs"))
+        event_id = build_event_id(code, category, period, date)
+        row = {
+            "event_id": event_id,
+            "code": code,
+            "name": meta.get("name"),
+            "market": meta.get("market"),
+            "listing_date": listing_by_code.get(code, ""),
+            "shares": shares,
+            "close_price": _to_int(meta.get("close_price")),
+            "category": category,
+            "type": "IPO확약" if category == CATEGORY_IPO else "보호예수",
+            "period": period,
+            "planned_date": date,
+            "planned_tradable_date": date,
+            "planned_date_display": date,
+            "planned_qty": qty,
+            "planned_pct": pct(qty, shares),
+            "dart_rcp": "",
+            "dart_source": "수기입력",
+            "parse_note": "시트 수기입력 탭에서 편입",
+            "api_return_date": "",
+            "api_return_qty": "",
+            "api_reason": "",
+            "manual_date": "",
+            "manual_qty": "",
+            "manual_lock": "N",
+            "memo": "",
+        }
+        # 재실행 시 기존 행의 API 확인값·수동 수정값을 유지한다
+        previous = existing_by_id.get(event_id)
+        if previous:
+            for key in ("api_return_date", "api_return_qty", "api_reason"):
+                if previous.get(key) not in (None, ""):
+                    row[key] = previous[key]
+        row = carry_manual_fields(row, previous)
+
+        finalized, f_reviews, f_logs = finalize_row(row)
+        reviews.extend(f_reviews)
+        logs.extend(f_logs)
+        if event_id not in existing_by_id:
+            logs.append(log_change(finalized, "event", "", "수기입력 이벤트 추가", "시트 수기입력 탭 반영"))
+        all_rows_by_id[event_id] = finalized
+        print(f"  [수기입력] {meta.get('name')}({code}) {period} {date} {qty:,}주 편입", file=sys.stderr)
+
+    return reviews, logs
 
 
 def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
@@ -656,6 +792,14 @@ def main() -> None:
             all_reviews.extend(reviews)
             all_logs.extend(logs)
             all_rows_by_id[finalized["event_id"]] = finalized
+
+    # 시트 수기입력 탭에서 내려받은 이벤트 편입 (스팩합병 등 자동 파싱이 안 되는 종목용)
+    manual_entries = load_manual_events()
+    if manual_entries:
+        print(f"[BUILD] 수기입력 이벤트 {len(manual_entries)}건 처리", file=sys.stderr)
+        manual_reviews, manual_logs = apply_manual_events(manual_entries, existing_rows, existing_by_id, all_rows_by_id)
+        all_reviews.extend(manual_reviews)
+        all_logs.extend(manual_logs)
 
     all_rows = sorted(all_rows_by_id.values(), key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""))
 

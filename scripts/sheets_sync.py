@@ -62,6 +62,18 @@ UNIVERSE_REVIEW_COLUMNS = [
 
 REVIEW_DECISIONS_PATH = ROOT_DIR / "data" / "listing_review_decisions.json"
 
+# 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
+MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
+MANUAL_EVENT_TAB = "수기입력"
+MANUAL_EVENT_HEADERS = ["종목코드", "구분", "락업기간", "해제일", "물량"]
+MANUAL_EVENT_KEYS = {
+    "종목코드": "code",
+    "구분": "category",
+    "락업기간": "period",
+    "해제일": "date",
+    "물량": "qty",
+}
+
 HEADER_KO = {
     "event_id": "이벤트ID",
     "code": "종목코드",
@@ -244,6 +256,7 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
     pull_review_decisions(spreadsheet)
+    pull_manual_events(spreadsheet)
 
 
 def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
@@ -273,6 +286,68 @@ def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
         json.dumps(decisions, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(f"[SHEET] 상장후보 검토결과 내려받기: {len(decisions)}개", file=sys.stderr)
+
+
+def ensure_manual_event_tab(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
+    """수기입력 탭이 없으면 헤더·서식과 함께 만든다. 있으면 내용은 절대 건드리지 않는다."""
+    try:
+        return spreadsheet.worksheet(MANUAL_EVENT_TAB)
+    except gspread.WorksheetNotFound:
+        pass
+
+    worksheet = spreadsheet.add_worksheet(title=MANUAL_EVENT_TAB, rows=200, cols=len(MANUAL_EVENT_HEADERS) + 1)
+    worksheet.update([MANUAL_EVENT_HEADERS], "A1", value_input_option="USER_ENTERED")
+    worksheet.freeze(rows=1)
+    worksheet.format(
+        "1:1",
+        {
+            "backgroundColor": {"red": 1.0, "green": 0.95, "blue": 0.85},
+            "textFormat": {"bold": True},
+            "horizontalAlignment": "CENTER",
+        },
+    )
+    category_column = MANUAL_EVENT_HEADERS.index("구분")
+    spreadsheet.batch_update({
+        "requests": [{
+            "setDataValidation": {
+                "range": {
+                    "sheetId": worksheet.id,
+                    "startRowIndex": 1,
+                    "endRowIndex": worksheet.row_count,
+                    "startColumnIndex": category_column,
+                    "endColumnIndex": category_column + 1,
+                },
+                "rule": {
+                    "condition": {
+                        "type": "ONE_OF_LIST",
+                        "values": [
+                            {"userEnteredValue": "IPO기관"},
+                            {"userEnteredValue": "기존주주"},
+                        ],
+                    },
+                    "strict": True,
+                    "showCustomUi": True,
+                },
+            }
+        }]
+    })
+    print(f"[SHEET] {MANUAL_EVENT_TAB} 탭 생성", file=sys.stderr)
+    return worksheet
+
+
+def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
+    worksheet = ensure_manual_event_tab(spreadsheet)
+    values = worksheet.get_all_values()
+    entries: list[dict[str, str]] = []
+    if len(values) >= 2:
+        headers = [MANUAL_EVENT_KEYS.get(value.strip(), value.strip()) for value in values[0]]
+        for row in values[1:]:
+            padded = row + [""] * max(0, len(headers) - len(row))
+            record = {headers[index]: padded[index].strip() for index in range(len(headers))}
+            if any(record.get(key, "") for key in MANUAL_EVENT_KEYS.values()):
+                entries.append({key: record.get(key, "") for key in MANUAL_EVENT_KEYS.values()})
+    MANUAL_EVENTS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[SHEET] 수기입력 내려받기: {len(entries)}건", file=sys.stderr)
 
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
@@ -398,6 +473,7 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
     push_universe_review(spreadsheet)
+    ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
 
 
 def main() -> None:
