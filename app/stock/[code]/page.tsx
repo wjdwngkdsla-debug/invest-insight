@@ -62,7 +62,7 @@ function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past",
             {tone === "upcoming" && (
               <span
                 className={`rounded-full px-2.5 py-1 text-xs font-bold tabular-nums ${
-                  d <= 3 ? "bg-[#fde5d8] text-alert" : "bg-ink text-white"
+                  d <= 3 ? "bg-[#ffe5e5] text-alert" : "bg-sky text-sky-ink"
                 }`}
               >
                 D-{d}

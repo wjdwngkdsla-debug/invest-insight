@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <header>
           <div className="mx-auto flex max-w-[1440px] items-center px-6 py-5">
             <Link href="/" className="flex items-center gap-2 text-[17px] font-extrabold tracking-tight">
-              <span className="inline-block h-2.5 w-2.5 rounded-full bg-lime ring-1 ring-black/10" aria-hidden />
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#5ac8fa] ring-1 ring-black/10" aria-hidden />
               IPO 락업 캘린더
             </Link>
           </div>

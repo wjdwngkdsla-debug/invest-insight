@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Superpower 스타일 라이트 팔레트 */
-  --color-cream: #f5f3ec; /* 페이지 배경 (웜 아이보리) */
-  --color-cream-deep: #efece2; /* 배경 위 살짝 가라앉은 면 (테이블 헤더 등) */
+  /* Apple 스타일 라이트 팔레트 + 하늘색 포인트
+     (토큰 이름은 이전 크림 팔레트 시절 그대로 유지 — 값만 교체) */
+  --color-cream: #f4f6f9; /* 페이지 배경: 쿨 그레이에 하늘색 기운 */
+  --color-cream-deep: #e9eef5; /* 배경 위 살짝 가라앉은 면 (테이블 헤더 등) */
   --color-card: #ffffff;
-  --color-hairline: #e7e4da;
-  --color-ink: #17150f;
-  --color-ink-soft: #55524a;
-  --color-ink-muted: #8b877c;
-  --color-lime: #d9f24b; /* 포인트 칩 */
-  --color-lime-ink: #2a2e0e;
-  --color-alert: #d1490f; /* 대량 물량/임박 경고 텍스트 */
+  --color-hairline: #e2e6ec;
+  --color-ink: #1d1d1f; /* Apple 잉크 */
+  --color-ink-soft: #3f4247;
+  --color-ink-muted: #7d838c;
+  --color-sky: #e8f2ff; /* 하늘색 칩 배경 */
+  --color-sky-ink: #0b62c4; /* 하늘색 칩 텍스트 */
+  --color-accent: #0071e3; /* Apple 블루 — 링크/포인트 */
+  --color-alert: #d70015; /* 대량 물량/임박 경고 텍스트 */
 }
 
 @theme inline {
@@ -22,8 +24,9 @@
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
   --color-ink-muted: var(--color-ink-muted);
-  --color-lime: var(--color-lime);
-  --color-lime-ink: var(--color-lime-ink);
+  --color-sky: var(--color-sky);
+  --color-sky-ink: var(--color-sky-ink);
+  --color-accent: var(--color-accent);
   --color-alert: var(--color-alert);
 
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -48,14 +51,6 @@ h3 {
   border: 1px solid var(--color-hairline);
   border-radius: 20px;
   box-shadow:
-    0 1px 2px rgba(23, 21, 15, 0.03),
-    0 12px 32px -18px rgba(23, 21, 15, 0.12);
-}
-
-/* 히어로 스탯 타일 그라디언트 (Superpower 스코어 카드 무드) */
-.tile-green {
-  background: radial-gradient(140% 130% at 50% -20%, #eec282 0%, #9ccb64 45%, #3f9e3b 95%);
-}
-.tile-orange {
-  background: radial-gradient(140% 130% at 12% -20%, #ccd4ec 0%, #ecbe75 48%, #e07d2c 95%);
+    0 1px 2px rgba(29, 29, 31, 0.03),
+    0 12px 32px -18px rgba(29, 29, 31, 0.1);
 }

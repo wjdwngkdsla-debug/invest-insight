@@ -98,7 +98,7 @@ function statusClass(status: string): string {
 }
 
 function categoryClass(category: LockupCategory): string {
-  return category === "IPO기관" ? "bg-[#eef7d2] text-[#4a6510]" : "bg-cream-deep text-ink-soft";
+  return category === "IPO기관" ? "bg-sky text-sky-ink" : "bg-cream-deep text-ink-soft";
 }
 
 function downloadCsv(rows: FlatRow[], priceDate: string, filter: FilterKey) {
@@ -212,7 +212,7 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate:
                   className="border-b border-hairline/60 transition-colors last:border-0 hover:bg-cream/50"
                 >
                   <td className="whitespace-nowrap px-4 py-3">
-                    <Link href={`/stock/${r.code}`} className="font-semibold text-ink hover:underline">{r.name}</Link>
+                    <Link href={`/stock/${r.code}`} className="font-semibold text-accent hover:underline">{r.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-ink-muted">{r.market}</td>
                   <td className="whitespace-nowrap px-4 py-3 text-ink-muted tabular-nums">{r.listing_date}</td>
