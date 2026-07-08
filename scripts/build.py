@@ -423,7 +423,9 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     api_qty = _to_int(row.get("api_return_qty"))
     api_date = row.get("api_return_date") or ""
     planned_qty = _to_int(row.get("planned_qty"))
-    planned_date = row.get("planned_tradable_date") or row.get("planned_date") or ""
+    # 원본 예정일 우선 — 주말/휴장일 보정을 하지 않기로 해서(2026-07-09)
+    # 과거에 저장된 보정일(planned_tradable_date)보다 원래 해제일을 쓴다.
+    planned_date = row.get("planned_date") or row.get("planned_tradable_date") or ""
 
     old_final_qty = row.get("final_qty", "")
     old_final_date = row.get("final_date", "")

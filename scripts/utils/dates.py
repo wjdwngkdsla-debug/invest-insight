@@ -3,17 +3,6 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
-# 임시 휴장일 세트. 한국천문연구원 특일정보 API/거래소 휴장일 연동 전까지 매년 갱신 필요.
-# 법정공휴일 외에 근로자의날, 연말 폐장일 등 KRX 휴장일을 별도 추가해야 함.
-HOLIDAYS = {
-    # 2026 주요 휴장일 예시
-    "20260101", "20260216", "20260217", "20260218", "20260302", "20260505",
-    "20260525", "20260817", "20260924", "20260925", "20260928", "20261005",
-    "20261009", "20261225", "20261231",
-    # 2027 예시
-    "20270101",
-}
-
 CALC = {
     "15일": lambda d: d + timedelta(days=15),
     "1개월": lambda d: d + relativedelta(months=1),
@@ -34,19 +23,15 @@ def parse_date(date_str: str) -> datetime:
     return datetime.strptime(date_str, "%Y-%m-%d")
 
 
-def next_trading_day(d: datetime) -> datetime:
-    t = d
-    while t.weekday() >= 5 or t.strftime("%Y%m%d") in HOLIDAYS:
-        t += timedelta(days=1)
-    return t
-
-
 def release_display(d: datetime) -> tuple[str, datetime]:
+    """해제일을 보정 없이 원본 그대로 표시한다.
+
+    주말/휴장일 → 다음 거래일 보정은 하지 않기로 결정(2026-07-09).
+    임시공휴일 등 변수가 많아 수동 휴장일 목록은 유지보수 부담만 크고,
+    해제일이 곧 매도일도 아니기 때문. 휴장일 안내는 사이트 푸터 문구로 대체.
+    """
     base = d.strftime("%Y-%m-%d")
-    tradable = next_trading_day(d)
-    if tradable != d:
-        return f"{base} (거래가능 {tradable.strftime('%m-%d')})", tradable
-    return base, tradable
+    return base, d
 
 
 def calc_release_date(listing_date: str, period: str) -> tuple[str, str, str]:
