@@ -136,12 +136,38 @@ def load_manual_targets() -> list[dict]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_listing_review_decisions() -> list[dict]:
+    path = ROOT_DIR / "data" / "listing_review_decisions.json"
+    if not path.exists():
+        return []
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def load_targets(args: argparse.Namespace) -> list[dict]:
     if args.manual_targets:
         print("[TARGET] manual_targets.json 사용", file=sys.stderr)
         return load_manual_targets()
     print(f"[TARGET] {args.year}년 KRX 신규상장 IPO universe 생성/갱신", file=sys.stderr)
-    return load_or_build_ipo_universe(args.year, refresh=not args.no_refresh_universe, end_date=args.end_date)
+    targets = load_or_build_ipo_universe(
+        args.year, refresh=not args.no_refresh_universe, end_date=args.end_date
+    )
+    decisions = {row.get("code", ""): row for row in load_listing_review_decisions() if row.get("code")}
+    targets = [
+        target for target in targets
+        if decisions.get(target.get("code", ""), {}).get("review_decision") != "비IPO"
+    ]
+    by_code = {target.get("code", ""): target for target in targets if target.get("code")}
+    for code, decision in decisions.items():
+        if decision.get("review_decision") != "IPO":
+            continue
+        if code in by_code:
+            by_code[code]["operator_forced_ipo"] = True
+            by_code[code]["review_memo"] = decision.get("review_memo", "")
+            continue
+        target = {**decision, "operator_forced_ipo": True}
+        targets.append(target)
+        by_code[code] = target
+    return targets
 
 
 def get_stock_meta(target: dict) -> tuple[str | None, dict | None, str | None]:
@@ -526,7 +552,10 @@ def main() -> None:
         shares = int(meta.get("shrs") or target.get("shares") or 0)
         existing_stock_rows = rows_for_stock(existing_rows, code)
 
-        if existing_stock_rows and not args.reparse_existing:
+        has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
+        if existing_stock_rows and not args.reparse_existing and (
+            not target.get("operator_forced_ipo") or has_ipo_rows
+        ):
             print(f"  [DART] 기존 편입 종목 → DART 재파싱 생략, API 검증만 수행", file=sys.stderr)
             stock_rows = [dict(r) for r in existing_stock_rows]
         else:
@@ -535,6 +564,25 @@ def main() -> None:
             float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, args.year)
             stock_rows.extend(float_rows)
             all_reviews.extend(float_reviews)
+            if target.get("operator_forced_ipo") and not any(
+                row.get("category") == CATEGORY_IPO for row in stock_rows
+            ):
+                all_reviews.append({
+                    "detected_at": _now(),
+                    "event_id": "",
+                    "code": code,
+                    "name": name,
+                    "category": CATEGORY_IPO,
+                    "period": "",
+                    "issue": "운영자 IPO 선택 종목의 IPO기관 락업 파싱 결과 없음",
+                    "planned_date": "",
+                    "planned_qty": "",
+                    "api_return_date": "",
+                    "api_return_qty": "",
+                    "manual_date": "",
+                    "manual_qty": "",
+                    "memo": target.get("review_memo", ""),
+                })
             stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
 
         stock_rows, api_reviews, api_logs = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)

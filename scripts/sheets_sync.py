@@ -56,8 +56,11 @@ LOG_COLUMNS = [
 
 UNIVERSE_REVIEW_COLUMNS = [
     "name", "code", "market", "listing_date", "shares", "close_price",
-    "classification", "classification_reason", "rcp", "detected_bas_dd",
+    "classification", "classification_reason", "review_decision", "review_memo",
+    "rcp", "detected_bas_dd",
 ]
+
+REVIEW_DECISIONS_PATH = ROOT_DIR / "data" / "listing_review_decisions.json"
 
 HEADER_KO = {
     "event_id": "이벤트ID",
@@ -104,6 +107,8 @@ HEADER_KO = {
     "classification_reason": "판정사유",
     "rcp": "DART접수번호",
     "detected_bas_dd": "상장감지기준일",
+    "review_decision": "검토결과",
+    "review_memo": "운영자메모",
 }
 HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
@@ -214,6 +219,36 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
 
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
+    pull_review_decisions(spreadsheet)
+
+
+def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
+    try:
+        sheet_rows = worksheet_records(spreadsheet.worksheet("상장후보_검토"))
+    except gspread.WorksheetNotFound:
+        return
+
+    existing = []
+    if REVIEW_DECISIONS_PATH.exists():
+        existing = json.loads(REVIEW_DECISIONS_PATH.read_text(encoding="utf-8"))
+    by_code = {row.get("code", ""): row for row in existing if row.get("code")}
+
+    for row in sheet_rows:
+        decision = row.get("review_decision", "").strip()
+        code = row.get("code", "").strip()
+        if not code or decision not in {"IPO", "비IPO"}:
+            continue
+        by_code[code] = {
+            **{column: row.get(column, "") for column in UNIVERSE_REVIEW_COLUMNS},
+            "review_decision": decision,
+            "review_memo": row.get("review_memo", "").strip(),
+        }
+
+    decisions = sorted(by_code.values(), key=lambda row: (row.get("listing_date", ""), row.get("code", "")))
+    REVIEW_DECISIONS_PATH.write_text(
+        json.dumps(decisions, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"[SHEET] 상장후보 검토결과 내려받기: {len(decisions)}개", file=sys.stderr)
 
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
@@ -282,7 +317,54 @@ def push_rows(
 def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
     candidates = sorted((ROOT_DIR / "data").glob("review_candidates_*.json"))
     rows = json.loads(candidates[-1].read_text(encoding="utf-8")) if candidates else []
-    push_rows(spreadsheet, "상장후보_검토", rows, UNIVERSE_REVIEW_COLUMNS)
+    decisions = []
+    if REVIEW_DECISIONS_PATH.exists():
+        decisions = json.loads(REVIEW_DECISIONS_PATH.read_text(encoding="utf-8"))
+    decision_by_code = {row.get("code", ""): row for row in decisions if row.get("code")}
+    admin_codes = {
+        row.get("code", "")
+        for row in read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+        if row.get("category") == "IPO기관"
+    }
+
+    merged_rows = []
+    for row in rows:
+        saved = decision_by_code.get(row.get("code", ""), {})
+        merged = {**row, **{
+            "review_decision": saved.get("review_decision", ""),
+            "review_memo": saved.get("review_memo", ""),
+        }}
+        if merged.get("review_decision") == "IPO" and merged.get("code") in admin_codes:
+            continue
+        merged_rows.append(merged)
+
+    push_rows(spreadsheet, "상장후보_검토", merged_rows, UNIVERSE_REVIEW_COLUMNS)
+    worksheet = spreadsheet.worksheet("상장후보_검토")
+    decision_column = UNIVERSE_REVIEW_COLUMNS.index("review_decision")
+    spreadsheet.batch_update({
+        "requests": [{
+            "setDataValidation": {
+                "range": {
+                    "sheetId": worksheet.id,
+                    "startRowIndex": 1,
+                    "endRowIndex": worksheet.row_count,
+                    "startColumnIndex": decision_column,
+                    "endColumnIndex": decision_column + 1,
+                },
+                "rule": {
+                    "condition": {
+                        "type": "ONE_OF_LIST",
+                        "values": [
+                            {"userEnteredValue": "IPO"},
+                            {"userEnteredValue": "비IPO"},
+                        ],
+                    },
+                    "strict": True,
+                    "showCustomUi": True,
+                },
+            }
+        }]
+    })
 
 
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
