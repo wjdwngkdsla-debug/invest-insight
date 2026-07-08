@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-lockup-data.yml"
-    # Temporary trigger used only for the initial production verification.
+    # Temporary trigger used for the production resilience verification.
   schedule:
     # 00:00 Asia/Seoul = 15:00 UTC on the previous calendar day.
     - cron: "0 15 * * *"
