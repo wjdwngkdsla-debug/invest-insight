@@ -523,6 +523,41 @@ def refresh_close_prices(rows: list[dict]) -> str | None:
     return close_date
 
 
+def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
+    """같은 종목·같은 원본 예정일 그룹에서 금융위 API 반환일이 확인되면
+    아직 API 확인이 없는 행(예: IPO기관 확약분)도 그 실제 반환일로 정렬한다.
+
+    예정일은 보정 없이 원본 그대로 두지만, 예탁원이 실제로 반환한 날짜가
+    확인된 경우 그것이 ground truth이므로 같은 해제 건의 날짜가 둘로
+    갈라지지 않게 맞춘다. 수동고정(manual_lock=Y) 행은 건드리지 않는다.
+    """
+    groups: dict[tuple, list[dict]] = {}
+    for row in all_rows_by_id.values():
+        key = (row.get("code"), row.get("planned_date"))
+        if key[0] and key[1]:
+            groups.setdefault(key, []).append(row)
+
+    logs: list[dict] = []
+    for rows in groups.values():
+        api_dates = {row.get("api_return_date") for row in rows if row.get("api_return_date")}
+        if len(api_dates) != 1:
+            continue  # API 확인이 없거나 서로 다른 날짜면 판단하지 않고 그대로 둔다
+        api_date = next(iter(api_dates))
+        for row in rows:
+            if row.get("api_return_date"):
+                continue
+            if str(row.get("manual_lock") or "N").upper() == "Y":
+                continue
+            if row.get("final_date") == api_date:
+                continue
+            old = row.get("final_date")
+            row["final_date"] = api_date
+            row["final_tradable_date"] = api_date
+            row["final_date_display"] = api_date
+            logs.append(log_change(row, "final_date", old, api_date, "같은 예정일의 API 실제 반환일로 정렬"))
+    return logs
+
+
 MANUAL_CATEGORY_MAP = {
     "IPO기관": CATEGORY_IPO,
     "기존주주": CATEGORY_FLOAT,
@@ -800,6 +835,9 @@ def main() -> None:
         manual_reviews, manual_logs = apply_manual_events(manual_entries, existing_rows, existing_by_id, all_rows_by_id)
         all_reviews.extend(manual_reviews)
         all_logs.extend(manual_logs)
+
+    # 같은 해제 건인데 API 확인 여부에 따라 날짜가 갈라지는 것 방지
+    all_logs.extend(align_final_dates_with_api(all_rows_by_id))
 
     all_rows = sorted(all_rows_by_id.values(), key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""))
 
