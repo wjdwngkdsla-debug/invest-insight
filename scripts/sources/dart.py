@@ -77,12 +77,39 @@ def dart_pdf(rcp: str):
     return pdfplumber.open(io.BytesIO(pdf_res.content))
 
 
-def parse_ipo_lockup(corp_name: str) -> tuple[str | None, dict | None, str]:
+def extract_ipo_price(pdf) -> int:
+    """증권발행실적보고서에서 1주당 확정 공모가(원)를 유도한다. 못 찾으면 0.
+
+    보고서에 '공모가'라는 단어가 직접 없어서, 인수기관/배정 표의
+    (수량, 금액) 쌍 중 금액이 수량으로 정확히 나눠떨어지는 것들을 모아
+    가장 많이 나온 단가를 공모가로 본다 (모든 행이 같은 단가라 매우 견고).
+    유상증자 등 이후 이벤트는 반영하지 않는 상장 시점 값.
+    """
+    from collections import Counter
+
+    text = "\n".join(page.extract_text() or "" for page in pdf.pages[:8])
+    candidates: Counter[int] = Counter()
+    for qty_str, amount_str in re.findall(r"([\d,]{5,15})\s+([\d,]{7,20})", text):
+        qty = int(qty_str.replace(",", ""))
+        amount = int(amount_str.replace(",", ""))
+        if qty < 1_000 or amount < 1_000_000:
+            continue
+        price, remainder = divmod(amount, qty)
+        if remainder == 0 and 1_000 <= price <= 10_000_000:  # 공모가 현실 범위 (원)
+            candidates[price] += 1
+    if not candidates:
+        return 0
+    price, count = candidates.most_common(1)[0]
+    return price if count >= 2 else 0  # 우연한 일치 방지: 최소 2개 행에서 확인
+
+
+def parse_ipo_lockup(corp_name: str) -> tuple[str | None, dict | None, str, int]:
     rcp = dart_find_report(corp_name)
     if not rcp:
-        return None, None, "증권발행실적보고서 미발견→수동확인"
+        return None, None, "증권발행실적보고서 미발견→수동확인", 0
     pdf = dart_pdf(rcp)
     if not pdf:
-        return rcp, None, "PDF 다운로드 실패→수동확인"
+        return rcp, None, "PDF 다운로드 실패→수동확인", 0
     parsed, note = parse_lockup_from_pdf(pdf)
-    return rcp, parsed, note
+    ipo_price = extract_ipo_price(pdf)
+    return rcp, parsed, note, ipo_price

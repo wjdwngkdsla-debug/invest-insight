@@ -28,7 +28,7 @@ PERIOD_KEY_MAP = {
 }
 
 ADMIN_COLUMNS = [
-    "event_id", "code", "name", "market", "listing_date", "shares", "close_price",
+    "event_id", "code", "name", "market", "listing_date", "shares", "close_price", "ipo_price",
     "category", "type", "period",
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
@@ -186,9 +186,10 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     name = target["name"]
     rcp = target.get("rcp")
     parsed = target.get("parsed_ipo_lockups")
+    ipo_price = _to_int(target.get("ipo_price"))
     note = ""
     if not parsed:
-        rcp, parsed, note = parse_ipo_lockup(name)
+        rcp, parsed, note, ipo_price = parse_ipo_lockup(name)
     if not parsed:
         print(f"  [DART] IPO기관 파싱 실패: {note}", file=sys.stderr)
         return []
@@ -209,6 +210,7 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
             "listing_date": listing_date,
             "shares": shares,
             "close_price": int(meta.get("close_price") or 0),
+            "ipo_price": ipo_price,
             "category": CATEGORY_IPO,
             "type": "IPO확약",
             "period": period,
@@ -740,9 +742,12 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             "listing_date": r.get("listing_date"),
             "shares": _to_int(r.get("shares")),
             "close_price": _to_int(r.get("close_price")),
+            "ipo_price": 0,
             "events": [],
             "holders": [],
         })
+        if not stock["ipo_price"] and _to_int(r.get("ipo_price")):
+            stock["ipo_price"] = _to_int(r.get("ipo_price"))
         stock["events"].append({
             "period": r.get("period"),
             "date": final_date,

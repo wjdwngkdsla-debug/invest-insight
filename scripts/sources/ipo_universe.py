@@ -145,8 +145,8 @@ def classify_candidate(candidate: dict) -> tuple[str, str, dict]:
     if excluded:
         return "제외", excluded, {}
 
-    rcp, parsed, note = parse_ipo_lockup(name)
-    extra = {"rcp": rcp, "parsed_ipo_lockups": parsed}
+    rcp, parsed, note, ipo_price = parse_ipo_lockup(name)
+    extra = {"rcp": rcp, "parsed_ipo_lockups": parsed, "ipo_price": ipo_price}
 
     if parsed:
         return "IPO확정", "DART 증권발행실적보고서 수요예측/의무보유확약 표 확인", extra

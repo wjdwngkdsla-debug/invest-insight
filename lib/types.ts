@@ -43,6 +43,7 @@ export interface StockLockup {
   listing_date: string;
   shares: number;
   close_price: number;
+  ipo_price?: number; // 확정 공모가(원). 0 또는 없음 = 미확인
   events: LockupEvent[];
   holders?: LockupHolder[];
 }

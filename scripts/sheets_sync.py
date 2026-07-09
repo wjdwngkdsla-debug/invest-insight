@@ -22,7 +22,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
 
 ADMIN_COLUMNS = [
-    "event_id", "code", "name", "market", "listing_date", "shares", "close_price",
+    "event_id", "code", "name", "market", "listing_date", "shares", "close_price", "ipo_price",
     "category", "type", "period",
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
@@ -34,7 +34,7 @@ ADMIN_COLUMNS = [
 
 ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "category", "period",
-    "listing_date", "close_price", "shares",
+    "listing_date", "close_price", "ipo_price", "shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
     "manual_lock", "manual_date", "manual_qty", "memo",
@@ -86,6 +86,7 @@ HEADER_KO = {
     "listing_date": "상장일",
     "shares": "상장주식수",
     "close_price": "종가",
+    "ipo_price": "공모가",
     "category": "구분",
     "type": "원본유형",
     "period": "락업기간",
@@ -369,14 +370,22 @@ def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
         print("[SHEET] 휴장일 탭이 없어 기존 휴장일 파일을 유지합니다.", file=sys.stderr)
         return
 
-    dates: set[str] = set()
+    # {날짜: 휴일이름} 형태 — 이름은 캘린더 뷰 표시에 쓴다
+    holidays: dict[str, str] = {}
     for row in worksheet.get_all_values():
+        date_value = ""
+        labels: list[str] = []
         for cell in row:
-            match = re.fullmatch(r"(\d{4})[-./](\d{1,2})[-./](\d{1,2})", cell.strip())
-            if match:
-                dates.add(f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}")
-    HOLIDAYS_PATH.write_text(json.dumps(sorted(dates), ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"[SHEET] 휴장일 내려받기: {len(dates)}일", file=sys.stderr)
+            cell = cell.strip()
+            match = re.fullmatch(r"(\d{4})[-./](\d{1,2})[-./](\d{1,2})", cell)
+            if match and not date_value:
+                date_value = f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+            elif cell and not cell.endswith("요일") and cell not in ("일자", "비고"):
+                labels.append(cell)
+        if date_value:
+            holidays[date_value] = labels[-1] if labels else "휴장일"
+    HOLIDAYS_PATH.write_text(json.dumps(holidays, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[SHEET] 휴장일 내려받기: {len(holidays)}일", file=sys.stderr)
 
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:

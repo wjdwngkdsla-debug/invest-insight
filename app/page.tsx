@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
+import { LockupCalendar, type CalendarEvent } from "@/components/LockupCalendar";
 import { dDay, getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
+import holidays from "@/data/holidays.json";
 
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
 export const revalidate = 3600;
@@ -14,6 +16,20 @@ function groupTitle(group: UpcomingGroup): string {
   return "락업 해제";
 }
 
+// 공모가 대비 등락률 — 상승 빨강, 하락 파랑 (국내 시장 관례)
+function IpoPriceChange({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: number }) {
+  if (!ipoPrice || !closePrice) return null;
+  const pct = ((closePrice - ipoPrice) / ipoPrice) * 100;
+  const rounded = Math.round(pct * 10) / 10;
+  const isUp = rounded >= 0;
+  return (
+    <p className={`whitespace-nowrap text-xs font-semibold ${isUp ? "text-red-600" : "text-blue-600"}`}>
+      공모가 대비 {isUp ? "+" : ""}
+      {rounded}%
+    </p>
+  );
+}
+
 function EventHoverCard({ event }: { event: UpcomingGroup }) {
   return (
     <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] hidden w-[320px] opacity-0 transition-opacity duration-150 lg:block">
@@ -21,11 +37,14 @@ function EventHoverCard({ event }: { event: UpcomingGroup }) {
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-5 shadow-xl hover:border-gray-300"
       >
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-start justify-between gap-4">
           <p className="min-w-0 truncate text-lg font-bold text-gray-900">{event.stockName}</p>
-          <p className="shrink-0 whitespace-nowrap font-semibold text-gray-900">
-            {formatQty(event.qty)}주 ({event.pct}%)
-          </p>
+          <div className="shrink-0 text-right">
+            <p className="whitespace-nowrap font-semibold text-gray-900">
+              {formatQty(event.qty)}주 ({event.pct}%)
+            </p>
+            <IpoPriceChange ipoPrice={event.ipoPrice} closePrice={event.closePrice} />
+          </div>
         </div>
 
         <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
@@ -80,10 +99,24 @@ export default function Home() {
   const rows = getFlatRows();
   const { updated } = getSiteData();
 
+  const calendarEvents: CalendarEvent[] = rows.map((row) => ({
+    date: row.tradable_date,
+    name: row.name,
+    code: row.code,
+  }));
+
   return (
     <main className="mx-auto max-w-[1480px] px-5 py-8">
-      <header className="mb-6">
+      <header className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
         <h1 className="text-2xl font-bold">IPO 락업 캘린더</h1>
+        <Link
+          href="https://blog.naver.com/vericap"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whitespace-nowrap text-sm font-medium text-blue-600 hover:underline"
+        >
+          경제 콘텐츠 보러가기 ↗
+        </Link>
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
@@ -105,16 +138,11 @@ export default function Home() {
         </aside>
 
         <section className="min-w-0">
-          <Link
-            href="https://blog.naver.com/vericap"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mb-6 flex min-h-24 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-6 text-center text-2xl font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-100"
-          >
-            Vericap 콘텐츠 보러가기
-          </Link>
+          <LockupCalendar events={calendarEvents} holidays={holidays as Record<string, string>} />
 
-          <CalendarTable rows={rows} priceDate={updated} />
+          <div className="mt-6">
+            <CalendarTable rows={rows} priceDate={updated} />
+          </div>
         </section>
       </div>
     </main>

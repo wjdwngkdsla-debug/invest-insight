@@ -28,6 +28,8 @@ export interface UpcomingGroup {
   market: string;
   listing_date: string;
   shares: number;
+  closePrice: number;
+  ipoPrice: number;
   tradable_date: string;
   date_display: string;
   periods: string[];
@@ -100,6 +102,8 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
       market: stock.market,
       listing_date: stock.listing_date,
       shares: stock.shares,
+      closePrice: stock.close_price,
+      ipoPrice: stock.ipo_price || 0,
       tradable_date: tradableDate,
       date_display: events[0]?.date_display || tradableDate,
       periods: [...new Set(events.map((ev) => ev.period))],

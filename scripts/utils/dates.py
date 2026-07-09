@@ -23,7 +23,9 @@ def market_holidays() -> set[str]:
     global _HOLIDAYS_CACHE
     if _HOLIDAYS_CACHE is None:
         try:
-            _HOLIDAYS_CACHE = set(json.loads(HOLIDAYS_PATH.read_text(encoding="utf-8")))
+            loaded = json.loads(HOLIDAYS_PATH.read_text(encoding="utf-8"))
+            # 리스트(구형)와 {날짜: 이름}(신형) 둘 다 지원
+            _HOLIDAYS_CACHE = set(loaded.keys() if isinstance(loaded, dict) else loaded)
         except Exception:
             _HOLIDAYS_CACHE = set()
     return _HOLIDAYS_CACHE
