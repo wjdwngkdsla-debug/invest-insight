@@ -103,8 +103,8 @@ def extract_ipo_price(pdf) -> int:
     return price if count >= 2 else 0  # 우연한 일치 방지: 최소 2개 행에서 확인
 
 
-def parse_ipo_lockup(corp_name: str) -> tuple[str | None, dict | None, str, int]:
-    rcp = dart_find_report(corp_name)
+def parse_ipo_lockup(corp_name: str, d0: str | None = None) -> tuple[str | None, dict | None, str, int]:
+    rcp = dart_find_report(corp_name, d0=d0 or "20250101")
     if not rcp:
         return None, None, "증권발행실적보고서 미발견→수동확인", 0
     pdf = dart_pdf(rcp)

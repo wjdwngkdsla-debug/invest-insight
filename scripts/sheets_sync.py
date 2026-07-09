@@ -66,6 +66,10 @@ REVIEW_DECISIONS_PATH = ROOT_DIR / "data" / "listing_review_decisions.json"
 HOLIDAYS_PATH = ROOT_DIR / "data" / "holidays.json"
 HOLIDAY_TAB = "휴장일"
 
+# IPO종목 탭 — 편입 대상 종목의 유일한 원천 (구분/회사명/상장일/종목코드)
+IPO_TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
+IPO_TARGET_TAB = "IPO종목"
+
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
 MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
 MANUAL_EVENT_TAB = "수기입력"
@@ -260,7 +264,7 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
 
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
-    pull_review_decisions(spreadsheet)
+    pull_ipo_targets(spreadsheet)
     pull_manual_events(spreadsheet)
     pull_holidays(spreadsheet)
 
@@ -354,6 +358,43 @@ def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
                 entries.append({key: record.get(key, "") for key in MANUAL_EVENT_KEYS.values()})
     MANUAL_EVENTS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[SHEET] 수기입력 내려받기: {len(entries)}건", file=sys.stderr)
+
+
+def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
+    """IPO종목 탭(구분/회사명/상장일/종목코드)을 편입 대상 목록으로 내려받는다.
+
+    KRX 연간 스캔을 대체하는 유일한 대상 원천 — 운영자가 행을 추가하면
+    다음 배치에서 그 종목이 편입된다. 탭이 없으면 기존 파일을 유지한다.
+    """
+    import re
+
+    try:
+        worksheet = spreadsheet.worksheet(IPO_TARGET_TAB)
+    except gspread.WorksheetNotFound:
+        print("[SHEET] IPO종목 탭이 없어 기존 대상 목록을 유지합니다.", file=sys.stderr)
+        return
+
+    entries: list[dict[str, str]] = []
+    skipped = 0
+    for row in worksheet.get_all_values()[1:]:
+        padded = [cell.strip() for cell in row] + ["", "", "", ""]
+        market, name, listing, code = padded[0], padded[1], padded[2], padded[3]
+        if not (name or code):
+            continue
+        normalized = listing.replace(".", "-").replace("/", "-")
+        match = re.fullmatch(r"(\d{4})-(\d{1,2})-(\d{1,2})", normalized)
+        if not name or not code or not match:
+            skipped += 1
+            continue
+        entries.append({
+            "market": market,
+            "name": name,
+            "listing_date": f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}",
+            "code": code,
+        })
+    IPO_TARGETS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    note = f" (형식 불완전 {skipped}건 제외)" if skipped else ""
+    print(f"[SHEET] IPO종목 목록 내려받기: {len(entries)}건{note}", file=sys.stderr)
 
 
 def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
@@ -518,7 +559,6 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
         reset_worksheets(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
-    push_universe_review(spreadsheet)
     ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
 
 

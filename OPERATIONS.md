@@ -3,10 +3,12 @@
 ## 자동 갱신
 
 - GitHub Actions가 매일 한국시간 00:00에 실행됩니다.
-- Google Sheet의 수동 수정값을 먼저 내려받습니다.
-- KRX, DART, 공공데이터 API를 실행합니다.
-- `data/site_data.json`과 운영 CSV를 갱신합니다.
-- Google Sheet를 다시 갱신하고 변경된 데이터는 GitHub에 자동 커밋합니다.
+- **편입 대상은 시트의 `IPO종목` 탭이 유일한 기준**입니다 (KRX 연간 스캔은 폐기).
+  새 종목은 `구분(시장)/회사명/상장일/종목코드` 한 줄을 추가하면 다음 배치에서 편입됩니다.
+  회사명은 DART 공시 회사명과 같아야 파싱이 됩니다.
+- Google Sheet의 수동 수정값·수기입력·휴장일도 함께 내려받습니다.
+- 신규 종목만 DART 파싱하고, 기존 종목은 금융위 API 검증과 종가 갱신만 수행합니다.
+- `data/site_data.json`과 운영 CSV를 갱신하고 Google Sheet를 다시 올린 뒤 GitHub에 자동 커밋합니다.
 - GitHub 커밋이 생기면 Vercel이 홈페이지를 자동 재배포합니다.
 
 ## Google Sheet에서 수정할 칸

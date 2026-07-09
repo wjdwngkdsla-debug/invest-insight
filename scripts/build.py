@@ -16,7 +16,6 @@ from scripts.config import require_env
 from scripts.sources.krx import find_stock_by_name, krx_snapshot
 from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import parse_float_summary_lockups
-from scripts.sources.ipo_universe import load_or_build_ipo_universe
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 
@@ -136,49 +135,50 @@ def load_manual_targets() -> list[dict]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_listing_review_decisions() -> list[dict]:
-    path = ROOT_DIR / "data" / "listing_review_decisions.json"
-    if not path.exists():
-        return []
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
 def load_targets(args: argparse.Namespace) -> list[dict]:
+    """대상 IPO 종목 목록 — 시트 'IPO종목' 탭이 유일한 원천.
+
+    KRX 1년치 스냅샷 스캔 방식은 느리고 실패가 잦아 폐기했다(2026-07-10).
+    새 종목은 운영자가 IPO종목 탭에 한 줄 추가하면 다음 배치에서 편입된다.
+    """
     if args.manual_targets:
         print("[TARGET] manual_targets.json 사용", file=sys.stderr)
         return load_manual_targets()
-    print(f"[TARGET] {args.year}년 KRX 신규상장 IPO universe 생성/갱신", file=sys.stderr)
-    targets = load_or_build_ipo_universe(
-        args.year, refresh=not args.no_refresh_universe, end_date=args.end_date
-    )
-    decisions = {row.get("code", ""): row for row in load_listing_review_decisions() if row.get("code")}
-    targets = [
-        target for target in targets
-        if decisions.get(target.get("code", ""), {}).get("review_decision") != "비IPO"
-    ]
-    by_code = {target.get("code", ""): target for target in targets if target.get("code")}
-    for code, decision in decisions.items():
-        if decision.get("review_decision") != "IPO":
-            continue
-        if code in by_code:
-            by_code[code]["operator_forced_ipo"] = True
-            by_code[code]["review_memo"] = decision.get("review_memo", "")
-            continue
-        target = {**decision, "operator_forced_ipo": True}
-        targets.append(target)
-        by_code[code] = target
+
+    path = ROOT_DIR / "data" / "ipo_targets.json"
+    if not path.exists():
+        raise FileNotFoundError(
+            "data/ipo_targets.json이 없습니다. 먼저 `python -m scripts.sheets_sync pull-admin`으로 "
+            "시트 IPO종목 탭을 내려받으세요."
+        )
+    targets = json.loads(path.read_text(encoding="utf-8"))
+    if not targets:
+        raise ValueError("시트 IPO종목 탭이 비어 있습니다.")
+    print(f"[TARGET] 시트 IPO종목 탭 기준 {len(targets)}개 종목", file=sys.stderr)
     return targets
 
 
 def get_stock_meta(target: dict) -> tuple[str | None, dict | None, str | None]:
-    if target.get("code"):
-        meta = {
-            "name": target.get("name"),
-            "market": target.get("market"),
-            "shrs": int(target.get("shares") or 0),
-            "close_price": int(target.get("close_price") or 0),
-        }
-        return target.get("code"), meta, target.get("detected_bas_dd")
+    """종목코드로 최근 KRX 스냅샷에서 상장주식수·종가·시장을 채운다."""
+    code = str(target.get("code") or "").strip()
+    if code:
+        _, snap = latest_krx_snapshot()
+        meta = snap.get(code)
+        if meta:
+            return code, {
+                "name": target.get("name") or meta.get("name"),
+                "market": target.get("market") or meta.get("market"),
+                "shrs": int(meta.get("shrs") or target.get("shares") or 0),
+                "close_price": int(meta.get("close_price") or target.get("close_price") or 0),
+            }, None
+        # 스냅샷에 코드가 없으면(거래정지 등) 저장된 값이라도 사용
+        if target.get("shares"):
+            return code, {
+                "name": target.get("name"),
+                "market": target.get("market"),
+                "shrs": int(target.get("shares") or 0),
+                "close_price": int(target.get("close_price") or 0),
+            }, None
     return find_stock_by_name(target["name"])
 
 
@@ -189,7 +189,9 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     ipo_price = _to_int(target.get("ipo_price"))
     note = ""
     if not parsed:
-        rcp, parsed, note, ipo_price = parse_ipo_lockup(name)
+        # DART 검색 시작일은 상장 전년도부터 (연말 상장 준비 공시 대비)
+        search_from = f"{int(listing_date[:4]) - 1}0101" if listing_date[:4].isdigit() else None
+        rcp, parsed, note, ipo_price = parse_ipo_lockup(name, d0=search_from)
     if not parsed:
         print(f"  [DART] IPO기관 파싱 실패: {note}", file=sys.stderr)
         return []
@@ -812,7 +814,7 @@ def main() -> None:
         else:
             stock_rows = []
             stock_rows.extend(build_ipo_events(target, code, meta, listing_date, shares))
-            float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, args.year)
+            float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, int(listing_date[:4]))
             stock_rows.extend(float_rows)
             all_reviews.extend(float_reviews)
             if target.get("operator_forced_ipo") and not any(
