@@ -427,16 +427,24 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
         if row.get("code")
     }
 
-    merged_rows = []
+    # 과거 검토 이력(비IPO 판정 등)은 이번 스캔의 후보 파일 유무와 무관하게 항상 탭에 유지한다
+    merged_by_code: dict[str, dict] = {}
+    for row in decisions:
+        code = str(row.get("code") or "").strip()
+        if code:
+            merged_by_code[code] = {column: row.get(column, "") for column in UNIVERSE_REVIEW_COLUMNS}
     for row in rows:
-        saved = decision_by_code.get(row.get("code", ""), {})
-        merged = {**row, **{
+        code = str(row.get("code") or "").strip()
+        if not code:
+            continue
+        saved = decision_by_code.get(code, {})
+        merged_by_code[code] = {**row, **{
             "review_decision": saved.get("review_decision", ""),
             "review_memo": saved.get("review_memo", ""),
         }}
-        if merged.get("code") in admin_codes:
-            continue
-        merged_rows.append(merged)
+
+    merged_rows = [row for code, row in merged_by_code.items() if code not in admin_codes]
+    merged_rows.sort(key=lambda row: (row.get("listing_date", ""), row.get("code", "")))
 
     push_rows(spreadsheet, "상장후보_검토", merged_rows, UNIVERSE_REVIEW_COLUMNS)
     worksheet = spreadsheet.worksheet("상장후보_검토")
