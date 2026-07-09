@@ -44,6 +44,7 @@ function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: nu
         {isUp ? "+" : ""}
         {rounded}%
       </span>
+      <span className="text-[10px] leading-none text-gray-400">공모가 대비</span>
     </span>
   );
 }
