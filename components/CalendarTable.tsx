@@ -192,15 +192,22 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate?
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <input
-          value={query}
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setPage(1);
-          }}
-          placeholder="종목명 검색"
-          className="w-56 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none"
-        />
+        <div className="flex items-center gap-2.5">
+          <input
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setPage(1);
+            }}
+            placeholder="종목명 검색"
+            className="w-56 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none"
+          />
+          {priceDate && (
+            <span className="whitespace-nowrap text-xs text-gray-400">
+              {priceDate.slice(5)} 종가 기준 (해제규모·시가총액)
+            </span>
+          )}
+        </div>
 
         <button
           onClick={() => downloadCsv(filteredRaw, priceDate)}

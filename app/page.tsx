@@ -16,17 +16,35 @@ function groupTitle(group: UpcomingGroup): string {
   return "락업 해제";
 }
 
-// 공모가 대비 등락률 — 상승 빨강, 하락 파랑 (국내 시장 관례)
-function IpoPriceChange({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: number }) {
+// 공모가 대비 등락률 + 추세 화살표 — 상승 빨강, 하락 파랑 (국내 시장 관례)
+function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: number }) {
   if (!ipoPrice || !closePrice) return null;
   const pct = ((closePrice - ipoPrice) / ipoPrice) * 100;
   const rounded = Math.round(pct * 10) / 10;
   const isUp = rounded >= 0;
   return (
-    <p className={`whitespace-nowrap text-xs font-semibold ${isUp ? "text-red-600" : "text-blue-600"}`}>
-      공모가 대비 {isUp ? "+" : ""}
-      {rounded}%
-    </p>
+    <span
+      className={`flex shrink-0 flex-col items-center gap-0.5 ${isUp ? "text-red-600" : "text-blue-600"}`}
+      title="공모가 대비 등락률"
+    >
+      <svg width="34" height="20" viewBox="0 0 34 20" fill="none" aria-hidden>
+        {isUp ? (
+          <>
+            <path d="M3 16.5 L11 8.5 L16 12.5 L28 3.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M21.5 3 H28.5 V10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </>
+        ) : (
+          <>
+            <path d="M3 3.5 L11 11.5 L16 7.5 L28 16.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M21.5 17 H28.5 V10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </>
+        )}
+      </svg>
+      <span className="text-xs font-bold tabular-nums">
+        {isUp ? "+" : ""}
+        {rounded}%
+      </span>
+    </span>
   );
 }
 
@@ -37,14 +55,11 @@ function EventHoverCard({ event }: { event: UpcomingGroup }) {
         href={`/stock/${event.stockCode}`}
         className="block rounded-lg border border-gray-200 bg-white p-5 shadow-xl hover:border-gray-300"
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <p className="min-w-0 truncate text-lg font-bold text-gray-900">{event.stockName}</p>
-          <div className="shrink-0 text-right">
-            <p className="whitespace-nowrap font-semibold text-gray-900">
-              {formatQty(event.qty)}주 ({event.pct}%)
-            </p>
-            <IpoPriceChange ipoPrice={event.ipoPrice} closePrice={event.closePrice} />
-          </div>
+          <p className="shrink-0 whitespace-nowrap font-semibold text-gray-900">
+            {formatQty(event.qty)}주 ({event.pct}%)
+          </p>
         </div>
 
         <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
@@ -84,10 +99,15 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
             {event.tradable_date} · {groupTitle(event)}
           </span>
         </span>
-        <p className="mt-3 font-semibold text-gray-900">{event.stockName}</p>
-        <p className="mt-1 text-sm text-gray-500">
-          {formatQty(event.qty)}주 ({event.pct}%)
-        </p>
+        <div className="mt-3 flex items-center justify-between gap-2">
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-gray-900">{event.stockName}</p>
+            <p className="mt-1 text-sm text-gray-500">
+              {formatQty(event.qty)}주 ({event.pct}%)
+            </p>
+          </div>
+          <TrendBadge ipoPrice={event.ipoPrice} closePrice={event.closePrice} />
+        </div>
       </Link>
       <EventHoverCard event={event} />
     </li>
