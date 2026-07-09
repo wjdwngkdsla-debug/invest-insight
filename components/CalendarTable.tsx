@@ -2,20 +2,24 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { displayStatus, type FlatRow, type LockupCategory } from "@/lib/data";
+import { displayStatus, type FlatRow } from "@/lib/data";
 
-type FilterKey = "전체" | LockupCategory;
-type SortKey =
-  | "name"
-  | "market"
-  | "listing_date"
-  | "category"
-  | "period"
-  | "tradable_date"
-  | "qty"
-  | "pct"
-  | "marketCap"
-  | "status";
+// 화면용 합산 행 — 같은 종목·같은 해제일의 IPO기관/기존주주 물량을 하나로 합친다
+interface MergedRow {
+  code: string;
+  name: string;
+  listing_date: string;
+  tradable_date: string;
+  date_display: string;
+  qty: number;
+  pct: number;
+  scale: number; // 해제규모(원) = 기준일 종가 × 합산 물량
+  periods: string;
+  periodOrder: number;
+  marketCap: number;
+}
+
+type SortKey = "name" | "listing_date" | "tradable_date" | "scale" | "qty" | "pct" | "period" | "marketCap";
 type SortDir = "asc" | "desc";
 
 const PERIOD_ORDER: Record<string, number> = {
@@ -33,41 +37,66 @@ const PERIOD_ORDER: Record<string, number> = {
   "3년": 11,
 };
 
-const FILTERS: FilterKey[] = ["전체", "IPO기관", "기존주주"];
-
 const COLUMNS: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "name", label: "종목" },
-  { key: "market", label: "시장" },
   { key: "listing_date", label: "상장일" },
-  { key: "category", label: "구분" },
-  { key: "period", label: "기간" },
   { key: "tradable_date", label: "해제일" },
+  { key: "scale", label: "해제규모", align: "right" },
   { key: "qty", label: "락업 해제 물량", align: "right" },
   { key: "pct", label: "비중", align: "right" },
+  { key: "period", label: "기간" },
   { key: "marketCap", label: "시가총액", align: "right" },
-  { key: "status", label: "상태" },
 ];
 
 function formatEok(won: number): string {
-  return `${Math.round(won / 1e8).toLocaleString("ko-KR")}억원`;
+  const eok = won / 1e8;
+  if (eok >= 10) return `${Math.round(eok).toLocaleString("ko-KR")}억원`;
+  return `${(Math.round(eok * 10) / 10).toLocaleString("ko-KR")}억원`;
 }
 
-function compare(a: FlatRow, b: FlatRow, key: SortKey): number {
+function mergeRows(rows: FlatRow[]): MergedRow[] {
+  const map = new Map<string, MergedRow>();
+  for (const row of rows) {
+    const key = `${row.code}|${row.tradable_date}`;
+    const existing = map.get(key);
+    if (existing) {
+      existing.qty += row.qty;
+      existing.pct = Math.round((existing.pct + row.pct) * 100) / 100;
+      existing.scale = existing.qty * row.close_price;
+      if (!existing.periods.split("·").includes(row.period)) {
+        existing.periods = `${existing.periods}·${row.period}`;
+        existing.periodOrder = Math.min(existing.periodOrder, PERIOD_ORDER[row.period] ?? 999);
+      }
+    } else {
+      map.set(key, {
+        code: row.code,
+        name: row.name,
+        listing_date: row.listing_date,
+        tradable_date: row.tradable_date,
+        date_display: row.date_display,
+        qty: row.qty,
+        pct: row.pct,
+        scale: row.qty * row.close_price,
+        periods: row.period,
+        periodOrder: PERIOD_ORDER[row.period] ?? 999,
+        marketCap: row.marketCap,
+      });
+    }
+  }
+  return [...map.values()];
+}
+
+function compare(a: MergedRow, b: MergedRow, key: SortKey): number {
   switch (key) {
     case "name":
       return a.name.localeCompare(b.name, "ko-KR");
-    case "market":
     case "listing_date":
-    case "category":
     case "tradable_date":
-      return String(a[key] || "").localeCompare(String(b[key] || ""), "ko-KR");
-    case "status": {
-      // 화면에 보이는 상태(예정/해제완료) 기준으로 정렬하고, 같은 상태끼리는 해제일순
-      const s = displayStatus(a.tradable_date).localeCompare(displayStatus(b.tradable_date), "ko-KR");
-      return s !== 0 ? s : a.tradable_date.localeCompare(b.tradable_date);
-    }
+      return a[key].localeCompare(b[key]);
     case "period":
-      return (PERIOD_ORDER[a.period] ?? 999) - (PERIOD_ORDER[b.period] ?? 999);
+      return a.periodOrder - b.periodOrder;
+    case "scale":
+      return a.scale - b.scale;
     case "qty":
       return a.qty - b.qty;
     case "pct":
@@ -77,11 +106,8 @@ function compare(a: FlatRow, b: FlatRow, key: SortKey): number {
   }
 }
 
-function statusClass(status: string): string {
-  return status === "예정" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-600";
-}
-
-function downloadCsv(rows: FlatRow[], filter: FilterKey, priceDate?: string) {
+// CSV는 화면 합산과 무관하게 원본 분리 데이터(구분·상태 포함)를 그대로 내보낸다
+function downloadCsv(rows: FlatRow[], priceDate?: string) {
   const marketCapHeader = priceDate ? `시가총액(${priceDate.slice(2)})` : "시가총액";
   const headers = [
     "종목",
@@ -116,11 +142,11 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey, priceDate?: string) {
         .join(",")
     ),
   ];
-  const blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `락업해제일정_${filter}_${new Date().toISOString().slice(0, 10)}.csv`;
+  a.download = `락업해제일정_${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -128,26 +154,25 @@ function downloadCsv(rows: FlatRow[], filter: FilterKey, priceDate?: string) {
 const PAGE_SIZE = 20;
 
 export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate?: string }) {
-  const [filter, setFilter] = useState<FilterKey>("전체");
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("tradable_date");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(1);
 
-  const filtered = useMemo(() => {
+  // 검색 → 합산 → 정렬 → 페이지 순서로 처리
+  const filteredRaw = useMemo(() => {
     const q = query.trim();
-    let out = filter === "전체" ? rows : rows.filter((row) => row.category === filter);
-    if (q) out = out.filter((row) => row.name.includes(q));
-    return out;
-  }, [rows, filter, query]);
+    return q ? rows.filter((row) => row.name.includes(q)) : rows;
+  }, [rows, query]);
+
+  const merged = useMemo(() => mergeRows(filteredRaw), [filteredRaw]);
 
   const sorted = useMemo(() => {
-    const copy = [...filtered];
+    const copy = [...merged];
     copy.sort((a, b) => compare(a, b, sortKey) * (sortDir === "asc" ? 1 : -1));
     return copy;
-  }, [filtered, sortKey, sortDir]);
+  }, [merged, sortKey, sortDir]);
 
-  // 페이지 자르기는 필터·정렬이 모두 끝난 결과에 마지막으로 적용 — 정렬/필터와 충돌하지 않는다
   const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const paged = useMemo(
@@ -167,38 +192,18 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate?
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex rounded-lg border border-gray-200 bg-white p-1 text-sm">
-            {FILTERS.map((item) => (
-              <button
-                key={item}
-                onClick={() => {
-                  setFilter(item);
-                  setPage(1);
-                }}
-                className={`rounded-md px-3 py-1.5 font-medium transition-colors ${
-                  filter === item ? "bg-gray-900 text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setPage(1);
-            }}
-            placeholder="종목명 검색"
-            className="w-40 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
-          />
-        </div>
+        <input
+          value={query}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            setPage(1);
+          }}
+          placeholder="종목명 검색"
+          className="w-56 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none"
+        />
 
         <button
-          onClick={() => downloadCsv(sorted, filter, priceDate)}
+          onClick={() => downloadCsv(filteredRaw, priceDate)}
           className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           CSV 다운로드
@@ -224,26 +229,20 @@ export function CalendarTable({ rows, priceDate }: { rows: FlatRow[]; priceDate?
             </tr>
           </thead>
           <tbody>
-            {paged.map((row, index) => (
-              <tr key={`${row.code}-${row.category}-${row.period}-${row.tradable_date}-${index}`} className="border-b border-gray-100 last:border-0">
+            {paged.map((row) => (
+              <tr key={`${row.code}-${row.tradable_date}`} className="border-b border-gray-100 last:border-0">
                 <td className="whitespace-nowrap px-3 py-3">
                   <Link href={`/stock/${row.code}`} className="font-medium text-blue-600 hover:underline">
                     {row.name}
                   </Link>
                 </td>
-                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.market}</td>
                 <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.listing_date}</td>
-                <td className="whitespace-nowrap px-3 py-3 text-gray-700">{row.category}</td>
-                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.period}</td>
                 <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.date_display}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right font-medium">{formatEok(row.scale)}</td>
                 <td className="whitespace-nowrap px-3 py-3 text-right">{row.qty.toLocaleString("ko-KR")}주</td>
-                <td className="whitespace-nowrap px-3 py-3 text-right">{row.pct}%</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right">{Math.round(row.pct * 100) / 100}%</td>
+                <td className="whitespace-nowrap px-3 py-3 text-gray-500">{row.periods}</td>
                 <td className="whitespace-nowrap px-3 py-3 text-right">{formatEok(row.marketCap)}</td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusClass(displayStatus(row.tradable_date))}`}>
-                    {displayStatus(row.tradable_date)}
-                  </span>
-                </td>
               </tr>
             ))}
           </tbody>

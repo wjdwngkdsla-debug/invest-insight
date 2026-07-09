@@ -146,6 +146,7 @@ export interface FlatRow {
   qty: number;
   pct: number;
   marketCap: number;
+  close_price: number;
   status: string;
   tradable_date: string;
   type: string;
@@ -169,6 +170,7 @@ export function getFlatRows(): FlatRow[] {
         qty: ev.qty,
         pct: ev.pct,
         marketCap: stock.shares * stock.close_price,
+        close_price: stock.close_price,
         status: ev.status,
         tradable_date: ev.tradable_date,
         type: ev.type,

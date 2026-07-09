@@ -106,19 +106,7 @@ export default function Home() {
   }));
 
   return (
-    <main className="mx-auto max-w-[1480px] px-5 py-8">
-      <header className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-        <h1 className="text-2xl font-bold">IPO 락업 캘린더</h1>
-        <Link
-          href="https://blog.naver.com/vericap"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="whitespace-nowrap text-sm font-medium text-blue-600 hover:underline"
-        >
-          경제 콘텐츠 보러가기 ↗
-        </Link>
-      </header>
-
+    <main className="mx-auto max-w-[1480px] px-5 py-6">
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
         <aside className="relative min-w-0">
           {upcoming.length === 0 ? (
