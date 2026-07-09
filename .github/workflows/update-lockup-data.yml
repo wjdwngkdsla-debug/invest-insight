@@ -2,8 +2,9 @@ name: Update lockup data
 
 on:
   schedule:
-    # 00:00 Asia/Seoul = 15:00 UTC on the previous calendar day.
-    - cron: "0 15 * * *"
+    # 08:40 Asia/Seoul (= 23:40 UTC 전날) — KRX가 전일 종가를 아침에 공개하므로
+    # 자정 실행은 종가가 하루 더 늦다. 장 시작 전에 전일 데이터로 갱신한다.
+    - cron: "40 23 * * *"
   workflow_dispatch:
     inputs:
       reset_sheet:
@@ -71,6 +72,9 @@ jobs:
           fi
 
       - name: Commit generated data
+        # 타임아웃·중단으로 앞 단계가 끊겨도 중간 저장된 데이터는 커밋해
+        # 다음 실행이 이어서 진행되게 한다 (편입 완료 종목은 재파싱 안 함)
+        if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"

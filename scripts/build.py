@@ -850,6 +850,15 @@ def main() -> None:
             all_logs.extend(logs)
             all_rows_by_id[finalized["event_id"]] = finalized
 
+        # 대량 편입 중 타임아웃 대비 중간 저장 — 끊겨도 여기까지는 커밋되어 다음 실행이 이어간다
+        if idx % 15 == 0:
+            interim = sorted(
+                all_rows_by_id.values(),
+                key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""),
+            )
+            _write_csv(admin_path, interim, ADMIN_COLUMNS)
+            print(f"[BUILD] 중간 저장 완료 ({idx}/{len(targets)})", file=sys.stderr)
+
     # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
     leftover_by_code: dict[str, list[dict]] = {}
     for row in existing_rows:
