@@ -8,12 +8,13 @@
       "listing_date": "2026-01-30",
       "shares": 24791195,
       "close_price": 8160,
+      "ipo_price": 10000,
       "events": [
         {
           "period": "15일",
           "date": "2026-02-14",
-          "date_display": "2026-02-14",
-          "tradable_date": "2026-02-14",
+          "date_display": "2026-02-19",
+          "tradable_date": "2026-02-19",
           "qty": 1767670,
           "pct": 7.13,
           "type": "IPO확약",
@@ -31,9 +32,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-02-28",
-          "date_display": "2026-02-28",
-          "tradable_date": "2026-02-28",
+          "date": "2026-03-03",
+          "date_display": "2026-03-03",
+          "tradable_date": "2026-03-03",
           "qty": 447675,
           "pct": 1.81,
           "type": "IPO확약",
@@ -152,8 +153,8 @@
         {
           "period": "12개월",
           "date": "2027-01-30",
-          "date_display": "2027-01-30",
-          "tradable_date": "2027-01-30",
+          "date_display": "2027-02-01",
+          "tradable_date": "2027-02-01",
           "qty": 184979,
           "pct": 0.75,
           "type": "보호예수",
@@ -172,8 +173,8 @@
         {
           "period": "30개월",
           "date": "2028-07-30",
-          "date_display": "2028-07-30",
-          "tradable_date": "2028-07-30",
+          "date_display": "2028-07-31",
+          "tradable_date": "2028-07-31",
           "qty": 9924237,
           "pct": 40.03,
           "type": "보호예수",
@@ -190,8 +191,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 10000
+      "holders": []
     },
     {
       "code": "279570",
@@ -200,6 +200,7 @@
       "listing_date": "2026-03-05",
       "shares": 405695151,
       "close_price": 5320,
+      "ipo_price": 8300,
       "events": [
         {
           "period": "15일",
@@ -224,8 +225,8 @@
         {
           "period": "1개월",
           "date": "2026-04-05",
-          "date_display": "2026-04-05",
-          "tradable_date": "2026-04-05",
+          "date_display": "2026-04-06",
+          "tradable_date": "2026-04-06",
           "qty": 3295900,
           "pct": 0.81,
           "type": "IPO확약",
@@ -284,8 +285,8 @@
         {
           "period": "6개월",
           "date": "2026-09-05",
-          "date_display": "2026-09-05",
-          "tradable_date": "2026-09-05",
+          "date_display": "2026-09-07",
+          "tradable_date": "2026-09-07",
           "qty": 10808410,
           "pct": 2.66,
           "type": "IPO확약",
@@ -304,8 +305,8 @@
         {
           "period": "6개월",
           "date": "2026-09-05",
-          "date_display": "2026-09-05",
-          "tradable_date": "2026-09-05",
+          "date_display": "2026-09-07",
+          "tradable_date": "2026-09-07",
           "qty": 83775566,
           "pct": 20.65,
           "type": "보호예수",
@@ -342,8 +343,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 8300
+      "holders": []
     },
     {
       "code": "458350",
@@ -352,10 +352,11 @@
       "listing_date": "2026-03-06",
       "shares": 8683200,
       "close_price": 3985,
+      "ipo_price": 8500,
       "events": [
         {
           "period": "15일",
-          "date": "2026-03-23",
+          "date": "2026-03-21",
           "date_display": "2026-03-23",
           "tradable_date": "2026-03-23",
           "qty": 582582,
@@ -415,7 +416,7 @@
         },
         {
           "period": "6개월",
-          "date": "2026-09-07",
+          "date": "2026-09-06",
           "date_display": "2026-09-07",
           "tradable_date": "2026-09-07",
           "qty": 96826,
@@ -434,8 +435,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 8500
+      "holders": []
     },
     {
       "code": "0011A0",
@@ -444,6 +444,7 @@
       "listing_date": "2026-03-09",
       "shares": 9333740,
       "close_price": 9200,
+      "ipo_price": 11500,
       "events": [
         {
           "period": "15일",
@@ -490,20 +491,20 @@
           "date": "2026-04-09",
           "date_display": "2026-04-09",
           "tradable_date": "2026-04-09",
-          "qty": 524543,
-          "pct": 5.62,
+          "qty": 636230,
+          "pct": 6.82,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260219002071",
           "api_checked": true,
           "api_return_date": "2026-04-09",
-          "api_return_qty": 524543,
+          "api_return_qty": 636230,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주"
         },
         {
           "period": "2개월",
@@ -608,8 +609,8 @@
         {
           "period": "30개월",
           "date": "2028-09-09",
-          "date_display": "2028-09-09",
-          "tradable_date": "2028-09-09",
+          "date_display": "2028-09-11",
+          "tradable_date": "2028-09-11",
           "qty": 5075593,
           "pct": 54.38,
           "type": "보호예수",
@@ -626,8 +627,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 11500
+      "holders": []
     },
     {
       "code": "0082N0",
@@ -636,6 +636,7 @@
       "listing_date": "2026-03-16",
       "shares": 12956030,
       "close_price": 12370,
+      "ipo_price": 20000,
       "events": [
         {
           "period": "15일",
@@ -682,20 +683,20 @@
           "date": "2026-04-16",
           "date_display": "2026-04-16",
           "tradable_date": "2026-04-16",
-          "qty": 776269,
-          "pct": 5.99,
+          "qty": 2028941,
+          "pct": 15.66,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260304001117",
           "api_checked": true,
           "api_return_date": "2026-04-16",
-          "api_return_qty": 776269,
+          "api_return_qty": 2028941,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주"
         },
         {
           "period": "3개월",
@@ -722,20 +723,20 @@
           "date": "2026-06-16",
           "date_display": "2026-06-16",
           "tradable_date": "2026-06-16",
-          "qty": 50000,
-          "pct": 0.39,
+          "qty": 2078931,
+          "pct": 16.05,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260304001117",
           "api_checked": true,
           "api_return_date": "2026-06-16",
-          "api_return_qty": 50000,
+          "api_return_qty": 2078931,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "상장주선인(국내기업)",
-          "reason": "상장주선인(국내기업)"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주 + 상장주선인(국내기업)",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주 + 상장주선인(국내기업)"
         },
         {
           "period": "6개월",
@@ -798,8 +799,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 20000
+      "holders": []
     },
     {
       "code": "493280",
@@ -808,10 +808,11 @@
       "listing_date": "2026-03-20",
       "shares": 14776110,
       "close_price": 20500,
+      "ipo_price": 26000,
       "events": [
         {
           "period": "15일",
-          "date": "2026-04-06",
+          "date": "2026-04-04",
           "date_display": "2026-04-06",
           "tradable_date": "2026-04-06",
           "qty": 90454,
@@ -894,24 +895,24 @@
           "date": "2026-06-22",
           "date_display": "2026-06-22",
           "tradable_date": "2026-06-22",
-          "qty": 38461,
-          "pct": 0.26,
+          "qty": 3540037,
+          "pct": 23.96,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260310002460",
           "api_checked": true,
           "api_return_date": "2026-06-22",
-          "api_return_qty": 38461,
+          "api_return_qty": 3540037,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "상장주선인(국내기업)",
-          "reason": "상장주선인(국내기업)"
+          "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
+          "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)"
         },
         {
           "period": "6개월",
-          "date": "2026-09-21",
+          "date": "2026-09-20",
           "date_display": "2026-09-21",
           "tradable_date": "2026-09-21",
           "qty": 869045,
@@ -931,7 +932,7 @@
         },
         {
           "period": "6개월",
-          "date": "2026-09-21",
+          "date": "2026-09-20",
           "date_display": "2026-09-21",
           "tradable_date": "2026-09-21",
           "qty": 1317497,
@@ -951,7 +952,7 @@
         },
         {
           "period": "1년",
-          "date": "2027-03-22",
+          "date": "2027-03-20",
           "date_display": "2027-03-22",
           "tradable_date": "2027-03-22",
           "qty": 1981667,
@@ -990,8 +991,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 26000
+      "holders": []
     },
     {
       "code": "408470",
@@ -1000,6 +1000,7 @@
       "listing_date": "2026-03-25",
       "shares": 10572000,
       "close_price": 5520,
+      "ipo_price": 19000,
       "events": [
         {
           "period": "15일",
@@ -1023,9 +1024,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-04-25",
-          "date_display": "2026-04-25",
-          "tradable_date": "2026-04-25",
+          "date": "2026-04-27",
+          "date_display": "2026-04-27",
+          "tradable_date": "2026-04-27",
           "qty": 57596,
           "pct": 0.54,
           "type": "IPO확약",
@@ -1046,20 +1047,20 @@
           "date": "2026-04-27",
           "date_display": "2026-04-27",
           "tradable_date": "2026-04-27",
-          "qty": 180123,
-          "pct": 1.7,
+          "qty": 1149953,
+          "pct": 10.88,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260313000893",
           "api_checked": true,
           "api_return_date": "2026-04-27",
-          "api_return_qty": 180123,
+          "api_return_qty": 1149953,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기관투자가",
-          "reason": "기관투자가"
+          "holder_name": "벤처금융 + 기관투자가",
+          "reason": "벤처금융 + 기관투자가"
         },
         {
           "period": "2개월",
@@ -1106,8 +1107,8 @@
           "date": "2026-06-25",
           "date_display": "2026-06-25",
           "tradable_date": "2026-06-25",
-          "qty": 6600,
-          "pct": 0.06,
+          "qty": 395237,
+          "pct": 3.74,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -1116,16 +1117,16 @@
           "rcp": "20260313000893",
           "api_checked": true,
           "api_return_date": "2026-06-25",
-          "api_return_qty": 6600,
+          "api_return_qty": 395237,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "상장주선인(국내기업)",
-          "reason": "상장주선인(국내기업)"
+          "holder_name": "기관투자가 + 상장주선인(국내기업)",
+          "reason": "기관투자가 + 상장주선인(국내기업)"
         },
         {
           "period": "6개월",
           "date": "2026-09-25",
-          "date_display": "2026-09-25",
-          "tradable_date": "2026-09-25",
+          "date_display": "2026-09-28",
+          "tradable_date": "2026-09-28",
           "qty": 148051,
           "pct": 1.4,
           "type": "IPO확약",
@@ -1144,8 +1145,8 @@
         {
           "period": "6개월",
           "date": "2026-09-25",
-          "date_display": "2026-09-25",
-          "tradable_date": "2026-09-25",
+          "date_display": "2026-09-28",
+          "tradable_date": "2026-09-28",
           "qty": 876023,
           "pct": 8.29,
           "type": "보호예수",
@@ -1164,8 +1165,8 @@
         {
           "period": "2년",
           "date": "2028-03-25",
-          "date_display": "2028-03-25",
-          "tradable_date": "2028-03-25",
+          "date_display": "2028-03-27",
+          "tradable_date": "2028-03-27",
           "qty": 4720000,
           "pct": 44.65,
           "type": "보호예수",
@@ -1182,8 +1183,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 19000
+      "holders": []
     },
     {
       "code": "0088M0",
@@ -1192,6 +1192,7 @@
       "listing_date": "2026-03-26",
       "shares": 9717750,
       "close_price": 14350,
+      "ipo_price": 21600,
       "events": [
         {
           "period": "15일",
@@ -1215,9 +1216,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-04-26",
-          "date_display": "2026-04-26",
-          "tradable_date": "2026-04-26",
+          "date": "2026-04-27",
+          "date_display": "2026-04-27",
+          "tradable_date": "2026-04-27",
           "qty": 110162,
           "pct": 1.13,
           "type": "IPO확약",
@@ -1238,8 +1239,8 @@
           "date": "2026-04-27",
           "date_display": "2026-04-27",
           "tradable_date": "2026-04-27",
-          "qty": 26000,
-          "pct": 0.27,
+          "qty": 2040084,
+          "pct": 20.99,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -1248,10 +1249,10 @@
           "rcp": "20260313000316",
           "api_checked": true,
           "api_return_date": "2026-04-27",
-          "api_return_qty": 26000,
+          "api_return_qty": 2040084,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주"
         },
         {
           "period": "2개월",
@@ -1298,8 +1299,8 @@
           "date": "2026-06-26",
           "date_display": "2026-06-26",
           "tradable_date": "2026-06-26",
-          "qty": 20400,
-          "pct": 0.21,
+          "qty": 169270,
+          "pct": 1.74,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -1308,16 +1309,16 @@
           "rcp": "20260313000316",
           "api_checked": true,
           "api_return_date": "2026-06-26",
-          "api_return_qty": 20400,
+          "api_return_qty": 169270,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
+          "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)"
         },
         {
           "period": "6개월",
           "date": "2026-09-26",
-          "date_display": "2026-09-26",
-          "tradable_date": "2026-09-26",
+          "date_display": "2026-09-28",
+          "tradable_date": "2026-09-28",
           "qty": 427670,
           "pct": 4.4,
           "type": "IPO확약",
@@ -1356,8 +1357,8 @@
         {
           "period": "2년",
           "date": "2028-03-26",
-          "date_display": "2028-03-26",
-          "tradable_date": "2028-03-26",
+          "date_display": "2028-03-27",
+          "tradable_date": "2028-03-27",
           "qty": 370920,
           "pct": 3.82,
           "type": "보호예수",
@@ -1394,8 +1395,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 21600
+      "holders": []
     },
     {
       "code": "394420",
@@ -1404,6 +1404,7 @@
       "listing_date": "2026-03-31",
       "shares": 10850298,
       "close_price": 14080,
+      "ipo_price": 11000,
       "events": [
         {
           "period": "15일",
@@ -1427,9 +1428,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-04-30",
-          "date_display": "2026-04-30",
-          "tradable_date": "2026-04-30",
+          "date": "2026-05-04",
+          "date_display": "2026-05-04",
+          "tradable_date": "2026-05-04",
           "qty": 190808,
           "pct": 1.76,
           "type": "IPO확약",
@@ -1447,69 +1448,49 @@
         },
         {
           "period": "1개월",
-          "date": "2026-04-30",
-          "date_display": "2026-04-30",
-          "tradable_date": "2026-04-30",
+          "date": "2026-05-04",
+          "date_display": "2026-05-04",
+          "tradable_date": "2026-05-04",
           "qty": 2251518,
           "pct": 20.75,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "확정(경과)",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260318000042",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": null
-        },
-        {
-          "period": "보호예수",
-          "date": "2026-05-04",
-          "date_display": "2026-05-04",
-          "tradable_date": "2026-05-04",
-          "qty": 1458791,
-          "pct": 13.44,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인_API수정",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
           "api_checked": true,
           "api_return_date": "2026-05-04",
-          "api_return_qty": 1458791,
+          "api_return_qty": 2251518,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주"
         },
         {
           "period": "2개월",
           "date": "2026-06-01",
           "date_display": "2026-06-01",
           "tradable_date": "2026-06-01",
-          "qty": 972528,
-          "pct": 8.96,
+          "qty": 1246456,
+          "pct": 11.49,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260318000042",
           "api_checked": true,
           "api_return_date": "2026-06-01",
-          "api_return_qty": 972528,
+          "api_return_qty": 1246456,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주"
         },
         {
           "period": "3개월",
-          "date": "2026-06-30",
-          "date_display": "2026-06-30",
-          "tradable_date": "2026-06-30",
+          "date": "2026-07-01",
+          "date_display": "2026-07-01",
+          "tradable_date": "2026-07-01",
           "qty": 319192,
           "pct": 2.94,
           "type": "IPO확약",
@@ -1527,43 +1508,23 @@
         },
         {
           "period": "3개월",
-          "date": "2026-06-30",
-          "date_display": "2026-06-30",
-          "tradable_date": "2026-06-30",
+          "date": "2026-07-01",
+          "date_display": "2026-07-01",
+          "tradable_date": "2026-07-01",
           "qty": 1246456,
           "pct": 11.49,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "확정(경과)",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260318000042",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": null
-        },
-        {
-          "period": "보호예수",
-          "date": "2026-07-01",
-          "date_display": "2026-07-01",
-          "tradable_date": "2026-07-01",
-          "qty": 1040366,
-          "pct": 9.59,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인_API수정",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
           "api_checked": true,
           "api_return_date": "2026-07-01",
-          "api_return_qty": 1040366,
+          "api_return_qty": 1246456,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주"
         },
         {
           "period": "6개월",
@@ -1646,8 +1607,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 11000
+      "holders": []
     },
     {
       "code": "0007J0",
@@ -1656,6 +1616,7 @@
       "listing_date": "2026-04-02",
       "shares": 7865714,
       "close_price": 8140,
+      "ipo_price": 16600,
       "events": [
         {
           "period": "15일",
@@ -1682,8 +1643,8 @@
           "date": "2026-05-04",
           "date_display": "2026-05-04",
           "tradable_date": "2026-05-04",
-          "qty": 362798,
-          "pct": 4.61,
+          "qty": 624989,
+          "pct": 7.95,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "반환확인_API수정",
@@ -1692,38 +1653,38 @@
           "rcp": "20260326001120",
           "api_checked": true,
           "api_return_date": "2026-05-04",
-          "api_return_qty": 362798,
+          "api_return_qty": 624989,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주"
         },
         {
           "period": "보호예수",
           "date": "2026-06-02",
           "date_display": "2026-06-02",
           "tradable_date": "2026-06-02",
-          "qty": 362795,
-          "pct": 4.61,
+          "qty": 624985,
+          "pct": 7.95,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "공공데이터 API 단독",
           "rcp": "",
           "api_checked": true,
           "api_return_date": "2026-06-02",
-          "api_return_qty": 362795,
+          "api_return_qty": 624985,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주"
         },
         {
           "period": "3개월",
           "date": "2026-07-02",
           "date_display": "2026-07-02",
           "tradable_date": "2026-07-02",
-          "qty": 35400,
-          "pct": 0.45,
+          "qty": 660380,
+          "pct": 8.4,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "반환확인_API수정",
@@ -1732,10 +1693,10 @@
           "rcp": "20260326001120",
           "api_checked": true,
           "api_return_date": "2026-07-02",
-          "api_return_qty": 35400,
+          "api_return_qty": 660380,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "상장주선인(국내기업)",
-          "reason": "상장주선인(국내기업)"
+          "holder_name": "벤처금융 + 기타 보호예수 필요 주주 + 상장주선인(국내기업)",
+          "reason": "벤처금융 + 기타 보호예수 필요 주주 + 상장주선인(국내기업)"
         },
         {
           "period": "6개월",
@@ -1758,8 +1719,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 16600
+      "holders": []
     },
     {
       "code": "0011T0",
@@ -1768,6 +1728,7 @@
       "listing_date": "2026-04-29",
       "shares": 46785280,
       "close_price": 5570,
+      "ipo_price": 12300,
       "events": [
         {
           "period": "15일",
@@ -1910,8 +1871,7 @@
           "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"
         }
       ],
-      "holders": [],
-      "ipo_price": 12300
+      "holders": []
     },
     {
       "code": "439960",
@@ -1920,6 +1880,7 @@
       "listing_date": "2026-05-11",
       "shares": 32108906,
       "close_price": 12150,
+      "ipo_price": 6000,
       "events": [
         {
           "period": "15일",
@@ -1983,7 +1944,7 @@
         },
         {
           "period": "2개월",
-          "date": "2026-07-13",
+          "date": "2026-07-11",
           "date_display": "2026-07-13",
           "tradable_date": "2026-07-13",
           "qty": 3210890,
@@ -2102,8 +2063,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 6000
+      "holders": []
     },
     {
       "code": "487580",
@@ -2112,6 +2072,7 @@
       "listing_date": "2026-05-14",
       "shares": 25182861,
       "close_price": 3610,
+      "ipo_price": 5000,
       "events": [
         {
           "period": "15일",
@@ -2135,9 +2096,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-06-14",
-          "date_display": "2026-06-14",
-          "tradable_date": "2026-06-14",
+          "date": "2026-06-15",
+          "date_display": "2026-06-15",
+          "tradable_date": "2026-06-15",
           "qty": 394770,
           "pct": 1.57,
           "type": "IPO확약",
@@ -2158,20 +2119,20 @@
           "date": "2026-06-15",
           "date_display": "2026-06-15",
           "tradable_date": "2026-06-15",
-          "qty": 2462316,
-          "pct": 9.78,
+          "qty": 3218139,
+          "pct": 12.78,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260430000415",
           "api_checked": true,
           "api_return_date": "2026-06-15",
-          "api_return_qty": 2462316,
+          "api_return_qty": 3218139,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
+          "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주"
         },
         {
           "period": "2개월",
@@ -2236,8 +2197,8 @@
         {
           "period": "6개월",
           "date": "2026-11-14",
-          "date_display": "2026-11-14",
-          "tradable_date": "2026-11-14",
+          "date_display": "2026-11-16",
+          "tradable_date": "2026-11-16",
           "qty": 258500,
           "pct": 1.03,
           "type": "IPO확약",
@@ -2256,8 +2217,8 @@
         {
           "period": "6개월",
           "date": "2026-11-14",
-          "date_display": "2026-11-14",
-          "tradable_date": "2026-11-14",
+          "date_display": "2026-11-16",
+          "tradable_date": "2026-11-16",
           "qty": 225000,
           "pct": 0.89,
           "type": "보호예수",
@@ -2294,8 +2255,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 5000
+      "holders": []
     },
     {
       "code": "477850",
@@ -2304,6 +2264,7 @@
       "listing_date": "2026-05-20",
       "shares": 17541640,
       "close_price": 27100,
+      "ipo_price": 15000,
       "events": [
         {
           "period": "15일",
@@ -2327,9 +2288,9 @@
         },
         {
           "period": "1개월",
-          "date": "2026-06-20",
-          "date_display": "2026-06-20",
-          "tradable_date": "2026-06-20",
+          "date": "2026-06-22",
+          "date_display": "2026-06-22",
+          "tradable_date": "2026-06-22",
           "qty": 151465,
           "pct": 0.86,
           "type": "IPO확약",
@@ -2350,20 +2311,20 @@
           "date": "2026-06-22",
           "date_display": "2026-06-22",
           "tradable_date": "2026-06-22",
-          "qty": 332459,
-          "pct": 1.9,
+          "qty": 454099,
+          "pct": 2.59,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "반환확인_API수정",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260508000924",
           "api_checked": true,
           "api_return_date": "2026-06-22",
-          "api_return_qty": 332459,
+          "api_return_qty": 454099,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주"
+          "holder_name": "기관투자가 + 기타 보호예수 필요 주주",
+          "reason": "기관투자가 + 기타 보호예수 필요 주주"
         },
         {
           "period": "2개월",
@@ -2488,8 +2449,8 @@
         {
           "period": "3년",
           "date": "2029-05-20",
-          "date_display": "2029-05-20",
-          "tradable_date": "2029-05-20",
+          "date_display": "2029-05-22",
+          "tradable_date": "2029-05-22",
           "qty": 5477016,
           "pct": 31.22,
           "type": "보호예수",
@@ -2506,8 +2467,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 15000
+      "holders": []
     },
     {
       "code": "0117P0",
@@ -2516,6 +2476,7 @@
       "listing_date": "2026-06-08",
       "shares": 14168911,
       "close_price": 4590,
+      "ipo_price": 21500,
       "events": [
         {
           "period": "15일",
@@ -2542,20 +2503,20 @@
           "date": "2026-07-08",
           "date_display": "2026-07-08",
           "tradable_date": "2026-07-08",
-          "qty": 191880,
-          "pct": 1.35,
+          "qty": 634312,
+          "pct": 4.48,
           "type": "IPO확약",
           "category": "IPO기관",
-          "status": "예정",
+          "status": "반환확인_API수정",
           "source": "DART",
           "source_label": "증권발행실적보고서",
           "rcp": "20260529001298",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
+          "api_checked": true,
+          "api_return_date": "2026-07-08",
+          "api_return_qty": 634312,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": null
+          "holder_name": "벤처금융",
+          "reason": "벤처금융"
         },
         {
           "period": "3개월",
@@ -2598,8 +2559,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 21500
+      "holders": []
     },
     {
       "code": "153890",
@@ -2608,6 +2568,7 @@
       "listing_date": "2026-06-29",
       "shares": 12050305,
       "close_price": 13080,
+      "ipo_price": 12500,
       "events": [
         {
           "period": "15일",
@@ -2770,8 +2731,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 12500
+      "holders": []
     },
     {
       "code": "475040",
@@ -2780,6 +2740,7 @@
       "listing_date": "2026-06-30",
       "shares": 53255138,
       "close_price": 4460,
+      "ipo_price": 12000,
       "events": [
         {
           "period": "15일",
@@ -2924,8 +2885,8 @@
         {
           "period": "3년",
           "date": "2029-06-30",
-          "date_display": "2029-06-30",
-          "tradable_date": "2029-06-30",
+          "date_display": "2029-07-02",
+          "tradable_date": "2029-07-02",
           "qty": 26382611,
           "pct": 49.54,
           "type": "보호예수",
@@ -2942,8 +2903,7 @@
           "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"
         }
       ],
-      "holders": [],
-      "ipo_price": 12000
+      "holders": []
     },
     {
       "code": "0039P0",
@@ -2952,6 +2912,7 @@
       "listing_date": "2026-07-01",
       "shares": 18746800,
       "close_price": 7600,
+      "ipo_price": 8000,
       "events": [
         {
           "period": "15일",
@@ -2976,8 +2937,8 @@
         {
           "period": "1개월",
           "date": "2026-08-01",
-          "date_display": "2026-08-01",
-          "tradable_date": "2026-08-01",
+          "date_display": "2026-08-03",
+          "tradable_date": "2026-08-03",
           "qty": 142214,
           "pct": 0.76,
           "type": "IPO확약",
@@ -2996,8 +2957,8 @@
         {
           "period": "1개월",
           "date": "2026-08-01",
-          "date_display": "2026-08-01",
-          "tradable_date": "2026-08-01",
+          "date_display": "2026-08-03",
+          "tradable_date": "2026-08-03",
           "qty": 2563800,
           "pct": 13.68,
           "type": "보호예수",
@@ -3056,8 +3017,8 @@
         {
           "period": "6개월",
           "date": "2027-01-01",
-          "date_display": "2027-01-01",
-          "tradable_date": "2027-01-01",
+          "date_display": "2027-01-04",
+          "tradable_date": "2027-01-04",
           "qty": 164476,
           "pct": 0.88,
           "type": "IPO확약",
@@ -3076,8 +3037,8 @@
         {
           "period": "6개월",
           "date": "2027-01-01",
-          "date_display": "2027-01-01",
-          "tradable_date": "2027-01-01",
+          "date_display": "2027-01-04",
+          "tradable_date": "2027-01-04",
           "qty": 840400,
           "pct": 4.48,
           "type": "보호예수",
@@ -3116,8 +3077,8 @@
         {
           "period": "2년",
           "date": "2028-07-01",
-          "date_display": "2028-07-01",
-          "tradable_date": "2028-07-01",
+          "date_display": "2028-07-03",
+          "tradable_date": "2028-07-03",
           "qty": 7236000,
           "pct": 38.6,
           "type": "보호예수",
@@ -3134,8 +3095,7 @@
           "reason": null
         }
       ],
-      "holders": [],
-      "ipo_price": 8000
+      "holders": []
     },
     {
       "code": "365660",
@@ -3144,6 +3104,7 @@
       "listing_date": "2026-07-06",
       "shares": 13351559,
       "close_price": 10190,
+      "ipo_price": 10000,
       "events": [
         {
           "period": "15일",
@@ -3306,8 +3267,7 @@
           "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"
         }
       ],
-      "holders": [],
-      "ipo_price": 10000
+      "holders": []
     }
   ]
 }
