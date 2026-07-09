@@ -18,7 +18,7 @@ from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import parse_float_summary_lockups
 from scripts.sources.ipo_universe import load_or_build_ipo_universe
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
-from scripts.utils.dates import calc_release_date, parse_date, release_display
+from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 
 PERIOD_KEY_MAP = {
     "15일 확약": "15일",
@@ -308,18 +308,38 @@ def rows_for_stock(existing_rows: list[dict], code: str) -> list[dict]:
     return [r for r in existing_rows if r.get("code") == code]
 
 
-def match_api_to_row(api_item: dict, rows: list[dict]) -> dict | None:
-    rd = api_item.get("return_date")
-    rq = int(api_item.get("return_qty") or 0)
-    if not rd or not rq:
-        return None
-    same_date = [r for r in rows if rd in {r.get("planned_date"), r.get("planned_tradable_date"), r.get("final_date"), r.get("final_tradable_date")}]
+def row_match_dates(row: dict) -> set[str]:
+    """API 반환일과 대조할 행의 날짜 후보. 저장된 값이 옛 정책(무보정)일 수 있어
+    원본 예정일의 거래가능일(주말·휴장일 반영)을 즉석에서 다시 계산해 포함한다."""
+    dates = {
+        row.get("planned_date"),
+        row.get("planned_tradable_date"),
+        row.get("final_date"),
+        row.get("final_tradable_date"),
+    }
+    try:
+        # 예탁원 반환은 해제일 당일 또는 그 다음 1~2 영업일에 처리되는 경우가 있어
+        # (예: 리센스메디컬 04-30 해제 → 05-04 반환) 그 범위까지 후보에 넣는다
+        adjusted = release_display(parse_date(row.get("planned_date") or ""))[1]
+        dates.add(adjusted.strftime("%Y-%m-%d"))
+        following = next_trading_day(adjusted + timedelta(days=1))
+        dates.add(following.strftime("%Y-%m-%d"))
+        dates.add(next_trading_day(following + timedelta(days=1)).strftime("%Y-%m-%d"))
+    except Exception:
+        pass
+    dates.discard(None)
+    dates.discard("")
+    return dates
+
+
+def match_api_group_to_row(rd: str, total_qty: int, rows: list[dict]) -> dict | None:
+    same_date = [r for r in rows if rd in row_match_dates(r)]
     if not same_date:
         return None
-    exact = [r for r in same_date if _to_int(r.get("planned_qty")) == rq]
+    exact = [r for r in same_date if _to_int(r.get("planned_qty")) == total_qty]
     if exact:
         return exact[0]
-    # 날짜가 같으면 구주·보호예수 우선. API 수량으로 최종값이 바뀌며 로그에 남긴다.
+    # 날짜가 같으면 구주·보호예수 우선. API 수량으로 최종값이 바뀌며 로그에 남는다.
     float_rows = [r for r in same_date if r.get("category") == CATEGORY_FLOAT]
     if float_rows:
         return float_rows[0]
@@ -368,36 +388,61 @@ def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, lis
     }
 
 
-def apply_api_updates(target: dict, code: str, meta: dict, listing_date: str, shares: int, rows: list[dict]) -> tuple[list[dict], list[dict], list[dict]]:
+def apply_api_updates(
+    target: dict, code: str, meta: dict, listing_date: str, shares: int, rows: list[dict]
+) -> tuple[list[dict], list[dict], list[dict], list[str]]:
+    """금융위 반환정보를 행에 반영한다.
+
+    같은 반환일의 여러 사유(벤처금융/기관투자가/기타 등)는 하나의 해제 건이므로
+    합산해서 처리한다 — 예: 리센스메디컬 05-04는 3건 합계 2,251,518주가
+    구주 1개월 예정물량과 정확히 일치. 과거에 만들어진 'API 단독' 행은 매 실행
+    새로 생성하므로 먼저 걷어내고, 그 event_id 목록을 호출부에 돌려줘 정리시킨다.
+    """
     raw_items = fetch_public_lockup_returns(target["name"])
     api_items = [normalize_public_return_item(x) for x in raw_items]
     logs: list[dict] = []
     reviews: list[dict] = []
     print(f"  [API] 금융위 반환정보 {len(api_items)}건", file=sys.stderr)
 
-    used_event_ids: set[str] = set()
-    row_map = {r["event_id"]: r for r in rows}
+    removed_ids = [r["event_id"] for r in rows if r.get("dart_source") == "공공데이터 API 단독"]
+    rows = [r for r in rows if r.get("dart_source") != "공공데이터 API 단독"]
+
+    # 반환일 기준 합산
+    groups: dict[str, dict] = {}
     for api in api_items:
-        if not api.get("return_date") or not api.get("return_qty"):
+        rd = api.get("return_date")
+        rq = int(api.get("return_qty") or 0)
+        if not rd or not rq:
             continue
-        row = match_api_to_row(api, rows)
+        group = groups.setdefault(rd, {"qty": 0, "reasons": []})
+        group["qty"] += rq
+        reason = (api.get("reason") or "").strip()
+        if reason and reason not in group["reasons"]:
+            group["reasons"].append(reason)
+
+    for rd in sorted(groups):
+        total = groups[rd]["qty"]
+        reason = " + ".join(groups[rd]["reasons"])
+        row = match_api_group_to_row(rd, total, rows)
         if row is None:
-            new_row = create_api_only_row(api, target, code, meta, listing_date, shares)
+            new_row = create_api_only_row(
+                {"return_date": rd, "return_qty": total, "reason": reason},
+                target, code, meta, listing_date, shares,
+            )
             if new_row:
                 rows.append(new_row)
                 logs.append(log_change(new_row, "event", "", "API 단독 이벤트 추가", "금융위 API 반환정보 신규 반영"))
             continue
-        used_event_ids.add(row["event_id"])
         old_api_date, old_api_qty = row.get("api_return_date", ""), row.get("api_return_qty", "")
-        row["api_return_date"] = api.get("return_date") or ""
-        row["api_return_qty"] = api.get("return_qty") or ""
-        row["api_reason"] = api.get("reason") or ""
-        if str(old_api_date) != str(row["api_return_date"]):
-            logs.append(log_change(row, "api_return_date", old_api_date, row["api_return_date"], "금융위 API 반환정보 확인"))
-        if str(old_api_qty) != str(row["api_return_qty"]):
-            logs.append(log_change(row, "api_return_qty", old_api_qty, row["api_return_qty"], "금융위 API 반환정보 확인"))
+        row["api_return_date"] = rd
+        row["api_return_qty"] = total
+        row["api_reason"] = reason
+        if str(old_api_date) != str(rd):
+            logs.append(log_change(row, "api_return_date", old_api_date, rd, "금융위 API 반환정보 확인"))
+        if str(old_api_qty) != str(total):
+            logs.append(log_change(row, "api_return_qty", old_api_qty, total, "금융위 API 반환정보 확인(동일 반환일 합산)"))
 
-    return rows, reviews, logs
+    return rows, reviews, logs, removed_ids
 
 
 def log_change(row: dict, field: str, old: Any, new: Any, reason: str) -> dict:
@@ -786,7 +831,9 @@ def main() -> None:
                 })
             stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
 
-        stock_rows, api_reviews, api_logs = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+        stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+        for removed_id in removed_ids:
+            all_rows_by_id.pop(removed_id, None)
         all_reviews.extend(api_reviews)
         all_logs.extend(api_logs)
 
@@ -819,7 +866,9 @@ def main() -> None:
         shares = _to_int(first.get("shares"))
         stock_rows = [dict(r) for r in rows_for_code]
         print(f"[BUILD] (스캔 연도 외 기존 종목) {name} → API 반환확인 갱신", file=sys.stderr)
-        stock_rows, api_reviews, api_logs = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+        stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+        for removed_id in removed_ids:
+            all_rows_by_id.pop(removed_id, None)
         all_reviews.extend(api_reviews)
         all_logs.extend(api_logs)
         for row in stock_rows:

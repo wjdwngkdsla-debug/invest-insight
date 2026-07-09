@@ -62,6 +62,10 @@ UNIVERSE_REVIEW_COLUMNS = [
 
 REVIEW_DECISIONS_PATH = ROOT_DIR / "data" / "listing_review_decisions.json"
 
+# 휴장일 탭 — 운영자가 연 단위로 채우는 거래소 휴장일. 배치가 내려받아 해제일 보정에 사용
+HOLIDAYS_PATH = ROOT_DIR / "data" / "holidays.json"
+HOLIDAY_TAB = "휴장일"
+
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
 MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
 MANUAL_EVENT_TAB = "수기입력"
@@ -257,6 +261,7 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
     pull_review_decisions(spreadsheet)
     pull_manual_events(spreadsheet)
+    pull_holidays(spreadsheet)
 
 
 def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
@@ -348,6 +353,30 @@ def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
                 entries.append({key: record.get(key, "") for key in MANUAL_EVENT_KEYS.values()})
     MANUAL_EVENTS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[SHEET] 수기입력 내려받기: {len(entries)}건", file=sys.stderr)
+
+
+def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
+    """휴장일 탭의 날짜를 전부 수집해 data/holidays.json으로 저장한다.
+
+    탭 형식은 자유(일자/요일/비고 등) — 셀에서 YYYY-MM-DD 꼴 날짜만 골라 쓴다.
+    탭이 없으면 기존 파일을 유지한다 (지워버리지 않음).
+    """
+    import re
+
+    try:
+        worksheet = spreadsheet.worksheet(HOLIDAY_TAB)
+    except gspread.WorksheetNotFound:
+        print("[SHEET] 휴장일 탭이 없어 기존 휴장일 파일을 유지합니다.", file=sys.stderr)
+        return
+
+    dates: set[str] = set()
+    for row in worksheet.get_all_values():
+        for cell in row:
+            match = re.fullmatch(r"(\d{4})[-./](\d{1,2})[-./](\d{1,2})", cell.strip())
+            if match:
+                dates.add(f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}")
+    HOLIDAYS_PATH.write_text(json.dumps(sorted(dates), ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[SHEET] 휴장일 내려받기: {len(dates)}일", file=sys.stderr)
 
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
