@@ -934,10 +934,10 @@ def main() -> None:
             new_ingested += 1
         processed_codes.add(code)
 
+        # IPO종목 탭에 있다 = 공모주라는 운영자 판정 → 실적보고서가 반드시 존재하므로
+        # IPO기관 행이 아직 없는 종목(일시적 DART 실패 등)은 찾을 때까지 매 배치 재시도한다
         has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
-        if existing_stock_rows and not args.reparse_existing and (
-            not target.get("operator_forced_ipo") or has_ipo_rows
-        ):
+        if existing_stock_rows and not args.reparse_existing and has_ipo_rows:
             print(f"  [DART] 기존 편입 종목 → DART 재파싱 생략, API 검증만 수행", file=sys.stderr)
             stock_rows = [dict(r) for r in existing_stock_rows]
         else:
