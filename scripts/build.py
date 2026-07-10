@@ -262,15 +262,25 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
     prev = None
     for row in rows:
         cumulative = int(row["cumulative_float"])
-        period = row["period"]
-        if prev is None:
+        period = str(row["period"] or "").strip()
+        # "상장일" 행은 해제 이벤트가 아니라 유통물량의 기준선 — 위치와 무관하게 기준으로만 쓴다
+        if prev is None or period in ("상장일", "상장당일", "상장 당일"):
             prev = cumulative
             continue
         inc = cumulative - prev
         prev = cumulative
         if inc <= 0:
             continue
-        date, date_display, tradable_date = calc_release_date(listing_date, period)
+        try:
+            date, date_display, tradable_date = calc_release_date(listing_date, period)
+        except ValueError as exc:
+            # 표에 예상 밖 기간 표기가 나와도 배치를 죽이지 않고 검토필요로 넘긴다
+            reviews.append({
+                "detected_at": _now(), "event_id": "", "code": code, "name": name,
+                "category": CATEGORY_FLOAT, "period": period,
+                "issue": f"기간 해석 실패: {exc}", "planned_qty": inc, "memo": "유통가능 요약표 행 확인 필요",
+            })
+            continue
         event_id = build_event_id(code, CATEGORY_FLOAT, period, tradable_date)
         out.append({
             "event_id": event_id,
@@ -918,83 +928,96 @@ def main() -> None:
         name = target["name"]
         listing_date = target["listing_date"]
         print(f"[BUILD] {idx}/{len(targets)} {name}", file=sys.stderr)
-        code, meta, bas_dd = get_stock_meta(target)
-        if not code or not meta:
-            print(f"  [KRX] 종목 검색 실패: {name}", file=sys.stderr)
-            continue
-        shares = int(meta.get("shrs") or target.get("shares") or 0)
-        existing_stock_rows = rows_for_stock(existing_rows, code)
+        code = str(target.get("code") or "")
+        # 종목 하나에서 어떤 예외가 나도 배치 전체가 죽지 않게 격리한다.
+        # (#11 실패 원인: 와이제이링크 요약표의 '상장일' 행이 예외를 던져 137종목 배치가 통째로 중단)
+        try:
+            code, meta, bas_dd = get_stock_meta(target)
+            if not code or not meta:
+                print(f"  [KRX] 종목 검색 실패: {name}", file=sys.stderr)
+                continue
+            shares = int(meta.get("shrs") or target.get("shares") or 0)
+            existing_stock_rows = rows_for_stock(existing_rows, code)
 
-        # 실행당 신규 편입 상한 — 한 번에 너무 많이 물면 타임아웃으로 통째로 날아가므로
-        # 상한을 넘는 신규 종목은 건드리지 않고 다음 배치가 이어서 처리한다
-        if not existing_stock_rows and args.max_new and new_ingested >= args.max_new:
-            skipped_new += 1
-            continue
-        if not existing_stock_rows:
-            new_ingested += 1
-        processed_codes.add(code)
+            # 실행당 신규 편입 상한 — 한 번에 너무 많이 물면 타임아웃으로 통째로 날아가므로
+            # 상한을 넘는 신규 종목은 건드리지 않고 다음 배치가 이어서 처리한다
+            if not existing_stock_rows and args.max_new and new_ingested >= args.max_new:
+                skipped_new += 1
+                continue
+            if not existing_stock_rows:
+                new_ingested += 1
+            processed_codes.add(code)
 
-        # IPO종목 탭에 있다 = 공모주라는 운영자 판정 → 실적보고서가 반드시 존재하므로
-        # IPO기관 행이 아직 없는 종목(일시적 DART 실패 등)은 찾을 때까지 매 배치 재시도한다
-        has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
-        if existing_stock_rows and not args.reparse_existing and has_ipo_rows:
-            print(f"  [DART] 기존 편입 종목 → DART 재파싱 생략, API 검증만 수행", file=sys.stderr)
-            stock_rows = [dict(r) for r in existing_stock_rows]
-        else:
-            stock_rows = []
-            stock_rows.extend(build_ipo_events(target, code, meta, listing_date, shares))
-            float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, int(listing_date[:4]))
-            stock_rows.extend(float_rows)
-            all_reviews.extend(float_reviews)
-            if target.get("operator_forced_ipo") and not any(
-                row.get("category") == CATEGORY_IPO for row in stock_rows
-            ):
+            # IPO종목 탭에 있다 = 공모주라는 운영자 판정 → 실적보고서가 반드시 존재하므로
+            # IPO기관 행이 아직 없는 종목(일시적 DART 실패 등)은 찾을 때까지 매 배치 재시도한다
+            has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
+            if existing_stock_rows and not args.reparse_existing and has_ipo_rows:
+                print(f"  [DART] 기존 편입 종목 → DART 재파싱 생략, API 검증만 수행", file=sys.stderr)
+                stock_rows = [dict(r) for r in existing_stock_rows]
+            else:
+                stock_rows = []
+                stock_rows.extend(build_ipo_events(target, code, meta, listing_date, shares))
+                float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, int(listing_date[:4]))
+                stock_rows.extend(float_rows)
+                all_reviews.extend(float_reviews)
+                if target.get("operator_forced_ipo") and not any(
+                    row.get("category") == CATEGORY_IPO for row in stock_rows
+                ):
+                    all_reviews.append({
+                        "detected_at": _now(),
+                        "event_id": "",
+                        "code": code,
+                        "name": name,
+                        "category": CATEGORY_IPO,
+                        "period": "",
+                        "issue": "운영자 IPO 선택 종목의 IPO기관 락업 파싱 결과 없음",
+                        "planned_date": "",
+                        "planned_qty": "",
+                        "api_return_date": "",
+                        "api_return_qty": "",
+                        "manual_date": "",
+                        "manual_qty": "",
+                        "memo": target.get("review_memo", ""),
+                    })
+                stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
+
+            # IPO종목 탭의 수동공모가는 선택적 보정값이다. 빈칸이면 기존값/DART값을 보존한다.
+            manual_ipo_price = _to_int(target.get("manual_ipo_price"))
+            existing_ipo_price = next((_to_int(r.get("ipo_price")) for r in existing_stock_rows if _to_int(r.get("ipo_price"))), 0)
+            effective_ipo_price = manual_ipo_price or next(
+                (_to_int(r.get("ipo_price")) for r in stock_rows if _to_int(r.get("ipo_price"))),
+                existing_ipo_price,
+            )
+            if effective_ipo_price:
+                for row in stock_rows:
+                    row["ipo_price"] = effective_ipo_price
+            else:
                 all_reviews.append({
-                    "detected_at": _now(),
-                    "event_id": "",
-                    "code": code,
-                    "name": name,
-                    "category": CATEGORY_IPO,
-                    "period": "",
-                    "issue": "운영자 IPO 선택 종목의 IPO기관 락업 파싱 결과 없음",
-                    "planned_date": "",
-                    "planned_qty": "",
-                    "api_return_date": "",
-                    "api_return_qty": "",
-                    "manual_date": "",
-                    "manual_qty": "",
-                    "memo": target.get("review_memo", ""),
+                    "detected_at": _now(), "event_id": "", "code": code, "name": name,
+                    "category": "종목정보", "period": "", "issue": "DART 공모가 파싱 실패 — IPO종목 탭의 수동공모가 입력 필요",
+                    "memo": "",
                 })
-            stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
 
-        # IPO종목 탭의 수동공모가는 선택적 보정값이다. 빈칸이면 기존값/DART값을 보존한다.
-        manual_ipo_price = _to_int(target.get("manual_ipo_price"))
-        existing_ipo_price = next((_to_int(r.get("ipo_price")) for r in existing_stock_rows if _to_int(r.get("ipo_price"))), 0)
-        effective_ipo_price = manual_ipo_price or next(
-            (_to_int(r.get("ipo_price")) for r in stock_rows if _to_int(r.get("ipo_price"))),
-            existing_ipo_price,
-        )
-        if effective_ipo_price:
+            stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+            for removed_id in removed_ids:
+                all_rows_by_id.pop(removed_id, None)
+            all_reviews.extend(api_reviews)
+            all_logs.extend(api_logs)
+
             for row in stock_rows:
-                row["ipo_price"] = effective_ipo_price
-        else:
+                finalized, reviews, logs = finalize_row(row)
+                all_reviews.extend(reviews)
+                all_logs.extend(logs)
+                all_rows_by_id[finalized["event_id"]] = finalized
+        except Exception as exc:
+            print(f"  [ERROR] {name} 처리 실패 → 건너뛰고 계속: {exc}", file=sys.stderr)
             all_reviews.append({
                 "detected_at": _now(), "event_id": "", "code": code, "name": name,
-                "category": "종목정보", "period": "", "issue": "DART 공모가 파싱 실패 — IPO종목 탭의 수동공모가 입력 필요",
-                "memo": "",
+                "category": "처리오류", "period": "",
+                "issue": f"종목 처리 중 오류로 건너뜀: {exc}",
+                "memo": "다음 배치에서 자동 재시도됨",
             })
-
-        stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
-        for removed_id in removed_ids:
-            all_rows_by_id.pop(removed_id, None)
-        all_reviews.extend(api_reviews)
-        all_logs.extend(api_logs)
-
-        for row in stock_rows:
-            finalized, reviews, logs = finalize_row(row)
-            all_reviews.extend(reviews)
-            all_logs.extend(logs)
-            all_rows_by_id[finalized["event_id"]] = finalized
+            continue
 
         # 대량 편입 중 타임아웃 대비 중간 저장 — 끊겨도 여기까지는 커밋되어 다음 실행이 이어간다
         if idx % 15 == 0:
@@ -1034,16 +1057,20 @@ def main() -> None:
         shares = _to_int(first.get("shares"))
         stock_rows = [dict(r) for r in rows_for_code]
         print(f"[BUILD] (스캔 연도 외 기존 종목) {name} → API 반환확인 갱신", file=sys.stderr)
-        stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
-        for removed_id in removed_ids:
-            all_rows_by_id.pop(removed_id, None)
-        all_reviews.extend(api_reviews)
-        all_logs.extend(api_logs)
-        for row in stock_rows:
-            finalized, reviews, logs = finalize_row(row)
-            all_reviews.extend(reviews)
-            all_logs.extend(logs)
-            all_rows_by_id[finalized["event_id"]] = finalized
+        try:
+            stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
+            for removed_id in removed_ids:
+                all_rows_by_id.pop(removed_id, None)
+            all_reviews.extend(api_reviews)
+            all_logs.extend(api_logs)
+            for row in stock_rows:
+                finalized, reviews, logs = finalize_row(row)
+                all_reviews.extend(reviews)
+                all_logs.extend(logs)
+                all_rows_by_id[finalized["event_id"]] = finalized
+        except Exception as exc:
+            print(f"  [ERROR] {name} API 갱신 실패 → 건너뛰고 계속: {exc}", file=sys.stderr)
+            continue
 
     # 시트 수기입력 탭에서 내려받은 이벤트 편입 (스팩합병 등 자동 파싱이 안 되는 종목용)
     manual_entries = load_manual_events()

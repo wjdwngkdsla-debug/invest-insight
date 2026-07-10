@@ -446,6 +446,9 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         listing = padded[listing_index] if listing_index < len(padded) else ""
         code = padded[code_index] if code_index < len(padded) else ""
         manual_ipo_price = padded[manual_price_index] if manual_price_index < len(padded) else ""
+        # 구글시트가 숫자 취급하며 잘라먹은 앞자리 0 복원 (예: 31210 → 031210)
+        if code.isdigit() and len(code) < 6:
+            code = code.zfill(6)
         if not (name or code):
             continue
         normalized = listing.replace(".", "-").replace("/", "-")
