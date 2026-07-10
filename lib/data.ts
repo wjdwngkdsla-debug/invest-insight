@@ -2,7 +2,11 @@ import siteData from "@/data/site_data.json";
 import type { SiteData, StockLockup, LockupEvent } from "./types";
 
 
+
+
 export type LockupCategory = "IPO기관" | "기존주주";
+
+
 
 
 export function getSiteData(): SiteData {
@@ -10,14 +14,20 @@ export function getSiteData(): SiteData {
 }
 
 
+
+
 export function getStockByCode(code: string): StockLockup | undefined {
   return getSiteData().stocks.find((s) => s.code === code);
 }
 
 
+
+
 export function getEventCategory(ev: Pick<LockupEvent, "type">): LockupCategory {
   return ev.type === "보호예수" ? "기존주주" : "IPO기관";
 }
+
+
 
 
 export interface EventBreakdown {
@@ -26,6 +36,8 @@ export interface EventBreakdown {
   pct: number;
   items: LockupEvent[];
 }
+
+
 
 
 export interface UpcomingGroup {
@@ -46,10 +58,14 @@ export interface UpcomingGroup {
 }
 
 
+
+
 // 절대시간(ms)을 한국시간 기준 날짜 번호로 변환 — 서버(UTC)/브라우저 어디서 돌아도 같은 결과
 function kstDayNumber(ms: number): number {
   return Math.floor((ms + 9 * 60 * 60 * 1000) / 86400000);
 }
+
+
 
 
 export function dDay(dateStr: string, today = new Date()): number {
@@ -58,10 +74,13 @@ export function dDay(dateStr: string, today = new Date()): number {
 }
 
 
+
+
 // 사용자에게 보여줄 상태 — 운영용 세부 상태(반환확인_API수정 등) 대신 날짜 기준 두 가지로 단순화
 export function displayStatus(tradableDate: string, today = new Date()): "예정" | "해제완료" {
   return dDay(tradableDate, today) >= 0 ? "예정" : "해제완료";
 }
+
 
 const GENERIC_PERIODS = new Set(["", "보호예수", "기존주주", "구주", "구주·보호예수", "기타"]);
 const PERIOD_TARGETS = [
@@ -77,21 +96,30 @@ const PERIOD_TARGETS = [
   { label: "36개월", days: 1095, tolerance: 60 },
 ];
 
+
 function inferPeriodFromDates(listingDate: string, releaseDate: string): string {
   const listedAt = Date.parse(`${listingDate}T00:00:00+09:00`);
   const releasedAt = Date.parse(`${releaseDate}T00:00:00+09:00`);
-  if (!Number.isFinite(listedAt) || !Number.isFinite(releasedAt)) return "해제기간 확인";
+  if (!Number.isFinite(listedAt) || !Number.isFinite(releasedAt)) return "기간 미확인";
 
-  const diffDays = Math.round((releasedAt - listedAt) / 86400000);
+  const diffDays = Math.max(0, Math.round((releasedAt - listedAt) / 86400000));
   const matched = PERIOD_TARGETS.find((target) => Math.abs(diffDays - target.days) <= target.tolerance);
-  return matched?.label || "해제기간 확인";
+  if (matched) return matched.label;
+
+  const nearest = PERIOD_TARGETS.reduce((best, target) =>
+    Math.abs(diffDays - target.days) < Math.abs(diffDays - best.days) ? target : best
+  );
+  return nearest.label;
 }
+
 
 export function displayPeriod(period: string | null | undefined, listingDate: string, releaseDate: string): string {
   const normalized = (period || "").trim();
   if (normalized && !GENERIC_PERIODS.has(normalized)) return normalized;
   return inferPeriodFromDates(listingDate, releaseDate);
 }
+
+
 
 
 function statusOrder(status: string): number {
@@ -102,8 +130,12 @@ function statusOrder(status: string): number {
 }
 
 
+
+
 function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
   const map = new Map<string, LockupEvent[]>();
+
+
 
 
   for (const ev of stock.events) {
@@ -114,9 +146,13 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
   }
 
 
+
+
   return [...map.entries()].map(([tradableDate, events]) => {
     const qty = events.reduce((sum, ev) => sum + ev.qty, 0);
     const breakdownMap = new Map<LockupCategory, LockupEvent[]>();
+
+
 
 
     for (const ev of events) {
@@ -125,6 +161,8 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
       current.push(ev);
       breakdownMap.set(category, current);
     }
+
+
 
 
     const breakdown: EventBreakdown[] = (["IPO기관", "기존주주"] as LockupCategory[])
@@ -140,6 +178,8 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
       })
       .filter((b) => b.qty > 0)
       .sort((a, b) => b.qty - a.qty);
+
+
 
 
     return {
@@ -162,6 +202,8 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
 }
 
 
+
+
 export function getUpcomingEvents(daysAhead = 30, today = new Date()): UpcomingGroup[] {
   const groups: UpcomingGroup[] = [];
   for (const stock of getSiteData().stocks) {
@@ -174,6 +216,8 @@ export function getUpcomingEvents(daysAhead = 30, today = new Date()): UpcomingG
 }
 
 
+
+
 export function getGroupedEventsByStock(stock: StockLockup, today = new Date()): { upcoming: UpcomingGroup[]; past: UpcomingGroup[] } {
   const groups = groupEventsForStock(stock).sort((a, b) => a.tradable_date.localeCompare(b.tradable_date));
   return {
@@ -181,6 +225,8 @@ export function getGroupedEventsByStock(stock: StockLockup, today = new Date()):
     past: groups.filter((g) => dDay(g.tradable_date, today) < 0),
   };
 }
+
+
 
 
 export interface FlatRow {
@@ -202,6 +248,8 @@ export interface FlatRow {
   holder_name?: string | null;
   reason?: string | null;
 }
+
+
 
 
 export function getFlatRows(): FlatRow[] {
