@@ -15,6 +15,22 @@ from __future__ import annotations
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import argparse
 import csv
 import json
@@ -38,9 +54,41 @@ from typing import Any
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -79,12 +127,44 @@ from scripts.utils.dates import calc_release_date, next_trading_day, parse_date,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 PERIOD_KEY_MAP = {
     "15일 확약": "15일",
     "1개월 확약": "1개월",
     "3개월 확약": "3개월",
     "6개월 확약": "6개월",
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,10 +208,42 @@ ADMIN_COLUMNS = [
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 REVIEW_COLUMNS = [
     "review_id", "status", "name", "code", "review_type", "target", "issue", "comparison",
     "first_detected", "last_detected", "resolved_at", "operator_memo", "event_id",
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,8 +279,56 @@ LOG_COLUMNS = [
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CATEGORY_IPO = "IPO기관"
 CATEGORY_FLOAT = "구주·보호예수"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -245,8 +405,72 @@ def parse_args() -> argparse.Namespace:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def _now() -> str:
     return datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -318,6 +542,38 @@ def _to_int(value: Any) -> int:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def _to_float(value: Any) -> float:
     if value in (None, ""):
         return 0.0
@@ -357,9 +613,73 @@ def _to_float(value: Any) -> float:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def normalize_stock_code(code: Any) -> str:
     code = str(code or "").strip()
     return code.zfill(6) if code.isdigit() and len(code) < 6 else code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -431,6 +751,38 @@ def _write_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def _read_csv(path: Path, columns: list[str]) -> list[dict]:
     if not path.exists():
         return []
@@ -440,6 +792,38 @@ def _read_csv(path: Path, columns: list[str]) -> list[dict]:
         for row in reader:
             rows.append({col: row.get(col, "") for col in columns})
         return rows
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -515,8 +899,72 @@ def _append_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def normalize_period_for_id(period: str) -> str:
     return period.replace("개월", "M").replace("년", "Y").replace("일", "D").replace(" ", "")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -584,8 +1032,48 @@ def build_event_id(code: str, category: str, period: str, date: str) -> str:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def pct(qty: int, shares: int) -> float:
     return round(qty / shares * 100, 2) if shares else 0.0
+
+
+
+
+
+
+
+
 
 
 
@@ -604,13 +1092,21 @@ LOCKUP_PERIOD_CANDIDATES = [
 
 
 
+
+
+
+
+
+
 def infer_lockup_period(listing_date: str, release_date: str, fallback: str = "") -> str:
     fallback = str(fallback or "").strip()
     try:
         listed = parse_date(listing_date)
         released = parse_date(release_date)
     except Exception:
-        return "" if fallback in GENERIC_PERIOD_LABELS else fallback
+        return fallback
+
+
 
 
     for period in LOCKUP_PERIOD_CANDIDATES:
@@ -620,6 +1116,8 @@ def infer_lockup_period(listing_date: str, release_date: str, fallback: str = ""
             continue
         if release_date in {planned, tradable.strftime("%Y-%m-%d")}:
             return period
+
+
 
 
     days = (released - listed).days
@@ -638,7 +1136,10 @@ def infer_lockup_period(listing_date: str, release_date: str, fallback: str = ""
     for period, target_days, tolerance in approx:
         if abs(days - target_days) <= tolerance:
             return period
-    return "" if fallback in GENERIC_PERIOD_LABELS else fallback
+    return fallback
+
+
+
 
 
 
@@ -653,7 +1154,7 @@ def normalize_row_period(row: dict) -> dict:
         or row.get("final_date")
         or ""
     )
-    inferred = infer_lockup_period(row.get("listing_date") or "", release_date, "")
+    inferred = infer_lockup_period(row.get("listing_date") or "", release_date, "기타")
     if inferred:
         row["period"] = inferred
         old_event_id = row.get("event_id") or ""
@@ -663,6 +1164,38 @@ def normalize_row_period(row: dict) -> dict:
         if "기간 자동보정" not in note:
             row["parse_note"] = (note + " / " if note else "") + f"기간 자동보정: {period or '빈값'}→{inferred}" 
     return row
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -732,6 +1265,38 @@ def load_manual_targets() -> list[dict]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def load_targets(args: argparse.Namespace) -> list[dict]:
     """대상 IPO 종목 목록 — 시트 'IPO종목' 탭이 유일한 원천.
 
@@ -741,6 +1306,22 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
     if args.manual_targets:
         print("[TARGET] manual_targets.json 사용", file=sys.stderr)
         return load_manual_targets()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -768,6 +1349,38 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
         raise ValueError("시트 IPO종목 탭이 비어 있습니다.")
     print(f"[TARGET] 시트 IPO종목 탭 기준 {len(targets)}개 종목", file=sys.stderr)
     return targets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -854,6 +1467,38 @@ def get_stock_meta(target: dict) -> tuple[str | None, dict | None, str | None]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, shares: int) -> list[dict]:
     name = target["name"]
     rcp = target.get("rcp")
@@ -876,6 +1521,22 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     if not parsed:
         print(f"  [DART] IPO기관 파싱 실패: {note}", file=sys.stderr)
         return []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -962,6 +1623,38 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def build_float_summary_events(target: dict, code: str, meta: dict, listing_date: str, shares: int, year: int) -> tuple[list[dict], list[dict]]:
     name = target["name"]
     chosen, candidates, note = parse_float_summary_lockups(name, expected_shares=shares, year=year, stock_code=code)
@@ -973,6 +1666,22 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
             "issue": note or "유통가능 요약표 파싱 실패", "memo": f"candidate_tables={len(candidates)}",
         })
         return [], reviews
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1077,6 +1786,38 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def carry_manual_fields(new_row: dict, old: dict | None) -> dict:
     if not old:
         return new_row
@@ -1116,8 +1857,72 @@ def carry_manual_fields(new_row: dict, old: dict | None) -> dict:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def rows_for_stock(existing_rows: list[dict], code: str) -> list[dict]:
     return [r for r in existing_rows if r.get("code") == code]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1204,18 +2009,81 @@ def row_match_dates(row: dict) -> set[str]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def match_api_group_to_row(rd: str, total_qty: int, rows: list[dict]) -> dict | None:
-    same_date = [r for r in rows if rd in row_match_dates(r)]
+    # 금융위 API 반환정보는 기존주주/보호예수 해제 확인용이다.
+    # 증권발행실적보고서의 IPO기관 확약 물량과 주체가 달라서 같은 날짜여도 합치지 않는다.
+    same_date = [r for r in rows if r.get("category") == CATEGORY_FLOAT and rd in row_match_dates(r)]
     if not same_date:
         return None
     exact = [r for r in same_date if _to_int(r.get("planned_qty")) == total_qty]
     if exact:
         return exact[0]
-    # 날짜가 같으면 구주·보호예수 우선. API 수량으로 최종값이 바뀌며 로그에 남는다.
-    float_rows = [r for r in same_date if r.get("category") == CATEGORY_FLOAT]
-    if float_rows:
-        return float_rows[0]
+    # 날짜가 같으면 구주·보호예수 행만 API 수량으로 최종값을 보정한다.
     return same_date[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1259,7 +2127,7 @@ def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, lis
     except Exception:
         date_display = rd
         tradable_date = rd
-    period = infer_lockup_period(listing_date, rd, "해제기간 확인")
+    period = infer_lockup_period(listing_date, rd, "기타")
     event_id = build_event_id(code, CATEGORY_FLOAT, period, tradable_date)
     return {
         "event_id": event_id,
@@ -1288,6 +2156,38 @@ def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, lis
         "manual_lock": "N",
         "memo": "",
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1351,8 +2251,52 @@ def apply_api_updates(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     removed_ids = [r["event_id"] for r in rows if r.get("dart_source") == "공공데이터 API 단독"]
     rows = [r for r in rows if r.get("dart_source") != "공공데이터 API 단독"]
+
+    for row in rows:
+        if row.get("category") != CATEGORY_IPO:
+            continue
+        old_api_date = row.get("api_return_date") or ""
+        old_api_qty = row.get("api_return_qty") or ""
+        old_api_reason = row.get("api_reason") or ""
+        if old_api_date or old_api_qty or old_api_reason:
+            row["api_return_date"] = ""
+            row["api_return_qty"] = ""
+            row["api_reason"] = ""
+            logs.append(log_change(row, "api_return_qty", old_api_qty, "", "IPO기관은 금융위 API 검증 대상 제외"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1388,6 +2332,22 @@ def apply_api_updates(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # 반환일 기준 합산
     groups: dict[str, dict] = {}
     for api in api_items:
@@ -1400,6 +2360,22 @@ def apply_api_updates(
         reason = (api.get("reason") or "").strip()
         if reason and reason not in group["reasons"]:
             group["reasons"].append(reason)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1456,7 +2432,55 @@ def apply_api_updates(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return rows, reviews, logs, removed_ids
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1500,6 +2524,38 @@ def log_change(row: dict, field: str, old: Any, new: Any, reason: str) -> dict:
         "new_value": new,
         "reason": reason,
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1576,6 +2632,38 @@ def _review_type(issue: str) -> str:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def _review_id(row: dict) -> str:
     if row.get("review_id"):
         return str(row["review_id"])
@@ -1583,6 +2671,38 @@ def _review_id(row: dict) -> str:
     issue_type = _review_type(str(row.get("issue") or row.get("review_type") or "데이터 확인"))
     event_id = str(row.get("event_id") or "")
     return f"{code}-{event_id or issue_type.replace(' ', '')}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1662,12 +2782,60 @@ def _comparison(row: dict) -> str:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[str] | None = None) -> list[dict]:
     """현재 문제와 과거 이력을 합친다. 해결 행도 삭제하지 않고 아래에 보존한다."""
     existing_raw: list[dict] = []
     if path.exists():
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
             existing_raw = [dict(row) for row in csv.DictReader(handle)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1700,6 +2868,22 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
             "operator_memo": old.get("operator_memo") or old.get("memo", ""),
             "event_id": old.get("event_id", ""),
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1749,10 +2933,42 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     for rid, old in history.items():
         if rid not in active_ids and rid in (resolved_ids or set()) and old.get("status") == "미해결":
             old["status"] = "해결"
             old["resolved_at"] = _now()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1805,6 +3021,38 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     logs: list[dict] = []
     reviews: list[dict] = []
@@ -1814,6 +3062,9 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     manual_date = row.get("manual_date") or ""
     api_qty = _to_int(row.get("api_return_qty"))
     api_date = row.get("api_return_date") or ""
+    if row.get("category") == CATEGORY_IPO:
+        api_qty = 0
+        api_date = ""
     planned_qty = _to_int(row.get("planned_qty"))
     # 원본 예정일 우선 — 주말/휴장일 보정을 하지 않기로 해서(2026-07-09)
     # 과거에 저장된 보정일(planned_tradable_date)보다 원래 해제일을 쓴다.
@@ -1834,8 +3085,40 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     old_final_qty = row.get("final_qty", "")
     old_final_date = row.get("final_date", "")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1898,12 +3181,44 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     try:
         date_display, tradable = release_display(parse_date(final_date))
         tradable_date = tradable.strftime("%Y-%m-%d")
     except Exception:
         date_display = row.get("planned_date_display") or final_date
         tradable_date = final_date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1943,11 +3258,59 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if str(old_final_qty) not in ("", str(final_qty)):
         logs.append(log_change(row, "final_qty", old_final_qty, final_qty, "최종표시수량 재계산"))
     if str(old_final_date) not in ("", str(final_date)):
         logs.append(log_change(row, "final_date", old_final_date, final_date, "최종표시일 재계산"))
     return row, reviews, logs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2013,6 +3376,38 @@ _SNAPSHOT_CACHE: tuple[str | None, dict] | None = None
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def latest_krx_snapshot() -> tuple[str | None, dict]:
     """최근 거래일의 KRX 전 종목 스냅샷. 한 배치에서 한 번만 조회해 재사용한다."""
     global _SNAPSHOT_CACHE
@@ -2028,6 +3423,38 @@ def latest_krx_snapshot() -> tuple[str | None, dict]:
             return _SNAPSHOT_CACHE
     _SNAPSHOT_CACHE = (None, {})
     return _SNAPSHOT_CACHE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2122,6 +3549,38 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
     """같은 종목·같은 원본 예정일 그룹에서 금융위 API 반환일이 확인되면
     아직 API 확인이 없는 행(예: IPO기관 확약분)도 그 실제 반환일로 정렬한다.
@@ -2135,6 +3594,22 @@ def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
         key = (row.get("code"), row.get("planned_date"))
         if key[0] and key[1]:
             groups.setdefault(key, []).append(row)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2170,6 +3645,38 @@ def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
             row["final_date_display"] = api_date
             logs.append(log_change(row, "final_date", old, api_date, "같은 예정일의 API 실제 반환일로 정렬"))
     return logs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2239,11 +3746,75 @@ MANUAL_CATEGORY_MAP = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def load_manual_events() -> list[dict]:
     path = ROOT_DIR / "data" / "manual_events.json"
     if not path.exists():
         return []
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2304,8 +3875,40 @@ def apply_manual_events(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     reviews: list[dict] = []
     logs: list[dict] = []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2329,6 +3932,22 @@ def apply_manual_events(
             "issue": f"수기입력 오류: {issue}",
             "planned_date": entry.get("date", ""), "planned_qty": entry.get("qty", ""), "memo": "수기입력 탭 확인 필요",
         })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2375,12 +3994,44 @@ def apply_manual_events(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     for entry in entries:
         code = normalize_stock_code(entry.get("code"))
         category = MANUAL_CATEGORY_MAP.get(str(entry.get("category") or "").strip())
         period = str(entry.get("period") or "").strip()
         date = str(entry.get("date") or "").strip()
         qty = _to_int(entry.get("qty"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2430,6 +4081,22 @@ def apply_manual_events(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         _, snap = latest_krx_snapshot()
         meta = snap.get(code)
         if not meta:
@@ -2445,6 +4112,22 @@ def apply_manual_events(
         if not meta:
             review(entry, "KRX에서 종목코드를 찾지 못함 (코드/종목명 확인)")
             continue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2513,6 +4196,22 @@ def apply_manual_events(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         row = normalize_row_period(row)
         finalized, f_reviews, f_logs = finalize_row(row)
         reviews.extend(f_reviews)
@@ -2537,7 +4236,55 @@ def apply_manual_events(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return reviews, logs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2653,6 +4400,38 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def main() -> None:
     require_env()
     args = parse_args()
@@ -2676,12 +4455,44 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
     existing_by_id = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     targets = load_targets(args)
     all_rows_by_id: dict[str, dict] = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     all_reviews: list[dict] = []
     all_logs: list[dict] = []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2732,6 +4543,22 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             # 실행당 신규 편입 상한 — 한 번에 너무 많이 물면 타임아웃으로 통째로 날아가므로
             # 상한을 넘는 신규 종목은 건드리지 않고 다음 배치가 이어서 처리한다
             if not existing_stock_rows and args.max_new and new_ingested >= args.max_new:
@@ -2740,6 +4567,22 @@ def main() -> None:
             if not existing_stock_rows:
                 new_ingested += 1
             processed_codes.add(code)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2804,6 +4647,22 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             # IPO종목 탭의 수동공모가는 선택적 보정값이다. 빈칸이면 기존값/DART값을 보존한다.
             manual_ipo_price = _to_int(target.get("manual_ipo_price"))
             existing_ipo_price = next((_to_int(r.get("ipo_price")) for r in existing_stock_rows if _to_int(r.get("ipo_price"))), 0)
@@ -2836,11 +4695,43 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
             for removed_id in removed_ids:
                 all_rows_by_id.pop(removed_id, None)
             all_reviews.extend(api_reviews)
             all_logs.extend(api_logs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2888,6 +4779,22 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         # 대량 편입 중 타임아웃 대비 중간 저장 — 끊겨도 여기까지는 커밋되어 다음 실행이 이어간다
         if idx % 15 == 0:
             interim = sorted(
@@ -2896,6 +4803,22 @@ def main() -> None:
             )
             _write_csv(admin_path, interim, ADMIN_COLUMNS)
             print(f"[BUILD] 중간 저장 완료 ({idx}/{len(targets)})", file=sys.stderr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2933,12 +4856,44 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
     leftover_by_code: dict[str, list[dict]] = {}
     for row in existing_rows:
         code = str(row.get("code") or "")
         if code and code not in processed_codes:
             leftover_by_code.setdefault(code, []).append(row)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3001,6 +4956,22 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # 시트 수기입력 탭에서 내려받은 이벤트 편입 (스팩합병 등 자동 파싱이 안 되는 종목용)
     manual_entries = load_manual_events()
     if manual_entries:
@@ -3008,6 +4979,22 @@ def main() -> None:
         manual_reviews, manual_logs = apply_manual_events(manual_entries, existing_rows, existing_by_id, all_rows_by_id)
         all_reviews.extend(manual_reviews)
         all_logs.extend(manual_logs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3042,7 +5029,39 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     all_rows = sorted(all_rows_by_id.values(), key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3062,6 +5081,22 @@ def main() -> None:
     # 편입된 전 종목의 최근 상장주식수·종가·비율을 같은 KRX 기준일로 갱신한다.
     close_date, market_logs = refresh_market_data(all_rows)
     all_logs.extend(market_logs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3103,6 +5138,22 @@ def main() -> None:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     site_data = rows_to_site_data(all_rows, close_date)
     out_path = data_dir / "site_data.json"
     out_path.write_text(json.dumps(site_data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -3110,6 +5161,38 @@ def main() -> None:
     print(f"[SAVE] review={review_path}", file=sys.stderr)
     print(f"[SAVE] site_data={out_path}", file=sys.stderr)
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
