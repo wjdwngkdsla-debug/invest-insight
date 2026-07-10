@@ -309,11 +309,8 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
             "manual_lock": "N",
             "memo": "",
         })
-    if note:
-        reviews.append({
-            "detected_at": _now(), "event_id": "", "code": code, "name": name, "category": CATEGORY_FLOAT, "period": "",
-            "issue": note, "planned_qty": chosen.get("last_cumulative_float"), "memo": f"selected_table={chosen.get('table_index')}",
-        })
+    # 투자설명서 누적치 ≠ KRX 상장주식수는 유증·스톡옵션 등 정상 자본 변동이 대부분이라
+    # 검토필요에 올리지 않는다 (각 행의 parse_note에 이미 기록되어 참고 가능)
     print(f"  [DART API] 구주·보호예수 요약 이벤트 {len(out)}건 / table={chosen.get('table_index')} / note={note or '-'}", file=sys.stderr)
     return out, reviews
 
@@ -429,6 +426,10 @@ def apply_api_updates(
 
     removed_ids = [r["event_id"] for r in rows if r.get("dart_source") == "공공데이터 API 단독"]
     rows = [r for r in rows if r.get("dart_source") != "공공데이터 API 단독"]
+
+    # 금융위 API의 상장주식수(lblProtTsumIssuStckCnt)는 보호예수 등록 시점 값이라
+    # 최신 KRX 값과 다른 게 정상 — 비교 기록을 만들면 노이즈만 쌓여서 사용하지 않는다.
+    # 비율·시가총액의 분모는 항상 최근 거래일 KRX(current_shares)로 통일한다.
 
     # 반환일 기준 합산
     groups: dict[str, dict] = {}
