@@ -51,6 +51,31 @@ ADMIN_SHEET_COLUMNS = [
 ]
 
 
+IPO_ADMIN_SHEET_COLUMNS = [
+    "name", "code", "market", "period",
+    "listing_date", "close_price", "ipo_price", "shares", "current_shares",
+    "planned_date", "planned_qty", "planned_pct",
+    "manual_lock", "manual_date", "manual_qty", "memo",
+    "final_date", "final_tradable_date", "final_qty", "final_pct",
+    "status", "review_needed",
+    "event_id", "type", "category", "planned_tradable_date", "planned_date_display",
+    "dart_rcp", "dart_source", "parse_note", "final_date_display", "updated_at",
+]
+
+
+FLOAT_ADMIN_SHEET_COLUMNS = [
+    "name", "code", "market", "period",
+    "listing_date", "close_price", "shares", "current_shares",
+    "planned_date", "planned_qty", "planned_pct",
+    "api_return_date", "api_return_qty", "api_reason",
+    "manual_lock", "manual_date", "manual_qty", "memo",
+    "final_date", "final_tradable_date", "final_qty", "final_pct",
+    "status", "review_needed",
+    "event_id", "type", "category", "planned_tradable_date", "planned_date_display",
+    "dart_rcp", "dart_source", "parse_note", "final_date_display", "updated_at",
+]
+
+
 REVIEW_COLUMNS = [
     "status", "name", "code", "review_type", "target", "issue", "comparison",
     "first_detected", "last_detected", "resolved_at", "operator_memo", "review_id", "event_id",
@@ -166,9 +191,15 @@ HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
 # 검토필요 탭은 폐지 — 운영자 보완 입력은 작업목록 탭으로 일원화 (review_needed.csv는 내부 기록용으로만 유지)
 TAB_CONFIG = [
-    ("운영_락업일정", "lockup_admin.csv", ADMIN_SHEET_COLUMNS),
     ("변경로그", "lockup_log.csv", LOG_COLUMNS),
 ]
+
+
+ADMIN_TAB_CONFIG = [
+    ("IPO기관", "IPO기관", IPO_ADMIN_SHEET_COLUMNS),
+    ("기존주주", "구주·보호예수", FLOAT_ADMIN_SHEET_COLUMNS),
+]
+LEGACY_ADMIN_TABS = ("운영_락업일정", "락업이벤트", "lockup_admin")
 
 
 MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
@@ -296,13 +327,21 @@ def worksheet_records(ws: gspread.Worksheet) -> list[dict[str, str]]:
 
 
 
-def admin_worksheet(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
-    for title in ("운영_락업일정", "락업이벤트", "lockup_admin"):
+def admin_worksheets(spreadsheet: gspread.Spreadsheet) -> list[gspread.Worksheet]:
+    worksheets: list[gspread.Worksheet] = []
+    for title, _, _ in ADMIN_TAB_CONFIG:
         try:
-            return spreadsheet.worksheet(title)
+            worksheets.append(spreadsheet.worksheet(title))
         except gspread.WorksheetNotFound:
             pass
-    return spreadsheet.get_worksheet(0)
+    if worksheets:
+        return worksheets
+    for title in LEGACY_ADMIN_TABS:
+        try:
+            return [spreadsheet.worksheet(title)]
+        except gspread.WorksheetNotFound:
+            pass
+    return [spreadsheet.get_worksheet(0)]
 
 
 
@@ -315,7 +354,9 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
         return
 
 
-    sheet_rows = worksheet_records(admin_worksheet(spreadsheet))
+    sheet_rows: list[dict[str, str]] = []
+    for worksheet in admin_worksheets(spreadsheet):
+        sheet_rows.extend(worksheet_records(worksheet))
     sheet_by_id = {row.get("event_id", ""): row for row in sheet_rows if row.get("event_id")}
     updated = 0
 
@@ -771,7 +812,7 @@ def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
     worksheets = spreadsheet.worksheets()
-    first_title = TAB_CONFIG[0][0]
+    first_title = ADMIN_TAB_CONFIG[0][0]
     primary = worksheets[0]
     primary.clear()
     primary.update_title(first_title)
@@ -810,6 +851,19 @@ def push_tab(
     rows = read_csv_dicts(ROOT_DIR / "data" / filename)
     push_rows(spreadsheet, title, rows, columns)
 
+
+
+def push_admin_tabs(spreadsheet: gspread.Spreadsheet) -> None:
+    rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    for title, category, columns in ADMIN_TAB_CONFIG:
+        filtered = [row for row in rows if row.get("category") == category]
+        push_rows(spreadsheet, title, filtered, columns)
+    for title in LEGACY_ADMIN_TABS:
+        try:
+            worksheet = spreadsheet.worksheet(title)
+        except gspread.WorksheetNotFound:
+            continue
+        spreadsheet.del_worksheet(worksheet)
 
 
 
@@ -956,6 +1010,7 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     if reset:
         reset_worksheets(spreadsheet)
+    push_admin_tabs(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
     ensure_ipo_target_manual_price_column(spreadsheet)
