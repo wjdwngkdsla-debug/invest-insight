@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 import argparse
 import csv
 import json
@@ -8,9 +9,11 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+
 ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+
 
 from scripts.config import require_env
 from scripts.sources.krx import find_stock_by_name, krx_snapshot
@@ -19,12 +22,14 @@ from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 
+
 PERIOD_KEY_MAP = {
     "15일 확약": "15일",
     "1개월 확약": "1개월",
     "3개월 확약": "3개월",
     "6개월 확약": "6개월",
 }
+
 
 ADMIN_COLUMNS = [
     "event_id", "code", "name", "market", "listing_date", "shares", "current_shares", "shares_date",
@@ -38,17 +43,22 @@ ADMIN_COLUMNS = [
     "status", "review_needed", "memo", "updated_at",
 ]
 
+
 REVIEW_COLUMNS = [
     "review_id", "status", "name", "code", "review_type", "target", "issue", "comparison",
     "first_detected", "last_detected", "resolved_at", "operator_memo", "event_id",
 ]
 
+
 LOG_COLUMNS = [
     "time", "event_id", "code", "name", "field", "old_value", "new_value", "reason",
 ]
 
+
 CATEGORY_IPO = "IPO기관"
 CATEGORY_FLOAT = "구주·보호예수"
+
+
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,8 +75,12 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+
+
 def _now() -> str:
     return datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+
+
 
 
 def _to_int(value: Any) -> int:
@@ -78,6 +92,8 @@ def _to_int(value: Any) -> int:
         return 0
 
 
+
+
 def _to_float(value: Any) -> float:
     if value in (None, ""):
         return 0.0
@@ -85,6 +101,15 @@ def _to_float(value: Any) -> float:
         return float(str(value).replace(",", ""))
     except Exception:
         return 0.0
+
+
+
+
+def normalize_stock_code(code: Any) -> str:
+    code = str(code or "").strip()
+    return code.zfill(6) if code.isdigit() and len(code) < 6 else code
+
+
 
 
 def _write_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
@@ -96,6 +121,8 @@ def _write_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
             writer.writerow({col: row.get(col, "") for col in columns})
 
 
+
+
 def _read_csv(path: Path, columns: list[str]) -> list[dict]:
     if not path.exists():
         return []
@@ -105,6 +132,8 @@ def _read_csv(path: Path, columns: list[str]) -> list[dict]:
         for row in reader:
             rows.append({col: row.get(col, "") for col in columns})
         return rows
+
+
 
 
 def _append_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
@@ -120,8 +149,12 @@ def _append_csv(path: Path, rows: list[dict], columns: list[str]) -> None:
             writer.writerow({col: row.get(col, "") for col in columns})
 
 
+
+
 def normalize_period_for_id(period: str) -> str:
     return period.replace("개월", "M").replace("년", "Y").replace("일", "D").replace(" ", "")
+
+
 
 
 def build_event_id(code: str, category: str, period: str, date: str) -> str:
@@ -129,8 +162,12 @@ def build_event_id(code: str, category: str, period: str, date: str) -> str:
     return f"{code}-{safe_category}-{normalize_period_for_id(period)}-{date}"
 
 
+
+
 def pct(qty: int, shares: int) -> float:
     return round(qty / shares * 100, 2) if shares else 0.0
+
+
 
 
 def load_manual_targets() -> list[dict]:
@@ -138,6 +175,8 @@ def load_manual_targets() -> list[dict]:
     if not path.exists():
         raise FileNotFoundError("data/manual_targets.json 파일이 없습니다.")
     return json.loads(path.read_text(encoding="utf-8"))
+
+
 
 
 def load_targets(args: argparse.Namespace) -> list[dict]:
@@ -149,6 +188,7 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
     if args.manual_targets:
         print("[TARGET] manual_targets.json 사용", file=sys.stderr)
         return load_manual_targets()
+
 
     path = ROOT_DIR / "data" / "ipo_targets.json"
     if not path.exists():
@@ -163,9 +203,11 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
     return targets
 
 
+
+
 def get_stock_meta(target: dict) -> tuple[str | None, dict | None, str | None]:
     """종목코드로 최근 KRX 스냅샷에서 상장주식수·종가·시장을 채운다."""
-    code = str(target.get("code") or "").strip()
+    code = normalize_stock_code(target.get("code"))
     if code:
         _, snap = latest_krx_snapshot()
         meta = snap.get(code)
@@ -185,6 +227,8 @@ def get_stock_meta(target: dict) -> tuple[str | None, dict | None, str | None]:
                 "close_price": int(target.get("close_price") or 0),
             }, None
     return find_stock_by_name(target["name"])
+
+
 
 
 def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, shares: int) -> list[dict]:
@@ -209,6 +253,7 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     if not parsed:
         print(f"  [DART] IPO기관 파싱 실패: {note}", file=sys.stderr)
         return []
+
 
     rows: list[dict] = []
     for raw_key, period in PERIOD_KEY_MAP.items():
@@ -250,6 +295,8 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     return rows
 
 
+
+
 def build_float_summary_events(target: dict, code: str, meta: dict, listing_date: str, shares: int, year: int) -> tuple[list[dict], list[dict]]:
     name = target["name"]
     chosen, candidates, note = parse_float_summary_lockups(name, expected_shares=shares, year=year, stock_code=code)
@@ -261,6 +308,7 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
             "issue": note or "유통가능 요약표 파싱 실패", "memo": f"candidate_tables={len(candidates)}",
         })
         return [], reviews
+
 
     rows = chosen["rows"]
     out: list[dict] = []
@@ -320,6 +368,8 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
     return out, reviews
 
 
+
+
 def carry_manual_fields(new_row: dict, old: dict | None) -> dict:
     if not old:
         return new_row
@@ -329,8 +379,12 @@ def carry_manual_fields(new_row: dict, old: dict | None) -> dict:
     return new_row
 
 
+
+
 def rows_for_stock(existing_rows: list[dict], code: str) -> list[dict]:
     return [r for r in existing_rows if r.get("code") == code]
+
+
 
 
 def row_match_dates(row: dict) -> set[str]:
@@ -357,6 +411,8 @@ def row_match_dates(row: dict) -> set[str]:
     return dates
 
 
+
+
 def match_api_group_to_row(rd: str, total_qty: int, rows: list[dict]) -> dict | None:
     same_date = [r for r in rows if rd in row_match_dates(r)]
     if not same_date:
@@ -369,6 +425,8 @@ def match_api_group_to_row(rd: str, total_qty: int, rows: list[dict]) -> dict | 
     if float_rows:
         return float_rows[0]
     return same_date[0]
+
+
 
 
 def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, listing_date: str, shares: int) -> dict | None:
@@ -413,6 +471,8 @@ def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, lis
     }
 
 
+
+
 def apply_api_updates(
     target: dict, code: str, meta: dict, listing_date: str, shares: int, rows: list[dict]
 ) -> tuple[list[dict], list[dict], list[dict], list[str]]:
@@ -429,12 +489,15 @@ def apply_api_updates(
     reviews: list[dict] = []
     print(f"  [API] 금융위 반환정보 {len(api_items)}건", file=sys.stderr)
 
+
     removed_ids = [r["event_id"] for r in rows if r.get("dart_source") == "공공데이터 API 단독"]
     rows = [r for r in rows if r.get("dart_source") != "공공데이터 API 단독"]
+
 
     # 금융위 API의 상장주식수(lblProtTsumIssuStckCnt)는 보호예수 등록 시점 값이라
     # 최신 KRX 값과 다른 게 정상 — 비교 기록을 만들면 노이즈만 쌓여서 사용하지 않는다.
     # 비율·시가총액의 분모는 항상 최근 거래일 KRX(current_shares)로 통일한다.
+
 
     # 반환일 기준 합산
     groups: dict[str, dict] = {}
@@ -448,6 +511,7 @@ def apply_api_updates(
         reason = (api.get("reason") or "").strip()
         if reason and reason not in group["reasons"]:
             group["reasons"].append(reason)
+
 
     for rd in sorted(groups):
         # 상장일 이전 반환은 상장 전(장외 시절) 보호예수 기록 — 락업 캘린더와 무관하므로 버린다
@@ -474,7 +538,10 @@ def apply_api_updates(
         if str(old_api_qty) != str(total):
             logs.append(log_change(row, "api_return_qty", old_api_qty, total, "금융위 API 반환정보 확인(동일 반환일 합산)"))
 
+
     return rows, reviews, logs, removed_ids
+
+
 
 
 def log_change(row: dict, field: str, old: Any, new: Any, reason: str) -> dict:
@@ -488,6 +555,8 @@ def log_change(row: dict, field: str, old: Any, new: Any, reason: str) -> dict:
         "new_value": new,
         "reason": reason,
     }
+
+
 
 
 def _review_type(issue: str) -> str:
@@ -504,6 +573,8 @@ def _review_type(issue: str) -> str:
     return "데이터 확인"
 
 
+
+
 def _review_id(row: dict) -> str:
     if row.get("review_id"):
         return str(row["review_id"])
@@ -511,6 +582,8 @@ def _review_id(row: dict) -> str:
     issue_type = _review_type(str(row.get("issue") or row.get("review_type") or "데이터 확인"))
     event_id = str(row.get("event_id") or "")
     return f"{code}-{event_id or issue_type.replace(' ', '')}"
+
+
 
 
 def _comparison(row: dict) -> str:
@@ -530,12 +603,15 @@ def _comparison(row: dict) -> str:
     return " / ".join(parts) or str(row.get("comparison") or "")
 
 
+
+
 def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[str] | None = None) -> list[dict]:
     """현재 문제와 과거 이력을 합친다. 해결 행도 삭제하지 않고 아래에 보존한다."""
     existing_raw: list[dict] = []
     if path.exists():
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
             existing_raw = [dict(row) for row in csv.DictReader(handle)]
+
 
     history: dict[str, dict] = {}
     for old in existing_raw:
@@ -553,6 +629,7 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
             "operator_memo": old.get("operator_memo") or old.get("memo", ""),
             "event_id": old.get("event_id", ""),
         }
+
 
     active_ids: set[str] = set()
     for detected in detections:
@@ -572,15 +649,19 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
             "event_id": detected.get("event_id", ""),
         }
 
+
     for rid, old in history.items():
         if rid not in active_ids and rid in (resolved_ids or set()) and old.get("status") == "미해결":
             old["status"] = "해결"
             old["resolved_at"] = _now()
 
+
     return sorted(
         history.values(),
         key=lambda row: (0 if row.get("status") == "미해결" else 1, -(int(str(row.get("last_detected") or "0").replace("-", "").replace(":", "").replace(" ", "") or 0))),
     )
+
+
 
 
 def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
@@ -597,8 +678,10 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     # 과거에 저장된 보정일(planned_tradable_date)보다 원래 해제일을 쓴다.
     planned_date = row.get("planned_date") or row.get("planned_tradable_date") or ""
 
+
     old_final_qty = row.get("final_qty", "")
     old_final_date = row.get("final_date", "")
+
 
     if manual_lock and (manual_qty or manual_date):
         final_qty = manual_qty or planned_qty
@@ -631,12 +714,14 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
         status = "예정" if final_date >= datetime.today().strftime("%Y-%m-%d") else "확정(경과)"
         row["review_needed"] = row.get("review_needed") or "N"
 
+
     try:
         date_display, tradable = release_display(parse_date(final_date))
         tradable_date = tradable.strftime("%Y-%m-%d")
     except Exception:
         date_display = row.get("planned_date_display") or final_date
         tradable_date = final_date
+
 
     row["final_date"] = final_date
     row["final_tradable_date"] = tradable_date
@@ -646,6 +731,7 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     row["status"] = status
     row["updated_at"] = _now()
 
+
     if str(old_final_qty) not in ("", str(final_qty)):
         logs.append(log_change(row, "final_qty", old_final_qty, final_qty, "최종표시수량 재계산"))
     if str(old_final_date) not in ("", str(final_date)):
@@ -653,7 +739,11 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     return row, reviews, logs
 
 
+
+
 _SNAPSHOT_CACHE: tuple[str | None, dict] | None = None
+
+
 
 
 def latest_krx_snapshot() -> tuple[str | None, dict]:
@@ -671,6 +761,8 @@ def latest_krx_snapshot() -> tuple[str | None, dict]:
             return _SNAPSHOT_CACHE
     _SNAPSHOT_CACHE = (None, {})
     return _SNAPSHOT_CACHE
+
+
 
 
 def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
@@ -705,6 +797,8 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
     return close_date, logs
 
 
+
+
 def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
     """같은 종목·같은 원본 예정일 그룹에서 금융위 API 반환일이 확인되면
     아직 API 확인이 없는 행(예: IPO기관 확약분)도 그 실제 반환일로 정렬한다.
@@ -718,6 +812,7 @@ def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
         key = (row.get("code"), row.get("planned_date"))
         if key[0] and key[1]:
             groups.setdefault(key, []).append(row)
+
 
     logs: list[dict] = []
     for rows in groups.values():
@@ -740,6 +835,8 @@ def align_final_dates_with_api(all_rows_by_id: dict[str, dict]) -> list[dict]:
     return logs
 
 
+
+
 MANUAL_CATEGORY_MAP = {
     "IPO기관": CATEGORY_IPO,
     "기존주주": CATEGORY_FLOAT,
@@ -747,11 +844,15 @@ MANUAL_CATEGORY_MAP = {
 }
 
 
+
+
 def load_manual_events() -> list[dict]:
     path = ROOT_DIR / "data" / "manual_events.json"
     if not path.exists():
         return []
     return json.loads(path.read_text(encoding="utf-8"))
+
+
 
 
 def apply_manual_events(
@@ -767,8 +868,10 @@ def apply_manual_events(
     """
     import re
 
+
     reviews: list[dict] = []
     logs: list[dict] = []
+
 
     def review(entry: dict, issue: str) -> None:
         reviews.append({
@@ -778,18 +881,21 @@ def apply_manual_events(
             "planned_date": entry.get("date", ""), "planned_qty": entry.get("qty", ""), "memo": "수기입력 탭 확인 필요",
         })
 
+
     listing_by_code = {
-        str(r.get("code") or ""): r.get("listing_date") or ""
+        normalize_stock_code(r.get("code")): r.get("listing_date") or ""
         for r in existing_rows
         if r.get("code") and r.get("listing_date")
     }
 
+
     for entry in entries:
-        code = str(entry.get("code") or "").strip()
+        code = normalize_stock_code(entry.get("code"))
         category = MANUAL_CATEGORY_MAP.get(str(entry.get("category") or "").strip())
         period = str(entry.get("period") or "").strip()
         date = str(entry.get("date") or "").strip()
         qty = _to_int(entry.get("qty"))
+
 
         if not code:
             review(entry, "종목코드가 비어 있음")
@@ -807,11 +913,13 @@ def apply_manual_events(
             review(entry, "물량은 0보다 큰 숫자여야 함")
             continue
 
+
         _, snap = latest_krx_snapshot()
         meta = snap.get(code)
         if not meta:
             review(entry, "KRX에서 종목코드를 찾지 못함 (코드 확인)")
             continue
+
 
         shares = _to_int(meta.get("shrs"))
         event_id = build_event_id(code, category, period, date)
@@ -850,6 +958,7 @@ def apply_manual_events(
                     row[key] = previous[key]
         row = carry_manual_fields(row, previous)
 
+
         finalized, f_reviews, f_logs = finalize_row(row)
         reviews.extend(f_reviews)
         logs.extend(f_logs)
@@ -858,7 +967,10 @@ def apply_manual_events(
         all_rows_by_id[event_id] = finalized
         print(f"  [수기입력] {meta.get('name')}({code}) {period} {date} {qty:,}주 편입", file=sys.stderr)
 
+
     return reviews, logs
+
+
 
 
 def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
@@ -914,6 +1026,8 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
     }
 
 
+
+
 def main() -> None:
     require_env()
     args = parse_args()
@@ -922,12 +1036,14 @@ def main() -> None:
     review_path = data_dir / "review_needed.csv"
     log_path = data_dir / "lockup_log.csv"
 
+
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
     existing_by_id = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     targets = load_targets(args)
     all_rows_by_id: dict[str, dict] = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     all_reviews: list[dict] = []
     all_logs: list[dict] = []
+
 
     print(f"[BUILD] 대상 IPO 종목 {len(targets)}개", file=sys.stderr)
     processed_codes: set[str] = set()
@@ -948,6 +1064,7 @@ def main() -> None:
             shares = int(meta.get("shrs") or target.get("shares") or 0)
             existing_stock_rows = rows_for_stock(existing_rows, code)
 
+
             # 실행당 신규 편입 상한 — 한 번에 너무 많이 물면 타임아웃으로 통째로 날아가므로
             # 상한을 넘는 신규 종목은 건드리지 않고 다음 배치가 이어서 처리한다
             if not existing_stock_rows and args.max_new and new_ingested >= args.max_new:
@@ -956,6 +1073,7 @@ def main() -> None:
             if not existing_stock_rows:
                 new_ingested += 1
             processed_codes.add(code)
+
 
             # IPO종목 탭에 있다 = 공모주라는 운영자 판정 → 실적보고서가 반드시 존재하므로
             # IPO기관 행이 아직 없는 종목(일시적 DART 실패 등)은 찾을 때까지 매 배치 재시도한다
@@ -990,6 +1108,7 @@ def main() -> None:
                     })
                 stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
 
+
             # IPO종목 탭의 수동공모가는 선택적 보정값이다. 빈칸이면 기존값/DART값을 보존한다.
             manual_ipo_price = _to_int(target.get("manual_ipo_price"))
             existing_ipo_price = next((_to_int(r.get("ipo_price")) for r in existing_stock_rows if _to_int(r.get("ipo_price"))), 0)
@@ -1007,11 +1126,13 @@ def main() -> None:
                     "memo": "",
                 })
 
+
             stock_rows, api_reviews, api_logs, removed_ids = apply_api_updates(target, code, meta, listing_date, shares, stock_rows)
             for removed_id in removed_ids:
                 all_rows_by_id.pop(removed_id, None)
             all_reviews.extend(api_reviews)
             all_logs.extend(api_logs)
+
 
             for row in stock_rows:
                 finalized, reviews, logs = finalize_row(row)
@@ -1028,6 +1149,7 @@ def main() -> None:
             })
             continue
 
+
         # 대량 편입 중 타임아웃 대비 중간 저장 — 끊겨도 여기까지는 커밋되어 다음 실행이 이어간다
         if idx % 15 == 0:
             interim = sorted(
@@ -1037,11 +1159,13 @@ def main() -> None:
             _write_csv(admin_path, interim, ADMIN_COLUMNS)
             print(f"[BUILD] 중간 저장 완료 ({idx}/{len(targets)})", file=sys.stderr)
 
+
     if skipped_new:
         print(
             f"[BUILD] 신규 편입 상한({args.max_new}개) 도달 — 남은 신규 {skipped_new}개는 다음 배치에서 이어서 처리",
             file=sys.stderr,
         )
+
 
     # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
     leftover_by_code: dict[str, list[dict]] = {}
@@ -1049,6 +1173,7 @@ def main() -> None:
         code = str(row.get("code") or "")
         if code and code not in processed_codes:
             leftover_by_code.setdefault(code, []).append(row)
+
 
     for code, rows_for_code in leftover_by_code.items():
         if all(_to_int(r.get("api_return_qty")) for r in rows_for_code):
@@ -1081,6 +1206,7 @@ def main() -> None:
             print(f"  [ERROR] {name} API 갱신 실패 → 건너뛰고 계속: {exc}", file=sys.stderr)
             continue
 
+
     # 시트 수기입력 탭에서 내려받은 이벤트 편입 (스팩합병 등 자동 파싱이 안 되는 종목용)
     manual_entries = load_manual_events()
     if manual_entries:
@@ -1089,14 +1215,18 @@ def main() -> None:
         all_reviews.extend(manual_reviews)
         all_logs.extend(manual_logs)
 
+
     # 같은 해제 건인데 API 확인 여부에 따라 날짜가 갈라지는 것 방지
     all_logs.extend(align_final_dates_with_api(all_rows_by_id))
 
+
     all_rows = sorted(all_rows_by_id.values(), key=lambda r: (r.get("final_tradable_date") or r.get("planned_tradable_date") or "9999-99-99", r.get("code") or ""))
+
 
     # 편입된 전 종목의 최근 상장주식수·종가·비율을 같은 KRX 기준일로 갱신한다.
     close_date, market_logs = refresh_market_data(all_rows)
     all_logs.extend(market_logs)
+
 
     resolved_review_ids = {
         f"{row.get('code')}-공모가파싱실패"
@@ -1108,6 +1238,7 @@ def main() -> None:
     _write_csv(review_path, review_history, REVIEW_COLUMNS)
     _append_csv(log_path, all_logs, LOG_COLUMNS)
 
+
     site_data = rows_to_site_data(all_rows, close_date)
     out_path = data_dir / "site_data.json"
     out_path.write_text(json.dumps(site_data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -1115,6 +1246,8 @@ def main() -> None:
     print(f"[SAVE] review={review_path}", file=sys.stderr)
     print(f"[SAVE] site_data={out_path}", file=sys.stderr)
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
+
+
 
 
 if __name__ == "__main__":
