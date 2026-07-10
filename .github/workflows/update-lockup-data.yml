@@ -28,7 +28,9 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    # 최초 대량 편입은 DART PDF 100여 건을 순차 처리하므로 150분을 넘을 수 있다.
+    # 이후 일일 배치는 기존 종목 재파싱을 생략해 훨씬 짧게 끝난다.
+    timeout-minutes: 360
     env:
       KRX_API_KEY: ${{ secrets.KRX_API_KEY }}
       DATA_GO_KR_API_KEY: ${{ secrets.DATA_GO_KR_API_KEY }}

@@ -50,5 +50,6 @@ export interface StockLockup {
 
 export interface SiteData {
   updated: string;
+  shares_updated?: string;
   stocks: StockLockup[];
 }

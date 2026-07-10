@@ -22,7 +22,8 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
 
 ADMIN_COLUMNS = [
-    "event_id", "code", "name", "market", "listing_date", "shares", "close_price", "ipo_price",
+    "event_id", "code", "name", "market", "listing_date", "shares", "current_shares", "shares_date",
+    "close_price", "ipo_price",
     "category", "type", "period",
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
@@ -34,7 +35,7 @@ ADMIN_COLUMNS = [
 
 ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "category", "period",
-    "listing_date", "close_price", "ipo_price", "shares",
+    "listing_date", "close_price", "ipo_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
     "manual_lock", "manual_date", "manual_qty", "memo",
@@ -45,9 +46,8 @@ ADMIN_SHEET_COLUMNS = [
 ]
 
 REVIEW_COLUMNS = [
-    "detected_at", "event_id", "code", "name", "category", "period", "issue",
-    "planned_date", "planned_qty", "api_return_date", "api_return_qty",
-    "manual_date", "manual_qty", "memo",
+    "status", "name", "code", "review_type", "target", "issue", "comparison",
+    "first_detected", "last_detected", "resolved_at", "operator_memo", "review_id", "event_id",
 ]
 
 LOG_COLUMNS = [
@@ -89,6 +89,8 @@ HEADER_KO = {
     "market": "시장",
     "listing_date": "상장일",
     "shares": "상장주식수",
+    "current_shares": "최근상장주식수",
+    "shares_date": "상장주식수기준일",
     "close_price": "종가",
     "ipo_price": "공모가",
     "category": "구분",
@@ -116,6 +118,14 @@ HEADER_KO = {
     "status": "상태",
     "review_needed": "검토필요(Y/N)",
     "memo": "운영자메모",
+    "review_id": "검토ID",
+    "review_type": "검토유형",
+    "target": "대상",
+    "comparison": "비교내용",
+    "first_detected": "최초감지일",
+    "last_detected": "최근감지일",
+    "resolved_at": "해결일",
+    "operator_memo": "처리메모",
     "updated_at": "갱신시각",
     "detected_at": "감지시각",
     "issue": "검토사유",
@@ -140,6 +150,7 @@ TAB_CONFIG = [
 ]
 
 MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
+REVIEW_MANUAL_COLUMNS = ("status", "operator_memo")
 
 
 def parse_args() -> argparse.Namespace:
@@ -202,16 +213,28 @@ def header_label(column: str) -> str:
         suffix = price_date_suffix()
         if suffix:
             return f"{label}({suffix})"
+    if column == "current_shares":
+        try:
+            data = json.loads((ROOT_DIR / "data" / "site_data.json").read_text(encoding="utf-8"))
+            suffix = str(data.get("shares_updated") or data.get("updated") or "")
+            if len(suffix) == 10:
+                return f"상장주식수({suffix})"
+        except Exception:
+            pass
     return label
 
 
 def internal_header(value: str) -> str:
     cleaned = value.strip()
+    if cleaned == "처리상태":
+        return "status"
     if cleaned in HEADER_INTERNAL:
         return HEADER_INTERNAL[cleaned]
     # "종가(26-07-08)"처럼 기준일이 붙은 종가 헤더도 인식
     if cleaned.startswith("종가("):
         return "close_price"
+    if cleaned.startswith("상장주식수("):
+        return "current_shares"
     return cleaned
 
 
@@ -264,9 +287,32 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
 
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
+    pull_review_status(spreadsheet)
     pull_ipo_targets(spreadsheet)
     pull_manual_events(spreadsheet)
     pull_holidays(spreadsheet)
+
+
+def pull_review_status(spreadsheet: gspread.Spreadsheet) -> None:
+    """검토 탭에서 관리자가 선택한 해결상태와 처리메모를 보존한다."""
+    path = ROOT_DIR / "data" / "review_needed.csv"
+    rows = read_csv_dicts(path)
+    if not rows:
+        return
+    try:
+        sheet_rows = worksheet_records(spreadsheet.worksheet("검토필요"))
+    except gspread.WorksheetNotFound:
+        return
+    by_id = {row.get("review_id", ""): row for row in sheet_rows if row.get("review_id")}
+    for row in rows:
+        sheet_row = by_id.get(row.get("review_id", ""))
+        if not sheet_row:
+            continue
+        for column in REVIEW_MANUAL_COLUMNS:
+            value = sheet_row.get(column, "").strip()
+            if value:
+                row[column] = value
+    write_csv_dicts(path, rows, list(rows[0].keys()))
 
 
 def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
@@ -361,7 +407,7 @@ def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
 
 
 def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
-    """IPO종목 탭(구분/회사명/상장일/종목코드)을 편입 대상 목록으로 내려받는다.
+    """IPO종목 탭(구분/회사명/상장일/종목코드/수동공모가)을 내려받는다.
 
     KRX 연간 스캔을 대체하는 유일한 대상 원천 — 운영자가 행을 추가하면
     다음 배치에서 그 종목이 편입된다. 탭이 없으면 기존 파일을 유지한다.
@@ -374,11 +420,32 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         print("[SHEET] IPO종목 탭이 없어 기존 대상 목록을 유지합니다.", file=sys.stderr)
         return
 
+    values = worksheet.get_all_values()
+    if not values:
+        return
+    headers = [cell.strip() for cell in values[0]]
+
+    def column_index(labels: tuple[str, ...], fallback: int) -> int:
+        for label in labels:
+            if label in headers:
+                return headers.index(label)
+        return fallback
+
+    market_index = column_index(("구분", "시장"), 0)
+    name_index = column_index(("회사명", "종목명"), 1)
+    listing_index = column_index(("상장일",), 2)
+    code_index = column_index(("종목코드",), 3)
+    manual_price_index = column_index(("수동공모가",), 4)
+
     entries: list[dict[str, str]] = []
     skipped = 0
-    for row in worksheet.get_all_values()[1:]:
-        padded = [cell.strip() for cell in row] + ["", "", "", ""]
-        market, name, listing, code = padded[0], padded[1], padded[2], padded[3]
+    for row in values[1:]:
+        padded = [cell.strip() for cell in row] + [""] * max(0, len(headers) - len(row) + 1)
+        market = padded[market_index] if market_index < len(padded) else ""
+        name = padded[name_index] if name_index < len(padded) else ""
+        listing = padded[listing_index] if listing_index < len(padded) else ""
+        code = padded[code_index] if code_index < len(padded) else ""
+        manual_ipo_price = padded[manual_price_index] if manual_price_index < len(padded) else ""
         if not (name or code):
             continue
         normalized = listing.replace(".", "-").replace("/", "-")
@@ -391,6 +458,8 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
             "name": name,
             "listing_date": f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}",
             "code": code,
+            # 빈칸은 기존값/DART 자동 파싱을 유지한다. 0으로 해석하지 않는다.
+            "manual_ipo_price": manual_ipo_price.replace(",", ""),
         })
     IPO_TARGETS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
     note = f" (형식 불완전 {skipped}건 제외)" if skipped else ""
@@ -473,7 +542,10 @@ def push_rows(
     rows: list[dict],
     columns: list[str],
 ) -> None:
-    values = [[header_label(column) for column in columns]]
+    values = [[
+        "처리상태" if title == "검토필요" and column == "status" else header_label(column)
+        for column in columns
+    ]]
     values.extend([[row.get(column, "") for column in columns] for row in rows])
 
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 10, len(columns))
@@ -489,7 +561,47 @@ def push_rows(
             "horizontalAlignment": "CENTER",
         },
     )
+    if title == "검토필요" and "status" in columns:
+        status_column = columns.index("status")
+        spreadsheet.batch_update({
+            "requests": [{
+                "setDataValidation": {
+                    "range": {
+                        "sheetId": worksheet.id,
+                        "startRowIndex": 1,
+                        "endRowIndex": worksheet.row_count,
+                        "startColumnIndex": status_column,
+                        "endColumnIndex": status_column + 1,
+                    },
+                    "rule": {
+                        "condition": {
+                            "type": "ONE_OF_LIST",
+                            "values": [
+                                {"userEnteredValue": "미해결"},
+                                {"userEnteredValue": "해결"},
+                            ],
+                        },
+                        "strict": True,
+                        "showCustomUi": True,
+                    },
+                }
+            }]
+        })
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
+
+
+def ensure_ipo_target_manual_price_column(spreadsheet: gspread.Spreadsheet) -> None:
+    """기존 IPO종목 탭을 초기화하지 않고 선택 입력 컬럼만 보장한다."""
+    try:
+        worksheet = spreadsheet.worksheet(IPO_TARGET_TAB)
+    except gspread.WorksheetNotFound:
+        return
+    headers = worksheet.row_values(1)
+    if "수동공모가" in headers:
+        return
+    column = max(len(headers) + 1, 5)
+    worksheet.update([["수동공모가"]], rowcol_to_a1(1, column), value_input_option="USER_ENTERED")
+    print("[SHEET] IPO종목 탭에 수동공모가 컬럼 추가", file=sys.stderr)
 
 
 def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
@@ -559,6 +671,7 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
         reset_worksheets(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
+    ensure_ipo_target_manual_price_column(spreadsheet)
     ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
 
 
