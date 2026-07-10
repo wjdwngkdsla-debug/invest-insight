@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 import io
 import re
 import requests
@@ -7,8 +8,11 @@ import pdfplumber
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+
 from scripts.config import USER_AGENT
 from scripts.utils.parser import parse_lockup_from_pdf
+
+
 
 
 def _dart_session() -> requests.Session:
@@ -26,8 +30,11 @@ def _dart_session() -> requests.Session:
     return session
 
 
+
+
 def dart_find_report(corp_name: str, report_kw: str = "증권발행실적보고서", d0: str = "20250101", d1: str | None = None) -> str | None:
     from datetime import datetime
+
 
     d1 = d1 or datetime.today().strftime("%Y%m%d")
     session = _dart_session()
@@ -58,6 +65,8 @@ def dart_find_report(corp_name: str, report_kw: str = "증권발행실적보고�
     return None
 
 
+
+
 def dart_pdf(rcp: str):
     session = _dart_session()
     session.headers.update(USER_AGENT)
@@ -83,6 +92,8 @@ def dart_pdf(rcp: str):
     return pdfplumber.open(io.BytesIO(pdf_res.content))
 
 
+
+
 def extract_ipo_price(pdf) -> int:
     """증권발행실적보고서에서 1주당 확정 공모가(원)를 유도한다. 못 찾으면 0.
 
@@ -93,7 +104,23 @@ def extract_ipo_price(pdf) -> int:
     """
     from collections import Counter
 
+
     text = "\n".join(page.extract_text() or "" for page in pdf.pages[:8])
+
+    direct_patterns = [
+        r"(?:확정\s*)?공모가(?:액)?[^\d]{0,30}([\d,]{4,12})\s*원",
+        r"1\s*주당\s*(?:확정\s*)?(?:공모|발행)가(?:액)?[^\d]{0,30}([\d,]{4,12})\s*원",
+        r"발행가액[^\d]{0,30}([\d,]{4,12})\s*원",
+    ]
+    direct: Counter[int] = Counter()
+    for pattern in direct_patterns:
+        for price_str in re.findall(pattern, text):
+            price = int(price_str.replace(",", ""))
+            if 1_000 <= price <= 10_000_000:
+                direct[price] += 1
+    if direct:
+        return direct.most_common(1)[0][0]
+
     candidates: Counter[int] = Counter()
     for qty_str, amount_str in re.findall(r"([\d,]{5,15})\s+([\d,]{7,20})", text):
         qty = int(qty_str.replace(",", ""))
@@ -107,6 +134,8 @@ def extract_ipo_price(pdf) -> int:
         return 0
     price, count = candidates.most_common(1)[0]
     return price if count >= 2 else 0  # 우연한 일치 방지: 최소 2개 행에서 확인
+
+
 
 
 def parse_ipo_lockup(corp_name: str, d0: str | None = None) -> tuple[str | None, dict | None, str, int]:
