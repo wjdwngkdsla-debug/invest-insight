@@ -32,23 +32,29 @@ def dart_find_report(corp_name: str, report_kw: str = "증권발행실적보고�
     d1 = d1 or datetime.today().strftime("%Y%m%d")
     session = _dart_session()
     session.headers.update({**USER_AGENT, "Referer": "https://dart.fss.or.kr/dsab007/main.do"})
-    try:
-        res = session.post(
-            "https://dart.fss.or.kr/dsab007/detailSearch.ax",
-            data={
-                "currentPage": "1",
-                "maxResults": "100",
-                "textCrpNm": corp_name,
-                "startDate": d0,
-                "endDate": d1,
-            },
-            timeout=20,
-        )
-    except requests.RequestException:
-        return None
-    for rcp, report_name in re.findall(r'rcpNo=(\d+)"[^>]*>\s*([^<]+?)\s*<', res.text):
-        if report_kw in report_name:
-            return rcp
+    # 대기업은 공시가 많아 1페이지(100건)에 실적보고서가 밀려날 수 있어 여러 페이지를 훑는다
+    # (LG씨엔에스 케이스 — 이름이 정확해도 최근 공시 100건 안에 없어서 미발견 처리됐었음)
+    for page in range(1, 6):
+        try:
+            res = session.post(
+                "https://dart.fss.or.kr/dsab007/detailSearch.ax",
+                data={
+                    "currentPage": str(page),
+                    "maxResults": "100",
+                    "textCrpNm": corp_name,
+                    "startDate": d0,
+                    "endDate": d1,
+                },
+                timeout=20,
+            )
+        except requests.RequestException:
+            return None
+        matches = re.findall(r'rcpNo=(\d+)"[^>]*>\s*([^<]+?)\s*<', res.text)
+        for rcp, report_name in matches:
+            if report_kw in report_name:
+                return rcp
+        if len(matches) < 100:  # 마지막 페이지
+            break
     return None
 
 

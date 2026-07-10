@@ -450,6 +450,9 @@ def apply_api_updates(
             group["reasons"].append(reason)
 
     for rd in sorted(groups):
+        # 상장일 이전 반환은 상장 전(장외 시절) 보호예수 기록 — 락업 캘린더와 무관하므로 버린다
+        if listing_date and rd < listing_date:
+            continue
         total = groups[rd]["qty"]
         reason = " + ".join(groups[rd]["reasons"])
         row = match_api_group_to_row(rd, total, rows)

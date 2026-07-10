@@ -70,6 +70,12 @@ HOLIDAY_TAB = "휴장일"
 IPO_TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
 IPO_TARGET_TAB = "IPO종목"
 
+# 작업목록 탭 — 운영자 보완 입력의 단일 창구. 배치가 "다 채운 행"만 수거해 표준
+# 통로(IPO종목 수동공모가 / 수기입력)로 옮기고, 남은 갭만 다시 나열한다.
+# 규칙: 빈칸 = 무시(다음 목록에 유지), 전부 채움 = 반영, 일부만 채움 = 값 보존.
+WORKLIST_TAB = "작업목록"
+WORKLIST_BACKUP_PATH = ROOT_DIR / "data" / "worklist_backup.json"
+
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
 MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
 MANUAL_EVENT_TAB = "수기입력"
@@ -143,9 +149,9 @@ HEADER_KO = {
 }
 HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
+# 검토필요 탭은 폐지 — 운영자 보완 입력은 작업목록 탭으로 일원화 (review_needed.csv는 내부 기록용으로만 유지)
 TAB_CONFIG = [
     ("운영_락업일정", "lockup_admin.csv", ADMIN_SHEET_COLUMNS),
-    ("검토필요", "review_needed.csv", REVIEW_COLUMNS),
     ("변경로그", "lockup_log.csv", LOG_COLUMNS),
 ]
 
@@ -287,7 +293,7 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
 
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
-    pull_review_status(spreadsheet)
+    pull_worklist(spreadsheet)  # 작업목록의 완성 행을 수동공모가/수기입력으로 이관 (백업 포함)
     pull_ipo_targets(spreadsheet)
     pull_manual_events(spreadsheet)
     pull_holidays(spreadsheet)
@@ -467,6 +473,176 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
     IPO_TARGETS_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
     note = f" (형식 불완전 {skipped}건 제외)" if skipped else ""
     print(f"[SHEET] IPO종목 목록 내려받기: {len(entries)}건{note}", file=sys.stderr)
+
+
+def _pad_code(code: str) -> str:
+    code = (code or "").strip()
+    return code.zfill(6) if code.isdigit() and len(code) < 6 else code
+
+
+def _worklist_entries(values: list[list[str]]) -> list[tuple[int, str, list[str]]]:
+    """작업목록 raw 값 → (섹션번호, 종목코드, [입력칸 3개]) 목록."""
+    section = 0
+    out: list[tuple[int, str, list[str]]] = []
+    for row in values:
+        first = (row[0] if row else "").strip()
+        if first.startswith("[1]"):
+            section = 1
+            continue
+        if first.startswith("[2]"):
+            section = 2
+            continue
+        if first.startswith("[3]"):
+            section = 3
+            continue
+        if not first or first == "종목코드" or not section:
+            continue
+        padded = [cell.strip() for cell in row] + [""] * 6
+        out.append((section, _pad_code(first), padded[3:6]))
+    return out
+
+
+def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
+    """작업목록에서 '다 채운 행'만 수거해 표준 통로로 옮긴다.
+
+    - 섹션1(공모가): 숫자면 IPO종목 탭 수동공모가에 기록
+    - 섹션2/3(물량): 기간·해제일·물량이 모두 채워진 행만 수기입력 탭에 추가
+    - 수거 전 탭 전체를 백업 파일에 저장 (실수로 지워져도 복구 가능)
+    """
+    import re
+    from datetime import datetime
+
+    try:
+        worksheet = spreadsheet.worksheet(WORKLIST_TAB)
+    except gspread.WorksheetNotFound:
+        return
+    values = worksheet.get_all_values()
+    WORKLIST_BACKUP_PATH.write_text(
+        json.dumps({"saved_at": datetime.today().strftime("%Y-%m-%d %H:%M:%S"), "values": values}, ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+
+    # 해제일은 입력받지 않는다 — 상장일 + 기간으로 자동 계산(주말·휴장일 보정 포함)
+    from scripts.utils.dates import calc_release_date
+
+    listing_by_code: dict[str, str] = {}
+    if IPO_TARGETS_PATH.exists():
+        for t in json.loads(IPO_TARGETS_PATH.read_text(encoding="utf-8")):
+            listing_by_code[t.get("code", "")] = t.get("listing_date", "")
+
+    prices: dict[str, str] = {}
+    manual_rows: list[list[str]] = []
+    for section, code, inputs in _worklist_entries(values):
+        if section == 1:
+            price = inputs[0].replace(",", "")
+            if price.isdigit() and int(price) > 0:
+                prices[code] = price
+        else:
+            period, qty = inputs[0], inputs[1].replace(",", "")
+            listing = listing_by_code.get(code, "")
+            if period and qty.isdigit() and listing:
+                try:
+                    _, _, tradable = calc_release_date(listing, period)
+                except Exception:
+                    continue  # 기간 표기 이상 — 입력값은 목록 재생성 때 보존됨
+                gubun = "기존주주" if section == 2 else "IPO기관"
+                manual_rows.append([code, gubun, period, tradable, qty])
+
+    if prices:
+        ipo = spreadsheet.worksheet(IPO_TARGET_TAB)
+        vals = ipo.get_all_values()
+        headers = [h.strip() for h in vals[0]]
+        code_index = headers.index("종목코드")
+        price_index = headers.index("수동공모가")
+        updates = []
+        for row_no, row in enumerate(vals[1:], start=2):
+            code = _pad_code(row[code_index] if len(row) > code_index else "")
+            existing_price = (row[price_index] if len(row) > price_index else "").strip()
+            if code in prices and not existing_price:
+                updates.append({"range": rowcol_to_a1(row_no, price_index + 1), "values": [[prices[code]]]})
+        if updates:
+            ipo.batch_update(updates, value_input_option="USER_ENTERED")
+        print(f"[SHEET] 작업목록 → 수동공모가 이관: {len(updates)}건", file=sys.stderr)
+
+    if manual_rows:
+        manual_ws = ensure_manual_event_tab(spreadsheet)
+        existing = {
+            (_pad_code(r[0]), r[2].strip(), r[3].strip())
+            for r in manual_ws.get_all_values()[1:]
+            if len(r) >= 4 and r[0].strip()
+        }
+        to_add = [r for r in manual_rows if (r[0], r[2], r[3]) not in existing]
+        if to_add:
+            manual_ws.append_rows(to_add, value_input_option="USER_ENTERED")
+        print(f"[SHEET] 작업목록 → 수기입력 이관: {len(to_add)}건 (중복 제외 {len(manual_rows) - len(to_add)}건)", file=sys.stderr)
+
+
+def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
+    """배치 결과 기준으로 남은 갭만 작업목록에 다시 나열한다.
+
+    - [1] 공모가 미확인 / [2] 구주 물량 없음 / [3] IPO확약 없음(확약이 아직 살아있는 종목만)
+    - 채웠지만 아직 반영되지 않은 값(형식 미달 등)은 지우지 않고 그대로 살린다
+    """
+    from datetime import datetime, timedelta
+
+    carry: dict[tuple[int, str], list[str]] = {}
+    try:
+        old = spreadsheet.worksheet(WORKLIST_TAB)
+        for section, code, inputs in _worklist_entries(old.get_all_values()):
+            if any(inputs):
+                carry[(section, code)] = inputs
+        spreadsheet.del_worksheet(old)
+    except gspread.WorksheetNotFound:
+        pass
+
+    rows_csv = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    targets = json.loads(IPO_TARGETS_PATH.read_text(encoding="utf-8")) if IPO_TARGETS_PATH.exists() else []
+    tmap = {t["code"]: t for t in targets}
+
+    def to_int(value: str) -> int:
+        try:
+            return int(str(value).replace(",", "") or 0)
+        except Exception:
+            return 0
+
+    admin_codes = {r.get("code") for r in rows_csv}
+    ipo_codes = {r.get("code") for r in rows_csv if r.get("category") == "IPO기관"}
+    float_codes = {r.get("code") for r in rows_csv if r.get("category") == "구주·보호예수"}
+    priced = {r.get("code") for r in rows_csv if to_int(r.get("ipo_price", ""))}
+
+    by_recent = lambda c: tmap[c].get("listing_date", "")
+    no_price = sorted([c for c in tmap if c in admin_codes and c not in priced], key=by_recent, reverse=True)
+    no_float = sorted([c for c in tmap if c not in float_codes], key=by_recent, reverse=True)
+    # IPO확약은 최장 6개월 — 이미 전부 만료된 과거 상장주는 지난 내역이라 입력받지 않는다
+    live_cutoff = (datetime.today() - timedelta(days=190)).strftime("%Y-%m-%d")
+    no_ipo = sorted(
+        [c for c in tmap if c not in ipo_codes and tmap[c].get("listing_date", "") >= live_cutoff],
+        key=by_recent, reverse=True,
+    )
+
+    out: list[list[str]] = []
+
+    def add_section(no: int, title: str, codes: list[str]) -> None:
+        out.append([title, "", "", "", "", ""])
+        # 해제일 입력칸 없음 — 상장일+기간으로 자동 계산되므로 기간·물량만 받는다
+        header = ["종목코드", "종목명", "상장일", "공모가(원)"] if no == 1 else ["종목코드", "종목명", "상장일", "락업기간", "물량(주)"]
+        out.append(header + [""] * (6 - len(header)))
+        for code in codes:
+            saved = carry.get((no, code), ["", "", ""])
+            base = [code, tmap[code].get("name", ""), tmap[code].get("listing_date", "")]
+            out.append(base + ([saved[0], "", ""] if no == 1 else [saved[0], saved[1], ""]))
+        out.append(["", "", "", "", "", ""])
+
+    add_section(1, "[1] 공모가 입력 — 공모가(원) 칸만 채우면 됩니다 (표시용)", no_price)
+    add_section(2, "[2] 기존주주(구주) 물량 입력 — 캘린더 정확도 직결. 한 종목 여러 건이면 행 복사", no_float)
+    add_section(3, "[3] IPO기관 확약 입력 — 확약이 아직 살아있는 최근 상장주만", no_ipo)
+
+    worksheet = spreadsheet.add_worksheet(title=WORKLIST_TAB, rows=len(out) + 30, cols=8)
+    worksheet.update(out, "A1", value_input_option="USER_ENTERED")
+    for line_no, row in enumerate(out, start=1):
+        if row[0].startswith("[") or row[0] == "종목코드":
+            worksheet.format(f"{line_no}:{line_no}", {"textFormat": {"bold": True}})
+    print(f"[SHEET] 작업목록 재생성: 공모가 {len(no_price)} / 구주 {len(no_float)} / IPO확약 {len(no_ipo)}종목", file=sys.stderr)
 
 
 def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
@@ -676,6 +852,7 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
         push_tab(spreadsheet, title, filename, columns)
     ensure_ipo_target_manual_price_column(spreadsheet)
     ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
+    regenerate_worklist(spreadsheet)  # 남은 갭만 다시 나열 (미반영 입력값은 보존)
 
 
 def main() -> None:

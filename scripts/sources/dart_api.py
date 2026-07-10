@@ -98,6 +98,8 @@ def get_reports(corp_code: str, start_date: str = "20250101", end_date: str = "2
             "end_de": end_date,
             "page_no": 1,
             "page_count": 100,
+            # 발행공시만 조회 — 대기업은 잡공시가 100건을 넘어 투자설명서가 밀려난다 (LG씨엔에스)
+            "pblntf_ty": "C",
         },
         timeout=30,
     )
