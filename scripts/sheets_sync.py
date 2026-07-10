@@ -65,7 +65,7 @@ IPO_ADMIN_SHEET_COLUMNS = [
 
 FLOAT_ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "period",
-    "listing_date", "close_price", "shares", "current_shares",
+    "listing_date", "close_price", "ipo_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
     "manual_lock", "manual_date", "manual_qty", "memo",
@@ -204,6 +204,26 @@ LEGACY_ADMIN_TABS = ("운영_락업일정", "락업이벤트", "lockup_admin")
 
 MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
 REVIEW_MANUAL_COLUMNS = ("status", "operator_memo")
+
+
+SHEET_INTEGER_COLUMNS = {
+    "close_price", "ipo_price", "shares", "current_shares",
+    "planned_qty", "api_return_qty", "manual_qty", "final_qty",
+    "old_value", "new_value",
+}
+
+
+def format_sheet_value(column: str, value: object) -> object:
+    if column not in SHEET_INTEGER_COLUMNS:
+        return value
+    text = str(value or "").strip().replace(",", "")
+    if not text:
+        return ""
+    sign = "-" if text.startswith("-") else ""
+    number = text[1:] if sign else text
+    if not number.isdigit():
+        return value
+    return f"{sign}{int(number):,}"
 
 
 
@@ -877,7 +897,7 @@ def push_rows(
         "처리상태" if title == "검토필요" and column == "status" else header_label(column)
         for column in columns
     ]]
-    values.extend([[row.get(column, "") for column in columns] for row in rows])
+    values.extend([[format_sheet_value(column, row.get(column, "")) for column in columns] for row in rows])
 
 
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 10, len(columns))
