@@ -7,6 +7,7 @@ Commands:
 """
 from __future__ import annotations
 
+
 import argparse
 import csv
 import glob
@@ -15,11 +16,14 @@ import os
 import sys
 from pathlib import Path
 
+
 import gspread
 from gspread.utils import rowcol_to_a1
 
+
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
+
 
 ADMIN_COLUMNS = [
     "event_id", "code", "name", "market", "listing_date", "shares", "current_shares", "shares_date",
@@ -33,6 +37,7 @@ ADMIN_COLUMNS = [
     "status", "review_needed", "memo", "updated_at",
 ]
 
+
 ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "category", "period",
     "listing_date", "close_price", "ipo_price", "shares", "current_shares",
@@ -45,14 +50,17 @@ ADMIN_SHEET_COLUMNS = [
     "dart_rcp", "dart_source", "parse_note", "final_date_display", "updated_at",
 ]
 
+
 REVIEW_COLUMNS = [
     "status", "name", "code", "review_type", "target", "issue", "comparison",
     "first_detected", "last_detected", "resolved_at", "operator_memo", "review_id", "event_id",
 ]
 
+
 LOG_COLUMNS = [
     "time", "event_id", "code", "name", "field", "old_value", "new_value", "reason",
 ]
+
 
 UNIVERSE_REVIEW_COLUMNS = [
     "name", "code", "market", "listing_date", "shares", "close_price",
@@ -60,21 +68,26 @@ UNIVERSE_REVIEW_COLUMNS = [
     "rcp", "detected_bas_dd",
 ]
 
+
 REVIEW_DECISIONS_PATH = ROOT_DIR / "data" / "listing_review_decisions.json"
+
 
 # 휴장일 탭 — 운영자가 연 단위로 채우는 거래소 휴장일. 배치가 내려받아 해제일 보정에 사용
 HOLIDAYS_PATH = ROOT_DIR / "data" / "holidays.json"
 HOLIDAY_TAB = "휴장일"
 
+
 # IPO종목 탭 — 편입 대상 종목의 유일한 원천 (구분/회사명/상장일/종목코드)
 IPO_TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
 IPO_TARGET_TAB = "IPO종목"
+
 
 # 작업목록 탭 — 운영자 보완 입력의 단일 창구. 배치가 "다 채운 행"만 수거해 표준
 # 통로(IPO종목 수동공모가 / 수기입력)로 옮기고, 남은 갭만 다시 나열한다.
 # 규칙: 빈칸 = 무시(다음 목록에 유지), 전부 채움 = 반영, 일부만 채움 = 값 보존.
 WORKLIST_TAB = "작업목록"
 WORKLIST_BACKUP_PATH = ROOT_DIR / "data" / "worklist_backup.json"
+
 
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
 MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
@@ -87,6 +100,7 @@ MANUAL_EVENT_KEYS = {
     "해제일": "date",
     "물량": "qty",
 }
+
 
 HEADER_KO = {
     "event_id": "이벤트ID",
@@ -149,14 +163,18 @@ HEADER_KO = {
 }
 HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
+
 # 검토필요 탭은 폐지 — 운영자 보완 입력은 작업목록 탭으로 일원화 (review_needed.csv는 내부 기록용으로만 유지)
 TAB_CONFIG = [
     ("운영_락업일정", "lockup_admin.csv", ADMIN_SHEET_COLUMNS),
     ("변경로그", "lockup_log.csv", LOG_COLUMNS),
 ]
 
+
 MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
 REVIEW_MANUAL_COLUMNS = ("status", "operator_memo")
+
+
 
 
 def parse_args() -> argparse.Namespace:
@@ -165,14 +183,18 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+
+
 def build_client() -> gspread.Client:
     raw_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
     if raw_json:
         return gspread.service_account_from_dict(json.loads(raw_json))
 
+
     configured_file = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "").strip()
     if configured_file:
         return gspread.service_account(filename=configured_file)
+
 
     hits = sorted(glob.glob(str(ROOT_DIR / "project-*.json")))
     hits.extend(sorted(glob.glob(str(ROOT_DIR / "*service-account*.json"))))
@@ -184,8 +206,12 @@ def build_client() -> gspread.Client:
     return gspread.service_account(filename=hits[0])
 
 
+
+
 def sheet_id() -> str:
     return os.getenv("GOOGLE_SHEET_ID", DEFAULT_SHEET_ID).strip()
+
+
 
 
 def read_csv_dicts(path: Path) -> list[dict[str, str]]:
@@ -193,6 +219,8 @@ def read_csv_dicts(path: Path) -> list[dict[str, str]]:
         return []
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return [dict(row) for row in csv.DictReader(handle)]
+
+
 
 
 def write_csv_dicts(path: Path, rows: list[dict[str, str]], columns: list[str]) -> None:
@@ -203,6 +231,8 @@ def write_csv_dicts(path: Path, rows: list[dict[str, str]], columns: list[str]) 
         writer.writerows({column: row.get(column, "") for column in columns} for row in rows)
 
 
+
+
 def price_date_suffix() -> str:
     """종가 기준일(예: '26-07-08'). site_data.json의 updated 값에서 가져온다."""
     try:
@@ -211,6 +241,8 @@ def price_date_suffix() -> str:
         return updated[2:] if len(updated) == 10 else ""
     except Exception:
         return ""
+
+
 
 
 def header_label(column: str) -> str:
@@ -230,6 +262,8 @@ def header_label(column: str) -> str:
     return label
 
 
+
+
 def internal_header(value: str) -> str:
     cleaned = value.strip()
     if cleaned == "처리상태":
@@ -242,6 +276,8 @@ def internal_header(value: str) -> str:
     if cleaned.startswith("상장주식수("):
         return "current_shares"
     return cleaned
+
+
 
 
 def worksheet_records(ws: gspread.Worksheet) -> list[dict[str, str]]:
@@ -258,6 +294,8 @@ def worksheet_records(ws: gspread.Worksheet) -> list[dict[str, str]]:
     return records
 
 
+
+
 def admin_worksheet(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
     for title in ("운영_락업일정", "락업이벤트", "lockup_admin"):
         try:
@@ -267,6 +305,8 @@ def admin_worksheet(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
     return spreadsheet.get_worksheet(0)
 
 
+
+
 def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     csv_path = ROOT_DIR / "data" / "lockup_admin.csv"
     local_rows = read_csv_dicts(csv_path)
@@ -274,9 +314,11 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
         print("[SHEET] 로컬 lockup_admin.csv가 없어 내려받기를 건너뜁니다.", file=sys.stderr)
         return
 
+
     sheet_rows = worksheet_records(admin_worksheet(spreadsheet))
     sheet_by_id = {row.get("event_id", ""): row for row in sheet_rows if row.get("event_id")}
     updated = 0
+
 
     for local in local_rows:
         sheet_row = sheet_by_id.get(local.get("event_id", ""))
@@ -291,12 +333,15 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
         if changed:
             updated += 1
 
+
     write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
     print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
     pull_worklist(spreadsheet)  # 작업목록의 완성 행을 수동공모가/수기입력으로 이관 (백업 포함)
     pull_ipo_targets(spreadsheet)
     pull_manual_events(spreadsheet)
     pull_holidays(spreadsheet)
+
+
 
 
 def pull_review_status(spreadsheet: gspread.Spreadsheet) -> None:
@@ -321,16 +366,20 @@ def pull_review_status(spreadsheet: gspread.Spreadsheet) -> None:
     write_csv_dicts(path, rows, list(rows[0].keys()))
 
 
+
+
 def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
     try:
         sheet_rows = worksheet_records(spreadsheet.worksheet("상장후보_검토"))
     except gspread.WorksheetNotFound:
         return
 
+
     existing = []
     if REVIEW_DECISIONS_PATH.exists():
         existing = json.loads(REVIEW_DECISIONS_PATH.read_text(encoding="utf-8"))
     by_code = {row.get("code", ""): row for row in existing if row.get("code")}
+
 
     for row in sheet_rows:
         decision = row.get("review_decision", "").strip()
@@ -343,11 +392,14 @@ def pull_review_decisions(spreadsheet: gspread.Spreadsheet) -> None:
             "review_memo": row.get("review_memo", "").strip(),
         }
 
+
     decisions = sorted(by_code.values(), key=lambda row: (row.get("listing_date", ""), row.get("code", "")))
     REVIEW_DECISIONS_PATH.write_text(
         json.dumps(decisions, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(f"[SHEET] 상장후보 검토결과 내려받기: {len(decisions)}개", file=sys.stderr)
+
+
 
 
 def ensure_manual_event_tab(spreadsheet: gspread.Spreadsheet) -> gspread.Worksheet:
@@ -356,6 +408,7 @@ def ensure_manual_event_tab(spreadsheet: gspread.Spreadsheet) -> gspread.Workshe
         return spreadsheet.worksheet(MANUAL_EVENT_TAB)
     except gspread.WorksheetNotFound:
         pass
+
 
     worksheet = spreadsheet.add_worksheet(title=MANUAL_EVENT_TAB, rows=200, cols=len(MANUAL_EVENT_HEADERS) + 1)
     worksheet.update([MANUAL_EVENT_HEADERS], "A1", value_input_option="USER_ENTERED")
@@ -397,6 +450,8 @@ def ensure_manual_event_tab(spreadsheet: gspread.Spreadsheet) -> gspread.Workshe
     return worksheet
 
 
+
+
 def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
     worksheet = ensure_manual_event_tab(spreadsheet)
     values = worksheet.get_all_values()
@@ -412,6 +467,8 @@ def pull_manual_events(spreadsheet: gspread.Spreadsheet) -> None:
     print(f"[SHEET] 수기입력 내려받기: {len(entries)}건", file=sys.stderr)
 
 
+
+
 def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
     """IPO종목 탭(구분/회사명/상장일/종목코드/수동공모가)을 내려받는다.
 
@@ -420,16 +477,19 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
     """
     import re
 
+
     try:
         worksheet = spreadsheet.worksheet(IPO_TARGET_TAB)
     except gspread.WorksheetNotFound:
         print("[SHEET] IPO종목 탭이 없어 기존 대상 목록을 유지합니다.", file=sys.stderr)
         return
 
+
     values = worksheet.get_all_values()
     if not values:
         return
     headers = [cell.strip() for cell in values[0]]
+
 
     def column_index(labels: tuple[str, ...], fallback: int) -> int:
         for label in labels:
@@ -437,11 +497,13 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
                 return headers.index(label)
         return fallback
 
+
     market_index = column_index(("구분", "시장"), 0)
     name_index = column_index(("회사명", "종목명"), 1)
     listing_index = column_index(("상장일",), 2)
     code_index = column_index(("종목코드",), 3)
     manual_price_index = column_index(("수동공모가",), 4)
+
 
     entries: list[dict[str, str]] = []
     skipped = 0
@@ -475,9 +537,13 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
     print(f"[SHEET] IPO종목 목록 내려받기: {len(entries)}건{note}", file=sys.stderr)
 
 
+
+
 def _pad_code(code: str) -> str:
     code = (code or "").strip()
     return code.zfill(6) if code.isdigit() and len(code) < 6 else code
+
+
 
 
 def _worklist_entries(values: list[list[str]]) -> list[tuple[int, str, list[str]]]:
@@ -502,6 +568,8 @@ def _worklist_entries(values: list[list[str]]) -> list[tuple[int, str, list[str]
     return out
 
 
+
+
 def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     """작업목록에서 '다 채운 행'만 수거해 표준 통로로 옮긴다.
 
@@ -511,6 +579,7 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     """
     import re
     from datetime import datetime
+
 
     try:
         worksheet = spreadsheet.worksheet(WORKLIST_TAB)
@@ -522,13 +591,16 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         encoding="utf-8",
     )
 
+
     # 해제일은 입력받지 않는다 — 상장일 + 기간으로 자동 계산(주말·휴장일 보정 포함)
     from scripts.utils.dates import calc_release_date
+
 
     listing_by_code: dict[str, str] = {}
     if IPO_TARGETS_PATH.exists():
         for t in json.loads(IPO_TARGETS_PATH.read_text(encoding="utf-8")):
             listing_by_code[t.get("code", "")] = t.get("listing_date", "")
+
 
     prices: dict[str, str] = {}
     manual_rows: list[list[str]] = []
@@ -548,6 +620,7 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
                 gubun = "기존주주" if section == 2 else "IPO기관"
                 manual_rows.append([code, gubun, period, tradable, qty])
 
+
     if prices:
         ipo = spreadsheet.worksheet(IPO_TARGET_TAB)
         vals = ipo.get_all_values()
@@ -557,12 +630,13 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         updates = []
         for row_no, row in enumerate(vals[1:], start=2):
             code = _pad_code(row[code_index] if len(row) > code_index else "")
-            existing_price = (row[price_index] if len(row) > price_index else "").strip()
-            if code in prices and not existing_price:
+            existing_price = (row[price_index] if len(row) > price_index else "").strip().replace(",", "")
+            if code in prices and existing_price != prices[code]:
                 updates.append({"range": rowcol_to_a1(row_no, price_index + 1), "values": [[prices[code]]]})
         if updates:
             ipo.batch_update(updates, value_input_option="USER_ENTERED")
         print(f"[SHEET] 작업목록 → 수동공모가 이관: {len(updates)}건", file=sys.stderr)
+
 
     if manual_rows:
         manual_ws = ensure_manual_event_tab(spreadsheet)
@@ -577,6 +651,8 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         print(f"[SHEET] 작업목록 → 수기입력 이관: {len(to_add)}건 (중복 제외 {len(manual_rows) - len(to_add)}건)", file=sys.stderr)
 
 
+
+
 def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     """배치 결과 기준으로 남은 갭만 작업목록에 다시 나열한다.
 
@@ -584,6 +660,7 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     - 채웠지만 아직 반영되지 않은 값(형식 미달 등)은 지우지 않고 그대로 살린다
     """
     from datetime import datetime, timedelta
+
 
     carry: dict[tuple[int, str], list[str]] = {}
     try:
@@ -595,9 +672,11 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     except gspread.WorksheetNotFound:
         pass
 
+
     rows_csv = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
     targets = json.loads(IPO_TARGETS_PATH.read_text(encoding="utf-8")) if IPO_TARGETS_PATH.exists() else []
     tmap = {t["code"]: t for t in targets}
+
 
     def to_int(value: str) -> int:
         try:
@@ -605,10 +684,13 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         except Exception:
             return 0
 
+
     admin_codes = {r.get("code") for r in rows_csv}
     ipo_codes = {r.get("code") for r in rows_csv if r.get("category") == "IPO기관"}
     float_codes = {r.get("code") for r in rows_csv if r.get("category") == "구주·보호예수"}
     priced = {r.get("code") for r in rows_csv if to_int(r.get("ipo_price", ""))}
+    priced.update({c for c, t in tmap.items() if to_int(t.get("manual_ipo_price", ""))})
+
 
     by_recent = lambda c: tmap[c].get("listing_date", "")
     no_price = sorted([c for c in tmap if c in admin_codes and c not in priced], key=by_recent, reverse=True)
@@ -620,7 +702,9 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         key=by_recent, reverse=True,
     )
 
+
     out: list[list[str]] = []
+
 
     def add_section(no: int, title: str, codes: list[str]) -> None:
         out.append([title, "", "", "", "", ""])
@@ -633,9 +717,11 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
             out.append(base + ([saved[0], "", ""] if no == 1 else [saved[0], saved[1], ""]))
         out.append(["", "", "", "", "", ""])
 
+
     add_section(1, "[1] 공모가 입력 — 공모가(원) 칸만 채우면 됩니다 (표시용)", no_price)
     add_section(2, "[2] 기존주주(구주) 물량 입력 — 캘린더 정확도 직결. 한 종목 여러 건이면 행 복사", no_float)
     add_section(3, "[3] IPO기관 확약 입력 — 확약이 아직 살아있는 최근 상장주만", no_ipo)
+
 
     worksheet = spreadsheet.add_worksheet(title=WORKLIST_TAB, rows=len(out) + 30, cols=8)
     worksheet.update(out, "A1", value_input_option="USER_ENTERED")
@@ -643,6 +729,8 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
         if row[0].startswith("[") or row[0] == "종목코드":
             worksheet.format(f"{line_no}:{line_no}", {"textFormat": {"bold": True}})
     print(f"[SHEET] 작업목록 재생성: 공모가 {len(no_price)} / 구주 {len(no_float)} / IPO확약 {len(no_ipo)}종목", file=sys.stderr)
+
+
 
 
 def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
@@ -653,11 +741,13 @@ def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
     """
     import re
 
+
     try:
         worksheet = spreadsheet.worksheet(HOLIDAY_TAB)
     except gspread.WorksheetNotFound:
         print("[SHEET] 휴장일 탭이 없어 기존 휴장일 파일을 유지합니다.", file=sys.stderr)
         return
+
 
     # {날짜: 휴일이름} 형태 — 이름은 캘린더 뷰 표시에 쓴다
     holidays: dict[str, str] = {}
@@ -677,6 +767,8 @@ def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
     print(f"[SHEET] 휴장일 내려받기: {len(holidays)}일", file=sys.stderr)
 
 
+
+
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
     worksheets = spreadsheet.worksheets()
     first_title = TAB_CONFIG[0][0]
@@ -685,6 +777,8 @@ def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
     primary.update_title(first_title)
     for worksheet in worksheets[1:]:
         spreadsheet.del_worksheet(worksheet)
+
+
 
 
 def get_or_create_worksheet(
@@ -705,6 +799,8 @@ def get_or_create_worksheet(
     return worksheet
 
 
+
+
 def push_tab(
     spreadsheet: gspread.Spreadsheet,
     title: str,
@@ -713,6 +809,8 @@ def push_tab(
 ) -> None:
     rows = read_csv_dicts(ROOT_DIR / "data" / filename)
     push_rows(spreadsheet, title, rows, columns)
+
+
 
 
 def push_rows(
@@ -726,6 +824,7 @@ def push_rows(
         for column in columns
     ]]
     values.extend([[row.get(column, "") for column in columns] for row in rows])
+
 
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 10, len(columns))
     worksheet.clear()
@@ -769,6 +868,8 @@ def push_rows(
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
 
 
+
+
 def ensure_ipo_target_manual_price_column(spreadsheet: gspread.Spreadsheet) -> None:
     """기존 IPO종목 탭을 초기화하지 않고 선택 입력 컬럼만 보장한다."""
     try:
@@ -781,6 +882,8 @@ def ensure_ipo_target_manual_price_column(spreadsheet: gspread.Spreadsheet) -> N
     column = max(len(headers) + 1, 5)
     worksheet.update([["수동공모가"]], rowcol_to_a1(1, column), value_input_option="USER_ENTERED")
     print("[SHEET] IPO종목 탭에 수동공모가 컬럼 추가", file=sys.stderr)
+
+
 
 
 def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
@@ -796,6 +899,7 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
         for row in read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
         if row.get("code")
     }
+
 
     # 과거 검토 이력(비IPO 판정 등)은 이번 스캔의 후보 파일 유무와 무관하게 항상 탭에 유지한다
     merged_by_code: dict[str, dict] = {}
@@ -813,8 +917,10 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
             "review_memo": saved.get("review_memo", ""),
         }}
 
+
     merged_rows = [row for code, row in merged_by_code.items() if code not in admin_codes]
     merged_rows.sort(key=lambda row: (row.get("listing_date", ""), row.get("code", "")))
+
 
     push_rows(spreadsheet, "상장후보_검토", merged_rows, UNIVERSE_REVIEW_COLUMNS)
     worksheet = spreadsheet.worksheet("상장후보_검토")
@@ -845,6 +951,8 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
     })
 
 
+
+
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     if reset:
         reset_worksheets(spreadsheet)
@@ -855,9 +963,12 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     regenerate_worklist(spreadsheet)  # 남은 갭만 다시 나열 (미반영 입력값은 보존)
 
 
+
+
 def main() -> None:
     args = parse_args()
     spreadsheet = build_client().open_by_key(sheet_id())
+
 
     if args.command == "pull-admin":
         pull_admin(spreadsheet)
@@ -866,7 +977,10 @@ def main() -> None:
     else:
         push_all(spreadsheet, reset=True)
 
+
     print("[SHEET] 동기화 완료", file=sys.stderr)
+
+
 
 
 if __name__ == "__main__":
