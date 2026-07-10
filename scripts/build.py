@@ -58,6 +58,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--no-refresh-universe", action="store_true", help="기존 ipo_universe_YEAR.json 사용")
     parser.add_argument("--manual-targets", action="store_true", help="테스트용 data/manual_targets.json만 사용")
     parser.add_argument("--reparse-existing", action="store_true", help="이미 편입된 종목도 DART 재파싱")
+    parser.add_argument(
+        "--max-new", type=int, default=50,
+        help="한 실행에서 새로 편입할 최대 종목 수 (초과분은 다음 배치에서 이어서, 0=무제한)",
+    )
     return parser.parse_args()
 
 
@@ -908,6 +912,8 @@ def main() -> None:
 
     print(f"[BUILD] 대상 IPO 종목 {len(targets)}개", file=sys.stderr)
     processed_codes: set[str] = set()
+    new_ingested = 0
+    skipped_new = 0
     for idx, target in enumerate(targets, start=1):
         name = target["name"]
         listing_date = target["listing_date"]
@@ -916,9 +922,17 @@ def main() -> None:
         if not code or not meta:
             print(f"  [KRX] 종목 검색 실패: {name}", file=sys.stderr)
             continue
-        processed_codes.add(code)
         shares = int(meta.get("shrs") or target.get("shares") or 0)
         existing_stock_rows = rows_for_stock(existing_rows, code)
+
+        # 실행당 신규 편입 상한 — 한 번에 너무 많이 물면 타임아웃으로 통째로 날아가므로
+        # 상한을 넘는 신규 종목은 건드리지 않고 다음 배치가 이어서 처리한다
+        if not existing_stock_rows and args.max_new and new_ingested >= args.max_new:
+            skipped_new += 1
+            continue
+        if not existing_stock_rows:
+            new_ingested += 1
+        processed_codes.add(code)
 
         has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
         if existing_stock_rows and not args.reparse_existing and (
@@ -990,6 +1004,12 @@ def main() -> None:
             )
             _write_csv(admin_path, interim, ADMIN_COLUMNS)
             print(f"[BUILD] 중간 저장 완료 ({idx}/{len(targets)})", file=sys.stderr)
+
+    if skipped_new:
+        print(
+            f"[BUILD] 신규 편입 상한({args.max_new}개) 도달 — 남은 신규 {skipped_new}개는 다음 배치에서 이어서 처리",
+            file=sys.stderr,
+        )
 
     # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
     leftover_by_code: dict[str, list[dict]] = {}

@@ -32,23 +32,43 @@ def _decode_bytes(raw: bytes) -> str:
     return raw.decode("utf-8", errors="ignore")
 
 
-def get_corp_code(company_name: str) -> dict[str, str] | None:
+_CORP_LIST: list[dict[str, str]] | None = None
+
+
+def _load_corp_list() -> list[dict[str, str]]:
+    """DART 전체 기업코드 목록 — 수십 MB ZIP이라 배치당 한 번만 내려받아 재사용한다.
+
+    이전에는 종목마다 매번 내려받아서 대량 편입이 종목당 수 분씩 걸렸다(5시간 배치의 주범).
+    """
+    global _CORP_LIST
+    if _CORP_LIST is not None:
+        return _CORP_LIST
     if not DART_API_KEY:
-        return None
+        _CORP_LIST = []
+        return _CORP_LIST
     res = requests.get(f"{DART_BASE}/corpCode.xml", params={"crtfc_key": DART_API_KEY}, timeout=60)
     res.raise_for_status()
     if res.content[:2] != b"PK":
-        return None
+        _CORP_LIST = []
+        return _CORP_LIST
     zf = zipfile.ZipFile(BytesIO(res.content))
     root = ET.fromstring(zf.read(zf.namelist()[0]))
-    exact: list[dict[str, str]] = []
-    contains: list[dict[str, str]] = []
-    for item in root.findall("list"):
-        row = {
+    _CORP_LIST = [
+        {
             "corp_name": item.findtext("corp_name") or "",
             "corp_code": item.findtext("corp_code") or "",
             "stock_code": item.findtext("stock_code") or "",
         }
+        for item in root.findall("list")
+    ]
+    print(f"[DART API] 기업코드 목록 로드: {len(_CORP_LIST)}개 (배치당 1회)", file=__import__('sys').stderr)
+    return _CORP_LIST
+
+
+def get_corp_code(company_name: str) -> dict[str, str] | None:
+    exact: list[dict[str, str]] = []
+    contains: list[dict[str, str]] = []
+    for row in _load_corp_list():
         if row["corp_name"] == company_name:
             exact.append(row)
         elif company_name in row["corp_name"]:
