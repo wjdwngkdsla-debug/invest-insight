@@ -15,7 +15,7 @@ if str(ROOT_DIR) not in sys.path:
 from scripts.config import require_env
 from scripts.sources.krx import find_stock_by_name, krx_snapshot
 from scripts.sources.dart import parse_ipo_lockup
-from scripts.sources.dart_api import parse_float_summary_lockups
+from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 
@@ -195,9 +195,14 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     ipo_price = _to_int(target.get("ipo_price"))
     note = ""
     if not parsed:
+        # DART 정식 사명으로 검색 — 사명 변경·동명 비상장사 문제를 종목코드 식별로 회피
+        corp = get_corp_code(name, stock_code=code)
+        dart_name = (corp or {}).get("corp_name") or name
+        if dart_name != name:
+            print(f"  [DART] 사명 보정: {name} → {dart_name}", file=sys.stderr)
         # DART 검색 시작일은 상장 전년도부터 (연말 상장 준비 공시 대비)
         search_from = f"{int(listing_date[:4]) - 1}0101" if listing_date[:4].isdigit() else None
-        rcp, parsed, note, parsed_ipo_price = parse_ipo_lockup(name, d0=search_from)
+        rcp, parsed, note, parsed_ipo_price = parse_ipo_lockup(dart_name, d0=search_from)
         ipo_price = manual_ipo_price or parsed_ipo_price
     elif manual_ipo_price:
         ipo_price = manual_ipo_price
@@ -247,7 +252,7 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
 
 def build_float_summary_events(target: dict, code: str, meta: dict, listing_date: str, shares: int, year: int) -> tuple[list[dict], list[dict]]:
     name = target["name"]
-    chosen, candidates, note = parse_float_summary_lockups(name, expected_shares=shares, year=year)
+    chosen, candidates, note = parse_float_summary_lockups(name, expected_shares=shares, year=year, stock_code=code)
     reviews: list[dict] = []
     if not chosen:
         print(f"  [DART API] 유통가능 요약표 실패: {note}", file=sys.stderr)

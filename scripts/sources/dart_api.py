@@ -65,10 +65,19 @@ def _load_corp_list() -> list[dict[str, str]]:
     return _CORP_LIST
 
 
-def get_corp_code(company_name: str) -> dict[str, str] | None:
+def get_corp_code(company_name: str, stock_code: str = "") -> dict[str, str] | None:
+    """DART 기업 식별 — 종목코드 우선, 이름은 보조.
+
+    이름만 쓰면 사명 변경(위너스→위너스일렉)이나 동명 비상장사(DART의
+    다른 '위너스')에 걸려 엉뚱한 회사를 잡는다. 종목코드는 유일하므로
+    코드가 있으면 무조건 코드로 찾는다.
+    """
+    stock_code = (stock_code or "").strip()
     exact: list[dict[str, str]] = []
     contains: list[dict[str, str]] = []
     for row in _load_corp_list():
+        if stock_code and row["stock_code"].strip() == stock_code:
+            return row
         if row["corp_name"] == company_name:
             exact.append(row)
         elif company_name in row["corp_name"]:
@@ -211,13 +220,13 @@ def choose_float_summary_table(candidates: list[dict[str, Any]], expected_shares
     return sorted(candidates, key=lambda c: c["table_index"])[-1]
 
 
-def parse_float_summary_lockups(company_name: str, expected_shares: int | None = None, year: int | None = None) -> tuple[dict[str, Any] | None, list[dict[str, Any]], str]:
+def parse_float_summary_lockups(company_name: str, expected_shares: int | None = None, year: int | None = None, stock_code: str = "") -> tuple[dict[str, Any] | None, list[dict[str, Any]], str]:
     """최신 투자설명서/증권신고서에서 유통가능 요약표를 파싱한다.
 
     반환: (선택 표, 전체 후보, note)
     선택 표의 rows는 누적 유통가능 주식수이며, build 단계에서 직전행 대비 증가분을 락업 해제 물량으로 계산한다.
     """
-    corp = get_corp_code(company_name)
+    corp = get_corp_code(company_name, stock_code=stock_code)
     if not corp:
         return None, [], "DART corpCode 미발견"
     start = f"{year}0101" if year else "20250101"
