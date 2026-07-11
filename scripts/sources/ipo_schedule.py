@@ -528,11 +528,11 @@ def detect_listings_from_krx(
     history: list[dict[str, Any]],
     log,
 ) -> int:
-    """상장일 자동 감지 — IPO일정에 있는 회사가 KRX 스냅샷에 처음 나타난 날 = 상장일.
+    """KRX 진실 소스 원칙: 상장일·종목코드·시장을 KRX 스냅샷 기준으로 반영한다.
 
-    운영자가 IPO일정 탭에 상장일을 안 채워도 자동 백업으로 채워진다. 배치가 매일 도니
-    상장 다음날엔 확실히 잡힌다. 사용자가 이미 시트에서 상장일을 수정한 종목(manual_fields에
-    listing_date 포함)은 건드리지 않는다.
+    사용자가 IPO일정 시트에 넣은 상장일과 KRX 반환값이 다르면 KRX가 우선.
+    사용자 입력은 "발표 예상값" 성격이라 오타·연기 시 자동 복구되는 게 맞다.
+    manual_fields 잠금(listing_date)은 이제 참조만 하고 KRX 자동수정은 항상 진행한다.
     """
     if not snapshot:
         return 0
@@ -544,25 +544,45 @@ def detect_listings_from_krx(
 
     detected = 0
     for item in items_by_corp.values():
-        if item.get("listing_date"):
-            continue
-        if "listing_date" in (item.get("manual_fields") or []):
-            continue
         match = name_to_meta.get(_norm_name(item.get("name") or ""))
         if not match:
             continue
         code, meta = match
-        item["listing_date"] = trading_date
-        if not item.get("stock_code"):
+
+        # 상장일: KRX 감지 거래일이 진실. 다르면 자동수정 + 이력 기록.
+        current_listing = item.get("listing_date") or ""
+        if current_listing != trading_date:
+            history.append({
+                "date": trading_date, "name": item.get("name", ""),
+                "type": "KRX 자동수정" if current_listing else "상장확인(KRX)",
+                "field": "상장일",
+                "old": current_listing or "미정",
+                "new": trading_date,
+            })
+            item["listing_date"] = trading_date
+            # 잠금은 참조용으로만 남기되 KRX 우선이라는 신호로 해제
+            manual_fields = [f for f in (item.get("manual_fields") or []) if f != "listing_date"]
+            if manual_fields:
+                item["manual_fields"] = manual_fields
+            elif "manual_fields" in item:
+                del item["manual_fields"]
+            detected += 1
+            log(f"KRX 상장 반영: {item.get('name')} {current_listing or '미정'} → {trading_date} (코드 {code})")
+
+        # 종목코드: 사용자가 잘못 넣었을 가능성 방어 — 다르면 KRX 값으로 자동수정
+        current_code = (item.get("stock_code") or "").strip()
+        if current_code != code:
+            if current_code:
+                history.append({
+                    "date": trading_date, "name": item.get("name", ""),
+                    "type": "KRX 자동수정", "field": "종목코드",
+                    "old": current_code, "new": code,
+                })
             item["stock_code"] = code
+
+        # 시장은 사용자 입력이 있으면 존중(코스닥/코스피 이름 자체가 KRX와 표기 다를 수 있음)
         if not item.get("market"):
             item["market"] = meta.get("market") or ""
-        history.append({
-            "date": trading_date, "name": item.get("name", ""), "type": "상장확인(KRX)",
-            "field": "상장일", "old": "미정", "new": trading_date,
-        })
-        log(f"KRX 상장 감지: {item.get('name')} → {trading_date} (코드 {code})")
-        detected += 1
     return detected
 
 
@@ -672,11 +692,13 @@ def refresh_ipo_schedule(
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
     for item in items_by_corp.values():
+        # IPO종목 탭에서 채운 값은 KRX 감지가 이미 우선 반영했으니 비어있을 때만 보조로 사용.
         linked = listing_map.get(_norm_name(item.get("name") or ""))
         if linked:
-            if "listing_date" not in (item.get("manual_fields") or []):
+            if not item.get("listing_date") and linked["listing_date"]:
                 item["listing_date"] = linked["listing_date"]
-            item["stock_code"] = linked["code"]
+            if not item.get("stock_code") and linked["code"]:
+                item["stock_code"] = linked["code"]
         item.setdefault("listing_date", "")
         item.setdefault("stock_code", "")
 

@@ -4478,6 +4478,54 @@ def main() -> None:
     all_reviews: list[dict] = []
     all_logs: list[dict] = []
 
+    # IPO종목 탭에서 삭제된 종목의 락업 이벤트를 정리한다.
+    # 규칙: 기존 lockup_admin.csv에 이벤트가 있는데 targets에 없으면 → 그 종목의 모든 이벤트 제거.
+    # 사용자가 IPO종목 탭에서 행을 지우면 락업 캘린더에서도 자연 정리되도록 하는 유일한 창구.
+    target_codes = {str(t.get("code") or "").strip() for t in targets if (t.get("code") or "").strip()}
+    target_names = {(t.get("name") or "").strip() for t in targets if (t.get("name") or "").strip()}
+    removed_codes: dict[str, dict[str, int]] = {}
+    for event_id, row in list(all_rows_by_id.items()):
+        row_code = str(row.get("code") or "").strip()
+        row_name = (row.get("name") or "").strip()
+        # 코드로 우선 매칭, 그도 없으면 이름 fallback (구코드 종목 방어)
+        in_targets = (row_code and row_code in target_codes) or (not row_code and row_name in target_names)
+        if in_targets:
+            continue
+        stat = removed_codes.setdefault(row_code or row_name, {"name": row_name, "count": 0})
+        stat["count"] += 1
+        all_rows_by_id.pop(event_id, None)
+
+    if removed_codes:
+        # 변경로그 + IPO일정 정정이력에도 크로스 기록해 운영자가 한 곳에서 확인 가능하게 한다.
+        from datetime import date as _date
+
+        today_iso = _date.today().isoformat()
+        for key, info in removed_codes.items():
+            all_logs.append({
+                "event_id": "", "code": key if key.isdigit() else "",
+                "name": info["name"], "field": "IPO종목 삭제",
+                "old_value": f"{info['count']}건 이벤트", "new_value": "",
+                "reason": "IPO종목 탭에서 삭제 감지 — 관련 락업 이벤트 전면 제거",
+                "updated_at": today_iso,
+            })
+            print(f"[BUILD] IPO종목 삭제 감지: {info['name']} — 락업 이벤트 {info['count']}건 제거", file=sys.stderr)
+
+        # IPO일정 정정이력 탭에도 반영 (운영자가 락업·IPO일정 한 곳에서 확인 가능하도록)
+        try:
+            schedule_path = ROOT_DIR / "data" / "ipo_schedule.json"
+            if schedule_path.exists():
+                schedule_data = json.loads(schedule_path.read_text(encoding="utf-8"))
+                schedule_data.setdefault("history", [])
+                for info in removed_codes.values():
+                    schedule_data["history"].append({
+                        "date": today_iso, "name": info["name"], "type": "IPO종목 삭제",
+                        "field": "락업 이벤트",
+                        "old": f"{info['count']}건 게시 중", "new": "전면 제거",
+                    })
+                schedule_path.write_text(json.dumps(schedule_data, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception as exc:
+            print(f"[BUILD] IPO일정 정정이력 크로스 기록 실패(무시): {exc}", file=sys.stderr)
+
 
 
 

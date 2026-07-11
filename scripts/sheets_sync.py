@@ -604,7 +604,9 @@ def pull_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
             continue
         normalized = listing.replace(".", "-").replace("/", "-")
         match = re.fullmatch(r"(\d{4})-(\d{1,2})-(\d{1,2})", normalized)
-        if not name or not code or not match:
+        # 종목코드가 없어도 통과시킨다 — 상장 후 KRX 스냅샷의 find_stock_by_name이 이름으로 코드를 자동 발견한다.
+        # 이름·상장일만 필수(형식 맞아야 함).
+        if not name or not match:
             skipped += 1
             continue
         entries.append({
@@ -1265,9 +1267,12 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 else:
                     start, end = dates[0], dates[-1]
                     item[fields[0]], item[fields[1]] = start, end
-            for field in fields:
-                if field not in manual_fields:
-                    manual_fields.append(field)
+            # 상장일은 KRX가 진실 소스라 잠금하지 않는다 — 다음 배치 KRX 감지가 오타 자동복구
+            # 확정공모가·수요예측·청약일은 KRX가 안 주는 값이라 사용자 잠금 유지
+            if column != "상장일":
+                for field in fields:
+                    if field not in manual_fields:
+                        manual_fields.append(field)
             overrides += 1
             changed = True
             from datetime import date as _date
@@ -1356,26 +1361,43 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     })
     print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존, IPO취소 드롭다운 설정)", file=sys.stderr)
 
-    # 정정이력 탭 — 정정공시·수기변경으로 값이 바뀐 내역 (최신순)
+    # 정정이력 탭 — 정정공시·수기변경·KRX 자동수정·삭제·부활·IPO종목 삭제 크로스기록까지 최신순.
+    # 운영자가 IPO일정·락업 둘 다 한 곳에서 감사할 수 있게 크로스 로그를 모아둔다.
+    from collections import Counter as _Counter
+
     hist = data.get("history") or []
     if hist:
-        hist_values = [["일자", "기업명", "구분", "항목", "이전값", "새값"]] + [
-            [h.get("date", ""), h.get("name", ""), h.get("type", ""), h.get("field", ""), str(h.get("old", "")), str(h.get("new", ""))]
-            for h in reversed(hist[-300:])
+        recent = list(reversed(hist[-500:]))
+        # 자동필터 사용을 위해 컬럼 순서: 일자·구분·기업명·항목·이전값·새값
+        hist_values = [["일자", "구분", "기업명", "항목", "이전값", "새값"]] + [
+            [h.get("date", ""), h.get("type", ""), h.get("name", ""), h.get("field", ""), str(h.get("old", "")), str(h.get("new", ""))]
+            for h in recent
         ]
         hist_ws = get_or_create_worksheet(spreadsheet, "정정이력", len(hist_values) + 10, 6)
         hist_ws.clear()
         hist_ws.update(hist_values, "A1", value_input_option="RAW")
         hist_ws.freeze(rows=1)
-        hist_ws.format("1:1", {"backgroundColor": {"red": 0.91, "green": 0.94, "blue": 1.0}, "textFormat": {"bold": True}})
-        print(f"[SHEET] 정정이력: {len(hist_values) - 1}건 적재", file=sys.stderr)
+        # 자동필터 활성 (구분/기업명별로 즉시 필터링 가능)
+        hist_ws.set_basic_filter(f"A1:{rowcol_to_a1(len(hist_values), 6)}")
+        hist_ws.format("1:1", {"backgroundColor": {"red": 0.91, "green": 0.94, "blue": 1.0}, "textFormat": {"bold": True}, "horizontalAlignment": "CENTER"})
+
+        # 최근 7일 요약을 헤더 아래 별도 영역이 아니라 로그 자체로 유지하고, 콘솔에만 카운트 출력
+        from datetime import date as _date, timedelta as _td
+
+        cutoff = (_date.today() - _td(days=7)).isoformat()
+        recent7 = [h for h in recent if (h.get("date") or "") >= cutoff]
+        type_counts = _Counter(h.get("type", "") for h in recent7)
+        summary = " · ".join(f"{k} {v}건" for k, v in type_counts.most_common())
+        print(f"[SHEET] 정정이력: {len(hist_values) - 1}건 적재 (최근 7일 {len(recent7)}건 — {summary or '없음'})", file=sys.stderr)
 
 
 def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
-    """IPO일정에 상장일이 채워졌는데 IPO종목 탭에 없는 기업을 자동 추가한다.
+    """IPO일정 → IPO종목 탭 upsert.
 
-    append-only: 기존 행은 절대 수정하지 않고 없는 기업만 뒤에 붙인다. 추가 전 탭 전체 백업.
-    종목코드는 RAW로 써서 앞자리 0이 잘리지 않게 한다 (064400 → 64400 사고 방지).
+    - 없는 기업: 새 행 추가
+    - 이미 있는 기업 중 종목코드 공란: KRX가 감지한 stock_code로 자동 채움
+    - 사용자가 넣은 수동공모가 등 다른 컬럼은 절대 안 건드림
+    - append_rows/batch_update 전 탭 전체 백업 저장
     """
     import re
 
@@ -1404,24 +1426,43 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
 
     headers = [c.strip() for c in values[0]]
     name_at = headers.index("회사명") if "회사명" in headers else 1
-    existing = {norm(row[name_at]) for row in values[1:] if len(row) > name_at and row[name_at].strip()}
+    code_at = headers.index("종목코드") if "종목코드" in headers else 3
+    existing_by_name: dict[str, int] = {}  # 정규화명 → 시트 행번호(1-based, 헤더 포함)
+    for idx, row in enumerate(values[1:], start=2):
+        if len(row) > name_at and row[name_at].strip():
+            existing_by_name[norm(row[name_at])] = idx
 
     new_rows: list[list[str]] = []
+    code_updates: list[dict] = []  # {"range": "D5", "values": [["01501764"]]}
     for item in candidates:
-        if norm(item.get("name") or "") in existing:
+        key = norm(item.get("name") or "")
+        item_code = str(item.get("stock_code") or "").strip()
+        item_code_padded = item_code.zfill(6) if item_code.isdigit() and len(item_code) < 6 else item_code
+
+        row_at = existing_by_name.get(key)
+        if row_at is None:
+            new_rows.append([
+                item.get("market") or "코스닥",
+                item.get("name") or "",
+                item.get("listing_date") or "",
+                item_code_padded,
+                "",
+            ])
             continue
-        code = str(item.get("stock_code") or "").strip()
-        new_rows.append([
-            item.get("market") or "코스닥",
-            item.get("name") or "",
-            item.get("listing_date") or "",
-            code.zfill(6) if code else "",
-            "",
-        ])
+        # upsert: 종목코드가 공란이고 KRX에서 발견됐으면 자동 채움
+        row = values[row_at - 1]
+        current_code = (row[code_at] if len(row) > code_at else "").strip()
+        if not current_code and item_code_padded:
+            cell = rowcol_to_a1(row_at, code_at + 1)
+            code_updates.append({"range": cell, "values": [[item_code_padded]]})
+
     if new_rows:
         worksheet.append_rows(new_rows, value_input_option="RAW")
         names = ", ".join(row[1] for row in new_rows)
-        print(f"[SHEET] IPO종목: IPO일정 상장일 기반 자동 추가 {len(new_rows)}건 ({names})", file=sys.stderr)
+        print(f"[SHEET] IPO종목 자동 추가: {len(new_rows)}건 ({names})", file=sys.stderr)
+    if code_updates:
+        worksheet.batch_update(code_updates, value_input_option="RAW")
+        print(f"[SHEET] IPO종목 종목코드 자동 기입: {len(code_updates)}건", file=sys.stderr)
 
 
 # 운영자가 직접 입력·관리하는 탭 — 왼쪽에 몰아서 파란 탭 색으로 구분한다
