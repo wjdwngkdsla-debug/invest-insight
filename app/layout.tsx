@@ -5,7 +5,11 @@ import NavTabs from "@/components/NavTabs";
 import "./globals.css";
 
 
+
+
 const siteUrl = "https://vericap.co.kr";
+
+
 
 
 export const metadata: Metadata = {
@@ -59,11 +63,14 @@ export const metadata: Metadata = {
     },
   },
   verification: {
+    google: "YgHsVZXZCHwlcN2mR4R1WjDLBG_V54tTw4TX6GfSJKE",
     other: {
       "naver-site-verification": "c4e11b830519699381f0e7d5f451ee3f02fcbeab",
     },
   },
 };
+
+
 
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -89,7 +96,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </header>
 
 
+
+
         <div className="flex-1">{children}</div>
+
+
 
 
         <footer className="border-t border-gray-200 bg-white px-4 py-8">
