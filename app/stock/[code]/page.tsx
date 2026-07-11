@@ -4,8 +4,9 @@ import { getStockByCode, getGroupedEventsByStock, getSiteData, dDay, displayStat
 import { BackButton } from "@/components/BackButton";
 
 
-// D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
-export const revalidate = 3600;
+
+
+
 
 
 export function generateStaticParams() {
@@ -13,10 +14,13 @@ export function generateStaticParams() {
 }
 
 
+
+
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   const { code } = await params;
   const stock = getStockByCode(code);
   if (!stock) return { title: "종목 정보 없음" };
+
 
   const sortedDates = stock.events
     .map((event) => event.tradable_date)
@@ -27,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
   const description = `${stock.name}(${stock.market}) IPO 락업 해제일, 보호예수 해제 일정, 의무보유확약 물량 ${totalQty.toLocaleString(
     "ko-KR",
   )}주${firstDate ? `, 주요 해제일 ${firstDate}` : ""} 정보를 확인하세요.`;
+
 
   return {
     title,
@@ -46,9 +51,13 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
 }
 
 
+
+
 function formatQty(qty: number): string {
   return qty.toLocaleString("ko-KR");
 }
+
+
 
 
 function formatEok(won: number): string {
@@ -56,7 +65,11 @@ function formatEok(won: number): string {
 }
 
 
+
+
 const PERIOD_PRIORITY = ["15일", "1개월", "2개월", "3개월", "6개월", "12개월", "1년", "24개월", "2년", "30개월", "36개월", "3년"];
+
+
 
 
 function groupTitle(group: UpcomingGroup): string {
@@ -67,8 +80,12 @@ function groupTitle(group: UpcomingGroup): string {
 }
 
 
+
+
 function renderBreakdown(group: UpcomingGroup) {
   if (group.breakdown.length === 0) return null;
+
+
 
 
   return (
@@ -84,6 +101,8 @@ function renderBreakdown(group: UpcomingGroup) {
     </div>
   );
 }
+
+
 
 
 function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past", today: Date) {
@@ -123,6 +142,8 @@ function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past",
         </div>
 
 
+
+
         <div className="shrink-0 text-right">
           <p className="font-semibold text-gray-900">
             {formatQty(group.qty)}주 ({group.pct}%)
@@ -135,15 +156,21 @@ function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past",
 }
 
 
+
+
 export default async function StockPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
   const stock = getStockByCode(code);
   if (!stock) return notFound();
 
 
+
+
   const today = new Date();
   const { upcoming, past } = getGroupedEventsByStock(stock, today);
   const { updated } = getSiteData();
+
+
 
 
   const marketCapLabel = (
@@ -152,6 +179,8 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
       시가총액 {formatEok(stock.shares * stock.close_price)}
     </p>
   );
+
+
 
 
   return (
@@ -168,6 +197,8 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
       </div>
 
 
+
+
       {upcoming.length > 0 && (
         <section className="mb-8">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -177,6 +208,8 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
           <ul className="space-y-3">{upcoming.map((group, i) => renderGroup(group, i, "upcoming", today))}</ul>
         </section>
       )}
+
+
 
 
       <section>
