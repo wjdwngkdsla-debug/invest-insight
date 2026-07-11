@@ -1,11 +1,17 @@
 "use client";
 
 
+
+
 import { useMemo, useState } from "react";
 import Link from "next/link";
 
 
+
+
 export type CalendarEventKind = "lockup" | "forecast" | "sub" | "listing";
+
+
 
 
 // 단일일 이벤트 (락업해제, 상장)
@@ -17,6 +23,8 @@ export interface CalendarEvent {
 }
 
 
+
+
 // 기간 이벤트 (수요예측, 청약) — 주 단위 가로 바로 그린다
 export interface CalendarRangeEvent {
   start: string;
@@ -25,6 +33,8 @@ export interface CalendarRangeEvent {
   code: string;
   kind: "forecast" | "sub";
 }
+
+
 
 
 const ALL_KINDS: CalendarEventKind[] = ["lockup", "forecast", "sub", "listing"];
@@ -38,11 +48,15 @@ const KIND_LABEL: Record<CalendarEventKind, string> = {
 const KIND_ORDER: Record<CalendarEventKind, number> = { lockup: 0, listing: 1, forecast: 2, sub: 3 };
 
 
+
+
 // 기간형 바 — 은은한 배경 (수요예측은 톤 다운한 보라)
 const BAR_STYLE: Record<"forecast" | "sub", string> = {
   forecast: "bg-violet-50/60 text-violet-500 hover:bg-violet-100",
   sub: "bg-amber-50 text-amber-800 hover:bg-amber-100",
 };
+
+
 
 
 const DOT_COLOR: Record<CalendarEventKind, string> = {
@@ -51,6 +65,8 @@ const DOT_COLOR: Record<CalendarEventKind, string> = {
   sub: "bg-amber-400",
   listing: "bg-emerald-500",
 };
+
+
 
 
 // 필터 토글 칩 (활성 시)
@@ -62,6 +78,8 @@ const FILTER_ACTIVE: Record<CalendarEventKind, string> = {
 };
 
 
+
+
 // 팝오버 카테고리 그룹 배경
 const GROUP_BG: Record<CalendarEventKind, string> = {
   lockup: "bg-blue-50/70",
@@ -71,13 +89,19 @@ const GROUP_BG: Record<CalendarEventKind, string> = {
 };
 
 
+
+
 interface DayCell {
   day: number;
   dateStr: string;
 }
 
 
+
+
 const WEEKDAY_LABELS = ["월", "화", "수", "목", "금"];
+
+
 
 
 // 서버(UTC)와 브라우저가 같은 "한국 기준 오늘"을 계산하도록 절대시간에서 유도
@@ -90,11 +114,15 @@ function kstToday(): { year: number; month: number; dateStr: string } {
 }
 
 
+
+
 // 해당 월을 월~금 5칸 주 단위로 배열 (주말 제외, 빈 칸은 null)
 function buildWeeks(year: number, month: number): (DayCell | null)[][] {
   const weeks: (DayCell | null)[][] = [];
   let current: (DayCell | null)[] = [];
   const lastDay = new Date(year, month + 1, 0).getDate();
+
+
 
 
   for (let day = 1; day <= lastDay; day++) {
@@ -119,10 +147,14 @@ function buildWeeks(year: number, month: number): (DayCell | null)[][] {
 }
 
 
+
+
 function shortDate(s: string): string {
   const [, m, d] = s.split("-");
   return `${Number(m)}/${Number(d)}`;
 }
+
+
 
 
 interface WeekBar {
@@ -133,6 +165,8 @@ interface WeekBar {
   contLeft: boolean; // 이전 주에서 이어짐
   contRight: boolean; // 다음 주로 이어짐
 }
+
+
 
 
 export function LockupCalendar({
@@ -152,6 +186,8 @@ export function LockupCalendar({
   const allActive = active.size === ALL_KINDS.length;
 
 
+
+
   const eventsByDate = useMemo(() => {
     const map = new Map<string, CalendarEvent[]>();
     for (const event of events) {
@@ -168,7 +204,11 @@ export function LockupCalendar({
   }, [events]);
 
 
+
+
   const weeks = useMemo(() => buildWeeks(year, month), [year, month]);
+
+
 
 
   function moveMonth(delta: number) {
@@ -176,6 +216,8 @@ export function LockupCalendar({
     setYear(moved.getFullYear());
     setMonth(moved.getMonth());
   }
+
+
 
 
   function toggleKind(kind: CalendarEventKind) {
@@ -186,6 +228,8 @@ export function LockupCalendar({
       return next;
     });
   }
+
+
 
 
   // 주 안에서 기간 바 배치 (겹치면 다음 줄로 — 간단한 레인 배정)
@@ -227,6 +271,8 @@ export function LockupCalendar({
   }
 
 
+
+
   // 특정 날짜의 전체 일정(바 + 칩) — "+N개 더" 팝오버에 카테고리별로 보여준다
   function dayAllItems(dateStr: string): { kind: CalendarEventKind; name: string; code: string }[] {
     const chips = (eventsByDate.get(dateStr) || [])
@@ -239,23 +285,27 @@ export function LockupCalendar({
   }
 
 
+
+
   function chipHref(ev: { kind: CalendarEventKind; code: string }): string {
     return ev.kind === "lockup" ? `/stock/${ev.code}` : "/ipo";
   }
 
 
+
+
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <h2 className="text-xl font-bold">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h2 className="text-base font-bold">
             {year}년 {month + 1}월 락업 해제 캘린더
           </h2>
           {/* 범례 겸 토글 필터 */}
-          <div className="flex flex-wrap items-center gap-2 text-sm font-medium">
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-medium">
             <button
               onClick={() => setActive(allActive ? new Set() : new Set(ALL_KINDS))}
-              className={`rounded-full px-3 py-1 transition-colors ${
+              className={`rounded-full px-2.5 py-0.5 transition-colors ${
                 allActive ? "bg-gray-900 text-white" : "border border-gray-200 bg-white text-gray-500 hover:bg-gray-50"
               }`}
             >
@@ -267,22 +317,22 @@ export function LockupCalendar({
                 <button
                   key={kind}
                   onClick={() => toggleKind(kind)}
-                  className={`flex items-center gap-1.5 rounded-full px-3 py-1 transition-colors ${
+                  className={`flex items-center gap-1 rounded-full px-2.5 py-0.5 transition-colors ${
                     on ? FILTER_ACTIVE[kind] : "border border-gray-100 bg-white text-gray-300 hover:bg-gray-50"
                   }`}
                 >
-                  <span className={`inline-block h-2 w-2 rounded-full ${on ? DOT_COLOR[kind] : "bg-gray-200"}`} />
+                  <span className={`inline-block h-1.5 w-1.5 rounded-full ${on ? DOT_COLOR[kind] : "bg-gray-200"}`} />
                   {KIND_LABEL[kind]}
                 </button>
               );
             })}
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-base">
+        <div className="flex items-center gap-1 text-sm">
           <button
             onClick={() => moveMonth(-1)}
             aria-label="이전 달"
-            className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-gray-600 hover:bg-gray-50"
+            className="rounded-md border border-gray-200 bg-white px-2.5 py-1 text-gray-600 hover:bg-gray-50"
           >
             ‹
           </button>
@@ -291,19 +341,21 @@ export function LockupCalendar({
               setYear(today.year);
               setMonth(today.month);
             }}
-            className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-gray-600 hover:bg-gray-50"
+            className="rounded-md border border-gray-200 bg-white px-2.5 py-1 text-gray-600 hover:bg-gray-50"
           >
             오늘
           </button>
           <button
             onClick={() => moveMonth(1)}
             aria-label="다음 달"
-            className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-gray-600 hover:bg-gray-50"
+            className="rounded-md border border-gray-200 bg-white px-2.5 py-1 text-gray-600 hover:bg-gray-50"
           >
             ›
           </button>
         </div>
       </div>
+
+
 
 
       <div className="grid grid-cols-5 gap-1.5">
@@ -313,6 +365,8 @@ export function LockupCalendar({
           </div>
         ))}
       </div>
+
+
 
 
       <div className="space-y-1.5">
@@ -339,6 +393,8 @@ export function LockupCalendar({
               </div>
 
 
+
+
               {/* 내용 레이어 — 바가 칸 경계를 가로질러 이어진다 */}
               <div className="relative grid min-h-20 grid-cols-5 gap-x-1.5 pb-1" style={{ gridAutoRows: "min-content" }}>
                 {week.map((cell, i) => {
@@ -354,6 +410,8 @@ export function LockupCalendar({
                     </div>
                   );
                 })}
+
+
 
 
                 {bars.map((bar, barIndex) => (
@@ -373,6 +431,8 @@ export function LockupCalendar({
                     )}
                   </Link>
                 ))}
+
+
 
 
                 {week.flatMap((cell, i) => {
