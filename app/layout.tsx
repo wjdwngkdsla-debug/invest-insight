@@ -4,10 +4,58 @@ import { Analytics } from "@vercel/analytics/next";
 import NavTabs from "@/components/NavTabs";
 import "./globals.css";
 
+const siteUrl = "https://vericap.co.kr";
 
 export const metadata: Metadata = {
-  title: "IPO 락업 해제 캘린더",
-  description: "신규 상장주 의무보유확약·보호예수 해제 일정을 제공합니다.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "IPO 락업 캘린더 | Vericap",
+    template: "%s | Vericap",
+  },
+  description:
+    "IPO 신규상장 종목의 락업 해제일, 보호예수 해제 일정, 의무보유확약 물량, 해제 비중과 시가총액 기준 해제 규모를 한눈에 확인하세요.",
+  applicationName: "Vericap IPO 락업 캘린더",
+  keywords: [
+    "IPO 락업",
+    "IPO 락업 캘린더",
+    "락업 해제",
+    "보호예수 해제",
+    "의무보유확약",
+    "IPO 기관 확약",
+    "신규상장 일정",
+    "상장주 락업",
+    "공모주 락업",
+    "Vericap",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "IPO 락업 캘린더 | Vericap",
+    description:
+      "신규상장 종목별 락업 해제일, 보호예수 해제 일정, 의무보유확약 물량과 해제 비중을 확인하세요.",
+    url: siteUrl,
+    siteName: "Vericap",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "IPO 락업 캘린더 | Vericap",
+    description:
+      "IPO 신규상장 종목의 락업 해제 일정, 보호예수 물량, 의무보유확약 정보를 한눈에 확인하세요.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
