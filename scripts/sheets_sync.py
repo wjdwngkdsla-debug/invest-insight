@@ -1167,6 +1167,16 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     except gspread.WorksheetNotFound:
         pass
 
+    # 1-1) 이름만 적힌 새 행(기존 항목과 매칭 안 됨) → 다음 배치가 DART에서 직접 찾도록 요청 파일에 적재
+    existing_names = {(i.get("name") or "").strip() for i in items}
+    seed_names = [name for name in sheet_cells if name not in existing_names]
+    ipo_seed_path = ROOT_DIR / "data" / "ipo_seed_names.json"
+    if seed_names:
+        ipo_seed_path.write_text(json.dumps(seed_names, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[SHEET] IPO일정 수동추가 요청 {len(seed_names)}건 저장 (다음 배치에 반영): {', '.join(seed_names)}", file=sys.stderr)
+    elif ipo_seed_path.exists():
+        ipo_seed_path.write_text("[]", encoding="utf-8")
+
     # 2) 운영자 입력을 사이트 데이터에 반영 (링크 + 수동수정 잠금)
     changed = False
     overrides = 0

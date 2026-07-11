@@ -11,11 +11,13 @@ from typing import Any
 import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
-from scripts.sources.dart_api import download_document_text, _clean_text
+from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
 TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
+# 시트에 이름만 적어 넣은 "아직 DART가 못 찾은 회사" 요청 목록 (sheets_sync.py가 씀 → 다음 배치가 읽음)
+SEED_PATH = ROOT_DIR / "data" / "ipo_seed_names.json"
 
 # 발굴 창 — 수요예측→청약→상장까지 수개월 걸릴 수 있어 넉넉히 둔다.
 LOOKBACK_DAYS = 210
@@ -416,6 +418,70 @@ def _core_fields_filled(item: dict[str, Any]) -> bool:
     return bool(item.get("band_low") and item.get("forecast_start") and item.get("sub_start") and item.get("underwriter"))
 
 
+def _fetch_corp_filings(corp_code: str, days_back: int) -> list[dict[str, Any]]:
+    """특정 회사 하나의 발행공시만 직접 조회 — 시장 전체 C001 스트림에 안 걸린 회사를 위한 개별 검색."""
+    end = datetime.today()
+    begin = end - timedelta(days=days_back)
+    reports = get_reports(corp_code, start_date=begin.strftime("%Y%m%d"), end_date=end.strftime("%Y%m%d"))
+    relevant = [r for r in reports if any(k in (r.get("report_nm") or "") for k in ("지분증권", "투자설명서", "철회신고서"))]
+    relevant.sort(key=lambda r: (r.get("rcept_dt") or "", r.get("rcept_no") or ""), reverse=True)
+    return relevant
+
+
+def seed_new_items(items_by_corp: dict[str, dict[str, Any]], process_corp, log) -> None:
+    """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
+
+    아직 공시가 없으면 이름·corp_code만 등록해두고("공모 준비" 상태로 표시) 매 배치 재시도한다.
+    실제 신고서가 잡히는 순간 process_corp으로 정식 파싱되며, 이후 시장 전체 자동발굴과 합류한다.
+    """
+    if not SEED_PATH.exists():
+        return
+    try:
+        names = json.loads(SEED_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    if not isinstance(names, list):
+        return
+
+    def find_by_name(norm: str) -> dict[str, Any] | None:
+        return next((i for i in items_by_corp.values() if _norm_name(i.get("name") or "") == norm), None)
+
+    for raw in names:
+        name = str(raw or "").strip()
+        if not name:
+            continue
+        existing = find_by_name(_norm_name(name))
+        if existing and (existing.get("band_low") or existing.get("forecast_start")):
+            continue  # 이미 실제 데이터 확보됨
+
+        corp = get_corp_code(name)
+        if not corp or not corp.get("corp_code"):
+            log(f"수동추가 실패(DART 미등록 회사명): {name}")
+            continue
+        corp_code = corp["corp_code"]
+        if corp_code in items_by_corp and not existing:
+            continue  # 자동발굴이 이미 다른 표기로 잡아둔 동일 회사
+
+        try:
+            filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
+        except Exception as exc:
+            log(f"수동추가 조회 실패: {name} ({exc})")
+            continue
+
+        if filings:
+            items_by_corp[corp_code] = process_corp(corp_code, corp.get("corp_name") or name, filings, existing)
+        elif not existing:
+            log(f"수동추가: {name} — 아직 DART 공시 없음, 대기 등록(매 배치 재조회)")
+            items_by_corp[corp_code] = {
+                "corp_code": corp_code,
+                "name": corp.get("corp_name") or name,
+                "first_filing_date": datetime.today().strftime("%Y%m%d"),
+                "last_rcept_no": "",
+                "withdrawn": False,
+                "seeded": True,
+            }
+
+
 def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -> dict[str, Any]:
     def log(msg: str) -> None:
         if verbose:
@@ -432,63 +498,68 @@ def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -
     today = datetime.today().strftime("%Y-%m-%d")
     listing_map = load_listing_map()
 
-    for corp_code, corp_filings in grouped.items():
+    def process_corp(corp_code: str, name: str, corp_filings: list[dict[str, Any]], old: dict[str, Any] | None) -> dict[str, Any]:
+        """신고서 목록(최신순) → 병합 파싱된 IPO일정 항목. 자동발굴·수동추가(seed) 양쪽에서 공용으로 쓴다."""
         newest = corp_filings[0]
-        name = newest.get("corp_name") or ""
-        old = items_by_corp.get(corp_code)
         withdrawn = any("철회신고서" in (f.get("report_nm") or "") for f in corp_filings)
 
         if old and old.get("last_rcept_no") == newest.get("rcept_no"):
-            item = old  # 새 공시 없음 → 문서 재다운로드 생략
-        else:
-            log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
-            item = dict(old or {})
-            item.update({
-                "corp_code": corp_code,
-                "name": name,
-                "first_filing_date": corp_filings[-1].get("rcept_dt") or "",
-                "last_rcept_no": newest.get("rcept_no") or "",
-            })
-            if not withdrawn:
-                merged: dict[str, Any] = {}
-                for f in corp_filings[:MAX_DOCS_PER_CORP]:
-                    rname = f.get("report_nm") or ""
-                    if "철회" in rname:
-                        continue
-                    try:
-                        doc = download_document_text(f["rcept_no"])
-                    except Exception as exc:
-                        log(f"  문서 실패 {f['rcept_no']}: {exc}")
-                        continue
-                    parsed = parse_offering_doc(doc)
-                    for key, val in parsed.items():
-                        # 최신 문서 우선 — 이미 값이 있으면 옛 문서 값으로 덮지 않는다
-                        if key not in merged or not merged[key]:
-                            if val:
-                                merged[key] = val
-                    if _core_fields_filled(merged) and merged.get("final_price"):
-                        break
-                    if _core_fields_filled(merged) and not any("발행조건확정" in (g.get("report_nm") or "") for g in corp_filings):
-                        break
-                locked = set(item.get("manual_fields") or [])  # 시트에서 운영자가 고친 필드는 파싱이 덮지 않는다
-                for key, val in merged.items():
-                    if key in locked:
-                        continue
-                    if val or key not in item:
-                        old_val = item.get(key)
-                        # 기존 편입 종목의 값이 정정공시로 바뀌면 이력에 남긴다 (최초 편입은 제외)
-                        if old and key in TRACKED_FIELDS and old_val not in (None, "", 0) and val and val != old_val:
-                            history.append({
-                                "date": today,
-                                "name": name,
-                                "type": "정정공시",
-                                "field": TRACKED_FIELDS[key],
-                                "old": str(old_val),
-                                "new": str(val),
-                            })
-                        item[key] = val
+            return old  # 새 공시 없음 → 문서 재다운로드 생략
+
+        log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
+        item = dict(old or {})
+        item.update({
+            "corp_code": corp_code,
+            "name": name,
+            "first_filing_date": corp_filings[-1].get("rcept_dt") or "",
+            "last_rcept_no": newest.get("rcept_no") or "",
+        })
+        if not withdrawn:
+            merged: dict[str, Any] = {}
+            for f in corp_filings[:MAX_DOCS_PER_CORP]:
+                rname = f.get("report_nm") or ""
+                if "철회" in rname:
+                    continue
+                try:
+                    doc = download_document_text(f["rcept_no"])
+                except Exception as exc:
+                    log(f"  문서 실패 {f['rcept_no']}: {exc}")
+                    continue
+                parsed = parse_offering_doc(doc)
+                for key, val in parsed.items():
+                    # 최신 문서 우선 — 이미 값이 있으면 옛 문서 값으로 덮지 않는다
+                    if key not in merged or not merged[key]:
+                        if val:
+                            merged[key] = val
+                if _core_fields_filled(merged) and merged.get("final_price"):
+                    break
+                if _core_fields_filled(merged) and not any("발행조건확정" in (g.get("report_nm") or "") for g in corp_filings):
+                    break
+            locked = set(item.get("manual_fields") or [])  # 시트에서 운영자가 고친 필드는 파싱이 덮지 않는다
+            for key, val in merged.items():
+                if key in locked:
+                    continue
+                if val or key not in item:
+                    old_val = item.get(key)
+                    # 기존 편입 종목의 값이 정정공시로 바뀌면 이력에 남긴다 (최초 편입은 제외)
+                    if old and key in TRACKED_FIELDS and old_val not in (None, "", 0) and val and val != old_val:
+                        history.append({
+                            "date": today,
+                            "name": name,
+                            "type": "정정공시",
+                            "field": TRACKED_FIELDS[key],
+                            "old": str(old_val),
+                            "new": str(val),
+                        })
+                    item[key] = val
         item["withdrawn"] = withdrawn
-        items_by_corp[corp_code] = item
+        return item
+
+    for corp_code, corp_filings in grouped.items():
+        name = corp_filings[0].get("corp_name") or ""
+        items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, items_by_corp.get(corp_code))
+
+    seed_new_items(items_by_corp, process_corp, log)
 
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
