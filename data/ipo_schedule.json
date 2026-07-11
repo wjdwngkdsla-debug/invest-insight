@@ -1,6 +1,18 @@
 {
-  "updated": "2026-07-11 15:48",
+  "updated": "2026-07-11 13:16",
   "items": [
+    {
+      "corp_code": "00104069",
+      "name": "케이디비생명보험",
+      "first_filing_date": "20251218",
+      "last_rcept_no": "20251230000600",
+      "sub_start": "2025-12-26",
+      "sub_end": "2025-12-26",
+      "payment_date": "2025-12-30",
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
     {
       "corp_code": "01501764",
       "name": "레메디",
@@ -46,7 +58,7 @@
         }
       ],
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-07-13",
       "stock_code": "",
       "sub_ratio": 1706.71,
       "commit_alloc": [
@@ -76,7 +88,10 @@
           "pct": 22.5
         }
       ],
-      "report_rcp": "20260706000401"
+      "report_rcp": "20260706000401",
+      "manual_fields": [
+        "listing_date"
+      ]
     },
     {
       "corp_code": "00624244",
@@ -123,8 +138,11 @@
         }
       ],
       "withdrawn": false,
-      "listing_date": "",
-      "stock_code": ""
+      "listing_date": "2026-07-24",
+      "stock_code": "",
+      "manual_fields": [
+        "listing_date"
+      ]
     },
     {
       "corp_code": "01461730",
@@ -257,6 +275,35 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": ""
+    },
+    {
+      "corp_code": "00683283",
+      "name": "LS전선",
+      "first_filing_date": "20251219",
+      "last_rcept_no": "20251219000079",
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
     }
-  ]
+  ],
+  "history": [
+    {
+      "date": "2026-07-11",
+      "name": "레메디",
+      "type": "수기변경",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2026-07-13"
+    },
+    {
+      "date": "2026-07-11",
+      "name": "에이치엘지노믹스",
+      "type": "수기변경",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2026-07-24"
+    }
+  ],
+  "seed_pending": [],
+  "deleted_corps": {}
 }
