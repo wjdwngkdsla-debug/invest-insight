@@ -8,7 +8,22 @@ import { getSortedIpoItems, ipoStatus, dateRange, mmdd, bandPosition, type IpoIt
 
 
 
-export const revalidate = 3600;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,11 +44,27 @@ export const metadata: Metadata = {
 
 
 
+
+
+
+
+
+
+
+
 const TONE_CLASS: Record<IpoTone, string> = {
   active: "bg-red-100 text-red-600",
   waiting: "bg-blue-100 text-blue-600",
   done: "bg-gray-100 text-gray-500",
 };
+
+
+
+
+
+
+
+
 
 
 
@@ -57,9 +88,25 @@ function formatOfferSize(item: IpoItem): string {
 
 
 
+
+
+
+
+
+
+
+
 function ratioText(v?: number): string {
   return v ? `${v.toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1` : "-";
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -81,6 +128,14 @@ function CommitTable({ item }: { item: IpoItem }) {
 
 
 
+
+
+
+
+
+
+
+
   const periods = [...new Set([...apply.map((t) => t.period), ...alloc.map((t) => t.period)])];
   const rows = periods.map((period) => {
     const a = apply.find((t) => t.period === period);
@@ -89,6 +144,14 @@ function CommitTable({ item }: { item: IpoItem }) {
     return { period, applyQty: a?.qty ?? null, allocQty: b?.qty ?? null, ratio };
   });
   const maxRatio = Math.max(...rows.map((r) => r.ratio ?? 0), 0.0001);
+
+
+
+
+
+
+
+
 
 
 
@@ -152,11 +215,27 @@ function CommitTable({ item }: { item: IpoItem }) {
 
 
 
+
+
+
+
+
+
+
+
 function IpoCard({ item }: { item: IpoItem }) {
   const status = ipoStatus(item);
   const hasCommit = Boolean(item.commit_apply?.length || item.commit_alloc?.length);
   const band = item.band_low && item.band_high ? `${item.band_low.toLocaleString()}~${item.band_high.toLocaleString()}원` : "미정";
   const bandPos = bandPosition(item);
+
+
+
+
+
+
+
+
 
 
 
@@ -195,6 +274,14 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 
 
+
+
+
+
+
+
+
+
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-violet-50/70 px-3 py-2 sm:block sm:flex-[5]">
           <p className="text-[11px] text-violet-500">수요예측일</p>
@@ -209,6 +296,14 @@ function IpoCard({ item }: { item: IpoItem }) {
           <p className="truncate text-[13px] font-bold text-emerald-800">{item.listing_date ? mmdd(item.listing_date) : "미정"}</p>
         </div>
       </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -244,6 +339,14 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 
 
+
+
+
+
+
+
+
+
       {hasCommit && (
         <>
           <div className="mt-3 flex justify-end">
@@ -267,8 +370,24 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 
 
+
+
+
+
+
+
+
+
 export default function IpoSchedulePage() {
   const items = getSortedIpoItems();
+
+
+
+
+
+
+
+
 
 
 
