@@ -119,10 +119,13 @@ IPO_SCHEDULE_TAB = "IPO일정"
 IPO_SCHEDULE_BACKUP_PATH = ROOT_DIR / "data" / "ipo_schedule_sheet_backup.json"
 # 배치가 마지막으로 쓴 값 스냅샷 — 시트 값과 이게 다르면 "사용자 수정"으로 판정한다
 IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
+COMMIT_TIER_ORDER = ["미확약", "15일", "1개월", "3개월", "6개월"]
 IPO_SCHEDULE_HEADERS = [
     "기업명", "상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
     "수요예측일", "청약일", "상장일", "수요예측경쟁률", "개인청약경쟁률",
-    "확약신청(기간별)", "확약배정(기간별)", "콘텐츠링크",
+    "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
+    "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
+    "콘텐츠링크",
 ]
 # 사용자가 수정하면 파싱보다 우선하는 열 → 잠글 item 필드 매핑
 IPO_EDITABLE_COLUMNS = {
@@ -1105,10 +1108,20 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     def num(value: object) -> str:
         return f"{value:,}" if isinstance(value, (int, float)) and value else "미정"
 
-    def commit_text(tiers: object) -> str:
-        if not isinstance(tiers, list) or not tiers:
-            return "미정"
-        return " · ".join(f"{t.get('period')} {t.get('pct')}%" for t in tiers if isinstance(t, dict))
+    def commit_qty_map(tiers: object) -> dict[str, int]:
+        """기간별 확약 수량만 뽑는다 — {"미확약": 12345, "15일": ..., ...}. 값 없으면 빈 딕셔너리."""
+        out: dict[str, int] = {}
+        if not isinstance(tiers, list):
+            return out
+        for t in tiers:
+            if isinstance(t, dict) and t.get("period") in COMMIT_TIER_ORDER:
+                qty = t.get("qty")
+                if isinstance(qty, (int, float)):
+                    out[t["period"]] = int(qty)
+        return out
+
+    def commit_cell(qty_map: dict[str, int], tier: str) -> str:
+        return str(qty_map[tier]) if tier in qty_map else "미정"
 
     def auto_cell(item: dict, column: str) -> str:
         if column == "확정공모가":
@@ -1216,6 +1229,8 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     for item in items:
         name = item.get("name") or ""
         band_low, band_high = item.get("band_low") or 0, item.get("band_high") or 0
+        apply_map = commit_qty_map(item.get("commit_apply"))
+        alloc_map = commit_qty_map(item.get("commit_alloc"))
         row = [
             name,
             _ipo_status_label(item),
@@ -1229,8 +1244,8 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             auto_cell(item, "상장일"),
             f"{item.get('demand_ratio'):,.2f}:1" if item.get("demand_ratio") else "미정",
             f"{item.get('sub_ratio'):,.2f}:1" if item.get("sub_ratio") else "미정",
-            commit_text(item.get("commit_apply")),
-            commit_text(item.get("commit_alloc")),
+            *[commit_cell(apply_map, tier) for tier in COMMIT_TIER_ORDER],
+            *[commit_cell(alloc_map, tier) for tier in COMMIT_TIER_ORDER],
             item.get("content_url") or "",
         ]
         rows.append(row)
@@ -1322,6 +1337,9 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
 
 # 운영자가 직접 입력·관리하는 탭 — 왼쪽에 몰아서 파란 탭 색으로 구분한다
 MANUAL_TABS_ORDER = ["작업목록", "수기입력", "IPO종목", "IPO일정", "휴장일"]
+# IPO기관·기존주주는 위치는 그대로 두되(핵심 원장), 수동 보정 컬럼(수동공모가/수동확정일수량/메모)이
+# 있어 운영자가 직접 만지는 탭이므로 같은 파란 탭 색만 입힌다.
+MANUAL_COLOR_ONLY_TABS = ["IPO기관", "기존주주"]
 MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
 
 
@@ -1342,9 +1360,19 @@ def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                 }
             })
             position += 1
+        for title in MANUAL_COLOR_ONLY_TABS:
+            ws = worksheets.get(title)
+            if not ws:
+                continue
+            requests.append({
+                "updateSheetProperties": {
+                    "properties": {"sheetId": ws.id, "tabColor": MANUAL_TAB_COLOR},
+                    "fields": "tabColor",
+                }
+            })
         if requests:
             spreadsheet.batch_update({"requests": requests})
-            print(f"[SHEET] 수기 관리 탭 {position}개를 왼쪽으로 정렬(파란색)", file=sys.stderr)
+            print(f"[SHEET] 수기 관리 탭 {len(requests)}개 파란색 적용(왼쪽 정렬 {position}개)", file=sys.stderr)
     except Exception as exc:
         print(f"[SHEET] 탭 정렬 실패(무시): {exc}", file=sys.stderr)
 
