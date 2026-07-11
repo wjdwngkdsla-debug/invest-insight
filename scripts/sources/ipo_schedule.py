@@ -517,7 +517,57 @@ def seed_new_items(
     return unresolved
 
 
-def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -> dict[str, Any]:
+def detect_listings_from_krx(
+    items_by_corp: dict[str, dict[str, Any]],
+    snapshot: dict[str, dict[str, Any]],
+    trading_date: str,
+    history: list[dict[str, Any]],
+    log,
+) -> int:
+    """상장일 자동 감지 — IPO일정에 있는 회사가 KRX 스냅샷에 처음 나타난 날 = 상장일.
+
+    운영자가 IPO일정 탭에 상장일을 안 채워도 자동 백업으로 채워진다. 배치가 매일 도니
+    상장 다음날엔 확실히 잡힌다. 사용자가 이미 시트에서 상장일을 수정한 종목(manual_fields에
+    listing_date 포함)은 건드리지 않는다.
+    """
+    if not snapshot:
+        return 0
+    name_to_meta: dict[str, tuple[str, dict[str, Any]]] = {}
+    for code, meta in snapshot.items():
+        key = _norm_name(meta.get("name") or "")
+        if key and key not in name_to_meta:
+            name_to_meta[key] = (code, meta)
+
+    detected = 0
+    for item in items_by_corp.values():
+        if item.get("listing_date"):
+            continue
+        if "listing_date" in (item.get("manual_fields") or []):
+            continue
+        match = name_to_meta.get(_norm_name(item.get("name") or ""))
+        if not match:
+            continue
+        code, meta = match
+        item["listing_date"] = trading_date
+        if not item.get("stock_code"):
+            item["stock_code"] = code
+        if not item.get("market"):
+            item["market"] = meta.get("market") or ""
+        history.append({
+            "date": trading_date, "name": item.get("name", ""), "type": "상장확인(KRX)",
+            "field": "상장일", "old": "미정", "new": trading_date,
+        })
+        log(f"KRX 상장 감지: {item.get('name')} → {trading_date} (코드 {code})")
+        detected += 1
+    return detected
+
+
+def refresh_ipo_schedule(
+    days_back: int = LOOKBACK_DAYS,
+    verbose: bool = True,
+    krx_snapshot: dict[str, dict[str, Any]] | None = None,
+    krx_trading_date: str | None = None,
+) -> dict[str, Any]:
     def log(msg: str) -> None:
         if verbose:
             print(f"[IPO일정] {msg}", file=sys.stderr)
@@ -596,6 +646,10 @@ def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, items_by_corp.get(corp_code))
 
     seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names)
+
+    # KRX 스냅샷으로 상장일 자동 감지(운영자 미입력 대비 백업)
+    if krx_snapshot and krx_trading_date:
+        detect_listings_from_krx(items_by_corp, krx_snapshot, krx_trading_date, history, log)
 
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []

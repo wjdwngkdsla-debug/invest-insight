@@ -5162,10 +5162,12 @@ def main() -> None:
     print(f"[SAVE] site_data={out_path}", file=sys.stderr)
 
     # IPO 일정 갱신 — 락업 배치와 완전히 분리된 부가 단계라 실패해도 배치 결과에 영향을 주지 않는다.
+    # KRX 스냅샷을 함께 넘겨 상장일 자동 감지(운영자가 시트에 안 넣어도 상장 다음날 배치가 잡음)
     try:
         from scripts.sources.ipo_schedule import refresh_ipo_schedule
 
-        refresh_ipo_schedule()
+        snap_date, snap = latest_krx_snapshot()
+        refresh_ipo_schedule(krx_snapshot=snap, krx_trading_date=snap_date)
     except Exception as exc:
         print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)
 
