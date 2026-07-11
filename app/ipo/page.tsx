@@ -45,7 +45,7 @@ function CommitTable({ item }: { item: IpoItem }) {
 
   return (
     <div className="mt-3 border-t border-gray-100 pt-3">
-      <p className="text-xs font-bold text-gray-700">기간별 의무보유확약 현황</p>
+      <p className="text-xs font-bold text-gray-700">기간별 기관 확약 현황 (의무보유확약)</p>
       <table className="mt-1.5 w-full table-fixed border-collapse text-xs">
         <thead>
           <tr className="text-gray-400">
@@ -108,8 +108,15 @@ function IpoCard({ item }: { item: IpoItem }) {
         <span className="text-xs text-gray-500">
           {item.market || "시장 미정"} · 주관 {item.underwriter || "미정"}
         </span>
-        {hasCommit && (
-          <span className="ml-auto text-[11px] text-gray-400 transition-opacity group-hover:opacity-0 group-focus-within:opacity-0">확약 현황 ▾</span>
+        {item.content_url && (
+          <a
+            href={item.content_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1 text-[12px] font-semibold text-blue-700 transition-colors hover:bg-blue-100"
+          >
+            {item.name} 분석 콘텐츠 보러가기 <span aria-hidden>↗</span>
+          </a>
         )}
       </div>
 
@@ -146,22 +153,19 @@ function IpoCard({ item }: { item: IpoItem }) {
         <span>
           <span className="text-gray-500">개인청약</span> <span className="font-semibold tabular-nums">{ratioText(item.sub_ratio)}</span>
         </span>
-        {item.content_url && (
-          <a
-            href={item.content_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-blue-600 hover:underline"
-          >
-            {item.name} 분석 콘텐츠 보러가기 ↗
-          </a>
-        )}
       </div>
 
       {hasCommit && (
-        <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-96 group-focus-within:max-h-96">
-          <CommitTable item={item} />
-        </div>
+        <>
+          <div className="mt-3 flex justify-end">
+            <span className="text-[11px] text-gray-400 transition-opacity group-hover:opacity-0 group-focus-within:opacity-0">
+              기관 확약 현황 ▾
+            </span>
+          </div>
+          <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-96 group-focus-within:max-h-96">
+            <CommitTable item={item} />
+          </div>
+        </>
       )}
     </div>
   );
