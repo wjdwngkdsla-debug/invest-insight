@@ -644,6 +644,9 @@ def _worklist_entries(values: list[list[str]]) -> list[tuple[int, str, list[str]
         if first.startswith("[3]"):
             section = 3
             continue
+        if first.startswith("[4]"):
+            section = 4
+            continue
         if not first or first == "종목코드" or not section:
             continue
         padded = [cell.strip() for cell in row] + [""] * 6
@@ -688,6 +691,8 @@ def pull_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     prices: dict[str, str] = {}
     manual_rows: list[list[str]] = []
     for section, code, inputs in _worklist_entries(values):
+        if section == 4:
+            continue  # 확인 필요 IPO종목은 읽기 전용 — 배치가 자동으로 재확인·재작성한다
         if section == 1:
             price = inputs[0].replace(",", "")
             if price.isdigit() and int(price) > 0:
@@ -805,13 +810,31 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
     add_section(2, "[2] 기존주주(구주) 물량 입력 — 캘린더 정확도 직결. 한 종목 여러 건이면 행 복사", no_float)
     add_section(3, "[3] IPO기관 확약 입력 — 확약이 아직 살아있는 최근 상장주만", no_ipo)
 
+    # [4] IPO일정에 이름만 추가했는데 자동편입 실패/대기 중인 회사 — 읽기 전용, 배치가 매번 재확인·재작성
+    seed_pending: list[dict[str, str]] = []
+    schedule_path = ROOT_DIR / "data" / "ipo_schedule.json"
+    if schedule_path.exists():
+        try:
+            seed_pending = json.loads(schedule_path.read_text(encoding="utf-8")).get("seed_pending", [])
+        except Exception:
+            seed_pending = []
+    seed_status_label = {"not_found": "DART 미등록", "pending": "공시 대기"}
+    out.append(["[4] 확인 필요 IPO종목 — 자동편입 실패/대기 중 (읽기 전용, 직접 입력 불필요)", "", "", "", "", ""])
+    out.append(["종목명", "상태", "DART 검색 링크", "", "", ""])
+    for p in seed_pending:
+        out.append([p.get("name", ""), seed_status_label.get(p.get("status", ""), p.get("status", "")), p.get("link", ""), "", "", ""])
+    out.append(["", "", "", "", "", ""])
 
     worksheet = spreadsheet.add_worksheet(title=WORKLIST_TAB, rows=len(out) + 30, cols=8)
     worksheet.update(out, "A1", value_input_option="USER_ENTERED")
     for line_no, row in enumerate(out, start=1):
-        if row[0].startswith("[") or row[0] == "종목코드":
+        if row[0].startswith("[") or row[0] in ("종목코드", "종목명"):
             worksheet.format(f"{line_no}:{line_no}", {"textFormat": {"bold": True}})
-    print(f"[SHEET] 작업목록 재생성: 공모가 {len(no_price)} / 구주 {len(no_float)} / IPO확약 {len(no_ipo)}종목", file=sys.stderr)
+    print(
+        f"[SHEET] 작업목록 재생성: 공모가 {len(no_price)} / 구주 {len(no_float)} / "
+        f"IPO확약 {len(no_ipo)} / 확인필요 {len(seed_pending)}종목",
+        file=sys.stderr,
+    )
 
 
 

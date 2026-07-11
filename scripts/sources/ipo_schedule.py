@@ -428,58 +428,93 @@ def _fetch_corp_filings(corp_code: str, days_back: int) -> list[dict[str, Any]]:
     return relevant
 
 
-def seed_new_items(items_by_corp: dict[str, dict[str, Any]], process_corp, log) -> None:
+def seed_new_items(
+    items_by_corp: dict[str, dict[str, Any]],
+    process_corp,
+    history: list[dict[str, Any]],
+    today: str,
+    log,
+    prev_pending_names: set[str],
+) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
 
-    아직 공시가 없으면 이름·corp_code만 등록해두고("공모 준비" 상태로 표시) 매 배치 재시도한다.
-    실제 신고서가 잡히는 순간 process_corp으로 정식 파싱되며, 이후 시장 전체 자동발굴과 합류한다.
+    아직 공시가 없거나 DART에서 이름을 못 찾으면 "확인 필요" 목록(작업목록[4]용)으로 반환하고
+    매 배치 재시도한다. 해결되면(직전 배치까지 확인 필요였던 이름이 이번에 데이터를 확보하면)
+    정정이력에 편입 완료로 기록한다.
     """
     if not SEED_PATH.exists():
-        return
+        return []
     try:
         names = json.loads(SEED_PATH.read_text(encoding="utf-8"))
     except Exception:
-        return
+        return []
     if not isinstance(names, list):
-        return
+        return []
+
+    from urllib.parse import quote
 
     def find_by_name(norm: str) -> dict[str, Any] | None:
         return next((i for i in items_by_corp.values() if _norm_name(i.get("name") or "") == norm), None)
 
+    def mark_resolved(name: str) -> None:
+        if name in prev_pending_names:
+            history.append({
+                "date": today, "name": name, "type": "수동추가", "field": "상태",
+                "old": "확인 필요", "new": "편입 완료",
+            })
+
+    def dart_search_link(query: str) -> str:
+        return f"https://dart.fss.or.kr/dsab002/main.do?textCrpNm={quote(query)}"
+
+    unresolved: list[dict[str, Any]] = []
     for raw in names:
         name = str(raw or "").strip()
         if not name:
             continue
         existing = find_by_name(_norm_name(name))
         if existing and (existing.get("band_low") or existing.get("forecast_start")):
-            continue  # 이미 실제 데이터 확보됨
+            mark_resolved(name)
+            continue  # 이미 실제 데이터 확보됨 (시장 전체 자동발굴로 해결됐을 수도 있음)
 
         corp = get_corp_code(name)
         if not corp or not corp.get("corp_code"):
             log(f"수동추가 실패(DART 미등록 회사명): {name}")
+            unresolved.append({"name": name, "status": "not_found", "link": dart_search_link(name)})
             continue
         corp_code = corp["corp_code"]
         if corp_code in items_by_corp and not existing:
+            mark_resolved(name)
             continue  # 자동발굴이 이미 다른 표기로 잡아둔 동일 회사
 
+        link = dart_search_link(corp.get("corp_name") or name)
         try:
             filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
         except Exception as exc:
             log(f"수동추가 조회 실패: {name} ({exc})")
+            unresolved.append({"name": name, "status": "pending", "link": link})
             continue
 
         if filings:
-            items_by_corp[corp_code] = process_corp(corp_code, corp.get("corp_name") or name, filings, existing)
-        elif not existing:
-            log(f"수동추가: {name} — 아직 DART 공시 없음, 대기 등록(매 배치 재조회)")
-            items_by_corp[corp_code] = {
-                "corp_code": corp_code,
-                "name": corp.get("corp_name") or name,
-                "first_filing_date": datetime.today().strftime("%Y%m%d"),
-                "last_rcept_no": "",
-                "withdrawn": False,
-                "seeded": True,
-            }
+            item = process_corp(corp_code, corp.get("corp_name") or name, filings, existing)
+            items_by_corp[corp_code] = item
+            if item.get("band_low") or item.get("forecast_start"):
+                mark_resolved(name)
+            else:
+                unresolved.append({"name": name, "status": "pending", "link": link})
+        else:
+            if not existing:
+                log(f"수동추가: {name} — 아직 DART 공시 없음, 대기 등록(매 배치 재조회)")
+                items_by_corp[corp_code] = {
+                    "corp_code": corp_code,
+                    "name": corp.get("corp_name") or name,
+                    "first_filing_date": datetime.today().strftime("%Y%m%d"),
+                    "last_rcept_no": "",
+                    "withdrawn": False,
+                    "seeded": True,
+                }
+            unresolved.append({"name": name, "status": "pending", "link": link})
+
+    return unresolved
 
 
 def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -> dict[str, Any]:
@@ -490,6 +525,7 @@ def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -
     state = load_state()
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
     history: list[dict[str, Any]] = list(state.get("history") or [])
+    prev_pending_names = {p.get("name") for p in state.get("seed_pending", []) if isinstance(p, dict)}
 
     filings = fetch_equity_filings(days_back)
     grouped = group_upcoming_ipos(filings)
@@ -559,7 +595,7 @@ def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -
         name = corp_filings[0].get("corp_name") or ""
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, items_by_corp.get(corp_code))
 
-    seed_new_items(items_by_corp, process_corp, log)
+    seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names)
 
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
@@ -599,7 +635,12 @@ def refresh_ipo_schedule(days_back: int = LOOKBACK_DAYS, verbose: bool = True) -
             kept.append(item)
 
     kept.sort(key=lambda i: (i.get("sub_start") or "9999", i.get("name") or ""))
-    result = {"updated": datetime.today().strftime("%Y-%m-%d %H:%M"), "items": kept, "history": history[-500:]}
+    result = {
+        "updated": datetime.today().strftime("%Y-%m-%d %H:%M"),
+        "items": kept,
+        "history": history[-500:],
+        "seed_pending": seed_pending,
+    }
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     log(f"저장: {len(kept)}종목 → {SCHEDULE_PATH.name}")
