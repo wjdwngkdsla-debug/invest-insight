@@ -2,6 +2,7 @@ import { getFlatRows, getSiteData } from "@/lib/data";
 import { CalendarTable } from "@/components/CalendarTable";
 import type { Metadata } from "next";
 
+
 export const metadata: Metadata = {
   title: "전체 IPO 락업 해제 일정",
   description:
@@ -20,12 +21,14 @@ export const metadata: Metadata = {
   },
 };
 
+
 // D-day/상태가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
-export const revalidate = 3600;
+
 
 export default function CalendarPage() {
   const rows = getFlatRows();
   const { updated } = getSiteData();
+
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-8">
