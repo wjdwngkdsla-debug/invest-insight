@@ -4,7 +4,9 @@ import { Analytics } from "@vercel/analytics/next";
 import NavTabs from "@/components/NavTabs";
 import "./globals.css";
 
+
 const siteUrl = "https://vericap.co.kr";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -56,7 +58,13 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    other: {
+      "naver-site-verification": "c4e11b830519699381f0e7d5f451ee3f02fcbeab",
+    },
+  },
 };
+
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -80,7 +88,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </Link>
         </header>
 
+
         <div className="flex-1">{children}</div>
+
 
         <footer className="border-t border-gray-200 bg-white px-4 py-8">
           <div className="mx-auto max-w-5xl space-y-2 text-xs leading-relaxed text-gray-500">
