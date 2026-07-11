@@ -1,11 +1,14 @@
 import type { MetadataRoute } from "next";
 import { getSiteData } from "@/lib/data";
 
+
 const siteUrl = "https://vericap.co.kr";
+
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const data = getSiteData();
   const lastModified = data.updated ? new Date(data.updated) : new Date();
+
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -15,12 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${siteUrl}/calendar`,
+      url: `${siteUrl}/ipo`,
       lastModified,
       changeFrequency: "daily",
       priority: 0.8,
     },
   ];
+
 
   const stockRoutes: MetadataRoute.Sitemap = data.stocks.map((stock) => ({
     url: `${siteUrl}/stock/${encodeURIComponent(stock.code)}`,
@@ -28,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "daily",
     priority: 0.7,
   }));
+
 
   return [...staticRoutes, ...stockRoutes];
 }
