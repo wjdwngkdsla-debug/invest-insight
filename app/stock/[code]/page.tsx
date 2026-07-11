@@ -3,28 +3,61 @@ import type { Metadata } from "next";
 import { getStockByCode, getGroupedEventsByStock, getSiteData, dDay, displayStatus, type UpcomingGroup } from "@/lib/data";
 import { BackButton } from "@/components/BackButton";
 
+
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
 export const revalidate = 3600;
+
+
+export function generateStaticParams() {
+  return getSiteData().stocks.map((stock) => ({ code: stock.code }));
+}
+
 
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   const { code } = await params;
   const stock = getStockByCode(code);
   if (!stock) return { title: "종목 정보 없음" };
+
+  const sortedDates = stock.events
+    .map((event) => event.tradable_date)
+    .sort((a, b) => a.localeCompare(b));
+  const firstDate = sortedDates[0];
+  const totalQty = stock.events.reduce((sum, event) => sum + event.qty, 0);
+  const title = `${stock.name} 락업 해제 일정`;
+  const description = `${stock.name}(${stock.market}) IPO 락업 해제일, 보호예수 해제 일정, 의무보유확약 물량 ${totalQty.toLocaleString(
+    "ko-KR",
+  )}주${firstDate ? `, 주요 해제일 ${firstDate}` : ""} 정보를 확인하세요.`;
+
   return {
-    title: `${stock.name} 락업 해제 일정`,
-    description: `${stock.name}(${stock.market}) 의무보유확약·보호예수 해제 일정 및 물량 정보`,
+    title,
+    description,
+    alternates: {
+      canonical: `/stock/${stock.code}`,
+    },
+    openGraph: {
+      title: `${title} | Vericap`,
+      description,
+      url: `/stock/${stock.code}`,
+      siteName: "Vericap",
+      locale: "ko_KR",
+      type: "article",
+    },
   };
 }
+
 
 function formatQty(qty: number): string {
   return qty.toLocaleString("ko-KR");
 }
 
+
 function formatEok(won: number): string {
   return `${Math.round(won / 1e8).toLocaleString("ko-KR")}억원`;
 }
 
+
 const PERIOD_PRIORITY = ["15일", "1개월", "2개월", "3개월", "6개월", "12개월", "1년", "24개월", "2년", "30개월", "36개월", "3년"];
+
 
 function groupTitle(group: UpcomingGroup): string {
   const period = PERIOD_PRIORITY.find((p) => group.periods.includes(p));
@@ -33,8 +66,10 @@ function groupTitle(group: UpcomingGroup): string {
   return "락업 해제";
 }
 
+
 function renderBreakdown(group: UpcomingGroup) {
   if (group.breakdown.length === 0) return null;
+
 
   return (
     <div className="mt-1 space-y-0.5 text-right text-xs leading-snug text-gray-400">
@@ -49,6 +84,7 @@ function renderBreakdown(group: UpcomingGroup) {
     </div>
   );
 }
+
 
 function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past", today: Date) {
   const d = dDay(group.tradable_date, today);
@@ -86,6 +122,7 @@ function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past",
           </div>
         </div>
 
+
         <div className="shrink-0 text-right">
           <p className="font-semibold text-gray-900">
             {formatQty(group.qty)}주 ({group.pct}%)
@@ -97,14 +134,17 @@ function renderGroup(group: UpcomingGroup, i: number, tone: "upcoming" | "past",
   );
 }
 
+
 export default async function StockPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
   const stock = getStockByCode(code);
   if (!stock) return notFound();
 
+
   const today = new Date();
   const { upcoming, past } = getGroupedEventsByStock(stock, today);
   const { updated } = getSiteData();
+
 
   const marketCapLabel = (
     <p className="text-lg font-bold text-gray-900">
@@ -112,6 +152,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
       시가총액 {formatEok(stock.shares * stock.close_price)}
     </p>
   );
+
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-8">
@@ -126,6 +167,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
         </p>
       </div>
 
+
       {upcoming.length > 0 && (
         <section className="mb-8">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -135,6 +177,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
           <ul className="space-y-3">{upcoming.map((group, i) => renderGroup(group, i, "upcoming", today))}</ul>
         </section>
       )}
+
 
       <section>
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
