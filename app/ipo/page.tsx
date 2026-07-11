@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import { getSortedIpoItems, ipoStatus, dateRange, mmdd, bandPosition, type IpoItem, type IpoTone } from "@/lib/ipo";
 
+
 export const revalidate = 3600;
+
 
 export const metadata: Metadata = {
   title: "IPO 일정 | IPO 락업 캘린더",
   description: "공모 진행 중인 종목의 수요예측·청약·상장 일정과 수요예측 결과를 제공합니다.",
 };
 
+
 const TONE_CLASS: Record<IpoTone, string> = {
   active: "bg-red-100 text-red-600",
-  waiting: "bg-blue-100 text-blue-600",
+  waiting: "bg-violet-50/70 text-violet-500",
   done: "bg-gray-100 text-gray-500",
 };
+
 
 function formatOfferSize(item: IpoItem): string {
   const shares = item.offer_shares || 0;
@@ -24,15 +28,18 @@ function formatOfferSize(item: IpoItem): string {
   return `${sharesText} · ${amount.toLocaleString()}억원`;
 }
 
+
 function ratioText(v?: number): string {
   return v ? `${v.toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1` : "-";
 }
+
 
 // 확약 표: 신청·배정 수량 + 기간별 신청 수량 대비 배정 비율
 function CommitTable({ item }: { item: IpoItem }) {
   const apply = item.commit_apply || [];
   const alloc = item.commit_alloc || [];
   if (!apply.length && !alloc.length) return null;
+
 
   const periods = [...new Set([...apply.map((t) => t.period), ...alloc.map((t) => t.period)])];
   const rows = periods.map((period) => {
@@ -42,6 +49,7 @@ function CommitTable({ item }: { item: IpoItem }) {
     return { period, applyQty: a?.qty ?? null, allocQty: b?.qty ?? null, ratio };
   });
   const maxRatio = Math.max(...rows.map((r) => r.ratio ?? 0), 0.0001);
+
 
   return (
     <div className="mt-3 border-t border-gray-100 pt-3">
@@ -91,11 +99,13 @@ function CommitTable({ item }: { item: IpoItem }) {
   );
 }
 
+
 function IpoCard({ item }: { item: IpoItem }) {
   const status = ipoStatus(item);
   const hasCommit = Boolean(item.commit_apply?.length || item.commit_alloc?.length);
   const band = item.band_low && item.band_high ? `${item.band_low.toLocaleString()}~${item.band_high.toLocaleString()}원` : "미정";
   const bandPos = bandPosition(item);
+
 
   return (
     <div
@@ -120,20 +130,22 @@ function IpoCard({ item }: { item: IpoItem }) {
         )}
       </div>
 
+
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-blue-50 px-3 py-2 sm:block sm:flex-[5]">
-          <p className="text-[11px] text-blue-700">수요예측일</p>
-          <p className="truncate text-[13px] font-bold text-blue-900">{dateRange(item.forecast_start, item.forecast_end)}</p>
+        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-violet-50/70 px-3 py-2 sm:block sm:flex-[5]">
+          <p className="text-[11px] text-violet-500">수요예측일</p>
+          <p className="truncate text-[13px] font-bold text-violet-700">{dateRange(item.forecast_start, item.forecast_end)}</p>
         </div>
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-amber-50 px-3 py-2 sm:block sm:flex-[2.2]">
-          <p className="text-[11px] text-amber-700">청약일</p>
-          <p className="truncate text-[13px] font-bold text-amber-900">{dateRange(item.sub_start, item.sub_end)}</p>
+          <p className="text-[11px] text-amber-800">청약일</p>
+          <p className="truncate text-[13px] font-bold text-amber-800">{dateRange(item.sub_start, item.sub_end)}</p>
         </div>
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-emerald-50 px-3 py-2 sm:block sm:flex-[1.8]">
-          <p className="text-[11px] text-emerald-700">상장일</p>
-          <p className="truncate text-[13px] font-bold text-emerald-900">{item.listing_date ? mmdd(item.listing_date) : "미정"}</p>
+          <p className="text-[11px] text-emerald-800">상장일</p>
+          <p className="truncate text-[13px] font-bold text-emerald-800">{item.listing_date ? mmdd(item.listing_date) : "미정"}</p>
         </div>
       </div>
+
 
       <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-1 px-0.5 text-[13px]">
         <span>
@@ -155,6 +167,7 @@ function IpoCard({ item }: { item: IpoItem }) {
         </span>
       </div>
 
+
       {hasCommit && (
         <>
           <div className="mt-3 flex justify-end">
@@ -171,8 +184,10 @@ function IpoCard({ item }: { item: IpoItem }) {
   );
 }
 
+
 export default function IpoSchedulePage() {
   const items = getSortedIpoItems();
+
 
   return (
     <main className="mx-auto w-full max-w-[900px] px-5 py-6">
