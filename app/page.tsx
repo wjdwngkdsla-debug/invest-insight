@@ -5,17 +5,18 @@ import { dDay, getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup }
 import { getIpoSchedule } from "@/lib/ipo";
 import holidays from "@/data/holidays.json";
 
-// D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
-export const revalidate = 3600;
+
 
 function formatQty(qty: number): string {
   return qty.toLocaleString("ko-KR");
 }
 
+
 function groupTitle(group: UpcomingGroup): string {
   if (group.periods.length === 1) return `${group.periods[0]} 락업 해제`;
   return "락업 해제";
 }
+
 
 // 공모가 대비 등락률 + 추세 화살표 — 상승 빨강, 하락 파랑 (국내 시장 관례)
 function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: number }) {
@@ -50,6 +51,7 @@ function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: nu
   );
 }
 
+
 function EventHoverCard({ event }: { event: UpcomingGroup }) {
   return (
     <div className="event-popover pointer-events-none absolute left-[calc(100%+10px)] top-0 z-[100] hidden w-[320px] opacity-0 transition-opacity duration-150 lg:block">
@@ -63,6 +65,7 @@ function EventHoverCard({ event }: { event: UpcomingGroup }) {
             {formatQty(event.qty)}주 ({event.pct}%)
           </p>
         </div>
+
 
         <div className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
           {event.breakdown.map((item) => (
@@ -79,9 +82,11 @@ function EventHoverCard({ event }: { event: UpcomingGroup }) {
   );
 }
 
+
 function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
   const days = dDay(event.tradable_date);
   const isNear = days <= 3;
+
 
   return (
     <li className="upcoming-event relative z-10 w-60 shrink-0 lg:w-auto">
@@ -116,16 +121,19 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
   );
 }
 
+
 export default function Home() {
   const upcoming = getUpcomingEvents(30);
   const rows = getFlatRows();
   const { updated } = getSiteData();
+
 
   const calendarEvents: CalendarEvent[] = rows.map((row) => ({
     date: row.tradable_date,
     name: row.name,
     code: row.code,
   }));
+
 
   // IPO 일정 — 수요예측·청약은 기간 바, 상장은 단일일 배지 (/ipo 페이지와 같은 데이터)
   const calendarRanges: CalendarRangeEvent[] = [];
@@ -154,6 +162,7 @@ export default function Home() {
     }
   }
 
+
   return (
     <main className="mx-auto max-w-[1480px] px-5 py-6">
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
@@ -174,8 +183,10 @@ export default function Home() {
           )}
         </aside>
 
+
         <section className="min-w-0">
           <LockupCalendar events={calendarEvents} rangeEvents={calendarRanges} holidays={holidays as Record<string, string>} />
+
 
           <div className="mt-6">
             <CalendarTable rows={rows} priceDate={updated} />
