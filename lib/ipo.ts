@@ -29,6 +29,7 @@ export interface IpoItem {
   commit_alloc?: CommitTier[];
   withdrawn?: boolean;
   content_url?: string; // 시트 IPO일정 탭의 콘텐츠링크 열 (운영자 입력)
+  first_filing_date?: string;
 }
 
 export interface IpoScheduleData {
@@ -71,23 +72,20 @@ export function ipoStatus(item: IpoItem, today = new Date()): IpoStatus {
   return { label: "공모 준비", tone: "waiting" };
 }
 
-// 남은 일정이 가까운 종목이 위로: ① 다가오는 날짜 오름차순 ② 청약 끝나고 상장 대기 ③ 일정 미정 ④ 철회
-export function ipoSortKey(item: IpoItem, today = new Date()): [number, string] {
-  if (item.withdrawn) return [3, item.name];
-  const dates = [item.forecast_start, item.forecast_end, item.sub_start, item.sub_end, item.listing_date]
-    .filter((s): s is string => Boolean(s))
-    .filter((s) => dDay(s, today) >= 0)
-    .sort();
-  if (dates.length) return [0, dates[0]];
-  if (item.sub_end && dDay(item.sub_end, today) < 0 && item.final_price) return [1, item.sub_end];
-  return [2, item.name];
+// 노출 우선순위: 임박한 상장일 → 임박한 청약일 → 임박한 수요예측일 → 나머지 → 철회
+export function ipoSortKey(item: IpoItem, today = new Date()): [number, string, string] {
+  if (item.withdrawn) return [4, "", item.name];
+  if (item.listing_date && dDay(item.listing_date, today) >= 0) return [0, item.listing_date, item.name];
+  if (item.sub_start && dDay(item.sub_start, today) >= 0) return [1, item.sub_start, item.name];
+  if (item.forecast_start && dDay(item.forecast_start, today) >= 0) return [2, item.forecast_start, item.name];
+  return [3, item.first_filing_date || "", item.name];
 }
 
 export function getSortedIpoItems(today = new Date()): IpoItem[] {
   return [...getIpoSchedule().items].sort((a, b) => {
     const ka = ipoSortKey(a, today);
     const kb = ipoSortKey(b, today);
-    return ka[0] - kb[0] || ka[1].localeCompare(kb[1]);
+    return ka[0] - kb[0] || ka[1].localeCompare(kb[1]) || ka[2].localeCompare(kb[2]);
   });
 }
 

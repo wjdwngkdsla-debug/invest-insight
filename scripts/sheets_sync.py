@@ -122,7 +122,7 @@ IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
 COMMIT_TIER_ORDER = ["미확약", "15일", "1개월", "3개월", "6개월"]
 IPO_SCHEDULE_HEADERS = [
     "기업명", "상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
-    "수요예측일", "청약일", "상장일", "수요예측경쟁률", "개인청약경쟁률",
+    "수요예측일", "청약일", "상장일", "IPO취소", "수요예측경쟁률", "개인청약경쟁률",
     "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
     "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
     "콘텐츠링크",
@@ -1178,7 +1178,11 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             headers = [h.strip() for h in values[0]]
             if "기업명" in headers:
                 name_at = headers.index("기업명")
-                col_at = {col: headers.index(col) for col in list(IPO_EDITABLE_COLUMNS) + ["콘텐츠링크"] if col in headers}
+                col_at = {
+                    col: headers.index(col)
+                    for col in list(IPO_EDITABLE_COLUMNS) + ["콘텐츠링크", "IPO취소"]
+                    if col in headers
+                }
                 for row in values[1:]:
                     if len(row) <= name_at or not row[name_at].strip():
                         continue
@@ -1200,6 +1204,33 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     elif ipo_seed_path.exists():
         ipo_seed_path.write_text("[]", encoding="utf-8")
 
+    # 1-2) IPO취소 컬럼에서 "삭제" 선택된 종목 → items에서 제거 + 톰스톤 등록
+    #      IPO종목/락업 캘린더는 독립 파이프라인이라 여기서 안 건드림. 새 신고서 나오면 자동 부활.
+    deleted_corps: dict[str, dict[str, str]] = dict(data.get("deleted_corps") or {})
+    kept_items: list[dict] = []
+    for item in items:
+        name = (item.get("name") or "").strip()
+        cancel = (sheet_cells.get(name) or {}).get("IPO취소", "").strip()
+        if cancel == "삭제":
+            from datetime import date as _date
+
+            data.setdefault("history", []).append({
+                "date": _date.today().isoformat(),
+                "name": name, "type": "삭제", "field": "IPO취소",
+                "old": "게시 중", "new": "삭제",
+            })
+            deleted_corps[item.get("corp_code", "")] = {
+                "name": name,
+                "last_rcept_no": item.get("last_rcept_no") or "",
+                "deleted_at": _date.today().isoformat(),
+            }
+            print(f"[SHEET] IPO일정 삭제: {name} (마지막 신고서 {item.get('last_rcept_no')})", file=sys.stderr)
+        else:
+            kept_items.append(item)
+    data["items"] = kept_items
+    data["deleted_corps"] = deleted_corps
+    items = kept_items
+
     # 2) 운영자 입력을 사이트 데이터에 반영 (링크 + 수동수정 잠금)
     changed = False
     overrides = 0
@@ -1219,24 +1250,6 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 continue
             # 배치가 마지막으로 쓴 값과 같으면 사용자 수정이 아님
             if cell == last.get(column, "") or cell == auto_cell(item, column):
-                continue
-            # "취소"/"연기": 사용자가 이전에 채운 값을 되돌린다 — 상장일 정정으로 되돌려야 하는 케이스
-            if cell.strip() in ("취소", "연기", "삭제"):
-                from datetime import date as _date
-
-                for field in fields:
-                    old_val = item.get(field, "")
-                    if old_val:
-                        data.setdefault("history", []).append({
-                            "date": _date.today().isoformat(), "name": name,
-                            "type": "수기변경", "field": column,
-                            "old": str(old_val), "new": cell.strip(),
-                        })
-                    item[field] = ""
-                    if field in manual_fields:
-                        manual_fields.remove(field)
-                changed = True
-                overrides += 1
                 continue
             if column == "확정공모가":
                 digits = "".join(ch for ch in cell if ch.isdigit())
@@ -1296,6 +1309,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             auto_cell(item, "수요예측일"),
             auto_cell(item, "청약일"),
             auto_cell(item, "상장일"),
+            "",  # IPO취소 — 드롭다운. "삭제" 선택하면 다음 배치가 items에서 완전 제거
             f"{item.get('demand_ratio'):,.2f}:1" if item.get("demand_ratio") else "미정",
             f"{item.get('sub_ratio'):,.2f}:1" if item.get("sub_ratio") else "미정",
             *[commit_cell(apply_map, tier) for tier in COMMIT_TIER_ORDER],
@@ -1319,7 +1333,28 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         },
     )
     IPO_SCHEDULE_WRITTEN_PATH.write_text(json.dumps(new_written, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존)", file=sys.stderr)
+
+    # IPO취소 컬럼에 "삭제"만 있는 드롭다운 데이터 검증
+    cancel_col_index = IPO_SCHEDULE_HEADERS.index("IPO취소")
+    spreadsheet.batch_update({
+        "requests": [{
+            "setDataValidation": {
+                "range": {
+                    "sheetId": worksheet.id,
+                    "startRowIndex": 1,
+                    "endRowIndex": len(sheet_values),
+                    "startColumnIndex": cancel_col_index,
+                    "endColumnIndex": cancel_col_index + 1,
+                },
+                "rule": {
+                    "condition": {"type": "ONE_OF_LIST", "values": [{"userEnteredValue": "삭제"}]},
+                    "strict": True,
+                    "showCustomUi": True,
+                },
+            }
+        }]
+    })
+    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존, IPO취소 드롭다운 설정)", file=sys.stderr)
 
     # 정정이력 탭 — 정정공시·수기변경으로 값이 바뀐 내역 (최신순)
     hist = data.get("history") or []

@@ -382,12 +382,15 @@ export function LockupCalendar({
                         className="group relative px-1.5"
                       >
                         <p className="cursor-default text-[10px] text-gray-400">+{hiddenCount}개 더</p>
-                        {/* 데스크톱 hover 팝오버 — 셀 오른쪽에, 카테고리별 배경색 그룹으로 */}
-                        <div
-                          className={`pointer-events-none absolute top-0 z-50 hidden w-60 rounded-lg border border-gray-200 bg-white p-2.5 opacity-0 shadow-xl transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100 lg:block ${
-                            i >= 3 ? "right-full mr-1.5" : "left-full ml-1.5"
-                          }`}
-                        >
+                        {/* 데스크톱 hover 팝오버 — 카테고리별 배경. 캘린더 밖으로 안 나가게 방향 자동 결정. */}
+                        {(() => {
+                          const horizontal = i >= 3 ? "right-full mr-1.5" : "left-full ml-1.5";
+                          // 마지막 주면 위로 뜨게(아래로 넘칠 위험), 아니면 위 맞춤으로 아래 흐름
+                          const vertical = weekIndex >= weeks.length - 1 ? "bottom-0" : "top-0";
+                          return (
+                            <div
+                              className={`pointer-events-none absolute z-50 hidden w-60 rounded-lg border border-gray-200 bg-white p-2.5 opacity-0 shadow-xl transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100 lg:block ${horizontal} ${vertical}`}
+                            >
                           <p className="mb-1.5 px-1 text-[12px] font-bold text-gray-700">
                             {month + 1}월 {cell.day}일 일정 상세
                           </p>
@@ -413,6 +416,8 @@ export function LockupCalendar({
                             ))}
                           </div>
                         </div>
+                          );
+                        })()}
                       </div>
                     );
                   }

@@ -435,6 +435,7 @@ def seed_new_items(
     today: str,
     log,
     prev_pending_names: set[str],
+    deleted_corps: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
 
@@ -482,6 +483,9 @@ def seed_new_items(
             unresolved.append({"name": name, "status": "not_found", "link": dart_search_link(name)})
             continue
         corp_code = corp["corp_code"]
+        if deleted_corps and corp_code in deleted_corps:
+            log(f"수동추가 무시(삭제된 종목): {name}")
+            continue  # 톰스톤: 사용자가 명시적으로 삭제한 종목은 seed로도 재편입하지 않음
         if corp_code in items_by_corp and not existing:
             mark_resolved(name)
             continue  # 자동발굴이 이미 다른 표기로 잡아둔 동일 회사
@@ -576,6 +580,9 @@ def refresh_ipo_schedule(
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
     history: list[dict[str, Any]] = list(state.get("history") or [])
     prev_pending_names = {p.get("name") for p in state.get("seed_pending", []) if isinstance(p, dict)}
+    # 톰스톤: 사용자가 IPO취소 컬럼에서 "삭제"한 종목. 저장된 rcept_no보다 새 신고서가
+    # 나오면 자동 부활, 그 이하면 계속 무시. IPO종목·락업 캘린더는 독립이라 여기서 안 건드림.
+    deleted_corps: dict[str, dict[str, Any]] = dict(state.get("deleted_corps") or {})
 
     filings = fetch_equity_filings(days_back)
     grouped = group_upcoming_ipos(filings)
@@ -643,9 +650,20 @@ def refresh_ipo_schedule(
 
     for corp_code, corp_filings in grouped.items():
         name = corp_filings[0].get("corp_name") or ""
+        newest_rcp = corp_filings[0].get("rcept_no") or ""
+        tomb = deleted_corps.get(corp_code)
+        if tomb and newest_rcp <= (tomb.get("last_rcept_no") or ""):
+            continue  # 삭제된 종목 — 톰스톤보다 새 신고서 나올 때만 부활
+        if tomb:
+            log(f"부활: {name} (톰스톤 {tomb.get('last_rcept_no')} → 새 신고서 {newest_rcp})")
+            history.append({
+                "date": today, "name": name, "type": "부활",
+                "field": "신규 신고서", "old": "삭제됨", "new": newest_rcp,
+            })
+            deleted_corps.pop(corp_code, None)
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, items_by_corp.get(corp_code))
 
-    seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names)
+    seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names, deleted_corps)
 
     # KRX 스냅샷으로 상장일 자동 감지(운영자 미입력 대비 백업)
     if krx_snapshot and krx_trading_date:
@@ -675,11 +693,12 @@ def refresh_ipo_schedule(
             except Exception as exc:
                 log(f"실적보고서 실패 {item.get('name')}: {exc}")
 
-        # 정리 규칙: 상장 후 7일 지남 / 철회 후 30일 지남 / 무소식 210일
+        # 정리 규칙: 상장 다음날부터 제외 / 철회 후 30일 지남 / 무소식 210일
+        # 상장 후는 락업 캘린더가 이어받으므로 IPO일정에는 남길 필요가 없다.
         listing = item.get("listing_date") or ""
         first = item.get("first_filing_date") or ""
         drop = False
-        if listing and listing < (datetime.today() - timedelta(days=7)).strftime("%Y-%m-%d"):
+        if listing and listing < today:
             drop = True
         if item.get("withdrawn") and first and first < (datetime.today() - timedelta(days=30)).strftime("%Y%m%d"):
             drop = True
@@ -694,6 +713,7 @@ def refresh_ipo_schedule(
         "items": kept,
         "history": history[-500:],
         "seed_pending": seed_pending,
+        "deleted_corps": deleted_corps,
     }
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
