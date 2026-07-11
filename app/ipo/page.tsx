@@ -1,0 +1,186 @@
+import type { Metadata } from "next";
+import { getSortedIpoItems, ipoStatus, dateRange, mmdd, bandPosition, type IpoItem, type IpoTone } from "@/lib/ipo";
+
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "IPO 일정 | IPO 락업 캘린더",
+  description: "공모 진행 중인 종목의 수요예측·청약·상장 일정과 수요예측 결과를 제공합니다.",
+};
+
+const TONE_CLASS: Record<IpoTone, string> = {
+  active: "bg-red-100 text-red-600",
+  waiting: "bg-blue-100 text-blue-600",
+  done: "bg-gray-100 text-gray-500",
+};
+
+function formatOfferSize(item: IpoItem): string {
+  const shares = item.offer_shares || 0;
+  if (!shares) return "미정";
+  const sharesText = shares >= 10000 ? `${Math.round(shares / 10000).toLocaleString()}만주` : `${shares.toLocaleString()}주`;
+  const price = item.final_price || 0;
+  if (!price) return sharesText;
+  const amount = Math.round((shares * price) / 100_000_000);
+  return `${sharesText} · ${amount.toLocaleString()}억원`;
+}
+
+function ratioText(v?: number): string {
+  return v ? `${v.toLocaleString("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1` : "-";
+}
+
+// 확약 표: 신청·배정 수량 + 기간별 신청 수량 대비 배정 비율
+function CommitTable({ item }: { item: IpoItem }) {
+  const apply = item.commit_apply || [];
+  const alloc = item.commit_alloc || [];
+  if (!apply.length && !alloc.length) return null;
+
+  const periods = [...new Set([...apply.map((t) => t.period), ...alloc.map((t) => t.period)])];
+  const rows = periods.map((period) => {
+    const a = apply.find((t) => t.period === period);
+    const b = alloc.find((t) => t.period === period);
+    const ratio = a?.qty && b?.qty ? (b.qty / a.qty) * 100 : null;
+    return { period, applyQty: a?.qty ?? null, allocQty: b?.qty ?? null, ratio };
+  });
+  const maxRatio = Math.max(...rows.map((r) => r.ratio ?? 0), 0.0001);
+
+  return (
+    <div className="mt-3 border-t border-gray-100 pt-3">
+      <p className="text-xs font-bold text-gray-700">기간별 의무보유확약 현황</p>
+      <table className="mt-1.5 w-full table-fixed border-collapse text-xs">
+        <thead>
+          <tr className="text-gray-400">
+            <td className="w-[14%] py-1">기간</td>
+            <td className="w-[26%] py-1 text-right">신청 수량</td>
+            <td className="w-[22%] py-1 text-right">배정 수량</td>
+            <td className="w-[38%] py-1 pl-4">신청 대비 배정</td>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => {
+            const muted = row.period === "미확약";
+            return (
+              <tr key={row.period} className={muted ? "text-gray-400" : ""}>
+                <td className={`py-1 ${muted ? "" : "font-semibold"}`}>{row.period}</td>
+                <td className="py-1 text-right tabular-nums">{row.applyQty !== null ? `${row.applyQty.toLocaleString()}주` : "미정"}</td>
+                <td className={`py-1 text-right tabular-nums ${muted ? "" : "font-semibold"}`}>
+                  {row.allocQty !== null ? `${row.allocQty.toLocaleString()}주` : "미정"}
+                </td>
+                <td className="py-1 pl-4">
+                  {row.ratio !== null ? (
+                    <span className="flex items-center gap-2">
+                      <span className="h-1.5 flex-1 rounded-full bg-gray-100">
+                        <span
+                          className={`block h-1.5 rounded-full ${muted ? "bg-gray-300" : "bg-blue-600"}`}
+                          style={{ width: `${Math.max(3, Math.round((row.ratio / maxRatio) * 100))}%` }}
+                        />
+                      </span>
+                      <span className={`min-w-[44px] text-right font-bold tabular-nums ${muted ? "text-gray-400" : "text-blue-600"}`}>
+                        {row.ratio.toFixed(2)}%
+                      </span>
+                    </span>
+                  ) : (
+                    <span className="text-gray-300">미정</span>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function IpoCard({ item }: { item: IpoItem }) {
+  const status = ipoStatus(item);
+  const hasCommit = Boolean(item.commit_apply?.length || item.commit_alloc?.length);
+  const band = item.band_low && item.band_high ? `${item.band_low.toLocaleString()}~${item.band_high.toLocaleString()}원` : "미정";
+  const bandPos = bandPosition(item);
+
+  return (
+    <div
+      tabIndex={hasCommit ? 0 : undefined}
+      className="group rounded-lg border border-gray-200 bg-white p-5 pb-4 outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300"
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <span className={`inline-flex shrink-0 rounded px-2 py-1 text-xs font-bold ${TONE_CLASS[status.tone]}`}>{status.label}</span>
+        <span className={`font-semibold text-gray-900 ${item.withdrawn ? "line-through text-gray-400" : ""}`}>{item.name}</span>
+        <span className="text-xs text-gray-500">
+          {item.market || "시장 미정"} · 주관 {item.underwriter || "미정"}
+        </span>
+        {hasCommit && (
+          <span className="ml-auto text-[11px] text-gray-400 transition-opacity group-hover:opacity-0 group-focus-within:opacity-0">확약 현황 ▾</span>
+        )}
+      </div>
+
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-blue-50 px-3 py-2 sm:block sm:flex-[5]">
+          <p className="text-[11px] text-blue-700">수요예측일</p>
+          <p className="truncate text-[13px] font-bold text-blue-900">{dateRange(item.forecast_start, item.forecast_end)}</p>
+        </div>
+        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-amber-50 px-3 py-2 sm:block sm:flex-[2.2]">
+          <p className="text-[11px] text-amber-700">청약일</p>
+          <p className="truncate text-[13px] font-bold text-amber-900">{dateRange(item.sub_start, item.sub_end)}</p>
+        </div>
+        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-emerald-50 px-3 py-2 sm:block sm:flex-[1.8]">
+          <p className="text-[11px] text-emerald-700">상장일</p>
+          <p className="truncate text-[13px] font-bold text-emerald-900">{item.listing_date ? mmdd(item.listing_date) : "미정"}</p>
+        </div>
+      </div>
+
+      <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-1 px-0.5 text-[13px]">
+        <span>
+          <span className="text-gray-500">희망가액</span> <span className="font-semibold">{band}</span>
+        </span>
+        <span>
+          <span className="text-gray-500">확정공모가</span>{" "}
+          <span className="font-semibold">{item.final_price ? `${item.final_price.toLocaleString()}원` : "미정"}</span>
+          {bandPos && <span className="ml-1 text-[11px] font-bold text-red-600">{bandPos}</span>}
+        </span>
+        <span>
+          <span className="text-gray-500">공모 규모</span> <span className="font-semibold">{formatOfferSize(item)}</span>
+        </span>
+        <span>
+          <span className="text-gray-500">수요예측</span> <span className="font-semibold tabular-nums">{ratioText(item.demand_ratio)}</span>
+        </span>
+        <span>
+          <span className="text-gray-500">개인청약</span> <span className="font-semibold tabular-nums">{ratioText(item.sub_ratio)}</span>
+        </span>
+        {item.content_url && (
+          <a
+            href={item.content_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-blue-600 hover:underline"
+          >
+            {item.name} 분석 콘텐츠 보러가기 ↗
+          </a>
+        )}
+      </div>
+
+      {hasCommit && (
+        <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-96 group-focus-within:max-h-96">
+          <CommitTable item={item} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function IpoSchedulePage() {
+  const items = getSortedIpoItems();
+
+  return (
+    <main className="mx-auto w-full max-w-[900px] px-5 py-6">
+      {items.length === 0 ? (
+        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">진행 중인 공모가 없습니다.</p>
+      ) : (
+        <div className="space-y-3">
+          {items.map((item) => (
+            <IpoCard key={item.corp_code} item={item} />
+          ))}
+        </div>
+      )}
+    </main>
+  );
+}

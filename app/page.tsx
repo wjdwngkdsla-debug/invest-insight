@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
-import { LockupCalendar, type CalendarEvent } from "@/components/LockupCalendar";
+import { LockupCalendar, type CalendarEvent, type CalendarRangeEvent } from "@/components/LockupCalendar";
 import { dDay, getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
+import { getIpoSchedule } from "@/lib/ipo";
 import holidays from "@/data/holidays.json";
 
 // D-day가 하루 단위로 갱신되도록 정적 페이지를 주기적으로 재생성
@@ -126,6 +127,33 @@ export default function Home() {
     code: row.code,
   }));
 
+  // IPO 일정 — 수요예측·청약은 기간 바, 상장은 단일일 배지 (/ipo 페이지와 같은 데이터)
+  const calendarRanges: CalendarRangeEvent[] = [];
+  for (const item of getIpoSchedule().items) {
+    if (item.withdrawn) continue;
+    if (item.forecast_start) {
+      calendarRanges.push({
+        start: item.forecast_start,
+        end: item.forecast_end || item.forecast_start,
+        name: item.name,
+        code: item.corp_code,
+        kind: "forecast",
+      });
+    }
+    if (item.sub_start) {
+      calendarRanges.push({
+        start: item.sub_start,
+        end: item.sub_end || item.sub_start,
+        name: item.name,
+        code: item.corp_code,
+        kind: "sub",
+      });
+    }
+    if (item.listing_date) {
+      calendarEvents.push({ date: item.listing_date, name: item.name, code: item.corp_code, kind: "listing" });
+    }
+  }
+
   return (
     <main className="mx-auto max-w-[1480px] px-5 py-6">
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,20%)_minmax(0,1fr)]">
@@ -147,7 +175,7 @@ export default function Home() {
         </aside>
 
         <section className="min-w-0">
-          <LockupCalendar events={calendarEvents} holidays={holidays as Record<string, string>} />
+          <LockupCalendar events={calendarEvents} rangeEvents={calendarRanges} holidays={holidays as Record<string, string>} />
 
           <div className="mt-6">
             <CalendarTable rows={rows} priceDate={updated} />

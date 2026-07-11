@@ -65,7 +65,7 @@ IPO_ADMIN_SHEET_COLUMNS = [
 
 FLOAT_ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "period",
-    "listing_date", "close_price", "ipo_price", "shares", "current_shares",
+    "listing_date", "close_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
     "manual_lock", "manual_date", "manual_qty", "memo",
@@ -112,6 +112,25 @@ IPO_TARGET_TAB = "IPO종목"
 # 규칙: 빈칸 = 무시(다음 목록에 유지), 전부 채움 = 반영, 일부만 채움 = 값 보존.
 WORKLIST_TAB = "작업목록"
 WORKLIST_BACKUP_PATH = ROOT_DIR / "data" / "worklist_backup.json"
+
+
+IPO_SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
+IPO_SCHEDULE_TAB = "IPO일정"
+IPO_SCHEDULE_BACKUP_PATH = ROOT_DIR / "data" / "ipo_schedule_sheet_backup.json"
+# 배치가 마지막으로 쓴 값 스냅샷 — 시트 값과 이게 다르면 "사용자 수정"으로 판정한다
+IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
+IPO_SCHEDULE_HEADERS = [
+    "기업명", "상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
+    "수요예측일", "청약일", "상장일", "수요예측경쟁률", "개인청약경쟁률",
+    "확약신청(기간별)", "확약배정(기간별)", "콘텐츠링크",
+]
+# 사용자가 수정하면 파싱보다 우선하는 열 → 잠글 item 필드 매핑
+IPO_EDITABLE_COLUMNS = {
+    "확정공모가": ["final_price"],
+    "수요예측일": ["forecast_start", "forecast_end"],
+    "청약일": ["sub_start", "sub_end"],
+    "상장일": ["listing_date"],
+}
 
 
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
@@ -1027,6 +1046,309 @@ def push_universe_review(spreadsheet: gspread.Spreadsheet) -> None:
 
 
 
+def _ipo_status_label(item: dict) -> str:
+    """사이트 lib/ipo.ts의 상태 판정과 동일한 규칙 (시트 가독용)."""
+    from datetime import date
+
+    today = date.today().isoformat()
+    if item.get("withdrawn"):
+        return "공모 철회"
+    listing = item.get("listing_date") or ""
+    if listing:
+        return "상장 완료" if listing < today else "상장 예정"
+    sub_start, sub_end = item.get("sub_start") or "", item.get("sub_end") or ""
+    if sub_start and sub_end and sub_start <= today <= sub_end:
+        return "청약 중"
+    if sub_end and sub_end < today:
+        return "청약 완료" if item.get("final_price") else "일정 미정"
+    fc_start, fc_end = item.get("forecast_start") or "", item.get("forecast_end") or ""
+    if fc_start and fc_end and fc_start <= today <= fc_end:
+        return "수요예측 중"
+    if fc_end and fc_end < today:
+        return "청약 예정"
+    if fc_start:
+        return "수요예측 예정"
+    return "공모 준비"
+
+
+def _parse_sheet_dates(text: str) -> list[str]:
+    """시트 셀의 날짜 표기(2026-07-27, 2026.7.27, ~ 구간)를 ISO 목록으로."""
+    import re
+
+    out: list[str] = []
+    for m in re.finditer(r"(20\d{2})[.\-/]\s*(\d{1,2})[.\-/]\s*(\d{1,2})", text):
+        out.append(f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}")
+    return out
+
+
+def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    """IPO 일정 현황을 IPO일정 탭에 적재하고, 운영자 입력을 수거한다.
+
+    - 콘텐츠링크: 운영자 입력 열. 기업명 기준으로 수거해 content_url로 연결.
+    - 확정공모가/수요예측일/청약일/상장일: 운영자가 고치면(마지막으로 배치가 쓴 값과
+      다르면) 그 값을 채택하고 manual_fields로 잠궈 이후 공시 파싱이 덮어쓰지 않는다.
+    - 나머지 열은 공시 기준으로 매번 덮어쓴다. 덮어쓰기 전 탭 전체 값을 백업한다.
+    """
+    if not IPO_SCHEDULE_PATH.exists():
+        return
+    try:
+        data = json.loads(IPO_SCHEDULE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    items = data.get("items", [])
+
+    def date_range(start: str, end: str) -> str:
+        if not start:
+            return "미정"
+        return start if not end or end == start else f"{start} ~ {end}"
+
+    def num(value: object) -> str:
+        return f"{value:,}" if isinstance(value, (int, float)) and value else "미정"
+
+    def commit_text(tiers: object) -> str:
+        if not isinstance(tiers, list) or not tiers:
+            return "미정"
+        return " · ".join(f"{t.get('period')} {t.get('pct')}%" for t in tiers if isinstance(t, dict))
+
+    def auto_cell(item: dict, column: str) -> str:
+        if column == "확정공모가":
+            return num(item.get("final_price"))
+        if column == "수요예측일":
+            return date_range(item.get("forecast_start") or "", item.get("forecast_end") or "")
+        if column == "청약일":
+            return date_range(item.get("sub_start") or "", item.get("sub_end") or "")
+        if column == "상장일":
+            return item.get("listing_date") or "미정"
+        return ""
+
+    # 배치가 마지막으로 쓴 값 스냅샷 (사용자 수정 판정 기준)
+    written: dict[str, dict[str, str]] = {}
+    if IPO_SCHEDULE_WRITTEN_PATH.exists():
+        try:
+            written = json.loads(IPO_SCHEDULE_WRITTEN_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            written = {}
+
+    # 1) 기존 탭 백업 + 운영자 입력 수거
+    links: dict[str, str] = {}
+    sheet_cells: dict[str, dict[str, str]] = {}  # 기업명 → {열: 값}
+    try:
+        worksheet = spreadsheet.worksheet(IPO_SCHEDULE_TAB)
+        values = worksheet.get_all_values()
+        if values:
+            IPO_SCHEDULE_BACKUP_PATH.write_text(
+                json.dumps({"values": values}, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            headers = [h.strip() for h in values[0]]
+            if "기업명" in headers:
+                name_at = headers.index("기업명")
+                col_at = {col: headers.index(col) for col in list(IPO_EDITABLE_COLUMNS) + ["콘텐츠링크"] if col in headers}
+                for row in values[1:]:
+                    if len(row) <= name_at or not row[name_at].strip():
+                        continue
+                    name = row[name_at].strip()
+                    cells = {col: (row[at].strip() if len(row) > at else "") for col, at in col_at.items()}
+                    sheet_cells[name] = cells
+                    if cells.get("콘텐츠링크"):
+                        links[name] = cells["콘텐츠링크"]
+    except gspread.WorksheetNotFound:
+        pass
+
+    # 2) 운영자 입력을 사이트 데이터에 반영 (링크 + 수동수정 잠금)
+    changed = False
+    overrides = 0
+    for item in items:
+        name = (item.get("name") or "").strip()
+        url = links.get(name, "")
+        if url and url != (item.get("content_url") or ""):
+            item["content_url"] = url
+            changed = True
+
+        cells = sheet_cells.get(name) or {}
+        last = written.get(name) or {}
+        manual_fields = list(item.get("manual_fields") or [])
+        for column, fields in IPO_EDITABLE_COLUMNS.items():
+            cell = cells.get(column, "")
+            if not cell or cell == "미정":
+                continue
+            # 배치가 마지막으로 쓴 값과 같으면 사용자 수정이 아님
+            if cell == last.get(column, "") or cell == auto_cell(item, column):
+                continue
+            if column == "확정공모가":
+                digits = "".join(ch for ch in cell if ch.isdigit())
+                if not digits:
+                    continue
+                item["final_price"] = int(digits)
+            else:
+                dates = _parse_sheet_dates(cell)
+                if not dates:
+                    continue
+                if column == "상장일":
+                    item["listing_date"] = dates[0]
+                else:
+                    start, end = dates[0], dates[-1]
+                    item[fields[0]], item[fields[1]] = start, end
+            for field in fields:
+                if field not in manual_fields:
+                    manual_fields.append(field)
+            overrides += 1
+            changed = True
+            from datetime import date as _date
+
+            data.setdefault("history", []).append({
+                "date": _date.today().isoformat(),
+                "name": name,
+                "type": "수기변경",
+                "field": column,
+                "old": last.get(column, "") or auto_cell(item, column),
+                "new": cell,
+            })
+        if manual_fields:
+            item["manual_fields"] = manual_fields
+
+    if changed:
+        IPO_SCHEDULE_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[SHEET] IPO일정: 운영자 입력 반영 (수동수정 {overrides}건, 링크 {len(links)}건)", file=sys.stderr)
+
+    # 3) 탭 재작성 + 쓴 값 스냅샷 저장
+    rows: list[list[str]] = []
+    new_written: dict[str, dict[str, str]] = {}
+    for item in items:
+        name = item.get("name") or ""
+        band_low, band_high = item.get("band_low") or 0, item.get("band_high") or 0
+        row = [
+            name,
+            _ipo_status_label(item),
+            item.get("market") or "미정",
+            item.get("underwriter") or "미정",
+            f"{band_low:,} ~ {band_high:,}" if band_low else "미정",
+            auto_cell(item, "확정공모가"),
+            num(item.get("offer_shares")),
+            auto_cell(item, "수요예측일"),
+            auto_cell(item, "청약일"),
+            auto_cell(item, "상장일"),
+            f"{item.get('demand_ratio'):,.2f}:1" if item.get("demand_ratio") else "미정",
+            f"{item.get('sub_ratio'):,.2f}:1" if item.get("sub_ratio") else "미정",
+            commit_text(item.get("commit_apply")),
+            commit_text(item.get("commit_alloc")),
+            item.get("content_url") or "",
+        ]
+        rows.append(row)
+        new_written[name] = {col: auto_cell(item, col) for col in IPO_EDITABLE_COLUMNS}
+
+    sheet_values = [IPO_SCHEDULE_HEADERS] + rows
+    worksheet = get_or_create_worksheet(spreadsheet, IPO_SCHEDULE_TAB, len(sheet_values) + 10, len(IPO_SCHEDULE_HEADERS))
+    worksheet.clear()
+    worksheet.update(sheet_values, "A1", value_input_option="USER_ENTERED")
+    worksheet.freeze(rows=1)
+    worksheet.format(
+        "1:1",
+        {
+            "backgroundColor": {"red": 0.91, "green": 0.94, "blue": 1.0},
+            "textFormat": {"bold": True},
+            "horizontalAlignment": "CENTER",
+        },
+    )
+    IPO_SCHEDULE_WRITTEN_PATH.write_text(json.dumps(new_written, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존)", file=sys.stderr)
+
+    # 정정이력 탭 — 정정공시·수기변경으로 값이 바뀐 내역 (최신순)
+    hist = data.get("history") or []
+    if hist:
+        hist_values = [["일자", "기업명", "구분", "항목", "이전값", "새값"]] + [
+            [h.get("date", ""), h.get("name", ""), h.get("type", ""), h.get("field", ""), str(h.get("old", "")), str(h.get("new", ""))]
+            for h in reversed(hist[-300:])
+        ]
+        hist_ws = get_or_create_worksheet(spreadsheet, "정정이력", len(hist_values) + 10, 6)
+        hist_ws.clear()
+        hist_ws.update(hist_values, "A1", value_input_option="RAW")
+        hist_ws.freeze(rows=1)
+        hist_ws.format("1:1", {"backgroundColor": {"red": 0.91, "green": 0.94, "blue": 1.0}, "textFormat": {"bold": True}})
+        print(f"[SHEET] 정정이력: {len(hist_values) - 1}건 적재", file=sys.stderr)
+
+
+def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
+    """IPO일정에 상장일이 채워졌는데 IPO종목 탭에 없는 기업을 자동 추가한다.
+
+    append-only: 기존 행은 절대 수정하지 않고 없는 기업만 뒤에 붙인다. 추가 전 탭 전체 백업.
+    종목코드는 RAW로 써서 앞자리 0이 잘리지 않게 한다 (064400 → 64400 사고 방지).
+    """
+    import re
+
+    if not IPO_SCHEDULE_PATH.exists():
+        return
+    try:
+        data = json.loads(IPO_SCHEDULE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    candidates = [i for i in data.get("items", []) if i.get("listing_date") and not i.get("withdrawn")]
+    if not candidates:
+        return
+    try:
+        worksheet = spreadsheet.worksheet(IPO_TARGET_TAB)
+    except gspread.WorksheetNotFound:
+        return
+    values = worksheet.get_all_values()
+    if not values:
+        return
+    (ROOT_DIR / "data" / "ipo_targets_sheet_backup.json").write_text(
+        json.dumps({"values": values}, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    def norm(s: str) -> str:
+        return re.sub(r"[\s㈜()]|주식회사", "", s or "")
+
+    headers = [c.strip() for c in values[0]]
+    name_at = headers.index("회사명") if "회사명" in headers else 1
+    existing = {norm(row[name_at]) for row in values[1:] if len(row) > name_at and row[name_at].strip()}
+
+    new_rows: list[list[str]] = []
+    for item in candidates:
+        if norm(item.get("name") or "") in existing:
+            continue
+        code = str(item.get("stock_code") or "").strip()
+        new_rows.append([
+            item.get("market") or "코스닥",
+            item.get("name") or "",
+            item.get("listing_date") or "",
+            code.zfill(6) if code else "",
+            "",
+        ])
+    if new_rows:
+        worksheet.append_rows(new_rows, value_input_option="RAW")
+        names = ", ".join(row[1] for row in new_rows)
+        print(f"[SHEET] IPO종목: IPO일정 상장일 기반 자동 추가 {len(new_rows)}건 ({names})", file=sys.stderr)
+
+
+# 운영자가 직접 입력·관리하는 탭 — 왼쪽에 몰아서 파란 탭 색으로 구분한다
+MANUAL_TABS_ORDER = ["작업목록", "수기입력", "IPO종목", "IPO일정", "휴장일"]
+MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
+
+
+def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
+    """수기 관리 탭을 왼쪽으로 정렬하고 파란 탭 색을 입힌다. 실패해도 동기화에는 영향 없음."""
+    try:
+        worksheets = {ws.title: ws for ws in spreadsheet.worksheets()}
+        requests = []
+        position = 0
+        for title in MANUAL_TABS_ORDER:
+            ws = worksheets.get(title)
+            if not ws:
+                continue
+            requests.append({
+                "updateSheetProperties": {
+                    "properties": {"sheetId": ws.id, "index": position, "tabColor": MANUAL_TAB_COLOR},
+                    "fields": "index,tabColor",
+                }
+            })
+            position += 1
+        if requests:
+            spreadsheet.batch_update({"requests": requests})
+            print(f"[SHEET] 수기 관리 탭 {position}개를 왼쪽으로 정렬(파란색)", file=sys.stderr)
+    except Exception as exc:
+        print(f"[SHEET] 탭 정렬 실패(무시): {exc}", file=sys.stderr)
+
+
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     if reset:
         reset_worksheets(spreadsheet)
@@ -1035,7 +1357,10 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
         push_tab(spreadsheet, title, filename, columns)
     ensure_ipo_target_manual_price_column(spreadsheet)
     ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
+    sync_ipo_schedule_tab(spreadsheet)  # IPO 일정 적재 + 콘텐츠링크·수동수정 수거 + 정정이력
+    append_missing_ipo_targets(spreadsheet)  # IPO일정 상장일 입력 → IPO종목 자동 행 추가 (append-only)
     regenerate_worklist(spreadsheet)  # 남은 갭만 다시 나열 (미반영 입력값은 보존)
+    arrange_sheet_tabs(spreadsheet)  # 수기 관리 탭 왼쪽 정렬 + 파란 탭 색
 
 
 

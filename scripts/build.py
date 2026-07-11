@@ -5160,6 +5160,15 @@ def main() -> None:
     print(f"[SAVE] admin={admin_path}", file=sys.stderr)
     print(f"[SAVE] review={review_path}", file=sys.stderr)
     print(f"[SAVE] site_data={out_path}", file=sys.stderr)
+
+    # IPO 일정 갱신 — 락업 배치와 완전히 분리된 부가 단계라 실패해도 배치 결과에 영향을 주지 않는다.
+    try:
+        from scripts.sources.ipo_schedule import refresh_ipo_schedule
+
+        refresh_ipo_schedule()
+    except Exception as exc:
+        print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)
+
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
 
 

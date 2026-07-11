@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import NavTabs from "@/components/NavTabs";
 import "./globals.css";
 
 
@@ -14,10 +15,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ko" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-gray-50 text-gray-900">
         {/* 모든 페이지 공통 상단 — 브랜드(홈 링크) + 우측 콘텐츠 링크 */}
-        <header className="mx-auto flex w-full max-w-[1480px] flex-wrap items-baseline justify-between gap-3 px-5 pb-2 pt-8">
-          <Link href="/" className="text-2xl font-bold tracking-tight">
-            IPO 락업 캘린더
-          </Link>
+        <header className="mx-auto flex w-full max-w-[1480px] flex-wrap items-center justify-between gap-3 px-5 pb-2 pt-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/" className="text-2xl font-bold tracking-tight">
+              IPO 락업 캘린더
+            </Link>
+            <NavTabs />
+          </div>
           <Link
             href="https://blog.naver.com/vericap"
             target="_blank"

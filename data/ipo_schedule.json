@@ -1,0 +1,262 @@
+{
+  "updated": "2026-07-11 15:48",
+  "items": [
+    {
+      "corp_code": "01501764",
+      "name": "레메디",
+      "first_filing_date": "20260522",
+      "last_rcept_no": "20260706000401",
+      "payment_date": "2026-07-01",
+      "underwriter": "케이비증권",
+      "band_low": 17800,
+      "band_high": 20700,
+      "final_price": 20700,
+      "forecast_start": "2026-06-17",
+      "forecast_end": "2026-06-23",
+      "sub_start": "2026-07-01",
+      "sub_end": "2026-07-02",
+      "market": "코스닥",
+      "offer_shares": 1200000,
+      "demand_ratio": 1146.41,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 7914000,
+          "pct": 0.77
+        },
+        {
+          "period": "3개월",
+          "qty": 19147000,
+          "pct": 1.86
+        },
+        {
+          "period": "1개월",
+          "qty": 45851000,
+          "pct": 4.44
+        },
+        {
+          "period": "15일",
+          "qty": 112101000,
+          "pct": 10.86
+        },
+        {
+          "period": "미확약",
+          "qty": 846755000,
+          "pct": 82.07
+        }
+      ],
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "sub_ratio": 1706.71,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 65012,
+          "pct": 7.22
+        },
+        {
+          "period": "3개월",
+          "qty": 103348,
+          "pct": 11.48
+        },
+        {
+          "period": "1개월",
+          "qty": 278484,
+          "pct": 30.94
+        },
+        {
+          "period": "15일",
+          "qty": 250656,
+          "pct": 27.85
+        },
+        {
+          "period": "미확약",
+          "qty": 202500,
+          "pct": 22.5
+        }
+      ],
+      "report_rcp": "20260706000401"
+    },
+    {
+      "corp_code": "00624244",
+      "name": "에이치엘지노믹스",
+      "first_filing_date": "20260616",
+      "last_rcept_no": "20260710000298",
+      "band_low": 18500,
+      "band_high": 21500,
+      "final_price": 21500,
+      "forecast_start": "2026-07-02",
+      "forecast_end": "2026-07-08",
+      "sub_start": "2026-07-13",
+      "sub_end": "2026-07-14",
+      "payment_date": "2026-07-16",
+      "underwriter": "KB증권·IBK투자증권",
+      "market": "코스닥",
+      "offer_shares": 2565000,
+      "demand_ratio": 714.52,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 11886000,
+          "pct": 0.86
+        },
+        {
+          "period": "3개월",
+          "qty": 300000,
+          "pct": 0.02
+        },
+        {
+          "period": "1개월",
+          "qty": 2340000,
+          "pct": 0.17
+        },
+        {
+          "period": "15일",
+          "qty": 11715000,
+          "pct": 0.85
+        },
+        {
+          "period": "미확약",
+          "qty": 1348308000,
+          "pct": 98.09
+        }
+      ],
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "01461730",
+      "name": "딜리셔스",
+      "first_filing_date": "20260624",
+      "last_rcept_no": "20260624000454",
+      "band_low": 5000,
+      "band_high": 7000,
+      "forecast_start": "2026-07-23",
+      "forecast_end": "2026-07-29",
+      "sub_start": "2026-08-03",
+      "sub_end": "2026-08-04",
+      "payment_date": "2026-08-03",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 2200000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "00920731",
+      "name": "케이앤에스아이앤씨",
+      "first_filing_date": "20260612",
+      "last_rcept_no": "20260708000575",
+      "band_low": 9000,
+      "band_high": 11000,
+      "forecast_start": "2026-07-27",
+      "forecast_end": "2026-07-31",
+      "sub_start": "2026-08-04",
+      "sub_end": "2026-08-05",
+      "payment_date": "2026-08-07",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "offer_shares": 2400000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "01588897",
+      "name": "니어스랩",
+      "first_filing_date": "20260625",
+      "last_rcept_no": "20260625000626",
+      "band_low": 30000,
+      "band_high": 41200,
+      "forecast_start": "2026-07-27",
+      "forecast_end": "2026-07-31",
+      "sub_start": "2026-08-05",
+      "sub_end": "2026-08-06",
+      "payment_date": "2026-08-10",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 910000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "01722066",
+      "name": "빅웨이브로보틱스",
+      "first_filing_date": "20260504",
+      "last_rcept_no": "20260701000455",
+      "band_low": 20000,
+      "band_high": 24000,
+      "forecast_start": "2026-07-27",
+      "forecast_end": "2026-07-31",
+      "sub_start": "2026-08-05",
+      "sub_end": "2026-08-06",
+      "payment_date": "2026-08-10",
+      "underwriter": "유진투자증권·미래에셋증권",
+      "market": "코스닥",
+      "offer_shares": 200000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "01947443",
+      "name": "해치텍",
+      "first_filing_date": "20260626",
+      "last_rcept_no": "20260626000518",
+      "band_low": 23000,
+      "band_high": 28000,
+      "forecast_start": "2026-07-29",
+      "forecast_end": "2026-08-04",
+      "sub_start": "2026-08-06",
+      "sub_end": "2026-08-07",
+      "underwriter": "DB증권",
+      "market": "코스닥",
+      "offer_shares": 1000000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "00229085",
+      "name": "기도산업",
+      "first_filing_date": "20260626",
+      "last_rcept_no": "20260626000715",
+      "band_low": 24800,
+      "band_high": 28400,
+      "forecast_start": "2026-07-31",
+      "forecast_end": "2026-08-06",
+      "sub_start": "2026-08-11",
+      "sub_end": "2026-08-12",
+      "payment_date": "2026-08-11",
+      "underwriter": "미래에셋증권",
+      "market": "코스닥",
+      "offer_shares": 1700000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    },
+    {
+      "corp_code": "01586923",
+      "name": "스카이랩스",
+      "first_filing_date": "20260707",
+      "last_rcept_no": "20260707000316",
+      "band_low": 13000,
+      "band_high": 16000,
+      "forecast_start": "2026-08-03",
+      "forecast_end": "2026-08-07",
+      "sub_start": "2026-08-13",
+      "sub_end": "2026-08-14",
+      "payment_date": "2026-08-19",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 2000000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": ""
+    }
+  ]
+}
