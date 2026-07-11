@@ -1220,6 +1220,24 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             # 배치가 마지막으로 쓴 값과 같으면 사용자 수정이 아님
             if cell == last.get(column, "") or cell == auto_cell(item, column):
                 continue
+            # "취소"/"연기": 사용자가 이전에 채운 값을 되돌린다 — 상장일 정정으로 되돌려야 하는 케이스
+            if cell.strip() in ("취소", "연기", "삭제"):
+                from datetime import date as _date
+
+                for field in fields:
+                    old_val = item.get(field, "")
+                    if old_val:
+                        data.setdefault("history", []).append({
+                            "date": _date.today().isoformat(), "name": name,
+                            "type": "수기변경", "field": column,
+                            "old": str(old_val), "new": cell.strip(),
+                        })
+                    item[field] = ""
+                    if field in manual_fields:
+                        manual_fields.remove(field)
+                changed = True
+                overrides += 1
+                continue
             if column == "확정공모가":
                 digits = "".join(ch for ch in cell if ch.isdigit())
                 if not digits:
@@ -1249,8 +1267,11 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 "old": last.get(column, "") or auto_cell(item, column),
                 "new": cell,
             })
+        # 취소/연기로 잠금이 풀린 경우 빈 리스트가 될 수 있어 무조건 덮어쓴다
         if manual_fields:
             item["manual_fields"] = manual_fields
+        elif "manual_fields" in item:
+            del item["manual_fields"]
 
     if changed:
         IPO_SCHEDULE_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
