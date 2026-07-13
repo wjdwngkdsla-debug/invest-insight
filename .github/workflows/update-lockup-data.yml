@@ -1,10 +1,11 @@
 name: Update lockup data
 
+
 on:
   schedule:
-    # 08:40 Asia/Seoul (= 23:40 UTC 전날) — KRX가 전일 종가를 아침에 공개하므로
-    # 자정 실행은 종가가 하루 더 늦다. 장 시작 전에 전일 데이터로 갱신한다.
-    - cron: "40 23 * * *"
+    # 00:30 Asia/Seoul (= 15:30 UTC 전날) — 00시가 지나면 KRX에 당일 상장 종목 값이 반영되므로
+    # 자정 직후 데이터로 갱신한다.
+    - cron: "30 15 * * *"
     # 20:00 Asia/Seoul (= 11:00 UTC) — 장 마감(15:30) 후 확정되는 당일 상장·공시를
     # 당일 저녁에 반영한다. 당일 상장 종목이 다음날이 아니라 당일 저녁에 잡힌다.
     - cron: "0 11 * * *"
@@ -21,12 +22,15 @@ on:
         default: false
         type: boolean
 
+
 permissions:
   contents: write
+
 
 concurrency:
   group: update-lockup-data
   cancel-in-progress: false
+
 
 jobs:
   update:
@@ -41,9 +45,11 @@ jobs:
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -51,12 +57,15 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+
       - name: Install parser dependencies
         run: python -m pip install -r requirements.txt
+
 
       - name: Pull manual edits from Google Sheet
         if: ${{ github.event_name == 'schedule' || github.event.inputs.reset_sheet != 'true' }}
         run: python -m scripts.sheets_sync pull-admin
+
 
       - name: Build lockup data
         shell: bash
