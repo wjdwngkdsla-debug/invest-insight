@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13 01:23",
+  "updated": "2026-07-13 11:31",
   "items": [
     {
       "corp_code": "00104069",
@@ -11,7 +11,8 @@
       "payment_date": "2025-12-30",
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": true
     },
     {
       "corp_code": "01501764",
@@ -92,7 +93,8 @@
       "manual_fields": [
         "listing_date"
       ],
-      "content_url": "https://blog.naver.com/vericap/224327442349"
+      "content_url": "https://blog.naver.com/vericap/224327442349",
+      "review_pending": false
     },
     {
       "corp_code": "00624244",
@@ -144,7 +146,8 @@
       "manual_fields": [
         "listing_date"
       ],
-      "content_url": "https://blog.naver.com/vericap/224343811780"
+      "content_url": "https://blog.naver.com/vericap/224343811780",
+      "review_pending": false
     },
     {
       "corp_code": "01461730",
@@ -163,7 +166,8 @@
       "offer_shares": 2200000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "00920731",
@@ -182,7 +186,8 @@
       "offer_shares": 2400000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01588897",
@@ -201,7 +206,8 @@
       "offer_shares": 910000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01722066",
@@ -220,7 +226,8 @@
       "offer_shares": 200000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01947443",
@@ -238,7 +245,8 @@
       "offer_shares": 1000000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "00229085",
@@ -257,7 +265,8 @@
       "offer_shares": 1700000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01586923",
@@ -276,7 +285,29 @@
       "offer_shares": 2000000,
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "01801026",
+      "name": "브릴스",
+      "first_filing_date": "20260713",
+      "last_rcept_no": "20260713000275",
+      "band_low": 16500,
+      "band_high": 19500,
+      "forecast_start": "2026-08-14",
+      "forecast_end": "2026-08-21",
+      "sub_start": "2026-08-25",
+      "sub_end": "2026-08-26",
+      "payment_date": "2026-08-28",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "offer_shares": 1200000,
+      "is_listing_ipo": true,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "00683283",
@@ -285,7 +316,8 @@
       "last_rcept_no": "20251219000079",
       "withdrawn": false,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "review_pending": true
     }
   ],
   "history": [
@@ -304,6 +336,22 @@
       "field": "상장일",
       "old": "미정",
       "new": "2026-07-24"
+    },
+    {
+      "date": "2026-07-13",
+      "name": "케이디비생명보험",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-13",
+      "name": "LS전선",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [],
