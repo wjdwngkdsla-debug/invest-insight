@@ -4,6 +4,7 @@ import { LockupCalendar, type CalendarEvent, type CalendarRangeEvent } from "@/c
 import { getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
 import { getIpoSchedule } from "@/lib/ipo";
 import { DdayBadge } from "@/components/DdayBadge";
+import { PastDateGate } from "@/components/PastDateGate";
 import holidays from "@/data/holidays.json";
 
 
@@ -165,10 +166,9 @@ export default function Home() {
           ) : (
             <ul className="flex gap-3 overflow-x-auto pb-2 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0">
               {upcoming.map((event, index) => (
-                <UpcomingEventCard
-                  key={`${event.stockCode}-${event.tradable_date}-${index}`}
-                  event={event}
-                />
+                <PastDateGate key={`${event.stockCode}-${event.tradable_date}-${index}`} date={event.tradable_date}>
+                  <UpcomingEventCard event={event} />
+                </PastDateGate>
               ))}
             </ul>
           )}

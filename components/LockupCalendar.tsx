@@ -3,7 +3,7 @@
 
 
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 
@@ -178,9 +178,15 @@ export function LockupCalendar({
   rangeEvents?: CalendarRangeEvent[];
   holidays: Record<string, string>;
 }) {
-  const today = kstToday();
-  const [year, setYear] = useState(today.year);
-  const [month, setMonth] = useState(today.month);
+  const initialToday = kstToday();
+  const [year, setYear] = useState(initialToday.year);
+  const [month, setMonth] = useState(initialToday.month);
+  // "오늘" 강조는 접속 시점 기준이어야 한다. 빌드 시점(SSR) 값에 굳지 않게 마운트 후 재계산.
+  // (이 값이 굳어서 새로고침=빌드날짜, 탭이동=현재날짜로 엇갈리던 버그 수정)
+  const [today, setToday] = useState(initialToday);
+  useEffect(() => {
+    setToday(kstToday());
+  }, []);
   // 범례 = 토글 필터. 초기값은 전체 표시
   const [active, setActive] = useState<Set<CalendarEventKind>>(new Set(ALL_KINDS));
   const allActive = active.size === ALL_KINDS.length;
