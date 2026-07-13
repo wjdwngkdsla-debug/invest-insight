@@ -1,5 +1,15 @@
 import ipoData from "@/data/ipo_schedule.json";
-import { dDay } from "./data";
+
+// dDay를 자체 정의(lib/data 미의존) — 이 모듈을 클라이언트 컴포넌트에서 import해도
+// 무거운 site_data.json이 번들에 딸려오지 않게 한다.
+function kstDayNumber(ms: number): number {
+  return Math.floor((ms + 9 * 60 * 60 * 1000) / 86400000);
+}
+
+export function dDay(dateStr: string, today = new Date()): number {
+  const target = kstDayNumber(Date.parse(`${dateStr}T00:00:00+09:00`));
+  return target - kstDayNumber(today.getTime());
+}
 
 export interface CommitTier {
   period: string;
@@ -30,6 +40,7 @@ export interface IpoItem {
   withdrawn?: boolean;
   content_url?: string; // 시트 IPO일정 탭의 콘텐츠링크 열 (운영자 입력)
   first_filing_date?: string;
+  review_pending?: boolean; // IPO 신호 부족 → 검토대기(비공개). 사이트 노출 제외
 }
 
 export interface IpoScheduleData {
@@ -82,11 +93,14 @@ export function ipoSortKey(item: IpoItem, today = new Date()): [number, string, 
 }
 
 export function getSortedIpoItems(today = new Date()): IpoItem[] {
-  return [...getIpoSchedule().items].sort((a, b) => {
-    const ka = ipoSortKey(a, today);
-    const kb = ipoSortKey(b, today);
-    return ka[0] - kb[0] || ka[1].localeCompare(kb[1]) || ka[2].localeCompare(kb[2]);
-  });
+  // 검토대기(review_pending) 종목은 사이트 비노출 — 시트에서 승인해야 뜬다
+  return [...getIpoSchedule().items]
+    .filter((item) => !item.review_pending)
+    .sort((a, b) => {
+      const ka = ipoSortKey(a, today);
+      const kb = ipoSortKey(b, today);
+      return ka[0] - kb[0] || ka[1].localeCompare(kb[1]) || ka[2].localeCompare(kb[2]);
+    });
 }
 
 // "2026-07-01" → "07.01"

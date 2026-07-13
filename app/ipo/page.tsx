@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getSortedIpoItems, ipoStatus, dateRange, mmdd, bandPosition, type IpoItem, type IpoTone } from "@/lib/ipo";
+import { getSortedIpoItems, dateRange, mmdd, bandPosition, type IpoItem } from "@/lib/ipo";
+import { IpoStatusChip } from "@/components/IpoStatusChip";
 
 
 
@@ -52,11 +53,6 @@ export const metadata: Metadata = {
 
 
 
-const TONE_CLASS: Record<IpoTone, string> = {
-  active: "bg-red-100 text-red-600",
-  waiting: "bg-blue-100 text-blue-600",
-  done: "bg-gray-100 text-gray-500",
-};
 
 
 
@@ -224,7 +220,6 @@ function CommitTable({ item }: { item: IpoItem }) {
 
 
 function IpoCard({ item }: { item: IpoItem }) {
-  const status = ipoStatus(item);
   const hasCommit = Boolean(item.commit_apply?.length || item.commit_alloc?.length);
   const band = item.band_low && item.band_high ? `${item.band_low.toLocaleString()}~${item.band_high.toLocaleString()}원` : "미정";
   const bandPos = bandPosition(item);
@@ -250,7 +245,7 @@ function IpoCard({ item }: { item: IpoItem }) {
       className="group rounded-lg border border-gray-200 bg-white p-5 pb-4 outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300"
     >
       <div className="flex flex-wrap items-center gap-2">
-        <span className={`inline-flex shrink-0 rounded px-2 py-1 text-xs font-bold ${TONE_CLASS[status.tone]}`}>{status.label}</span>
+        <IpoStatusChip item={item} />
         <span className={`font-semibold text-gray-900 ${item.withdrawn ? "line-through text-gray-400" : ""}`}>{item.name}</span>
         <span className="text-xs text-gray-500">
           {item.market || "시장 미정"} · 주관 {item.underwriter || "미정"}

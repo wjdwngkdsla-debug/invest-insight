@@ -122,7 +122,7 @@ IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
 COMMIT_TIER_ORDER = ["미확약", "15일", "1개월", "3개월", "6개월"]
 IPO_SCHEDULE_HEADERS = [
     "기업명", "상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
-    "수요예측일", "청약일", "상장일", "IPO취소", "수요예측경쟁률", "개인청약경쟁률",
+    "수요예측일", "청약일", "상장일", "검토", "IPO취소", "수요예측경쟁률", "개인청약경쟁률",
     "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
     "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
     "콘텐츠링크",
@@ -765,7 +765,10 @@ def regenerate_worklist(spreadsheet: gspread.Spreadsheet) -> None:
 
     rows_csv = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
     targets = json.loads(IPO_TARGETS_PATH.read_text(encoding="utf-8")) if IPO_TARGETS_PATH.exists() else []
-    tmap = {t["code"]: t for t in targets}
+    # 종목코드 있는 대상만 작업목록에 나열한다. 코드 없는(상장 전) 종목은 빈 키("")로 충돌해
+    # 하나만 살아남던 버그가 있었고(레메디/에이치엘지노믹스), 코드 없으면 락업 이벤트 매칭도
+    # 불가하다. 이런 종목은 상장 후 KRX 코드가 잡히면 자동 편입되므로 여기서 제외한다.
+    tmap = {t["code"]: t for t in targets if (t.get("code") or "").strip()}
 
 
     def to_int(value: str) -> int:
@@ -1079,6 +1082,8 @@ def _ipo_status_label(item: dict) -> str:
     from datetime import date
 
     today = date.today().isoformat()
+    if item.get("review_pending"):
+        return "검토필요"
     if item.get("withdrawn"):
         return "공모 철회"
     listing = item.get("listing_date") or ""
@@ -1182,7 +1187,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 name_at = headers.index("기업명")
                 col_at = {
                     col: headers.index(col)
-                    for col in list(IPO_EDITABLE_COLUMNS) + ["콘텐츠링크", "IPO취소"]
+                    for col in list(IPO_EDITABLE_COLUMNS) + ["콘텐츠링크", "IPO취소", "검토"]
                     if col in headers
                 }
                 for row in values[1:]:
@@ -1245,6 +1250,20 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
 
         cells = sheet_cells.get(name) or {}
         last = written.get(name) or {}
+
+        # 검토 컬럼 "승인" → 검토대기 항목을 사이트에 노출(잠금). IPO 신호 약해도 사용자가 보증.
+        if cells.get("검토", "").strip() == "승인" and not item.get("review_approved"):
+            item["review_approved"] = True
+            item["review_pending"] = False
+            changed = True
+            from datetime import date as _date
+
+            data.setdefault("history", []).append({
+                "date": _date.today().isoformat(),
+                "name": name, "type": "검토승인", "field": "노출",
+                "old": "검토필요(비공개)", "new": "노출",
+            })
+
         manual_fields = list(item.get("manual_fields") or [])
         for column, fields in IPO_EDITABLE_COLUMNS.items():
             cell = cells.get(column, "")
@@ -1314,6 +1333,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             auto_cell(item, "수요예측일"),
             auto_cell(item, "청약일"),
             auto_cell(item, "상장일"),
+            "",  # 검토 — 드롭다운. "승인" 선택하면 검토대기 항목을 사이트에 노출
             "",  # IPO취소 — 드롭다운. "삭제" 선택하면 다음 배치가 items에서 완전 제거
             f"{item.get('demand_ratio'):,.2f}:1" if item.get("demand_ratio") else "미정",
             f"{item.get('sub_ratio'):,.2f}:1" if item.get("sub_ratio") else "미정",
@@ -1339,27 +1359,31 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     )
     IPO_SCHEDULE_WRITTEN_PATH.write_text(json.dumps(new_written, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # IPO취소 컬럼에 "삭제"만 있는 드롭다운 데이터 검증
-    cancel_col_index = IPO_SCHEDULE_HEADERS.index("IPO취소")
-    spreadsheet.batch_update({
-        "requests": [{
+    # 드롭다운 데이터 검증: IPO취소="삭제", 검토="승인"
+    def _dropdown_request(col_name: str, option: str) -> dict:
+        col_index = IPO_SCHEDULE_HEADERS.index(col_name)
+        return {
             "setDataValidation": {
                 "range": {
                     "sheetId": worksheet.id,
                     "startRowIndex": 1,
                     "endRowIndex": len(sheet_values),
-                    "startColumnIndex": cancel_col_index,
-                    "endColumnIndex": cancel_col_index + 1,
+                    "startColumnIndex": col_index,
+                    "endColumnIndex": col_index + 1,
                 },
                 "rule": {
-                    "condition": {"type": "ONE_OF_LIST", "values": [{"userEnteredValue": "삭제"}]},
+                    "condition": {"type": "ONE_OF_LIST", "values": [{"userEnteredValue": option}]},
                     "strict": True,
                     "showCustomUi": True,
                 },
             }
-        }]
-    })
-    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존, IPO취소 드롭다운 설정)", file=sys.stderr)
+        }
+
+    spreadsheet.batch_update({"requests": [
+        _dropdown_request("IPO취소", "삭제"),
+        _dropdown_request("검토", "승인"),
+    ]})
+    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존, IPO취소·검토 드롭다운 설정)", file=sys.stderr)
 
     # 정정이력 탭 — 정정공시·수기변경·KRX 자동수정·삭제·부활·IPO종목 삭제 크로스기록까지 최신순.
     # 운영자가 IPO일정·락업 둘 다 한 곳에서 감사할 수 있게 크로스 로그를 모아둔다.

@@ -288,6 +288,18 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
     return demand_ratio, commit_apply
 
 
+def _parse_ipo_intent(plain: str) -> bool:
+    """진짜 신규상장(IPO)인지 판별 — 미상장사의 유상증자(케이디비생명보험 등)를 걸러낸다.
+
+    IPO 증권신고서는 반드시 '신규상장/코스닥·유가증권시장 상장/상장예비심사/상장을 목적' 문구를
+    담는다. 미상장사가 자금조달용 유상증자를 하면 이런 상장 의도 문구가 없다.
+    """
+    return bool(re.search(
+        r"신규\s*상장|코스닥\s*시장\s*상장|유가증권\s*시장\s*상장|상장\s*예비\s*심사|상장을\s*목적|코스닥시장\s*상장|공모를\s*통한\s*(?:신규\s*)?상장",
+        plain,
+    ))
+
+
 def parse_offering_doc(doc: str) -> dict[str, Any]:
     plain = _clean_text(doc)
     band = _parse_band(plain)
@@ -308,7 +320,22 @@ def parse_offering_doc(doc: str) -> dict[str, Any]:
         "offer_shares": _parse_offer_shares(plain),
         "demand_ratio": demand_ratio,
         "commit_apply": commit_apply,
+        "is_listing_ipo": _parse_ipo_intent(plain),
     }
+
+
+def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
+    """사이트 노출 여부 판정. 신호 부족하면 검토대기(비공개)로 돌린다.
+
+    강한 IPO 신호: 상장 의도 문구 / 상장 시장 확정 / 수요예측 실시(증자는 수요예측 안 함).
+    """
+    if item.get("is_listing_ipo"):
+        return True
+    if item.get("market"):
+        return True
+    if item.get("forecast_start"):
+        return True
+    return False
 
 
 # ── 3) 실적보고서 파싱 (청약 후: 개인청약경쟁률 + 확약 '배정') ──
@@ -527,51 +554,65 @@ def detect_listings_from_krx(
     trading_date: str,
     history: list[dict[str, Any]],
     log,
+    base_info: dict[str, dict[str, Any]] | None = None,
 ) -> int:
-    """KRX 진실 소스 원칙: 상장일·종목코드·시장을 KRX 스냅샷 기준으로 반영한다.
+    """KRX 진실 소스 원칙: 상장일·종목코드·시장을 KRX 기준으로 반영한다.
 
-    사용자가 IPO일정 시트에 넣은 상장일과 KRX 반환값이 다르면 KRX가 우선.
-    사용자 입력은 "발표 예상값" 성격이라 오타·연기 시 자동 복구되는 게 맞다.
-    manual_fields 잠금(listing_date)은 이제 참조만 하고 KRX 자동수정은 항상 진행한다.
+    상장일은 종목기본정보의 LIST_DD(실제 상장일)를 우선 사용하고, 없으면 시세 스냅샷
+    등장 거래일로 대체한다. 사용자 입력과 다르면 KRX가 우선(오타·연기 자동 복구).
     """
-    if not snapshot:
+    if not snapshot and not base_info:
         return 0
-    name_to_meta: dict[str, tuple[str, dict[str, Any]]] = {}
-    for code, meta in snapshot.items():
+
+    # 이름 → (코드, 상장일, 시장) 통합 조회표. 기본정보(정확한 LIST_DD)가 우선.
+    name_to_meta: dict[str, dict[str, Any]] = {}
+    for code, meta in (snapshot or {}).items():
         key = _norm_name(meta.get("name") or "")
         if key and key not in name_to_meta:
-            name_to_meta[key] = (code, meta)
+            name_to_meta[key] = {"code": code, "list_dd": trading_date, "market": meta.get("market") or ""}
+    for code, info in (base_info or {}).items():
+        key = _norm_name(info.get("name") or "")
+        if not key:
+            continue
+        # 기본정보는 정확한 상장일을 주므로 스냅샷 값을 덮어쓴다
+        entry = name_to_meta.setdefault(key, {})
+        entry["code"] = code
+        entry["market"] = info.get("market") or entry.get("market") or ""
+        if info.get("list_dd"):
+            entry["list_dd"] = info["list_dd"]
+        elif "list_dd" not in entry:
+            entry["list_dd"] = trading_date
 
     detected = 0
     for item in items_by_corp.values():
         match = name_to_meta.get(_norm_name(item.get("name") or ""))
         if not match:
             continue
-        code, meta = match
+        code = match.get("code") or ""
+        list_dd = match.get("list_dd") or trading_date
 
-        # 상장일: KRX 감지 거래일이 진실. 다르면 자동수정 + 이력 기록.
+        # 상장일: KRX가 진실. 다르면 자동수정 + 이력 기록.
         current_listing = item.get("listing_date") or ""
-        if current_listing != trading_date:
+        if current_listing != list_dd:
             history.append({
                 "date": trading_date, "name": item.get("name", ""),
                 "type": "KRX 자동수정" if current_listing else "상장확인(KRX)",
                 "field": "상장일",
                 "old": current_listing or "미정",
-                "new": trading_date,
+                "new": list_dd,
             })
-            item["listing_date"] = trading_date
-            # 잠금은 참조용으로만 남기되 KRX 우선이라는 신호로 해제
+            item["listing_date"] = list_dd
             manual_fields = [f for f in (item.get("manual_fields") or []) if f != "listing_date"]
             if manual_fields:
                 item["manual_fields"] = manual_fields
             elif "manual_fields" in item:
                 del item["manual_fields"]
             detected += 1
-            log(f"KRX 상장 반영: {item.get('name')} {current_listing or '미정'} → {trading_date} (코드 {code})")
+            log(f"KRX 상장 반영: {item.get('name')} {current_listing or '미정'} → {list_dd} (코드 {code})")
 
-        # 종목코드: 사용자가 잘못 넣었을 가능성 방어 — 다르면 KRX 값으로 자동수정
+        # 종목코드: 사용자가 잘못 넣었으면 KRX 값으로 자동수정
         current_code = (item.get("stock_code") or "").strip()
-        if current_code != code:
+        if code and current_code != code:
             if current_code:
                 history.append({
                     "date": trading_date, "name": item.get("name", ""),
@@ -580,9 +621,8 @@ def detect_listings_from_krx(
                 })
             item["stock_code"] = code
 
-        # 시장은 사용자 입력이 있으면 존중(코스닥/코스피 이름 자체가 KRX와 표기 다를 수 있음)
-        if not item.get("market"):
-            item["market"] = meta.get("market") or ""
+        if not item.get("market") and match.get("market"):
+            item["market"] = match["market"]
     return detected
 
 
@@ -591,6 +631,7 @@ def refresh_ipo_schedule(
     verbose: bool = True,
     krx_snapshot: dict[str, dict[str, Any]] | None = None,
     krx_trading_date: str | None = None,
+    krx_base_info: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     def log(msg: str) -> None:
         if verbose:
@@ -685,9 +726,9 @@ def refresh_ipo_schedule(
 
     seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names, deleted_corps)
 
-    # KRX 스냅샷으로 상장일 자동 감지(운영자 미입력 대비 백업)
-    if krx_snapshot and krx_trading_date:
-        detect_listings_from_krx(items_by_corp, krx_snapshot, krx_trading_date, history, log)
+    # KRX로 상장일 자동 감지·확정 (종목기본정보 LIST_DD 우선, 시세 스냅샷 보조)
+    if (krx_snapshot or krx_base_info) and krx_trading_date:
+        detect_listings_from_krx(items_by_corp, krx_snapshot or {}, krx_trading_date, history, log, base_info=krx_base_info)
 
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
@@ -726,6 +767,19 @@ def refresh_ipo_schedule(
             drop = True
         if not listing and first and first < (datetime.today() - timedelta(days=days_back)).strftime("%Y%m%d"):
             drop = True
+        # 검토대기 판정: 사용자가 승인한 종목은 항상 노출, 아니면 IPO 신호 부족 시 비공개 대기
+        if item.get("review_approved"):
+            item["review_pending"] = False
+        else:
+            weak = not _is_confirmed_ipo(item)
+            if weak and not item.get("review_pending"):
+                # 새로 검토대기로 넘어가는 순간만 이력에 남긴다
+                history.append({
+                    "date": today, "name": item.get("name", ""), "type": "검토대기",
+                    "field": "노출", "old": "-", "new": "IPO 신호 부족(비공개)",
+                })
+            item["review_pending"] = weak
+
         if not drop:
             kept.append(item)
 

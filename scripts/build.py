@@ -5213,9 +5213,15 @@ def main() -> None:
     # KRX 스냅샷을 함께 넘겨 상장일 자동 감지(운영자가 시트에 안 넣어도 상장 다음날 배치가 잡음)
     try:
         from scripts.sources.ipo_schedule import refresh_ipo_schedule
+        from scripts.sources.krx import latest_base_info
 
         snap_date, snap = latest_krx_snapshot()
-        refresh_ipo_schedule(krx_snapshot=snap, krx_trading_date=snap_date)
+        base_date, base = latest_base_info()  # 종목기본정보 LIST_DD로 정확한 상장일 확정
+        refresh_ipo_schedule(
+            krx_snapshot=snap,
+            krx_trading_date=snap_date or base_date,
+            krx_base_info=base,
+        )
     except Exception as exc:
         print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)
 

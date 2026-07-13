@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { CalendarTable } from "@/components/CalendarTable";
 import { LockupCalendar, type CalendarEvent, type CalendarRangeEvent } from "@/components/LockupCalendar";
-import { dDay, getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
+import { getFlatRows, getSiteData, getUpcomingEvents, type UpcomingGroup } from "@/lib/data";
 import { getIpoSchedule } from "@/lib/ipo";
+import { DdayBadge } from "@/components/DdayBadge";
 import holidays from "@/data/holidays.json";
 
 
@@ -84,10 +85,6 @@ function EventHoverCard({ event }: { event: UpcomingGroup }) {
 
 
 function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
-  const days = dDay(event.tradable_date);
-  const isNear = days <= 3;
-
-
   return (
     <li className="upcoming-event relative z-10 w-60 shrink-0 lg:w-auto">
       <Link
@@ -95,13 +92,7 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
         className="block rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-gray-300 hover:bg-gray-50"
       >
         <span className="flex items-center gap-2">
-          <span
-            className={`inline-flex shrink-0 rounded px-2 py-1 text-xs font-bold ${
-              isNear ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"
-            }`}
-          >
-            D-{days}
-          </span>
+          <DdayBadge date={event.tradable_date} />
           <span className="min-w-0 truncate text-xs text-gray-500">
             {event.tradable_date} · {groupTitle(event)}
           </span>
@@ -138,7 +129,7 @@ export default function Home() {
   // IPO 일정 — 수요예측·청약은 기간 바, 상장은 단일일 배지 (/ipo 페이지와 같은 데이터)
   const calendarRanges: CalendarRangeEvent[] = [];
   for (const item of getIpoSchedule().items) {
-    if (item.withdrawn) continue;
+    if (item.withdrawn || item.review_pending) continue;
     if (item.forecast_start) {
       calendarRanges.push({
         start: item.forecast_start,
