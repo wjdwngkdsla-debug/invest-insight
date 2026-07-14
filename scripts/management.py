@@ -123,7 +123,7 @@ def merge_stock_management(
             # 확인하고, 운영자가 개입할 때만 수동편입/비공개를 선택한다.
             status, visibility = "자동", "비공개" if item.get("management_hidden") else ""
         source = {
-            "scope": "IPO일정",
+            "scope": "IPO일정+락업",
             "name": item.get("name") or "",
             "corp_code": item.get("corp_code") or "",
             "stock_code": item.get("stock_code") or "",
@@ -143,14 +143,14 @@ def merge_stock_management(
             destination = merged.pop(source_key, None)
             if destination:
                 current["scope"] = _scope_label(
-                    _scope_parts(current.get("scope")) | _scope_parts(destination.get("scope")) | {"IPO일정"}
+                    _scope_parts(current.get("scope")) | _scope_parts(destination.get("scope")) | {"IPO일정", "락업"}
                 )
                 _fill_missing(current, destination)
             merged[source_key] = current
-            current["scope"] = _scope_label(_scope_parts(current.get("scope")) | {"IPO일정"})
+            current["scope"] = _scope_label(_scope_parts(current.get("scope")) | {"IPO일정", "락업"})
             _fill_missing(current, source)
         else:
-            current = upsert(source, "IPO일정")
+            current = upsert(source, "IPO일정+락업")
         # KRX/DART가 확정한 식별자는 초기 수동 힌트보다 우선한다.
         for identity in ("name", "corp_code", "stock_code", "market", "listing_date"):
             if source.get(identity):
@@ -164,13 +164,13 @@ def merge_stock_management(
     # Old IPO취소 tombstones become permanent exclusions during migration.
     for corp_code, tomb in (schedule.get("deleted_corps") or {}).items():
         current = upsert({
-            "scope": "IPO일정",
+            "scope": "IPO일정+락업",
             "name": tomb.get("name") or "",
             "corp_code": corp_code,
             "management_status": "제외고정",
             "visibility": "비공개",
             "memo": "기존 IPO취소 이관",
-        }, "IPO일정")
+        }, "IPO일정+락업")
         current["management_status"] = "제외고정"
         current["visibility"] = "비공개"
 
@@ -229,7 +229,7 @@ def apply_stock_management(
         name = row.get("name", "")
         if not name:
             continue
-        scopes = _scope_parts(row.get("scope")) or {"IPO일정"}
+        scopes = _scope_parts(row.get("scope")) or {"IPO일정", "락업"}
         status = row.get("management_status") or "수동편입"
         visibility = row.get("visibility") or (
             "비공개" if status in {"검토대기", "제외고정"} else ("노출" if status == "수동편입" else "")

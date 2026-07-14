@@ -483,7 +483,7 @@ def pull_stock_management(spreadsheet: gspread.Spreadsheet) -> None:
         if corp.isdigit() and len(corp) < 8:
             row["corp_code"] = corp.zfill(8)
         if row.get("name") and not row.get("scope"):
-            row["scope"] = "IPO일정"
+            row["scope"] = "IPO일정+락업"
         if row.get("name") and not row.get("management_status"):
             row["management_status"] = "수동편입"
 
