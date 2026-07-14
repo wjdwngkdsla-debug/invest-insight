@@ -408,6 +408,17 @@ def parse_result_report(doc: str) -> dict[str, Any]:
     return out
 
 
+def _should_fetch_result_report(item: dict[str, Any], today: str) -> bool:
+    """청약 종료 당일부터 DART 실적보고서를 조회할 수 있는지 판정한다."""
+    sub_end = item.get("sub_end") or ""
+    return bool(
+        not item.get("withdrawn")
+        and sub_end
+        and sub_end <= today
+        and not item.get("report_rcp")
+    )
+
+
 # ── 4) 상장일 연결 (IPO종목 탭 → ipo_targets.json) ─────────
 
 
@@ -749,8 +760,9 @@ def refresh_ipo_schedule(
         item.setdefault("listing_date", "")
         item.setdefault("stock_code", "")
 
-        sub_end = item.get("sub_end") or ""
-        if not item.get("withdrawn") and sub_end and sub_end < today and not item.get("report_rcp"):
+        # 청약 종료 당일 장 마감 후 실적보고서가 공시될 수 있으므로, 그날
+        # 저녁 배치부터 바로 조회한다. KRX 시세/종목 존재 여부와는 무관하다.
+        if _should_fetch_result_report(item, today):
             try:
                 report = find_result_report(item["corp_code"])
                 if report:
