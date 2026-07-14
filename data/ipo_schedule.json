@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14 18:15",
+  "updated": "2026-07-14 21:22",
   "items": [
     {
       "corp_code": "00104069",
@@ -338,6 +338,275 @@
       "review_pending": false,
       "archived_at": "2026-07-14",
       "management_status": "자동"
+    },
+    {
+      "corp_code": "01424261",
+      "name": "레몬헬스케어",
+      "management_name": "레몬헬스케어",
+      "first_filing_date": "20260417",
+      "last_rcept_no": "20260623000244",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "stock_code": "365660",
+      "market": "코스닥",
+      "listing_date": "2026-07-06",
+      "band_low": 7500,
+      "band_high": 10000,
+      "final_price": 10000,
+      "forecast_start": "2026-06-15",
+      "forecast_end": "2026-06-19",
+      "sub_start": "2026-06-24",
+      "sub_end": "2026-06-25",
+      "payment_date": "2026-06-29",
+      "underwriter": "KB증권",
+      "offer_shares": 2000000,
+      "demand_ratio": 1238.0,
+      "is_listing_ipo": true,
+      "sub_ratio": 1510.57,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 296514,
+          "pct": 19.77
+        },
+        {
+          "period": "1개월",
+          "qty": 91938,
+          "pct": 6.13
+        },
+        {
+          "period": "15일",
+          "qty": 724123,
+          "pct": 48.27
+        },
+        {
+          "period": "미확약",
+          "qty": 387425,
+          "pct": 25.83
+        }
+      ],
+      "report_rcp": "20260629000505",
+      "archived_at": "2026-07-14"
+    },
+    {
+      "corp_code": "01379129",
+      "name": "매드업",
+      "management_name": "매드업",
+      "first_filing_date": "20260413",
+      "last_rcept_no": "20260622000384",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "stock_code": "0039P0",
+      "market": "코스닥",
+      "listing_date": "2026-07-01",
+      "band_low": 7000,
+      "band_high": 8000,
+      "final_price": 8000,
+      "forecast_start": "2026-06-12",
+      "forecast_end": "2026-06-18",
+      "sub_start": "2026-06-23",
+      "sub_end": "2026-06-24",
+      "payment_date": "2026-06-23",
+      "underwriter": "미래에셋증권",
+      "offer_shares": 2000000,
+      "demand_ratio": 1396.29,
+      "is_listing_ipo": true,
+      "sub_ratio": 3304.76,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 164476,
+          "pct": 11.0
+        },
+        {
+          "period": "3개월",
+          "qty": 452412,
+          "pct": 30.2
+        },
+        {
+          "period": "1개월",
+          "qty": 142214,
+          "pct": 9.5
+        },
+        {
+          "period": "15일",
+          "qty": 488053,
+          "pct": 32.5
+        },
+        {
+          "period": "미확약",
+          "qty": 252845,
+          "pct": 16.9
+        }
+      ],
+      "report_rcp": "20260626000469",
+      "archived_at": "2026-07-14"
+    },
+    {
+      "corp_code": "01370517",
+      "name": "스트라드비젼",
+      "management_name": "스트라드비젼",
+      "first_filing_date": "20260409",
+      "last_rcept_no": "20260617000171",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "stock_code": "475040",
+      "market": "코스닥",
+      "listing_date": "2026-06-30",
+      "band_low": 12000,
+      "band_high": 14000,
+      "final_price": 12000,
+      "forecast_start": "2026-06-09",
+      "forecast_end": "2026-06-15",
+      "sub_start": "2026-06-18",
+      "sub_end": "2026-06-19",
+      "payment_date": "2026-06-23",
+      "underwriter": "KB증권",
+      "offer_shares": 7000000,
+      "demand_ratio": 381.3,
+      "is_listing_ipo": true,
+      "sub_ratio": 45.83,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 1271808,
+          "pct": 24.52
+        },
+        {
+          "period": "3개월",
+          "qty": 99250,
+          "pct": 1.91
+        },
+        {
+          "period": "1개월",
+          "qty": 152248,
+          "pct": 2.94
+        },
+        {
+          "period": "15일",
+          "qty": 189714,
+          "pct": 3.66
+        },
+        {
+          "period": "미확약",
+          "qty": 3473572,
+          "pct": 66.97
+        }
+      ],
+      "report_rcp": "20260623000422",
+      "archived_at": "2026-07-14"
+    },
+    {
+      "corp_code": "00577593",
+      "name": "져스텍",
+      "management_name": "져스텍",
+      "first_filing_date": "20260416",
+      "last_rcept_no": "20260616000250",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "stock_code": "153890",
+      "market": "코스닥",
+      "listing_date": "2026-06-29",
+      "band_low": 10500,
+      "band_high": 12500,
+      "final_price": 12500,
+      "forecast_start": "2026-06-08",
+      "forecast_end": "2026-06-12",
+      "sub_start": "2026-06-18",
+      "sub_end": "2026-06-19",
+      "payment_date": "2026-06-23",
+      "underwriter": "삼성증권",
+      "offer_shares": 1600000,
+      "demand_ratio": 1294.99,
+      "is_listing_ipo": true,
+      "sub_ratio": 2783.89,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 192075,
+          "pct": 16.6
+        },
+        {
+          "period": "3개월",
+          "qty": 359161,
+          "pct": 31.0
+        },
+        {
+          "period": "1개월",
+          "qty": 186357,
+          "pct": 16.1
+        },
+        {
+          "period": "15일",
+          "qty": 181110,
+          "pct": 15.6
+        },
+        {
+          "period": "미확약",
+          "qty": 241297,
+          "pct": 20.8
+        }
+      ],
+      "report_rcp": "20260623000136",
+      "archived_at": "2026-07-14"
+    },
+    {
+      "corp_code": "01755259",
+      "name": "피스피스스튜디오",
+      "management_name": "피스피스스튜디오",
+      "first_filing_date": "20260407",
+      "last_rcept_no": "20260522000577",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "stock_code": "0117P0",
+      "market": "코스닥",
+      "listing_date": "2026-06-08",
+      "band_low": 19000,
+      "band_high": 21500,
+      "final_price": 21500,
+      "forecast_start": "2026-05-14",
+      "forecast_end": "2026-05-20",
+      "sub_start": "2026-05-26",
+      "sub_end": "2026-05-27",
+      "underwriter": "NH투자증권·미래에셋증권",
+      "offer_shares": 2272637,
+      "demand_ratio": 847.76,
+      "is_listing_ipo": true,
+      "sub_ratio": 1191.15,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 294512,
+          "pct": 17.3
+        },
+        {
+          "period": "3개월",
+          "qty": 3580,
+          "pct": 0.2
+        },
+        {
+          "period": "1개월",
+          "qty": 191880,
+          "pct": 11.3
+        },
+        {
+          "period": "15일",
+          "qty": 780642,
+          "pct": 45.8
+        },
+        {
+          "period": "미확약",
+          "qty": 433863,
+          "pct": 25.5
+        }
+      ],
+      "report_rcp": "20260529001298",
+      "archived_at": "2026-07-14"
     }
   ],
   "history": [
@@ -420,6 +689,46 @@
       "field": "청약 종료",
       "old": "2026-08-06",
       "new": "2026-08-13"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "피스피스스튜디오",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "져스텍",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "스트라드비젼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "매드업",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "레몬헬스케어",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
     }
   ],
   "seed_pending": [],
