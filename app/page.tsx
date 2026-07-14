@@ -130,7 +130,7 @@ export default function Home() {
   // IPO 일정 — 수요예측·청약은 기간 바, 상장은 단일일 배지 (/ipo 페이지와 같은 데이터)
   const calendarRanges: CalendarRangeEvent[] = [];
   for (const item of getIpoSchedule().items) {
-    if (item.withdrawn || item.review_pending) continue;
+    if (item.withdrawn || item.review_pending || item.fixed_excluded || item.management_hidden) continue;
     if (item.forecast_start) {
       calendarRanges.push({
         start: item.forecast_start,

@@ -185,7 +185,8 @@ export function LockupCalendar({
   // (이 값이 굳어서 새로고침=빌드날짜, 탭이동=현재날짜로 엇갈리던 버그 수정)
   const [today, setToday] = useState(initialToday);
   useEffect(() => {
-    setToday(kstToday());
+    const timer = window.setTimeout(() => setToday(kstToday()), 0);
+    return () => window.clearTimeout(timer);
   }, []);
   // 범례 = 토글 필터. 초기값은 전체 표시
   const [active, setActive] = useState<Set<CalendarEventKind>>(new Set(ALL_KINDS));

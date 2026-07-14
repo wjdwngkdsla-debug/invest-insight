@@ -20,6 +20,17 @@ from pathlib import Path
 import gspread
 from gspread.utils import rowcol_to_a1
 
+from scripts.management import (
+    CORRECTION_COLUMNS,
+    MANAGEMENT_COLUMNS,
+    SCHEDULE_FIELD_MAP,
+    apply_schedule_correction,
+    apply_stock_management,
+    build_correction_tasks,
+    merge_stock_management,
+    norm_name,
+)
+
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_SHEET_ID = "1THcCbn5n9NQesOa0JHV3B-pdCeab8sRqMZhxOIWI-pg"
@@ -107,6 +118,24 @@ IPO_TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
 IPO_TARGET_TAB = "IPO종목"
 
 
+# 새 운영 구조. 기존 탭/파일은 첫 배치 이관과 하위 호환에만 사용한다.
+STOCK_MANAGEMENT_PATH = ROOT_DIR / "data" / "stock_management.json"
+STOCK_MANAGEMENT_TAB = "종목관리"
+STOCK_MANAGEMENT_HEADERS = [
+    "대상구분", "기업명", "DART기업코드", "종목코드", "시장", "상장일",
+    "관리상태", "노출", "수동공모가", "콘텐츠링크", "메모",
+]
+STOCK_MANAGEMENT_KEYS = dict(zip(STOCK_MANAGEMENT_HEADERS, MANAGEMENT_COLUMNS))
+
+CORRECTION_PATH = ROOT_DIR / "data" / "correction_tasks.json"
+CORRECTION_TAB = "보정작업"
+CORRECTION_HEADERS = [
+    "작업ID", "대상", "기업명", "코드", "항목", "구분", "기간",
+    "자동값", "수기값", "수기일자", "수기수량", "보정방식", "처리상태", "메모", "이벤트ID",
+]
+CORRECTION_KEYS = dict(zip(CORRECTION_HEADERS, CORRECTION_COLUMNS))
+
+
 # 작업목록 탭 — 운영자 보완 입력의 단일 창구. 배치가 "다 채운 행"만 수거해 표준
 # 통로(IPO종목 수동공모가 / 수기입력)로 옮기고, 남은 갭만 다시 나열한다.
 # 규칙: 빈칸 = 무시(다음 목록에 유지), 전부 채움 = 반영, 일부만 채움 = 값 보존.
@@ -116,6 +145,7 @@ WORKLIST_BACKUP_PATH = ROOT_DIR / "data" / "worklist_backup.json"
 
 IPO_SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
 IPO_SCHEDULE_TAB = "IPO일정"
+IPO_SCHEDULE_VIEW_TAB = "IPO일정_현황"
 IPO_SCHEDULE_BACKUP_PATH = ROOT_DIR / "data" / "ipo_schedule_sheet_backup.json"
 # 배치가 마지막으로 쓴 값 스냅샷 — 시트 값과 이게 다르면 "사용자 수정"으로 판정한다
 IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
@@ -123,6 +153,13 @@ COMMIT_TIER_ORDER = ["미확약", "15일", "1개월", "3개월", "6개월"]
 IPO_SCHEDULE_HEADERS = [
     "기업명", "상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
     "수요예측일", "청약일", "상장일", "검토", "IPO취소", "수요예측경쟁률", "개인청약경쟁률",
+    "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
+    "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
+    "콘텐츠링크",
+]
+IPO_SCHEDULE_VIEW_HEADERS = [
+    "기업명", "상태", "관리상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
+    "수요예측일", "청약일", "상장일", "수요예측경쟁률", "개인청약경쟁률",
     "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
     "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
     "콘텐츠링크",
@@ -221,6 +258,10 @@ ADMIN_TAB_CONFIG = [
     ("IPO기관", "IPO기관", IPO_ADMIN_SHEET_COLUMNS),
     ("기존주주", "구주·보호예수", FLOAT_ADMIN_SHEET_COLUMNS),
 ]
+READ_ONLY_ADMIN_TAB_CONFIG = [
+    ("IPO기관_현황", "IPO기관", [column for column in IPO_ADMIN_SHEET_COLUMNS if column not in {"manual_lock", "manual_date", "manual_qty", "memo"}]),
+    ("기존주주_현황", "구주·보호예수", [column for column in FLOAT_ADMIN_SHEET_COLUMNS if column not in {"manual_lock", "manual_date", "manual_qty", "memo"}]),
+]
 LEGACY_ADMIN_TABS = ("운영_락업일정", "락업이벤트", "lockup_admin")
 
 
@@ -302,6 +343,39 @@ def write_csv_dicts(path: Path, rows: list[dict[str, str]], columns: list[str]) 
         writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         writer.writerows({column: row.get(column, "") for column in columns} for row in rows)
+
+
+def read_json_list(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return [dict(row) for row in value] if isinstance(value, list) else []
+
+
+def read_schedule_data() -> dict:
+    if not IPO_SCHEDULE_PATH.exists():
+        return {"updated": "", "items": [], "past_items": [], "history": []}
+    try:
+        value = json.loads(IPO_SCHEDULE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {"updated": "", "items": [], "past_items": [], "history": []}
+    return value if isinstance(value, dict) else {"updated": "", "items": [], "past_items": [], "history": []}
+
+
+def table_records(values: list[list[str]], key_map: dict[str, str]) -> list[dict[str, str]]:
+    if len(values) < 2:
+        return []
+    headers = [key_map.get(cell.strip(), cell.strip()) for cell in values[0]]
+    out: list[dict[str, str]] = []
+    for raw in values[1:]:
+        padded = raw + [""] * max(0, len(headers) - len(raw))
+        row = {headers[index]: padded[index].strip() for index in range(len(headers))}
+        if any(row.get(key, "") for key in key_map.values()):
+            out.append(row)
+    return out
 
 
 
@@ -386,42 +460,204 @@ def admin_worksheets(spreadsheet: gspread.Spreadsheet) -> list[gspread.Worksheet
     return [spreadsheet.get_worksheet(0)]
 
 
+def pull_stock_management(spreadsheet: gspread.Spreadsheet) -> None:
+    """새 종목관리 탭을 기존 파일과 병합해 편입/노출/고정제외 명령을 적용한다.
+
+    탭이 아직 없는 첫 실행은 커밋된 JSON과 기존 시트에서 만든 파일을 그대로
+    부트스트랩한다. 따라서 기존 종목을 비우거나 전체 DART 재파싱하지 않는다.
+    """
+    saved = read_json_list(STOCK_MANAGEMENT_PATH)
+    targets = read_json_list(IPO_TARGETS_PATH)
+    schedule = read_schedule_data()
+    sheet_rows: list[dict[str, str]] = []
+    try:
+        sheet_rows = table_records(spreadsheet.worksheet(STOCK_MANAGEMENT_TAB).get_all_values(), STOCK_MANAGEMENT_KEYS)
+    except gspread.WorksheetNotFound:
+        pass
+
+    for row in sheet_rows:
+        code = str(row.get("stock_code") or "").strip()
+        if code.isdigit() and len(code) < 6:
+            row["stock_code"] = code.zfill(6)
+        corp = str(row.get("corp_code") or "").strip()
+        if corp.isdigit() and len(corp) < 8:
+            row["corp_code"] = corp.zfill(8)
+        if row.get("name") and not row.get("scope"):
+            row["scope"] = "IPO일정"
+        if row.get("name") and not row.get("management_status"):
+            row["management_status"] = "수동편입"
+
+    management = merge_stock_management(sheet_rows or saved, targets, schedule)
+    targets, schedule, seed_names = apply_stock_management(management, targets, schedule)
+
+    STOCK_MANAGEMENT_PATH.write_text(json.dumps(management, ensure_ascii=False, indent=2), encoding="utf-8")
+    IPO_TARGETS_PATH.write_text(json.dumps(targets, ensure_ascii=False, indent=2), encoding="utf-8")
+    IPO_SCHEDULE_PATH.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+    (ROOT_DIR / "data" / "ipo_seed_names.json").write_text(
+        json.dumps(seed_names, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    source = "종목관리 탭" if sheet_rows else "기존 데이터 이관"
+    print(f"[SHEET] {source}: {len(management)}종목 (DART 재조회 요청 {len(seed_names)}종목)", file=sys.stderr)
+
+
+def _find_schedule_item(schedule: dict, code: str, name: str) -> dict | None:
+    all_items = list(schedule.get("items") or []) + list(schedule.get("past_items") or [])
+    if code:
+        found = next((item for item in all_items if str(item.get("corp_code") or "") == code), None)
+        if found:
+            return found
+    key = norm_name(name)
+    return next((item for item in all_items if key and norm_name(item.get("name")) == key), None)
+
+
+def pull_correction_tasks(spreadsheet: gspread.Spreadsheet) -> None:
+    """보정작업의 입력을 기존 표준 파일에 적용한다. 새 탭 값이 구형 탭보다 우선한다."""
+    saved = read_json_list(CORRECTION_PATH)
+    sheet_rows: list[dict[str, str]] = []
+    try:
+        sheet_rows = table_records(spreadsheet.worksheet(CORRECTION_TAB).get_all_values(), CORRECTION_KEYS)
+    except gspread.WorksheetNotFound:
+        pass
+
+    # 행 삭제는 명령으로 해석하지 않는다. 취소는 처리상태=취소로 명시한다.
+    by_id = {str(row.get("task_id") or ""): dict(row) for row in saved if row.get("task_id")}
+    for index, row in enumerate(sheet_rows, start=2):
+        task_id = str(row.get("task_id") or "").strip()
+        if not task_id and (row.get("name") or row.get("code")) and row.get("field"):
+            task_id = "manual:{target}:{code}:{name}:{field}:{period}:{index}".format(
+                target=row.get("target") or "", code=row.get("code") or "",
+                name=norm_name(row.get("name")), field=row.get("field") or "",
+                period=row.get("period") or "", index=index,
+            )
+            row["task_id"] = task_id
+        if task_id:
+            by_id[task_id] = {column: str(row.get(column) or "") for column in CORRECTION_COLUMNS}
+    tasks = list(by_id.values())
+
+    targets = read_json_list(IPO_TARGETS_PATH)
+    schedule = read_schedule_data()
+    admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    manual_events = read_json_list(MANUAL_EVENTS_PATH)
+    admin_by_id = {row.get("event_id", ""): row for row in admin_rows if row.get("event_id")}
+    target_by_code = {str(row.get("code") or ""): row for row in targets if row.get("code")}
+    manual_keys = {
+        (str(row.get("code") or ""), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
+        for row in manual_events
+    }
+
+    from datetime import date as _date
+    from scripts.utils.dates import calc_release_date
+
+    changed_schedule = False
+    for row in tasks:
+        if str(row.get("status") or "") in {"자동해결", "취소"}:
+            continue
+        target = str(row.get("target") or "")
+        if target == "IPO일정":
+            item = _find_schedule_item(schedule, str(row.get("code") or ""), str(row.get("name") or ""))
+            if not item:
+                continue
+            old_value = next((str(item.get(field) or "") for field in SCHEDULE_FIELD_MAP.get(str(row.get("field") or ""), ()) if item.get(field)), "")
+            if apply_schedule_correction(item, row):
+                schedule.setdefault("history", []).append({
+                    "date": _date.today().isoformat(), "name": item.get("name") or row.get("name") or "",
+                    "type": "수기변경", "field": row.get("field") or "",
+                    "old": old_value, "new": row.get("manual_value") or "",
+                })
+                row["status"] = "적용"
+                changed_schedule = True
+            continue
+
+        code = str(row.get("code") or "").strip()
+        field = str(row.get("field") or "")
+        if field == "공모가":
+            digits = "".join(ch for ch in str(row.get("manual_value") or "") if ch.isdigit())
+            target_row = target_by_code.get(code)
+            if target_row and digits:
+                target_row["manual_ipo_price"] = digits
+                row["status"] = "적용"
+        elif field == "기존이벤트보정":
+            event = admin_by_id.get(str(row.get("event_id") or ""))
+            if event and (row.get("manual_date") or row.get("manual_qty")):
+                event["manual_date"] = str(row.get("manual_date") or "")
+                event["manual_qty"] = str(row.get("manual_qty") or "").replace(",", "")
+                event["manual_lock"] = "Y"
+                event["memo"] = str(row.get("memo") or "")
+                row["status"] = "적용"
+        elif field == "락업이벤트":
+            period = str(row.get("period") or "").strip()
+            qty = str(row.get("manual_qty") or "").replace(",", "").strip()
+            release_date = str(row.get("manual_date") or "").strip()
+            target_row = target_by_code.get(code) or {}
+            if not release_date and period and target_row.get("listing_date"):
+                try:
+                    _, _, release_date = calc_release_date(str(target_row["listing_date"]), period)
+                except Exception:
+                    release_date = ""
+            category = str(row.get("category") or "").strip()
+            key = (code, category, period, release_date)
+            if code and category in {"IPO기관", "기존주주"} and period and qty.isdigit() and release_date and key not in manual_keys:
+                manual_events.append({"code": code, "category": category, "period": period, "date": release_date, "qty": qty})
+                manual_keys.add(key)
+                row["manual_date"] = release_date
+                row["status"] = "적용"
+
+    if changed_schedule:
+        schedule["history"] = list(schedule.get("history") or [])[-500:]
+    IPO_TARGETS_PATH.write_text(json.dumps(targets, ensure_ascii=False, indent=2), encoding="utf-8")
+    IPO_SCHEDULE_PATH.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+    MANUAL_EVENTS_PATH.write_text(json.dumps(manual_events, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv", admin_rows, ADMIN_COLUMNS)
+    CORRECTION_PATH.write_text(json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8")
+    if sheet_rows:
+        print(f"[SHEET] 보정작업 입력 반영: {len(sheet_rows)}행", file=sys.stderr)
+
+
 
 
 def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     csv_path = ROOT_DIR / "data" / "lockup_admin.csv"
     local_rows = read_csv_dicts(csv_path)
-    if not local_rows:
-        print("[SHEET] 로컬 lockup_admin.csv가 없어 내려받기를 건너뜁니다.", file=sys.stderr)
-        return
+    new_structure = False
+    try:
+        spreadsheet.worksheet(STOCK_MANAGEMENT_TAB)
+        spreadsheet.worksheet(CORRECTION_TAB)
+        new_structure = True
+    except gspread.WorksheetNotFound:
+        pass
 
+    if local_rows and not new_structure:
+        sheet_rows: list[dict[str, str]] = []
+        for worksheet in admin_worksheets(spreadsheet):
+            sheet_rows.extend(worksheet_records(worksheet))
+        sheet_by_id = {row.get("event_id", ""): row for row in sheet_rows if row.get("event_id")}
+        updated = 0
+        for local in local_rows:
+            sheet_row = sheet_by_id.get(local.get("event_id", ""))
+            if not sheet_row:
+                continue
+            changed = False
+            for column in MANUAL_COLUMNS:
+                value = sheet_row.get(column, "")
+                if local.get(column, "") != value:
+                    local[column] = value
+                    changed = True
+            if changed:
+                updated += 1
+        write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
+        print(f"[SHEET] 기존 락업 수동값 이관: {updated}개 행", file=sys.stderr)
+    elif not local_rows:
+        print("[SHEET] lockup_admin.csv 없음 — 종목관리/보정작업 이관은 계속합니다.", file=sys.stderr)
+    else:
+        print("[SHEET] 새 관리 탭 사용 — 구형 락업 입력 탭은 읽지 않습니다.", file=sys.stderr)
 
-    sheet_rows: list[dict[str, str]] = []
-    for worksheet in admin_worksheets(spreadsheet):
-        sheet_rows.extend(worksheet_records(worksheet))
-    sheet_by_id = {row.get("event_id", ""): row for row in sheet_rows if row.get("event_id")}
-    updated = 0
-
-
-    for local in local_rows:
-        sheet_row = sheet_by_id.get(local.get("event_id", ""))
-        if not sheet_row:
-            continue
-        changed = False
-        for column in MANUAL_COLUMNS:
-            value = sheet_row.get(column, "")
-            if local.get(column, "") != value:
-                local[column] = value
-                changed = True
-        if changed:
-            updated += 1
-
-
-    write_csv_dicts(csv_path, local_rows, ADMIN_COLUMNS)
-    print(f"[SHEET] 수동 수정값 내려받기 완료: {updated}개 행", file=sys.stderr)
-    pull_worklist(spreadsheet)  # 작업목록의 완성 행을 수동공모가/수기입력으로 이관 (백업 포함)
-    pull_ipo_targets(spreadsheet)
-    pull_manual_events(spreadsheet)
+    # 첫 배치에만 구형 탭을 읽는다. 새 탭 생성 후에는 오래된 복제본이 다시 원천이 되지 않는다.
+    if not new_structure:
+        pull_worklist(spreadsheet)
+        pull_ipo_targets(spreadsheet)
+        pull_manual_events(spreadsheet)
+    pull_stock_management(spreadsheet)
+    pull_correction_tasks(spreadsheet)
     pull_holidays(spreadsheet)
 
 
@@ -882,7 +1118,7 @@ def pull_holidays(spreadsheet: gspread.Spreadsheet) -> None:
 
 def reset_worksheets(spreadsheet: gspread.Spreadsheet) -> None:
     worksheets = spreadsheet.worksheets()
-    first_title = ADMIN_TAB_CONFIG[0][0]
+    first_title = STOCK_MANAGEMENT_TAB
     primary = worksheets[0]
     primary.clear()
     primary.update_title(first_title)
@@ -925,7 +1161,7 @@ def push_tab(
 
 def push_admin_tabs(spreadsheet: gspread.Spreadsheet) -> None:
     rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
-    for title, category, columns in ADMIN_TAB_CONFIG:
+    for title, category, columns in READ_ONLY_ADMIN_TAB_CONFIG:
         filtered = [row for row in rows if row.get("category") == category]
         push_rows(spreadsheet, title, filtered, columns)
     for title in LEGACY_ADMIN_TABS:
@@ -990,6 +1226,79 @@ def push_rows(
             }]
         })
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
+
+
+def _dropdown_request(worksheet: gspread.Worksheet, headers: list[str], column: str, options: list[str]) -> dict:
+    column_index = headers.index(column)
+    return {
+        "setDataValidation": {
+            "range": {
+                "sheetId": worksheet.id,
+                "startRowIndex": 1,
+                "endRowIndex": worksheet.row_count,
+                "startColumnIndex": column_index,
+                "endColumnIndex": column_index + 1,
+            },
+            "rule": {
+                "condition": {"type": "ONE_OF_LIST", "values": [{"userEnteredValue": option} for option in options]},
+                "strict": True,
+                "showCustomUi": True,
+            },
+        }
+    }
+
+
+def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    saved = read_json_list(STOCK_MANAGEMENT_PATH)
+    rows = merge_stock_management(saved, read_json_list(IPO_TARGETS_PATH), read_schedule_data())
+    STOCK_MANAGEMENT_PATH.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+    values = [STOCK_MANAGEMENT_HEADERS] + [
+        [row.get(key, "") for key in MANAGEMENT_COLUMNS]
+        for row in rows
+    ]
+    worksheet = get_or_create_worksheet(spreadsheet, STOCK_MANAGEMENT_TAB, len(values) + 30, len(STOCK_MANAGEMENT_HEADERS))
+    worksheet.clear()
+    worksheet.update(values, "A1", value_input_option="RAW")
+    worksheet.freeze(rows=1)
+    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(len(values), len(STOCK_MANAGEMENT_HEADERS))}")
+    worksheet.format("1:1", {
+        "backgroundColor": {"red": 0.82, "green": 0.89, "blue": 1.0},
+        "textFormat": {"bold": True}, "horizontalAlignment": "CENTER",
+    })
+    spreadsheet.batch_update({"requests": [
+        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "대상구분", ["IPO일정", "락업", "IPO일정+락업"]),
+        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "관리상태", ["자동", "수동편입", "검토대기", "제외고정"]),
+        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "노출", ["노출", "비공개"]),
+    ]})
+    print(f"[SHEET] 종목관리: 기존 데이터 포함 {len(rows)}종목", file=sys.stderr)
+
+
+def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    rows = build_correction_tasks(
+        read_json_list(CORRECTION_PATH),
+        read_json_list(IPO_TARGETS_PATH),
+        read_schedule_data(),
+        read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv"),
+        read_json_list(MANUAL_EVENTS_PATH),
+    )
+    CORRECTION_PATH.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+    values = [CORRECTION_HEADERS] + [[row.get(key, "") for key in CORRECTION_COLUMNS] for row in rows]
+    worksheet = get_or_create_worksheet(spreadsheet, CORRECTION_TAB, len(values) + 30, len(CORRECTION_HEADERS))
+    worksheet.clear()
+    worksheet.update(values, "A1", value_input_option="RAW")
+    worksheet.freeze(rows=1)
+    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(len(values), len(CORRECTION_HEADERS))}")
+    worksheet.format("1:1", {
+        "backgroundColor": {"red": 0.82, "green": 0.89, "blue": 1.0},
+        "textFormat": {"bold": True}, "horizontalAlignment": "CENTER",
+    })
+    spreadsheet.batch_update({"requests": [
+        _dropdown_request(worksheet, CORRECTION_HEADERS, "대상", ["IPO일정", "락업"]),
+        _dropdown_request(worksheet, CORRECTION_HEADERS, "구분", ["IPO기관", "기존주주"]),
+        _dropdown_request(worksheet, CORRECTION_HEADERS, "보정방식", ["임시", "고정"]),
+        _dropdown_request(worksheet, CORRECTION_HEADERS, "처리상태", ["대기", "적용", "검토필요", "자동해결", "취소"]),
+    ]})
+    print(f"[SHEET] 보정작업: {len(rows)}건 (기존 수기값·미해결 작업 보존)", file=sys.stderr)
 
 
 
@@ -1082,6 +1391,8 @@ def _ipo_status_label(item: dict) -> str:
     from datetime import date
 
     today = date.today().isoformat()
+    if item.get("fixed_excluded"):
+        return "제외고정"
     if item.get("review_pending"):
         return "검토필요"
     if item.get("withdrawn"):
@@ -1115,12 +1426,10 @@ def _parse_sheet_dates(text: str) -> list[str]:
 
 
 def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
-    """IPO 일정 현황을 IPO일정 탭에 적재하고, 운영자 입력을 수거한다.
+    """IPO 일정 결과를 읽기 전용 현황 탭에 적재한다.
 
-    - 콘텐츠링크: 운영자 입력 열. 기업명 기준으로 수거해 content_url로 연결.
-    - 확정공모가/수요예측일/청약일/상장일: 운영자가 고치면(마지막으로 배치가 쓴 값과
-      다르면) 그 값을 채택하고 manual_fields로 잠궈 이후 공시 파싱이 덮어쓰지 않는다.
-    - 나머지 열은 공시 기준으로 매번 덮어쓴다. 덮어쓰기 전 탭 전체 값을 백업한다.
+    새 종목관리 탭이 아직 없는 최초 이관 실행에서만 구형 IPO일정 탭의 링크·수기수정·삭제를
+    한 번 수거한다. 이후 입력은 종목관리/보정작업만 사용하고 이 탭은 결과 확인 전용이다.
     """
     if not IPO_SCHEDULE_PATH.exists():
         return
@@ -1175,9 +1484,15 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     # 1) 기존 탭 백업 + 운영자 입력 수거
     links: dict[str, str] = {}
     sheet_cells: dict[str, dict[str, str]] = {}  # 기업명 → {열: 값}
+    use_legacy_inputs = True
     try:
-        worksheet = spreadsheet.worksheet(IPO_SCHEDULE_TAB)
-        values = worksheet.get_all_values()
+        spreadsheet.worksheet(STOCK_MANAGEMENT_TAB)
+        use_legacy_inputs = False
+    except gspread.WorksheetNotFound:
+        pass
+    try:
+        worksheet = spreadsheet.worksheet(IPO_SCHEDULE_TAB) if use_legacy_inputs else None
+        values = worksheet.get_all_values() if worksheet else []
         if values:
             IPO_SCHEDULE_BACKUP_PATH.write_text(
                 json.dumps({"values": values}, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -1202,14 +1517,15 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         pass
 
     # 1-1) 이름만 적힌 새 행(기존 항목과 매칭 안 됨) → 다음 배치가 DART에서 직접 찾도록 요청 파일에 적재
-    existing_names = {(i.get("name") or "").strip() for i in items}
-    seed_names = [name for name in sheet_cells if name not in existing_names]
-    ipo_seed_path = ROOT_DIR / "data" / "ipo_seed_names.json"
-    if seed_names:
-        ipo_seed_path.write_text(json.dumps(seed_names, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"[SHEET] IPO일정 수동추가 요청 {len(seed_names)}건 저장 (다음 배치에 반영): {', '.join(seed_names)}", file=sys.stderr)
-    elif ipo_seed_path.exists():
-        ipo_seed_path.write_text("[]", encoding="utf-8")
+    if use_legacy_inputs:
+        existing_names = {(i.get("name") or "").strip() for i in items}
+        seed_names = [name for name in sheet_cells if name not in existing_names]
+        ipo_seed_path = ROOT_DIR / "data" / "ipo_seed_names.json"
+        if seed_names:
+            ipo_seed_path.write_text(json.dumps(seed_names, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"[SHEET] IPO일정 수동추가 요청 {len(seed_names)}건 저장 (다음 배치에 반영): {', '.join(seed_names)}", file=sys.stderr)
+        elif ipo_seed_path.exists():
+            ipo_seed_path.write_text("[]", encoding="utf-8")
 
     # 1-2) IPO취소 컬럼에서 "삭제" 선택된 종목 → items에서 제거 + 톰스톤 등록
     #      IPO종목/락업 캘린더는 독립 파이프라인이라 여기서 안 건드림. 새 신고서 나오면 자동 부활.
@@ -1314,10 +1630,12 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         IPO_SCHEDULE_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"[SHEET] IPO일정: 운영자 입력 반영 (수동수정 {overrides}건, 링크 {len(links)}건)", file=sys.stderr)
 
-    # 3) 탭 재작성 + 쓴 값 스냅샷 저장
+    # 3) 읽기 전용 현황 탭 재작성 + 쓴 값 스냅샷 저장
     rows: list[list[str]] = []
     new_written: dict[str, dict[str, str]] = {}
     for item in items:
+        if item.get("fixed_excluded"):
+            continue
         name = item.get("name") or ""
         band_low, band_high = item.get("band_low") or 0, item.get("band_high") or 0
         apply_map = commit_qty_map(item.get("commit_apply"))
@@ -1325,6 +1643,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         row = [
             name,
             _ipo_status_label(item),
+            item.get("management_status") or ("수동편입" if item.get("manual_entry") else "자동"),
             item.get("market") or "미정",
             item.get("underwriter") or "미정",
             f"{band_low:,} ~ {band_high:,}" if band_low else "미정",
@@ -1333,8 +1652,6 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
             auto_cell(item, "수요예측일"),
             auto_cell(item, "청약일"),
             auto_cell(item, "상장일"),
-            "",  # 검토 — 드롭다운. "승인" 선택하면 검토대기 항목을 사이트에 노출
-            "",  # IPO취소 — 드롭다운. "삭제" 선택하면 다음 배치가 items에서 완전 제거
             f"{item.get('demand_ratio'):,.2f}:1" if item.get("demand_ratio") else "미정",
             f"{item.get('sub_ratio'):,.2f}:1" if item.get("sub_ratio") else "미정",
             *[commit_cell(apply_map, tier) for tier in COMMIT_TIER_ORDER],
@@ -1344,11 +1661,12 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         rows.append(row)
         new_written[name] = {col: auto_cell(item, col) for col in IPO_EDITABLE_COLUMNS}
 
-    sheet_values = [IPO_SCHEDULE_HEADERS] + rows
-    worksheet = get_or_create_worksheet(spreadsheet, IPO_SCHEDULE_TAB, len(sheet_values) + 10, len(IPO_SCHEDULE_HEADERS))
+    sheet_values = [IPO_SCHEDULE_VIEW_HEADERS] + rows
+    worksheet = get_or_create_worksheet(spreadsheet, IPO_SCHEDULE_VIEW_TAB, len(sheet_values) + 10, len(IPO_SCHEDULE_VIEW_HEADERS))
     worksheet.clear()
     worksheet.update(sheet_values, "A1", value_input_option="USER_ENTERED")
     worksheet.freeze(rows=1)
+    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(len(sheet_values), len(IPO_SCHEDULE_VIEW_HEADERS))}")
     worksheet.format(
         "1:1",
         {
@@ -1359,31 +1677,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     )
     IPO_SCHEDULE_WRITTEN_PATH.write_text(json.dumps(new_written, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # 드롭다운 데이터 검증: IPO취소="삭제", 검토="승인"
-    def _dropdown_request(col_name: str, option: str) -> dict:
-        col_index = IPO_SCHEDULE_HEADERS.index(col_name)
-        return {
-            "setDataValidation": {
-                "range": {
-                    "sheetId": worksheet.id,
-                    "startRowIndex": 1,
-                    "endRowIndex": len(sheet_values),
-                    "startColumnIndex": col_index,
-                    "endColumnIndex": col_index + 1,
-                },
-                "rule": {
-                    "condition": {"type": "ONE_OF_LIST", "values": [{"userEnteredValue": option}]},
-                    "strict": True,
-                    "showCustomUi": True,
-                },
-            }
-        }
-
-    spreadsheet.batch_update({"requests": [
-        _dropdown_request("IPO취소", "삭제"),
-        _dropdown_request("검토", "승인"),
-    ]})
-    print(f"[SHEET] IPO일정: {len(rows)}개 종목 적재 (콘텐츠링크 {len(links)}건 보존, IPO취소·검토 드롭다운 설정)", file=sys.stderr)
+    print(f"[SHEET] IPO일정_현황: {len(rows)}개 종목 읽기 전용 적재", file=sys.stderr)
 
     # 정정이력 탭 — 정정공시·수기변경·KRX 자동수정·삭제·부활·IPO종목 삭제 크로스기록까지 최신순.
     # 운영자가 IPO일정·락업 둘 다 한 곳에서 감사할 수 있게 크로스 로그를 모아둔다.
@@ -1489,12 +1783,12 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         print(f"[SHEET] IPO종목 종목코드 자동 기입: {len(code_updates)}건", file=sys.stderr)
 
 
-# 운영자가 직접 입력·관리하는 탭 — 왼쪽에 몰아서 파란 탭 색으로 구분한다
-MANUAL_TABS_ORDER = ["작업목록", "수기입력", "IPO종목", "IPO일정", "휴장일"]
-# IPO기관·기존주주는 위치는 그대로 두되(핵심 원장), 수동 보정 컬럼(수동공모가/수동확정일수량/메모)이
-# 있어 운영자가 직접 만지는 탭이므로 같은 파란 탭 색만 입힌다.
-MANUAL_COLOR_ONLY_TABS = ["IPO기관", "기존주주"]
+# 운영자 입력은 세 탭만 사용한다. 나머지는 결과 확인 또는 첫 배치 이관용이다.
+MANUAL_TABS_ORDER = [STOCK_MANAGEMENT_TAB, CORRECTION_TAB, HOLIDAY_TAB]
+MANUAL_COLOR_ONLY_TABS: list[str] = []
 MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
+LEGACY_INPUT_TABS = ["IPO일정", "IPO종목", "작업목록", "수기입력", "IPO기관", "기존주주"]
+LEGACY_TAB_COLOR = {"red": 0.72, "green": 0.72, "blue": 0.72}
 
 
 def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
@@ -1524,6 +1818,16 @@ def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                     "fields": "tabColor",
                 }
             })
+        for title in LEGACY_INPUT_TABS:
+            ws = worksheets.get(title)
+            if not ws:
+                continue
+            requests.append({
+                "updateSheetProperties": {
+                    "properties": {"sheetId": ws.id, "tabColor": LEGACY_TAB_COLOR},
+                    "fields": "tabColor",
+                }
+            })
         if requests:
             spreadsheet.batch_update({"requests": requests})
             print(f"[SHEET] 수기 관리 탭 {len(requests)}개 파란색 적용(왼쪽 정렬 {position}개)", file=sys.stderr)
@@ -1537,11 +1841,10 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     push_admin_tabs(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
-    ensure_ipo_target_manual_price_column(spreadsheet)
-    ensure_manual_event_tab(spreadsheet)  # 수기입력 탭은 항상 존재하되 내용은 보존
-    sync_ipo_schedule_tab(spreadsheet)  # IPO 일정 적재 + 콘텐츠링크·수동수정 수거 + 정정이력
-    append_missing_ipo_targets(spreadsheet)  # IPO일정 상장일 입력 → IPO종목 자동 행 추가 (append-only)
-    regenerate_worklist(spreadsheet)  # 남은 갭만 다시 나열 (미반영 입력값은 보존)
+    # 최초 실행에서는 여기서 구형 IPO일정 입력을 마지막으로 이관한 뒤 새 읽기전용 현황을 만든다.
+    sync_ipo_schedule_tab(spreadsheet)
+    push_stock_management_tab(spreadsheet)
+    push_correction_tab(spreadsheet)
     arrange_sheet_tabs(spreadsheet)  # 수기 관리 탭 왼쪽 정렬 + 파란 탭 색
 
 

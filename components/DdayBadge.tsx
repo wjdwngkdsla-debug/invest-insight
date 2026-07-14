@@ -15,7 +15,10 @@ function dday(dateStr: string): number {
 export function DdayBadge({ date }: { date: string }) {
   // 서버/클라이언트 날짜 불일치(하이드레이션 오류) 방지: 마운트 후 계산
   const [days, setDays] = useState<number | null>(null);
-  useEffect(() => setDays(dday(date)), [date]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDays(dday(date)), 0);
+    return () => window.clearTimeout(timer);
+  }, [date]);
 
   if (days === null) {
     return (

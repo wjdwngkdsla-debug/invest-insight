@@ -41,6 +41,10 @@ export interface IpoItem {
   content_url?: string; // 시트 IPO일정 탭의 콘텐츠링크 열 (운영자 입력)
   first_filing_date?: string;
   review_pending?: boolean; // IPO 신호 부족 → 검토대기(비공개). 사이트 노출 제외
+  manual_entry?: boolean; // 종목관리에서 이름만 먼저 편입한 항목(빈 값은 미정 노출)
+  fixed_excluded?: boolean; // 운영자 제외고정. 새 공시가 나와도 자동 부활하지 않음
+  management_hidden?: boolean;
+  management_status?: string;
 }
 
 export interface IpoScheduleData {
@@ -96,7 +100,7 @@ export function ipoSortKey(item: IpoItem, today = new Date()): [number, string, 
 export function getSortedIpoItems(today = new Date()): IpoItem[] {
   // 검토대기(review_pending) 종목은 사이트 비노출 — 시트에서 승인해야 뜬다
   return [...getIpoSchedule().items]
-    .filter((item) => !item.review_pending)
+    .filter((item) => !item.review_pending && !item.fixed_excluded && !item.management_hidden)
     .sort((a, b) => {
       const ka = ipoSortKey(a, today);
       const kb = ipoSortKey(b, today);
@@ -106,7 +110,7 @@ export function getSortedIpoItems(today = new Date()): IpoItem[] {
 
 export function getPastIpoItems(): IpoItem[] {
   return [...(getIpoSchedule().past_items || [])]
-    .filter((item) => !item.review_pending)
+    .filter((item) => !item.review_pending && !item.fixed_excluded && !item.management_hidden)
     .sort(
       (a, b) =>
         (b.listing_date || "").localeCompare(a.listing_date || "") ||

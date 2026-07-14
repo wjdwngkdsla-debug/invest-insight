@@ -178,7 +178,7 @@ function statusOrder(status: string): number {
 
 
 
-function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
+export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
   const map = new Map<string, LockupEvent[]>();
 
 
@@ -277,7 +277,7 @@ function groupEventsForStock(stock: StockLockup): UpcomingGroup[] {
 export function getUpcomingEvents(daysAhead = 30, today = new Date()): UpcomingGroup[] {
   const groups: UpcomingGroup[] = [];
   for (const stock of getSiteData().stocks) {
-    for (const group of groupEventsForStock(stock)) {
+    for (const group of getEventGroupsByStock(stock)) {
       const d = dDay(group.tradable_date, today);
       if (d >= 0 && d <= daysAhead) groups.push(group);
     }
@@ -293,7 +293,7 @@ export function getUpcomingEvents(daysAhead = 30, today = new Date()): UpcomingG
 
 
 export function getGroupedEventsByStock(stock: StockLockup, today = new Date()): { upcoming: UpcomingGroup[]; past: UpcomingGroup[] } {
-  const groups = groupEventsForStock(stock).sort((a, b) => a.tradable_date.localeCompare(b.tradable_date));
+  const groups = getEventGroupsByStock(stock).sort((a, b) => a.tradable_date.localeCompare(b.tradable_date));
   return {
     upcoming: groups.filter((g) => dDay(g.tradable_date, today) >= 0),
     past: groups.filter((g) => dDay(g.tradable_date, today) < 0),

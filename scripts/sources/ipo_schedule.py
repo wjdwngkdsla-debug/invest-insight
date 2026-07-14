@@ -13,12 +13,14 @@ import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
 from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports
+from scripts.management import apply_stock_management, is_fixed_excluded, merge_stock_management
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
 TARGETS_PATH = ROOT_DIR / "data" / "ipo_targets.json"
 # 시트에 이름만 적어 넣은 "아직 DART가 못 찾은 회사" 요청 목록 (sheets_sync.py가 씀 → 다음 배치가 읽음)
 SEED_PATH = ROOT_DIR / "data" / "ipo_seed_names.json"
+MANAGEMENT_PATH = ROOT_DIR / "data" / "stock_management.json"
 
 # 발굴 창 — 수요예측→청약→상장까지 수개월 걸릴 수 있어 넉넉히 둔다.
 LOOKBACK_DAYS = 210
@@ -475,6 +477,7 @@ def seed_new_items(
     log,
     prev_pending_names: set[str],
     deleted_corps: dict[str, dict[str, Any]] | None = None,
+    fixed_exclusions: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
 
@@ -522,6 +525,9 @@ def seed_new_items(
             unresolved.append({"name": name, "status": "not_found", "link": dart_search_link(name)})
             continue
         corp_code = corp["corp_code"]
+        if fixed_exclusions and is_fixed_excluded(corp_code, corp.get("corp_name") or name, fixed_exclusions):
+            log(f"수동추가 무시(고정 제외): {name}")
+            continue
         if deleted_corps and corp_code in deleted_corps:
             log(f"수동추가 무시(삭제된 종목): {name}")
             continue  # 톰스톤: 사용자가 명시적으로 삭제한 종목은 seed로도 재편입하지 않음
@@ -539,6 +545,8 @@ def seed_new_items(
 
         if filings:
             item = process_corp(corp_code, corp.get("corp_name") or name, filings, existing)
+            if existing and existing.get("corp_code") != corp_code:
+                items_by_corp.pop(str(existing.get("corp_code") or ""), None)
             items_by_corp[corp_code] = item
             if item.get("band_low") or item.get("forecast_start"):
                 mark_resolved(name)
@@ -650,6 +658,16 @@ def refresh_ipo_schedule(
             print(f"[IPO일정] {msg}", file=sys.stderr)
 
     state = load_state()
+    # reset_sheet 실행은 시트 pull을 건너뛴다. 그래도 커밋된 관리 명령(특히 제외고정과
+    # 이름만 수동편입)은 빌드 전에 적용해 불필요한 재파싱/자동부활을 막는다.
+    if MANAGEMENT_PATH.exists():
+        try:
+            saved_management = json.loads(MANAGEMENT_PATH.read_text(encoding="utf-8"))
+            targets = json.loads(TARGETS_PATH.read_text(encoding="utf-8")) if TARGETS_PATH.exists() else []
+            management_rows = merge_stock_management(saved_management, targets, state)
+            _, state, _ = apply_stock_management(management_rows, targets, state)
+        except Exception as exc:
+            log(f"종목관리 사전 적용 실패(기존 상태로 계속): {exc}")
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
     archived_by_corp: dict[str, dict[str, Any]] = {
         i["corp_code"]: i for i in state.get("past_items", []) if i.get("corp_code")
@@ -659,6 +677,9 @@ def refresh_ipo_schedule(
     # 톰스톤: 사용자가 IPO취소 컬럼에서 "삭제"한 종목. 저장된 rcept_no보다 새 신고서가
     # 나오면 자동 부활, 그 이하면 계속 무시. IPO종목·락업 캘린더는 독립이라 여기서 안 건드림.
     deleted_corps: dict[str, dict[str, Any]] = dict(state.get("deleted_corps") or {})
+    # 종목관리의 제외고정은 새 공시가 나와도 자동 부활하지 않는다. 기존 파싱값은
+    # state에 보존해 재승인 시 전체 문서를 다시 받지 않고 즉시 복구한다.
+    fixed_exclusions: dict[str, dict[str, Any]] = dict(state.get("fixed_exclusions") or {})
 
     filings = fetch_equity_filings(days_back)
     grouped = group_upcoming_ipos(filings)
@@ -705,14 +726,23 @@ def refresh_ipo_schedule(
                     break
                 if _core_fields_filled(merged) and not any("발행조건확정" in (g.get("report_nm") or "") for g in corp_filings):
                     break
-            locked = set(item.get("manual_fields") or [])  # 시트에서 운영자가 고친 필드는 파싱이 덮지 않는다
+            locked = set(item.get("manual_fields") or [])  # 고정 보정은 공시가 덮지 않는다
+            provisional = set(item.get("provisional_fields") or [])
             for key, val in merged.items():
                 if key in locked:
                     continue
                 if val or key not in item:
                     old_val = item.get(key)
+                    was_provisional = key in provisional
+                    if was_provisional and val:
+                        if old_val not in (None, "", 0) and val != old_val:
+                            history.append({
+                                "date": today, "name": name, "type": "자동확정",
+                                "field": TRACKED_FIELDS.get(key, key), "old": str(old_val), "new": str(val),
+                            })
+                        provisional.discard(key)
                     # 기존 편입 종목의 값이 정정공시로 바뀌면 이력에 남긴다 (최초 편입은 제외)
-                    if old and key in TRACKED_FIELDS and old_val not in (None, "", 0) and val and val != old_val:
+                    if old and not was_provisional and key in TRACKED_FIELDS and old_val not in (None, "", 0) and val and val != old_val:
                         history.append({
                             "date": today,
                             "name": name,
@@ -722,12 +752,18 @@ def refresh_ipo_schedule(
                             "new": str(val),
                         })
                     item[key] = val
+            if provisional:
+                item["provisional_fields"] = sorted(provisional)
+            else:
+                item.pop("provisional_fields", None)
         item["withdrawn"] = withdrawn
         return item
 
     for corp_code, corp_filings in grouped.items():
         name = corp_filings[0].get("corp_name") or ""
         newest_rcp = corp_filings[0].get("rcept_no") or ""
+        if is_fixed_excluded(corp_code, name, fixed_exclusions):
+            continue
         tomb = deleted_corps.get(corp_code)
         if tomb and newest_rcp <= (tomb.get("last_rcept_no") or ""):
             continue  # 삭제된 종목 — 톰스톤보다 새 신고서 나올 때만 부활
@@ -739,9 +775,20 @@ def refresh_ipo_schedule(
             })
             deleted_corps.pop(corp_code, None)
         old = items_by_corp.get(corp_code) or archived_by_corp.get(corp_code)
+        if not old:
+            # 이름만 수동편입한 synthetic 항목을 실제 DART 기업코드로 승격한다.
+            old_key, old = next(
+                ((key, item) for key, item in items_by_corp.items() if item.get("manual_entry") and _norm_name(item.get("name") or "") == _norm_name(name)),
+                ("", None),
+            )
+            if old and old_key:
+                items_by_corp.pop(old_key, None)
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, old)
 
-    seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names, deleted_corps)
+    seed_pending = seed_new_items(
+        items_by_corp, process_corp, history, today, log, prev_pending_names,
+        deleted_corps, fixed_exclusions,
+    )
 
     # KRX로 상장일 자동 감지·확정 (종목기본정보 LIST_DD 우선, 시세 스냅샷 보조)
     if (krx_snapshot or krx_base_info) and krx_trading_date:
@@ -750,6 +797,14 @@ def refresh_ipo_schedule(
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
     for item in items_by_corp.values():
+        if item.get("fixed_excluded") or is_fixed_excluded(
+            str(item.get("corp_code") or ""), str(item.get("name") or ""), fixed_exclusions
+        ):
+            item["fixed_excluded"] = True
+            item["management_status"] = "제외고정"
+            item["review_pending"] = True
+            kept.append(item)
+            continue
         # IPO종목 탭에서 채운 값은 KRX 감지가 이미 우선 반영했으니 비어있을 때만 보조로 사용.
         linked = listing_map.get(_norm_name(item.get("name") or ""))
         if linked:
@@ -787,7 +842,9 @@ def refresh_ipo_schedule(
         if not listing and first and first < (now_kst - timedelta(days=days_back)).strftime("%Y%m%d"):
             drop = True
         # 검토대기 판정: 사용자가 승인한 종목은 항상 노출, 아니면 IPO 신호 부족 시 비공개 대기
-        if item.get("review_approved"):
+        if item.get("management_hidden"):
+            item["review_pending"] = True
+        elif item.get("manual_entry") or item.get("review_approved"):
             item["review_pending"] = False
         else:
             weak = not _is_confirmed_ipo(item)
@@ -820,6 +877,7 @@ def refresh_ipo_schedule(
         "history": history[-500:],
         "seed_pending": seed_pending,
         "deleted_corps": deleted_corps,
+        "fixed_exclusions": fixed_exclusions,
     }
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -12,7 +12,10 @@ const TONE_CLASS: Record<IpoTone, string> = {
 
 export function IpoStatusChip({ item }: { item: IpoItem }) {
   const [status, setStatus] = useState<IpoStatus | null>(null);
-  useEffect(() => setStatus(ipoStatus(item)), [item]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setStatus(ipoStatus(item)), 0);
+    return () => window.clearTimeout(timer);
+  }, [item]);
 
   const s = status ?? { label: "…", tone: "waiting" as IpoTone };
   return (
