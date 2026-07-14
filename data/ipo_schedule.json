@@ -12,7 +12,9 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "fixed_excluded": true,
+      "management_status": "제외고정"
     },
     {
       "corp_code": "00624244",
@@ -65,7 +67,8 @@
         "listing_date"
       ],
       "content_url": "https://blog.naver.com/vericap/224343811780",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01461730",
@@ -85,7 +88,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "00920731",
@@ -105,7 +109,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01588897",
@@ -125,7 +130,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01722066",
@@ -145,7 +151,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01947443",
@@ -164,7 +171,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "00229085",
@@ -184,7 +192,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01586923",
@@ -204,7 +213,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "01801026",
@@ -225,7 +235,8 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동"
     },
     {
       "corp_code": "00683283",
@@ -235,7 +246,9 @@
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "fixed_excluded": true,
+      "management_status": "제외고정"
     }
   ],
   "past_items": [
@@ -320,7 +333,8 @@
       ],
       "content_url": "https://blog.naver.com/vericap/224327442349",
       "review_pending": false,
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "management_status": "자동"
     }
   ],
   "history": [
@@ -355,8 +369,38 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "LS전선",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "케이디비생명보험",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
-  "deleted_corps": {}
+  "deleted_corps": {},
+  "fixed_exclusions": {
+    "corp:00683283": {
+      "name": "LS전선",
+      "corp_code": "00683283",
+      "excluded_at": "2026-07-14",
+      "memo": "운영자 삭제 요청 이관"
+    },
+    "corp:00104069": {
+      "name": "케이디비생명보험",
+      "corp_code": "00104069",
+      "excluded_at": "2026-07-14",
+      "memo": "운영자 삭제 요청 이관"
+    }
+  }
 }
