@@ -1248,6 +1248,44 @@ def _dropdown_request(worksheet: gspread.Worksheet, headers: list[str], column: 
     }
 
 
+def _repeat_cell_format_request(
+    worksheet: gspread.Worksheet,
+    start_row: int,
+    end_row: int,
+    start_col: int,
+    end_col: int,
+    cell_format: dict,
+) -> dict:
+    return {
+        "repeatCell": {
+            "range": {
+                "sheetId": worksheet.id,
+                "startRowIndex": start_row,
+                "endRowIndex": end_row,
+                "startColumnIndex": start_col,
+                "endColumnIndex": end_col,
+            },
+            "cell": {"userEnteredFormat": cell_format},
+            "fields": "userEnteredFormat(backgroundColor,textFormat)",
+        }
+    }
+
+
+def _review_pending_ranges(rows: list[dict]) -> list[tuple[int, int]]:
+    ranges: list[tuple[int, int]] = []
+    start: int | None = None
+    for index, row in enumerate(rows):
+        if str(row.get("management_status") or "") == "검토대기":
+            if start is None:
+                start = index
+        elif start is not None:
+            ranges.append((start, index))
+            start = None
+    if start is not None:
+        ranges.append((start, len(rows)))
+    return ranges
+
+
 def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
     saved = read_json_list(STOCK_MANAGEMENT_PATH)
     rows = merge_stock_management(saved, read_json_list(IPO_TARGETS_PATH), read_schedule_data())
@@ -1265,11 +1303,36 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
         "backgroundColor": {"red": 0.82, "green": 0.89, "blue": 1.0},
         "textFormat": {"bold": True}, "horizontalAlignment": "CENTER",
     })
-    spreadsheet.batch_update({"requests": [
+    status_column = STOCK_MANAGEMENT_HEADERS.index("관리상태")
+    requests = [
         _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "대상구분", ["IPO일정", "락업", "IPO일정+락업"]),
         _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "관리상태", ["자동", "수동편입", "검토대기", "제외고정"]),
         _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "노출", ["노출", "비공개"]),
-    ]})
+        _repeat_cell_format_request(
+            worksheet,
+            1,
+            max(len(values), 2),
+            status_column,
+            status_column + 1,
+            {
+                "backgroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0},
+                "textFormat": {"bold": False, "foregroundColor": {"red": 0.0, "green": 0.0, "blue": 0.0}},
+            },
+        ),
+    ]
+    for start, end in _review_pending_ranges(rows):
+        requests.append(_repeat_cell_format_request(
+            worksheet,
+            start + 1,
+            end + 1,
+            status_column,
+            status_column + 1,
+            {
+                "backgroundColor": {"red": 1.0, "green": 0.80, "blue": 0.80},
+                "textFormat": {"bold": True, "foregroundColor": {"red": 0.75, "green": 0.0, "blue": 0.0}},
+            },
+        ))
+    spreadsheet.batch_update({"requests": requests})
     print(f"[SHEET] 종목관리: 기존 데이터 포함 {len(rows)}종목", file=sys.stderr)
 
 

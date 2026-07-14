@@ -19,7 +19,7 @@ if "gspread" not in sys.modules:
         sys.modules["gspread.utils"] = gspread_utils_stub
 
 
-from scripts.sheets_sync import OBSOLETE_TABS, cleanup_obsolete_tabs
+from scripts.sheets_sync import OBSOLETE_TABS, cleanup_obsolete_tabs, _review_pending_ranges
 
 
 class _Worksheet:
@@ -56,6 +56,17 @@ class SheetTabCleanupTest(unittest.TestCase):
             [worksheet.title for worksheet in spreadsheet.worksheets()],
             retained + ["개인메모"],
         )
+
+    def test_review_pending_ranges_are_grouped_for_formatting(self):
+        rows = [
+            {"management_status": "자동"},
+            {"management_status": "검토대기"},
+            {"management_status": "검토대기"},
+            {"management_status": "수동편입"},
+            {"management_status": "검토대기"},
+        ]
+
+        self.assertEqual(_review_pending_ranges(rows), [(1, 3), (4, 5)])
 
 
 if __name__ == "__main__":
