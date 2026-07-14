@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13 17:47",
+  "updated": "2026-07-14 14:37",
   "items": [
     {
       "corp_code": "00104069",
@@ -13,88 +13,6 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": true
-    },
-    {
-      "corp_code": "01501764",
-      "name": "레메디",
-      "first_filing_date": "20260522",
-      "last_rcept_no": "20260706000401",
-      "payment_date": "2026-07-01",
-      "underwriter": "케이비증권",
-      "band_low": 17800,
-      "band_high": 20700,
-      "final_price": 20700,
-      "forecast_start": "2026-06-17",
-      "forecast_end": "2026-06-23",
-      "sub_start": "2026-07-01",
-      "sub_end": "2026-07-02",
-      "market": "코스닥",
-      "offer_shares": 1200000,
-      "demand_ratio": 1146.41,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 7914000,
-          "pct": 0.77
-        },
-        {
-          "period": "3개월",
-          "qty": 19147000,
-          "pct": 1.86
-        },
-        {
-          "period": "1개월",
-          "qty": 45851000,
-          "pct": 4.44
-        },
-        {
-          "period": "15일",
-          "qty": 112101000,
-          "pct": 10.86
-        },
-        {
-          "period": "미확약",
-          "qty": 846755000,
-          "pct": 82.07
-        }
-      ],
-      "withdrawn": false,
-      "listing_date": "2026-07-13",
-      "stock_code": "387690",
-      "sub_ratio": 1706.71,
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 65012,
-          "pct": 7.22
-        },
-        {
-          "period": "3개월",
-          "qty": 103348,
-          "pct": 11.48
-        },
-        {
-          "period": "1개월",
-          "qty": 278484,
-          "pct": 30.94
-        },
-        {
-          "period": "15일",
-          "qty": 250656,
-          "pct": 27.85
-        },
-        {
-          "period": "미확약",
-          "qty": 202500,
-          "pct": 22.5
-        }
-      ],
-      "report_rcp": "20260706000401",
-      "manual_fields": [
-        "listing_date"
-      ],
-      "content_url": "https://blog.naver.com/vericap/224327442349",
-      "review_pending": false
     },
     {
       "corp_code": "00624244",
@@ -318,6 +236,91 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": true
+    }
+  ],
+  "past_items": [
+    {
+      "corp_code": "01501764",
+      "name": "레메디",
+      "first_filing_date": "20260522",
+      "last_rcept_no": "20260706000401",
+      "payment_date": "2026-07-01",
+      "underwriter": "케이비증권",
+      "band_low": 17800,
+      "band_high": 20700,
+      "final_price": 20700,
+      "forecast_start": "2026-06-17",
+      "forecast_end": "2026-06-23",
+      "sub_start": "2026-07-01",
+      "sub_end": "2026-07-02",
+      "market": "코스닥",
+      "offer_shares": 1200000,
+      "demand_ratio": 1146.41,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 7914000,
+          "pct": 0.77
+        },
+        {
+          "period": "3개월",
+          "qty": 19147000,
+          "pct": 1.86
+        },
+        {
+          "period": "1개월",
+          "qty": 45851000,
+          "pct": 4.44
+        },
+        {
+          "period": "15일",
+          "qty": 112101000,
+          "pct": 10.86
+        },
+        {
+          "period": "미확약",
+          "qty": 846755000,
+          "pct": 82.07
+        }
+      ],
+      "withdrawn": false,
+      "listing_date": "2026-07-13",
+      "stock_code": "387690",
+      "sub_ratio": 1706.71,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 65012,
+          "pct": 7.22
+        },
+        {
+          "period": "3개월",
+          "qty": 103348,
+          "pct": 11.48
+        },
+        {
+          "period": "1개월",
+          "qty": 278484,
+          "pct": 30.94
+        },
+        {
+          "period": "15일",
+          "qty": 250656,
+          "pct": 27.85
+        },
+        {
+          "period": "미확약",
+          "qty": 202500,
+          "pct": 22.5
+        }
+      ],
+      "report_rcp": "20260706000401",
+      "manual_fields": [
+        "listing_date"
+      ],
+      "content_url": "https://blog.naver.com/vericap/224327442349",
+      "review_pending": false,
+      "archived_at": "2026-07-14"
     }
   ],
   "history": [
