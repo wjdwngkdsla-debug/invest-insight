@@ -1783,12 +1783,34 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         print(f"[SHEET] IPO종목 종목코드 자동 기입: {len(code_updates)}건", file=sys.stderr)
 
 
-# 운영자 입력은 세 탭만 사용한다. 나머지는 결과 확인 또는 첫 배치 이관용이다.
+# 운영자 입력은 세 탭만 사용한다. 나머지는 결과 확인용이며, 첫 배치 이관이 끝난
+# 구형 입력 탭은 삭제한다. 원본 데이터는 저장소 JSON/CSV에 남아 있으므로 시트에서
+# 제거해도 다음 배치가 전체 DART 재파싱을 하지 않는다.
 MANUAL_TABS_ORDER = [STOCK_MANAGEMENT_TAB, CORRECTION_TAB, HOLIDAY_TAB]
 MANUAL_COLOR_ONLY_TABS: list[str] = []
 MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
 LEGACY_INPUT_TABS = ["IPO일정", "IPO종목", "작업목록", "수기입력", "IPO기관", "기존주주"]
-LEGACY_TAB_COLOR = {"red": 0.72, "green": 0.72, "blue": 0.72}
+OBSOLETE_TABS = tuple(dict.fromkeys([
+    *LEGACY_INPUT_TABS,
+    *LEGACY_ADMIN_TABS,
+    "검토필요",
+    "상장후보_검토",
+]))
+
+
+def cleanup_obsolete_tabs(spreadsheet: gspread.Spreadsheet) -> list[str]:
+    """첫 마이그레이션이 끝난 구형 운영 탭만 명시적으로 삭제한다."""
+    worksheets = {worksheet.title: worksheet for worksheet in spreadsheet.worksheets()}
+    removed: list[str] = []
+    for title in OBSOLETE_TABS:
+        worksheet = worksheets.get(title)
+        if not worksheet:
+            continue
+        spreadsheet.del_worksheet(worksheet)
+        removed.append(title)
+    if removed:
+        print(f"[SHEET] 구형 탭 삭제: {', '.join(removed)}", file=sys.stderr)
+    return removed
 
 
 def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
@@ -1818,16 +1840,6 @@ def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                     "fields": "tabColor",
                 }
             })
-        for title in LEGACY_INPUT_TABS:
-            ws = worksheets.get(title)
-            if not ws:
-                continue
-            requests.append({
-                "updateSheetProperties": {
-                    "properties": {"sheetId": ws.id, "tabColor": LEGACY_TAB_COLOR},
-                    "fields": "tabColor",
-                }
-            })
         if requests:
             spreadsheet.batch_update({"requests": requests})
             print(f"[SHEET] 수기 관리 탭 {len(requests)}개 파란색 적용(왼쪽 정렬 {position}개)", file=sys.stderr)
@@ -1845,6 +1857,7 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     sync_ipo_schedule_tab(spreadsheet)
     push_stock_management_tab(spreadsheet)
     push_correction_tab(spreadsheet)
+    cleanup_obsolete_tabs(spreadsheet)
     arrange_sheet_tabs(spreadsheet)  # 수기 관리 탭 왼쪽 정렬 + 파란 탭 색
 
 
