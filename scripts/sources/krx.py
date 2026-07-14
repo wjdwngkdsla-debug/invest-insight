@@ -68,8 +68,16 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
     out: dict[str, dict] = {}
     empty = True
     for url, market in KRX_URLS:
-        res = requests.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
-        items = res.json().get("OutBlock_1", [])
+        try:
+            res = requests.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
+            res.raise_for_status()
+            payload = res.json()
+            items = payload.get("OutBlock_1", []) if isinstance(payload, dict) else []
+        except (requests.RequestException, ValueError):
+            # KRX occasionally returns an empty or non-JSON response. Treat that
+            # market as unavailable so a transient response does not abort the
+            # entire scheduled build; the lookback caller can try another date.
+            items = []
         if items:
             empty = False
         for it in items:
