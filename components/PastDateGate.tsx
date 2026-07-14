@@ -13,11 +13,23 @@ function isPast(dateStr: string): boolean {
   return target < kstDayNumber(Date.now());
 }
 
-export function PastDateGate({ date, children }: { date?: string; children: ReactNode }) {
+export function PastDateGate({
+  date,
+  children,
+  showWhen = "current",
+}: {
+  date?: string;
+  children: ReactNode;
+  showWhen?: "current" | "past";
+}) {
   const [hidden, setHidden] = useState(false);
   useEffect(() => {
-    if (date) setHidden(isPast(date));
-  }, [date]);
+    const timer = window.setTimeout(() => {
+      const past = Boolean(date && isPast(date));
+      setHidden(showWhen === "past" ? !past : past);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [date, showWhen]);
 
   if (hidden) return null;
   return <>{children}</>;

@@ -349,7 +349,7 @@ export function getFlatRows(): FlatRow[] {
         date_display: ev.date_display,
         qty: ev.qty,
         pct: ev.pct,
-        marketCap: stock.shares * stock.close_price,
+        marketCap: stock.market_cap || stock.shares * stock.close_price,
         close_price: stock.close_price,
         status: ev.status,
         tradable_date: ev.tradable_date,

@@ -5,6 +5,7 @@ import re
 import sys
 from collections import Counter
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
@@ -77,7 +78,7 @@ def fetch_equity_filings(days_back: int = LOOKBACK_DAYS) -> list[dict[str, Any]]
         return []
     filings: list[dict[str, Any]] = []
     seen: set[str] = set()
-    chunk_end = datetime.today()
+    chunk_end = datetime.now(ZoneInfo("Asia/Seoul"))
     remaining = days_back
     while remaining > 0:
         span = min(remaining, 90)
@@ -349,8 +350,8 @@ def find_result_report(corp_code: str) -> dict[str, Any] | None:
         params={
             "crtfc_key": DART_API_KEY,
             "corp_code": corp_code,
-            "bgn_de": (datetime.today() - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d"),
-            "end_de": datetime.today().strftime("%Y%m%d"),
+            "bgn_de": (datetime.now(ZoneInfo("Asia/Seoul")) - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d"),
+            "end_de": datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y%m%d"),
             "page_no": 1,
             "page_count": 100,
             "pblntf_ty": "C",
@@ -438,7 +439,7 @@ def load_state() -> dict[str, Any]:
             return json.loads(SCHEDULE_PATH.read_text(encoding="utf-8"))
         except Exception:
             pass
-    return {"updated": "", "items": []}
+    return {"updated": "", "items": [], "past_items": []}
 
 
 def _core_fields_filled(item: dict[str, Any]) -> bool:
@@ -447,7 +448,7 @@ def _core_fields_filled(item: dict[str, Any]) -> bool:
 
 def _fetch_corp_filings(corp_code: str, days_back: int) -> list[dict[str, Any]]:
     """특정 회사 하나의 발행공시만 직접 조회 — 시장 전체 C001 스트림에 안 걸린 회사를 위한 개별 검색."""
-    end = datetime.today()
+    end = datetime.now(ZoneInfo("Asia/Seoul"))
     begin = end - timedelta(days=days_back)
     reports = get_reports(corp_code, start_date=begin.strftime("%Y%m%d"), end_date=end.strftime("%Y%m%d"))
     relevant = [r for r in reports if any(k in (r.get("report_nm") or "") for k in ("지분증권", "투자설명서", "철회신고서"))]
@@ -538,7 +539,7 @@ def seed_new_items(
                 items_by_corp[corp_code] = {
                     "corp_code": corp_code,
                     "name": corp.get("corp_name") or name,
-                    "first_filing_date": datetime.today().strftime("%Y%m%d"),
+                    "first_filing_date": datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y%m%d"),
                     "last_rcept_no": "",
                     "withdrawn": False,
                     "seeded": True,
@@ -639,6 +640,9 @@ def refresh_ipo_schedule(
 
     state = load_state()
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
+    archived_by_corp: dict[str, dict[str, Any]] = {
+        i["corp_code"]: i for i in state.get("past_items", []) if i.get("corp_code")
+    }
     history: list[dict[str, Any]] = list(state.get("history") or [])
     prev_pending_names = {p.get("name") for p in state.get("seed_pending", []) if isinstance(p, dict)}
     # 톰스톤: 사용자가 IPO취소 컬럼에서 "삭제"한 종목. 저장된 rcept_no보다 새 신고서가
@@ -649,7 +653,8 @@ def refresh_ipo_schedule(
     grouped = group_upcoming_ipos(filings)
     log(f"C001 신고서 {len(filings)}건 → 미상장 법인 {len(grouped)}곳")
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    now_kst = datetime.now(ZoneInfo("Asia/Seoul"))
+    today = now_kst.strftime("%Y-%m-%d")
     listing_map = load_listing_map()
 
     def process_corp(corp_code: str, name: str, corp_filings: list[dict[str, Any]], old: dict[str, Any] | None) -> dict[str, Any]:
@@ -722,7 +727,8 @@ def refresh_ipo_schedule(
                 "field": "신규 신고서", "old": "삭제됨", "new": newest_rcp,
             })
             deleted_corps.pop(corp_code, None)
-        items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, items_by_corp.get(corp_code))
+        old = items_by_corp.get(corp_code) or archived_by_corp.get(corp_code)
+        items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, old)
 
     seed_pending = seed_new_items(items_by_corp, process_corp, history, today, log, prev_pending_names, deleted_corps)
 
@@ -761,11 +767,12 @@ def refresh_ipo_schedule(
         listing = item.get("listing_date") or ""
         first = item.get("first_filing_date") or ""
         drop = False
-        if listing and listing < today:
+        past_listing = bool(listing and listing < today)
+        if past_listing:
             drop = True
-        if item.get("withdrawn") and first and first < (datetime.today() - timedelta(days=30)).strftime("%Y%m%d"):
+        if item.get("withdrawn") and first and first < (now_kst - timedelta(days=30)).strftime("%Y%m%d"):
             drop = True
-        if not listing and first and first < (datetime.today() - timedelta(days=days_back)).strftime("%Y%m%d"):
+        if not listing and first and first < (now_kst - timedelta(days=days_back)).strftime("%Y%m%d"):
             drop = True
         # 검토대기 판정: 사용자가 승인한 종목은 항상 노출, 아니면 IPO 신호 부족 시 비공개 대기
         if item.get("review_approved"):
@@ -780,20 +787,31 @@ def refresh_ipo_schedule(
                 })
             item["review_pending"] = weak
 
-        if not drop:
+        if past_listing:
+            item["archived_at"] = item.get("archived_at") or today
+            archived_by_corp[item["corp_code"]] = dict(item)
+        elif not drop:
+            # 상장일 정정으로 미래 일정이 되면 이전 이력에서 다시 진행 일정으로 복귀한다.
+            archived_by_corp.pop(item["corp_code"], None)
             kept.append(item)
 
     kept.sort(key=lambda i: (i.get("sub_start") or "9999", i.get("name") or ""))
+    past_items = sorted(
+        archived_by_corp.values(),
+        key=lambda i: (i.get("listing_date") or "", i.get("name") or ""),
+        reverse=True,
+    )
     result = {
-        "updated": datetime.today().strftime("%Y-%m-%d %H:%M"),
+        "updated": now_kst.strftime("%Y-%m-%d %H:%M"),
         "items": kept,
+        "past_items": past_items,
         "history": history[-500:],
         "seed_pending": seed_pending,
         "deleted_corps": deleted_corps,
     }
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    log(f"저장: {len(kept)}종목 → {SCHEDULE_PATH.name}")
+    log(f"저장: 진행 {len(kept)}종목 / 이전 이력 {len(past_items)}종목 → {SCHEDULE_PATH.name}")
     return result
 
 

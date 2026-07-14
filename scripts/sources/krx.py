@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 import re
 import time
+from zoneinfo import ZoneInfo
 import requests
 
 from scripts.config import KRX_HEADERS, KRX_URLS
@@ -53,7 +54,7 @@ def krx_base_info(bas_dd: str) -> dict[str, dict] | None:
 
 def latest_base_info(lookback_days: int = 10) -> tuple[str | None, dict[str, dict]]:
     """최근 거래일의 종목기본정보 마스터. (기준일, {code: info}). 없으면 (None, {})."""
-    today = datetime.today()
+    today = datetime.now(ZoneInfo("Asia/Seoul"))
     for back in range(lookback_days + 1):
         bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
         info = krx_base_info(bas_dd)
@@ -63,7 +64,7 @@ def latest_base_info(lookback_days: int = 10) -> tuple[str | None, dict[str, dic
 
 
 def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
-    """{code: {name, market, shrs, close_price}}. 휴장일이면 None."""
+    """{code: {name, market, shrs, close_price, market_cap}}. 휴장일이면 None."""
     out: dict[str, dict] = {}
     empty = True
     for url, market in KRX_URLS:
@@ -81,13 +82,14 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
                 "market": market,
                 "shrs": _to_int(it.get("LIST_SHRS")),
                 "close_price": _to_int(it.get("TDD_CLSPRC")),
+                "market_cap": _to_int(it.get("MKTCAP")),
             }
         time.sleep(0.15)
     return None if empty else out
 
 
 def find_stock_by_name(name: str, lookback_days: int = 10) -> tuple[str | None, dict | None, str | None]:
-    today = datetime.today()
+    today = datetime.now(ZoneInfo("Asia/Seoul"))
     for back in range(lookback_days + 1):
         bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
         snap = krx_snapshot(bas_dd)

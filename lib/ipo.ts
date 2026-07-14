@@ -46,6 +46,7 @@ export interface IpoItem {
 export interface IpoScheduleData {
   updated: string;
   items: IpoItem[];
+  past_items?: IpoItem[];
 }
 
 export function getIpoSchedule(): IpoScheduleData {
@@ -101,6 +102,16 @@ export function getSortedIpoItems(today = new Date()): IpoItem[] {
       const kb = ipoSortKey(b, today);
       return ka[0] - kb[0] || ka[1].localeCompare(kb[1]) || ka[2].localeCompare(kb[2]);
     });
+}
+
+export function getPastIpoItems(): IpoItem[] {
+  return [...(getIpoSchedule().past_items || [])]
+    .filter((item) => !item.review_pending)
+    .sort(
+      (a, b) =>
+        (b.listing_date || "").localeCompare(a.listing_date || "") ||
+        a.name.localeCompare(b.name)
+    );
 }
 
 // "2026-07-01" → "07.01"

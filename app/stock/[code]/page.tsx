@@ -176,7 +176,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
   const marketCapLabel = (
     <p className="text-lg font-bold text-gray-900">
       <span className="mr-1.5 text-xs font-normal text-gray-400">{updated.slice(5)} 종가 기준</span>
-      시가총액 {formatEok(stock.shares * stock.close_price)}
+      시가총액 {formatEok(stock.market_cap || stock.shares * stock.close_price)}
     </p>
   );
 

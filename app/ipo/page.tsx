@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { getSortedIpoItems, dateRange, mmdd, bandPosition, type IpoItem } from "@/lib/ipo";
+import { getPastIpoItems, getSortedIpoItems, dateRange, mmdd, bandPosition, type IpoItem } from "@/lib/ipo";
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { PastDateGate } from "@/components/PastDateGate";
+import { IpoHistoryToggle } from "@/components/IpoHistoryToggle";
 
 
 
@@ -395,6 +396,36 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 export default function IpoSchedulePage() {
   const items = getSortedIpoItems();
+  const pastItems = getPastIpoItems();
+
+  const currentCards = (
+    <div className="space-y-3">
+      {items.map((item) => (
+        <PastDateGate key={item.corp_code} date={item.listing_date}>
+          <IpoCard item={item} />
+        </PastDateGate>
+      ))}
+      {items.length === 0 && (
+        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">진행 중인 공모가 없습니다.</p>
+      )}
+    </div>
+  );
+
+  const historyCards = (
+    <div className="space-y-3">
+      {pastItems.map((item) => (
+        <IpoCard key={item.corp_code} item={item} />
+      ))}
+      {items.map((item) => (
+        <PastDateGate key={`live-${item.corp_code}`} date={item.listing_date} showWhen="past">
+          <IpoCard item={item} />
+        </PastDateGate>
+      ))}
+      {pastItems.length === 0 && items.length === 0 && (
+        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">이전 IPO 이력이 없습니다.</p>
+      )}
+    </div>
+  );
 
 
 
@@ -413,17 +444,7 @@ export default function IpoSchedulePage() {
 
   return (
     <main className="mx-auto w-full max-w-[900px] px-5 py-6">
-      {items.length === 0 ? (
-        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">진행 중인 공모가 없습니다.</p>
-      ) : (
-        <div className="space-y-3">
-          {items.map((item) => (
-            <PastDateGate key={item.corp_code} date={item.listing_date}>
-              <IpoCard item={item} />
-            </PastDateGate>
-          ))}
-        </div>
-      )}
+      <IpoHistoryToggle current={currentCards} history={historyCards} />
     </main>
   );
 }

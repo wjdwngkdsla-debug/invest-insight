@@ -38,6 +38,7 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 
@@ -3413,7 +3414,9 @@ def latest_krx_snapshot() -> tuple[str | None, dict]:
     global _SNAPSHOT_CACHE
     if _SNAPSHOT_CACHE is not None:
         return _SNAPSHOT_CACHE
-    today = datetime.today()
+    # GitHub Actions 러너는 UTC다. KRX 기준일 탐색은 한국 날짜로 시작해야
+    # 자정 직후 실행에서도 전일 거래 데이터를 놓치지 않는다.
+    today = datetime.now(ZoneInfo("Asia/Seoul"))
     for back in range(0, 10):
         bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
         snap = krx_snapshot(bas_dd)
@@ -3514,6 +3517,8 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
             row["final_pct"] = pct(_to_int(row.get("final_qty")), current_shares)
         if meta.get("close_price"):
             row["close_price"] = meta["close_price"]
+        if meta.get("market_cap"):
+            row["market_cap"] = meta["market_cap"]
         updated += 1
     print(f"[KRX] 상장주식수·종가·비율 갱신: {updated}개 행 / 기준일 {close_date}", file=sys.stderr)
     return close_date, logs
@@ -4334,6 +4339,10 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             # 홈페이지의 비율·시가총액은 최근 KRX 상장주식수를 기준으로 통일한다.
             "shares": _to_int(r.get("current_shares")) or _to_int(r.get("shares")),
             "close_price": _to_int(r.get("close_price")),
+            # KRX 일별매매정보의 MKTCAP을 우선 사용하고, 미제공 시에만 계산한다.
+            "market_cap": _to_int(r.get("market_cap")) or (
+                (_to_int(r.get("current_shares")) or _to_int(r.get("shares"))) * _to_int(r.get("close_price"))
+            ),
             "ipo_price": 0,
             "events": [],
             "holders": [],
@@ -5202,8 +5211,16 @@ def main() -> None:
 
 
 
-    site_data = rows_to_site_data(all_rows, close_date)
     out_path = data_dir / "site_data.json"
+    previous_price_date = None
+    if out_path.exists():
+        try:
+            previous_price_date = json.loads(out_path.read_text(encoding="utf-8")).get("updated")
+        except Exception:
+            previous_price_date = None
+    # KRX 호출이 일시 실패하면 기존 종가의 실제 기준일을 유지한다.
+    # 실행일로 덮으면 오래된 가격이 오늘 가격처럼 표시되는 문제가 생긴다.
+    site_data = rows_to_site_data(all_rows, close_date or previous_price_date)
     out_path.write_text(json.dumps(site_data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[SAVE] admin={admin_path}", file=sys.stderr)
     print(f"[SAVE] review={review_path}", file=sys.stderr)
