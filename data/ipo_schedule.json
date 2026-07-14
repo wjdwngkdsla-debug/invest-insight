@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14 14:37",
+  "updated": "2026-07-14 17:17",
   "items": [
     {
       "corp_code": "00104069",
@@ -74,7 +74,7 @@
       "corp_code": "01461730",
       "name": "딜리셔스",
       "first_filing_date": "20260624",
-      "last_rcept_no": "20260624000454",
+      "last_rcept_no": "20260714000470",
       "band_low": 5000,
       "band_high": 7000,
       "forecast_start": "2026-07-23",
@@ -89,7 +89,8 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true
     },
     {
       "corp_code": "00920731",
@@ -106,27 +107,6 @@
       "underwriter": "아이비케이투자증권",
       "market": "코스닥",
       "offer_shares": 2400000,
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01588897",
-      "name": "니어스랩",
-      "first_filing_date": "20260625",
-      "last_rcept_no": "20260625000626",
-      "band_low": 30000,
-      "band_high": 41200,
-      "forecast_start": "2026-07-27",
-      "forecast_end": "2026-07-31",
-      "sub_start": "2026-08-05",
-      "sub_end": "2026-08-06",
-      "payment_date": "2026-08-10",
-      "underwriter": "삼성증권",
-      "market": "코스닥",
-      "offer_shares": 910000,
       "withdrawn": false,
       "listing_date": "",
       "stock_code": "",
@@ -178,7 +158,7 @@
       "corp_code": "00229085",
       "name": "기도산업",
       "first_filing_date": "20260626",
-      "last_rcept_no": "20260626000715",
+      "last_rcept_no": "20260714000315",
       "band_low": 24800,
       "band_high": 28400,
       "forecast_start": "2026-07-31",
@@ -193,7 +173,30 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true
+    },
+    {
+      "corp_code": "01588897",
+      "name": "니어스랩",
+      "first_filing_date": "20260625",
+      "last_rcept_no": "20260714000417",
+      "band_low": 30000,
+      "band_high": 41200,
+      "forecast_start": "2026-08-03",
+      "forecast_end": "2026-08-07",
+      "sub_start": "2026-08-12",
+      "sub_end": "2026-08-13",
+      "payment_date": "2026-08-18",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 910000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true
     },
     {
       "corp_code": "01586923",
@@ -385,6 +388,38 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "니어스랩",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-07-27",
+      "new": "2026-08-03"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "니어스랩",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-07-31",
+      "new": "2026-08-07"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "니어스랩",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-05",
+      "new": "2026-08-12"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "니어스랩",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-08-06",
+      "new": "2026-08-13"
     }
   ],
   "seed_pending": [],
