@@ -1115,7 +1115,8 @@ def infer_lockup_period(listing_date: str, release_date: str, fallback: str = ""
             planned, _, tradable = calc_release_date(listing_date, period)
         except Exception:
             continue
-        if release_date in {planned, tradable.strftime("%Y-%m-%d")}:
+        # calc_release_date의 세 번째 반환값은 이미 YYYY-MM-DD 문자열이다.
+        if release_date in {planned, tradable}:
             return period
 
 
