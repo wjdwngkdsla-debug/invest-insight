@@ -24,6 +24,13 @@ MANAGEMENT_PATH = ROOT_DIR / "data" / "stock_management.json"
 
 # 발굴 창 — 수요예측→청약→상장까지 수개월 걸릴 수 있어 넉넉히 둔다.
 LOOKBACK_DAYS = 210
+# 백필 창 — 이미 상장한 과거 종목의 신고서·실적보고서 조회용. corp_code 지정 조회는
+# DART가 기간 제한을 두지 않으므로 넓게 잡아도 호출 1번이다. (420일 창으로는
+# 2024~2025 상반기 상장 종목의 공시를 영영 못 찾아 85건이 빈 껍데기로 남았던 원인)
+BACKFILL_LOOKBACK_DAYS = 1825
+# 백필은 종목당 문서 3~5건을 내려받는 무거운 작업이라 배치당 처리 수를 제한한다.
+# 완료된 종목은 ipo_parse_version/report_rcp로 스킵되므로 며칠에 걸쳐 자연 소화된다.
+MAX_BACKFILL_PER_RUN = 25
 # 종목당 신고서 다운로드 상한 — 정정이 많아도 최신 몇 건이면 전 필드가 채워진다.
 MAX_DOCS_PER_CORP = 4
 
@@ -350,16 +357,30 @@ def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
 # ── 3) 실적보고서 파싱 (청약 후: 개인청약경쟁률 + 확약 '배정') ──
 
 
-def find_result_report(corp_code: str) -> dict[str, Any] | None:
+def find_result_report(corp_code: str, listing_date: str = "") -> dict[str, Any] | None:
+    """증권발행실적보고서 조회.
+
+    과거 종목은 상장일 주변 창(신고~상장+40일)으로 좁혀 찾는다 — 최근 N일 창으로는
+    옛 실적보고서를 못 찾고, 무제한 최신순으로 잡으면 상장 이후 유상증자 실적보고서를
+    IPO 실적으로 오인할 수 있어서다.
+    """
     if not DART_API_KEY:
         return None
+    now = datetime.now(ZoneInfo("Asia/Seoul"))
+    if listing_date and re.fullmatch(r"\d{4}-\d{2}-\d{2}", listing_date):
+        base = datetime.strptime(listing_date, "%Y-%m-%d")
+        bgn_de = (base - timedelta(days=180)).strftime("%Y%m%d")
+        end_de = min(base + timedelta(days=40), now.replace(tzinfo=None)).strftime("%Y%m%d")
+    else:
+        bgn_de = (now - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d")
+        end_de = now.strftime("%Y%m%d")
     res = requests.get(
         f"{DART_BASE}/list.json",
         params={
             "crtfc_key": DART_API_KEY,
             "corp_code": corp_code,
-            "bgn_de": (datetime.now(ZoneInfo("Asia/Seoul")) - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d"),
-            "end_de": datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y%m%d"),
+            "bgn_de": bgn_de,
+            "end_de": end_de,
             "page_no": 1,
             "page_count": 100,
             "pblntf_ty": "C",
@@ -484,12 +505,16 @@ def seed_new_items(
     prev_pending_names: set[str],
     deleted_corps: dict[str, dict[str, Any]] | None = None,
     fixed_exclusions: dict[str, dict[str, Any]] | None = None,
+    heavy_budget: dict[str, int] | None = None,
 ) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
 
     아직 공시가 없거나 DART에서 이름을 못 찾으면 "확인 필요" 목록(작업목록[4]용)으로 반환하고
     매 배치 재시도한다. 해결되면(직전 배치까지 확인 필요였던 이름이 이번에 데이터를 확보하면)
     정정이력에 편입 완료로 기록한다.
+
+    heavy_budget: 문서 다운로드가 필요한 종목의 배치당 처리 상한(과거 종목 백필과 공유).
+    상한 초과분은 pending으로 남겨 다음 배치가 이어서 처리한다.
     """
     if not SEED_PATH.exists():
         return []
@@ -542,14 +567,21 @@ def seed_new_items(
             continue  # 자동발굴이 이미 다른 표기로 잡아둔 동일 회사
 
         link = dart_search_link(corp.get("corp_name") or name)
+        # 문서 파싱은 무거우니 배치당 상한을 넘으면 이번엔 건너뛰고 pending 유지
+        if heavy_budget is not None and heavy_budget.get("left", 0) <= 0:
+            unresolved.append({"name": name, "status": "pending", "link": link})
+            continue
         try:
-            filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
+            # 과거 상장 종목 백필까지 커버하도록 넓은 창 사용 (corp 지정 조회라 호출 1번)
+            filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
         except Exception as exc:
             log(f"수동추가 조회 실패: {name} ({exc})")
             unresolved.append({"name": name, "status": "pending", "link": link})
             continue
 
         if filings:
+            if heavy_budget is not None:
+                heavy_budget["left"] = heavy_budget.get("left", 0) - 1
             item = process_corp(corp_code, corp.get("corp_name") or name, filings, existing)
             if existing and existing.get("corp_code") != corp_code:
                 items_by_corp.pop(str(existing.get("corp_code") or ""), None)
@@ -853,15 +885,19 @@ def refresh_ipo_schedule(
                 items_by_corp.pop(old_key, None)
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, old)
 
+    heavy_budget = {"left": MAX_BACKFILL_PER_RUN}
     seed_pending = seed_new_items(
         items_by_corp, process_corp, history, today, log, prev_pending_names,
-        deleted_corps, fixed_exclusions,
+        deleted_corps, fixed_exclusions, heavy_budget,
     )
 
     # 이미 상장된 과거 종목은 시장 전체 C001 조회에서 corp_cls=E(미상장)가 아니어서
     # grouped에 들어오지 않는다. 기관 신청물량이 없는 과거 이력은 기업코드로 직접
     # 공시를 찾아 한 번 보강하고, 파서 버전을 저장해 매일 반복 조회하지 않는다.
     for corp_code, archived in list(archived_by_corp.items()):
+        if archived.get("fixed_excluded"):
+            archived["ipo_parse_version"] = IPO_PARSE_VERSION
+            continue
         has_official_commit_apply = any(
             isinstance(value, dict)
             and value.get("qty")
@@ -872,34 +908,65 @@ def refresh_ipo_schedule(
             not bool((value or {}).get("locked"))
             for value in dict(archived.get("manual_commit_apply") or {}).values()
         )
-        if archived.get("fixed_excluded") or has_official_commit_apply:
+
+        # ① 신고서 보강 (희망밴드·일정·확약 신청) — 완료 후 버전 저장으로 반복 방지
+        needs_filing = not has_official_commit_apply and (
+            int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION or has_temporary_commit_apply
+        )
+        if has_official_commit_apply:
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
-            continue
-        if int(archived.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION and not has_temporary_commit_apply:
-            continue
-        try:
-            corp_filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
-            if corp_filings:
-                source_item = dict(archived)
-                if has_temporary_commit_apply:
-                    source_item["ipo_parse_version"] = 0
-                refreshed = process_corp(
-                    corp_code,
-                    archived.get("name") or corp_filings[0].get("corp_name") or "",
-                    corp_filings,
-                    source_item,
-                )
-                archived_by_corp[corp_code] = refreshed
-                log(
-                    f"과거 이력 기관신청 보강: {refreshed.get('name')} "
-                    f"({len(refreshed.get('commit_apply') or [])}개 구간)"
-                )
-            else:
-                archived["ipo_parse_version"] = IPO_PARSE_VERSION
-                log(f"과거 이력 기관신청 공시 없음: {archived.get('name')}")
-        except Exception as exc:
-            # 다음 배치에서 재시도할 수 있게 버전은 올리지 않는다.
-            log(f"과거 이력 기관신청 보강 실패 {archived.get('name')}: {exc}")
+        if needs_filing and heavy_budget["left"] > 0:
+            try:
+                corp_filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
+                if corp_filings:
+                    heavy_budget["left"] -= 1
+                    source_item = dict(archived)
+                    if has_temporary_commit_apply:
+                        source_item["ipo_parse_version"] = 0
+                    refreshed = process_corp(
+                        corp_code,
+                        archived.get("name") or corp_filings[0].get("corp_name") or "",
+                        corp_filings,
+                        source_item,
+                    )
+                    archived_by_corp[corp_code] = refreshed
+                    archived = refreshed
+                    log(
+                        f"과거 이력 기관신청 보강: {refreshed.get('name')} "
+                        f"({len(refreshed.get('commit_apply') or [])}개 구간)"
+                    )
+                else:
+                    archived["ipo_parse_version"] = IPO_PARSE_VERSION
+                    log(f"과거 이력 기관신청 공시 없음: {archived.get('name')}")
+            except Exception as exc:
+                # 다음 배치에서 재시도할 수 있게 버전은 올리지 않는다.
+                log(f"과거 이력 기관신청 보강 실패 {archived.get('name')}: {exc}")
+
+        # ② 실적보고서 보강 (확약 배정·개인청약경쟁률) — 상장일 주변 창으로 조회.
+        #    이전엔 이 단계가 없어서 과거 종목의 배정 데이터가 영영 비어 있었다.
+        needs_result = (
+            not archived.get("report_rcp")
+            and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
+            and not archived.get("result_report_missing")
+        )
+        if needs_result and heavy_budget["left"] > 0:
+            try:
+                report = find_result_report(corp_code, listing_date=archived.get("listing_date") or "")
+                heavy_budget["left"] -= 1
+                if report:
+                    parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                    if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
+                        archived.update(parsed)
+                        archived["report_rcp"] = report["rcept_no"]
+                        log(f"과거 이력 실적보강: {archived.get('name')} (개인청약 {parsed.get('sub_ratio')}:1)")
+                    else:
+                        archived["result_report_missing"] = True
+                else:
+                    # 실적보고서가 없는 상장(스팩합병·이전상장 등) — 재조회 반복 방지 플래그
+                    archived["result_report_missing"] = True
+                    log(f"과거 이력 실적보고서 없음: {archived.get('name')}")
+            except Exception as exc:
+                log(f"과거 이력 실적보강 실패 {archived.get('name')}: {exc}")
 
     # KRX로 상장일 자동 감지·확정 (종목기본정보 LIST_DD 우선, 시세 스냅샷 보조)
     if (krx_snapshot or krx_base_info) and krx_trading_date:
@@ -974,6 +1041,32 @@ def refresh_ipo_schedule(
             # 상장일 정정으로 미래 일정이 되면 이전 이력에서 다시 진행 일정으로 복귀한다.
             archived_by_corp.pop(item["corp_code"], None)
             kept.append(item)
+
+    # manual-* 스텁 정리 — 시드/시트에서 임시 생성된 항목이 진짜 DART corp_code로 파싱되면
+    # 같은 이름의 스텁은 중복이므로 제거한다(스텁의 listing_date는 백필 실행일로 오염돼 있어
+    # 남기면 잘못된 상장일이 노출됨). 이름이 빈 스텁도 정리한다.
+    real_names = {
+        _norm_name(i.get("name") or "")
+        for i in list(kept) + list(archived_by_corp.values())
+        if not str(i.get("corp_code") or "").startswith("manual-")
+    }
+
+    def _is_stale_stub(entry: dict[str, Any]) -> bool:
+        if not str(entry.get("corp_code") or "").startswith("manual-"):
+            return False
+        nm = _norm_name(entry.get("name") or "")
+        return not nm or nm in real_names
+
+    stub_removed = 0
+    for code, entry in list(archived_by_corp.items()):
+        if _is_stale_stub(entry):
+            archived_by_corp.pop(code, None)
+            stub_removed += 1
+    before_kept = len(kept)
+    kept = [i for i in kept if not _is_stale_stub(i)]
+    stub_removed += before_kept - len(kept)
+    if stub_removed:
+        log(f"manual 스텁 정리: {stub_removed}건 (진짜 corp_code 항목과 중복/빈 이름)")
 
     kept.sort(key=lambda i: (i.get("sub_start") or "9999", i.get("name") or ""))
     past_items = sorted(

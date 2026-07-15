@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15 21:18",
+  "updated": "2026-07-16 01:23",
   "items": [
     {
       "corp_code": "00104069",
@@ -261,16 +261,6 @@
       "management_status": "자동",
       "ipo_parse_version": 2,
       "schedule_hidden": false
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true,
-      "listing_date": "",
-      "stock_code": ""
     },
     {
       "corp_code": "00683283",
@@ -568,137 +558,6 @@
       ],
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "manual-230e776e953c",
-      "name": "더본코리아",
-      "management_name": "더본코리아",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "475560",
-      "market": "코스피",
-      "listing_date": "2026-07-14",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "manual-3bf5aee28393",
-      "name": "대한조선",
-      "management_name": "대한조선",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "439260",
-      "market": "코스피",
-      "listing_date": "2026-07-14",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "manual-7f5002579b85",
-      "name": "달바글로벌",
-      "management_name": "달바글로벌",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "483650",
-      "market": "코스피",
-      "listing_date": "2026-07-14",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "01639508",
-      "name": "뉴엔AI",
-      "management_name": "뉴엔AI",
-      "first_filing_date": "20250521",
-      "last_rcept_no": "20250620000291",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "463020",
-      "market": "코스닥",
-      "listing_date": "2026-07-14",
-      "manual_commit_apply": {},
-      "band_low": 13000,
-      "band_high": 15000,
-      "final_price": 15000,
-      "forecast_start": "2025-06-12",
-      "forecast_end": "2025-06-18",
-      "sub_start": "2025-06-23",
-      "sub_end": "2025-06-24",
-      "payment_date": "2025-06-23",
-      "underwriter": "NH투자증권",
-      "offer_shares": 2220000,
-      "demand_ratio": 995.61,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 131,
-          "pct": 5.47
-        },
-        {
-          "period": "3개월",
-          "qty": 153,
-          "pct": 6.38
-        },
-        {
-          "period": "1개월",
-          "qty": 107,
-          "pct": 4.46
-        },
-        {
-          "period": "15일",
-          "qty": 65,
-          "pct": 2.71
-        },
-        {
-          "period": "미확약",
-          "qty": 1941,
-          "pct": 80.98
-        }
-      ],
-      "is_listing_ipo": true,
-      "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "manual-f9973645a0bf",
-      "name": "M83",
-      "management_name": "M83",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "476080",
-      "market": "코스닥",
-      "listing_date": "2026-07-14",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
-    },
-    {
-      "corp_code": "manual-e4e3b0c39755",
-      "name": "LG씨엔에스",
-      "management_name": "LG씨엔에스",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "064400",
-      "market": "코스피",
-      "listing_date": "2026-07-14",
-      "final_price": 61900,
-      "manual_commit_apply": {},
       "archived_at": "2026-07-15"
     },
     {
@@ -1956,16 +1815,8 @@
     {
       "corp_code": "01516933",
       "name": "덕양에너젠",
-      "management_name": "덕양에너젠",
       "first_filing_date": "20251201",
       "last_rcept_no": "20260119000299",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "0001A0",
-      "market": "코스닥",
-      "listing_date": "2026-01-30",
-      "manual_commit_apply": {},
       "band_low": 8500,
       "band_high": 10000,
       "final_price": 10000,
@@ -1975,6 +1826,7 @@
       "sub_end": "2026-01-21",
       "payment_date": "2026-01-23",
       "underwriter": "NH투자증권",
+      "market": "코스닥",
       "offer_shares": 7500000,
       "demand_ratio": 650.14,
       "commit_apply": [
@@ -2006,6 +1858,9 @@
       ],
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2026-01-30",
+      "stock_code": "0001A0",
       "sub_ratio": 1353.12,
       "commit_alloc": [
         {
@@ -2035,7 +1890,8 @@
         }
       ],
       "report_rcp": "20260123000364",
-      "archived_at": "2026-07-15"
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01627363",
@@ -2097,16 +1953,8 @@
     {
       "corp_code": "01385005",
       "name": "리브스메드",
-      "management_name": "리브스메드",
       "first_filing_date": "20251020",
       "last_rcept_no": "20251212000519",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "491000",
-      "market": "코스닥",
-      "listing_date": "2025-12-24",
-      "manual_commit_apply": {},
       "band_low": 44000,
       "band_high": 55000,
       "final_price": 55000,
@@ -2116,10 +1964,14 @@
       "sub_end": "2025-12-16",
       "payment_date": "2025-12-18",
       "underwriter": "삼성증권",
+      "market": "코스닥",
       "offer_shares": 2470000,
       "demand_ratio": 231.87,
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2025-12-24",
+      "stock_code": "491000",
       "sub_ratio": 390.18,
       "commit_alloc": [
         {
@@ -2149,7 +2001,8 @@
         }
       ],
       "report_rcp": "20251218000187",
-      "archived_at": "2026-07-15"
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-9e4367694b76",
@@ -2197,16 +2050,8 @@
     {
       "corp_code": "01787355",
       "name": "나라스페이스테크놀로지",
-      "management_name": "나라스페이스테크놀로지",
       "first_filing_date": "20250926",
       "last_rcept_no": "20251205000544",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "478340",
-      "market": "코스닥",
-      "listing_date": "2025-12-17",
-      "manual_commit_apply": {},
       "band_low": 13100,
       "band_high": 16500,
       "final_price": 16500,
@@ -2214,13 +2059,18 @@
       "sub_end": "2025-12-09",
       "payment_date": "2025-12-11",
       "underwriter": "삼성증권",
+      "market": "코스닥",
       "offer_shares": 1720000,
       "demand_ratio": 879.08,
       "is_listing_ipo": true,
       "forecast_start": "2025-11-26",
       "forecast_end": "2025-12-02",
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-12-17",
+      "stock_code": "478340",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01829819",
@@ -2515,16 +2365,8 @@
     {
       "corp_code": "01138364",
       "name": "더핑크퐁컴퍼니",
-      "management_name": "더핑크퐁컴퍼니",
       "first_filing_date": "20250922",
       "last_rcept_no": "20251105000308",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "403850",
-      "market": "코스닥",
-      "listing_date": "2025-11-18",
-      "manual_commit_apply": {},
       "band_low": 32000,
       "band_high": 38000,
       "final_price": 38000,
@@ -2534,25 +2376,22 @@
       "sub_end": "2025-11-07",
       "payment_date": "2025-11-11",
       "underwriter": "미래에셋증권",
+      "market": "코스닥",
       "offer_shares": 2000000,
       "demand_ratio": 615.89,
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-11-18",
+      "stock_code": "403850",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "00677486",
       "name": "그린광학",
-      "management_name": "그린광학",
       "first_filing_date": "20250917",
       "last_rcept_no": "20251105000066",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "0015G0",
-      "market": "코스닥",
-      "listing_date": "2025-11-17",
-      "manual_commit_apply": {},
       "band_low": 14000,
       "band_high": 16000,
       "final_price": 16000,
@@ -2561,6 +2400,7 @@
       "sub_start": "2025-11-06",
       "sub_end": "2025-11-07",
       "underwriter": "신영증권",
+      "market": "코스닥",
       "offer_shares": 2000000,
       "demand_ratio": 962.34,
       "commit_apply": [
@@ -2592,7 +2432,11 @@
       ],
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-11-17",
+      "stock_code": "0015G0",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01010615",
@@ -2722,16 +2566,8 @@
     {
       "corp_code": "01810477",
       "name": "노타",
-      "management_name": "노타",
       "first_filing_date": "20250821",
       "last_rcept_no": "20251022000316",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "486990",
-      "market": "코스닥",
-      "listing_date": "2025-11-03",
-      "manual_commit_apply": {},
       "band_low": 7600,
       "band_high": 9100,
       "final_price": 9100,
@@ -2740,11 +2576,16 @@
       "sub_start": "2025-10-23",
       "sub_end": "2025-10-24",
       "underwriter": "미래에셋증권",
+      "market": "코스닥",
       "offer_shares": 2916000,
       "demand_ratio": 1058.2,
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-11-03",
+      "stock_code": "486990",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01803635",
@@ -2764,29 +2605,27 @@
     {
       "corp_code": "01565054",
       "name": "그래피",
-      "management_name": "그래피",
       "first_filing_date": "20250624",
       "last_rcept_no": "20250808000193",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "318060",
-      "market": "코스닥",
-      "listing_date": "2025-08-25",
-      "final_price": 15000,
       "band_low": 17000,
       "band_high": 20000,
+      "final_price": 15000,
       "forecast_start": "2025-07-31",
       "forecast_end": "2025-08-06",
       "sub_start": "2025-08-11",
       "sub_end": "2025-08-12",
       "payment_date": "2025-08-14",
       "underwriter": "KB증권·신한투자증권",
+      "market": "코스닥",
       "offer_shares": 1950000,
       "demand_ratio": 182.15,
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-08-25",
+      "stock_code": "318060",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "00185301",
@@ -3092,6 +2931,18 @@
       "archived_at": "2026-07-15"
     },
     {
+      "corp_code": "01561465",
+      "name": "대한조선",
+      "first_filing_date": "20260716",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "seeded": true,
+      "listing_date": "2025-08-01",
+      "stock_code": "439260",
+      "review_pending": true,
+      "archived_at": "2026-07-16"
+    },
+    {
       "corp_code": "01688568",
       "name": "프로티나",
       "management_name": "프로티나",
@@ -3198,16 +3049,8 @@
     {
       "corp_code": "01782004",
       "name": "뉴로핏",
-      "management_name": "뉴로핏",
       "first_filing_date": "20250529",
       "last_rcept_no": "20250714000224",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "380550",
-      "market": "코스닥",
-      "listing_date": "2025-07-25",
-      "manual_commit_apply": {},
       "band_low": 11400,
       "band_high": 14000,
       "final_price": 14000,
@@ -3216,6 +3059,7 @@
       "sub_start": "2025-07-15",
       "sub_end": "2025-07-16",
       "underwriter": "미래에셋증권",
+      "market": "코스닥",
       "offer_shares": 2000000,
       "demand_ratio": 1087.6,
       "commit_apply": [
@@ -3247,21 +3091,17 @@
       ],
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-07-25",
+      "stock_code": "380550",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01380578",
       "name": "도우인시스",
-      "management_name": "도우인시스",
-      "first_filing_date": "20250523",
+      "first_filing_date": "20250430",
       "last_rcept_no": "20250711000123",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "484120",
-      "market": "코스닥",
-      "listing_date": "2025-07-23",
-      "manual_commit_apply": {},
       "band_low": 29000,
       "band_high": 32000,
       "final_price": 32000,
@@ -3271,11 +3111,16 @@
       "sub_end": "2025-07-15",
       "payment_date": "2025-07-17",
       "underwriter": "키움증권",
+      "market": "코스닥",
       "offer_shares": 1400000,
       "demand_ratio": 785.41,
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
-      "archived_at": "2026-07-15"
+      "withdrawn": false,
+      "listing_date": "2025-07-23",
+      "stock_code": "484120",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01649620",
@@ -3332,6 +3177,58 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15"
+    },
+    {
+      "corp_code": "01639508",
+      "name": "뉴엔AI",
+      "first_filing_date": "20250422",
+      "last_rcept_no": "20250620000291",
+      "band_low": 13000,
+      "band_high": 15000,
+      "final_price": 15000,
+      "forecast_start": "2025-06-12",
+      "forecast_end": "2025-06-18",
+      "sub_start": "2025-06-23",
+      "sub_end": "2025-06-24",
+      "payment_date": "2025-06-23",
+      "underwriter": "NH투자증권",
+      "market": "코스닥",
+      "offer_shares": 2220000,
+      "demand_ratio": 995.61,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 131,
+          "pct": 5.47
+        },
+        {
+          "period": "3개월",
+          "qty": 153,
+          "pct": 6.38
+        },
+        {
+          "period": "1개월",
+          "qty": 107,
+          "pct": 4.46
+        },
+        {
+          "period": "15일",
+          "qty": 65,
+          "pct": 2.71
+        },
+        {
+          "period": "미확약",
+          "qty": 1941,
+          "pct": 80.98
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2025-07-04",
+      "stock_code": "463020",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01432598",
@@ -3446,6 +3343,58 @@
       "archived_at": "2026-07-15"
     },
     {
+      "corp_code": "01649204",
+      "name": "달바글로벌",
+      "first_filing_date": "20250325",
+      "last_rcept_no": "20250508000654",
+      "band_low": 54500,
+      "band_high": 66300,
+      "final_price": 66300,
+      "forecast_start": "2025-04-28",
+      "forecast_end": "2025-05-07",
+      "sub_start": "2025-05-09",
+      "sub_end": "2025-05-12",
+      "payment_date": "2025-05-14",
+      "underwriter": "미래에셋증권",
+      "market": "코스피",
+      "offer_shares": 654000,
+      "demand_ratio": 1140.88,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 28525900,
+          "pct": 6.95
+        },
+        {
+          "period": "3개월",
+          "qty": 37764500,
+          "pct": 9.2
+        },
+        {
+          "period": "1개월",
+          "qty": 20767300,
+          "pct": 5.06
+        },
+        {
+          "period": "15일",
+          "qty": 12399600,
+          "pct": 3.02
+        },
+        {
+          "period": "미확약",
+          "qty": 310915500,
+          "pct": 75.76
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2025-05-22",
+      "stock_code": "483650",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
+    },
+    {
       "corp_code": "manual-57d072429f98",
       "name": "바이오비쥬",
       "management_name": "바이오비쥬",
@@ -3482,19 +3431,45 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-6c56fd469ab3",
+      "corp_code": "01335143",
       "name": "로킷헬스케어",
-      "management_name": "로킷헬스케어",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "376900",
+      "first_filing_date": "20231006",
+      "last_rcept_no": "20250422000104",
+      "band_low": 11000,
+      "band_high": 13000,
+      "final_price": 11000,
+      "forecast_start": "2025-04-14",
+      "forecast_end": "2025-04-18",
+      "sub_start": "2025-04-23",
+      "sub_end": "2025-04-24",
+      "underwriter": "SK증권",
       "market": "코스닥",
+      "offer_shares": 1560000,
+      "demand_ratio": 368.45,
+      "commit_apply": [
+        {
+          "period": "3개월",
+          "qty": 30861000,
+          "pct": 7.16
+        },
+        {
+          "period": "1개월",
+          "qty": 5806000,
+          "pct": 1.35
+        },
+        {
+          "period": "미확약",
+          "qty": 394421000,
+          "pct": 91.49
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2025-05-12",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "376900",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-1e66eff2dcb5",
@@ -3527,19 +3502,29 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-f1f23f46cba1",
+      "corp_code": "01594791",
       "name": "나우로보틱스",
-      "management_name": "나우로보틱스",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "459510",
+      "first_filing_date": "20250220",
+      "last_rcept_no": "20250422000541",
+      "band_low": 5900,
+      "band_high": 6800,
+      "final_price": 6800,
+      "forecast_start": "2025-04-14",
+      "forecast_end": "2025-04-18",
+      "sub_start": "2025-04-24",
+      "sub_end": "2025-04-25",
+      "payment_date": "2025-04-29",
+      "underwriter": "대신증권",
       "market": "코스닥",
+      "offer_shares": 2500000,
+      "demand_ratio": 1394.96,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2025-05-08",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "459510",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-f24191521e23",
@@ -3572,19 +3557,45 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-9c0710c80578",
+      "corp_code": "01563667",
       "name": "더즌",
-      "management_name": "더즌",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "462860",
+      "first_filing_date": "20250120",
+      "last_rcept_no": "20250311000718",
+      "band_low": 10500,
+      "band_high": 12500,
+      "final_price": 9000,
+      "forecast_start": "2025-02-28",
+      "forecast_end": "2025-03-07",
+      "sub_start": "2025-03-12",
+      "sub_end": "2025-03-13",
+      "payment_date": "2025-03-12",
+      "underwriter": "한국투자증권",
       "market": "코스닥",
+      "demand_ratio": 461.95,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 4330000,
+          "pct": 0.5
+        },
+        {
+          "period": "3개월",
+          "qty": 1875000,
+          "pct": 0.22
+        },
+        {
+          "period": "미확약",
+          "qty": 859955400,
+          "pct": 99.28
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2025-03-24",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "462860",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-5105c623305d",
@@ -3647,19 +3658,28 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-23d21acab833",
+      "corp_code": "01549472",
       "name": "대진첨단소재",
-      "management_name": "대진첨단소재",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "393970",
+      "first_filing_date": "20241227",
+      "last_rcept_no": "20250219001523",
+      "band_low": 10900,
+      "band_high": 13000,
+      "final_price": 9000,
+      "forecast_start": "2025-02-11",
+      "forecast_end": "2025-02-17",
+      "sub_start": "2025-02-20",
+      "sub_end": "2025-02-21",
+      "underwriter": "미래에셋증권",
       "market": "코스닥",
+      "offer_shares": 3000000,
+      "demand_ratio": 576.65,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2025-03-06",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "393970",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-a6222612d957",
@@ -3707,19 +3727,29 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-5a25a359b110",
+      "corp_code": "01233465",
       "name": "동국생명과학",
-      "management_name": "동국생명과학",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "303810",
+      "first_filing_date": "20241216",
+      "last_rcept_no": "20250131000485",
+      "band_low": 12600,
+      "band_high": 14300,
+      "final_price": 9000,
+      "forecast_start": "2025-01-20",
+      "forecast_end": "2025-01-24",
+      "sub_start": "2025-02-05",
+      "sub_end": "2025-02-06",
+      "payment_date": "2025-02-10",
+      "underwriter": "NH투자증권·KB증권",
       "market": "코스닥",
+      "offer_shares": 2000000,
+      "demand_ratio": 117.83,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2025-02-17",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "303810",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-3d9be4708a15",
@@ -3737,19 +3767,15 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-0356e9b02d63",
+      "corp_code": "01073261",
       "name": "동방메디컬",
-      "management_name": "동방메디컬",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "240550",
-      "market": "코스닥",
+      "first_filing_date": "20240913",
+      "last_rcept_no": "20250124000584",
+      "withdrawn": true,
       "listing_date": "2025-02-13",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "240550",
+      "review_pending": true,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-42fa542b3a97",
@@ -3765,6 +3791,58 @@
       "listing_date": "2025-02-12",
       "manual_commit_apply": {},
       "archived_at": "2026-07-15"
+    },
+    {
+      "corp_code": "00139834",
+      "name": "LG씨엔에스",
+      "first_filing_date": "20230310",
+      "last_rcept_no": "20250117000578",
+      "band_low": 53700,
+      "band_high": 61900,
+      "final_price": 61900,
+      "forecast_start": "2025-01-09",
+      "forecast_end": "2025-01-15",
+      "sub_start": "2025-01-21",
+      "sub_end": "2025-01-22",
+      "payment_date": "2025-01-24",
+      "underwriter": "KB증권·미래에셋증권",
+      "market": "코스피",
+      "offer_shares": 19377190,
+      "demand_ratio": 114.38,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 172000,
+          "pct": 0.08
+        },
+        {
+          "period": "3개월",
+          "qty": 3999000,
+          "pct": 1.94
+        },
+        {
+          "period": "1개월",
+          "qty": 5340000,
+          "pct": 2.6
+        },
+        {
+          "period": "15일",
+          "qty": 2494000,
+          "pct": 1.21
+        },
+        {
+          "period": "미확약",
+          "qty": 193654000,
+          "pct": 94.16
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2025-02-05",
+      "stock_code": "064400",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-ed8e9873bf3e",
@@ -3842,19 +3920,28 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-5752fa1121b8",
+      "corp_code": "01455492",
       "name": "데이원컴퍼니",
-      "management_name": "데이원컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "373160",
-      "market": "코스닥",
-      "listing_date": "2025-01-24",
+      "first_filing_date": "20241104",
+      "last_rcept_no": "20250114000477",
+      "band_low": 22000,
+      "band_high": 26700,
       "final_price": 13000,
-      "archived_at": "2026-07-15"
+      "forecast_start": "2025-01-06",
+      "forecast_end": "2025-01-10",
+      "sub_start": "2025-01-15",
+      "sub_end": "2025-01-16",
+      "underwriter": "미래에셋증권·삼성증권",
+      "market": "코스닥",
+      "offer_shares": 1361000,
+      "demand_ratio": 114.98,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2025-01-24",
+      "stock_code": "373160",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-a395d2ddfd25",
@@ -4007,34 +4094,54 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-f1b591cd44a5",
+      "corp_code": "01605282",
       "name": "닷밀",
-      "management_name": "닷밀",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "464580",
+      "first_filing_date": "20240911",
+      "last_rcept_no": "20241101000293",
+      "band_low": 11000,
+      "band_high": 13000,
+      "final_price": 13000,
+      "forecast_start": "2024-10-24",
+      "forecast_end": "2024-10-30",
+      "sub_start": "2024-11-04",
+      "sub_end": "2024-11-05",
+      "payment_date": "2024-11-04",
+      "underwriter": "미래에셋증권",
       "market": "코스닥",
+      "offer_shares": 1200000,
+      "demand_ratio": 1082.35,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2024-11-13",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "464580",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
-      "corp_code": "manual-edde0974aaba",
+      "corp_code": "01703849",
       "name": "노머스",
-      "management_name": "노머스",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "473980",
+      "first_filing_date": "20240913",
+      "last_rcept_no": "20241101000250",
+      "band_low": 27200,
+      "band_high": 30200,
+      "final_price": 30200,
+      "forecast_start": "2024-10-11",
+      "forecast_end": "2024-10-17",
+      "sub_start": "2024-11-04",
+      "sub_end": "2024-11-05",
+      "payment_date": "2024-11-07",
+      "underwriter": "대신증권",
       "market": "코스닥",
+      "offer_shares": 1130000,
+      "demand_ratio": 288.0,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2024-11-12",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "473980",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-b28ec8b6cb38",
@@ -4065,6 +4172,58 @@
       "listing_date": "2024-11-07",
       "manual_commit_apply": {},
       "archived_at": "2026-07-15"
+    },
+    {
+      "corp_code": "00968607",
+      "name": "더본코리아",
+      "first_filing_date": "20240905",
+      "last_rcept_no": "20241025000269",
+      "band_low": 23000,
+      "band_high": 28000,
+      "final_price": 34000,
+      "forecast_start": "2024-10-18",
+      "forecast_end": "2024-10-24",
+      "sub_start": "2024-10-28",
+      "sub_end": "2024-10-29",
+      "payment_date": "2024-10-31",
+      "underwriter": "한국투자증권",
+      "market": "코스피",
+      "offer_shares": 3000000,
+      "demand_ratio": 734.67,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 30942000,
+          "pct": 2.55
+        },
+        {
+          "period": "3개월",
+          "qty": 47682000,
+          "pct": 3.93
+        },
+        {
+          "period": "1개월",
+          "qty": 52473000,
+          "pct": 4.33
+        },
+        {
+          "period": "15일",
+          "qty": 17207000,
+          "pct": 1.42
+        },
+        {
+          "period": "미확약",
+          "qty": 1063905300,
+          "pct": 87.77
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2024-11-06",
+      "stock_code": "475560",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-4c0823da39e1",
@@ -4194,19 +4353,29 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-85cbd2ce31ec",
+      "corp_code": "01636565",
       "name": "루미르",
-      "management_name": "루미르",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "474170",
+      "first_filing_date": "20240816",
+      "last_rcept_no": "20241008000450",
+      "band_low": 16500,
+      "band_high": 20500,
+      "final_price": 12000,
+      "forecast_start": "2024-09-26",
+      "forecast_end": "2024-10-04",
+      "sub_start": "2024-10-10",
+      "sub_end": "2024-10-11",
+      "payment_date": "2024-10-15",
+      "underwriter": "NH투자증권",
       "market": "코스닥",
+      "offer_shares": 3000000,
+      "demand_ratio": 13.1,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2024-10-21",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "474170",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-7f87408a4dfa",
@@ -4314,6 +4483,52 @@
       "archived_at": "2026-07-15"
     },
     {
+      "corp_code": "01704680",
+      "name": "M83",
+      "first_filing_date": "20240715",
+      "last_rcept_no": "20240814002733",
+      "band_low": 11000,
+      "band_high": 13000,
+      "final_price": 16000,
+      "forecast_start": "2024-08-01",
+      "forecast_end": "2024-08-07",
+      "sub_start": "2024-08-12",
+      "sub_end": "2024-08-13",
+      "underwriter": "신영증권",
+      "market": "코스닥",
+      "offer_shares": 1500000,
+      "demand_ratio": 1024.72,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 5092000,
+          "pct": 0.47
+        },
+        {
+          "period": "3개월",
+          "qty": 2496000,
+          "pct": 0.23
+        },
+        {
+          "period": "1개월",
+          "qty": 482000,
+          "pct": 0.04
+        },
+        {
+          "period": "미확약",
+          "qty": 1067887000,
+          "pct": 99.25
+        }
+      ],
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
+      "listing_date": "2024-08-22",
+      "stock_code": "476080",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
+    },
+    {
       "corp_code": "manual-42b8076d8f8c",
       "name": "티디에스팜",
       "management_name": "티디에스팜",
@@ -4344,19 +4559,28 @@
       "archived_at": "2026-07-15"
     },
     {
-      "corp_code": "manual-be3aff8021e5",
+      "corp_code": "01385050",
       "name": "넥스트바이오메디컬",
-      "management_name": "넥스트바이오메디컬",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "389650",
+      "first_filing_date": "20240610",
+      "last_rcept_no": "20240806000202",
+      "band_low": 24000,
+      "band_high": 29000,
+      "final_price": 29000,
+      "forecast_start": "2024-07-29",
+      "forecast_end": "2024-08-02",
+      "sub_start": "2024-08-07",
+      "sub_end": "2024-08-08",
+      "payment_date": "2024-08-07",
+      "underwriter": "한국투자증권",
       "market": "코스닥",
+      "demand_ratio": 356.95,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2,
+      "withdrawn": false,
       "listing_date": "2024-08-20",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15"
+      "stock_code": "389650",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "manual-79f931c8030f",
@@ -5752,73 +5976,157 @@
       "field": "상장일",
       "old": "2025-12-09",
       "new": "2026-07-14"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "LG씨엔에스",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "M83",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "나우로보틱스",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "넥스트바이오메디컬",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "노머스",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "달바글로벌",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "닷밀",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "대진첨단소재",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "더본코리아",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "더즌",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "데이원컴퍼니",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "동국생명과학",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "로킷헬스케어",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "루미르",
+      "type": "수동추가",
+      "field": "상태",
+      "old": "확인 필요",
+      "new": "편입 완료"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "대한조선",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "동방메디컬",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "대한조선",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "동방메디컬",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
     {
-      "name": "LG씨엔에스",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=LG%EC%94%A8%EC%97%94%EC%97%90%EC%8A%A4"
-    },
-    {
-      "name": "M83",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=M83"
-    },
-    {
-      "name": "나우로보틱스",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%82%98%EC%9A%B0%EB%A1%9C%EB%B3%B4%ED%8B%B1%EC%8A%A4"
-    },
-    {
-      "name": "넥스트바이오메디컬",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%84%A5%EC%8A%A4%ED%8A%B8%EB%B0%94%EC%9D%B4%EC%98%A4%EB%A9%94%EB%94%94%EC%BB%AC"
-    },
-    {
-      "name": "노머스",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%85%B8%EB%A8%B8%EC%8A%A4"
-    },
-    {
-      "name": "달바글로벌",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8B%AC%EB%B0%94%EA%B8%80%EB%A1%9C%EB%B2%8C"
-    },
-    {
-      "name": "닷밀",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8B%B7%EB%B0%80"
-    },
-    {
-      "name": "대진첨단소재",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8C%80%EC%A7%84%EC%B2%A8%EB%8B%A8%EC%86%8C%EC%9E%AC"
-    },
-    {
       "name": "대한조선",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8C%80%ED%95%9C%EC%A1%B0%EC%84%A0"
-    },
-    {
-      "name": "더본코리아",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%94%EB%B3%B8%EC%BD%94%EB%A6%AC%EC%95%84"
-    },
-    {
-      "name": "더즌",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%94%EC%A6%8C"
-    },
-    {
-      "name": "데이원컴퍼니",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%B0%EC%9D%B4%EC%9B%90%EC%BB%B4%ED%8D%BC%EB%8B%88"
-    },
-    {
-      "name": "동국생명과학",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8F%99%EA%B5%AD%EC%83%9D%EB%AA%85%EA%B3%BC%ED%95%99"
     },
     {
       "name": "동방메디컬",
@@ -5826,14 +6134,29 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8F%99%EB%B0%A9%EB%A9%94%EB%94%94%EC%BB%AC"
     },
     {
-      "name": "로킷헬스케어",
+      "name": "리센스메디컬",
       "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A1%9C%ED%82%B7%ED%97%AC%EC%8A%A4%EC%BC%80%EC%96%B4"
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A6%AC%EC%84%BC%EC%8A%A4%EB%A9%94%EB%94%94%EC%BB%AC"
     },
     {
-      "name": "루미르",
+      "name": "링크솔루션",
       "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A3%A8%EB%AF%B8%EB%A5%B4"
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A7%81%ED%81%AC%EC%86%94%EB%A3%A8%EC%85%98"
+    },
+    {
+      "name": "마키나락스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A7%88%ED%82%A4%EB%82%98%EB%9D%BD%EC%8A%A4"
+    },
+    {
+      "name": "메쥬",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%A9%94%EC%A5%AC"
+    },
+    {
+      "name": "명인제약",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%AA%85%EC%9D%B8%EC%A0%9C%EC%95%BD"
     },
     {
       "name": "모티브링크",
@@ -5861,6 +6184,11 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%B2%A1%ED%8A%B8"
     },
     {
+      "name": "비츠로넥스텍",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%B9%84%EC%B8%A0%EB%A1%9C%EB%84%A5%EC%8A%A4%ED%85%8D"
+    },
+    {
       "name": "사이냅소프트",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%82%AC%EC%9D%B4%EB%83%85%EC%86%8C%ED%94%84%ED%8A%B8"
@@ -5874,6 +6202,11 @@
       "name": "삼양엔씨켐",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%82%BC%EC%96%91%EC%97%94%EC%94%A8%EC%BC%90"
+    },
+    {
+      "name": "삼양컴텍",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%82%BC%EC%96%91%EC%BB%B4%ED%85%8D"
     },
     {
       "name": "삼진식품",
@@ -5891,6 +6224,16 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%84%B1%EC%9A%B0"
     },
     {
+      "name": "세나테크놀로지",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%84%B8%EB%82%98%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80"
+    },
+    {
+      "name": "세미파이브",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%84%B8%EB%AF%B8%ED%8C%8C%EC%9D%B4%EB%B8%8C"
+    },
+    {
       "name": "셀비온",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%85%80%EB%B9%84%EC%98%A8"
@@ -5904,6 +6247,11 @@
       "name": "심플랫폼",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%8B%AC%ED%94%8C%EB%9E%AB%ED%8F%BC"
+    },
+    {
+      "name": "싸이닉솔루션",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%8B%B8%EC%9D%B4%EB%8B%89%EC%86%94%EB%A3%A8%EC%85%98"
     },
     {
       "name": "쎄크",
@@ -5926,14 +6274,29 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%94%A8%EB%A9%94%EC%8A%A4%EB%A1%9C%EB%B3%B4%ED%8B%B1%EC%8A%A4"
     },
     {
+      "name": "씨엠티엑스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%94%A8%EC%97%A0%ED%8B%B0%EC%97%91%EC%8A%A4"
+    },
+    {
       "name": "씨케이솔루션",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%94%A8%EC%BC%80%EC%9D%B4%EC%86%94%EB%A3%A8%EC%85%98"
     },
     {
+      "name": "아로마티카",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EB%A1%9C%EB%A7%88%ED%8B%B0%EC%B9%B4"
+    },
+    {
       "name": "아스테라시스",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%8A%A4%ED%85%8C%EB%9D%BC%EC%8B%9C%EC%8A%A4"
+    },
+    {
+      "name": "아우토크립트",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%9A%B0%ED%86%A0%ED%81%AC%EB%A6%BD%ED%8A%B8"
     },
     {
       "name": "아이빔테크놀로지",
@@ -5956,9 +6319,39 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%9D%B4%EC%97%90%EC%8A%A4%ED%8B%B0%EC%9D%B4"
     },
     {
+      "name": "아이엠바이오로직스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%9D%B4%EC%97%A0%EB%B0%94%EC%9D%B4%EC%98%A4%EB%A1%9C%EC%A7%81%EC%8A%A4"
+    },
+    {
       "name": "아이지넷",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%9D%B4%EC%A7%80%EB%84%B7"
+    },
+    {
+      "name": "아이티켐",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%EC%9D%B4%ED%8B%B0%EC%BC%90"
+    },
+    {
+      "name": "아크릴",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%84%ED%81%AC%EB%A6%B4"
+    },
+    {
+      "name": "알지노믹스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%8C%EC%A7%80%EB%85%B8%EB%AF%B9%EC%8A%A4"
+    },
+    {
+      "name": "액스비스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%95%A1%EC%8A%A4%EB%B9%84%EC%8A%A4"
+    },
+    {
+      "name": "에스엔시스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%90%EC%8A%A4%EC%97%94%EC%8B%9C%EC%8A%A4"
     },
     {
       "name": "에스켐",
@@ -5969,6 +6362,11 @@
       "name": "에스투더블유",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%90%EC%8A%A4%ED%88%AC%EB%8D%94%EB%B8%94%EC%9C%A0"
+    },
+    {
+      "name": "에스팀",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%90%EC%8A%A4%ED%8C%80"
     },
     {
       "name": "에어레인",
@@ -5991,9 +6389,19 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%90%EC%9D%B4%EC%B9%98%EC%9D%B4%EC%97%A0%ED%8C%8C%EB%A7%88"
     },
     {
+      "name": "에임드바이오",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%90%EC%9E%84%EB%93%9C%EB%B0%94%EC%9D%B4%EC%98%A4"
+    },
+    {
       "name": "엑셀세라퓨틱스",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%91%EC%85%80%EC%84%B8%EB%9D%BC%ED%93%A8%ED%8B%B1%EC%8A%A4"
+    },
+    {
+      "name": "엔알비",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%94%EC%95%8C%EB%B9%84"
     },
     {
       "name": "엘케이켐",
@@ -6116,9 +6524,54 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%A0%9C%EB%8B%89%EC%8A%A4"
     },
     {
+      "name": "제이피아이헬스케어",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%A0%9C%EC%9D%B4%ED%94%BC%EC%95%84%EC%9D%B4%ED%97%AC%EC%8A%A4%EC%BC%80%EC%96%B4"
+    },
+    {
+      "name": "지씨지놈",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%A7%80%EC%94%A8%EC%A7%80%EB%86%88"
+    },
+    {
+      "name": "지투지바이오",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%A7%80%ED%88%AC%EC%A7%80%EB%B0%94%EC%9D%B4%EC%98%A4"
+    },
+    {
+      "name": "채비",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%B1%84%EB%B9%84"
+    },
+    {
+      "name": "카나프테라퓨틱스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%B9%B4%EB%82%98%ED%94%84%ED%85%8C%EB%9D%BC%ED%93%A8%ED%8B%B1%EC%8A%A4"
+    },
+    {
+      "name": "케이뱅크",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC"
+    },
+    {
       "name": "케이쓰리아이",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%BC%80%EC%9D%B4%EC%93%B0%EB%A6%AC%EC%95%84%EC%9D%B4"
+    },
+    {
+      "name": "코스모로보틱스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%BD%94%EC%8A%A4%EB%AA%A8%EB%A1%9C%EB%B3%B4%ED%8B%B1%EC%8A%A4"
+    },
+    {
+      "name": "쿼드메디슨",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%BF%BC%EB%93%9C%EB%A9%94%EB%94%94%EC%8A%A8"
+    },
+    {
+      "name": "큐리오시스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%81%90%EB%A6%AC%EC%98%A4%EC%8B%9C%EC%8A%A4"
     },
     {
       "name": "클로봇",
@@ -6134,6 +6587,11 @@
       "name": "탑런토탈솔루션",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%83%91%EB%9F%B0%ED%86%A0%ED%83%88%EC%86%94%EB%A3%A8%EC%85%98"
+    },
+    {
+      "name": "테라뷰",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%85%8C%EB%9D%BC%EB%B7%B0"
     },
     {
       "name": "토모큐브",
@@ -6161,6 +6619,21 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%8C%8C%EC%9D%B8%EB%A9%94%EB%94%95%EC%8A%A4"
     },
     {
+      "name": "페스카로",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%8E%98%EC%8A%A4%EC%B9%B4%EB%A1%9C"
+    },
+    {
+      "name": "폴레드",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%8F%B4%EB%A0%88%EB%93%9C"
+    },
+    {
+      "name": "프로티나",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%94%84%EB%A1%9C%ED%8B%B0%EB%82%98"
+    },
+    {
       "name": "피아이이",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%94%BC%EC%95%84%EC%9D%B4%EC%9D%B4"
@@ -6171,6 +6644,11 @@
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%94%BC%EC%95%A4%EC%97%90%EC%8A%A4%EB%AF%B8%EC%BA%90%EB%8B%89%EC%8A%A4"
     },
     {
+      "name": "한라캐스트",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%95%9C%EB%9D%BC%EC%BA%90%EC%8A%A4%ED%8A%B8"
+    },
+    {
       "name": "한켐",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%95%9C%EC%BC%90"
@@ -6179,6 +6657,11 @@
       "name": "한텍",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%95%9C%ED%85%8D"
+    },
+    {
+      "name": "한패스",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%95%9C%ED%8C%A8%EC%8A%A4"
     }
   ],
   "deleted_corps": {},
@@ -6186,13 +6669,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-15",
+      "excluded_at": "2026-07-16",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-15",
+      "excluded_at": "2026-07-16",
       "memo": "운영자 삭제 요청 이관"
     }
   }
