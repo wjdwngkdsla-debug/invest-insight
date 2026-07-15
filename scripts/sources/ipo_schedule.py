@@ -818,6 +818,36 @@ def refresh_ipo_schedule(
         deleted_corps, fixed_exclusions,
     )
 
+    # 이미 상장된 과거 종목은 시장 전체 C001 조회에서 corp_cls=E(미상장)가 아니어서
+    # grouped에 들어오지 않는다. 기관 신청물량이 없는 과거 이력은 기업코드로 직접
+    # 공시를 찾아 한 번 보강하고, 파서 버전을 저장해 매일 반복 조회하지 않는다.
+    for corp_code, archived in list(archived_by_corp.items()):
+        if archived.get("fixed_excluded") or archived.get("commit_apply"):
+            archived["ipo_parse_version"] = IPO_PARSE_VERSION
+            continue
+        if int(archived.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION:
+            continue
+        try:
+            corp_filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
+            if corp_filings:
+                refreshed = process_corp(
+                    corp_code,
+                    archived.get("name") or corp_filings[0].get("corp_name") or "",
+                    corp_filings,
+                    archived,
+                )
+                archived_by_corp[corp_code] = refreshed
+                log(
+                    f"과거 이력 기관신청 보강: {refreshed.get('name')} "
+                    f"({len(refreshed.get('commit_apply') or [])}개 구간)"
+                )
+            else:
+                archived["ipo_parse_version"] = IPO_PARSE_VERSION
+                log(f"과거 이력 기관신청 공시 없음: {archived.get('name')}")
+        except Exception as exc:
+            # 다음 배치에서 재시도할 수 있게 버전은 올리지 않는다.
+            log(f"과거 이력 기관신청 보강 실패 {archived.get('name')}: {exc}")
+
     # KRX로 상장일 자동 감지·확정 (종목기본정보 LIST_DD 우선, 시세 스냅샷 보조)
     if (krx_snapshot or krx_base_info) and krx_trading_date:
         detect_listings_from_krx(items_by_corp, krx_snapshot or {}, krx_trading_date, history, log, base_info=krx_base_info)

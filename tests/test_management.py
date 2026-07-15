@@ -3,10 +3,12 @@ from __future__ import annotations
 import unittest
 
 from scripts.management import (
+    apply_commit_apply_correction,
     apply_schedule_correction,
     apply_stock_management,
     build_correction_tasks,
     merge_stock_management,
+    release_schedule_correction,
 )
 
 
@@ -156,6 +158,54 @@ class CorrectionPrecedenceTest(unittest.TestCase):
         self.assertEqual(row["auto_value"], "22000")
         self.assertEqual(row["manual_value"], "21,500")
         self.assertEqual(row["status"], "자동해결")
+
+    def test_past_item_missing_commit_apply_gets_manual_fallback_tasks(self) -> None:
+        schedule = {
+            "items": [],
+            "past_items": [{
+                "corp_code": "00123456", "name": "과거회사", "demand_ratio": 1000,
+                "commit_alloc": [{"period": "6개월", "qty": 100}],
+            }],
+        }
+
+        tasks = build_correction_tasks([], [], schedule, [], [], today="2026-07-15")
+        rows = [row for row in tasks if row["field"] == "기관신청물량"]
+
+        self.assertEqual(sorted(row["period"] for row in rows), sorted(["미확약", "15일", "1개월", "3개월", "6개월"]))
+        self.assertTrue(all(row["target"] == "IPO일정" for row in rows))
+
+    def test_commit_apply_manual_qty_recalculates_percentages_when_complete(self) -> None:
+        item = {"commit_apply": [
+            {"period": "미확약", "qty": 600, "pct": 0},
+            {"period": "15일", "qty": 100, "pct": 0},
+            {"period": "1개월", "qty": 100, "pct": 0},
+            {"period": "3개월", "qty": 100, "pct": 0},
+        ]}
+
+        changed = apply_commit_apply_correction(item, {
+            "field": "기관신청물량", "period": "6개월", "manual_qty": "100",
+        })
+
+        self.assertTrue(changed)
+        by_period = {row["period"]: row for row in item["commit_apply"]}
+        self.assertEqual(by_period["미확약"]["pct"], 60.0)
+        self.assertEqual(by_period["6개월"]["pct"], 10.0)
+
+    def test_automatic_return_clears_manual_listing_date(self) -> None:
+        item = {
+            "listing_date": "2026-07-24",
+            "manual_fields": ["listing_date"],
+            "ipo_parse_version": 2,
+        }
+
+        changed = release_schedule_correction(item, {
+            "field": "상장일", "override_mode": "자동복귀",
+        })
+
+        self.assertTrue(changed)
+        self.assertNotIn("listing_date", item)
+        self.assertNotIn("manual_fields", item)
+        self.assertEqual(item["ipo_parse_version"], 0)
 
 
 if __name__ == "__main__":

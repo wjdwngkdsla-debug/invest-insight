@@ -24,11 +24,13 @@ from scripts.management import (
     CORRECTION_COLUMNS,
     MANAGEMENT_COLUMNS,
     SCHEDULE_FIELD_MAP,
+    apply_commit_apply_correction,
     apply_schedule_correction,
     apply_stock_management,
     build_correction_tasks,
     merge_stock_management,
     norm_name,
+    release_schedule_correction,
 )
 
 
@@ -556,6 +558,28 @@ def pull_correction_tasks(spreadsheet: gspread.Spreadsheet) -> None:
         if target == "IPO일정":
             item = _find_schedule_item(schedule, str(row.get("code") or ""), str(row.get("name") or ""))
             if not item:
+                continue
+            if str(row.get("override_mode") or "") == "자동복귀":
+                fields = SCHEDULE_FIELD_MAP.get(str(row.get("field") or "")) or ()
+                old_value = next((str(item.get(field) or "") for field in fields if item.get(field)), "")
+                if release_schedule_correction(item, row):
+                    schedule.setdefault("history", []).append({
+                        "date": _date.today().isoformat(), "name": item.get("name") or row.get("name") or "",
+                        "type": "자동복귀", "field": row.get("field") or "",
+                        "old": old_value, "new": "자동 수집 대기",
+                    })
+                    row["status"] = "적용"
+                    changed_schedule = True
+                continue
+            if str(row.get("field") or "") == "기관신청물량":
+                if apply_commit_apply_correction(item, row):
+                    schedule.setdefault("history", []).append({
+                        "date": _date.today().isoformat(), "name": item.get("name") or row.get("name") or "",
+                        "type": "수기변경", "field": f"기관신청물량({row.get('period') or ''})",
+                        "old": "", "new": row.get("manual_qty") or row.get("manual_value") or "",
+                    })
+                    row["status"] = "적용"
+                    changed_schedule = True
                 continue
             old_value = next((str(item.get(field) or "") for field in SCHEDULE_FIELD_MAP.get(str(row.get("field") or ""), ()) if item.get(field)), "")
             if apply_schedule_correction(item, row):
@@ -1358,7 +1382,7 @@ def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:
     spreadsheet.batch_update({"requests": [
         _dropdown_request(worksheet, CORRECTION_HEADERS, "대상", ["IPO일정", "락업"]),
         _dropdown_request(worksheet, CORRECTION_HEADERS, "구분", ["IPO기관", "기존주주"]),
-        _dropdown_request(worksheet, CORRECTION_HEADERS, "보정방식", ["임시", "고정"]),
+        _dropdown_request(worksheet, CORRECTION_HEADERS, "보정방식", ["임시", "고정", "자동복귀"]),
         _dropdown_request(worksheet, CORRECTION_HEADERS, "처리상태", ["대기", "적용", "검토필요", "자동해결", "취소"]),
     ]})
     print(f"[SHEET] 보정작업: {len(rows)}건 (기존 수기값·미해결 작업 보존)", file=sys.stderr)

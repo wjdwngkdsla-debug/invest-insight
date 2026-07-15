@@ -4576,6 +4576,11 @@ def main() -> None:
         listing_date = target["listing_date"]
         print(f"[BUILD] {idx}/{len(targets)} {name}", file=sys.stderr)
         code = str(target.get("code") or "")
+        # 종목코드와 상장일이 모두 없는 예비 IPO는 아직 KRX에 존재하지 않는다.
+        # 최근 거래일을 반복 검색해도 찾을 수 없으므로 락업 단계에서는 건너뛴다.
+        if not code.strip() and not str(listing_date or "").strip():
+            print(f"  [KRX] 상장 전 예비 IPO → 락업 검색 생략: {name}", file=sys.stderr)
+            continue
         # 종목 하나에서 어떤 예외가 나도 배치 전체가 죽지 않게 격리한다.
         # (#11 실패 원인: 와이제이링크 요약표의 '상장일' 행이 예외를 던져 137종목 배치가 통째로 중단)
         try:

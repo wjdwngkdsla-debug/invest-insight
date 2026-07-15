@@ -102,7 +102,8 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
         state = {"items": [], "past_items": [item], "history": []}
         with (
             patch.object(ipo_schedule, "load_state", return_value=state),
-            patch.object(ipo_schedule, "fetch_equity_filings", return_value=[filing]),
+            patch.object(ipo_schedule, "fetch_equity_filings", return_value=[]),
+            patch.object(ipo_schedule, "_fetch_corp_filings", return_value=[filing]),
             patch.object(ipo_schedule, "seed_new_items", return_value=[]),
             patch.object(ipo_schedule, "download_document_text", return_value="document") as download,
             patch.object(ipo_schedule, "parse_offering_doc", return_value=parsed),
