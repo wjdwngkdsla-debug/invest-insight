@@ -91,46 +91,6 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null
-        },
-        {
-          "period": "6개월",
-          "date": "2025-01-13",
-          "date_display": "2025-01-13",
-          "tradable_date": "2025-01-13",
-          "qty": 25209815,
-          "pct": 42.98,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2025-01-13",
-          "api_return_qty": 25209815,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장) + 최대주주(제3자배정) + 기타 보호예수 필요 주주 + 주식매수선택권",
-          "reason": "최대주주(상장) + 최대주주(제3자배정) + 기타 보호예수 필요 주주 + 주식매수선택권"
-        },
-        {
-          "period": "12개월",
-          "date": "2025-07-11",
-          "date_display": "2025-07-11",
-          "tradable_date": "2025-07-11",
-          "qty": 22661370,
-          "pct": 38.64,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2025-07-11",
-          "api_return_qty": 22661370,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장)",
-          "reason": "최대주주(상장)"
         }
       ],
       "holders": []
@@ -931,26 +891,6 @@
           "reason": null
         },
         {
-          "period": "2개월",
-          "date": "2024-10-11",
-          "date_display": "2024-10-11",
-          "tradable_date": "2024-10-11",
-          "qty": 768029,
-          "pct": 5.26,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2024-10-11",
-          "api_return_qty": 768029,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장)",
-          "reason": "최대주주(상장)"
-        },
-        {
           "period": "3개월",
           "date": "2024-11-19",
           "date_display": "2024-11-19",
@@ -989,26 +929,6 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null
-        },
-        {
-          "period": "6개월",
-          "date": "2025-02-19",
-          "date_display": "2025-02-19",
-          "tradable_date": "2025-02-19",
-          "qty": 3147675,
-          "pct": 21.57,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2025-02-19",
-          "api_return_qty": 3147675,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장)",
-          "reason": "최대주주(상장)"
         }
       ],
       "holders": []
@@ -8318,26 +8238,6 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null
-        },
-        {
-          "period": "12개월",
-          "date": "2026-03-16",
-          "date_display": "2026-03-16",
-          "tradable_date": "2026-03-16",
-          "qty": 58546746,
-          "pct": 83.85,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2026-03-16",
-          "api_return_qty": 58546746,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장)",
-          "reason": "최대주주(상장)"
         }
       ],
       "holders": []
@@ -16856,26 +16756,6 @@
           "reason": null
         },
         {
-          "period": "기타",
-          "date": "2026-04-17",
-          "date_display": "2026-04-17",
-          "tradable_date": "2026-04-17",
-          "qty": 417044,
-          "pct": 1.73,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2026-04-17",
-          "api_return_qty": 417044,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장)",
-          "reason": "최대주주(상장)"
-        },
-        {
           "period": "6개월",
           "date": "2026-06-15",
           "date_display": "2026-06-15",
@@ -16894,26 +16774,6 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null
-        },
-        {
-          "period": "6개월",
-          "date": "2026-06-15",
-          "date_display": "2026-06-15",
-          "tradable_date": "2026-06-15",
-          "qty": 17265016,
-          "pct": 71.66,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "반환확인",
-          "source": "투자설명서",
-          "source_label": "공공데이터 API 단독",
-          "rcp": "",
-          "api_checked": true,
-          "api_return_date": "2026-06-15",
-          "api_return_qty": 17265016,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "최대주주(상장) + 최대주주(제3자배정)",
-          "reason": "최대주주(상장) + 최대주주(제3자배정)"
         }
       ],
       "holders": []
