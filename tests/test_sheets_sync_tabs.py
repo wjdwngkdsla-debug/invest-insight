@@ -43,8 +43,7 @@ class _Spreadsheet:
 class SheetTabCleanupTest(unittest.TestCase):
     def test_removes_only_known_legacy_tabs(self):
         retained = [
-            "종목관리", "보정작업", "휴장일", "IPO일정_현황",
-            "IPO기관_현황", "기존주주_현황", "정정이력", "변경로그",
+            "종목관리", "IPO일정", "IPO기관", "기존주주", "휴장일", "로그",
         ]
         spreadsheet = _Spreadsheet(retained + list(OBSOLETE_TABS) + ["개인메모"])
 

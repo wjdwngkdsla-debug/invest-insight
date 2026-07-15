@@ -101,6 +101,39 @@ class StockManagementMigrationTest(unittest.TestCase):
         self.assertEqual(rows[0]["corp_code"], "00123456")
         self.assertEqual(rows[0]["management_status"], "수동편입")
 
+    def test_unlocked_sheet_price_is_temporary_and_can_be_replaced(self) -> None:
+        schedule = {"items": [{
+            "corp_code": "00123456", "name": "신규회사", "final_price": 10000,
+            "last_rcept_no": "20260714000001",
+        }], "past_items": [], "history": []}
+        rows = [{
+            "scope": "IPO일정+락업", "name": "신규회사", "corp_code": "00123456",
+            "management_status": "자동", "visibility": "노출",
+            "manual_ipo_price": "11000", "manual_ipo_price_locked": "N",
+            "manual_ipo_price_edited": "Y",
+        }]
+
+        _, applied, _ = apply_stock_management(rows, [], schedule, today="2026-07-15")
+
+        self.assertEqual(applied["items"][0]["final_price"], 11000)
+        self.assertIn("final_price", applied["items"][0]["provisional_fields"])
+        self.assertNotIn("manual_fields", applied["items"][0])
+
+    def test_fixed_sheet_price_is_marked_as_manual_field(self) -> None:
+        schedule = {"items": [{
+            "corp_code": "00123456", "name": "신규회사", "final_price": 10000,
+        }], "past_items": [], "history": []}
+        rows = [{
+            "scope": "IPO일정+락업", "name": "신규회사", "corp_code": "00123456",
+            "management_status": "자동", "visibility": "노출",
+            "manual_ipo_price": "11000", "manual_ipo_price_locked": "Y",
+        }]
+
+        _, applied, _ = apply_stock_management(rows, [], schedule, today="2026-07-15")
+
+        self.assertEqual(applied["items"][0]["final_price"], 11000)
+        self.assertIn("final_price", applied["items"][0]["manual_fields"])
+
 
 class CorrectionPrecedenceTest(unittest.TestCase):
     def test_temporary_value_is_not_locked(self) -> None:

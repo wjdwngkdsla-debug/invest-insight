@@ -189,7 +189,7 @@ ADMIN_COLUMNS = [
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
     "api_return_date", "api_return_qty", "api_reason",
-    "manual_date", "manual_qty", "manual_lock",
+    "manual_date", "manual_qty", "manual_lock", "manual_mode", "sheet_visible",
     "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct",
     "status", "review_needed", "memo", "updated_at",
 ]
@@ -1506,6 +1506,7 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     rcp = target.get("rcp")
     parsed = target.get("parsed_ipo_lockups")
     manual_ipo_price = _to_int(target.get("manual_ipo_price"))
+    manual_ipo_price_locked = str(target.get("manual_ipo_price_locked") or "N").upper() == "Y"
     ipo_price = _to_int(target.get("ipo_price"))
     note = ""
     if not parsed:
@@ -1517,8 +1518,8 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
         # DART 검색 시작일은 상장 전년도부터 (연말 상장 준비 공시 대비)
         search_from = f"{int(listing_date[:4]) - 1}0101" if listing_date[:4].isdigit() else None
         rcp, parsed, note, parsed_ipo_price = parse_ipo_lockup(dart_name, d0=search_from)
-        ipo_price = manual_ipo_price or parsed_ipo_price
-    elif manual_ipo_price:
+        ipo_price = manual_ipo_price if manual_ipo_price_locked else (parsed_ipo_price or manual_ipo_price)
+    elif manual_ipo_price_locked and manual_ipo_price:
         ipo_price = manual_ipo_price
     if not parsed:
         print(f"  [DART] IPO기관 파싱 실패: {note}", file=sys.stderr)
@@ -1823,7 +1824,7 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
 def carry_manual_fields(new_row: dict, old: dict | None) -> dict:
     if not old:
         return new_row
-    for key in ["manual_date", "manual_qty", "manual_lock", "memo"]:
+    for key in ["manual_date", "manual_qty", "manual_lock", "manual_mode", "sheet_visible", "memo"]:
         if old.get(key) not in (None, ""):
             new_row[key] = old.get(key)
     return new_row
@@ -3060,6 +3061,7 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
     reviews: list[dict] = []
     shares = _to_int(row.get("shares"))
     manual_lock = str(row.get("manual_lock") or "N").upper() == "Y"
+    manual_mode = str(row.get("manual_mode") or "")
     manual_qty = _to_int(row.get("manual_qty"))
     manual_date = row.get("manual_date") or ""
     api_qty = _to_int(row.get("api_return_qty"))
@@ -3155,18 +3157,30 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
             row["review_needed"] = "N"
     elif api_qty:
         final_qty = api_qty
-        final_date = api_date or planned_date
+        final_date = api_date or planned_date or (manual_date if manual_mode == "임시" else "")
         if planned_qty and api_qty != planned_qty:
             status = "반환확인_API수정"
             row["review_needed"] = "N"  # 운영자가 볼 필요는 없고 로그에만 남긴다.
         else:
             status = "반환확인"
             row["review_needed"] = "N"
+    elif planned_qty or planned_date or (manual_mode == "임시" and (manual_qty or manual_date)):
+        used_manual = manual_mode == "임시" and (
+            (not planned_qty and manual_qty) or (not planned_date and manual_date)
+        )
+        final_qty = planned_qty or (manual_qty if manual_mode == "임시" else 0)
+        final_date = planned_date or (manual_date if manual_mode == "임시" else "")
+        if used_manual:
+            status = "수기임시"
+            row["review_needed"] = "Y"
+        else:
+            status = "예정" if final_date >= datetime.today().strftime("%Y-%m-%d") else "확정(경과)"
+            row["review_needed"] = row.get("review_needed") or "N"
     else:
         final_qty = planned_qty
         final_date = planned_date
-        status = "예정" if final_date >= datetime.today().strftime("%Y-%m-%d") else "확정(경과)"
-        row["review_needed"] = row.get("review_needed") or "N"
+        status = "확인필요"
+        row["review_needed"] = "Y"
 
 
 
@@ -4176,7 +4190,9 @@ def apply_manual_events(
             "api_reason": "",
             "manual_date": "",
             "manual_qty": "",
-            "manual_lock": "N",
+            "manual_lock": str(entry.get("manual_lock") or "N"),
+            "manual_mode": "고정" if str(entry.get("manual_lock") or "N").upper() == "Y" else "임시",
+            "sheet_visible": str(entry.get("sheet_visible") or "Y"),
             "memo": "",
         }
         # 재실행 시 기존 행의 API 확인값·수동 수정값을 유지한다
@@ -4324,8 +4340,29 @@ def apply_manual_events(
 
 
 def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
+    def managed_name(value: object) -> str:
+        return re.sub(r"[\s㈜()\[\]]|주식회사", "", str(value or ""))
+
+    hidden_codes: set[str] = set()
+    hidden_names: set[str] = set()
+    management_path = ROOT_DIR / "data" / "stock_management.json"
+    if management_path.exists():
+        try:
+            for command in json.loads(management_path.read_text(encoding="utf-8")):
+                if command.get("visibility") != "비공개":
+                    continue
+                if command.get("stock_code"):
+                    hidden_codes.add(normalize_stock_code(command.get("stock_code")))
+                if command.get("name"):
+                    hidden_names.add(managed_name(command.get("name")))
+        except Exception:
+            pass
     stocks_map: dict[str, dict] = {}
     for r in rows:
+        if str(r.get("sheet_visible") or "Y").upper() == "N":
+            continue
+        if normalize_stock_code(r.get("code")) in hidden_codes or managed_name(r.get("name")) in hidden_names:
+            continue
         final_qty = _to_int(r.get("final_qty"))
         final_date = r.get("final_date") or r.get("planned_date")
         final_tradable = r.get("final_tradable_date") or r.get("planned_tradable_date") or final_date
@@ -4729,9 +4766,14 @@ def main() -> None:
             # IPO종목 탭의 수동공모가는 선택적 보정값이다. 빈칸이면 기존값/DART값을 보존한다.
             manual_ipo_price = _to_int(target.get("manual_ipo_price"))
             existing_ipo_price = next((_to_int(r.get("ipo_price")) for r in existing_stock_rows if _to_int(r.get("ipo_price"))), 0)
-            effective_ipo_price = manual_ipo_price or next(
+            parsed_or_existing_ipo_price = next(
                 (_to_int(r.get("ipo_price")) for r in stock_rows if _to_int(r.get("ipo_price"))),
                 existing_ipo_price,
+            )
+            effective_ipo_price = (
+                manual_ipo_price
+                if str(target.get("manual_ipo_price_locked") or "N").upper() == "Y" and manual_ipo_price
+                else (parsed_or_existing_ipo_price or manual_ipo_price)
             )
             if effective_ipo_price:
                 for row in stock_rows:

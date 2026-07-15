@@ -14,6 +14,7 @@ import glob
 import json
 import os
 import sys
+from datetime import date
 from pathlib import Path
 
 
@@ -45,7 +46,7 @@ ADMIN_COLUMNS = [
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
     "api_return_date", "api_return_qty", "api_reason",
-    "manual_date", "manual_qty", "manual_lock",
+    "manual_date", "manual_qty", "manual_lock", "manual_mode", "sheet_visible",
     "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct",
     "status", "review_needed", "memo", "updated_at",
 ]
@@ -56,7 +57,7 @@ ADMIN_SHEET_COLUMNS = [
     "listing_date", "close_price", "ipo_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
-    "manual_lock", "manual_date", "manual_qty", "memo",
+    "manual_lock", "manual_date", "manual_qty", "manual_mode", "sheet_visible", "memo",
     "final_date", "final_tradable_date", "final_qty", "final_pct",
     "status", "review_needed",
     "event_id", "type", "planned_tradable_date", "planned_date_display",
@@ -68,7 +69,7 @@ IPO_ADMIN_SHEET_COLUMNS = [
     "name", "code", "market", "period",
     "listing_date", "close_price", "ipo_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
-    "manual_lock", "manual_date", "manual_qty", "memo",
+    "manual_lock", "manual_date", "manual_qty", "manual_mode", "sheet_visible", "memo",
     "final_date", "final_tradable_date", "final_qty", "final_pct",
     "status", "review_needed",
     "event_id", "type", "category", "planned_tradable_date", "planned_date_display",
@@ -81,7 +82,7 @@ FLOAT_ADMIN_SHEET_COLUMNS = [
     "listing_date", "close_price", "shares", "current_shares",
     "planned_date", "planned_qty", "planned_pct",
     "api_return_date", "api_return_qty", "api_reason",
-    "manual_lock", "manual_date", "manual_qty", "memo",
+    "manual_lock", "manual_date", "manual_qty", "manual_mode", "sheet_visible", "memo",
     "final_date", "final_tradable_date", "final_qty", "final_pct",
     "status", "review_needed",
     "event_id", "type", "category", "planned_tradable_date", "planned_date_display",
@@ -124,10 +125,21 @@ IPO_TARGET_TAB = "IPO종목"
 STOCK_MANAGEMENT_PATH = ROOT_DIR / "data" / "stock_management.json"
 STOCK_MANAGEMENT_TAB = "종목관리"
 STOCK_MANAGEMENT_HEADERS = [
-    "대상구분", "기업명", "DART기업코드", "종목코드", "시장", "상장일",
-    "관리상태", "노출", "수동공모가", "콘텐츠링크", "메모",
+    "관리", "홈페이지노출", "기업명", "DART기업코드", "종목코드", "시장",
+    "상장일", "상장일고정", "공모가", "공모가고정",
+    "최초상장주식수", "현재상장주식수", "상장주식수기준일", "종가",
+    "콘텐츠링크", "검증상태", "검증사유", "메모",
 ]
-STOCK_MANAGEMENT_KEYS = dict(zip(STOCK_MANAGEMENT_HEADERS, MANAGEMENT_COLUMNS))
+STOCK_MANAGEMENT_KEYS = {
+    "관리": "management_status", "홈페이지노출": "visibility", "기업명": "name",
+    "DART기업코드": "corp_code", "종목코드": "stock_code", "시장": "market",
+    "상장일": "listing_date", "상장일고정": "listing_date_locked",
+    "공모가": "manual_ipo_price", "공모가고정": "manual_ipo_price_locked",
+    "최초상장주식수": "initial_shares", "현재상장주식수": "current_shares",
+    "상장주식수기준일": "shares_date", "종가": "close_price",
+    "콘텐츠링크": "content_url", "검증상태": "validation_status",
+    "검증사유": "validation_reason", "메모": "memo",
+}
 
 CORRECTION_PATH = ROOT_DIR / "data" / "correction_tasks.json"
 CORRECTION_TAB = "보정작업"
@@ -147,7 +159,7 @@ WORKLIST_BACKUP_PATH = ROOT_DIR / "data" / "worklist_backup.json"
 
 IPO_SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
 IPO_SCHEDULE_TAB = "IPO일정"
-IPO_SCHEDULE_VIEW_TAB = "IPO일정_현황"
+IPO_SCHEDULE_VIEW_TAB = IPO_SCHEDULE_TAB
 IPO_SCHEDULE_BACKUP_PATH = ROOT_DIR / "data" / "ipo_schedule_sheet_backup.json"
 # 배치가 마지막으로 쓴 값 스냅샷 — 시트 값과 이게 다르면 "사용자 수정"으로 판정한다
 IPO_SCHEDULE_WRITTEN_PATH = ROOT_DIR / "data" / "ipo_sheet_written.json"
@@ -160,11 +172,9 @@ IPO_SCHEDULE_HEADERS = [
     "콘텐츠링크",
 ]
 IPO_SCHEDULE_VIEW_HEADERS = [
-    "기업명", "상태", "관리상태", "시장", "주관사", "희망가액", "확정공모가", "공모주식수",
-    "수요예측일", "청약일", "상장일", "수요예측경쟁률", "개인청약경쟁률",
-    "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
-    "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
-    "콘텐츠링크",
+    "고정", "노출", "기업명", "희망가액", "공모주식수", "수요예측일", "청약일",
+    "수요예측경쟁률", "개인청약경쟁률", "주관사", "검증상태", "검증사유",
+    "DART기업코드", "이벤트ID", "콘텐츠링크",
 ]
 # 사용자가 수정하면 파싱보다 우선하는 열 → 잠글 item 필드 매핑
 IPO_EDITABLE_COLUMNS = {
@@ -216,6 +226,8 @@ HEADER_KO = {
     "manual_date": "수동해제일",
     "manual_qty": "수동물량",
     "manual_lock": "수동값사용(Y/N)",
+    "manual_mode": "수기모드",
+    "sheet_visible": "노출(Y/N)",
     "final_date": "최종해제일",
     "final_tradable_date": "최종거래가능일",
     "final_date_display": "최종일표시",
@@ -251,23 +263,24 @@ HEADER_INTERNAL = {label: key for key, label in HEADER_KO.items()}
 
 
 # 검토필요 탭은 폐지 — 운영자 보완 입력은 작업목록 탭으로 일원화 (review_needed.csv는 내부 기록용으로만 유지)
-TAB_CONFIG = [
-    ("변경로그", "lockup_log.csv", LOG_COLUMNS),
-]
+TAB_CONFIG = [("로그", "lockup_log.csv", LOG_COLUMNS)]
 
 
-ADMIN_TAB_CONFIG = [
-    ("IPO기관", "IPO기관", IPO_ADMIN_SHEET_COLUMNS),
-    ("기존주주", "구주·보호예수", FLOAT_ADMIN_SHEET_COLUMNS),
-]
-READ_ONLY_ADMIN_TAB_CONFIG = [
-    ("IPO기관_현황", "IPO기관", [column for column in IPO_ADMIN_SHEET_COLUMNS if column not in {"manual_lock", "manual_date", "manual_qty", "memo"}]),
-    ("기존주주_현황", "구주·보호예수", [column for column in FLOAT_ADMIN_SHEET_COLUMNS if column not in {"manual_lock", "manual_date", "manual_qty", "memo"}]),
-]
+ADMIN_TAB_CONFIG = [("IPO기관", "IPO기관", IPO_ADMIN_SHEET_COLUMNS), ("기존주주", "구주·보호예수", FLOAT_ADMIN_SHEET_COLUMNS)]
 LEGACY_ADMIN_TABS = ("운영_락업일정", "락업이벤트", "lockup_admin")
 
+SIMPLE_SHEET_STATE_PATH = ROOT_DIR / "data" / "simple_sheet_state.json"
+IPO_INSTITUTION_HEADERS = [
+    "고정", "노출", "종목명", "종목코드", "기간", "신청물량", "배정물량",
+    "배정률(%)", "배정비중(%)", "해제일", "검증상태", "검증사유", "이벤트ID", "DART기업코드",
+]
+HOLDER_HEADERS = [
+    "고정", "노출", "종목명", "종목코드", "락업기간", "해제일", "물량",
+    "현재주식수기준비중(%)", "검증상태", "검증사유", "이벤트ID",
+]
 
-MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "memo")
+
+MANUAL_COLUMNS = ("manual_lock", "manual_date", "manual_qty", "manual_mode", "sheet_visible", "memo")
 REVIEW_MANUAL_COLUMNS = ("status", "operator_memo")
 
 
@@ -367,6 +380,52 @@ def read_schedule_data() -> dict:
     return value if isinstance(value, dict) else {"updated": "", "items": [], "past_items": [], "history": []}
 
 
+def load_simple_sheet_state() -> dict:
+    if not SIMPLE_SHEET_STATE_PATH.exists():
+        return {"management": {}, "schedule": {}, "ipo_institution": {}, "holders": {}}
+    try:
+        value = json.loads(SIMPLE_SHEET_STATE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        value = {}
+    return {
+        key: dict(value.get(key) or {})
+        for key in ("management", "schedule", "ipo_institution", "holders")
+    }
+
+
+def yn(value: object, default: str = "N") -> str:
+    text = str(value or "").strip().upper()
+    if text in {"TRUE", "Y", "예", "노출", "관리"}:
+        return "Y"
+    if text in {"FALSE", "N", "아니오", "비공개", "제외"}:
+        return "N"
+    return default
+
+
+def number(value: object) -> int:
+    text = str(value or "").replace(",", "").replace("원", "").strip()
+    try:
+        return int(float(text)) if text else 0
+    except ValueError:
+        return 0
+
+
+def decimal(value: object) -> float:
+    text = str(value or "").replace(",", "").replace("%", "").replace(":1", "").strip()
+    try:
+        return float(text) if text else 0.0
+    except ValueError:
+        return 0.0
+
+
+def all_schedule_items(schedule: dict) -> list[dict]:
+    return list(schedule.get("items") or []) + list(schedule.get("past_items") or [])
+
+
+def item_key(item: dict) -> str:
+    return str(item.get("corp_code") or f"name:{norm_name(item.get('name'))}")
+
+
 def table_records(values: list[list[str]], key_map: dict[str, str]) -> list[dict[str, str]]:
     if len(values) < 2:
         return []
@@ -378,6 +437,15 @@ def table_records(values: list[list[str]], key_map: dict[str, str]) -> list[dict
         if any(row.get(key, "") for key in key_map.values()):
             out.append(row)
     return out
+
+
+def has_sheet_headers(spreadsheet: gspread.Spreadsheet, title: str, required: set[str]) -> bool:
+    try:
+        values = spreadsheet.worksheet(title).get_all_values()
+    except gspread.WorksheetNotFound:
+        return False
+    headers = {str(value).strip() for value in (values[0] if values else [])}
+    return required.issubset(headers)
 
 
 
@@ -473,19 +541,42 @@ def pull_stock_management(spreadsheet: gspread.Spreadsheet) -> None:
     schedule = read_schedule_data()
     sheet_rows: list[dict[str, str]] = []
     try:
-        sheet_rows = table_records(spreadsheet.worksheet(STOCK_MANAGEMENT_TAB).get_all_values(), STOCK_MANAGEMENT_KEYS)
+        values = spreadsheet.worksheet(STOCK_MANAGEMENT_TAB).get_all_values()
+        if {"관리", "홈페이지노출", "기업명"}.issubset({cell.strip() for cell in (values[0] if values else [])}):
+            sheet_rows = table_records(values, STOCK_MANAGEMENT_KEYS)
     except gspread.WorksheetNotFound:
         pass
 
+    state = load_simple_sheet_state().get("management", {})
     for row in sheet_rows:
+        key = str(row.get("corp_code") or f"name:{norm_name(row.get('name'))}")
+        previous = dict(state.get(key) or {})
+        managed = yn(row.get("management_status"), "Y")
+        visible = yn(row.get("visibility"), "Y")
+        row["management_status"] = "제외고정" if managed == "N" else (
+            "수동편입" if not row.get("corp_code") and not row.get("stock_code") else "자동"
+        )
+        row["visibility"] = "노출" if visible == "Y" else "비공개"
+        row["scope"] = "IPO일정+락업"
+        for field, lock_field, edited_field in (
+            ("listing_date", "listing_date_locked", "listing_date_edited"),
+            ("manual_ipo_price", "manual_ipo_price_locked", "manual_ipo_price_edited"),
+        ):
+            row[lock_field] = yn(row.get(lock_field), "N")
+            current = str(row.get(field) or "").replace(",", "").strip()
+            old = str(previous.get(field) or "").replace(",", "").strip()
+            changed = bool(previous and current != old)
+            row[edited_field] = "Y" if changed else "N"
+            # 공식값이 이미 있으면 고정하지 않은 수기 수정은 즉시 되돌린다.
+            if changed and row[lock_field] != "Y" and old:
+                row[field] = previous.get(field) or ""
+                row[edited_field] = "N"
         code = str(row.get("stock_code") or "").strip()
         if code.isdigit() and len(code) < 6:
             row["stock_code"] = code.zfill(6)
         corp = str(row.get("corp_code") or "").strip()
         if corp.isdigit() and len(corp) < 8:
             row["corp_code"] = corp.zfill(8)
-        if row.get("name") and not row.get("scope"):
-            row["scope"] = "IPO일정+락업"
         if row.get("name") and not row.get("management_status"):
             row["management_status"] = "수동편입"
 
@@ -637,18 +728,252 @@ def pull_correction_tasks(spreadsheet: gspread.Spreadsheet) -> None:
         print(f"[SHEET] 보정작업 입력 반영: {len(sheet_rows)}행", file=sys.stderr)
 
 
+def _schedule_snapshot(item: dict) -> dict[str, str]:
+    low, high = number(item.get("band_low")), number(item.get("band_high"))
+    return {
+        "band": f"{low:,} ~ {high:,}" if low and high else "",
+        "offer_shares": f"{number(item.get('offer_shares')):,}" if number(item.get("offer_shares")) else "",
+        "forecast": _date_range_text(item.get("forecast_start"), item.get("forecast_end")),
+        "subscription": _date_range_text(item.get("sub_start"), item.get("sub_end")),
+        "demand_ratio": str(item.get("demand_ratio") or ""),
+        "sub_ratio": str(item.get("sub_ratio") or ""),
+        "underwriter": str(item.get("underwriter") or ""),
+        "content_url": str(item.get("content_url") or ""),
+    }
+
+
+def _date_range_text(start: object, end: object) -> str:
+    left, right = str(start or ""), str(end or "")
+    return left if left and (not right or left == right) else (f"{left} ~ {right}" if left else "")
+
+
+def _apply_schedule_cell(item: dict, key: str, value: str) -> tuple[str, ...]:
+    if key == "band":
+        nums = [number(token) for token in value.replace("~", " ").split() if number(token)]
+        if len(nums) >= 2:
+            item["band_low"], item["band_high"] = nums[0], nums[-1]
+        return ("band_low", "band_high")
+    if key == "offer_shares":
+        if number(value):
+            item["offer_shares"] = number(value)
+        return ("offer_shares",)
+    if key in {"forecast", "subscription"}:
+        dates = _parse_sheet_dates(value)
+        fields = ("forecast_start", "forecast_end") if key == "forecast" else ("sub_start", "sub_end")
+        if dates:
+            item[fields[0]], item[fields[1]] = dates[0], dates[-1]
+        return fields
+    if key in {"demand_ratio", "sub_ratio"}:
+        if decimal(value):
+            item[key] = decimal(value)
+        return (key,)
+    if key == "underwriter":
+        item["underwriter"] = value
+        return ("underwriter",)
+    if key == "content_url":
+        item["content_url"] = value
+        return ("content_url",)
+    return ()
+
+
+def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    try:
+        values = spreadsheet.worksheet(IPO_SCHEDULE_TAB).get_all_values()
+    except gspread.WorksheetNotFound:
+        return
+    if not {"고정", "노출", "기업명"}.issubset({cell.strip() for cell in (values[0] if values else [])}):
+        return
+    key_map = {
+        "고정": "locked", "노출": "visible", "기업명": "name", "희망가액": "band",
+        "공모주식수": "offer_shares", "수요예측일": "forecast", "청약일": "subscription",
+        "수요예측경쟁률": "demand_ratio", "개인청약경쟁률": "sub_ratio", "주관사": "underwriter",
+        "DART기업코드": "corp_code", "콘텐츠링크": "content_url",
+    }
+    rows = table_records(values, key_map)
+    if not rows:
+        return
+    schedule = read_schedule_data()
+    state = load_simple_sheet_state().get("schedule", {})
+    items = all_schedule_items(schedule)
+    history = list(schedule.get("history") or [])
+    today = __import__("datetime").date.today().isoformat()
+    domain = {"band_low", "band_high", "offer_shares", "forecast_start", "forecast_end", "sub_start", "sub_end", "demand_ratio", "sub_ratio", "underwriter"}
+    changed = 0
+    for row in rows:
+        item = _find_schedule_item(schedule, str(row.get("corp_code") or ""), str(row.get("name") or ""))
+        if not item:
+            item = {
+                "corp_code": row.get("corp_code") or f"manual-{norm_name(row.get('name'))}",
+                "name": row.get("name") or "", "manual_entry": True,
+                "review_approved": True, "review_pending": False,
+            }
+            schedule.setdefault("items", []).append(item)
+            items.append(item)
+        key = item_key(item)
+        previous = dict(state.get(key) or {})
+        locked = yn(row.get("locked"), "N") == "Y"
+        manual_fields = set(item.get("manual_fields") or [])
+        provisional = set(item.get("provisional_fields") or [])
+        if locked:
+            # 체크만 해도 현재 표시된 이 탭의 값 전체를 고정한다.
+            manual_fields.update(field for field in domain if item.get(field) not in (None, "", 0))
+            provisional.difference_update(domain)
+        else:
+            manual_fields.difference_update(domain)
+        for cell_key in ("band", "offer_shares", "forecast", "subscription", "demand_ratio", "sub_ratio", "underwriter", "content_url"):
+            current = str(row.get(cell_key) or "").strip()
+            old = str(previous.get(cell_key) or "").strip()
+            if not previous or current == old:
+                continue
+            if not locked and old:
+                continue
+            fields = set(_apply_schedule_cell(item, cell_key, current))
+            if locked:
+                manual_fields.update(fields)
+                provisional.difference_update(fields)
+            else:
+                provisional.update(fields)
+            history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": cell_key, "old": old, "new": current})
+            changed += 1
+        if manual_fields:
+            item["manual_fields"] = sorted(manual_fields)
+        else:
+            item.pop("manual_fields", None)
+        if provisional:
+            item["provisional_fields"] = sorted(provisional)
+        else:
+            item.pop("provisional_fields", None)
+        item["schedule_hidden"] = yn(row.get("visible"), "Y") != "Y"
+    schedule["history"] = history[-500:]
+    IPO_SCHEDULE_PATH.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+    if changed:
+        print(f"[SHEET] IPO일정 직접 수정 {changed}개 반영", file=sys.stderr)
+
+
+def _schedule_by_corp_or_name(schedule: dict) -> tuple[dict[str, dict], dict[str, dict]]:
+    by_corp, by_name = {}, {}
+    for item in all_schedule_items(schedule):
+        if item.get("corp_code"):
+            by_corp[str(item["corp_code"])] = item
+        if norm_name(item.get("name")):
+            by_name[norm_name(item.get("name"))] = item
+    return by_corp, by_name
+
+
+def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
+    admin_path = ROOT_DIR / "data" / "lockup_admin.csv"
+    admin_rows = read_csv_dicts(admin_path)
+    by_id = {str(row.get("event_id") or ""): row for row in admin_rows if row.get("event_id")}
+    schedule = read_schedule_data()
+    history = list(schedule.get("history") or [])
+    today = date.today().isoformat()
+    by_corp, by_name = _schedule_by_corp_or_name(schedule)
+    state = load_simple_sheet_state()
+    manual_events = read_json_list(MANUAL_EVENTS_PATH)
+    manual_event_keys = {
+        (str(row.get("code") or ""), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
+        for row in manual_events
+    }
+
+    def pull_tab(title: str, kind: str) -> None:
+        try:
+            values = spreadsheet.worksheet(title).get_all_values()
+        except gspread.WorksheetNotFound:
+            return
+        if not {"고정", "노출"}.issubset({cell.strip() for cell in (values[0] if values else [])}):
+            return
+        headers = IPO_INSTITUTION_HEADERS if kind == "ipo" else HOLDER_HEADERS
+        key_map = {header: header for header in headers}
+        rows = table_records(values, key_map)
+        previous_rows = dict(state.get("ipo_institution" if kind == "ipo" else "holders") or {})
+        seen: set[str] = set()
+        for index, raw in enumerate(rows, start=2):
+            event_id = str(raw.get("이벤트ID") or "").strip()
+            corp_code = str(raw.get("DART기업코드") or "").strip()
+            period = str(raw.get("기간") or raw.get("락업기간") or "").strip()
+            key = event_id or f"{corp_code or norm_name(raw.get('종목명'))}:{period}:{index}"
+            seen.add(key)
+            previous = dict(previous_rows.get(key) or {})
+            locked = yn(raw.get("고정"), "N") == "Y"
+            visible = yn(raw.get("노출"), "Y")
+            event = by_id.get(event_id)
+            if event:
+                old_visible, old_lock = event.get("sheet_visible") or "Y", event.get("manual_lock") or "N"
+                event["sheet_visible"] = visible
+                event["manual_lock"] = "Y" if locked else "N"
+                if old_visible != visible:
+                    history.append({"date": today, "name": event.get("name") or "", "type": "노출변경", "field": f"{kind}:{period}", "old": old_visible, "new": visible})
+                if old_lock != event["manual_lock"]:
+                    history.append({"date": today, "name": event.get("name") or "", "type": "고정변경", "field": f"{kind}:{period}", "old": old_lock, "new": event["manual_lock"]})
+                for sheet_field, event_field in (("배정물량", "manual_qty"), ("물량", "manual_qty"), ("해제일", "manual_date")):
+                    current = str(raw.get(sheet_field) or "").replace(",", "").strip()
+                    old = str(previous.get(sheet_field) or "").replace(",", "").strip()
+                    if current and (locked or (previous and current != old and not old)):
+                        event[event_field] = current
+                        event["manual_mode"] = "고정" if locked else "임시"
+                        if current != old:
+                            history.append({"date": today, "name": event.get("name") or "", "type": "수기변경", "field": sheet_field, "old": old, "new": current})
+            elif kind == "holder" and raw.get("종목코드") and period and raw.get("해제일") and number(raw.get("물량")):
+                manual_key = (str(raw.get("종목코드") or "").zfill(6), "기존주주", period, str(raw.get("해제일") or ""))
+                if manual_key not in manual_event_keys:
+                    manual_events.append({
+                        "code": manual_key[0], "category": "기존주주",
+                        "period": period, "date": manual_key[3], "qty": number(raw.get("물량")),
+                        "sheet_visible": visible, "manual_lock": "Y" if locked else "N",
+                    })
+                    manual_event_keys.add(manual_key)
+            if kind == "ipo":
+                item = by_corp.get(corp_code) or by_name.get(norm_name(raw.get("종목명")))
+                if item:
+                    manual = dict(item.get("manual_commit_apply") or {})
+                    current = number(raw.get("신청물량"))
+                    old = number(previous.get("신청물량"))
+                    if current and (locked or (previous and current != old and not old)):
+                        manual[period] = {"qty": current, "locked": locked, "visible": visible == "Y"}
+                        if current != old:
+                            history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": f"기관신청물량({period})", "old": old, "new": current})
+                    elif current and previous and yn(previous.get("노출"), "Y") != visible:
+                        manual[period] = {"qty": current, "locked": locked, "visible": visible == "Y"}
+                    elif period in manual:
+                        manual[period]["locked"] = locked
+                        manual[period]["visible"] = visible == "Y"
+                    item["manual_commit_apply"] = manual
+        for missing in set(previous_rows) - seen:
+            previous = previous_rows[missing]
+            event = by_id.get(str(previous.get("이벤트ID") or ""))
+            if event:
+                event["sheet_visible"] = "N"
+                history.append({"date": today, "name": event.get("name") or "", "type": "행삭제", "field": f"{kind}:{event.get('period') or ''}", "old": "노출", "new": "비노출"})
+            elif kind == "ipo":
+                item = by_corp.get(str(previous.get("DART기업코드") or "")) or by_name.get(norm_name(previous.get("종목명")))
+                period = str(previous.get("기간") or "")
+                qty = number(previous.get("신청물량"))
+                if item and period and qty:
+                    manual = dict(item.get("manual_commit_apply") or {})
+                    manual[period] = {"qty": qty, "locked": False, "visible": False}
+                    item["manual_commit_apply"] = manual
+                    history.append({"date": today, "name": item.get("name") or "", "type": "행삭제", "field": f"ipo:{period}", "old": "노출", "new": "비노출"})
+
+    pull_tab("IPO기관", "ipo")
+    pull_tab("기존주주", "holder")
+    write_csv_dicts(admin_path, admin_rows, ADMIN_COLUMNS)
+    schedule["history"] = history[-500:]
+    IPO_SCHEDULE_PATH.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+    MANUAL_EVENTS_PATH.write_text(json.dumps(manual_events, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 
 
 def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     csv_path = ROOT_DIR / "data" / "lockup_admin.csv"
     local_rows = read_csv_dicts(csv_path)
     new_structure = False
-    try:
-        spreadsheet.worksheet(STOCK_MANAGEMENT_TAB)
-        spreadsheet.worksheet(CORRECTION_TAB)
-        new_structure = True
-    except gspread.WorksheetNotFound:
-        pass
+    new_structure = all((
+        has_sheet_headers(spreadsheet, STOCK_MANAGEMENT_TAB, {"관리", "홈페이지노출", "기업명"}),
+        has_sheet_headers(spreadsheet, IPO_SCHEDULE_TAB, {"고정", "노출", "기업명"}),
+        has_sheet_headers(spreadsheet, "IPO기관", {"고정", "노출", "기간"}),
+        has_sheet_headers(spreadsheet, "기존주주", {"고정", "노출", "락업기간"}),
+    ))
 
     if local_rows and not new_structure:
         sheet_rows: list[dict[str, str]] = []
@@ -680,8 +1005,12 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
         pull_worklist(spreadsheet)
         pull_ipo_targets(spreadsheet)
         pull_manual_events(spreadsheet)
+    # 보정작업은 첫 마이그레이션 때만 읽는다. 이후에는 각 도메인 탭에서 직접 수정한다.
     pull_stock_management(spreadsheet)
-    pull_correction_tasks(spreadsheet)
+    if not new_structure:
+        pull_correction_tasks(spreadsheet)
+    pull_simple_schedule_tab(spreadsheet)
+    pull_simple_event_tabs(spreadsheet)
     pull_holidays(spreadsheet)
 
 
@@ -1179,6 +1508,20 @@ def push_tab(
     columns: list[str],
 ) -> None:
     rows = read_csv_dicts(ROOT_DIR / "data" / filename)
+    if title == "로그":
+        for entry in read_schedule_data().get("history") or []:
+            rows.append({
+                "time": entry.get("date") or "", "event_id": "",
+                "code": entry.get("code") or "", "name": entry.get("name") or "",
+                "field": entry.get("field") or entry.get("type") or "",
+                "old_value": entry.get("old") or "", "new_value": entry.get("new") or "",
+                "reason": entry.get("type") or "IPO일정 변경",
+            })
+        unique: dict[tuple[str, ...], dict] = {}
+        for row in rows:
+            key = tuple(str(row.get(column) or "") for column in columns)
+            unique[key] = row
+        rows = sorted(unique.values(), key=lambda row: str(row.get("time") or ""), reverse=True)
     push_rows(spreadsheet, title, rows, columns)
 
 
@@ -1310,54 +1653,250 @@ def _review_pending_ranges(rows: list[dict]) -> list[tuple[int, int]]:
     return ranges
 
 
-def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
-    saved = read_json_list(STOCK_MANAGEMENT_PATH)
-    rows = merge_stock_management(saved, read_json_list(IPO_TARGETS_PATH), read_schedule_data())
-    STOCK_MANAGEMENT_PATH.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
-    values = [STOCK_MANAGEMENT_HEADERS] + [
-        [row.get(key, "") for key in MANAGEMENT_COLUMNS]
-        for row in rows
-    ]
-    worksheet = get_or_create_worksheet(spreadsheet, STOCK_MANAGEMENT_TAB, len(values) + 30, len(STOCK_MANAGEMENT_HEADERS))
+def _checkbox_request(worksheet: gspread.Worksheet, headers: list[str], column: str) -> dict:
+    index = headers.index(column)
+    return {
+        "setDataValidation": {
+            "range": {
+                "sheetId": worksheet.id, "startRowIndex": 1,
+                "endRowIndex": worksheet.row_count,
+                "startColumnIndex": index, "endColumnIndex": index + 1,
+            },
+            "rule": {"condition": {"type": "BOOLEAN"}, "strict": True, "showCustomUi": True},
+        }
+    }
+
+
+def _hide_columns_request(worksheet: gspread.Worksheet, headers: list[str], columns: list[str]) -> list[dict]:
+    requests: list[dict] = []
+    for column in columns:
+        if column not in headers:
+            continue
+        index = headers.index(column)
+        requests.append({
+            "updateDimensionProperties": {
+                "range": {
+                    "sheetId": worksheet.id, "dimension": "COLUMNS",
+                    "startIndex": index, "endIndex": index + 1,
+                },
+                "properties": {"hiddenByUser": True}, "fields": "hiddenByUser",
+            }
+        })
+    return requests
+
+
+def _push_simple_table(
+    spreadsheet: gspread.Spreadsheet,
+    title: str,
+    headers: list[str],
+    rows: list[list[object]],
+    checkbox_columns: list[str],
+    hidden_columns: list[str] | None = None,
+) -> None:
+    values = [headers] + rows
+    worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 30, len(headers))
     worksheet.clear()
-    worksheet.update(values, "A1", value_input_option="RAW")
-    worksheet.freeze(rows=1)
-    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(len(values), len(STOCK_MANAGEMENT_HEADERS))}")
+    worksheet.update(values, "A1", value_input_option="USER_ENTERED")
+    worksheet.freeze(rows=1, cols=min(2, len(headers)))
+    worksheet.set_basic_filter(f"A1:{rowcol_to_a1(max(len(values), 1), len(headers))}")
     worksheet.format("1:1", {
         "backgroundColor": {"red": 0.82, "green": 0.89, "blue": 1.0},
         "textFormat": {"bold": True}, "horizontalAlignment": "CENTER",
     })
-    status_column = STOCK_MANAGEMENT_HEADERS.index("관리상태")
-    requests = [
-        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "대상구분", ["IPO일정", "락업", "IPO일정+락업"]),
-        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "관리상태", ["자동", "수동편입", "검토대기", "제외고정"]),
-        _dropdown_request(worksheet, STOCK_MANAGEMENT_HEADERS, "노출", ["노출", "비공개"]),
-        _repeat_cell_format_request(
-            worksheet,
-            1,
-            max(len(values), 2),
-            status_column,
-            status_column + 1,
-            {
-                "backgroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0},
-                "textFormat": {"bold": False, "foregroundColor": {"red": 0.0, "green": 0.0, "blue": 0.0}},
-            },
-        ),
-    ]
-    for start, end in _review_pending_ranges(rows):
-        requests.append(_repeat_cell_format_request(
-            worksheet,
-            start + 1,
-            end + 1,
-            status_column,
-            status_column + 1,
-            {
-                "backgroundColor": {"red": 1.0, "green": 0.80, "blue": 0.80},
-                "textFormat": {"bold": True, "foregroundColor": {"red": 0.75, "green": 0.0, "blue": 0.0}},
-            },
-        ))
-    spreadsheet.batch_update({"requests": requests})
-    print(f"[SHEET] 종목관리: 기존 데이터 포함 {len(rows)}종목", file=sys.stderr)
+    requests = [_checkbox_request(worksheet, headers, column) for column in checkbox_columns]
+    requests.extend(_hide_columns_request(worksheet, headers, hidden_columns or []))
+    if requests:
+        spreadsheet.batch_update({"requests": requests})
+    print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
+
+
+def _event_validation(row: dict) -> tuple[str, str]:
+    if row.get("review_needed") == "Y":
+        return "확인필요", str(row.get("parse_note") or row.get("api_reason") or row.get("memo") or "자동 검증 필요")
+    if row.get("manual_lock") == "Y":
+        return "수기고정", "운영자가 이 행을 고정"
+    if row.get("manual_mode") == "임시":
+        return "수기임시", "공식값 수집 시 자동 교체"
+    return "정상", ""
+
+
+def _management_stats(admin_rows: list[dict]) -> dict[str, dict]:
+    stats: dict[str, dict] = {}
+    for row in admin_rows:
+        keys = [str(row.get("code") or ""), f"name:{norm_name(row.get('name'))}"]
+        for key in keys:
+            if not key or key == "name:":
+                continue
+            current = stats.setdefault(key, {})
+            current["initial_shares"] = current.get("initial_shares") or row.get("shares") or ""
+            current["current_shares"] = row.get("current_shares") or current.get("current_shares") or ""
+            current["shares_date"] = row.get("shares_date") or current.get("shares_date") or ""
+            current["close_price"] = row.get("close_price") or current.get("close_price") or ""
+    return stats
+
+
+def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    schedule = read_schedule_data()
+    rows = merge_stock_management(
+        read_json_list(STOCK_MANAGEMENT_PATH), read_json_list(IPO_TARGETS_PATH), schedule,
+    )
+    stats = _management_stats(read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv"))
+    by_item = {item_key(item): item for item in all_schedule_items(schedule)}
+    state = load_simple_sheet_state()
+    state_rows: dict[str, dict] = {}
+    values: list[list[object]] = []
+    for row in rows:
+        key = str(row.get("corp_code") or f"name:{norm_name(row.get('name'))}")
+        item = by_item.get(key) or next(
+            (value for value in all_schedule_items(schedule) if norm_name(value.get("name")) == norm_name(row.get("name"))), {}
+        )
+        metric = stats.get(str(row.get("stock_code") or "")) or stats.get(f"name:{norm_name(row.get('name'))}") or {}
+        official_price = item.get("final_price") or row.get("manual_ipo_price") or ""
+        row.update({field: metric.get(field) or row.get(field) or "" for field in ("initial_shares", "current_shares", "shares_date", "close_price")})
+        row["manual_ipo_price"] = official_price
+        if item.get("review_pending"):
+            row["validation_status"], row["validation_reason"] = "확인필요", str(item.get("review_reason") or "DART/API 확인 필요")
+        elif item.get("provisional_fields"):
+            row["validation_status"], row["validation_reason"] = "수기임시", "공식값 수집 시 자동 교체"
+        else:
+            row["validation_status"], row["validation_reason"] = "정상", ""
+        values.append([
+            row.get("management_status") != "제외고정", row.get("visibility") != "비공개",
+            row.get("name", ""), row.get("corp_code", ""), row.get("stock_code", ""), row.get("market", ""),
+            row.get("listing_date", ""), row.get("listing_date_locked") == "Y",
+            number(row.get("manual_ipo_price")) or "", row.get("manual_ipo_price_locked") == "Y",
+            number(row.get("initial_shares")) or "", number(row.get("current_shares")) or "",
+            row.get("shares_date", ""), number(row.get("close_price")) or "", row.get("content_url", ""),
+            row.get("validation_status", ""), row.get("validation_reason", ""), row.get("memo", ""),
+        ])
+        state_rows[key] = {
+            "listing_date": str(row.get("listing_date") or ""),
+            "manual_ipo_price": str(number(row.get("manual_ipo_price")) or ""),
+        }
+    STOCK_MANAGEMENT_PATH.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+    state["management"] = state_rows
+    SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    _push_simple_table(
+        spreadsheet, STOCK_MANAGEMENT_TAB, STOCK_MANAGEMENT_HEADERS, values,
+        ["관리", "홈페이지노출", "상장일고정", "공모가고정"],
+    )
+
+
+def _schedule_validation(item: dict) -> tuple[str, str]:
+    if item.get("review_pending"):
+        return "확인필요", str(item.get("review_reason") or "DART 파싱 결과 확인 필요")
+    if set(item.get("manual_fields") or []).intersection({
+        "band_low", "band_high", "offer_shares", "forecast_start", "forecast_end",
+        "sub_start", "sub_end", "demand_ratio", "sub_ratio", "underwriter",
+    }):
+        return "수기고정", "이 탭의 일정값 고정"
+    if item.get("provisional_fields"):
+        return "수기임시", "공식값 수집 시 자동 교체"
+    return "정상", ""
+
+
+def push_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    schedule = read_schedule_data()
+    state = load_simple_sheet_state()
+    state_rows: dict[str, dict] = {}
+    rows: list[list[object]] = []
+    domain = {
+        "band_low", "band_high", "offer_shares", "forecast_start", "forecast_end",
+        "sub_start", "sub_end", "demand_ratio", "sub_ratio", "underwriter",
+    }
+    for item in sorted(all_schedule_items(schedule), key=lambda value: (value.get("listing_date") or "9999", value.get("name") or "")):
+        if item.get("fixed_excluded"):
+            continue
+        snapshot = _schedule_snapshot(item)
+        status, reason = _schedule_validation(item)
+        key = item_key(item)
+        state_rows[key] = snapshot
+        rows.append([
+            bool(set(item.get("manual_fields") or []).intersection(domain)), not item.get("schedule_hidden", False),
+            item.get("name", ""), snapshot["band"], number(snapshot["offer_shares"]) or "",
+            snapshot["forecast"], snapshot["subscription"], item.get("demand_ratio") or "",
+            item.get("sub_ratio") or "", item.get("underwriter") or "", status, reason,
+            item.get("corp_code", ""), f"schedule:{key}", item.get("content_url", ""),
+        ])
+    state["schedule"] = state_rows
+    SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    _push_simple_table(
+        spreadsheet, IPO_SCHEDULE_TAB, IPO_SCHEDULE_VIEW_HEADERS, rows,
+        ["고정", "노출"], ["DART기업코드", "이벤트ID"],
+    )
+
+
+def _period_order(period: object) -> int:
+    try:
+        return COMMIT_TIER_ORDER.index(str(period or ""))
+    except ValueError:
+        return len(COMMIT_TIER_ORDER)
+
+
+def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
+    admin = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    schedule = read_schedule_data()
+    items = all_schedule_items(schedule)
+    by_code = {str(item.get("stock_code") or ""): item for item in items if item.get("stock_code")}
+    by_name = {norm_name(item.get("name")): item for item in items if norm_name(item.get("name"))}
+    state = load_simple_sheet_state()
+
+    ipo_admin = [row for row in admin if row.get("category") == "IPO기관"]
+    ipo_by_key = {(str(row.get("code") or ""), str(row.get("period") or "")): row for row in ipo_admin}
+    ipo_rows: list[list[object]] = []
+    ipo_state: dict[str, dict] = {}
+    keys: set[tuple[str, str, str]] = set()
+    for item in items:
+        code, name = str(item.get("stock_code") or ""), str(item.get("name") or "")
+        for tier in list(item.get("commit_apply") or []) + list(item.get("commit_alloc") or []):
+            if isinstance(tier, dict) and tier.get("period"):
+                keys.add((code, name, str(tier["period"])))
+    for row in ipo_admin:
+        keys.add((str(row.get("code") or ""), str(row.get("name") or ""), str(row.get("period") or "")))
+    for code, name, period in sorted(keys, key=lambda value: (value[1], _period_order(value[2]))):
+        item = by_code.get(code) or by_name.get(norm_name(name)) or {}
+        event = ipo_by_key.get((code, period), {})
+        apply_tier = next((tier for tier in item.get("commit_apply") or [] if str(tier.get("period") or "") == period), {})
+        alloc_tier = next((tier for tier in item.get("commit_alloc") or [] if str(tier.get("period") or "") == period), {})
+        apply_qty = number(apply_tier.get("qty"))
+        alloc_qty = number(event.get("final_qty") or event.get("planned_qty") or alloc_tier.get("qty"))
+        total_alloc = sum(number(tier.get("qty")) for tier in item.get("commit_alloc") or [])
+        event_id = str(event.get("event_id") or f"ipo:{item_key(item) if item else norm_name(name)}:{period}")
+        status, reason = _event_validation(event) if event else ("정상" if apply_qty or alloc_qty else "확인필요", "" if apply_qty or alloc_qty else "기관 수량 미수집")
+        visible = event.get("sheet_visible") != "N" and apply_tier.get("visible", True) is not False
+        row_values = [
+            event.get("manual_lock") == "Y" or str(apply_tier.get("source") or "") == "manual_fixed", visible,
+            name or event.get("name", ""), code or event.get("code", ""), period, apply_qty or "", alloc_qty or "",
+            round(alloc_qty / apply_qty * 100, 2) if apply_qty and alloc_qty else "",
+            round(alloc_qty / total_alloc * 100, 2) if total_alloc and alloc_qty else "",
+            event.get("final_date") or event.get("planned_date") or "", status, reason,
+            event_id, item.get("corp_code", ""),
+        ]
+        ipo_rows.append(row_values)
+        ipo_state[event_id] = dict(zip(IPO_INSTITUTION_HEADERS, [str(value) for value in row_values]))
+
+    holder_rows: list[list[object]] = []
+    holder_state: dict[str, dict] = {}
+    for event in sorted((row for row in admin if row.get("category") == "구주·보호예수"), key=lambda row: (row.get("name") or "", row.get("final_date") or row.get("planned_date") or "")):
+        if not event.get("event_id"):
+            continue
+        status, reason = _event_validation(event)
+        qty = number(event.get("final_qty") or event.get("planned_qty"))
+        current_shares = number(event.get("current_shares") or event.get("shares"))
+        values = [
+            event.get("manual_lock") == "Y", event.get("sheet_visible") != "N",
+            event.get("name", ""), event.get("code", ""), event.get("period", ""),
+            event.get("final_date") or event.get("planned_date") or "", qty or "",
+            round(qty / current_shares * 100, 2) if qty and current_shares else "",
+            status, reason, event.get("event_id", ""),
+        ]
+        holder_rows.append(values)
+        holder_state[str(event["event_id"])] = dict(zip(HOLDER_HEADERS, [str(value) for value in values]))
+
+    state["ipo_institution"], state["holders"] = ipo_state, holder_state
+    SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    _push_simple_table(spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
+    _push_simple_table(spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows, ["고정", "노출"], ["이벤트ID"])
 
 
 def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:
@@ -1878,18 +2417,22 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         print(f"[SHEET] IPO종목 종목코드 자동 기입: {len(code_updates)}건", file=sys.stderr)
 
 
-# 운영자 입력은 세 탭만 사용한다. 나머지는 결과 확인용이며, 첫 배치 이관이 끝난
-# 구형 입력 탭은 삭제한다. 원본 데이터는 저장소 JSON/CSV에 남아 있으므로 시트에서
-# 제거해도 다음 배치가 전체 DART 재파싱을 하지 않는다.
-MANUAL_TABS_ORDER = [STOCK_MANAGEMENT_TAB, CORRECTION_TAB, HOLIDAY_TAB]
+# 운영자 입력은 도메인별 네 탭과 휴장일에서만 받는다.
+MANUAL_TABS_ORDER = [STOCK_MANAGEMENT_TAB, IPO_SCHEDULE_TAB, "IPO기관", "기존주주", HOLIDAY_TAB, "로그"]
 MANUAL_COLOR_ONLY_TABS: list[str] = []
 MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
-LEGACY_INPUT_TABS = ["IPO일정", "IPO종목", "작업목록", "수기입력", "IPO기관", "기존주주"]
+LEGACY_INPUT_TABS = ["IPO종목", "작업목록", "수기입력"]
 OBSOLETE_TABS = tuple(dict.fromkeys([
     *LEGACY_INPUT_TABS,
     *LEGACY_ADMIN_TABS,
     "검토필요",
     "상장후보_검토",
+    CORRECTION_TAB,
+    "IPO일정_현황",
+    "IPO기관_현황",
+    "기존주주_현황",
+    "정정이력",
+    "변경로그",
 ]))
 
 
@@ -1945,13 +2488,11 @@ def arrange_sheet_tabs(spreadsheet: gspread.Spreadsheet) -> None:
 def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     if reset:
         reset_worksheets(spreadsheet)
-    push_admin_tabs(spreadsheet)
+    push_stock_management_tab(spreadsheet)
+    push_simple_schedule_tab(spreadsheet)
+    push_simple_event_tabs(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
-    # 최초 실행에서는 여기서 구형 IPO일정 입력을 마지막으로 이관한 뒤 새 읽기전용 현황을 만든다.
-    sync_ipo_schedule_tab(spreadsheet)
-    push_stock_management_tab(spreadsheet)
-    push_correction_tab(spreadsheet)
     cleanup_obsolete_tabs(spreadsheet)
     arrange_sheet_tabs(spreadsheet)  # 수기 관리 탭 왼쪽 정렬 + 파란 탭 색
 

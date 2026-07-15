@@ -79,6 +79,33 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
         download.assert_not_called()
         self.assertEqual(result["items"][0]["last_rcept_no"], "20260713000001")
 
+    def test_unlocked_manual_commit_does_not_replace_existing_official_value(self) -> None:
+        from scripts.sources import ipo_schedule
+
+        item = {
+            "corp_code": "00000001", "name": "기존회사", "last_rcept_no": "20260713000001",
+            "first_filing_date": "20260701", "forecast_start": "2026-08-01",
+            "sub_start": "2026-08-10", "sub_end": "2026-08-11", "withdrawn": False,
+            "ipo_parse_version": ipo_schedule.IPO_PARSE_VERSION,
+            "commit_apply": [{"period": "1개월", "qty": 100, "pct": 100.0}],
+            "manual_commit_apply": {"1개월": {"qty": 999, "locked": False}},
+        }
+        filing = {
+            "corp_code": "00000001", "corp_name": "기존회사", "corp_cls": "E",
+            "rcept_no": "20260713000001", "rcept_dt": "20260713", "report_nm": "지분증권 증권신고서",
+        }
+        with (
+            patch.object(ipo_schedule, "load_state", return_value={"items": [item], "past_items": [], "history": []}),
+            patch.object(ipo_schedule, "fetch_equity_filings", return_value=[filing]),
+            patch.object(ipo_schedule, "seed_new_items", return_value=[]),
+            patch.object(ipo_schedule, "download_document_text") as download,
+            patch.object(ipo_schedule, "SCHEDULE_PATH"),
+        ):
+            result = ipo_schedule.refresh_ipo_schedule(verbose=False)
+
+        download.assert_not_called()
+        self.assertEqual(result["items"][0]["commit_apply"][0]["qty"], 100)
+
     def test_old_parser_snapshot_is_reparsed_once_even_when_receipt_is_same(self) -> None:
         from scripts.sources import ipo_schedule
 

@@ -115,8 +115,8 @@ function ratioText(v?: number): string {
 
 // 확약 표: 신청·배정 수량 + 기간별 신청 수량 대비 배정 비율
 function CommitTable({ item }: { item: IpoItem }) {
-  const apply = item.commit_apply || [];
-  const alloc = item.commit_alloc || [];
+  const apply = (item.commit_apply || []).filter((tier) => tier.visible !== false);
+  const alloc = (item.commit_alloc || []).filter((tier) => tier.visible !== false);
   if (!apply.length && !alloc.length) return null;
 
 

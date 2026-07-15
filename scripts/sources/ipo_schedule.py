@@ -695,17 +695,57 @@ def refresh_ipo_schedule(
     today = now_kst.strftime("%Y-%m-%d")
     listing_map = load_listing_map()
 
+    def apply_manual_commit_values(item: dict[str, Any]) -> dict[str, Any]:
+        """수기 신청물량은 공식 파싱 실패 시만 쓰고, 고정한 기간만 계속 유지한다."""
+        manual = dict(item.get("manual_commit_apply") or {})
+        if not manual:
+            return item
+        official = {
+            str(value.get("period") or ""): dict(value)
+            for value in (item.get("commit_apply") or [])
+            if isinstance(value, dict) and value.get("period")
+        }
+        for period, raw in manual.items():
+            value = dict(raw or {})
+            if value.get("locked") or period not in official:
+                official[period] = {
+                    "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
+                    "source": "manual_fixed" if value.get("locked") else "manual_temporary",
+                    "visible": value.get("visible", True),
+                }
+            elif period in official:
+                official[period]["visible"] = value.get("visible", True)
+        total = sum(int(value.get("qty") or 0) for value in official.values())
+        if total:
+            for value in official.values():
+                value["pct"] = round(int(value.get("qty") or 0) / total * 100, 2)
+        order = {period: index for index, period in enumerate(["미확약", "15일", "1개월", "3개월", "6개월"])}
+        item["commit_apply"] = sorted(official.values(), key=lambda value: order.get(str(value.get("period") or ""), 99))
+        return item
+
     def process_corp(corp_code: str, name: str, corp_filings: list[dict[str, Any]], old: dict[str, Any] | None) -> dict[str, Any]:
         """신고서 목록(최신순) → 병합 파싱된 IPO일정 항목. 자동발굴·수동추가(seed) 양쪽에서 공용으로 쓴다."""
         newest = corp_filings[0]
         withdrawn = any("철회신고서" in (f.get("report_nm") or "") for f in corp_filings)
+        official_periods = {
+            str(value.get("period") or "")
+            for value in ((old or {}).get("commit_apply") or [])
+            if isinstance(value, dict)
+            and value.get("qty")
+            and str(value.get("source") or "") not in {"manual_fixed", "manual_temporary"}
+        }
+        needs_temporary_commit_check = any(
+            not bool((value or {}).get("locked")) and str(period) not in official_periods
+            for period, value in dict((old or {}).get("manual_commit_apply") or {}).items()
+        )
 
         if (
             old
             and old.get("last_rcept_no") == newest.get("rcept_no")
             and int(old.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION
+            and not needs_temporary_commit_check
         ):
-            return old  # 새 공시 없음 → 문서 재다운로드 생략
+            return apply_manual_commit_values(old)  # 새 공시 없음 → 문서 재다운로드 생략
 
         log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
         item = dict(old or {})
@@ -785,7 +825,7 @@ def refresh_ipo_schedule(
             else:
                 item.pop("provisional_fields", None)
         item["withdrawn"] = withdrawn
-        return item
+        return apply_manual_commit_values(item)
 
     for corp_code, corp_filings in grouped.items():
         name = corp_filings[0].get("corp_name") or ""
@@ -822,19 +862,32 @@ def refresh_ipo_schedule(
     # grouped에 들어오지 않는다. 기관 신청물량이 없는 과거 이력은 기업코드로 직접
     # 공시를 찾아 한 번 보강하고, 파서 버전을 저장해 매일 반복 조회하지 않는다.
     for corp_code, archived in list(archived_by_corp.items()):
-        if archived.get("fixed_excluded") or archived.get("commit_apply"):
+        has_official_commit_apply = any(
+            isinstance(value, dict)
+            and value.get("qty")
+            and str(value.get("source") or "") not in {"manual_fixed", "manual_temporary"}
+            for value in (archived.get("commit_apply") or [])
+        )
+        has_temporary_commit_apply = any(
+            not bool((value or {}).get("locked"))
+            for value in dict(archived.get("manual_commit_apply") or {}).values()
+        )
+        if archived.get("fixed_excluded") or has_official_commit_apply:
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
             continue
-        if int(archived.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION:
+        if int(archived.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION and not has_temporary_commit_apply:
             continue
         try:
             corp_filings = _fetch_corp_filings(corp_code, LOOKBACK_DAYS * 2)
             if corp_filings:
+                source_item = dict(archived)
+                if has_temporary_commit_apply:
+                    source_item["ipo_parse_version"] = 0
                 refreshed = process_corp(
                     corp_code,
                     archived.get("name") or corp_filings[0].get("corp_name") or "",
                     corp_filings,
-                    archived,
+                    source_item,
                 )
                 archived_by_corp[corp_code] = refreshed
                 log(

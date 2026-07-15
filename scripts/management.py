@@ -14,7 +14,10 @@ from typing import Any, Iterable
 
 MANAGEMENT_COLUMNS = [
     "scope", "name", "corp_code", "stock_code", "market", "listing_date",
-    "management_status", "visibility", "manual_ipo_price", "content_url", "memo",
+    "management_status", "visibility", "listing_date_locked", "manual_ipo_price",
+    "manual_ipo_price_locked", "listing_date_edited", "manual_ipo_price_edited",
+    "initial_shares", "current_shares", "shares_date",
+    "close_price", "content_url", "validation_status", "validation_reason", "memo",
 ]
 
 CORRECTION_COLUMNS = [
@@ -110,6 +113,7 @@ def merge_stock_management(
             "market": target.get("market") or "",
             "listing_date": target.get("listing_date") or "",
             "manual_ipo_price": target.get("manual_ipo_price") or "",
+            "manual_ipo_price_locked": target.get("manual_ipo_price_locked") or "N",
             "management_status": "자동",
             "visibility": "",
         }, "락업")
@@ -131,6 +135,9 @@ def merge_stock_management(
             "stock_code": item.get("stock_code") or "",
             "market": item.get("market") or "",
             "listing_date": item.get("listing_date") or "",
+            "listing_date_locked": "Y" if "listing_date" in set(item.get("manual_fields") or []) else "N",
+            "manual_ipo_price": item.get("final_price") or "",
+            "manual_ipo_price_locked": "Y" if "final_price" in set(item.get("manual_fields") or []) else "N",
             "management_status": status,
             "visibility": visibility,
             "content_url": item.get("content_url") or "",
@@ -248,6 +255,7 @@ def apply_stock_management(
                     "listing_date": row.get("listing_date") or old.get("listing_date") or "",
                     "code": row.get("stock_code") or old.get("code") or "",
                     "manual_ipo_price": row.get("manual_ipo_price") or old.get("manual_ipo_price") or "",
+                    "manual_ipo_price_locked": row.get("manual_ipo_price_locked") or old.get("manual_ipo_price_locked") or "N",
                 }
             else:
                 target_by_name.pop(key, None)
@@ -309,10 +317,41 @@ def apply_stock_management(
             existing["stock_code"] = row["stock_code"]
         if row.get("market") and not existing.get("market"):
             existing["market"] = row["market"]
-        if row.get("listing_date") and not existing.get("listing_date"):
+        if row.get("listing_date"):
             existing["listing_date"] = row["listing_date"]
+        if row.get("manual_ipo_price"):
+            try:
+                existing["final_price"] = int(str(row["manual_ipo_price"]).replace(",", ""))
+            except ValueError:
+                pass
         if row.get("content_url"):
             existing["content_url"] = row["content_url"]
+
+        locked = set(existing.get("manual_fields") or [])
+        provisional = set(existing.get("provisional_fields") or [])
+        for field, flag in (
+            ("listing_date", row.get("listing_date_locked")),
+            ("final_price", row.get("manual_ipo_price_locked")),
+        ):
+            if str(flag or "N").upper() == "Y":
+                locked.add(field)
+                provisional.discard(field)
+            else:
+                locked.discard(field)
+                edited = (
+                    row.get("listing_date_edited") if field == "listing_date"
+                    else row.get("manual_ipo_price_edited")
+                )
+                if str(edited or "N").upper() == "Y":
+                    provisional.add(field)
+        if locked:
+            existing["manual_fields"] = sorted(locked)
+        else:
+            existing.pop("manual_fields", None)
+        if provisional:
+            existing["provisional_fields"] = sorted(provisional)
+        else:
+            existing.pop("provisional_fields", None)
 
         if visibility == "비공개" or status == "검토대기":
             existing["management_hidden"] = True
