@@ -27,6 +27,10 @@ LOOKBACK_DAYS = 210
 # 종목당 신고서 다운로드 상한 — 정정이 많아도 최신 몇 건이면 전 필드가 채워진다.
 MAX_DOCS_PER_CORP = 4
 
+# 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
+# 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
+IPO_PARSE_VERSION = 2
+
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
 # 정정이력 추적 대상 필드 (시트 정정이력 탭에 적재)
@@ -256,7 +260,8 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
         rows = _rows(table)
         if not rows:
             continue
-        header = " ".join(rows[0])
+        # DART 문서마다 합계가 첫 행 또는 2~3번째 다중 헤더에 놓인다. 표 전체에
+        # 필요한 표식이 있는지 확인하고, 행 라벨은 앞쪽 셀들을 합쳐 판정한다.
         # 단순경쟁률 표: '경쟁률' 행의 마지막(합계) 값
         if "기관투자자" in txt and "경쟁률" in txt:
             for r in rows:
@@ -268,19 +273,20 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                     except ValueError:
                         pass
         # 확약 신청 표: 행 라벨 'N개월/15일 확약'+'미확약', 헤더에 합계 열이 있는 표만 (마지막 3열 = 합계 건수/수량/신청가격)
-        if "미확약" in txt and "신청가격" in txt and "합계" in header:
+        if "미확약" in txt and "신청가격" in txt and "합계" in txt:
             tiers: dict[str, int] = {}
             total = 0
             for r in rows:
-                label = (r[0] if r else "").replace(" ", "")
+                label = "".join(r[:3]).replace(" ", "") if r else ""
                 nums = [c for c in r if re.fullmatch(r"[\d,]{2,}", c)]
                 if len(nums) < 2:
                     continue
-                if label in {f"{t}확약" for t in TIER_LABELS}:
-                    tiers[label.replace("확약", "")] = _to_int(nums[-2])
-                elif label == "미확약":
+                tier = next((t for t in TIER_LABELS if f"{t}확약" in label), "")
+                if tier:
+                    tiers[tier] = _to_int(nums[-2])
+                elif "미확약" in label:
                     tiers["미확약"] = _to_int(nums[-2])
-                elif label.startswith("합계"):
+                elif "합계" in label:
                     total = _to_int(nums[-2])
             if total and len(tiers) >= 3:
                 commit_apply = [
@@ -694,7 +700,11 @@ def refresh_ipo_schedule(
         newest = corp_filings[0]
         withdrawn = any("철회신고서" in (f.get("report_nm") or "") for f in corp_filings)
 
-        if old and old.get("last_rcept_no") == newest.get("rcept_no"):
+        if (
+            old
+            and old.get("last_rcept_no") == newest.get("rcept_no")
+            and int(old.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION
+        ):
             return old  # 새 공시 없음 → 문서 재다운로드 생략
 
         log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
@@ -707,7 +717,20 @@ def refresh_ipo_schedule(
         })
         if not withdrawn:
             merged: dict[str, Any] = {}
-            for f in corp_filings[:MAX_DOCS_PER_CORP]:
+            selected_filings = list(corp_filings[:MAX_DOCS_PER_CORP])
+            # 최신 정정/투자설명서 몇 건 뒤로 밀린 [발행조건확정] 신고서에도
+            # 기관 신청표가 있으므로 최소 한 건은 반드시 파싱 후보에 포함한다.
+            condition_filing = next(
+                (f for f in corp_filings if "발행조건확정" in (f.get("report_nm") or "")),
+                None,
+            )
+            if condition_filing and all(
+                f.get("rcept_no") != condition_filing.get("rcept_no") for f in selected_filings
+            ):
+                selected_filings.append(condition_filing)
+
+            has_condition_filing = condition_filing is not None
+            for f in selected_filings:
                 rname = f.get("report_nm") or ""
                 if "철회" in rname:
                     continue
@@ -722,9 +745,13 @@ def refresh_ipo_schedule(
                     if key not in merged or not merged[key]:
                         if val:
                             merged[key] = val
-                if _core_fields_filled(merged) and merged.get("final_price"):
+                if (
+                    _core_fields_filled(merged)
+                    and merged.get("final_price")
+                    and (merged.get("commit_apply") or not has_condition_filing)
+                ):
                     break
-                if _core_fields_filled(merged) and not any("발행조건확정" in (g.get("report_nm") or "") for g in corp_filings):
+                if _core_fields_filled(merged) and not has_condition_filing:
                     break
             locked = set(item.get("manual_fields") or [])  # 고정 보정은 공시가 덮지 않는다
             provisional = set(item.get("provisional_fields") or [])
@@ -752,6 +779,7 @@ def refresh_ipo_schedule(
                             "new": str(val),
                         })
                     item[key] = val
+            item["ipo_parse_version"] = IPO_PARSE_VERSION
             if provisional:
                 item["provisional_fields"] = sorted(provisional)
             else:

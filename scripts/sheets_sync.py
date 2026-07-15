@@ -1501,6 +1501,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     except Exception:
         return
     items = data.get("items", [])
+    past_items = data.get("past_items", [])
 
     def date_range(start: str, end: str) -> str:
         if not start:
@@ -1581,7 +1582,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
 
     # 1-1) 이름만 적힌 새 행(기존 항목과 매칭 안 됨) → 다음 배치가 DART에서 직접 찾도록 요청 파일에 적재
     if use_legacy_inputs:
-        existing_names = {(i.get("name") or "").strip() for i in items}
+        existing_names = {(i.get("name") or "").strip() for i in items + past_items}
         seed_names = [name for name in sheet_cells if name not in existing_names]
         ipo_seed_path = ROOT_DIR / "data" / "ipo_seed_names.json"
         if seed_names:
@@ -1696,7 +1697,10 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     # 3) 읽기 전용 현황 탭 재작성 + 쓴 값 스냅샷 저장
     rows: list[list[str]] = []
     new_written: dict[str, dict[str, str]] = {}
-    for item in items:
+    # 진행 종목을 먼저, 상장 완료 이력을 그 아래에 함께 유지한다. 상태 열의
+    # '상장 완료' 필터로 과거 데이터만 따로 볼 수 있고 홈페이지 노출에는 영향이 없다.
+    view_items = items + past_items
+    for item in view_items:
         if item.get("fixed_excluded"):
             continue
         name = item.get("name") or ""
@@ -1740,7 +1744,11 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     )
     IPO_SCHEDULE_WRITTEN_PATH.write_text(json.dumps(new_written, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    print(f"[SHEET] IPO일정_현황: {len(rows)}개 종목 읽기 전용 적재", file=sys.stderr)
+    print(
+        f"[SHEET] IPO일정_현황: {len(rows)}개 종목 읽기 전용 적재 "
+        f"(진행 {len(items)} / 과거 {len(past_items)})",
+        file=sys.stderr,
+    )
 
     # 정정이력 탭 — 정정공시·수기변경·KRX 자동수정·삭제·부활·IPO종목 삭제 크로스기록까지 최신순.
     # 운영자가 IPO일정·락업 둘 다 한 곳에서 감사할 수 있게 크로스 로그를 모아둔다.
