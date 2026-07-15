@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
