@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15 10:35",
+  "updated": "2026-07-15 11:32",
   "items": [
     {
       "corp_code": "00104069",
@@ -351,7 +351,8 @@
       "content_url": "https://blog.naver.com/vericap/224327442349",
       "review_pending": false,
       "archived_at": "2026-07-14",
-      "management_status": "자동"
+      "management_status": "자동",
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01424261",
@@ -401,7 +402,8 @@
         }
       ],
       "report_rcp": "20260629000505",
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01379129",
@@ -456,7 +458,8 @@
         }
       ],
       "report_rcp": "20260626000469",
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01370517",
@@ -511,7 +514,35 @@
         }
       ],
       "report_rcp": "20260623000422",
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 33462000,
+          "pct": 16.52
+        },
+        {
+          "period": "3개월",
+          "qty": 173000,
+          "pct": 0.09
+        },
+        {
+          "period": "1개월",
+          "qty": 103000,
+          "pct": 0.05
+        },
+        {
+          "period": "15일",
+          "qty": 46000,
+          "pct": 0.02
+        },
+        {
+          "period": "미확약",
+          "qty": 202582000,
+          "pct": 100.0
+        }
+      ],
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "00577593",
@@ -566,7 +597,8 @@
         }
       ],
       "report_rcp": "20260623000136",
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01755259",
@@ -620,7 +652,8 @@
         }
       ],
       "report_rcp": "20260529001298",
-      "archived_at": "2026-07-14"
+      "archived_at": "2026-07-14",
+      "ipo_parse_version": 2
     }
   ],
   "history": [
