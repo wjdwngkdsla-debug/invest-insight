@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14 21:22",
+  "updated": "2026-07-15 10:35",
   "items": [
     {
       "corp_code": "00104069",
@@ -68,7 +68,9 @@
       ],
       "content_url": "https://blog.naver.com/vericap/224343811780",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01461730",
@@ -90,7 +92,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "00920731",
@@ -111,7 +114,9 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01722066",
@@ -132,7 +137,9 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01947443",
@@ -152,7 +159,9 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "00229085",
@@ -174,7 +183,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01588897",
@@ -196,7 +206,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01586923",
@@ -217,7 +228,9 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "01801026",
@@ -239,7 +252,8 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "ipo_parse_version": 2
     },
     {
       "corp_code": "00683283",
@@ -737,13 +751,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-14",
+      "excluded_at": "2026-07-15",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-14",
+      "excluded_at": "2026-07-15",
       "memo": "운영자 삭제 요청 이관"
     }
   }
