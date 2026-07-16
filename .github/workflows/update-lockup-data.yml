@@ -21,6 +21,11 @@ on:
         required: true
         default: false
         type: boolean
+      backfill_all:
+        description: "IPO일정 미채움 종목(과거 신고서·실적보고서) 전량 백필 — 배치당 상한 해제"
+        required: true
+        default: false
+        type: boolean
 
 
 permissions:
@@ -73,6 +78,9 @@ jobs:
           ARGS=()
           if [ "${{ github.event.inputs.reparse_existing }}" = "true" ]; then
             ARGS+=(--reparse-existing)
+          fi
+          if [ "${{ github.event.inputs.backfill_all }}" = "true" ]; then
+            ARGS+=(--backfill-all)
           fi
           python -m scripts.build "${ARGS[@]}"
 

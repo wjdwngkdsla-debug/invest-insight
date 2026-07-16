@@ -374,6 +374,10 @@ def parse_args() -> argparse.Namespace:
         "--max-new", type=int, default=50,
         help="한 실행에서 새로 편입할 최대 종목 수 (초과분은 다음 배치에서 이어서, 0=무제한)",
     )
+    parser.add_argument(
+        "--backfill-all", action="store_true",
+        help="IPO일정 백필(과거 종목 신고서·실적보고서)을 배치당 상한 없이 전량 처리",
+    )
     return parser.parse_args()
 
 
@@ -5287,6 +5291,7 @@ def main() -> None:
             krx_snapshot=snap,
             krx_trading_date=snap_date or base_date,
             krx_base_info=base,
+            backfill_all=bool(getattr(args, "backfill_all", False)),
         )
     except Exception as exc:
         print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)

@@ -690,6 +690,7 @@ def refresh_ipo_schedule(
     krx_snapshot: dict[str, dict[str, Any]] | None = None,
     krx_trading_date: str | None = None,
     krx_base_info: dict[str, dict[str, Any]] | None = None,
+    backfill_all: bool = False,
 ) -> dict[str, Any]:
     def log(msg: str) -> None:
         if verbose:
@@ -885,7 +886,11 @@ def refresh_ipo_schedule(
                 items_by_corp.pop(old_key, None)
         items_by_corp[corp_code] = process_corp(corp_code, name, corp_filings, old)
 
-    heavy_budget = {"left": MAX_BACKFILL_PER_RUN}
+    # backfill_all=True면 배치당 상한 없이 남은 백필(신고서·실적보고서)을 한 번에 전부 처리한다.
+    # Run workflow의 backfill_all 체크 또는 --backfill-all 인자로 켠다.
+    heavy_budget = {"left": 10**9 if backfill_all else MAX_BACKFILL_PER_RUN}
+    if backfill_all:
+        log("backfill_all — 배치당 상한 해제, 미채움 종목 전량 처리")
     seed_pending = seed_new_items(
         items_by_corp, process_corp, history, today, log, prev_pending_names,
         deleted_corps, fixed_exclusions, heavy_budget,
@@ -1094,8 +1099,9 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="IPO 일정 데이터 갱신 (DART C001 스트림)")
     parser.add_argument("--days", type=int, default=LOOKBACK_DAYS, help="발굴 창(일)")
+    parser.add_argument("--backfill-all", action="store_true", help="배치당 상한 없이 미채움 백필 전량 처리")
     args = parser.parse_args()
-    result = refresh_ipo_schedule(days_back=args.days)
+    result = refresh_ipo_schedule(days_back=args.days, backfill_all=args.backfill_all)
     for item in result["items"]:
         print(
             f"{item.get('name','?'):<12} {item.get('market','?'):<4} "
