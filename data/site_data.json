@@ -397,6 +397,26 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "주식매수선택권",
           "reason": "주식매수선택권"
+        },
+        {
+          "period": "24개월",
+          "date": "2026-07-15",
+          "date_display": "2026-07-15",
+          "tradable_date": "2026-07-15",
+          "qty": 869631,
+          "pct": 5.03,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "반환확인",
+          "source": "투자설명서",
+          "source_label": "공공데이터 API 단독",
+          "rcp": "",
+          "api_checked": true,
+          "api_return_date": "2026-07-15",
+          "api_return_qty": 869631,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": "기타 보호예수 필요 주주",
+          "reason": "기타 보호예수 필요 주주"
         }
       ],
       "holders": []
@@ -4647,7 +4667,7 @@
     {
       "code": "413390",
       "name": "엠오티",
-      "market": "코스닥",
+      "market": "KOSDAQ",
       "listing_date": "2024-11-18",
       "shares": 11580180,
       "close_price": 6320,
@@ -5670,8 +5690,8 @@
           "date": "2025-03-24",
           "date_display": "2025-03-24",
           "tradable_date": "2025-03-24",
-          "qty": 16716,
-          "pct": 0.17,
+          "qty": 39006,
+          "pct": 0.41,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -5680,7 +5700,7 @@
           "rcp": "20241212000615",
           "api_checked": true,
           "api_return_date": "2025-03-24",
-          "api_return_qty": 16716,
+          "api_return_qty": 39006,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)"

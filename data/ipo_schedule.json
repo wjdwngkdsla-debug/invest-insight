@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16 10:52",
+  "updated": "2026-07-16 12:55",
   "items": [
     {
       "corp_code": "00104069",
@@ -312,7 +312,11 @@
       "listing_date": "2026-07-15",
       "stock_code": "079900",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {},
+      "result_report_missing": true
     },
     {
       "corp_code": "01519790",
@@ -336,7 +340,10 @@
       "listing_date": "2026-07-15",
       "stock_code": "484870",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "result_report_missing": true
     },
     {
       "corp_code": "01561465",
@@ -376,7 +383,8 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "result_report_missing": true
     },
     {
       "corp_code": "01203312",
@@ -475,7 +483,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_report_missing": true
     },
     {
       "corp_code": "01384787",
@@ -503,7 +512,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_report_missing": true
     },
     {
       "corp_code": "00112998",
@@ -518,7 +528,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_report_missing": true
     },
     {
       "corp_code": "00366438",
@@ -546,7 +557,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_report_missing": true
     },
     {
       "corp_code": "01374717",
@@ -561,7 +573,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "final_price": 19000,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "result_report_missing": true
     },
     {
       "corp_code": "00179489",
@@ -617,7 +630,8 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "result_report_missing": true
     },
     {
       "corp_code": "01501764",
@@ -2119,7 +2133,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 1865.96,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 738866,
+          "pct": 47.8
+        },
+        {
+          "period": "3개월",
+          "qty": 359186,
+          "pct": 23.2
+        },
+        {
+          "period": "1개월",
+          "qty": 85962,
+          "pct": 5.6
+        },
+        {
+          "period": "15일",
+          "qty": 95068,
+          "pct": 6.2
+        },
+        {
+          "period": "미확약",
+          "qty": 265918,
+          "pct": 17.2
+        }
+      ],
+      "report_rcp": "20251212000302"
     },
     {
       "corp_code": "01787355",
@@ -2147,7 +2190,36 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "sub_ratio": 699.64,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 1000,
+          "pct": 0.1
+        },
+        {
+          "period": "3개월",
+          "qty": 65719,
+          "pct": 5.1
+        },
+        {
+          "period": "1개월",
+          "qty": 5820,
+          "pct": 0.5
+        },
+        {
+          "period": "15일",
+          "qty": 231061,
+          "pct": 17.9
+        },
+        {
+          "period": "미확약",
+          "qty": 986400,
+          "pct": 76.5
+        }
+      ],
+      "report_rcp": "20251211000109"
     },
     {
       "corp_code": "01829819",
@@ -2176,7 +2248,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 1130.33,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 322127,
+          "pct": 19.88
+        },
+        {
+          "period": "3개월",
+          "qty": 293971,
+          "pct": 18.15
+        },
+        {
+          "period": "1개월",
+          "qty": 302327,
+          "pct": 18.66
+        },
+        {
+          "period": "15일",
+          "qty": 559007,
+          "pct": 34.51
+        },
+        {
+          "period": "미확약",
+          "qty": 142568,
+          "pct": 8.8
+        }
+      ],
+      "report_rcp": "20251209000239"
     },
     {
       "corp_code": "01671285",
@@ -2232,7 +2333,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 607.39,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 295950,
+          "pct": 24.87
+        },
+        {
+          "period": "3개월",
+          "qty": 168590,
+          "pct": 14.17
+        },
+        {
+          "period": "1개월",
+          "qty": 68310,
+          "pct": 5.74
+        },
+        {
+          "period": "15일",
+          "qty": 323710,
+          "pct": 27.2
+        },
+        {
+          "period": "미확약",
+          "qty": 333440,
+          "pct": 28.02
+        }
+      ],
+      "report_rcp": "20251205000407"
     },
     {
       "corp_code": "01316102",
@@ -2301,7 +2431,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 1429.63,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 74980,
+          "pct": 7.69
+        },
+        {
+          "period": "3개월",
+          "qty": 6720,
+          "pct": 0.69
+        },
+        {
+          "period": "1개월",
+          "qty": 16280,
+          "pct": 1.67
+        },
+        {
+          "period": "15일",
+          "qty": 547710,
+          "pct": 56.18
+        },
+        {
+          "period": "미확약",
+          "qty": 329310,
+          "pct": 33.78
+        }
+      ],
+      "report_rcp": "20251204000409"
     },
     {
       "corp_code": "01781999",
@@ -2329,7 +2488,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 1736.77,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 2377220,
+          "pct": 49.3
+        },
+        {
+          "period": "3개월",
+          "qty": 1331300,
+          "pct": 27.6
+        },
+        {
+          "period": "1개월",
+          "qty": 569980,
+          "pct": 11.8
+        },
+        {
+          "period": "15일",
+          "qty": 392075,
+          "pct": 8.1
+        },
+        {
+          "period": "미확약",
+          "qty": 151925,
+          "pct": 3.2
+        }
+      ],
+      "report_rcp": "20251126000523"
     },
     {
       "corp_code": "01381805",
@@ -2358,7 +2546,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 2865.18,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 130963,
+          "pct": 6.27
+        },
+        {
+          "period": "3개월",
+          "qty": 470271,
+          "pct": 22.5
+        },
+        {
+          "period": "1개월",
+          "qty": 452284,
+          "pct": 21.64
+        },
+        {
+          "period": "15일",
+          "qty": 846365,
+          "pct": 40.5
+        },
+        {
+          "period": "미확약",
+          "qty": 190117,
+          "pct": 9.1
+        }
+      ],
+      "report_rcp": "20251121000203"
     },
     {
       "corp_code": "01194607",
@@ -2414,7 +2631,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 2,
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "sub_ratio": 762.0,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 490670,
+          "pct": 15.5
+        },
+        {
+          "period": "3개월",
+          "qty": 368940,
+          "pct": 11.6
+        },
+        {
+          "period": "1개월",
+          "qty": 379290,
+          "pct": 12.0
+        },
+        {
+          "period": "15일",
+          "qty": 1120150,
+          "pct": 35.3
+        },
+        {
+          "period": "미확약",
+          "qty": 810353,
+          "pct": 25.6
+        }
+      ],
+      "report_rcp": "20251114002314"
     },
     {
       "corp_code": "01529982",
@@ -3477,7 +3723,10 @@
       "listing_date": "2025-05-23",
       "stock_code": "287840",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01649204",
@@ -3678,7 +3927,10 @@
       "listing_date": "2025-05-09",
       "stock_code": "136150",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01626391",
@@ -3729,7 +3981,10 @@
       "listing_date": "2025-05-09",
       "stock_code": "476040",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01594791",
@@ -3857,7 +4112,10 @@
       "listing_date": "2025-04-03",
       "stock_code": "481070",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01563667",
@@ -3932,20 +4190,17 @@
       "manual_commit_apply": {}
     },
     {
-      "corp_code": "manual-e7e428a38edd",
+      "corp_code": "00467339",
       "name": "한텍",
-      "management_name": "한텍",
-      "first_filing_date": "",
+      "first_filing_date": "20260716",
       "last_rcept_no": "",
       "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "098070",
-      "market": "코스닥",
+      "seeded": true,
       "listing_date": "2025-03-20",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "stock_code": "098070",
+      "market": "KOSDAQ",
+      "review_pending": false,
+      "archived_at": "2026-07-16"
     },
     {
       "corp_code": "01458161",
@@ -3987,7 +4242,10 @@
       "listing_date": "2025-03-20",
       "stock_code": "484810",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01022142",
@@ -4039,7 +4297,10 @@
       "listing_date": "2025-03-07",
       "stock_code": "226590",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01549472",
@@ -4117,7 +4378,10 @@
       "listing_date": "2025-02-25",
       "stock_code": "489500",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "00398862",
@@ -4196,7 +4460,10 @@
       "stock_code": "475830",
       "market": "KOSDAQ",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01073261",
@@ -4293,7 +4560,10 @@
       "stock_code": "452450",
       "market": "KOSDAQ",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01728167",
@@ -4417,7 +4687,10 @@
       "listing_date": "2025-01-24",
       "stock_code": "096250",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01590528",
@@ -4538,7 +4811,10 @@
       "listing_date": "2024-12-26",
       "stock_code": "387570",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "00870065",
@@ -4612,7 +4888,10 @@
       "listing_date": "2024-12-19",
       "stock_code": "476060",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01423916",
@@ -4624,7 +4903,10 @@
       "stock_code": "382150",
       "market": "KOSDAQ",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01453944",
@@ -4704,7 +4986,10 @@
       "listing_date": "2024-11-20",
       "stock_code": "459100",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01207901",
@@ -4920,7 +5205,10 @@
       "listing_date": "2024-11-07",
       "stock_code": "475960",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "00968607",
@@ -5091,7 +5379,10 @@
       "listing_date": "2024-10-25",
       "stock_code": "289930",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01588189",
@@ -5207,7 +5498,10 @@
       "listing_date": "2024-10-22",
       "stock_code": "457370",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01636565",
@@ -5281,7 +5575,10 @@
       "listing_date": "2024-10-18",
       "stock_code": "465480",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01023211",
@@ -5328,7 +5625,10 @@
       "listing_date": "2024-10-18",
       "stock_code": "209640",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01275489",
@@ -5476,7 +5776,10 @@
       "listing_date": "2024-08-23",
       "stock_code": "456070",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01704680",
@@ -5576,7 +5879,10 @@
       "listing_date": "2024-08-21",
       "stock_code": "464280",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01689266",
@@ -5601,7 +5907,10 @@
       "listing_date": "2024-08-20",
       "stock_code": "431190",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01385050",
@@ -5652,7 +5961,10 @@
       "listing_date": "2024-08-16",
       "stock_code": "088340",
       "review_pending": false,
-      "archived_at": "2026-07-16"
+      "archived_at": "2026-07-16",
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01138595",
@@ -8085,6 +8397,118 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "대한조선",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2026-07-15"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "삼진식품",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-12-22"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "성우",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-10-31"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "에스켐",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-11-18"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "엠오티",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-11-18"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "이노테크",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-11-07"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "이지스",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-12-11"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "인벤테라",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2026-04-02"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "키스트론",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-06-02"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "탑런토탈솔루션",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-11-01"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "티엠씨",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2026-07-15"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "한텍",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-03-20"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "위너스",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "제닉스",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -8117,16 +8541,6 @@
       "name": "엠오티",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%A0%EC%98%A4%ED%8B%B0"
-    },
-    {
-      "name": "오름테라퓨틱",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%98%A4%EB%A6%84%ED%85%8C%EB%9D%BC%ED%93%A8%ED%8B%B1"
-    },
-    {
-      "name": "온코크로스",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%98%A8%EC%BD%94%ED%81%AC%EB%A1%9C%EC%8A%A4"
     },
     {
       "name": "위너스",
@@ -8167,11 +8581,6 @@
       "name": "티엠씨",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%8B%B0%EC%97%A0%EC%94%A8"
-    },
-    {
-      "name": "피아이이",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%ED%94%BC%EC%95%84%EC%9D%B4%EC%9D%B4"
     },
     {
       "name": "피앤에스미캐닉스",
