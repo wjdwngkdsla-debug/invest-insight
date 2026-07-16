@@ -506,6 +506,7 @@ def seed_new_items(
     deleted_corps: dict[str, dict[str, Any]] | None = None,
     fixed_exclusions: dict[str, dict[str, Any]] | None = None,
     heavy_budget: dict[str, int] | None = None,
+    stock_hints: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
 
@@ -550,7 +551,10 @@ def seed_new_items(
             mark_resolved(name)
             continue  # 이미 실제 데이터 확보됨 (시장 전체 자동발굴로 해결됐을 수도 있음)
 
-        corp = get_corp_code(name)
+        # 종목코드 힌트가 있으면 코드 우선 매칭 — DART에 동명 비상장사가 있으면
+        # 이름 매칭이 엉뚱한(공시 0건) 회사를 잡는다 (티엠씨·인벤테라·키스트론·한텍 케이스)
+        stock_hint = (stock_hints or {}).get(_norm_name(name), "")
+        corp = get_corp_code(name, stock_code=stock_hint) if stock_hint else get_corp_code(name)
         if not corp or not corp.get("corp_code"):
             log(f"수동추가 실패(DART 미등록 회사명): {name}")
             unresolved.append({"name": name, "status": "not_found", "link": dart_search_link(name)})
@@ -891,9 +895,22 @@ def refresh_ipo_schedule(
     heavy_budget = {"left": 10**9 if backfill_all else MAX_BACKFILL_PER_RUN}
     if backfill_all:
         log("backfill_all — 배치당 상한 해제, 미채움 종목 전량 처리")
+
+    # 이름 → 종목코드 힌트 (동명 비상장사 오매칭 방지용). 과거 종목은 이미 상장돼 코드를 안다.
+    stock_hints: dict[str, str] = {}
+    for source in (archived_by_corp.values(), items_by_corp.values()):
+        for entry in source:
+            code = str(entry.get("stock_code") or "").strip()
+            key = _norm_name(entry.get("name") or "")
+            if key and code:
+                stock_hints.setdefault(key, code)
+    for key, linked in listing_map.items():
+        if linked.get("code"):
+            stock_hints.setdefault(key, str(linked["code"]))
+
     seed_pending = seed_new_items(
         items_by_corp, process_corp, history, today, log, prev_pending_names,
-        deleted_corps, fixed_exclusions, heavy_budget,
+        deleted_corps, fixed_exclusions, heavy_budget, stock_hints,
     )
 
     # 이미 상장된 과거 종목은 시장 전체 C001 조회에서 corp_cls=E(미상장)가 아니어서
@@ -914,12 +931,39 @@ def refresh_ipo_schedule(
             for value in dict(archived.get("manual_commit_apply") or {}).values()
         )
 
+        # corp_code 검증·교정 — 백필 초기에 이름 매칭으로 등록된 항목은 DART 동명
+        # 비상장사(공시 0건)를 잡았을 수 있고, manual-* 스텁은 DART 등록명이 달라
+        # 이름으로는 영영 못 찾는다. 종목코드(상장 후 확보됨)로 재확인해 다르면 교정하고
+        # 파서 상태를 리셋해 아래 보강이 새 corp 기준으로 다시 돌게 한다.
+        # (티엠씨·인벤테라·키스트론·한텍·에이치이엠파마·피앤에스미캐닉스가 영영 미채움이던 원인)
+        core_missing = not (archived.get("band_low") or archived.get("forecast_start"))
+        if core_missing and not archived.get("corp_verified"):
+            hint = str(archived.get("stock_code") or "").strip()
+            if hint:
+                verified = get_corp_code(archived.get("name") or "", stock_code=hint)
+                archived["corp_verified"] = True  # 배치마다 재조회하지 않게 1회만
+                if verified and verified.get("corp_code") and verified["corp_code"] != corp_code:
+                    history.append({
+                        "date": today, "name": archived.get("name") or "", "type": "KRX 자동수정",
+                        "field": "DART기업코드", "old": str(corp_code), "new": verified["corp_code"],
+                    })
+                    archived_by_corp.pop(corp_code, None)
+                    corp_code = verified["corp_code"]
+                    archived["corp_code"] = corp_code
+                    # 엉뚱한 corp로 저장된 실패 흔적 리셋 — 새 corp 기준으로 재파싱·재조회
+                    archived["ipo_parse_version"] = 0
+                    archived.pop("result_report_missing", None)
+                    archived.pop("last_rcept_no", None)
+                    archived_by_corp[corp_code] = archived
+                    log(f"과거 이력 corp 교정: {archived.get('name')} → {corp_code}")
+
         # ① 신고서 보강 (희망밴드·일정·확약 신청) — 완료 후 버전 저장으로 반복 방지
         needs_filing = not has_official_commit_apply and (
             int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION or has_temporary_commit_apply
         )
         if has_official_commit_apply:
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
+
         if needs_filing and heavy_budget["left"] > 0:
             try:
                 corp_filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
