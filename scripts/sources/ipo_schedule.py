@@ -649,26 +649,35 @@ def detect_listings_from_krx(
     if not snapshot and not base_info:
         return 0
 
-    # 이름 → (코드, 상장일, 시장) 통합 조회표. 기본정보(정확한 LIST_DD)가 우선.
+    # 종목코드/이름 → (코드, 상장일, 시장) 통합 조회표. 기본정보(정확한 LIST_DD)가 우선.
     name_to_meta: dict[str, dict[str, Any]] = {}
+    code_to_meta: dict[str, dict[str, Any]] = {}
     for code, meta in (snapshot or {}).items():
         key = _norm_name(meta.get("name") or "")
+        entry = {"code": code, "market": meta.get("market") or ""}
         if key and key not in name_to_meta:
-            name_to_meta[key] = {"code": code, "market": meta.get("market") or ""}
+            name_to_meta[key] = entry
+        if code:
+            code_to_meta[code] = entry
     for code, info in (base_info or {}).items():
         key = _norm_name(info.get("name") or "")
-        if not key:
+        if not key and not code:
             continue
         # 기본정보는 정확한 상장일을 주므로 스냅샷 값을 덮어쓴다
-        entry = name_to_meta.setdefault(key, {})
+        entry = name_to_meta.setdefault(key, {}) if key else {}
         entry["code"] = code
         entry["market"] = info.get("market") or entry.get("market") or ""
         if info.get("list_dd"):
             entry["list_dd"] = info["list_dd"]
+        if code:
+            code_to_meta[code] = entry
 
     detected = 0
     for item in items_by_corp.values():
-        match = name_to_meta.get(_norm_name(item.get("name") or ""))
+        item_code = (item.get("stock_code") or "").strip()
+        match = code_to_meta.get(item_code) if item_code else None
+        if not match:
+            match = name_to_meta.get(_norm_name(item.get("name") or ""))
         if not match:
             continue
         code = match.get("code") or ""
@@ -754,6 +763,24 @@ def _listing_date_is_plausible(item: dict[str, Any], listing_date: str) -> bool:
 def _trusted_listing_date(item: dict[str, Any]) -> str:
     listing = item.get("listing_date") or ""
     return listing if _listing_date_is_plausible(item, listing) else ""
+
+
+def _needs_offering_backfill(item: dict[str, Any]) -> bool:
+    """DART 증권신고서/발행조건확정 문서 재파싱이 필요한 IPO일정 빈칸."""
+    if item.get("withdrawn") or item.get("fixed_excluded"):
+        return False
+    if item.get("management_hidden") or item.get("review_pending"):
+        return False
+    required_any = (
+        "band_low", "band_high", "final_price",
+        "forecast_start", "forecast_end", "sub_start", "sub_end",
+        "underwriter", "market", "offer_shares", "demand_ratio",
+    )
+    if any(not item.get(field) for field in required_any):
+        return True
+    if not any((row or {}).get("qty") for row in (item.get("commit_apply") or [])):
+        return True
+    return False
 
 
 def _clear_suspicious_listing_date(
@@ -874,6 +901,7 @@ def refresh_ipo_schedule(
             and old.get("last_rcept_no") == newest.get("rcept_no")
             and int(old.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION
             and not needs_temporary_commit_check
+            and not _needs_offering_backfill(old)
         ):
             return apply_manual_commit_values(old)  # 새 공시 없음 → 문서 재다운로드 생략
 
@@ -1052,8 +1080,13 @@ def refresh_ipo_schedule(
                     log(f"과거 이력 corp 교정: {archived.get('name')} → {corp_code}")
 
         # ① 신고서 보강 (희망밴드·일정·확약 신청) — 완료 후 버전 저장으로 반복 방지
-        needs_filing = not has_official_commit_apply and (
-            int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION or has_temporary_commit_apply
+        needs_filing = (
+            _needs_offering_backfill(archived)
+            or has_temporary_commit_apply
+            or (
+                not has_official_commit_apply
+                and int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
+            )
         )
         if has_official_commit_apply:
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
@@ -1090,7 +1123,11 @@ def refresh_ipo_schedule(
         needs_result = (
             not archived.get("report_rcp")
             and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
-            and not archived.get("result_report_missing")
+            and (
+                not archived.get("result_report_missing")
+                or not archived.get("sub_ratio")
+                or int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
+            )
         )
         if needs_result and heavy_budget["left"] > 0:
             try:

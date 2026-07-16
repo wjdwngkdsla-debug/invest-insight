@@ -1753,6 +1753,8 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
         metric = stats.get(str(row.get("stock_code") or "")) or stats.get(f"name:{norm_name(row.get('name'))}") or {}
         official_price = item.get("final_price") or row.get("manual_ipo_price") or ""
         row.update({field: metric.get(field) or row.get(field) or "" for field in ("initial_shares", "current_shares", "shares_date", "close_price")})
+        if row.get("listing_date_locked") != "Y" and item.get("listing_date"):
+            row["listing_date"] = item.get("listing_date") or ""
         row["manual_ipo_price"] = official_price
         if item.get("fixed_excluded") or row.get("management_status") == "제외고정":
             row["validation_status"], row["validation_reason"] = "삭제", "관리 체크 해제 + 홈페이지 비공개"
