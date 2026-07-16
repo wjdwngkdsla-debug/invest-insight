@@ -21,6 +21,11 @@ on:
         required: true
         default: false
         type: boolean
+      reparse_incomplete:
+        description: "종목관리·IPO일정·IPO기관·기존주주 중 빈값 있는 종목만 DART 재파싱"
+        required: true
+        default: true
+        type: boolean
       backfill_all:
         description: "IPO일정 미채움 종목(과거 신고서·실적보고서) 전량 백필 — 배치당 상한 해제"
         required: true
@@ -78,6 +83,9 @@ jobs:
           ARGS=()
           if [ "${{ github.event.inputs.reparse_existing }}" = "true" ]; then
             ARGS+=(--reparse-existing)
+          fi
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.reparse_incomplete }}" = "true" ]; then
+            ARGS+=(--reparse-incomplete)
           fi
           if [ "${{ github.event.inputs.backfill_all }}" = "true" ]; then
             ARGS+=(--backfill-all)
