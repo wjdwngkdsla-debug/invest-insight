@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPastIpoItems, getSortedIpoItems, dateRange, mmdd, bandPosition, type IpoItem } from "@/lib/ipo";
+import { getPastIpoItems, getSortedIpoItems, dateRangeWithYear, mmdd, bandPosition, type IpoItem } from "@/lib/ipo";
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { PastDateGate } from "@/components/PastDateGate";
 import { IpoHistoryToggle } from "@/components/IpoHistoryToggle";
@@ -301,11 +301,11 @@ function IpoCard({ item }: { item: IpoItem }) {
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-violet-50/70 px-3 py-2 sm:block sm:flex-[5]">
           <p className="text-[11px] text-violet-500">수요예측일</p>
-          <p className="truncate text-[13px] font-bold text-violet-700">{dateRange(item.forecast_start, item.forecast_end)}</p>
+          <p className="truncate text-[13px] font-bold text-violet-700">{dateRangeWithYear(item.forecast_start, item.forecast_end)}</p>
         </div>
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-amber-50 px-3 py-2 sm:block sm:flex-[2.2]">
           <p className="text-[11px] text-amber-800">청약일</p>
-          <p className="truncate text-[13px] font-bold text-amber-800">{dateRange(item.sub_start, item.sub_end)}</p>
+          <p className="truncate text-[13px] font-bold text-amber-800">{dateRangeWithYear(item.sub_start, item.sub_end)}</p>
         </div>
         <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-emerald-50 px-3 py-2 sm:block sm:flex-[1.8]">
           <p className="text-[11px] text-emerald-800">상장일</p>
@@ -414,11 +414,15 @@ export default function IpoSchedulePage() {
   const historyCards = (
     <div className="space-y-3">
       {pastItems.map((item) => (
-        <IpoCard key={item.corp_code} item={item} />
+        <div key={item.corp_code} data-ipo-history-card data-ipo-name={item.name}>
+          <IpoCard item={item} />
+        </div>
       ))}
       {items.map((item) => (
         <PastDateGate key={`live-${item.corp_code}`} date={item.listing_date} showWhen="past">
-          <IpoCard item={item} />
+          <div data-ipo-history-card data-ipo-name={item.name}>
+            <IpoCard item={item} />
+          </div>
         </PastDateGate>
       ))}
       {pastItems.length === 0 && items.length === 0 && (

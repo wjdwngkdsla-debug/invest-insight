@@ -126,10 +126,20 @@ export function mmdd(s?: string): string {
   return s ? s.slice(5).replace("-", ".") : "";
 }
 
+export function yymmdd(s?: string): string {
+  return s ? s.slice(2).replaceAll("-", ".") : "";
+}
+
 export function dateRange(start?: string, end?: string): string {
   if (!start) return "미정";
   if (!end || end === start) return mmdd(start);
   return `${mmdd(start)} ~ ${mmdd(end)}`;
+}
+
+export function dateRangeWithYear(start?: string, end?: string): string {
+  if (!start) return "미정";
+  if (!end || end === start) return yymmdd(start);
+  return `${yymmdd(start)} ~ ${yymmdd(end)}`;
 }
 
 // 확정공모가의 밴드 내 위치 표시
