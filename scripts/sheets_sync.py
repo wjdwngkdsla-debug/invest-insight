@@ -1754,7 +1754,9 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
         official_price = item.get("final_price") or row.get("manual_ipo_price") or ""
         row.update({field: metric.get(field) or row.get(field) or "" for field in ("initial_shares", "current_shares", "shares_date", "close_price")})
         row["manual_ipo_price"] = official_price
-        if item.get("review_pending"):
+        if item.get("fixed_excluded") or row.get("management_status") == "제외고정":
+            row["validation_status"], row["validation_reason"] = "삭제", "관리 체크 해제 + 홈페이지 비공개"
+        elif item.get("review_pending"):
             row["validation_status"], row["validation_reason"] = "확인필요", str(item.get("review_reason") or "DART/API 확인 필요")
         elif item.get("provisional_fields"):
             row["validation_status"], row["validation_reason"] = "수기임시", "공식값 수집 시 자동 교체"

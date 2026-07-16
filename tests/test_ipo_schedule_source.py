@@ -7,7 +7,20 @@ from pathlib import Path
 from unittest.mock import patch
 
 
+def ensure_fake_requests() -> None:
+    if "requests" not in sys.modules:
+        requests = types.ModuleType("requests")
+        requests.get = None
+        requests.post = None
+        requests.RequestException = Exception
+        sys.modules["requests"] = requests
+
+
 class IpoScheduleDemandTableTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        ensure_fake_requests()
+
     def test_multirow_header_and_split_label_are_parsed(self) -> None:
         from scripts.sources.ipo_schedule import _parse_demand_tables
 
@@ -33,12 +46,7 @@ class IpoScheduleDemandTableTest(unittest.TestCase):
 class IpoScheduleResultReportGateTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        if "requests" not in sys.modules:
-            requests = types.ModuleType("requests")
-            requests.get = None
-            requests.post = None
-            requests.RequestException = Exception
-            sys.modules["requests"] = requests
+        ensure_fake_requests()
 
     def test_result_report_is_checked_on_subscription_end_date(self) -> None:
         from scripts.sources.ipo_schedule import _should_fetch_result_report
@@ -180,6 +188,67 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
         }
 
         self.assertFalse(_should_fetch_result_report(item, "2026-07-14"))
+
+    def test_krx_snapshot_date_is_not_used_as_listing_date(self) -> None:
+        from scripts.sources.ipo_schedule import detect_listings_from_krx
+
+        items = {
+            "00366438": {
+                "corp_code": "00366438",
+                "name": "산일전기",
+                "stock_code": "062040",
+                "listing_date": "2024-07-29",
+            }
+        }
+
+        detect_listings_from_krx(
+            items,
+            {"062040": {"name": "산일전기", "market": "코스피"}},
+            "2026-07-14",
+            [],
+            lambda _msg: None,
+        )
+
+        self.assertEqual(items["00366438"]["listing_date"], "2024-07-29")
+
+    def test_krx_base_info_list_dd_can_correct_listing_date(self) -> None:
+        from scripts.sources.ipo_schedule import detect_listings_from_krx
+
+        items = {
+            "00366438": {
+                "corp_code": "00366438",
+                "name": "산일전기",
+                "stock_code": "062040",
+                "listing_date": "2026-07-14",
+            }
+        }
+
+        detect_listings_from_krx(
+            items,
+            {"062040": {"name": "산일전기", "market": "코스피"}},
+            "2026-07-14",
+            [],
+            lambda _msg: None,
+            base_info={"062040": {"name": "산일전기", "market": "코스피", "list_dd": "2024-07-29"}},
+        )
+
+        self.assertEqual(items["00366438"]["listing_date"], "2024-07-29")
+
+    def test_suspicious_listing_date_is_cleared_for_retry(self) -> None:
+        from scripts.sources.ipo_schedule import _clear_suspicious_listing_date
+
+        item = {
+            "name": "시프트업",
+            "listing_date": "2026-07-14",
+            "sub_end": "2024-07-03",
+            "result_report_missing": True,
+        }
+
+        changed = _clear_suspicious_listing_date(item, [], "2026-07-16", lambda _msg: None)
+
+        self.assertTrue(changed)
+        self.assertEqual(item["listing_date"], "")
+        self.assertNotIn("result_report_missing", item)
 
 
 if __name__ == "__main__":

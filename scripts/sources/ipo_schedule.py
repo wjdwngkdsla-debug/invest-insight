@@ -36,7 +36,7 @@ MAX_DOCS_PER_CORP = 4
 
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
-IPO_PARSE_VERSION = 2
+IPO_PARSE_VERSION = 3
 
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
@@ -254,8 +254,17 @@ def _parse_market(plain: str) -> str:
 
 
 def _parse_offer_shares(plain: str) -> int:
-    m = re.search(r"(?:모집\s*또는\s*매출|모집\(매출\))\s*주식의?\s*수\s*(?:기명식)?\s*보통주\s*([\d,]{4,15})\s*주", plain)
-    return _to_int(m.group(1)) if m else 0
+    patterns = [
+        r"(?:모집\s*또는\s*매출|모집\(매출\))\s*주식의?\s*수\s*(?:기명식)?\s*보통주\s*([\d,]{4,15})\s*주",
+        r"(?:총\s*)?공모\s*주식\s*수[^\d]{0,40}([\d,]{4,15})\s*주",
+        r"공모주식수[^\d]{0,40}([\d,]{4,15})\s*주",
+        r"모집\s*주식\s*수[^\d]{0,40}([\d,]{4,15})\s*주",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, plain)
+        if m:
+            return _to_int(m.group(1))
+    return 0
 
 
 def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
@@ -357,7 +366,7 @@ def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
 # ── 3) 실적보고서 파싱 (청약 후: 개인청약경쟁률 + 확약 '배정') ──
 
 
-def find_result_report(corp_code: str, listing_date: str = "") -> dict[str, Any] | None:
+def find_result_report(corp_code: str, listing_date: str = "", sub_end: str = "") -> dict[str, Any] | None:
     """증권발행실적보고서 조회.
 
     과거 종목은 상장일 주변 창(신고~상장+40일)으로 좁혀 찾는다 — 최근 N일 창으로는
@@ -371,6 +380,10 @@ def find_result_report(corp_code: str, listing_date: str = "") -> dict[str, Any]
         base = datetime.strptime(listing_date, "%Y-%m-%d")
         bgn_de = (base - timedelta(days=180)).strftime("%Y%m%d")
         end_de = min(base + timedelta(days=40), now.replace(tzinfo=None)).strftime("%Y%m%d")
+    elif sub_end and re.fullmatch(r"\d{4}-\d{2}-\d{2}", sub_end):
+        base = datetime.strptime(sub_end, "%Y-%m-%d")
+        bgn_de = (base - timedelta(days=30)).strftime("%Y%m%d")
+        end_de = min(base + timedelta(days=60), now.replace(tzinfo=None)).strftime("%Y%m%d")
     else:
         bgn_de = (now - timedelta(days=LOOKBACK_DAYS)).strftime("%Y%m%d")
         end_de = now.strftime("%Y%m%d")
@@ -402,6 +415,15 @@ _NUM_TOKEN = r"(?:\s+(?:[\d,]+(?:\.\d+)?|-)(?=\s|$))"
 def parse_result_report(doc: str) -> dict[str, Any]:
     plain = _clean_text(doc)
     out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": []}
+
+    # 일부 실적보고서는 표 구조가 흔들려도 본문에 개인/일반 청약 경쟁률을 직접 적는다.
+    for m in re.finditer(r"(?:개인|일반)\s*청약\s*경쟁률[^\d]{0,30}([\d,]+(?:\.\d+)?)\s*(?::|대)?\s*1", plain):
+        try:
+            value = float(m.group(1).replace(",", ""))
+        except ValueError:
+            continue
+        if value > 0:
+            out["sub_ratio"] = value
 
     # 개인청약경쟁률 = 일반투자자 청약수량 ÷ 최초 배정수량 (청약 및 배정현황 표)
     seg_at = plain.find("청약 및 배정현황")
@@ -620,8 +642,9 @@ def detect_listings_from_krx(
 ) -> int:
     """KRX 진실 소스 원칙: 상장일·종목코드·시장을 KRX 기준으로 반영한다.
 
-    상장일은 종목기본정보의 LIST_DD(실제 상장일)를 우선 사용하고, 없으면 시세 스냅샷
-    등장 거래일로 대체한다. 사용자 입력과 다르면 KRX가 우선(오타·연기 자동 복구).
+    상장일은 종목기본정보의 LIST_DD(실제 상장일)만 사용한다. 시세 스냅샷은 이미 상장된
+    모든 종목을 포함하므로, 스냅샷 기준일을 상장일로 쓰면 과거 종목이 오늘 상장한 것처럼
+    오염된다. 스냅샷은 종목코드·시장 보조값으로만 사용한다.
     """
     if not snapshot and not base_info:
         return 0
@@ -631,7 +654,7 @@ def detect_listings_from_krx(
     for code, meta in (snapshot or {}).items():
         key = _norm_name(meta.get("name") or "")
         if key and key not in name_to_meta:
-            name_to_meta[key] = {"code": code, "list_dd": trading_date, "market": meta.get("market") or ""}
+            name_to_meta[key] = {"code": code, "market": meta.get("market") or ""}
     for code, info in (base_info or {}).items():
         key = _norm_name(info.get("name") or "")
         if not key:
@@ -642,8 +665,6 @@ def detect_listings_from_krx(
         entry["market"] = info.get("market") or entry.get("market") or ""
         if info.get("list_dd"):
             entry["list_dd"] = info["list_dd"]
-        elif "list_dd" not in entry:
-            entry["list_dd"] = trading_date
 
     detected = 0
     for item in items_by_corp.values():
@@ -651,11 +672,11 @@ def detect_listings_from_krx(
         if not match:
             continue
         code = match.get("code") or ""
-        list_dd = match.get("list_dd") or trading_date
+        list_dd = match.get("list_dd") or ""
 
         # 상장일: KRX가 진실. 다르면 자동수정 + 이력 기록.
         current_listing = item.get("listing_date") or ""
-        if current_listing != list_dd:
+        if list_dd and current_listing != list_dd:
             history.append({
                 "date": trading_date, "name": item.get("name", ""),
                 "type": "KRX 자동수정" if current_listing else "상장확인(KRX)",
@@ -686,6 +707,78 @@ def detect_listings_from_krx(
         if not item.get("market") and match.get("market"):
             item["market"] = match["market"]
     return detected
+
+
+def _date_or_none(value: str) -> datetime | None:
+    try:
+        return datetime.strptime(str(value or ""), "%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def _filing_date_or_none(value: str) -> datetime | None:
+    text = re.sub(r"[^\d]", "", str(value or ""))
+    if len(text) != 8:
+        return None
+    try:
+        return datetime.strptime(text, "%Y%m%d")
+    except ValueError:
+        return None
+
+
+def _listing_date_is_plausible(item: dict[str, Any], listing_date: str) -> bool:
+    listing = _date_or_none(listing_date)
+    if not listing:
+        return False
+    sub_end = _date_or_none(item.get("sub_end") or "")
+    if sub_end:
+        # IPO 상장일은 보통 청약 종료 뒤 며칠~수주 안에 온다. 몇 달 이상 벌어지면
+        # KRX 시세 기준일이나 잘못된 수기값이 순환 저장된 것으로 본다.
+        # 반대로 상장일이 청약일보다 앞서는 경우는 기존 실제 상장일에 나중 공시 일정이
+        # 섞인 케이스일 수 있으므로 여기서 상장일을 지우지 않는다.
+        return listing <= sub_end + timedelta(days=120)
+    forecast_start = _date_or_none(item.get("forecast_start") or "")
+    if forecast_start and listing > forecast_start + timedelta(days=180):
+        return False
+    first_filing = _filing_date_or_none(item.get("first_filing_date") or "")
+    if (
+        first_filing
+        and not item.get("report_rcp")
+        and not item.get("final_price")
+        and listing > first_filing + timedelta(days=420)
+    ):
+        return False
+    return True
+
+
+def _trusted_listing_date(item: dict[str, Any]) -> str:
+    listing = item.get("listing_date") or ""
+    return listing if _listing_date_is_plausible(item, listing) else ""
+
+
+def _clear_suspicious_listing_date(
+    item: dict[str, Any],
+    history: list[dict[str, Any]],
+    today: str,
+    log,
+) -> bool:
+    listing = item.get("listing_date") or ""
+    if not listing or _listing_date_is_plausible(item, listing):
+        return False
+    if "listing_date" in set(item.get("manual_fields") or []):
+        return False
+    history.append({
+        "date": today,
+        "name": item.get("name", ""),
+        "type": "자동정리",
+        "field": "상장일",
+        "old": listing,
+        "new": "미정",
+    })
+    item["listing_date"] = ""
+    item.pop("result_report_missing", None)
+    log(f"상장일 오염값 제거: {item.get('name')} {listing} → 미정")
+    return True
 
 
 def refresh_ipo_schedule(
@@ -920,6 +1013,7 @@ def refresh_ipo_schedule(
         if archived.get("fixed_excluded"):
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
             continue
+        _clear_suspicious_listing_date(archived, history, today, log)
         has_official_commit_apply = any(
             isinstance(value, dict)
             and value.get("qty")
@@ -1000,7 +1094,11 @@ def refresh_ipo_schedule(
         )
         if needs_result and heavy_budget["left"] > 0:
             try:
-                report = find_result_report(corp_code, listing_date=archived.get("listing_date") or "")
+                report = find_result_report(
+                    corp_code,
+                    listing_date=_trusted_listing_date(archived),
+                    sub_end=archived.get("sub_end") or "",
+                )
                 heavy_budget["left"] -= 1
                 if report:
                     parsed = parse_result_report(download_document_text(report["rcept_no"]))
@@ -1017,9 +1115,10 @@ def refresh_ipo_schedule(
             except Exception as exc:
                 log(f"과거 이력 실적보강 실패 {archived.get('name')}: {exc}")
 
-    # KRX로 상장일 자동 감지·확정 (종목기본정보 LIST_DD 우선, 시세 스냅샷 보조)
+    # KRX로 상장일 자동 감지·확정 (상장일은 종목기본정보 LIST_DD만 사용)
     if (krx_snapshot or krx_base_info) and krx_trading_date:
         detect_listings_from_krx(items_by_corp, krx_snapshot or {}, krx_trading_date, history, log, base_info=krx_base_info)
+        detect_listings_from_krx(archived_by_corp, krx_snapshot or {}, krx_trading_date, history, log, base_info=krx_base_info)
 
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
@@ -1032,10 +1131,15 @@ def refresh_ipo_schedule(
             item["review_pending"] = True
             kept.append(item)
             continue
+        _clear_suspicious_listing_date(item, history, today, log)
         # IPO종목 탭에서 채운 값은 KRX 감지가 이미 우선 반영했으니 비어있을 때만 보조로 사용.
         linked = listing_map.get(_norm_name(item.get("name") or ""))
         if linked:
-            if not item.get("listing_date") and linked["listing_date"]:
+            if (
+                not item.get("listing_date")
+                and linked["listing_date"]
+                and _listing_date_is_plausible(item, linked["listing_date"])
+            ):
                 item["listing_date"] = linked["listing_date"]
             if not item.get("stock_code") and linked["code"]:
                 item["stock_code"] = linked["code"]
@@ -1046,7 +1150,11 @@ def refresh_ipo_schedule(
         # 저녁 배치부터 바로 조회한다. KRX 시세/종목 존재 여부와는 무관하다.
         if _should_fetch_result_report(item, today):
             try:
-                report = find_result_report(item["corp_code"])
+                report = find_result_report(
+                    item["corp_code"],
+                    listing_date=_trusted_listing_date(item),
+                    sub_end=item.get("sub_end") or "",
+                )
                 if report:
                     parsed = parse_result_report(download_document_text(report["rcept_no"]))
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
