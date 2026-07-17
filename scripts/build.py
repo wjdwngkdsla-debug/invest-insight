@@ -373,7 +373,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--reparse-incomplete",
         action="store_true",
-        help="종목관리/IPO일정/IPO기관/기존주주 중 빈값이 있는 종목만 DART 재파싱",
+        help="종목관리/IPO기관/기존주주(락업) 중 빈값이 있는 종목만 DART 재파싱 (IPO일정 탭은 별도 백필)",
     )
     parser.add_argument(
         "--max-new", type=int, default=50,
@@ -1446,8 +1446,11 @@ def _incomplete_reparse_reasons(
     has_ipo_price = bool(_to_int(target.get("manual_ipo_price")) or any(_to_int(row.get("ipo_price")) for row in existing_stock_rows))
     if not (target.get("name") and target.get("market") and (code or target.get("code")) and (listing_date or target.get("listing_date")) and has_ipo_price):
         reasons.append("종목관리")
-    if _schedule_item_has_gap(_schedule_item_for_target(target, code, schedule_items)):
-        reasons.append("IPO일정")
+    # 주의: IPO일정 탭의 빈칸은 여기서 트리거하지 않는다.
+    # IPO일정 데이터는 ipo_schedule.py(refresh_ipo_schedule)가 자체 상한(MAX_BACKFILL_PER_RUN)을
+    # 두고 별도 백필한다. 반면 여기서 도는 재파싱은 락업(build_ipo_events + build_float_summary_events)
+    # 전용이라 IPO일정 빈칸을 절대 못 채운다. 과거엔 IPO일정 gap으로 락업을 매 배치 재파싱해
+    # (미래 종목의 수요예측 미도래 등 정상 빈칸까지) 148중 92종목이 헛돌며 배치가 3시간 걸렸다.
     if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_IPO):
         reasons.append("IPO기관")
     if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_FLOAT):

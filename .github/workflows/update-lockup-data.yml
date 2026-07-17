@@ -22,7 +22,7 @@ on:
         default: false
         type: boolean
       reparse_incomplete:
-        description: "종목관리·IPO일정·IPO기관·기존주주 중 빈값 있는 종목만 DART 재파싱"
+        description: "종목관리·IPO기관·기존주주(락업) 빈값 종목만 DART 재파싱 (IPO일정 탭은 별도 백필)"
         required: true
         default: true
         type: boolean
