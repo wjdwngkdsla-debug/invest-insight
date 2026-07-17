@@ -1168,8 +1168,10 @@ def refresh_ipo_schedule(
             not archived.get("report_rcp")
             and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
             and (
+                # "실적보고서 없음" 판정을 받았으면 파서 버전이 오르기 전까지 재조회하지 않는다.
+                # (예전의 `or not sub_ratio` 예외는 보고서가 원래 없는 종목을 매 배치
+                #  재조회하게 만들어 배치당 상한 25건을 허탕으로 소진시키던 원인)
                 not archived.get("result_report_missing")
-                or not archived.get("sub_ratio")
                 or int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
             )
         )
