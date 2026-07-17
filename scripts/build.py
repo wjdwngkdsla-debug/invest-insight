@@ -371,6 +371,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manual-targets", action="store_true", help="테스트용 data/manual_targets.json만 사용")
     parser.add_argument("--reparse-existing", action="store_true", help="이미 편입된 종목도 DART 재파싱")
     parser.add_argument(
+        "--reparse-incomplete",
+        action="store_true",
+        help="종목관리/IPO일정/IPO기관/기존주주 중 빈값이 있는 종목만 DART 재파싱",
+    )
+    parser.add_argument(
         "--max-new", type=int, default=50,
         help="한 실행에서 새로 편입할 최대 종목 수 (초과분은 다음 배치에서 이어서, 0=무제한)",
     )
@@ -1356,6 +1361,98 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
         raise ValueError("시트 IPO종목 탭이 비어 있습니다.")
     print(f"[TARGET] 시트 IPO종목 탭 기준 {len(targets)}개 종목", file=sys.stderr)
     return targets
+
+
+def _compact_code(value: Any) -> str:
+    digits = "".join(ch for ch in str(value or "") if ch.isdigit())
+    return digits.zfill(6) if digits and len(digits) <= 6 else digits
+
+
+def _compact_name(value: Any) -> str:
+    return "".join(str(value or "").split()).lower()
+
+
+def _load_schedule_items(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    items = data.get("items") or []
+    past_items = data.get("past_items") or []
+    return [item for item in [*items, *past_items] if isinstance(item, dict)]
+
+
+def _schedule_item_for_target(
+    target: dict[str, Any],
+    code: str,
+    schedule_items: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    corp_code = str(target.get("corp_code") or "").strip()
+    stock_code = _compact_code(code or target.get("code") or target.get("stock_code"))
+    name_key = _compact_name(target.get("name"))
+    for item in schedule_items:
+        if corp_code and str(item.get("corp_code") or "").strip() == corp_code:
+            return item
+    for item in schedule_items:
+        if stock_code and _compact_code(item.get("stock_code")) == stock_code:
+            return item
+    for item in schedule_items:
+        if name_key and _compact_name(item.get("name")) == name_key:
+            return item
+    return None
+
+
+def _schedule_item_has_gap(item: dict[str, Any] | None) -> bool:
+    if not item:
+        return True
+    if item.get("withdrawn") or item.get("fixed_excluded"):
+        return False
+    if item.get("management_hidden") or item.get("review_pending"):
+        return False
+    required_fields = (
+        "band_low", "band_high", "final_price",
+        "forecast_start", "forecast_end", "sub_start", "sub_end",
+        "underwriter", "market", "offer_shares", "demand_ratio",
+    )
+    if any(not item.get(field) for field in required_fields):
+        return True
+    if not any((row or {}).get("qty") for row in (item.get("commit_apply") or [])):
+        return True
+    return False
+
+
+def _has_complete_admin_rows(rows: list[dict[str, Any]], category: str) -> bool:
+    category_rows = [row for row in rows if row.get("category") == category]
+    if not category_rows:
+        return False
+    for row in category_rows:
+        has_date = bool(row.get("planned_date") or row.get("api_return_date") or row.get("final_date"))
+        has_qty = bool(_to_int(row.get("planned_qty")) or _to_int(row.get("api_return_qty")) or _to_int(row.get("final_qty")))
+        if has_date and has_qty:
+            return True
+    return False
+
+
+def _incomplete_reparse_reasons(
+    target: dict[str, Any],
+    code: str,
+    listing_date: str,
+    existing_stock_rows: list[dict[str, Any]],
+    schedule_items: list[dict[str, Any]],
+) -> list[str]:
+    reasons: list[str] = []
+    has_ipo_price = bool(_to_int(target.get("manual_ipo_price")) or any(_to_int(row.get("ipo_price")) for row in existing_stock_rows))
+    if not (target.get("name") and target.get("market") and (code or target.get("code")) and (listing_date or target.get("listing_date")) and has_ipo_price):
+        reasons.append("종목관리")
+    if _schedule_item_has_gap(_schedule_item_for_target(target, code, schedule_items)):
+        reasons.append("IPO일정")
+    if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_IPO):
+        reasons.append("IPO기관")
+    if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_FLOAT):
+        reasons.append("기존주주")
+    return reasons
 
 
 
@@ -4526,6 +4623,7 @@ def main() -> None:
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
     existing_by_id = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     targets = load_targets(args)
+    schedule_items = _load_schedule_items(data_dir / "ipo_schedule.json")
     all_rows_by_id: dict[str, dict] = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     all_reviews: list[dict] = []
     all_logs: list[dict] = []
@@ -4707,10 +4805,17 @@ def main() -> None:
             # IPO종목 탭에 있다 = 공모주라는 운영자 판정 → 실적보고서가 반드시 존재하므로
             # IPO기관 행이 아직 없는 종목(일시적 DART 실패 등)은 찾을 때까지 매 배치 재시도한다
             has_ipo_rows = any(row.get("category") == CATEGORY_IPO for row in existing_stock_rows)
-            if existing_stock_rows and not args.reparse_existing and has_ipo_rows:
+            incomplete_reasons = (
+                _incomplete_reparse_reasons(target, code, listing_date, existing_stock_rows, schedule_items)
+                if args.reparse_incomplete
+                else []
+            )
+            if existing_stock_rows and not args.reparse_existing and has_ipo_rows and not incomplete_reasons:
                 print(f"  [DART] 기존 편입 종목 → DART 재파싱 생략, API 검증만 수행", file=sys.stderr)
                 stock_rows = [dict(r) for r in existing_stock_rows]
             else:
+                if incomplete_reasons and not args.reparse_existing:
+                    print(f"  [DART] 미완성 영역 재파싱: {', '.join(incomplete_reasons)}", file=sys.stderr)
                 stock_rows = []
                 stock_rows.extend(build_ipo_events(target, code, meta, listing_date, shares))
                 float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, int(listing_date[:4]))
