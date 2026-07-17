@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17 21:11",
+  "updated": "2026-07-18 02:46",
   "items": [
     {
       "corp_code": "00104069",
@@ -7452,11 +7452,35 @@
       "market": "코스닥",
       "listing_date": "2024-10-24",
       "final_price": 30000,
-      "archived_at": "2026-07-17"
+      "archived_at": "2026-07-17",
+      "band_low": 20000,
+      "band_high": 24000,
+      "offer_shares": 2600000,
+      "forecast_start": "2024-09-30",
+      "forecast_end": "2024-10-08",
+      "sub_start": "2024-10-15",
+      "sub_end": "2024-10-16",
+      "demand_ratio": 577.59,
+      "sub_ratio": 425.73,
+      "underwriter": "삼성증권·유진투자증권",
+      "provisional_fields": [
+        "band_high",
+        "band_low",
+        "demand_ratio",
+        "forecast_end",
+        "forecast_start",
+        "offer_shares",
+        "sub_end",
+        "sub_ratio",
+        "sub_start",
+        "underwriter"
+      ],
+      "ipo_parse_version": 3,
+      "result_report_missing": true
     },
     {
       "corp_code": "01588189",
-      "name": "씨메스",
+      "name": "씨메스로보틱스",
       "management_name": "씨메스",
       "first_filing_date": "20240823",
       "withdrawn": false,
@@ -7466,7 +7490,7 @@
       "market": "코스닥",
       "listing_date": "2024-10-24",
       "manual_commit_apply": {},
-      "archived_at": "2026-07-15",
+      "archived_at": "2026-07-18",
       "schedule_hidden": false,
       "ipo_parse_version": 3,
       "corp_verified": true,
@@ -11758,6 +11782,70 @@
       "field": "상장일",
       "old": "미정",
       "new": "2025-10-01"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "band",
+      "old": "",
+      "new": "20,000 ~ 24,000"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "offer_shares",
+      "old": "",
+      "new": "2600000"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "forecast",
+      "old": "",
+      "new": "2024-09-30 ~ 2024-10-08"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "subscription",
+      "old": "",
+      "new": "2024-10-15 ~ 2024-10-16"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "demand_ratio",
+      "old": "",
+      "new": "577.59"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "sub_ratio",
+      "old": "",
+      "new": "425.73"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "underwriter",
+      "old": "",
+      "new": "삼성증권·유진투자증권"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "씨메스로보틱스",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-10-24"
     }
   ],
   "seed_pending": [],
