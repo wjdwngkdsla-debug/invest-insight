@@ -1191,7 +1191,8 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
 
         # 구주 기간/물량 쌍 → 기존주주 락업 이벤트
         for index in (1, 2, 3):
-            period = (rec.get(f"구주_기간{index}") or "").strip()
+            # "2개 월" 같은 공백 표기도 허용 — calc_release_date는 "N개월"/"N년"/"15일"만 인식
+            period = (rec.get(f"구주_기간{index}") or "").replace(" ", "").strip()
             qty = number(rec.get(f"구주_물량{index}"))
             if not (listing and period and qty):
                 continue
@@ -1268,6 +1269,16 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     except gspread.WorksheetNotFound:
         pass
 
+    # 빨간 셀 = 배치가 다시 찾지 않는 값(DART에 없음 판정) → 수기 입력이 유일한 통로.
+    # 신청_*: commit_apply_missing 마커, 배정_*·개인청약경쟁률: result_report_missing.
+    try:
+        from scripts.sources.ipo_schedule import IPO_PARSE_VERSION as parse_version
+    except Exception:
+        parse_version = 1
+    column_no = {header: index + 1 for index, header in enumerate(REVIEW_FILL_HEADERS)}
+    apply_cols = [column_no[f"신청_{period}"] for period in COMMIT_TIER_ORDER]
+    alloc_cols = [column_no[f"배정_{period}"] for period in COMMIT_TIER_ORDER]
+
     rows: list[dict[str, str]] = []
     snapshot: dict[str, dict[str, str]] = {}
     for item in all_schedule_items(schedule):
@@ -1307,6 +1318,16 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         for header, value in (carry.get(code) or {}).items():
             if not row.get(header):
                 row[header] = value
+
+        red_cols: set[int] = set()
+        if "확약신청" in gaps and int(item.get("commit_apply_missing") or 0) >= parse_version:
+            red_cols.update(apply_cols)
+        if item.get("result_report_missing") and not item.get("report_rcp"):
+            if "확약배정" in gaps:
+                red_cols.update(alloc_cols)
+            if "개인청약경쟁률" in gaps:
+                red_cols.add(column_no["개인청약경쟁률"])
+        row["_red"] = red_cols
         rows.append(row)
 
     rows.sort(key=lambda row: row["상장일"], reverse=True)
@@ -1317,6 +1338,34 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     worksheet.update(payload, "A1", value_input_option="USER_ENTERED")
     worksheet.freeze(rows=1, cols=4)
     worksheet.format("1:1", {"textFormat": {"bold": True}})
+
+    # 수기 전용 셀 빨간 표시 — 행별 연속 열 구간으로 압축해 요청 수를 줄인다
+    red_format = {
+        "backgroundColor": {"red": 1.0, "green": 0.87, "blue": 0.87},
+        "textFormat": {"foregroundColor": {"red": 0.72, "green": 0.05, "blue": 0.05}, "bold": True},
+    }
+    formats = []
+    for row_no, row in enumerate(rows, start=2):
+        cols = sorted(row.pop("_red", set()) or [])
+        start = prev = None
+        for col in [*cols, None]:
+            if start is None:
+                start = prev = col
+                continue
+            if col is not None and col == prev + 1:
+                prev = col
+                continue
+            formats.append({
+                "range": f"{rowcol_to_a1(row_no, start)}:{rowcol_to_a1(row_no, prev)}",
+                "format": red_format,
+            })
+            start = prev = col
+    if formats:
+        try:
+            worksheet.batch_format(formats)
+            print(f"[SHEET] 검토필요 수기전용(빨강) 표시: {len(formats)}구간", file=sys.stderr)
+        except Exception as exc:
+            print(f"[SHEET] 검토필요 빨간 표시 실패(무시): {exc}", file=sys.stderr)
     REVIEW_FILL_WRITTEN_PATH.write_text(
         json.dumps({"saved_at": today, "rows": snapshot}, ensure_ascii=False, indent=1), encoding="utf-8"
     )
