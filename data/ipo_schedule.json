@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17 01:08",
+  "updated": "2026-07-17 13:09",
   "items": [
     {
       "corp_code": "00104069",
@@ -5486,7 +5486,36 @@
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "corp_verified": true,
-      "result_report_missing": true
+      "result_report_missing": true,
+      "sub_ratio": 1320.68,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 18850,
+          "pct": 2.25
+        },
+        {
+          "period": "3개월",
+          "qty": 127130,
+          "pct": 15.15
+        },
+        {
+          "period": "1개월",
+          "qty": 540,
+          "pct": 0.06
+        },
+        {
+          "period": "15일",
+          "qty": 7980,
+          "pct": 0.95
+        },
+        {
+          "period": "미확약",
+          "qty": 684520,
+          "pct": 81.59
+        }
+      ],
+      "report_rcp": "20250307000559"
     },
     {
       "corp_code": "00112998",
@@ -6345,7 +6374,10 @@
       "final_price": 19000,
       "schedule_hidden": false,
       "result_report_missing": true,
-      "corp_verified": true
+      "corp_verified": true,
+      "sub_ratio": 459.07,
+      "commit_alloc": [],
+      "report_rcp": "20250116000090"
     },
     {
       "corp_code": "01455410",
@@ -7521,24 +7553,36 @@
       "market": "코스닥",
       "listing_date": "2024-10-24",
       "final_price": 30000,
-      "archived_at": "2026-07-17"
+      "archived_at": "2026-07-17",
+      "band_low": 20000,
+      "band_high": 24000,
+      "offer_shares": 2600000,
+      "forecast_start": "2024-09-30",
+      "forecast_end": "2024-10-08",
+      "sub_start": "2024-10-15",
+      "sub_end": "2024-10-16",
+      "demand_ratio": 577.59,
+      "sub_ratio": 425.73,
+      "underwriter": "삼성증권·유진투자증권",
+      "provisional_fields": [
+        "band_high",
+        "band_low",
+        "demand_ratio",
+        "forecast_end",
+        "forecast_start",
+        "offer_shares",
+        "sub_end",
+        "sub_ratio",
+        "sub_start",
+        "underwriter"
+      ],
+      "ipo_parse_version": 3,
+      "result_report_missing": true
     },
     {
       "corp_code": "01588189",
-      "name": "씨메스",
-      "management_name": "씨메스",
+      "name": "씨메스로보틱스",
       "first_filing_date": "20240823",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "stock_code": "475400",
-      "market": "코스닥",
-      "listing_date": "2024-10-24",
-      "manual_commit_apply": {},
-      "archived_at": "2026-07-15",
-      "schedule_hidden": false,
-      "ipo_parse_version": 3,
-      "corp_verified": true,
       "last_rcept_no": "20241014000124",
       "band_low": 20000,
       "band_high": 24000,
@@ -7549,6 +7593,7 @@
       "sub_end": "2024-10-16",
       "payment_date": "2024-10-15",
       "underwriter": "삼성증권·유진투자증권",
+      "market": "코스닥",
       "offer_shares": 2600000,
       "demand_ratio": 577.59,
       "commit_apply": [
@@ -7574,6 +7619,10 @@
         }
       ],
       "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "listing_date": "2024-10-24",
+      "stock_code": "475400",
       "sub_ratio": 425.73,
       "commit_alloc": [
         {
@@ -7598,9 +7647,8 @@
         }
       ],
       "report_rcp": "20241018000138",
-      "provisional_fields": [
-        "sub_ratio"
-      ]
+      "review_pending": false,
+      "archived_at": "2026-07-17"
     },
     {
       "corp_code": "01016309",
@@ -8799,46 +8847,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-11",
-      "name": "레메디",
-      "type": "수기변경",
-      "field": "상장일",
-      "old": "미정",
-      "new": "2026-07-13"
-    },
-    {
-      "date": "2026-07-11",
-      "name": "에이치엘지노믹스",
-      "type": "수기변경",
-      "field": "상장일",
-      "old": "미정",
-      "new": "2026-07-24"
-    },
-    {
-      "date": "2026-07-13",
-      "name": "케이디비생명보험",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-13",
-      "name": "LS전선",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-14",
-      "name": "LS전선",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
     {
       "date": "2026-07-14",
       "name": "케이디비생명보험",
@@ -12758,6 +12766,86 @@
       "field": "상장일",
       "old": "미정",
       "new": "2025-10-01"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "band",
+      "old": "",
+      "new": "20,000 ~ 24,000"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "offer_shares",
+      "old": "",
+      "new": "2600000"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "forecast",
+      "old": "",
+      "new": "2024-09-30 ~ 2024-10-08"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "subscription",
+      "old": "",
+      "new": "2024-10-15 ~ 2024-10-16"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "demand_ratio",
+      "old": "",
+      "new": "577.59"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "sub_ratio",
+      "old": "",
+      "new": "425.73"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "씨메스로보틱스",
+      "type": "수기변경",
+      "field": "underwriter",
+      "old": "",
+      "new": "삼성증권·유진투자증권"
+    },
+    {
+      "date": "2026-07-17",
+      "name": "서울보증보험",
+      "type": "자동정리",
+      "field": "상장일",
+      "old": "2025-03-14",
+      "new": "미정"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "씨메스로보틱스",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-10-24"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "서울보증보험",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2025-03-14"
     }
   ],
   "seed_pending": [],
@@ -12766,13 +12854,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-16",
+      "excluded_at": "2026-07-17",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-16",
+      "excluded_at": "2026-07-17",
       "memo": "운영자 삭제 요청 이관"
     }
   }
