@@ -122,7 +122,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00920731",
@@ -146,7 +147,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01722066",
@@ -170,7 +172,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00229085",
@@ -194,7 +197,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01588897",
@@ -218,7 +222,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01947443",
@@ -242,7 +247,8 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "payment_date": "2026-08-11"
+      "payment_date": "2026-08-11",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01586923",
@@ -266,7 +272,8 @@
       "management_status": "자동",
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01801026",
@@ -290,7 +297,8 @@
       "review_pending": false,
       "management_status": "자동",
       "ipo_parse_version": 3,
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00683283",
@@ -441,7 +449,8 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01379129",
@@ -499,7 +508,8 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01370517",
@@ -642,7 +652,8 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01755259",
@@ -699,7 +710,8 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01709065",
@@ -756,7 +768,8 @@
       ],
       "report_rcp": "20260514001096",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01565364",
@@ -984,7 +997,8 @@
       ],
       "report_rcp": "20260424000220",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01869710",
@@ -1551,7 +1565,8 @@
       ],
       "report_rcp": "20260226002277",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01379563",
@@ -1862,7 +1877,8 @@
       ],
       "report_rcp": "20251222000160",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01385005",
@@ -1919,7 +1935,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01370322",
@@ -1950,7 +1967,8 @@
       "commit_alloc": [],
       "report_rcp": "20251216000347",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01596920",
@@ -2008,7 +2026,8 @@
           "pct": 17.2
         }
       ],
-      "report_rcp": "20251212000302"
+      "report_rcp": "20251212000302",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01787355",
@@ -2065,7 +2084,8 @@
           "pct": 76.5
         }
       ],
-      "report_rcp": "20251211000109"
+      "report_rcp": "20251211000109",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01829819",
@@ -2123,7 +2143,8 @@
           "pct": 8.8
         }
       ],
-      "report_rcp": "20251209000239"
+      "report_rcp": "20251209000239",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00949161",
@@ -2179,7 +2200,8 @@
           "pct": 14.4
         }
       ],
-      "report_rcp": "20251208000371"
+      "report_rcp": "20251208000371",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01671285",
@@ -2489,7 +2511,8 @@
           "pct": 23.7
         }
       ],
-      "report_rcp": "20251126000196"
+      "report_rcp": "20251126000196",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01781999",
@@ -2546,7 +2569,8 @@
           "pct": 3.2
         }
       ],
-      "report_rcp": "20251126000523"
+      "report_rcp": "20251126000523",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01381805",
@@ -2604,7 +2628,8 @@
           "pct": 9.1
         }
       ],
-      "report_rcp": "20251121000203"
+      "report_rcp": "20251121000203",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01194607",
@@ -2746,7 +2771,8 @@
           "pct": 3.8
         }
       ],
-      "report_rcp": "20251114003028"
+      "report_rcp": "20251114003028",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01138364",
@@ -2803,7 +2829,8 @@
           "pct": 28.1
         }
       ],
-      "report_rcp": "20251111000120"
+      "report_rcp": "20251111000120",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00677486",
@@ -3087,7 +3114,8 @@
       "commit_alloc": [],
       "report_rcp": "20251030000489",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01810477",
@@ -3143,7 +3171,8 @@
           "pct": 8.1
         }
       ],
-      "report_rcp": "20251028000334"
+      "report_rcp": "20251028000334",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00179489",
@@ -3261,7 +3290,8 @@
       "underwriter": "대신증권",
       "offer_shares": 1580000,
       "demand_ratio": 1145.4,
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01565054",
@@ -3291,7 +3321,8 @@
       "schedule_hidden": false,
       "sub_ratio": 44.35,
       "commit_alloc": [],
-      "report_rcp": "20250826000264"
+      "report_rcp": "20250826000264",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00185301",
@@ -3408,7 +3439,8 @@
       "schedule_hidden": false,
       "sub_ratio": 972.37,
       "commit_alloc": [],
-      "report_rcp": "20250814001376"
+      "report_rcp": "20250814001376",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01294110",
@@ -4054,7 +4086,8 @@
           "pct": 86.35
         }
       ],
-      "report_rcp": "20250717000250"
+      "report_rcp": "20250717000250",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01649620",
@@ -4086,7 +4119,8 @@
       "schedule_hidden": false,
       "sub_ratio": 1406.42,
       "commit_alloc": [],
-      "report_rcp": "20250708000371"
+      "report_rcp": "20250708000371",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00874168",
@@ -4118,7 +4152,8 @@
       "schedule_hidden": false,
       "sub_ratio": 2148.37,
       "commit_alloc": [],
-      "report_rcp": "20250630000288"
+      "report_rcp": "20250630000288",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01639508",
@@ -4255,7 +4290,8 @@
           "pct": 98.93
         }
       ],
-      "report_rcp": "20250604000287"
+      "report_rcp": "20250604000287",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01764099",
@@ -4616,7 +4652,8 @@
           "pct": 69.6
         }
       ],
-      "report_rcp": "20250513000768"
+      "report_rcp": "20250513000768",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01203659",
@@ -4969,7 +5006,8 @@
           "pct": 65.92
         }
       ],
-      "report_rcp": "20250430000650"
+      "report_rcp": "20250430000650",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00406222",
@@ -5195,7 +5233,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 913.05,
       "commit_alloc": [],
-      "report_rcp": "20250314000975"
+      "report_rcp": "20250314000975",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00404941",
@@ -5226,7 +5265,8 @@
       "commit_alloc": [],
       "report_rcp": "20250311000902",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01458161",
@@ -5358,7 +5398,8 @@
           "pct": 81.59
         }
       ],
-      "report_rcp": "20250307000559"
+      "report_rcp": "20250307000559",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00112998",
@@ -5578,7 +5619,8 @@
           "pct": 88.3
         }
       ],
-      "report_rcp": "20250225003476"
+      "report_rcp": "20250225003476",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01747977",
@@ -5694,7 +5736,8 @@
       "commit_alloc": [],
       "report_rcp": "20250218000018",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00367400",
@@ -5724,7 +5767,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 1667.23,
       "commit_alloc": [],
-      "report_rcp": "20250214000304"
+      "report_rcp": "20250214000304",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01233465",
@@ -5755,7 +5799,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 15.18,
       "commit_alloc": [],
-      "report_rcp": "20250210000693"
+      "report_rcp": "20250210000693",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01658831",
@@ -5953,7 +5998,8 @@
       "underwriter": "KB증권",
       "offer_shares": 1300000,
       "demand_ratio": 1148.16,
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00139834",
@@ -6064,7 +6110,8 @@
       "underwriter": "삼성증권",
       "offer_shares": 3600000,
       "demand_ratio": 1117.74,
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01728167",
@@ -6243,7 +6290,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 10.17,
       "commit_alloc": [],
-      "report_rcp": "20250120000409"
+      "report_rcp": "20250120000409",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01590528",
@@ -6319,7 +6367,8 @@
       "schedule_hidden": false,
       "sub_ratio": 133.46,
       "commit_alloc": [],
-      "report_rcp": "20250120000324"
+      "report_rcp": "20250120000324",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01374717",
@@ -6349,7 +6398,8 @@
       "is_listing_ipo": true,
       "sub_ratio": 459.07,
       "commit_alloc": [],
-      "report_rcp": "20250116000090"
+      "report_rcp": "20250116000090",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01455410",
@@ -6463,7 +6513,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 58.46,
       "commit_alloc": [],
-      "report_rcp": "20241218000273"
+      "report_rcp": "20241218000273",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01632912",
@@ -6568,7 +6619,8 @@
       "underwriter": "미래에셋증권",
       "offer_shares": 1423000,
       "demand_ratio": 635.05,
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01519790",
@@ -6597,7 +6649,8 @@
       "schedule_hidden": false,
       "sub_ratio": 2.86,
       "commit_alloc": [],
-      "report_rcp": "20241210000560"
+      "report_rcp": "20241210000560",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01453944",
@@ -6712,7 +6765,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 112.08,
       "commit_alloc": [],
-      "report_rcp": "20241112000001"
+      "report_rcp": "20241112000001",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01207901",
@@ -6743,7 +6797,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 60.47,
       "commit_alloc": [],
-      "report_rcp": "20241113000449"
+      "report_rcp": "20241113000449",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01563922",
@@ -6774,7 +6829,8 @@
       "report_rcp": "20241112000322",
       "schedule_hidden": false,
       "manual_commit_apply": {},
-      "offer_shares": 1750000
+      "offer_shares": 1750000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01383779",
@@ -6804,7 +6860,8 @@
       "sub_ratio": 75.07,
       "commit_alloc": [],
       "report_rcp": "20241112000145",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01506617",
@@ -6861,7 +6918,8 @@
         }
       ],
       "report_rcp": "20241108000515",
-      "offer_shares": 3200000
+      "offer_shares": 3200000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01605282",
@@ -6892,7 +6950,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 58.41,
       "commit_alloc": [],
-      "report_rcp": "20241107000185"
+      "report_rcp": "20241107000185",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01703849",
@@ -6923,7 +6982,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 2.62,
       "commit_alloc": [],
-      "report_rcp": "20241107000133"
+      "report_rcp": "20241107000133",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01663116",
@@ -7048,7 +7108,8 @@
           "pct": 98.81
         }
       ],
-      "report_rcp": "20241031000452"
+      "report_rcp": "20241031000452",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00968607",
@@ -7239,7 +7300,8 @@
       ],
       "report_rcp": "20241028000339",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01641600",
@@ -7270,7 +7332,8 @@
       "sub_ratio": 539.86,
       "commit_alloc": [],
       "report_rcp": "20241028000122",
-      "offer_shares": 1500000
+      "offer_shares": 1500000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00319272",
@@ -7408,7 +7471,8 @@
       "forecast_start": "2024-10-07",
       "forecast_end": "2024-10-14",
       "offer_shares": 3000000,
-      "demand_ratio": 933.9
+      "demand_ratio": 933.9,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01270749",
@@ -7439,7 +7503,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 1126.51,
       "commit_alloc": [],
-      "report_rcp": "20241022000173"
+      "report_rcp": "20241022000173",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "1588189",
@@ -7476,7 +7541,8 @@
         "underwriter"
       ],
       "ipo_parse_version": 3,
-      "result_report_missing": true
+      "result_report_missing": true,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01588189",
@@ -7666,7 +7732,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 130.78,
       "commit_alloc": [],
-      "report_rcp": "20241015000383"
+      "report_rcp": "20241015000383",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01284876",
@@ -7845,7 +7912,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 1065.46,
       "commit_alloc": [],
-      "report_rcp": "20241011000490"
+      "report_rcp": "20241011000490",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01293485",
@@ -7951,7 +8019,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 1965.04,
       "commit_alloc": [],
-      "report_rcp": "20240912000065"
+      "report_rcp": "20240912000065",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00657224",
@@ -7998,7 +8067,8 @@
           "pct": 98.4
         }
       ],
-      "report_rcp": "20240826000056"
+      "report_rcp": "20240826000056",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01544468",
@@ -8270,7 +8340,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 34.28,
       "commit_alloc": [],
-      "report_rcp": "20240813000871"
+      "report_rcp": "20240813000871",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01385050",
@@ -8322,7 +8393,8 @@
         }
       ],
       "report_rcp": "20240812000516",
-      "offer_shares": 1000000
+      "offer_shares": 1000000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00372129",
@@ -8353,7 +8425,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 1304.72,
       "commit_alloc": [],
-      "report_rcp": "20240813001336"
+      "report_rcp": "20240813001336",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00407294",
@@ -8400,7 +8473,8 @@
         }
       ],
       "report_rcp": "20240809000621",
-      "offer_shares": 751000
+      "offer_shares": 751000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01138595",
@@ -8431,7 +8505,8 @@
       "manual_commit_apply": {},
       "sub_ratio": 239.19,
       "commit_alloc": [],
-      "report_rcp": "20240806000025"
+      "report_rcp": "20240806000025",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01678312",
@@ -8488,7 +8563,8 @@
           "pct": 97.8
         }
       ],
-      "report_rcp": "20240730000095"
+      "report_rcp": "20240730000095",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01419205",
@@ -8537,7 +8613,8 @@
         }
       ],
       "report_rcp": "20240725000425",
-      "offer_shares": 1350000
+      "offer_shares": 1350000,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "00366438",
@@ -8594,7 +8671,8 @@
           "pct": 40.0
         }
       ],
-      "report_rcp": "20240723000042"
+      "report_rcp": "20240723000042",
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01492217",
@@ -8626,7 +8704,8 @@
       "forecast_start": "2024-06-24",
       "forecast_end": "2024-06-28",
       "offer_shares": 1618000,
-      "demand_ratio": 1233.8
+      "demand_ratio": 1233.8,
+      "commit_apply_missing": 2
     },
     {
       "corp_code": "01384787",
@@ -8683,7 +8762,8 @@
           "pct": 53.15
         }
       ],
-      "report_rcp": "20240705000569"
+      "report_rcp": "20240705000569",
+      "commit_apply_missing": 2
     }
   ],
   "history": [
