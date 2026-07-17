@@ -470,6 +470,20 @@ def load_listing_map() -> dict[str, dict[str, str]]:
     return out
 
 
+def _ipo_era_filings(filings: list[dict[str, Any]], listing_date: str) -> list[dict[str, Any]]:
+    """상장일 기준 IPO 시점 공시만 남긴다 (상장일+15일 이내 접수분).
+
+    상장 후 유상증자(주주배정) 투자설명서가 5년 창의 최신 공시로 잡히면 희망밴드가
+    없어 파싱이 빈다 (이뮨온시아·클로봇·엑셀세라퓨틱스). 상장일을 알면 그 이전
+    IPO 문서만 골라 원래 공모 정보를 파싱한다. 상장일 미상이면 원본을 그대로 둔다.
+    """
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", listing_date or ""):
+        return filings
+    cutoff = (datetime.strptime(listing_date, "%Y-%m-%d") + timedelta(days=15)).strftime("%Y%m%d")
+    era = [f for f in filings if (f.get("rcept_dt") or "") <= cutoff]
+    return era or filings  # 창에 아무것도 없으면(데이터 이상) 원본 유지
+
+
 # ── 5) 메인 갱신 루프 ─────────────────────────────────────
 
 
@@ -763,7 +777,10 @@ def refresh_ipo_schedule(
     def process_corp(corp_code: str, name: str, corp_filings: list[dict[str, Any]], old: dict[str, Any] | None) -> dict[str, Any]:
         """신고서 목록(최신순) → 병합 파싱된 IPO일정 항목. 자동발굴·수동추가(seed) 양쪽에서 공용으로 쓴다."""
         newest = corp_filings[0]
-        withdrawn = any("철회신고서" in (f.get("report_nm") or "") for f in corp_filings)
+        # 철회는 "최신 공시가 철회신고서"일 때만. 과거 철회 후 재도전해 상장한 종목
+        # (미트박스·서울보증보험·온코크로스 등)은 5년 창에 옛 철회가 걸려도 철회가 아니다.
+        # (any() 판정은 백필 창 확대 후 이들 파싱을 통째로 스킵시키던 버그였음)
+        withdrawn = "철회신고서" in (newest.get("report_nm") or "")
         official_periods = {
             str(value.get("period") or "")
             for value in ((old or {}).get("commit_apply") or [])
@@ -937,6 +954,12 @@ def refresh_ipo_schedule(
         # 파서 상태를 리셋해 아래 보강이 새 corp 기준으로 다시 돌게 한다.
         # (티엠씨·인벤테라·키스트론·한텍·에이치이엠파마·피앤에스미캐닉스가 영영 미채움이던 원인)
         core_missing = not (archived.get("band_low") or archived.get("forecast_start"))
+        # 코어(밴드·일정)가 비어 있으면 이전 실행이 남긴 실패 플래그(result_report_missing 등)와
+        # 파서 버전을 리셋해 이번 배치가 신고서·실적보고서를 처음부터 다시 채우게 한다.
+        # (과거 철회 재도전 종목이 withdrawn 오탐으로 스킵돼 깨진 상태로 굳었던 것 복구)
+        if core_missing:
+            archived["ipo_parse_version"] = 0
+            archived.pop("result_report_missing", None)
         if core_missing and not archived.get("corp_verified"):
             hint = str(archived.get("stock_code") or "").strip()
             if hint:
@@ -967,6 +990,8 @@ def refresh_ipo_schedule(
         if needs_filing and heavy_budget["left"] > 0:
             try:
                 corp_filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
+                # 상장 후 유상증자 문서가 최신으로 잡히지 않게 IPO 시점 공시만 사용
+                corp_filings = _ipo_era_filings(corp_filings, archived.get("listing_date") or "")
                 if corp_filings:
                     heavy_budget["left"] -= 1
                     source_item = dict(archived)
@@ -1085,7 +1110,15 @@ def refresh_ipo_schedule(
 
         if past_listing:
             item["archived_at"] = item.get("archived_at") or today
-            archived_by_corp[item["corp_code"]] = dict(item)
+            # 백필 루프가 이미 채워둔 과거 항목을 비어 있는 복사본으로 덮지 않는다.
+            # 기존 archived(백필로 밴드·일정·확약이 채워짐)를 베이스로 두고, item의
+            # 값이 있는 필드만 덮어쓴다 (미트박스·온코크로스 값이 유실되던 버그 수정).
+            prior = archived_by_corp.get(item["corp_code"]) or {}
+            merged_archive = dict(prior)
+            for key, value in item.items():
+                if value not in (None, "", [], {}) or key not in merged_archive:
+                    merged_archive[key] = value
+            archived_by_corp[item["corp_code"]] = merged_archive
         elif not drop:
             # 상장일 정정으로 미래 일정이 되면 이전 이력에서 다시 진행 일정으로 복귀한다.
             archived_by_corp.pop(item["corp_code"], None)
