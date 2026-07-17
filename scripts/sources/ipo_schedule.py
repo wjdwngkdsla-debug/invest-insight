@@ -793,6 +793,11 @@ def _needs_offering_backfill(item: dict[str, Any]) -> bool:
     if any(not item.get(field) for field in required_any):
         return True
     if not any((row or {}).get("qty") for row in (item.get("commit_apply") or [])):
+        # 전체 문서를 훑고도 확약신청이 없던 종목(DART에 데이터 자체가 없음)은
+        # 파서 버전이 오르기 전까지 재시도하지 않는다. 이 마커가 없으면 신청 없는
+        # 과거 종목 80여 개가 매 백필마다 문서 5~14건씩 재다운로드하며 시간을 태운다.
+        if int(item.get("commit_apply_missing") or 0) >= IPO_PARSE_VERSION:
+            return False
         return True
     return False
 
@@ -1001,6 +1006,17 @@ def refresh_ipo_schedule(
             else:
                 item.pop("provisional_fields", None)
         item["withdrawn"] = withdrawn
+        # 파싱을 끝냈는데도 확약신청이 없으면 마커를 남겨 다음 배치가 재시도하지 않게 한다.
+        # 새 공시(rcept_no 변경)가 나오면 마커와 무관하게 다시 파싱된다.
+        has_official_apply = any(
+            (row or {}).get("qty")
+            and str((row or {}).get("source") or "") not in {"manual_fixed", "manual_temporary"}
+            for row in (item.get("commit_apply") or [])
+        )
+        if has_official_apply:
+            item.pop("commit_apply_missing", None)
+        else:
+            item["commit_apply_missing"] = IPO_PARSE_VERSION
         return apply_manual_commit_values(item)
 
     for corp_code, corp_filings in grouped.items():
@@ -1083,6 +1099,7 @@ def refresh_ipo_schedule(
         if core_missing:
             archived["ipo_parse_version"] = 0
             archived.pop("result_report_missing", None)
+            archived.pop("commit_apply_missing", None)
         if core_missing and not archived.get("corp_verified"):
             hint = str(archived.get("stock_code") or "").strip()
             if hint:
@@ -1139,6 +1156,7 @@ def refresh_ipo_schedule(
                     )
                 else:
                     archived["ipo_parse_version"] = IPO_PARSE_VERSION
+                    archived["commit_apply_missing"] = IPO_PARSE_VERSION
                     log(f"과거 이력 기관신청 공시 없음: {archived.get('name')}")
             except Exception as exc:
                 # 다음 배치에서 재시도할 수 있게 버전은 올리지 않는다.
