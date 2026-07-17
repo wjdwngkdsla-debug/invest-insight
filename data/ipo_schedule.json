@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18 02:46",
+  "updated": "2026-07-18 05:44",
   "items": [
     {
       "corp_code": "00104069",
@@ -449,8 +449,59 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1728579000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 99551000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 12379000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 16495000,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1728579000,
+          "pct": 93.08,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 99551000,
+          "pct": 5.36,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 12379000,
+          "pct": 0.67,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 16495000,
+          "pct": 0.89,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01379129",
@@ -508,8 +559,71 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1520725400,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 373459300,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 80282100,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 98751200,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 21211700,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1520725400,
+          "pct": 72.61,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 373459300,
+          "pct": 17.83,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 80282100,
+          "pct": 3.83,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 98751200,
+          "pct": 4.71,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 21211700,
+          "pct": 1.01,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01370517",
@@ -652,8 +766,71 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 793089045,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 320872528,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 152237492,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 180918700,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 55070000,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 793089045,
+          "pct": 52.8,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 320872528,
+          "pct": 21.36,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 152237492,
+          "pct": 10.13,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 180918700,
+          "pct": 12.04,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 55070000,
+          "pct": 3.67,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01755259",
@@ -710,8 +887,71 @@
       "archived_at": "2026-07-14",
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1364455385,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 51947000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 13416000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1753000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 16,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1364455385,
+          "pct": 95.31,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 51947000,
+          "pct": 3.63,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 13416000,
+          "pct": 0.94,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 1753000,
+          "pct": 0.12,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 16,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01709065",
@@ -7507,44 +7747,6 @@
       "commit_apply_missing": 3
     },
     {
-      "corp_code": "1588189",
-      "name": "씨메스로보틱스",
-      "review_pending": false,
-      "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "management_status": "자동",
-      "stock_code": "475400",
-      "market": "코스닥",
-      "listing_date": "2024-10-24",
-      "final_price": 30000,
-      "archived_at": "2026-07-17",
-      "band_low": 20000,
-      "band_high": 24000,
-      "offer_shares": 2600000,
-      "forecast_start": "2024-09-30",
-      "forecast_end": "2024-10-08",
-      "sub_start": "2024-10-15",
-      "sub_end": "2024-10-16",
-      "demand_ratio": 577.59,
-      "sub_ratio": 425.73,
-      "underwriter": "삼성증권·유진투자증권",
-      "provisional_fields": [
-        "band_high",
-        "band_low",
-        "demand_ratio",
-        "forecast_end",
-        "forecast_start",
-        "offer_shares",
-        "sub_end",
-        "sub_ratio",
-        "sub_start",
-        "underwriter"
-      ],
-      "ipo_parse_version": 3,
-      "result_report_missing": true,
-      "commit_apply_missing": 3
-    },
-    {
       "corp_code": "01588189",
       "name": "씨메스로보틱스",
       "management_name": "씨메스",
@@ -11926,6 +12128,166 @@
       "field": "상장일",
       "old": "미정",
       "new": "2024-10-24"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "레몬헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1728579000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "레몬헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "99551000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "레몬헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "12379000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "레몬헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "16495000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "매드업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1520725400"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "매드업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "373459300"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "매드업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "80282100"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "매드업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "98751200"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "매드업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "21211700"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "져스텍",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "793089045"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "져스텍",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "320872528"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "져스텍",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "152237492"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "져스텍",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "180918700"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "져스텍",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "55070000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "피스피스스튜디오",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1364455385"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "피스피스스튜디오",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "51947000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "피스피스스튜디오",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "13416000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "피스피스스튜디오",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "1753000"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "피스피스스튜디오",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "16"
+    },
+    {
+      "date": "2026-07-15",
+      "name": "씨메스로보틱스",
+      "type": "상장확인(KRX)",
+      "field": "상장일",
+      "old": "미정",
+      "new": "2024-10-24"
     }
   ],
   "seed_pending": [],
@@ -11934,13 +12296,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-17",
+      "excluded_at": "2026-07-18",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-17",
+      "excluded_at": "2026-07-18",
       "memo": "운영자 삭제 요청 이관"
     }
   }
