@@ -198,6 +198,23 @@ MANUAL_EVENT_KEYS = {
 }
 
 
+# 검토필요 탭 — 배치가 자동으로 못 채운 값만 기업별 한 행으로 모아 받는 수기 보완 창구.
+# push 때 갭 있는 상장 완료 종목만 나열하고(아는 값은 미리 채움), pull 때 "배치가 쓴 값과
+# 달라진 셀"만 수거해 표준 채널(IPO일정 manual_fields/manual_commit_*, 수기 락업 이벤트,
+# 종목관리 공모가)로 옮긴다. 갭이 해소된 종목은 다음 push 때 자동으로 목록에서 빠진다.
+REVIEW_FILL_TAB = "검토필요"
+REVIEW_FILL_WRITTEN_PATH = ROOT_DIR / "data" / "review_fill_written.json"
+REVIEW_FILL_HEADERS = [
+    "종목코드", "기업명", "상장일", "부족한값", "메모",
+    "시장", "확정공모가", "희망가하단", "희망가상단", "공모주식수", "주관사",
+    "수요예측시작", "수요예측종료", "청약시작", "청약종료",
+    "수요예측경쟁률", "개인청약경쟁률",
+    "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
+    "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
+    "구주_기간1", "구주_물량1", "구주_기간2", "구주_물량2", "구주_기간3", "구주_물량3",
+]
+
+
 HEADER_KO = {
     "event_id": "이벤트ID",
     "code": "종목코드",
@@ -964,6 +981,348 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
 
 
 
+def _norm_ymd(value: str) -> str:
+    import re
+    text = str(value or "").strip().replace(".", "-").replace("/", "-")
+    if re.fullmatch(r"\d{8}", text):
+        text = f"{text[:4]}-{text[4:6]}-{text[6:]}"
+    match = re.fullmatch(r"(\d{4})-(\d{1,2})-(\d{1,2})", text)
+    return f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}" if match else ""
+
+
+def _commit_qty(item: dict, field: str, period: str) -> int:
+    for tier in item.get(field) or []:
+        if isinstance(tier, dict) and str(tier.get("period") or "") == period:
+            return number(tier.get("qty"))
+    return 0
+
+
+def _merge_manual_commit(item: dict, field: str, manual: dict) -> None:
+    """수기 확약값을 표시용 commit_apply/commit_alloc에 즉시 병합한다(배치 병합과 동일 규칙)."""
+    official = {
+        str(tier.get("period") or ""): dict(tier)
+        for tier in item.get(field) or []
+        if isinstance(tier, dict) and tier.get("period")
+    }
+    for period, raw in manual.items():
+        value = dict(raw or {})
+        if value.get("locked") or period not in official:
+            official[period] = {
+                "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
+                "source": "manual_fixed" if value.get("locked") else "manual_temporary",
+                "visible": value.get("visible", True),
+            }
+    total = sum(int(value.get("qty") or 0) for value in official.values())
+    if total:
+        for value in official.values():
+            value["pct"] = round(int(value.get("qty") or 0) / total * 100, 2)
+    order = {period: index for index, period in enumerate(COMMIT_TIER_ORDER)}
+    item[field] = sorted(official.values(), key=lambda value: order.get(str(value.get("period") or ""), 99))
+
+
+def _load_review_fill_written() -> dict[str, dict[str, str]]:
+    if not REVIEW_FILL_WRITTEN_PATH.exists():
+        return {}
+    try:
+        return json.loads(REVIEW_FILL_WRITTEN_PATH.read_text(encoding="utf-8")).get("rows") or {}
+    except Exception:
+        return {}
+
+
+def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
+    gaps: list[str] = []
+    if not item.get("market"):
+        gaps.append("시장")
+    if not number(item.get("final_price")):
+        gaps.append("확정공모가")
+    if not (number(item.get("band_low")) and number(item.get("band_high"))):
+        gaps.append("희망가")
+    if not number(item.get("offer_shares")):
+        gaps.append("공모주식수")
+    if not item.get("underwriter"):
+        gaps.append("주관사")
+    if not (item.get("forecast_start") and item.get("forecast_end")):
+        gaps.append("수요예측일")
+    if not (item.get("sub_start") and item.get("sub_end")):
+        gaps.append("청약일")
+    if not decimal(item.get("demand_ratio")):
+        gaps.append("수요예측경쟁률")
+    if not decimal(item.get("sub_ratio")):
+        gaps.append("개인청약경쟁률")
+    if not any(number(tier.get("qty")) for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
+        gaps.append("확약신청")
+    if not any(number(tier.get("qty")) for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
+        gaps.append("확약배정")
+    if not has_float_rows:
+        gaps.append("구주물량")
+    return gaps
+
+
+def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    """검토필요 탭에서 사용자가 채운 셀만 수거해 표준 채널로 반영한다.
+
+    - IPO일정 스칼라 필드 → item 값 + manual_fields 고정 (재파싱이 덮지 않음)
+    - 신청_/배정_ 확약 → manual_commit_apply/alloc 고정 + 표시값 즉시 병합
+    - 배정 물량(IPO기관 행 없는 최근 종목) · 구주 기간/물량 쌍 → 수기 락업 이벤트
+    - 확정공모가 → 종목관리 탭 공모가·공모가고정 셀에도 기입
+    """
+    from datetime import timedelta
+    from scripts.utils.dates import calc_release_date
+
+    try:
+        worksheet = spreadsheet.worksheet(REVIEW_FILL_TAB)
+    except gspread.WorksheetNotFound:
+        return
+    values = worksheet.get_all_values()
+    if not values or "종목코드" not in {cell.strip() for cell in values[0]}:
+        return
+
+    written = _load_review_fill_written()
+    schedule = read_schedule_data()
+    history = list(schedule.get("history") or [])
+    today = date.today().isoformat()
+    live_cutoff = (date.today() - timedelta(days=190)).isoformat()
+    admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    ipo_codes = {row.get("code") for row in admin_rows if row.get("category") == "IPO기관"}
+    manual_events = read_json_list(MANUAL_EVENTS_PATH)
+    manual_event_keys = {
+        (str(row.get("code") or ""), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
+        for row in manual_events
+    }
+    by_code: dict[str, dict] = {}
+    for item in all_schedule_items(schedule):
+        code = _pad_code(str(item.get("stock_code") or ""))
+        if code:
+            by_code.setdefault(code, item)
+
+    changed = 0
+    mgmt_prices: dict[str, int] = {}
+    for rec in table_records(values, {header: header for header in REVIEW_FILL_HEADERS}):
+        code = _pad_code(rec.get("종목코드") or "")
+        if not code:
+            continue
+        prev = written.get(code) or {}
+
+        def entered(header: str) -> str:
+            current = (rec.get(header) or "").strip()
+            return current if current and current != (prev.get(header) or "").strip() else ""
+
+        item = by_code.get(code)
+        listing = str((item or {}).get("listing_date") or rec.get("상장일") or "").strip()
+
+        if item is not None:
+            manual_fields = set(item.get("manual_fields") or [])
+
+            def set_field(field: str, value: object) -> None:
+                nonlocal changed
+                if item.get(field) != value:
+                    history.append({
+                        "date": today, "name": item.get("name") or "", "type": "수기변경(검토필요)",
+                        "field": field, "old": str(item.get(field) or ""), "new": str(value),
+                    })
+                    item[field] = value
+                    changed += 1
+                manual_fields.add(field)
+
+            text = entered("시장")
+            if text:
+                set_field("market", text)
+            price = number(entered("확정공모가"))
+            if price:
+                set_field("final_price", price)
+                mgmt_prices[code] = price
+            for column, field in (("희망가하단", "band_low"), ("희망가상단", "band_high"), ("공모주식수", "offer_shares")):
+                qty = number(entered(column))
+                if qty:
+                    set_field(field, qty)
+            text = entered("주관사")
+            if text:
+                set_field("underwriter", text)
+            for column, field in (
+                ("수요예측시작", "forecast_start"), ("수요예측종료", "forecast_end"),
+                ("청약시작", "sub_start"), ("청약종료", "sub_end"),
+            ):
+                day = _norm_ymd(entered(column))
+                if day:
+                    set_field(field, day)
+            for column, field in (("수요예측경쟁률", "demand_ratio"), ("개인청약경쟁률", "sub_ratio")):
+                ratio = decimal(entered(column))
+                if ratio:
+                    set_field(field, ratio)
+            if manual_fields:
+                item["manual_fields"] = sorted(manual_fields)
+
+            for kind, field, manual_field in (
+                ("신청", "commit_apply", "manual_commit_apply"),
+                ("배정", "commit_alloc", "manual_commit_alloc"),
+            ):
+                manual = dict(item.get(manual_field) or {})
+                dirty = False
+                for period in COMMIT_TIER_ORDER:
+                    qty = number(entered(f"{kind}_{period}"))
+                    if not qty or number((manual.get(period) or {}).get("qty")) == qty:
+                        continue
+                    manual[period] = {"qty": qty, "locked": True, "visible": True}
+                    history.append({
+                        "date": today, "name": item.get("name") or "", "type": "수기변경(검토필요)",
+                        "field": f"{kind}_{period}", "old": "", "new": str(qty),
+                    })
+                    dirty = True
+                    changed += 1
+                if dirty:
+                    item[manual_field] = manual
+                    _merge_manual_commit(item, field, manual)
+
+        # 배정 물량 → IPO기관 락업 이벤트 (아직 행이 없고 확약이 살아있는 종목만)
+        if listing and code not in ipo_codes and listing >= live_cutoff:
+            for period in ("15일", "1개월", "3개월", "6개월"):
+                qty = number(entered(f"배정_{period}"))
+                if not qty:
+                    continue
+                try:
+                    _, _, tradable = calc_release_date(listing, period)
+                except Exception:
+                    continue
+                key = (code, "IPO기관", period, tradable)
+                if key not in manual_event_keys:
+                    manual_events.append({"code": code, "category": "IPO기관", "period": period, "date": tradable, "qty": qty})
+                    manual_event_keys.add(key)
+                    changed += 1
+
+        # 구주 기간/물량 쌍 → 기존주주 락업 이벤트
+        for index in (1, 2, 3):
+            period = (rec.get(f"구주_기간{index}") or "").strip()
+            qty = number(rec.get(f"구주_물량{index}"))
+            if not (listing and period and qty):
+                continue
+            try:
+                _, _, tradable = calc_release_date(listing, period)
+            except Exception:
+                continue
+            key = (code, "기존주주", period, tradable)
+            if key not in manual_event_keys:
+                manual_events.append({"code": code, "category": "기존주주", "period": period, "date": tradable, "qty": qty})
+                manual_event_keys.add(key)
+                changed += 1
+
+    if changed:
+        schedule["history"] = history[-500:]
+        IPO_SCHEDULE_PATH.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+        MANUAL_EVENTS_PATH.write_text(json.dumps(manual_events, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[SHEET] 검토필요 수기값 {changed}건 반영", file=sys.stderr)
+
+    # 확정공모가는 종목관리 탭에도 기입해 뒤이은 pull_stock_management가 수거하게 한다
+    if mgmt_prices:
+        try:
+            mgmt = spreadsheet.worksheet(STOCK_MANAGEMENT_TAB)
+            vals = mgmt.get_all_values()
+            headers = [cell.strip() for cell in vals[0]] if vals else []
+            if "종목코드" in headers and "공모가" in headers:
+                code_index = headers.index("종목코드")
+                price_index = headers.index("공모가")
+                lock_index = headers.index("공모가고정") if "공모가고정" in headers else -1
+                updates = []
+                for row_no, row in enumerate(vals[1:], start=2):
+                    row_code = _pad_code(row[code_index] if len(row) > code_index else "")
+                    if row_code in mgmt_prices:
+                        updates.append({"range": rowcol_to_a1(row_no, price_index + 1), "values": [[str(mgmt_prices[row_code])]]})
+                        if lock_index >= 0:
+                            updates.append({"range": rowcol_to_a1(row_no, lock_index + 1), "values": [["Y"]]})
+                if updates:
+                    mgmt.batch_update(updates, value_input_option="USER_ENTERED")
+                    print(f"[SHEET] 검토필요 → 종목관리 공모가 반영: {len(mgmt_prices)}건", file=sys.stderr)
+        except gspread.WorksheetNotFound:
+            pass
+
+
+def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
+    """배치가 못 채운 값이 있는 상장 완료 종목만 검토필요 탭에 다시 나열한다.
+
+    - 미상장 종목은 제외 (DART 공시가 자연히 채우므로 수기 대상 아님)
+    - 아는 값은 미리 채워 두고, 빈 칸 = 채워야 할 값. '부족한값' 열이 목록을 요약
+    - 이전 탭에서 아직 반영 안 된 사용자 입력(형식 오류·메모)은 보존
+    - 스냅샷(review_fill_written.json)과 달라진 셀만 다음 pull 때 수거된다
+    """
+    schedule = read_schedule_data()
+    admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    float_codes = {row.get("code") for row in admin_rows if row.get("category") == "구주·보호예수"}
+    today = date.today().isoformat()
+
+    written = _load_review_fill_written()
+    carry: dict[str, dict[str, str]] = {}
+    try:
+        old = spreadsheet.worksheet(REVIEW_FILL_TAB)
+        for rec in table_records(old.get_all_values(), {header: header for header in REVIEW_FILL_HEADERS}):
+            code = _pad_code(rec.get("종목코드") or "")
+            if not code:
+                continue
+            prev = written.get(code) or {}
+            kept = {
+                header: rec[header]
+                for header in REVIEW_FILL_HEADERS
+                if (rec.get(header) or "").strip() and (rec.get(header) or "").strip() != (prev.get(header) or "").strip()
+            }
+            if kept:
+                carry[code] = kept
+        spreadsheet.del_worksheet(old)
+    except gspread.WorksheetNotFound:
+        pass
+
+    rows: list[dict[str, str]] = []
+    snapshot: dict[str, dict[str, str]] = {}
+    for item in all_schedule_items(schedule):
+        if item.get("withdrawn") or item.get("fixed_excluded") or item.get("review_pending"):
+            continue
+        if item.get("management_hidden") or item.get("schedule_hidden"):
+            continue
+        code = _pad_code(str(item.get("stock_code") or ""))
+        listing = str(item.get("listing_date") or "")
+        if not code or not listing or listing > today:
+            continue
+        gaps = _review_fill_gaps(item, code in float_codes)
+        if not gaps:
+            continue
+        row = {
+            "종목코드": code, "기업명": item.get("name") or "", "상장일": listing,
+            "부족한값": ", ".join(gaps), "메모": "",
+            "시장": item.get("market") or "",
+            "확정공모가": str(number(item.get("final_price")) or ""),
+            "희망가하단": str(number(item.get("band_low")) or ""),
+            "희망가상단": str(number(item.get("band_high")) or ""),
+            "공모주식수": str(number(item.get("offer_shares")) or ""),
+            "주관사": item.get("underwriter") or "",
+            "수요예측시작": item.get("forecast_start") or "", "수요예측종료": item.get("forecast_end") or "",
+            "청약시작": item.get("sub_start") or "", "청약종료": item.get("sub_end") or "",
+            "수요예측경쟁률": str(item.get("demand_ratio") or ""), "개인청약경쟁률": str(item.get("sub_ratio") or ""),
+        }
+        for period in COMMIT_TIER_ORDER:
+            row[f"신청_{period}"] = str(_commit_qty(item, "commit_apply", period) or "")
+            row[f"배정_{period}"] = str(_commit_qty(item, "commit_alloc", period) or "")
+        for index in (1, 2, 3):
+            row[f"구주_기간{index}"] = ""
+            row[f"구주_물량{index}"] = ""
+        # 스냅샷은 배치가 쓴 값만 담는다 — 사용자 입력(carry)을 스냅샷에 넣으면
+        # "달라진 셀" 판정에서 빠져 미반영 입력이 영영 수거되지 않는다
+        snapshot[code] = dict(row)
+        for header, value in (carry.get(code) or {}).items():
+            if not row.get(header):
+                row[header] = value
+        rows.append(row)
+
+    rows.sort(key=lambda row: row["상장일"], reverse=True)
+    worksheet = spreadsheet.add_worksheet(
+        title=REVIEW_FILL_TAB, rows=len(rows) + 20, cols=len(REVIEW_FILL_HEADERS) + 1
+    )
+    payload = [REVIEW_FILL_HEADERS] + [[row.get(header, "") for header in REVIEW_FILL_HEADERS] for row in rows]
+    worksheet.update(payload, "A1", value_input_option="USER_ENTERED")
+    worksheet.freeze(rows=1, cols=4)
+    worksheet.format("1:1", {"textFormat": {"bold": True}})
+    REVIEW_FILL_WRITTEN_PATH.write_text(
+        json.dumps({"saved_at": today, "rows": snapshot}, ensure_ascii=False, indent=1), encoding="utf-8"
+    )
+    print(f"[SHEET] 검토필요 탭 재작성: {len(rows)}종목", file=sys.stderr)
+
+
 def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
     csv_path = ROOT_DIR / "data" / "lockup_admin.csv"
     local_rows = read_csv_dicts(csv_path)
@@ -1005,6 +1364,8 @@ def pull_admin(spreadsheet: gspread.Spreadsheet) -> None:
         pull_worklist(spreadsheet)
         pull_ipo_targets(spreadsheet)
         pull_manual_events(spreadsheet)
+    # 검토필요 수거는 종목관리보다 먼저 — 공모가를 종목관리 탭에 기입한 뒤 pull_stock_management가 읽는다
+    collect_review_fill_tab(spreadsheet)
     # 보정작업은 첫 마이그레이션 때만 읽는다. 이후에는 각 도메인 탭에서 직접 수정한다.
     pull_stock_management(spreadsheet)
     if not new_structure:
@@ -2422,14 +2783,14 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
 
 
 # 운영자 입력은 도메인별 네 탭과 휴장일에서만 받는다.
-MANUAL_TABS_ORDER = [STOCK_MANAGEMENT_TAB, IPO_SCHEDULE_TAB, "IPO기관", "기존주주", HOLIDAY_TAB, "로그"]
+MANUAL_TABS_ORDER = [REVIEW_FILL_TAB, STOCK_MANAGEMENT_TAB, IPO_SCHEDULE_TAB, "IPO기관", "기존주주", HOLIDAY_TAB, "로그"]
 MANUAL_COLOR_ONLY_TABS: list[str] = []
 MANUAL_TAB_COLOR = {"red": 0.26, "green": 0.52, "blue": 0.96}
 LEGACY_INPUT_TABS = ["IPO종목", "작업목록", "수기입력"]
 OBSOLETE_TABS = tuple(dict.fromkeys([
     *LEGACY_INPUT_TABS,
     *LEGACY_ADMIN_TABS,
-    "검토필요",
+    # "검토필요"는 수기 보완 창구로 부활 — 폐지 목록에서 제외 (REVIEW_FILL_TAB)
     "상장후보_검토",
     CORRECTION_TAB,
     "IPO일정_현황",
@@ -2495,6 +2856,7 @@ def push_all(spreadsheet: gspread.Spreadsheet, reset: bool) -> None:
     push_stock_management_tab(spreadsheet)
     push_simple_schedule_tab(spreadsheet)
     push_simple_event_tabs(spreadsheet)
+    regenerate_review_fill_tab(spreadsheet)
     for title, filename, columns in TAB_CONFIG:
         push_tab(spreadsheet, title, filename, columns)
     cleanup_obsolete_tabs(spreadsheet)

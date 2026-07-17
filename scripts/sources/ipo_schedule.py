@@ -867,31 +867,32 @@ def refresh_ipo_schedule(
     listing_map = load_listing_map()
 
     def apply_manual_commit_values(item: dict[str, Any]) -> dict[str, Any]:
-        """수기 신청물량은 공식 파싱 실패 시만 쓰고, 고정한 기간만 계속 유지한다."""
-        manual = dict(item.get("manual_commit_apply") or {})
-        if not manual:
-            return item
-        official = {
-            str(value.get("period") or ""): dict(value)
-            for value in (item.get("commit_apply") or [])
-            if isinstance(value, dict) and value.get("period")
-        }
-        for period, raw in manual.items():
-            value = dict(raw or {})
-            if value.get("locked") or period not in official:
-                official[period] = {
-                    "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
-                    "source": "manual_fixed" if value.get("locked") else "manual_temporary",
-                    "visible": value.get("visible", True),
-                }
-            elif period in official:
-                official[period]["visible"] = value.get("visible", True)
-        total = sum(int(value.get("qty") or 0) for value in official.values())
-        if total:
-            for value in official.values():
-                value["pct"] = round(int(value.get("qty") or 0) / total * 100, 2)
-        order = {period: index for index, period in enumerate(["미확약", "15일", "1개월", "3개월", "6개월"])}
-        item["commit_apply"] = sorted(official.values(), key=lambda value: order.get(str(value.get("period") or ""), 99))
+        """수기 확약값(신청·배정)은 공식 파싱 실패 시만 쓰고, 고정한 기간만 계속 유지한다."""
+        for field, manual_field in (("commit_apply", "manual_commit_apply"), ("commit_alloc", "manual_commit_alloc")):
+            manual = dict(item.get(manual_field) or {})
+            if not manual:
+                continue
+            official = {
+                str(value.get("period") or ""): dict(value)
+                for value in (item.get(field) or [])
+                if isinstance(value, dict) and value.get("period")
+            }
+            for period, raw in manual.items():
+                value = dict(raw or {})
+                if value.get("locked") or period not in official:
+                    official[period] = {
+                        "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
+                        "source": "manual_fixed" if value.get("locked") else "manual_temporary",
+                        "visible": value.get("visible", True),
+                    }
+                elif period in official:
+                    official[period]["visible"] = value.get("visible", True)
+            total = sum(int(value.get("qty") or 0) for value in official.values())
+            if total:
+                for value in official.values():
+                    value["pct"] = round(int(value.get("qty") or 0) / total * 100, 2)
+            order = {period: index for index, period in enumerate(["미확약", "15일", "1개월", "3개월", "6개월"])}
+            item[field] = sorted(official.values(), key=lambda value: order.get(str(value.get("period") or ""), 99))
         return item
 
     def process_corp(corp_code: str, name: str, corp_filings: list[dict[str, Any]], old: dict[str, Any] | None) -> dict[str, Any]:
