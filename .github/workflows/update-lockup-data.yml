@@ -115,4 +115,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update lockup data"
+          # 배치가 도는 동안 다른 커밋(수동 푸시·다른 배치)이 main에 먼저 올라가면
+          # push가 non-fast-forward로 거부된다(run #51). rebase 후 재시도하되,
+          # 충돌 시 방금 생성한 데이터(-X theirs: rebase에서는 우리 커밋 쪽)를 우선한다.
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase -X theirs origin main
+          done
           git push
