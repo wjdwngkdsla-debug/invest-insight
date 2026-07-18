@@ -955,6 +955,21 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                         manual[period]["locked"] = locked
                         manual[period]["visible"] = visible == "Y"
                     item["manual_commit_apply"] = manual
+                    if manual:
+                        # 재파싱이 안 도는 종목(commit_apply_missing 마커 등)도 바로 표시되게 즉시 병합
+                        _merge_manual_commit(item, "commit_apply", manual)
+                    # 배정물량 — 락업 이벤트가 있는 구간은 위 event 경로(manual_qty)가 받는다.
+                    # 이벤트가 없는 구간(미확약 등)은 받을 곳이 없어 manual_commit_alloc으로 수거.
+                    if not event:
+                        manual_alloc = dict(item.get("manual_commit_alloc") or {})
+                        alloc_now = number(raw.get("배정물량"))
+                        alloc_old = number(previous.get("배정물량"))
+                        if alloc_now and (locked or (previous and alloc_now != alloc_old and not alloc_old)):
+                            manual_alloc[period] = {"qty": alloc_now, "locked": locked, "visible": visible == "Y"}
+                            item["manual_commit_alloc"] = manual_alloc
+                            _merge_manual_commit(item, "commit_alloc", manual_alloc)
+                            if alloc_now != alloc_old:
+                                history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": f"기관배정물량({period})", "old": alloc_old, "new": alloc_now})
         for missing in set(previous_rows) - seen:
             previous = previous_rows[missing]
             event = by_id.get(str(previous.get("이벤트ID") or ""))
