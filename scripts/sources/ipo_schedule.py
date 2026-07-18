@@ -295,14 +295,14 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
             for r in rows:
                 label = "".join(r[:3]).replace(" ", "") if r else ""
                 nums = [c for c in r if re.fullmatch(r"[\d,]{2,}", c)]
-                if len(nums) < 2:
-                    continue
                 tier = next((t for t in TIER_LABELS if f"{t}확약" in label), "")
+                if not tier and "미확약" in label:
+                    tier = "미확약"
                 if tier:
-                    tiers[tier] = _to_int(nums[-2])
-                elif "미확약" in label:
-                    tiers["미확약"] = _to_int(nums[-2])
-                elif "합계" in label:
+                    # 구간 행이 표에 있는데 값이 전부 "-" = 확정된 0. 기록해서
+                    # 사이트의 '미정'(미수집)과 구분한다 (토모큐브 1개월·15일 케이스)
+                    tiers[tier] = _to_int(nums[-2]) if len(nums) >= 2 else 0
+                elif "합계" in label and len(nums) >= 2:
                     total = _to_int(nums[-2])
             if total and len(tiers) >= 3:
                 commit_apply = [
@@ -445,8 +445,12 @@ def parse_result_report(doc: str) -> dict[str, Any]:
             m = re.search(label + rf"({_NUM_TOKEN}{{2,30}})", seg)
             if not m:
                 continue
-            nums = [t for t in m.group(1).split() if t != "-"]
+            tokens = m.group(1).split()
+            nums = [t for t in tokens if t != "-"]
             if len(nums) < 2:
+                # 구간이 표에 있는데 값이 전부 "-" = 확정된 0으로 기록 ('미정'과 구분)
+                if tokens and all(t == "-" for t in tokens):
+                    alloc_rows.append({"period": tier, "qty": 0, "pct": 0.0})
                 continue
             try:
                 qty = _to_int(nums[-2])
