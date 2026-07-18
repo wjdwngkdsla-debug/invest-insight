@@ -2149,6 +2149,51 @@ def row_match_dates(row: dict) -> set[str]:
 
 
 
+def sync_commit_alloc_from_lockup(schedule_path: Path, rows: list[dict]) -> None:
+    """IPO기관 락업 물량을 IPO일정 확약배정(commit_alloc)이 빈 종목에 복사한다.
+
+    두 파서가 같은 증권발행실적보고서를 따로 읽는 구조라, 락업 쪽만 성공하고
+    일정 쪽 배정표 파싱이 실패하면 검토필요에 '확약배정 부족'으로 남는다.
+    이미 확보된 값의 복사라 API 비용이 없고, 이후 공식 파싱이 성공하면 덮인다.
+    락업 행에는 미확약 물량이 없으므로 확약 구간만 채워진다.
+    """
+    try:
+        data = json.loads(schedule_path.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    by_code: dict[str, dict[str, int]] = {}
+    for row in rows:
+        if row.get("category") != CATEGORY_IPO:
+            continue
+        code = normalize_stock_code(row.get("code"))
+        qty = _to_int(row.get("final_qty")) or _to_int(row.get("api_return_qty")) or _to_int(row.get("planned_qty"))
+        period = str(row.get("period") or "").strip()
+        if code and period and qty:
+            merged = by_code.setdefault(code, {})
+            merged[period] = merged.get(period, 0) + qty
+    if not by_code:
+        return
+    order = {p: i for i, p in enumerate(["미확약", "15일", "1개월", "3개월", "6개월"])}
+    synced: list[str] = []
+    for item in [*(data.get("items") or []), *(data.get("past_items") or [])]:
+        if not isinstance(item, dict):
+            continue
+        if any(_to_int(t.get("qty")) for t in item.get("commit_alloc") or [] if isinstance(t, dict)):
+            continue
+        tiers = by_code.get(normalize_stock_code(item.get("stock_code")))
+        if not tiers:
+            continue
+        total = sum(tiers.values())
+        item["commit_alloc"] = [
+            {"period": p, "qty": q, "pct": round(q / total * 100, 2) if total else 0, "source": "IPO기관 락업"}
+            for p, q in sorted(tiers.items(), key=lambda kv: order.get(kv[0], 99))
+        ]
+        synced.append(item.get("name") or "?")
+    if synced:
+        schedule_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[IPO일정] IPO기관 락업값 → 확약배정 복사: {len(synced)}종목 ({', '.join(synced[:10])})", file=sys.stderr)
+
+
 def match_api_group_to_row(rd: str, total_qty: int, rows: list[dict]) -> dict | None:
     # 금융위 API 반환정보는 기존주주/보호예수 해제 확인용이다.
     # 증권발행실적보고서의 IPO기관 확약 물량과 주체가 달라서 같은 날짜여도 합치지 않는다.
@@ -5401,6 +5446,9 @@ def main() -> None:
             krx_base_info=base,
             backfill_all=bool(getattr(args, "backfill_all", False)),
         )
+        # 같은 실적보고서를 락업 파서와 일정 파서가 따로 읽는데 일정 쪽만 배정표를
+        # 못 읽은 종목(삼진식품·로킷헬스케어 등)은 재파싱 대신 락업 값을 복사한다.
+        sync_commit_alloc_from_lockup(data_dir / "ipo_schedule.json", list(all_rows_by_id.values()))
     except Exception as exc:
         print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)
 

@@ -1164,8 +1164,9 @@ def refresh_ipo_schedule(
 
         # ② 실적보고서 보강 (확약 배정·개인청약경쟁률) — 상장일 주변 창으로 조회.
         #    이전엔 이 단계가 없어서 과거 종목의 배정 데이터가 영영 비어 있었다.
+        has_report = bool(archived.get("report_rcp"))
         needs_result = (
-            not archived.get("report_rcp")
+            not has_report
             and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
             and (
                 # "실적보고서 없음" 판정을 받았으면 파서 버전이 오르기 전까지 재조회하지 않는다.
@@ -1175,15 +1176,33 @@ def refresh_ipo_schedule(
                 or int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
             )
         )
-        if needs_result and heavy_budget["left"] > 0:
+        # 정정 실적보고서 탐지 — 이미 반영한 보고서보다 새 접수번호가 있으면 다시 읽는다.
+        # 상장 90일 이내 종목만 재확인(목록 조회는 싸고, 정정은 대부분 이 창 안에 나온다).
+        # 전 종목 상시 재확인은 배치당 상한을 다시 허탕으로 소진시키므로 하지 않는다.
+        recheck_listing = _trusted_listing_date(archived)
+        recheck_correction = (
+            has_report
+            and bool(recheck_listing)
+            and recheck_listing >= (now_kst - timedelta(days=90)).strftime("%Y-%m-%d")
+        )
+        if (needs_result or recheck_correction) and heavy_budget["left"] > 0:
             try:
                 report = find_result_report(
                     corp_code,
                     listing_date=_trusted_listing_date(archived),
                     sub_end=archived.get("sub_end") or "",
                 )
-                heavy_budget["left"] -= 1
-                if report:
+                if recheck_correction:
+                    # 접수번호가 저장값보다 새것일 때만 문서를 내려받는다(상한 차감도 그때만)
+                    if report and str(report["rcept_no"]) > str(archived.get("report_rcp") or ""):
+                        heavy_budget["left"] -= 1
+                        parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                        if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
+                            archived.update(parsed)
+                            archived["report_rcp"] = report["rcept_no"]
+                            log(f"정정 실적보고서 반영: {archived.get('name')} ({report['rcept_no']})")
+                elif report:
+                    heavy_budget["left"] -= 1
                     parsed = parse_result_report(download_document_text(report["rcept_no"]))
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
@@ -1193,6 +1212,7 @@ def refresh_ipo_schedule(
                         archived["result_report_missing"] = True
                 else:
                     # 실적보고서가 없는 상장(스팩합병·이전상장 등) — 재조회 반복 방지 플래그
+                    heavy_budget["left"] -= 1
                     archived["result_report_missing"] = True
                     log(f"과거 이력 실적보고서 없음: {archived.get('name')}")
             except Exception as exc:
