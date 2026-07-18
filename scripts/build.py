@@ -1452,7 +1452,11 @@ def _incomplete_reparse_reasons(
     # 전용이라 IPO일정 빈칸을 절대 못 채운다. 과거엔 IPO일정 gap으로 락업을 매 배치 재파싱해
     # (미래 종목의 수요예측 미도래 등 정상 빈칸까지) 148중 92종목이 헛돌며 배치가 3시간 걸렸다.
     if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_IPO):
-        reasons.append("IPO기관")
+        # 실적보고서 자체가 DART에 없다고 판정된 종목(IPO일정 파이프라인의 result_report_missing)은
+        # 락업 재파싱도 허탕 확정 — 재시도하지 않는다. 수기(검토필요·수기입력)가 유일한 통로.
+        schedule_item = _schedule_item_for_target(target, code, schedule_items) or {}
+        if not (schedule_item.get("result_report_missing") and not schedule_item.get("report_rcp")):
+            reasons.append("IPO기관")
     if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_FLOAT):
         reasons.append("기존주주")
     return reasons

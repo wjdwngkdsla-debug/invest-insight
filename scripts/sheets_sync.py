@@ -943,9 +943,13 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                 item = by_corp.get(corp_code) or by_name.get(norm_name(raw.get("종목명")))
                 if item:
                     manual = dict(item.get("manual_commit_apply") or {})
-                    current = number(raw.get("신청물량"))
-                    old = number(previous.get("신청물량"))
-                    if current and (locked or (previous and current != old and not old)):
+                    apply_text = str(raw.get("신청물량") or "").replace(",", "").strip()
+                    old_text = str(previous.get("신청물량") or "").replace(",", "").strip()
+                    current = number(apply_text)
+                    old = number(old_text)
+                    # "0" 명시 입력 = 실값 0 (빈칸과 구분)
+                    explicit_zero = bool(apply_text) and apply_text.strip("0") == ""
+                    if (current or explicit_zero) and (locked or (previous and apply_text != old_text and not old)):
                         manual[period] = {"qty": current, "locked": locked, "visible": visible == "Y"}
                         if current != old:
                             history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": f"기관신청물량({period})", "old": old, "new": current})
@@ -962,9 +966,12 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                     # 이벤트가 없는 구간(미확약 등)은 받을 곳이 없어 manual_commit_alloc으로 수거.
                     if not event:
                         manual_alloc = dict(item.get("manual_commit_alloc") or {})
-                        alloc_now = number(raw.get("배정물량"))
-                        alloc_old = number(previous.get("배정물량"))
-                        if alloc_now and (locked or (previous and alloc_now != alloc_old and not alloc_old)):
+                        alloc_text = str(raw.get("배정물량") or "").replace(",", "").strip()
+                        old_alloc_text = str(previous.get("배정물량") or "").replace(",", "").strip()
+                        alloc_now = number(alloc_text)
+                        alloc_old = number(old_alloc_text)
+                        zero_alloc = bool(alloc_text) and alloc_text.strip("0") == ""
+                        if (alloc_now or zero_alloc) and (locked or (previous and alloc_text != old_alloc_text and not alloc_old)):
                             manual_alloc[period] = {"qty": alloc_now, "locked": locked, "visible": visible == "Y"}
                             item["manual_commit_alloc"] = manual_alloc
                             _merge_manual_commit(item, "commit_alloc", manual_alloc)
@@ -1174,8 +1181,14 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 manual = dict(item.get(manual_field) or {})
                 dirty = False
                 for period in COMMIT_TIER_ORDER:
-                    qty = number(entered(f"{kind}_{period}"))
-                    if not qty or number((manual.get(period) or {}).get("qty")) == qty:
+                    text = entered(f"{kind}_{period}").replace(",", "").strip()
+                    if not text:
+                        continue
+                    qty = number(text)
+                    # "0" 명시 입력 = 실값 0으로 반영 (확약이 진짜 없는 구간). 빈칸과 구분한다.
+                    if qty == 0 and text.strip("0") != "":
+                        continue
+                    if period in manual and number((manual.get(period) or {}).get("qty")) == qty:
                         continue
                     manual[period] = {"qty": qty, "locked": True, "visible": True}
                     history.append({
@@ -2117,7 +2130,7 @@ def _push_simple_table(
     rows: list[list[object]],
     checkbox_columns: list[str],
     hidden_columns: list[str] | None = None,
-) -> None:
+) -> gspread.Worksheet:
     values = [headers] + rows
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 30, len(headers))
     worksheet.clear()
@@ -2133,6 +2146,7 @@ def _push_simple_table(
     if requests:
         spreadsheet.batch_update({"requests": requests})
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
+    return worksheet
 
 
 def _event_validation(row: dict) -> tuple[str, str]:
@@ -2274,6 +2288,14 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
     ipo_by_key = {(str(row.get("code") or ""), str(row.get("period") or "")): row for row in ipo_admin}
     ipo_rows: list[list[object]] = []
     ipo_state: dict[str, dict] = {}
+    # 빨간 셀 = 배치가 다시 찾지 않는 값(DART에 없음 판정) → 수기 입력이 유일한 통로
+    try:
+        from scripts.sources.ipo_schedule import IPO_PARSE_VERSION as _parse_version
+    except Exception:
+        _parse_version = 1
+    apply_col = IPO_INSTITUTION_HEADERS.index("신청물량") + 1
+    alloc_col = IPO_INSTITUTION_HEADERS.index("배정물량") + 1
+    ipo_red_cells: list[tuple[int, int]] = []
     keys: set[tuple[str, str, str]] = set()
     for item in items:
         code, name = str(item.get("stock_code") or ""), str(item.get("name") or "")
@@ -2303,6 +2325,11 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         ]
         ipo_rows.append(row_values)
         ipo_state[event_id] = dict(zip(IPO_INSTITUTION_HEADERS, [str(value) for value in row_values]))
+        row_no = len(ipo_rows) + 1  # 헤더 다음부터
+        if not apply_qty and int(item.get("commit_apply_missing") or 0) >= _parse_version:
+            ipo_red_cells.append((row_no, apply_col))
+        if not alloc_qty and item.get("result_report_missing") and not item.get("report_rcp"):
+            ipo_red_cells.append((row_no, alloc_col))
 
     holder_rows: list[list[object]] = []
     holder_state: dict[str, dict] = {}
@@ -2324,7 +2351,20 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
 
     state["ipo_institution"], state["holders"] = ipo_state, holder_state
     SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
-    _push_simple_table(spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
+    ipo_ws = _push_simple_table(spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
+    if ipo_red_cells:
+        red_format = {
+            "backgroundColor": {"red": 1.0, "green": 0.87, "blue": 0.87},
+            "textFormat": {"foregroundColor": {"red": 0.72, "green": 0.05, "blue": 0.05}, "bold": True},
+        }
+        try:
+            ipo_ws.batch_format([
+                {"range": rowcol_to_a1(row_no, col), "format": red_format}
+                for row_no, col in ipo_red_cells
+            ])
+            print(f"[SHEET] IPO기관 수기전용(빨강) 표시: {len(ipo_red_cells)}셀", file=sys.stderr)
+        except Exception as exc:
+            print(f"[SHEET] IPO기관 빨간 표시 실패(무시): {exc}", file=sys.stderr)
     _push_simple_table(spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows, ["고정", "노출"], ["이벤트ID"])
 
 
