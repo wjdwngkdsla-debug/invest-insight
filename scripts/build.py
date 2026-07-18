@@ -1455,7 +1455,14 @@ def _incomplete_reparse_reasons(
         # 실적보고서 자체가 DART에 없다고 판정된 종목(IPO일정 파이프라인의 result_report_missing)은
         # 락업 재파싱도 허탕 확정 — 재시도하지 않는다. 수기(검토필요·수기입력)가 유일한 통로.
         schedule_item = _schedule_item_for_target(target, code, schedule_items) or {}
-        if not (schedule_item.get("result_report_missing") and not schedule_item.get("report_rcp")):
+        report_missing = schedule_item.get("result_report_missing") and not schedule_item.get("report_rcp")
+        # 확약 배정이 확인된 0(전 구간 0, 미확약 100%)인 종목은 락업 행 0개가 정상 —
+        # 재파싱해도 만들 행이 없다 (데이원컴퍼니·미트박스·엠앤씨솔루션 케이스)
+        alloc_tiers = [t for t in schedule_item.get("commit_alloc") or [] if isinstance(t, dict)]
+        confirmed_zero_lockup = bool(alloc_tiers) and not any(
+            _to_int(t.get("qty")) for t in alloc_tiers if str(t.get("period")) != "미확약"
+        )
+        if not report_missing and not confirmed_zero_lockup:
             reasons.append("IPO기관")
     if not _has_complete_admin_rows(existing_stock_rows, CATEGORY_FLOAT):
         reasons.append("기존주주")

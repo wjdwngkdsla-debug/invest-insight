@@ -305,11 +305,15 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                 elif "합계" in label and len(nums) >= 2:
                     total = _to_int(nums[-2])
             if total and len(tiers) >= 3:
-                commit_apply = [
-                    {"period": t, "qty": tiers[t], "pct": round(tiers[t] / total * 100, 2)}
-                    for t in TIER_LABELS + ["미확약"]
-                    if t in tiers
-                ]
+                # 모든 종목은 5구간(미확약·15일·1개월·3개월·6개월)을 갖는다.
+                # 표에 행 자체가 없는 구간은 0으로 간주하되 zero_missing 표식을 남겨
+                # 검토필요에서 확인을 요청한다 (기입 생략 관행 대응).
+                commit_apply = []
+                for t in TIER_LABELS + ["미확약"]:
+                    if t in tiers:
+                        commit_apply.append({"period": t, "qty": tiers[t], "pct": round(tiers[t] / total * 100, 2)})
+                    else:
+                        commit_apply.append({"period": t, "qty": 0, "pct": 0.0, "source": "zero_missing"})
     return demand_ratio, commit_apply
 
 
@@ -459,6 +463,11 @@ def parse_result_report(doc: str) -> dict[str, Any]:
                 continue
             alloc_rows.append({"period": tier, "qty": qty, "pct": pct})
         if len(alloc_rows) >= 3:
+            # 5구간 강제 — 표에 없는 구간은 0 + zero_missing 표식 (검토필요 확인 요청)
+            present = {str(row.get("period")) for row in alloc_rows}
+            for tier in TIER_LABELS + ["미확약"]:
+                if tier not in present:
+                    alloc_rows.append({"period": tier, "qty": 0, "pct": 0.0, "source": "zero_missing"})
             out["commit_alloc"] = alloc_rows
     return out
 

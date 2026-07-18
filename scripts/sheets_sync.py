@@ -1073,8 +1073,12 @@ def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
         gaps.append("개인청약경쟁률")
     if not any(number(tier.get("qty")) for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
         gaps.append("확약신청")
+    elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
+        gaps.append("확약신청 0확인")
     if not any(number(tier.get("qty")) for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
         gaps.append("확약배정")
+    elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
+        gaps.append("확약배정 0확인")
     if not has_float_rows:
         gaps.append("구주물량")
     return gaps
@@ -1359,6 +1363,15 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             if not row.get("개인청약경쟁률"):
                 red_cols.add(column_no["개인청약경쟁률"])
         row["_red"] = red_cols
+        # 노란 셀 = 표에 구간 행이 없어 0으로 추정한 값 — 맞으면 0, 아니면 실값 입력으로 확정
+        yellow_cols: set[int] = set()
+        for kind, field in (("신청", "commit_apply"), ("배정", "commit_alloc")):
+            for tier in item.get(field) or []:
+                if isinstance(tier, dict) and str(tier.get("source")) == "zero_missing":
+                    header = f"{kind}_{tier.get('period')}"
+                    if header in column_no and not row.get(header):
+                        yellow_cols.add(column_no[header])
+        row["_yellow"] = yellow_cols - red_cols
         rows.append(row)
 
     rows.sort(key=lambda row: row["상장일"], reverse=True)
@@ -1370,33 +1383,38 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     worksheet.freeze(rows=1, cols=4)
     worksheet.format("1:1", {"textFormat": {"bold": True}})
 
-    # 수기 전용 셀 빨간 표시 — 행별 연속 열 구간으로 압축해 요청 수를 줄인다
+    # 빨강 = 수기 전용(배치가 다시 안 찾음), 노랑 = 0 추정(확인 요청). 행별 연속 열 압축.
     red_format = {
         "backgroundColor": {"red": 1.0, "green": 0.87, "blue": 0.87},
         "textFormat": {"foregroundColor": {"red": 0.72, "green": 0.05, "blue": 0.05}, "bold": True},
     }
+    yellow_format = {
+        "backgroundColor": {"red": 1.0, "green": 0.95, "blue": 0.75},
+        "textFormat": {"foregroundColor": {"red": 0.55, "green": 0.4, "blue": 0.0}, "bold": True},
+    }
     formats = []
     for row_no, row in enumerate(rows, start=2):
-        cols = sorted(row.pop("_red", set()) or [])
-        start = prev = None
-        for col in [*cols, None]:
-            if start is None:
+        for key, cell_format in (("_red", red_format), ("_yellow", yellow_format)):
+            cols = sorted(row.pop(key, set()) or [])
+            start = prev = None
+            for col in [*cols, None]:
+                if start is None:
+                    start = prev = col
+                    continue
+                if col is not None and col == prev + 1:
+                    prev = col
+                    continue
+                formats.append({
+                    "range": f"{rowcol_to_a1(row_no, start)}:{rowcol_to_a1(row_no, prev)}",
+                    "format": cell_format,
+                })
                 start = prev = col
-                continue
-            if col is not None and col == prev + 1:
-                prev = col
-                continue
-            formats.append({
-                "range": f"{rowcol_to_a1(row_no, start)}:{rowcol_to_a1(row_no, prev)}",
-                "format": red_format,
-            })
-            start = prev = col
     if formats:
         try:
             worksheet.batch_format(formats)
-            print(f"[SHEET] 검토필요 수기전용(빨강) 표시: {len(formats)}구간", file=sys.stderr)
+            print(f"[SHEET] 검토필요 색 표시(빨강=수기전용·노랑=0확인): {len(formats)}구간", file=sys.stderr)
         except Exception as exc:
-            print(f"[SHEET] 검토필요 빨간 표시 실패(무시): {exc}", file=sys.stderr)
+            print(f"[SHEET] 검토필요 색 표시 실패(무시): {exc}", file=sys.stderr)
     REVIEW_FILL_WRITTEN_PATH.write_text(
         json.dumps({"saved_at": today, "rows": snapshot}, ensure_ascii=False, indent=1), encoding="utf-8"
     )
@@ -2315,12 +2333,21 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         apply_qty = number(apply_tier.get("qty"))
         alloc_qty = number(event.get("final_qty") or event.get("planned_qty") or alloc_tier.get("qty"))
         total_alloc = sum(number(tier.get("qty")) for tier in item.get("commit_alloc") or [])
+
+        # 확정된 0(파싱·수기)은 "0"으로 표시해 미수집("")과 구분한다. zero_missing(0 추정)은 빈칸 유지.
+        def _qty_display(qty: int, tier: dict) -> object:
+            if qty:
+                return qty
+            if tier and str(tier.get("source") or "") != "zero_missing":
+                return 0
+            return ""
         event_id = str(event.get("event_id") or f"ipo:{item_key(item) if item else norm_name(name)}:{period}")
         status, reason = _event_validation(event) if event else ("정상" if apply_qty or alloc_qty else "확인필요", "" if apply_qty or alloc_qty else "기관 수량 미수집")
         visible = event.get("sheet_visible") != "N" and apply_tier.get("visible", True) is not False
         row_values = [
             event.get("manual_lock") == "Y" or str(apply_tier.get("source") or "") == "manual_fixed", visible,
-            name or event.get("name", ""), code or event.get("code", ""), period, apply_qty or "", alloc_qty or "",
+            name or event.get("name", ""), code or event.get("code", ""), period,
+            _qty_display(apply_qty, apply_tier), _qty_display(alloc_qty, alloc_tier),
             round(alloc_qty / apply_qty * 100, 2) if apply_qty and alloc_qty else "",
             round(alloc_qty / total_alloc * 100, 2) if total_alloc and alloc_qty else "",
             event.get("final_date") or event.get("planned_date") or "", status, reason,

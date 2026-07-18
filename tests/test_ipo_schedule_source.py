@@ -38,9 +38,14 @@ class IpoScheduleDemandTableTest(unittest.TestCase):
 
         _, apply = _parse_demand_tables(doc)
 
+        # 표에 없는 구간(15일)은 0 + zero_missing 표식으로 항상 5구간을 채운다
         self.assertEqual({row["period"]: row["qty"] for row in apply}, {
-            "6개월": 600, "3개월": 300, "1개월": 100, "미확약": 1000,
+            "6개월": 600, "3개월": 300, "1개월": 100, "15일": 0, "미확약": 1000,
         })
+        self.assertEqual(
+            [row["period"] for row in apply if row.get("source") == "zero_missing"],
+            ["15일"],
+        )
 
 
 class IpoScheduleResultReportGateTest(unittest.TestCase):
