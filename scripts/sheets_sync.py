@@ -1304,8 +1304,6 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     except Exception:
         parse_version = 1
     column_no = {header: index + 1 for index, header in enumerate(REVIEW_FILL_HEADERS)}
-    apply_cols = [column_no[f"신청_{period}"] for period in COMMIT_TIER_ORDER]
-    alloc_cols = [column_no[f"배정_{period}"] for period in COMMIT_TIER_ORDER]
 
     rows: list[dict[str, str]] = []
     snapshot: dict[str, dict[str, str]] = {}
@@ -1347,13 +1345,18 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             if not row.get(header):
                 row[header] = value
 
+        # 셀 단위 빨간 표시 — IPO기관 탭과 동일 기준. 영역이 일부 채워져 갭 판정을
+        # 통과해도, 마커가 있는 종목의 남은 빈 칸은 수기 전용이므로 계속 표시한다.
         red_cols: set[int] = set()
-        if "확약신청" in gaps and int(item.get("commit_apply_missing") or 0) >= parse_version:
-            red_cols.update(apply_cols)
+        if int(item.get("commit_apply_missing") or 0) >= parse_version:
+            red_cols.update(
+                column_no[f"신청_{period}"] for period in COMMIT_TIER_ORDER if not row.get(f"신청_{period}")
+            )
         if item.get("result_report_missing") and not item.get("report_rcp"):
-            if "확약배정" in gaps:
-                red_cols.update(alloc_cols)
-            if "개인청약경쟁률" in gaps:
+            red_cols.update(
+                column_no[f"배정_{period}"] for period in COMMIT_TIER_ORDER if not row.get(f"배정_{period}")
+            )
+            if not row.get("개인청약경쟁률"):
                 red_cols.add(column_no["개인청약경쟁률"])
         row["_red"] = red_cols
         rows.append(row)
