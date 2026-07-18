@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19 00:55",
+  "updated": "2026-07-19 02:27",
   "items": [
     {
       "corp_code": "00104069",
@@ -478,6 +478,11 @@
           "qty": 16495000,
           "locked": true,
           "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
         }
       },
       "commit_apply_missing": 3,
@@ -507,7 +512,8 @@
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
@@ -6613,6 +6619,11 @@
           "qty": 6049000,
           "locked": true,
           "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
         }
       },
       "band_low": 9000,
@@ -6690,7 +6701,8 @@
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
@@ -7364,7 +7376,8 @@
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
@@ -7382,7 +7395,8 @@
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20250428000707",
@@ -7390,6 +7404,16 @@
         "미확약": {
           "qty": 835238,
           "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": true,
           "visible": true
         }
       }
@@ -8065,32 +8089,36 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 684765,
+          "pct": 99.24,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 5235,
-          "pct": 100.0,
+          "pct": 0.76,
           "source": "IPO기관 락업"
         }
       ],
@@ -8130,7 +8158,29 @@
           "pct": 0.31,
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 684765,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "00404941",
@@ -8161,32 +8211,34 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1252179,
+          "pct": 50.46,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 27046,
+          "pct": 1.09,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 178437,
-          "pct": 14.84,
+          "pct": 7.19,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 556882,
-          "pct": 46.31,
+          "pct": 22.44,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 467206,
-          "pct": 38.85,
+          "pct": 18.83,
           "source": "IPO기관 락업"
         }
       ],
@@ -8256,7 +8308,19 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1252179,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 27046,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01458161",
@@ -8980,32 +9044,33 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1910177,
+          "pct": 88.59,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 1030,
-          "pct": 0.42,
+          "pct": 0.05,
           "source": "IPO기관 락업"
         },
         {
           "period": "1개월",
           "qty": 7000,
-          "pct": 2.85,
+          "pct": 0.32,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 204240,
-          "pct": 83.05,
+          "pct": 9.47,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 33640,
-          "pct": 13.68,
+          "pct": 1.56,
           "source": "IPO기관 락업"
         }
       ],
@@ -9047,7 +9112,14 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1910177,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01233465",
@@ -9106,32 +9178,36 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1442020,
+          "pct": 98.1,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 27980,
-          "pct": 100.0,
+          "pct": 1.9,
           "source": "IPO기관 락업"
         }
       ],
@@ -9171,7 +9247,29 @@
           "pct": 1.92,
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1442020,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01658831",
@@ -9994,32 +10092,36 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 600419,
+          "pct": 95.3,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 29581,
-          "pct": 100.0,
+          "pct": 4.7,
           "source": "IPO기관 락업"
         }
       ],
@@ -10059,7 +10161,29 @@
           "pct": 0.32,
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 600419,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01590528",
@@ -10134,7 +10258,7 @@
         {
           "period": "미확약",
           "qty": 898767,
-          "pct": 100.0,
+          "pct": 35.18,
           "source": "manual_temporary",
           "visible": true
         },
@@ -10142,25 +10266,29 @@
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 20054,
+          "pct": 0.78,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1636179,
+          "pct": 64.04,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20250117000237",
@@ -10168,6 +10296,26 @@
         "미확약": {
           "qty": 898767,
           "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 20054,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1636179,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": true,
           "visible": true
         }
       },
@@ -10628,33 +10776,37 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1328450,
+          "pct": 99.89,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 1400,
-          "pct": 100.0,
+          "pct": 0.11,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20241218000273",
@@ -10695,7 +10847,29 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1328450,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01632912",
@@ -10841,33 +11015,37 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1066630,
+          "pct": 99.94,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 620,
-          "pct": 100.0,
+          "pct": 0.06,
           "source": "IPO기관 락업"
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20241212000146",
@@ -10921,7 +11099,29 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1066630,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01519790",
@@ -11221,32 +11421,36 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 2231577,
+          "pct": 99.18,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 18423,
-          "pct": 100.0,
+          "pct": 0.82,
           "source": "IPO기관 락업"
         }
       ],
@@ -11286,7 +11490,29 @@
           "pct": 0.23,
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 2231577,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01207901",
@@ -11345,32 +11571,36 @@
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 654305,
+          "pct": 97.97,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 13570,
-          "pct": 100.0,
+          "pct": 2.03,
           "source": "IPO기관 락업"
         }
       ],
@@ -11410,7 +11640,29 @@
           "pct": 0.35,
           "visible": true
         }
-      ]
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 654305,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01563922",
@@ -11861,42 +12113,131 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 971926600,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 2188000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 58.41,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 896567,
+          "pct": 99.62,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 3433,
-          "pct": 100.0,
+          "pct": 0.38,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20241107000185",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 971926600,
+          "pct": 99.78,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 2188000,
+          "pct": 0.22,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 896567,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01703849",
@@ -11924,42 +12265,125 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 242143000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 59000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 1879000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 2.62,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 840990,
+          "pct": 99.23,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 2442,
-          "pct": 37.51,
+          "pct": 0.29,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 4068,
-          "pct": 62.49,
+          "pct": 0.48,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20241107000133",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 242143000,
+          "pct": 99.21,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 59000,
+          "pct": 0.02,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 1879000,
+          "pct": 0.77,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 840990,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01663116",
@@ -12079,7 +12503,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1449594500,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1905500,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 61000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 39.94,
       "commit_alloc": [
         {
@@ -12125,7 +12575,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1449594500,
+          "pct": 99.86,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 1905500,
+          "pct": 0.13,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 61000,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "00968607",
@@ -12273,7 +12760,7 @@
         {
           "period": "미확약",
           "qty": 515027,
-          "pct": 100.0,
+          "pct": 98.52,
           "source": "manual_temporary",
           "visible": true
         },
@@ -12281,25 +12768,29 @@
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 5017,
+          "pct": 0.96,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 2706,
+          "pct": 0.52,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20241029000394",
@@ -12319,6 +12810,26 @@
         "미확약": {
           "qty": 515027,
           "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 5017,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 2706,
+          "locked": true,
           "visible": true
         }
       }
@@ -12378,8 +12889,71 @@
       ],
       "report_rcp": "20241028000339",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1549780000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 7254000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 11928000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 3979000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 4161000,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1549780000,
+          "pct": 98.27,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 7254000,
+          "pct": 0.46,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 11928000,
+          "pct": 0.76,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 3979000,
+          "pct": 0.25,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 4161000,
+          "pct": 0.26,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01641600",
@@ -12623,7 +13197,33 @@
       "stock_code": "466100",
       "market": "코스닥",
       "listing_date": "2024-10-28",
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1967200700,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 1190000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 283000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 27335900,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_start": "2024-10-16",
       "sub_end": "2024-10-17",
       "payment_date": "2026-08-24",
@@ -12678,7 +13278,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1967200700,
+          "pct": 98.56,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 1190000,
+          "pct": 0.06,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 283000,
+          "pct": 0.01,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 27335900,
+          "pct": 1.37,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01270749",
@@ -12706,7 +13343,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1296108000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 67000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1126.51,
       "commit_alloc": [
         {
@@ -12767,7 +13430,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1296108000,
+          "pct": 99.99,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 67000,
+          "pct": 0.01,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01588189",
@@ -12980,7 +13680,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 23461000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 32000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 130.78,
       "commit_alloc": [
         {
@@ -13041,7 +13767,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 23461000,
+          "pct": 99.86,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 32000,
+          "pct": 0.14,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01284876",
@@ -13269,42 +14032,119 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1375121000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 6404000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 14213000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 59647000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 49806000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1065.46,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1135622,
+          "pct": 79.23,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 3864,
+          "pct": 0.27,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 14717,
-          "pct": 5.01,
+          "pct": 1.03,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 188746,
-          "pct": 64.25,
+          "pct": 13.17,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 90301,
-          "pct": 30.74,
+          "pct": 6.3,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20241011000490",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1375121000,
+          "pct": 91.36,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 6404000,
+          "pct": 0.43,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 14213000,
+          "pct": 0.94,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 59647000,
+          "pct": 3.96,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 49806000,
+          "pct": 3.31,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1135622,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 3864,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01293485",
@@ -13419,42 +14259,119 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 2437146000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 100000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 933000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 72410000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 10694000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1965.04,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1904473,
+          "pct": 87.08,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 610,
+          "pct": 0.03,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 4140,
-          "pct": 1.47,
+          "pct": 0.19,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 237855,
-          "pct": 84.37,
+          "pct": 10.88,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 39922,
-          "pct": 14.16,
+          "pct": 1.83,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20240912000065",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 2437146000,
+          "pct": 96.66,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 100000,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 933000,
+          "pct": 0.04,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 72410000,
+          "pct": 2.87,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 10694000,
+          "pct": 0.42,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1904473,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 610,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "00657224",
@@ -13482,7 +14399,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 51483780,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 1000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 2353000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 12.89,
       "commit_alloc": [
         {
@@ -13528,7 +14471,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 51483780,
+          "pct": 95.63,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 1000,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 2353000,
+          "pct": 4.37,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01544468",
@@ -13823,7 +14803,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 248615000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 2581000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 34.28,
       "commit_alloc": [
         {
@@ -13884,7 +14890,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 248615000,
+          "pct": 98.97,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 2581000,
+          "pct": 1.03,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01385050",
@@ -13911,7 +14954,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 251395000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 1703000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 189000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 3714000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 65.83,
       "commit_alloc": [
         {
@@ -13951,7 +15020,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 251395000,
+          "pct": 97.82,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 1703000,
+          "pct": 0.66,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 189000,
+          "pct": 0.07,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 3714000,
+          "pct": 1.45,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "00372129",
@@ -13979,42 +15085,113 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1343399000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 3027000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 34849000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 51565000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 40087000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1304.72,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 1565645,
+          "pct": 75.34,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 23852,
-          "pct": 4.65,
+          "pct": 1.15,
           "source": "IPO기관 락업"
         },
         {
           "period": "1개월",
           "qty": 86507,
-          "pct": 16.88,
+          "pct": 4.16,
           "source": "IPO기관 락업"
         },
         {
           "period": "3개월",
           "qty": 205029,
-          "pct": 40.0,
+          "pct": 9.87,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 197142,
-          "pct": 38.46,
+          "pct": 9.49,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20240813001336",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1343399000,
+          "pct": 91.21,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 3027000,
+          "pct": 0.21,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 34849000,
+          "pct": 2.37,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 51565000,
+          "pct": 3.5,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 40087000,
+          "pct": 2.72,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1565645,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "00407294",
@@ -14041,7 +15218,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 572655000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 1483000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1695000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1080.44,
       "commit_alloc": [
         {
@@ -14088,7 +15291,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 572655000,
+          "pct": 99.45,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 1483000,
+          "pct": 0.26,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 1695000,
+          "pct": 0.29,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01138595",
@@ -14116,42 +15356,125 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 161031500,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 184000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 2307200,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 239.19,
       "commit_alloc": [
         {
           "period": "미확약",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
+          "qty": 937710,
+          "pct": 89.31,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 85900,
-          "pct": 76.5,
+          "pct": 8.18,
           "source": "IPO기관 락업"
         },
         {
           "period": "6개월",
           "qty": 26390,
-          "pct": 23.5,
+          "pct": 2.51,
           "source": "IPO기관 락업"
         }
       ],
       "report_rcp": "20240806000025",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 161031500,
+          "pct": 98.48,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 184000,
+          "pct": 0.11,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 2307200,
+          "pct": 1.41,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 937710,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01678312",
@@ -14179,7 +15502,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1686450907,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 405000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 1084000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1163000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 5673000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 1094.66,
       "commit_alloc": [
         {
@@ -14209,7 +15558,44 @@
         }
       ],
       "report_rcp": "20240730000095",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1686450907,
+          "pct": 99.51,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 405000,
+          "pct": 0.02,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 1084000,
+          "pct": 0.06,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 1163000,
+          "pct": 0.07,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 5673000,
+          "pct": 0.33,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01419205",
@@ -14222,7 +15608,33 @@
       "stock_code": "460940",
       "market": "코스닥",
       "listing_date": "2024-07-31",
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 942517000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 3556000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 52337000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "ipo_parse_version": 3,
@@ -14285,7 +15697,44 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 942517000,
+          "pct": 94.4,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 3556000,
+          "pct": 0.36,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 52337000,
+          "pct": 5.24,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "00366438",
@@ -14313,7 +15762,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 996961000,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 19804000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 252066000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 402763000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 58338000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 507.71,
       "commit_alloc": [
         {
@@ -14343,7 +15818,44 @@
         }
       ],
       "report_rcp": "20240723000042",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 996961000,
+          "pct": 57.63,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 19804000,
+          "pct": 1.14,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 252066000,
+          "pct": 14.57,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 402763000,
+          "pct": 23.28,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 58338000,
+          "pct": 3.37,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     },
     {
       "corp_code": "01492217",
@@ -14367,7 +15879,43 @@
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1.01,
-      "commit_alloc": [],
+      "commit_alloc": [
+        {
+          "period": "미확약",
+          "qty": 1078053,
+          "pct": 90.75,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 1418,
+          "pct": 0.12,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 11612,
+          "pct": 0.98,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 88034,
+          "pct": 7.41,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 8783,
+          "pct": 0.74,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
       "report_rcp": "20240708000389",
       "corp_verified": true,
       "band_low": 6200,
@@ -14376,7 +15924,98 @@
       "forecast_end": "2024-06-28",
       "offer_shares": 1618000,
       "demand_ratio": 1233.8,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1399707000,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 2836000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 7255000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 40552000,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 15280000,
+          "locked": true,
+          "visible": true
+        }
+      },
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 1399707000,
+          "pct": 95.5,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 2836000,
+          "pct": 0.19,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 7255000,
+          "pct": 0.5,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 40552000,
+          "pct": 2.77,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 15280000,
+          "pct": 1.04,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1078053,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 1418,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 11612,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 88034,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 8783,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01384787",
@@ -14404,7 +16043,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 823338355,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 30766308,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 126408000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 183497000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 64545000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "sub_ratio": 341.24,
       "commit_alloc": [
         {
@@ -14434,1314 +16099,47 @@
         }
       ],
       "report_rcp": "20240705000569",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 823338355,
+          "pct": 67.02,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 30766308,
+          "pct": 2.5,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 126408000,
+          "pct": 10.29,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 183497000,
+          "pct": 14.94,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 64545000,
+          "pct": 5.25,
+          "source": "manual_fixed",
+          "visible": true
+        }
+      ]
     }
   ],
   "history": [
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "band",
-      "old": "",
-      "new": "20,000 ~ 24,000"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "offer_shares",
-      "old": "",
-      "new": "2600000"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "forecast",
-      "old": "",
-      "new": "2024-09-30 ~ 2024-10-08"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "subscription",
-      "old": "",
-      "new": "2024-10-15 ~ 2024-10-16"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "demand_ratio",
-      "old": "",
-      "new": "577.59"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "sub_ratio",
-      "old": "",
-      "new": "425.73"
-    },
-    {
-      "date": "2026-07-17",
-      "name": "씨메스로보틱스",
-      "type": "수기변경",
-      "field": "underwriter",
-      "old": "",
-      "new": "삼성증권·유진투자증권"
-    },
-    {
-      "date": "2026-07-15",
-      "name": "씨메스로보틱스",
-      "type": "상장확인(KRX)",
-      "field": "상장일",
-      "old": "미정",
-      "new": "2024-10-24"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1728579000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "99551000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "12379000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "16495000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1520725400"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "373459300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "80282100"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "98751200"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "21211700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "793089045"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "320872528"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "152237492"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "180918700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "55070000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1364455385"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "51947000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "13416000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "1753000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "16"
-    },
-    {
-      "date": "2026-07-15",
-      "name": "씨메스로보틱스",
-      "type": "상장확인(KRX)",
-      "field": "상장일",
-      "old": "미정",
-      "new": "2024-10-24"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "424792100"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "187656900"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "329977100"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "604188300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "399346300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "채비",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "348597580"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "채비",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "1001500"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "채비",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "391000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "채비",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "96000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "채비",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "22724000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "액스비스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "471230000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "액스비스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "274085000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "액스비스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "430390000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "액스비스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "536600000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "액스비스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "226962000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "세미파이브",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "992111001"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "세미파이브",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "243855149"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "세미파이브",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "266945334"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "세미파이브",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "142320800"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "세미파이브",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "124182800"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "레몬헬스케어",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "매드업",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "져스텍",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "피스피스스튜디오",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "리브스메드",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "341632182"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "리브스메드",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "36169105"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "리브스메드",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "9204300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "리브스메드",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "7567300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "리브스메드",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "17608700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "삼진식품",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1152920000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "삼진식품",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "615210000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "삼진식품",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "87675000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "삼진식품",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "82715000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "삼진식품",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "17291000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "337248114"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "101890700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "151689200"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "313678900"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "407055481"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "나라스페이스테크놀로지",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1071312318"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "나라스페이스테크놀로지",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "55471000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "나라스페이스테크놀로지",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "615000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "나라스페이스테크놀로지",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "6421000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "나라스페이스테크놀로지",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "191000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아크릴",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "605068000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아크릴",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "372994000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아크릴",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "132972000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아크릴",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "102867000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아크릴",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "66700000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1500254800"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "709130300"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "561757400"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "343675500"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "105836800"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "offer_shares",
-      "old": "",
-      "new": "5000000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "2176894623"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "165495000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "52934000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "12101000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "16510000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "835587000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "383090000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "585050000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "680210000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "756686000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1011819000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "832828000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "344206000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "179031000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "41835000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "160126600"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "84445200"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "73048900"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "147047500"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "102471600"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "더핑크퐁컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "642809100"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "더핑크퐁컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "171569800"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "더핑크퐁컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "71882200"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "더핑크퐁컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "12780700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "더핑크퐁컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "24787200"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "622374000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "440737000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "181769000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "134186000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "36512000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "노타",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "931590600"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "노타",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "699947100"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "노타",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "328712700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "노타",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "252733700"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "노타",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "101297000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1017917000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "138196000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "91190000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "61305000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "10891000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "그래피",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "248635000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "4412230000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "39481000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "35162000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "160689000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "37430000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "989964000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "4479000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "7982000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "35843000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "6837000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "3117558000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "26875000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "81383000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "136030000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "23424000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1625365961"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "9456000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "1539000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "6049000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "인투셀",
-      "type": "수기변경(검토필요)",
-      "field": "demand_ratio",
-      "old": "",
-      "new": "1151.5"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "바이오비쥬",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "2068634000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "바이오비쥬",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "44372000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "바이오비쥬",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "49655000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "바이오비쥬",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "161432000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "바이오비쥬",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "39499000"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "마키나락스",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
     {
       "date": "2026-07-18",
       "name": "마키나락스",
@@ -18437,6 +18835,1310 @@
       "field": "배정_6개월",
       "old": "",
       "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "레몬헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "지씨지놈",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "로킷헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "로킷헬스케어",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "심플랫폼",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "684765"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "심플랫폼",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "심플랫폼",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "심플랫폼",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "한텍",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1252179"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "한텍",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "27046"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "모티브링크",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1910177"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "동국생명과학",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1442020"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "동국생명과학",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "동국생명과학",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "동국생명과학",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "와이즈넛",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "600419"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "와이즈넛",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "와이즈넛",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "와이즈넛",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아스테라시스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아스테라시스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "20054"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아스테라시스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "1636179"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아스테라시스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "쓰리에이로직스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1328450"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "쓰리에이로직스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "쓰리에이로직스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "쓰리에이로직스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "온코크로스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1066630"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "온코크로스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "온코크로스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "온코크로스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "위츠",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "2231577"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "위츠",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "위츠",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "위츠",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "사이냅소프트",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "654305"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "사이냅소프트",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "사이냅소프트",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "사이냅소프트",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "971926600"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "2188000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "896567"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "닷밀",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "242143000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "59000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "1879000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "840990"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "노머스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "토모큐브",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1449594500"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "토모큐브",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "토모큐브",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "토모큐브",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "1905500"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "토모큐브",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "61000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "에이치이엠파마",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "에이치이엠파마",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "에이치이엠파마",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "5017"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "에이치이엠파마",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "2706"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "탑런토탈솔루션",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1549780000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "탑런토탈솔루션",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "7254000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "탑런토탈솔루션",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "11928000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "탑런토탈솔루션",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "3979000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "탑런토탈솔루션",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "4161000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "클로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1967200700"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "클로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "1190000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "클로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "283000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "클로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "클로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "27335900"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "웨이비스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1296108000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "웨이비스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "웨이비스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "웨이비스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "웨이비스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "67000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "루미르",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "23461000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "루미르",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "32000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "루미르",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "루미르",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "루미르",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1375121000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "6404000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "14213000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "59647000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "49806000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1135622"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "셀비온",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "3864"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "2437146000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "100000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "933000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "72410000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "10694000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1904473"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이언디바이스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "610"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이스크림미디어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "51483780"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이스크림미디어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "1000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이스크림미디어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이스크림미디어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이스크림미디어",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "2353000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "케이쓰리아이",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "248615000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "케이쓰리아이",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "케이쓰리아이",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "케이쓰리아이",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "케이쓰리아이",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "2581000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "넥스트바이오메디컬",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "251395000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "넥스트바이오메디컬",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "넥스트바이오메디컬",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "1703000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "넥스트바이오메디컬",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "189000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "넥스트바이오메디컬",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "3714000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1343399000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "3027000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "34849000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "51565000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "40087000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "전진건설로봇",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1565645"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "유라클",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "572655000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "유라클",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "유라클",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "1483000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "유라클",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "1695000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "유라클",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "161031500"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "184000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "2307200"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "937710"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "뱅크웨어글로벌",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이빔테크놀로지",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1686450907"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이빔테크놀로지",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "405000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이빔테크놀로지",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "1084000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이빔테크놀로지",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "1163000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "아이빔테크놀로지",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "5673000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "피앤에스미캐닉스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "942517000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "피앤에스미캐닉스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "피앤에스미캐닉스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "3556000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "피앤에스미캐닉스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "52337000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "피앤에스미캐닉스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "산일전기",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "996961000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "산일전기",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "19804000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "산일전기",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "252066000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "산일전기",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "402763000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "산일전기",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "58338000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "1399707000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "2836000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "7255000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "40552000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "15280000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "1078053"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "1418"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "11612"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "88034"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "엑셀세라퓨틱스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "8783"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "시프트업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "823338355"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "시프트업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "30766308"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "시프트업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "126408000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "시프트업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "183497000"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "시프트업",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "64545000"
     }
   ],
   "seed_pending": [],
