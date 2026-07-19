@@ -897,7 +897,9 @@ def refresh_ipo_schedule(
             }
             for period, raw in manual.items():
                 value = dict(raw or {})
-                if value.get("locked") or period not in official:
+                # 0 추정(zero_missing) 자리는 임시 수기라도 확정값이 낫다 — 덮는다
+                replaceable = period not in official or str(official[period].get("source") or "") == "zero_missing"
+                if value.get("locked") or replaceable:
                     official[period] = {
                         "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
                         "source": "manual_fixed" if value.get("locked") else "manual_temporary",

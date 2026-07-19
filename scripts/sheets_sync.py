@@ -1028,7 +1028,9 @@ def _merge_manual_commit(item: dict, field: str, manual: dict) -> None:
     }
     for period, raw in manual.items():
         value = dict(raw or {})
-        if value.get("locked") or period not in official:
+        # 0 추정(zero_missing) 자리는 임시 수기라도 확정값이 낫다 — 덮는다
+        replaceable = period not in official or str(official[period].get("source") or "") == "zero_missing"
+        if value.get("locked") or replaceable:
             official[period] = {
                 "period": period, "qty": int(value.get("qty") or 0), "pct": 0,
                 "source": "manual_fixed" if value.get("locked") else "manual_temporary",
@@ -2155,6 +2157,14 @@ def _push_simple_table(
     values = [headers] + rows
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 30, len(headers))
     worksheet.clear()
+    # clear()는 값만 지우고 서식은 남긴다 — 이전 회차의 빨간 표시가 값이 채워진 뒤에도
+    # 잔재로 남던 원인. 매 재작성마다 서식을 통째로 초기화한다 (헤더·색은 아래서 재적용).
+    try:
+        spreadsheet.batch_update({"requests": [{
+            "repeatCell": {"range": {"sheetId": worksheet.id}, "fields": "userEnteredFormat"}
+        }]})
+    except Exception as exc:
+        print(f"[SHEET] {title} 서식 초기화 실패(무시): {exc}", file=sys.stderr)
     worksheet.update(values, "A1", value_input_option="USER_ENTERED")
     worksheet.freeze(rows=1, cols=min(2, len(headers)))
     worksheet.set_basic_filter(f"A1:{rowcol_to_a1(max(len(values), 1), len(headers))}")
@@ -2356,9 +2366,12 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         ipo_rows.append(row_values)
         ipo_state[event_id] = dict(zip(IPO_INSTITUTION_HEADERS, [str(value) for value in row_values]))
         row_no = len(ipo_rows) + 1  # 헤더 다음부터
-        if not apply_qty and int(item.get("commit_apply_missing") or 0) >= _parse_version:
+        # 확정된 0(구간 값이 파싱·수기로 존재)은 빨간 대상이 아니다 — 미수집만 칠한다
+        apply_confirmed = bool(apply_tier) and str(apply_tier.get("source") or "") != "zero_missing"
+        alloc_confirmed = bool(event) or (bool(alloc_tier) and str(alloc_tier.get("source") or "") != "zero_missing")
+        if not apply_qty and not apply_confirmed and int(item.get("commit_apply_missing") or 0) >= _parse_version:
             ipo_red_cells.append((row_no, apply_col))
-        if not alloc_qty and item.get("result_report_missing") and not item.get("report_rcp"):
+        if not alloc_qty and not alloc_confirmed and item.get("result_report_missing") and not item.get("report_rcp"):
             ipo_red_cells.append((row_no, alloc_col))
 
     holder_rows: list[list[object]] = []
