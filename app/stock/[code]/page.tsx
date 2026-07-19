@@ -80,7 +80,8 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
         </span>
         <h1 className="mt-3 text-[28px] font-bold leading-tight">{stock.name} 락업 해제 일정</h1>
         <p className="mt-1.5 text-sm text-gray-500">
-          상장일 {stock.listing_date} · 상장주식수 {stock.shares.toLocaleString("ko-KR")}주
+          상장일 {stock.listing_date} · 공모가{" "}
+          {stock.ipo_price ? `${stock.ipo_price.toLocaleString("ko-KR")}원` : "미확인"}
         </p>
       </div>
       <StockEventSections
