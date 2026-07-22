@@ -30,7 +30,9 @@ LOOKBACK_DAYS = 210
 BACKFILL_LOOKBACK_DAYS = 1825
 # 백필은 종목당 문서 3~5건을 내려받는 무거운 작업이라 배치당 처리 수를 제한한다.
 # 완료된 종목은 ipo_parse_version/report_rcp로 스킵되므로 며칠에 걸쳐 자연 소화된다.
-MAX_BACKFILL_PER_RUN = 10**9
+# (2026-07-16 0626dd7에서 실수로 10**9로 풀려 상한이 사라졌고, 이로 인해 2026-07-21
+#  배치가 timeout-minutes: 360을 꽉 채우고 강제 취소됨 — backfill_all 외에는 반드시 유한값 유지)
+MAX_BACKFILL_PER_RUN = 25
 # 종목당 신고서 다운로드 상한 — 정정이 많아도 최신 몇 건이면 전 필드가 채워진다.
 MAX_DOCS_PER_CORP = 4
 
