@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-21 13:17",
+  "updated": "2026-07-22 10:59",
   "items": [
     {
       "corp_code": "00104069",
@@ -151,31 +151,6 @@
       "commit_apply_missing": 3
     },
     {
-      "corp_code": "01722066",
-      "name": "빅웨이브로보틱스",
-      "first_filing_date": "20260504",
-      "last_rcept_no": "20260701000455",
-      "band_low": 20000,
-      "band_high": 24000,
-      "forecast_start": "2026-07-27",
-      "forecast_end": "2026-07-31",
-      "sub_start": "2026-08-05",
-      "sub_end": "2026-08-06",
-      "payment_date": "2026-08-10",
-      "underwriter": "유진투자증권·미래에셋증권",
-      "market": "코스닥",
-      "offer_shares": 200000,
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 3,
-      "schedule_hidden": false,
-      "commit_apply_missing": 3
-    },
-    {
       "corp_code": "00229085",
       "name": "기도산업",
       "first_filing_date": "20260626",
@@ -204,7 +179,7 @@
       "corp_code": "01588897",
       "name": "니어스랩",
       "first_filing_date": "20260625",
-      "last_rcept_no": "20260714000417",
+      "last_rcept_no": "20260721000296",
       "band_low": 30000,
       "band_high": 41200,
       "forecast_start": "2026-08-03",
@@ -248,6 +223,31 @@
       "ipo_parse_version": 3,
       "schedule_hidden": false,
       "payment_date": "2026-08-11",
+      "commit_apply_missing": 3
+    },
+    {
+      "corp_code": "01722066",
+      "name": "빅웨이브로보틱스",
+      "first_filing_date": "20260504",
+      "last_rcept_no": "20260721001344",
+      "band_low": 20000,
+      "band_high": 24000,
+      "forecast_start": "2026-08-04",
+      "forecast_end": "2026-08-10",
+      "sub_start": "2026-08-13",
+      "sub_end": "2026-08-14",
+      "payment_date": "2026-08-19",
+      "underwriter": "유진투자증권·미래에셋증권",
+      "market": "코스닥",
+      "offer_shares": 2000000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "schedule_hidden": false,
       "commit_apply_missing": 3
     },
     {
@@ -311,246 +311,6 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -16460,38 +16220,6 @@
   "history": [
     {
       "date": "2026-07-18",
-      "name": "씨엠티엑스",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "아로마티카",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
       "name": "아로마티카",
       "type": "고정변경",
       "field": "ipo:6개월",
@@ -20457,6 +20185,38 @@
       "field": "ipo:3개월",
       "old": "N",
       "new": "Y"
+    },
+    {
+      "date": "2026-07-22",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-07-27",
+      "new": "2026-08-04"
+    },
+    {
+      "date": "2026-07-22",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-07-31",
+      "new": "2026-08-10"
+    },
+    {
+      "date": "2026-07-22",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-05",
+      "new": "2026-08-13"
+    },
+    {
+      "date": "2026-07-22",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-08-06",
+      "new": "2026-08-14"
     }
   ],
   "seed_pending": [],
@@ -20465,13 +20225,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-21",
+      "excluded_at": "2026-07-22",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-21",
+      "excluded_at": "2026-07-22",
       "memo": "운영자 삭제 요청 이관"
     }
   }
