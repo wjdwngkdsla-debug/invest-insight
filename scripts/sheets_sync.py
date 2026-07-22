@@ -2190,6 +2190,20 @@ def _event_validation(row: dict) -> tuple[str, str]:
     return "정상", ""
 
 
+def _apply_below_alloc_all_tiers(item: dict) -> bool:
+    """신청물량이 5개 확약구간 전부에서 배정물량보다 낮으면 파싱/입력 오류로 본다.
+
+    한 구간만 낮은 건 소량 신청 등으로 흔히 있을 수 있어 애매하지만, 5개 전부가
+    낮은 건 신청물량 자체가 잘못 채워졌다는 강한 신호다(배정은 신청 범위를 못 넘음).
+    (에스팀 사례: 신청 27/123/141/709/1263 vs 배정 96826/254618/185497/582582/230477)
+    """
+    applies = {str(t.get("period") or ""): number(t.get("qty")) for t in item.get("commit_apply") or [] if isinstance(t, dict)}
+    allocs = {str(t.get("period") or ""): number(t.get("qty")) for t in item.get("commit_alloc") or [] if isinstance(t, dict)}
+    if not all(period in applies and period in allocs for period in COMMIT_TIER_ORDER):
+        return False
+    return all(allocs[period] > 0 and applies[period] < allocs[period] for period in COMMIT_TIER_ORDER)
+
+
 def _management_stats(admin_rows: list[dict]) -> dict[str, dict]:
     stats: dict[str, dict] = {}
     for row in admin_rows:
@@ -2328,11 +2342,14 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
     alloc_col = IPO_INSTITUTION_HEADERS.index("배정물량") + 1
     ipo_red_cells: list[tuple[int, int]] = []
     keys: set[tuple[str, str, str]] = set()
+    apply_below_alloc_flagged: set[str] = set()
     for item in items:
         code, name = str(item.get("stock_code") or ""), str(item.get("name") or "")
         for tier in list(item.get("commit_apply") or []) + list(item.get("commit_alloc") or []):
             if isinstance(tier, dict) and tier.get("period"):
                 keys.add((code, name, str(tier["period"])))
+        if _apply_below_alloc_all_tiers(item):
+            apply_below_alloc_flagged.add(item_key(item))
     for row in ipo_admin:
         keys.add((str(row.get("code") or ""), str(row.get("name") or ""), str(row.get("period") or "")))
     for code, name, period in sorted(keys, key=lambda value: (value[1], _period_order(value[2]))):
@@ -2353,6 +2370,13 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             return ""
         event_id = str(event.get("event_id") or f"ipo:{item_key(item) if item else norm_name(name)}:{period}")
         status, reason = _event_validation(event) if event else ("정상" if apply_qty or alloc_qty else "확인필요", "" if apply_qty or alloc_qty else "기관 수량 미수집")
+        if (
+            item
+            and item_key(item) in apply_below_alloc_flagged
+            and not apply_tier.get("locked")
+            and event.get("manual_lock") != "Y"
+        ):
+            status, reason = "확인필요", "신청물량이 5개 구간 전부 배정물량보다 낮음 — 신청물량 확인 필요"
         visible = event.get("sheet_visible") != "N" and apply_tier.get("visible", True) is not False
         row_values = [
             event.get("manual_lock") == "Y" or str(apply_tier.get("source") or "") == "manual_fixed", visible,
