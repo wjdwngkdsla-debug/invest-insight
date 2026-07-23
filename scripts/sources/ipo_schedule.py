@@ -273,6 +273,21 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
     """수요예측 경쟁률 + 기간별 확약 '신청' 내역 — [발행조건확정] 신고서의 결과 표."""
     demand_ratio = 0.0
     commit_apply: list[dict[str, Any]] = []
+
+    def total_quantity(row: list[str]) -> int:
+        """확약 행의 합계 수량을 찾는다.
+
+        일부 DART 표는 마지막 합계 신청가격을 "-"로 비워 둔다. 기존 로직은 숫자
+        셀만 모은 뒤 끝에서 두 번째 값을 골라 이 경우 합계 건수를 수량으로 오인했다.
+        마지막 셀이 숫자면 [건수, 수량, 가격]의 수량, 비어 있으면 [건수, 수량]의
+        마지막 값을 사용한다.
+        """
+        nums = [cell for cell in row if re.fullmatch(r"[\d,]{2,}", cell)]
+        if len(nums) < 2:
+            return 0
+        last_cell_is_number = bool(row and re.fullmatch(r"[\d,]{2,}", row[-1]))
+        return _to_int(nums[-2] if last_cell_is_number else nums[-1])
+
     for table in _tables(doc):
         txt = _clean_text(table)
         rows = _rows(table)
@@ -303,9 +318,9 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                 if tier:
                     # 구간 행이 표에 있는데 값이 전부 "-" = 확정된 0. 기록해서
                     # 사이트의 '미정'(미수집)과 구분한다 (토모큐브 1개월·15일 케이스)
-                    tiers[tier] = _to_int(nums[-2]) if len(nums) >= 2 else 0
+                    tiers[tier] = total_quantity(r)
                 elif "합계" in label and len(nums) >= 2:
-                    total = _to_int(nums[-2])
+                    total = total_quantity(r)
             if total and len(tiers) >= 3:
                 # 모든 종목은 5구간(미확약·15일·1개월·3개월·6개월)을 갖는다.
                 # 표에 행 자체가 없는 구간은 0으로 간주하되 zero_missing 표식을 남겨
@@ -317,6 +332,24 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                     else:
                         commit_apply.append({"period": t, "qty": 0, "pct": 0.0, "source": "zero_missing"})
     return demand_ratio, commit_apply
+
+
+def _commit_apply_below_alloc_all_tiers(item: dict[str, Any]) -> bool:
+    """5개 구간 신청수량이 모두 배정수량보다 작으면 건수 오인 파싱으로 본다."""
+    periods = TIER_LABELS + ["미확약"]
+    applies = {
+        str(tier.get("period") or ""): _to_int(str(tier.get("qty") or "0"))
+        for tier in item.get("commit_apply") or []
+        if isinstance(tier, dict)
+    }
+    allocs = {
+        str(tier.get("period") or ""): _to_int(str(tier.get("qty") or "0"))
+        for tier in item.get("commit_alloc") or []
+        if isinstance(tier, dict)
+    }
+    if not all(period in applies and period in allocs for period in periods):
+        return False
+    return all(allocs[period] > 0 and applies[period] < allocs[period] for period in periods)
 
 
 def _parse_ipo_intent(plain: str) -> bool:
@@ -942,6 +975,7 @@ def refresh_ipo_schedule(
             and int(old.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION
             and not needs_temporary_commit_check
             and not _needs_offering_backfill(old)
+            and not _commit_apply_below_alloc_all_tiers(old)
         ):
             return apply_manual_commit_values(old)  # 새 공시 없음 → 문서 재다운로드 생략
 
@@ -1103,6 +1137,7 @@ def refresh_ipo_schedule(
             not bool((value or {}).get("locked"))
             for value in dict(archived.get("manual_commit_apply") or {}).values()
         )
+        suspicious_commit_apply = _commit_apply_below_alloc_all_tiers(archived)
 
         # corp_code 검증·교정 — 백필 초기에 이름 매칭으로 등록된 항목은 DART 동명
         # 비상장사(공시 0건)를 잡았을 수 있고, manual-* 스텁은 DART 등록명이 달라
@@ -1141,6 +1176,7 @@ def refresh_ipo_schedule(
         needs_filing = (
             _needs_offering_backfill(archived)
             or has_temporary_commit_apply
+            or suspicious_commit_apply
             or (
                 not has_official_commit_apply
                 and int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
@@ -1157,7 +1193,7 @@ def refresh_ipo_schedule(
                 if corp_filings:
                     heavy_budget["left"] -= 1
                     source_item = dict(archived)
-                    if has_temporary_commit_apply:
+                    if has_temporary_commit_apply or suspicious_commit_apply:
                         source_item["ipo_parse_version"] = 0
                     refreshed = process_corp(
                         corp_code,

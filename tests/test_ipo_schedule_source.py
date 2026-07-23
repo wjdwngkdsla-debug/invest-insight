@@ -47,6 +47,35 @@ class IpoScheduleDemandTableTest(unittest.TestCase):
             ["15일"],
         )
 
+    def test_blank_total_price_uses_quantity_not_application_count(self) -> None:
+        from scripts.sources.ipo_schedule import _parse_demand_tables
+
+        doc = """
+        <TABLE>
+          <TR><TD>구분</TD><TD>합계</TD><TD>합계</TD><TD>합계</TD></TR>
+          <TR><TD>구분</TD><TD>건수</TD><TD>수량</TD><TD>신청가격</TD></TR>
+          <TR><TD>6개월 확약</TD><TD>27</TD><TD>21,416,000</TD><TD>-</TD></TR>
+          <TR><TD>3개월 확약</TD><TD>123</TD><TD>104,590,000</TD><TD>-</TD></TR>
+          <TR><TD>1개월 확약</TD><TD>141</TD><TD>128,590,000</TD><TD>-</TD></TR>
+          <TR><TD>15일 확약</TD><TD>709</TD><TD>510,453,800</TD><TD>-</TD></TR>
+          <TR><TD>미확약</TD><TD>1,263</TD><TD>1,037,075,200</TD><TD>-</TD></TR>
+          <TR><TD>합계</TD><TD>2,263</TD><TD>1,802,125,000</TD><TD>8,457</TD></TR>
+        </TABLE>
+        """
+
+        _, apply = _parse_demand_tables(doc)
+
+        self.assertEqual(
+            {row["period"]: row["qty"] for row in apply},
+            {
+                "6개월": 21_416_000,
+                "3개월": 104_590_000,
+                "1개월": 128_590_000,
+                "15일": 510_453_800,
+                "미확약": 1_037_075_200,
+            },
+        )
+
 
 class IpoScheduleResultReportGateTest(unittest.TestCase):
     @classmethod

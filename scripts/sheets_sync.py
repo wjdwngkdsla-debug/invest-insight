@@ -1081,6 +1081,8 @@ def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
         gaps.append("확약배정")
     elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
         gaps.append("확약배정 0확인")
+    if _apply_below_alloc_all_tiers(item):
+        gaps.append("확약신청 오류(신청건수 오인 의심)")
     if not has_float_rows:
         gaps.append("구주물량")
     return gaps

@@ -19,7 +19,12 @@ if "gspread" not in sys.modules:
         sys.modules["gspread.utils"] = gspread_utils_stub
 
 
-from scripts.sheets_sync import OBSOLETE_TABS, cleanup_obsolete_tabs, _review_pending_ranges
+from scripts.sheets_sync import (
+    OBSOLETE_TABS,
+    _review_fill_gaps,
+    cleanup_obsolete_tabs,
+    _review_pending_ranges,
+)
 
 
 class _Worksheet:
@@ -66,6 +71,30 @@ class SheetTabCleanupTest(unittest.TestCase):
         ]
 
         self.assertEqual(_review_pending_ranges(rows), [(1, 3), (4, 5)])
+
+    def test_all_application_tiers_below_allocation_appear_in_review_tab(self):
+        periods = ["미확약", "15일", "1개월", "3개월", "6개월"]
+        item = {
+            "market": "코스닥",
+            "final_price": 10000,
+            "band_low": 9000,
+            "band_high": 11000,
+            "offer_shares": 1_000_000,
+            "underwriter": "테스트증권",
+            "forecast_start": "2026-01-01",
+            "forecast_end": "2026-01-02",
+            "sub_start": "2026-01-10",
+            "sub_end": "2026-01-11",
+            "demand_ratio": 100,
+            "sub_ratio": 500,
+            "commit_apply": [{"period": period, "qty": index + 1} for index, period in enumerate(periods)],
+            "commit_alloc": [{"period": period, "qty": 100 + index} for index, period in enumerate(periods)],
+        }
+
+        self.assertIn(
+            "확약신청 오류(신청건수 오인 의심)",
+            _review_fill_gaps(item, has_float_rows=True),
+        )
 
 
 if __name__ == "__main__":
