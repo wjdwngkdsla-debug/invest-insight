@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23 13:16",
+  "updated": "2026-07-23 15:33",
   "items": [
     {
       "corp_code": "00104069",
@@ -5866,7 +5866,33 @@
       "stock_code": "468530",
       "market": "코스닥",
       "listing_date": "2025-07-29",
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 1211729000,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 34690000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 22760000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 39900000,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 9626000,
+          "locked": true,
+          "visible": true
+        }
+      },
       "band_low": 11000,
       "band_high": 14000,
       "final_price": 14000,
@@ -5879,29 +5905,39 @@
       "demand_ratio": 1199.2,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 14,
-          "pct": 0.0
-        },
-        {
-          "period": "3개월",
-          "qty": 58,
-          "pct": 0.0
-        },
-        {
-          "period": "1개월",
-          "qty": 38,
-          "pct": 0.0
+          "period": "미확약",
+          "qty": 1211729000,
+          "pct": 91.89,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 57,
-          "pct": 0.0
+          "qty": 34690000,
+          "pct": 2.63,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 2175,
-          "pct": 0.0
+          "period": "1개월",
+          "qty": 22760000,
+          "pct": 1.73,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 39900000,
+          "pct": 3.03,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 9626000,
+          "pct": 0.73,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "is_listing_ipo": true,
@@ -5911,19 +5947,11 @@
       "sub_ratio": 1797.61,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 69314,
-          "pct": 6.3
-        },
-        {
-          "period": "3개월",
-          "qty": 311108,
-          "pct": 28.29
-        },
-        {
-          "period": "1개월",
-          "qty": 78692,
-          "pct": 7.16
+          "period": "미확약",
+          "qty": 597274,
+          "pct": 54.31,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
@@ -5931,13 +5959,30 @@
           "pct": 3.93
         },
         {
-          "period": "미확약",
-          "qty": 597274,
-          "pct": 54.31
+          "period": "1개월",
+          "qty": 78692,
+          "pct": 7.16
+        },
+        {
+          "period": "3개월",
+          "qty": 311108,
+          "pct": 28.29
+        },
+        {
+          "period": "6개월",
+          "qty": 69314,
+          "pct": 6.3
         }
       ],
       "report_rcp": "20250723000351",
-      "offer_shares": 1500000
+      "offer_shares": 1500000,
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 597274,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01708163",
@@ -7325,29 +7370,39 @@
       "sub_ratio": 913.24,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 287336,
-          "pct": 4.19
-        },
-        {
-          "period": "3개월",
-          "qty": 2136910,
-          "pct": 31.17
-        },
-        {
-          "period": "1개월",
-          "qty": 251480,
-          "pct": 3.67
+          "period": "미확약",
+          "qty": 4089539,
+          "pct": 59.65,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 90096,
-          "pct": 1.31
+          "pct": 1.31,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 4089539,
-          "pct": 59.66
+          "period": "1개월",
+          "qty": 251480,
+          "pct": 3.67,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 2136910,
+          "pct": 31.17,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 287336,
+          "pct": 4.19,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20250512000574",
@@ -7359,33 +7414,96 @@
       "demand_ratio": 897.45,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 36,
-          "pct": 0.0
-        },
-        {
-          "period": "3개월",
-          "qty": 128,
-          "pct": 0.0
-        },
-        {
-          "period": "1개월",
-          "qty": 29,
-          "pct": 0.0
+          "period": "미확약",
+          "qty": 5646689000,
+          "pct": 91.78,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 19,
-          "pct": 0.0
+          "qty": 53866000,
+          "pct": 0.88,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 1993,
-          "pct": 0.0
+          "period": "1개월",
+          "qty": 85758000,
+          "pct": 1.39,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 312601000,
+          "pct": 5.08,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 53409000,
+          "pct": 0.87,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
-      "manual_commit_apply": {},
-      "offer_shares": 9140482
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 5646689000,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 53866000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 85758000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 312601000,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 53409000,
+          "locked": true,
+          "visible": true
+        }
+      },
+      "offer_shares": 9140482,
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 4089539,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 90096,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 251480,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 2136910,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 287336,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01335143",
@@ -8432,29 +8550,37 @@
       "commit_apply": [
         {
           "period": "미확약",
-          "qty": 2227,
-          "pct": 95.66
+          "qty": 1868301000,
+          "pct": 93.9,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 0,
-          "pct": 0.0,
+          "qty": 14431000,
+          "pct": 0.73,
+          "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
-          "qty": 43,
-          "pct": 1.85
+          "qty": 53122000,
+          "pct": 2.67,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
-          "qty": 58,
-          "pct": 2.49
+          "qty": 47728000,
+          "pct": 2.4,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
+          "qty": 6088000,
+          "pct": 0.31,
+          "source": "manual_fixed",
           "visible": true
         }
       ],
@@ -8470,31 +8596,38 @@
       "manual_commit_apply": {
         "15일": {
           "qty": 14431000,
-          "locked": false,
+          "locked": true,
           "visible": true
         },
         "6개월": {
           "qty": 6088000,
-          "locked": false,
+          "locked": true,
+          "visible": true
+        },
+        "미확약": {
+          "qty": 1868301000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 53122000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 47728000,
+          "locked": true,
           "visible": true
         }
       },
       "sub_ratio": 816.09,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 28890,
-          "pct": 1.25
-        },
-        {
-          "period": "3개월",
-          "qty": 344360,
-          "pct": 14.93
-        },
-        {
-          "period": "1개월",
-          "qty": 47480,
-          "pct": 2.06
+          "period": "미확약",
+          "qty": 1836970,
+          "pct": 79.64,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
@@ -8502,12 +8635,29 @@
           "pct": 2.12
         },
         {
-          "period": "미확약",
-          "qty": 1836970,
-          "pct": 79.64
+          "period": "1개월",
+          "qty": 47480,
+          "pct": 2.06
+        },
+        {
+          "period": "3개월",
+          "qty": 344360,
+          "pct": 14.93
+        },
+        {
+          "period": "6개월",
+          "qty": 28890,
+          "pct": 1.25
         }
       ],
-      "report_rcp": "20250313001398"
+      "report_rcp": "20250313001398",
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 1836970,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01210677",
@@ -9890,7 +10040,7 @@
       "commit_apply": [
         {
           "period": "미확약",
-          "qty": 1913,
+          "qty": 2554565004,
           "pct": 100.0,
           "visible": true
         },
@@ -16309,190 +16459,6 @@
   ],
   "history": [
     {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "인투셀",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 690332
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지씨지놈",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "지투지바이오",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 281080
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "테라뷰",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "티엠씨",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 3751457
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "한라캐스트",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "779991000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "8209000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "7278000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "7513000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "5984000"
-    },
-    {
       "date": "2026-07-19",
       "name": "나우로보틱스",
       "type": "수기변경(검토필요)",
@@ -20307,6 +20273,190 @@
       "field": "기관신청물량(미확약)",
       "old": 1941,
       "new": 1372843000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "이뮨온시아",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 1993,
+      "new": 5646689000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "이뮨온시아",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 19,
+      "new": 53866000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "이뮨온시아",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 29,
+      "new": 85758000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "이뮨온시아",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 128,
+      "new": 312601000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "이뮨온시아",
+      "type": "수기변경",
+      "field": "기관신청물량(6개월)",
+      "old": 36,
+      "new": 53409000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 2227,
+      "new": 1868301000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "고정변경",
+      "field": "ipo:15일",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 0,
+      "new": 14431000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "고정변경",
+      "field": "ipo:1개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 43,
+      "new": 53122000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "고정변경",
+      "field": "ipo:3개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 58,
+      "new": 47728000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "고정변경",
+      "field": "ipo:6개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "티엑스알로보틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(6개월)",
+      "old": 0,
+      "new": 6088000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 2175,
+      "new": 1211729000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "고정변경",
+      "field": "ipo:15일",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 57,
+      "new": 34690000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "고정변경",
+      "field": "ipo:1개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 38,
+      "new": 22760000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "고정변경",
+      "field": "ipo:3개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 58,
+      "new": 39900000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "고정변경",
+      "field": "ipo:6개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "프로티나",
+      "type": "수기변경",
+      "field": "기관신청물량(6개월)",
+      "old": 14,
+      "new": 9626000
     }
   ],
   "seed_pending": [],
