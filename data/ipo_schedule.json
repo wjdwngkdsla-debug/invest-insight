@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23 11:10",
+  "updated": "2026-07-23 13:16",
   "items": [
     {
       "corp_code": "00104069",
@@ -2096,7 +2096,33 @@
       "stock_code": "458350",
       "market": "코스닥",
       "listing_date": "2026-03-06",
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "6개월": {
+          "qty": 21416000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 104590000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 128590000,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 510453800,
+          "locked": true,
+          "visible": true
+        },
+        "미확약": {
+          "qty": 1037075200,
+          "locked": true,
+          "visible": true
+        }
+      },
       "band_low": 7000,
       "band_high": 8500,
       "final_price": 8500,
@@ -2108,29 +2134,39 @@
       "demand_ratio": 1334.91,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 27,
-          "pct": 0.0
-        },
-        {
-          "period": "3개월",
-          "qty": 123,
-          "pct": 0.0
-        },
-        {
-          "period": "1개월",
-          "qty": 141,
-          "pct": 0.0
+          "period": "미확약",
+          "qty": 1037075200,
+          "pct": 57.55,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 709,
-          "pct": 0.0
+          "qty": 510453800,
+          "pct": 28.33,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 1263,
-          "pct": 0.0
+          "period": "1개월",
+          "qty": 128590000,
+          "pct": 7.14,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 104590000,
+          "pct": 5.8,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 21416000,
+          "pct": 1.19,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "is_listing_ipo": true,
@@ -2140,19 +2176,11 @@
       "sub_ratio": 1960.87,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 96826,
-          "pct": 7.17
-        },
-        {
-          "period": "3개월",
-          "qty": 254618,
-          "pct": 18.86
-        },
-        {
-          "period": "1개월",
-          "qty": 185497,
-          "pct": 13.74
+          "period": "미확약",
+          "qty": 230477,
+          "pct": 17.07,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
@@ -2160,14 +2188,31 @@
           "pct": 43.15
         },
         {
-          "period": "미확약",
-          "qty": 230477,
-          "pct": 17.07
+          "period": "1개월",
+          "qty": 185497,
+          "pct": 13.74
+        },
+        {
+          "period": "3개월",
+          "qty": 254618,
+          "pct": 18.86
+        },
+        {
+          "period": "6개월",
+          "qty": 96826,
+          "pct": 7.17
         }
       ],
       "report_rcp": "20260303002175",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 230477,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01203312",
@@ -6522,29 +6567,39 @@
       "demand_ratio": 995.61,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 131,
-          "pct": 5.47
-        },
-        {
-          "period": "3개월",
-          "qty": 153,
-          "pct": 6.38
-        },
-        {
-          "period": "1개월",
-          "qty": 107,
-          "pct": 4.46
+          "period": "미확약",
+          "qty": 1372843000,
+          "pct": 82.82,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
-          "qty": 65,
-          "pct": 2.71
+          "qty": 48639000,
+          "pct": 2.93,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 1941,
-          "pct": 80.98
+          "period": "1개월",
+          "qty": 82856000,
+          "pct": 5.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 100162000,
+          "pct": 6.04,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 53192000,
+          "pct": 3.21,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "is_listing_ipo": true,
@@ -6556,23 +6611,41 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "15일": {
+          "qty": 48639000,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 82856000,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 53192000,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 100162000,
+          "locked": true,
+          "visible": true
+        },
+        "미확약": {
+          "qty": 1372843000,
+          "locked": true,
+          "visible": true
+        }
+      },
       "sub_ratio": 1468.23,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 187950,
-          "pct": 11.29
-        },
-        {
-          "period": "3개월",
-          "qty": 380825,
-          "pct": 22.87
-        },
-        {
-          "period": "1개월",
-          "qty": 96450,
-          "pct": 5.79
+          "period": "미확약",
+          "qty": 931900,
+          "pct": 55.97,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
@@ -6580,12 +6653,29 @@
           "pct": 4.08
         },
         {
-          "period": "미확약",
-          "qty": 931900,
-          "pct": 55.97
+          "period": "1개월",
+          "qty": 96450,
+          "pct": 5.79
+        },
+        {
+          "period": "3개월",
+          "qty": 380825,
+          "pct": 22.87
+        },
+        {
+          "period": "6개월",
+          "qty": 187950,
+          "pct": 11.29
         }
       ],
-      "report_rcp": "20250626000474"
+      "report_rcp": "20250626000474",
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 931900,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "01432598",
@@ -16220,150 +16310,6 @@
   "history": [
     {
       "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "알지노믹스",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스엔시스",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 656600
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 315224
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에스투더블유",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에이유브랜즈",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 1118524
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에이치이엠파마",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 515027
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "에임드바이오",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "수기변경",
-      "field": "기관배정물량(미확약)",
-      "old": 0,
-      "new": 140231
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
-      "name": "이노테크",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-18",
       "name": "이노테크",
       "type": "고정변경",
       "field": "ipo:6개월",
@@ -20217,6 +20163,150 @@
       "field": "기관신청물량(6개월)",
       "old": 0,
       "new": 12275000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "고정변경",
+      "field": "ipo:6개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "수기변경",
+      "field": "기관신청물량(6개월)",
+      "old": 27,
+      "new": 21416000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "고정변경",
+      "field": "ipo:15일",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 65,
+      "new": 48639000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "고정변경",
+      "field": "ipo:1개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 107,
+      "new": 82856000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "고정변경",
+      "field": "ipo:3개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 123,
+      "new": 104590000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "고정변경",
+      "field": "ipo:6개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "수기변경",
+      "field": "기관신청물량(6개월)",
+      "old": 131,
+      "new": 53192000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "고정변경",
+      "field": "ipo:1개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 141,
+      "new": 128590000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "고정변경",
+      "field": "ipo:3개월",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 153,
+      "new": 100162000
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "고정변경",
+      "field": "ipo:15일",
+      "old": "N",
+      "new": "Y"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 709,
+      "new": 510453800
+    },
+    {
+      "date": "2026-07-23",
+      "name": "에스팀",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 1263,
+      "new": 1037075200
+    },
+    {
+      "date": "2026-07-23",
+      "name": "뉴엔AI",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 1941,
+      "new": 1372843000
     }
   ],
   "seed_pending": [],
