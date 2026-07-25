@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24 21:18",
+  "updated": "2026-07-25 12:56",
   "items": [
     {
       "corp_code": "00104069",
@@ -15,90 +15,6 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
-    },
-    {
-      "corp_code": "00624244",
-      "name": "에이치엘지노믹스",
-      "first_filing_date": "20260616",
-      "last_rcept_no": "20260716000654",
-      "band_low": 18500,
-      "band_high": 21500,
-      "final_price": 21500,
-      "forecast_start": "2026-07-02",
-      "forecast_end": "2026-07-08",
-      "sub_start": "2026-07-13",
-      "sub_end": "2026-07-14",
-      "payment_date": "2026-07-13",
-      "underwriter": "아이비케이투자증권·케이비증권",
-      "market": "코스닥",
-      "offer_shares": 2565000,
-      "demand_ratio": 714.52,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 11886000,
-          "pct": 0.86
-        },
-        {
-          "period": "3개월",
-          "qty": 300000,
-          "pct": 0.02
-        },
-        {
-          "period": "1개월",
-          "qty": 2340000,
-          "pct": 0.17
-        },
-        {
-          "period": "15일",
-          "qty": 11715000,
-          "pct": 0.85
-        },
-        {
-          "period": "미확약",
-          "qty": 1348308000,
-          "pct": 98.09
-        }
-      ],
-      "withdrawn": false,
-      "listing_date": "2026-07-24",
-      "stock_code": "",
-      "content_url": "https://blog.naver.com/vericap/224343811780",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 3,
-      "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "sub_ratio": 667.18,
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 226269,
-          "pct": 11.76
-        },
-        {
-          "period": "3개월",
-          "qty": 9935,
-          "pct": 0.52
-        },
-        {
-          "period": "1개월",
-          "qty": 9307,
-          "pct": 0.48
-        },
-        {
-          "period": "15일",
-          "qty": 419808,
-          "pct": 21.82
-        },
-        {
-          "period": "미확약",
-          "qty": 1258431,
-          "pct": 65.42
-        }
-      ],
-      "report_rcp": "20260716000654"
     },
     {
       "corp_code": "01461730",
@@ -346,7 +262,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "00683283",
@@ -362,6 +280,91 @@
     }
   ],
   "past_items": [
+    {
+      "corp_code": "00624244",
+      "name": "에이치엘지노믹스",
+      "first_filing_date": "20260616",
+      "last_rcept_no": "20260716000654",
+      "band_low": 18500,
+      "band_high": 21500,
+      "final_price": 21500,
+      "forecast_start": "2026-07-02",
+      "forecast_end": "2026-07-08",
+      "sub_start": "2026-07-13",
+      "sub_end": "2026-07-14",
+      "payment_date": "2026-07-13",
+      "underwriter": "아이비케이투자증권·케이비증권",
+      "market": "코스닥",
+      "offer_shares": 2565000,
+      "demand_ratio": 714.52,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 11886000,
+          "pct": 0.86
+        },
+        {
+          "period": "3개월",
+          "qty": 300000,
+          "pct": 0.02
+        },
+        {
+          "period": "1개월",
+          "qty": 2340000,
+          "pct": 0.17
+        },
+        {
+          "period": "15일",
+          "qty": 11715000,
+          "pct": 0.85
+        },
+        {
+          "period": "미확약",
+          "qty": 1348308000,
+          "pct": 98.09
+        }
+      ],
+      "withdrawn": false,
+      "listing_date": "2026-07-24",
+      "stock_code": "0156T0",
+      "content_url": "https://blog.naver.com/vericap/224343811780",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "schedule_hidden": false,
+      "manual_commit_apply": {},
+      "sub_ratio": 667.18,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 226269,
+          "pct": 11.76
+        },
+        {
+          "period": "3개월",
+          "qty": 9935,
+          "pct": 0.52
+        },
+        {
+          "period": "1개월",
+          "qty": 9307,
+          "pct": 0.48
+        },
+        {
+          "period": "15일",
+          "qty": 419808,
+          "pct": 21.82
+        },
+        {
+          "period": "미확약",
+          "qty": 1258431,
+          "pct": 65.42
+        }
+      ],
+      "report_rcp": "20260716000654",
+      "archived_at": "2026-07-25"
+    },
     {
       "corp_code": "01501764",
       "name": "레메디",
@@ -20513,13 +20516,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-24",
+      "excluded_at": "2026-07-25",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-24",
+      "excluded_at": "2026-07-25",
       "memo": "운영자 삭제 요청 이관"
     }
   }
