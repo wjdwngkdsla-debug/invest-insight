@@ -84,8 +84,14 @@ def _tables(doc: str) -> list[str]:
 # ── 1) 시장 전체 지분증권 신고서 스트림 (예정 IPO 자동 발굴) ──
 
 
+# 발굴 대상 증권신고서 상세유형:
+#   C001 = 지분증권(일반 주식 IPO), C005 = 증권예탁증권(DR/KDR 상장, 예: 인제니아테라퓨틱스)
+# C001만 스캔하면 DR로 상장하는 종목이 자동 발굴에서 통째로 빠진다.
+FILING_DETAIL_TYPES = ("C001", "C005")
+
+
 def fetch_equity_filings(days_back: int = LOOKBACK_DAYS) -> list[dict[str, Any]]:
-    """list.json C001(지분증권 증권신고서) 시장 전체 조회.
+    """list.json에서 지분증권(C001)·증권예탁증권(C005) 증권신고서를 시장 전체 조회.
 
     corp_code 없는 조회는 DART가 검색기간을 3개월로 제한하므로 90일 조각으로 나눠 훑는다.
     """
@@ -93,39 +99,40 @@ def fetch_equity_filings(days_back: int = LOOKBACK_DAYS) -> list[dict[str, Any]]
         return []
     filings: list[dict[str, Any]] = []
     seen: set[str] = set()
-    chunk_end = datetime.now(ZoneInfo("Asia/Seoul"))
-    remaining = days_back
-    while remaining > 0:
-        span = min(remaining, 90)
-        chunk_begin = chunk_end - timedelta(days=span)
-        page = 1
-        while True:
-            res = requests.get(
-                f"{DART_BASE}/list.json",
-                params={
-                    "crtfc_key": DART_API_KEY,
-                    "bgn_de": chunk_begin.strftime("%Y%m%d"),
-                    "end_de": chunk_end.strftime("%Y%m%d"),
-                    "pblntf_detail_ty": "C001",
-                    "page_no": page,
-                    "page_count": 100,
-                },
-                timeout=30,
-            )
-            res.raise_for_status()
-            data = res.json()
-            if data.get("status") != "000":
-                break
-            for f in data.get("list", []) or []:
-                rcp = f.get("rcept_no") or ""
-                if rcp and rcp not in seen:
-                    seen.add(rcp)
-                    filings.append(f)
-            if page >= int(data.get("total_page") or 1):
-                break
-            page += 1
-        chunk_end = chunk_begin - timedelta(days=1)
-        remaining -= span + 1
+    for detail_ty in FILING_DETAIL_TYPES:
+        chunk_end = datetime.now(ZoneInfo("Asia/Seoul"))
+        remaining = days_back
+        while remaining > 0:
+            span = min(remaining, 90)
+            chunk_begin = chunk_end - timedelta(days=span)
+            page = 1
+            while True:
+                res = requests.get(
+                    f"{DART_BASE}/list.json",
+                    params={
+                        "crtfc_key": DART_API_KEY,
+                        "bgn_de": chunk_begin.strftime("%Y%m%d"),
+                        "end_de": chunk_end.strftime("%Y%m%d"),
+                        "pblntf_detail_ty": detail_ty,
+                        "page_no": page,
+                        "page_count": 100,
+                    },
+                    timeout=30,
+                )
+                res.raise_for_status()
+                data = res.json()
+                if data.get("status") != "000":
+                    break
+                for f in data.get("list", []) or []:
+                    rcp = f.get("rcept_no") or ""
+                    if rcp and rcp not in seen:
+                        seen.add(rcp)
+                        filings.append(f)
+                if page >= int(data.get("total_page") or 1):
+                    break
+                page += 1
+            chunk_end = chunk_begin - timedelta(days=1)
+            remaining -= span + 1
     return filings
 
 
