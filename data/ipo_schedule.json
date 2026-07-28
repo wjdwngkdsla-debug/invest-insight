@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-28 19:54",
+  "updated": "2026-07-28 20:57",
   "items": [
     {
       "corp_code": "00104069",
@@ -15,6 +15,94 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
+    },
+    {
+      "corp_code": "01645448",
+      "name": "열매컴퍼니",
+      "first_filing_date": "20260108",
+      "last_rcept_no": "20260212000531",
+      "sub_start": "2026-02-05",
+      "sub_end": "2026-02-09",
+      "payment_date": "2026-02-10",
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
+    },
+    {
+      "corp_code": "01760118",
+      "name": "스탁키퍼",
+      "first_filing_date": "20260102",
+      "last_rcept_no": "20260611000015",
+      "sub_start": "2026-05-21",
+      "sub_end": "2026-06-10",
+      "payment_date": "2026-06-11",
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
+    },
+    {
+      "corp_code": "01721933",
+      "name": "투게더아트",
+      "first_filing_date": "20260327",
+      "last_rcept_no": "20260529000528",
+      "sub_start": "2026-05-22",
+      "sub_end": "2026-05-28",
+      "payment_date": "2026-05-29",
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
+    },
+    {
+      "corp_code": "01936340",
+      "name": "데이터젠",
+      "first_filing_date": "20260107",
+      "last_rcept_no": "20260714000008",
+      "payment_date": "2026-06-29",
+      "sub_start": "2026-06-29",
+      "sub_end": "2026-07-10",
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
+    },
+    {
+      "corp_code": "02031369",
+      "name": "인제니아테라퓨틱스",
+      "management_name": "인제니아테라퓨틱스",
+      "first_filing_date": "20260610",
+      "last_rcept_no": "20260728000402",
+      "withdrawn": false,
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "management_status": "수동편입",
+      "band_low": 12000,
+      "band_high": 14500,
+      "final_price": 12000,
+      "forecast_start": "2026-07-20",
+      "forecast_end": "2026-07-24",
+      "sub_start": "2026-07-30",
+      "sub_end": "2026-07-31",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 5000000,
+      "demand_ratio": 50.4,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": ""
     },
     {
       "corp_code": "01461730",
@@ -262,7 +350,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "00960623",
@@ -16534,46 +16624,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "39101000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "35774000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "105738000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "108430000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "834928000"
-    },
-    {
-      "date": "2026-07-19",
       "name": "심플랫폼",
       "type": "수기변경(검토필요)",
       "field": "신청_15일",
@@ -20531,6 +20581,46 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "인제니아테라퓨틱스",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "투게더아트",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [],
@@ -20547,12 +20637,6 @@
       "corp_code": "00104069",
       "excluded_at": "2026-07-28",
       "memo": "운영자 삭제 요청 이관"
-    },
-    "name:인제니아테라퓨틱스": {
-      "name": "인제니아테라퓨틱스",
-      "corp_code": "",
-      "excluded_at": "2026-07-28",
-      "memo": ""
     }
   }
 }
