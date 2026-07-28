@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-28 13:09",
+  "updated": "2026-07-28 19:54",
   "items": [
     {
       "corp_code": "00104069",
@@ -240,6 +240,29 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
+    },
+    {
+      "corp_code": "01564514",
+      "name": "글로벌테크놀로지",
+      "first_filing_date": "20260728",
+      "last_rcept_no": "20260728000487",
+      "band_low": 13000,
+      "band_high": 15000,
+      "forecast_start": "2026-09-07",
+      "forecast_end": "2026-09-11",
+      "sub_start": "2026-09-16",
+      "sub_end": "2026-09-17",
+      "payment_date": "2026-09-21",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 4000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "00960623",
@@ -16513,22 +16536,6 @@
       "date": "2026-07-19",
       "name": "나우로보틱스",
       "type": "수기변경(검토필요)",
-      "field": "sub_ratio",
-      "old": "",
-      "new": "1572.07"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1838271000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "수기변경(검토필요)",
       "field": "신청_15일",
       "old": "",
       "new": "39101000"
@@ -20508,6 +20515,22 @@
       "field": "기관신청물량(6개월)",
       "old": 14,
       "new": 9626000
+    },
+    {
+      "date": "2026-07-28",
+      "name": "인제니아테라퓨틱스",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "인제니아테라퓨틱스",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -20524,6 +20547,12 @@
       "corp_code": "00104069",
       "excluded_at": "2026-07-28",
       "memo": "운영자 삭제 요청 이관"
+    },
+    "name:인제니아테라퓨틱스": {
+      "name": "인제니아테라퓨틱스",
+      "corp_code": "",
+      "excluded_at": "2026-07-28",
+      "memo": ""
     }
   }
 }
