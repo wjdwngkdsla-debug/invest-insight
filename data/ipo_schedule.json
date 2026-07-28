@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-28 20:57",
+  "updated": "2026-07-28 21:15",
   "items": [
     {
       "corp_code": "00104069",
@@ -29,7 +29,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01760118",
@@ -44,7 +46,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01721933",
@@ -59,7 +63,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01936340",
@@ -74,7 +80,9 @@
       "commit_apply_missing": 3,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true
+      "review_pending": true,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "02031369",
@@ -83,10 +91,8 @@
       "first_filing_date": "20260610",
       "last_rcept_no": "20260728000402",
       "withdrawn": false,
-      "manual_entry": true,
-      "review_approved": true,
       "review_pending": false,
-      "management_status": "수동편입",
+      "management_status": "자동",
       "band_low": 12000,
       "band_high": 14500,
       "final_price": 12000,
@@ -102,7 +108,8 @@
       "ipo_parse_version": 3,
       "commit_apply_missing": 3,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01461730",
