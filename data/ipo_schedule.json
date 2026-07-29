@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-28 21:54",
+  "updated": "2026-07-29 22:10",
   "items": [
     {
       "corp_code": "00104069",
@@ -262,31 +262,6 @@
       "commit_apply_missing": 3
     },
     {
-      "corp_code": "01586923",
-      "name": "스카이랩스",
-      "first_filing_date": "20260707",
-      "last_rcept_no": "20260707000316",
-      "band_low": 13000,
-      "band_high": 16000,
-      "forecast_start": "2026-08-03",
-      "forecast_end": "2026-08-07",
-      "sub_start": "2026-08-13",
-      "sub_end": "2026-08-14",
-      "payment_date": "2026-08-19",
-      "underwriter": "한국투자증권",
-      "market": "코스닥",
-      "offer_shares": 2000000,
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 3,
-      "schedule_hidden": false,
-      "commit_apply_missing": 3
-    },
-    {
       "corp_code": "01801026",
       "name": "브릴스",
       "first_filing_date": "20260713",
@@ -312,6 +287,52 @@
       "commit_apply_missing": 3
     },
     {
+      "corp_code": "01586923",
+      "name": "스카이랩스",
+      "first_filing_date": "20260707",
+      "last_rcept_no": "20260729000518",
+      "band_low": 13000,
+      "band_high": 16000,
+      "forecast_start": "2026-08-14",
+      "forecast_end": "2026-08-21",
+      "sub_start": "2026-08-26",
+      "sub_end": "2026-08-27",
+      "payment_date": "2026-08-31",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 2000000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "schedule_hidden": false,
+      "commit_apply_missing": 3
+    },
+    {
+      "corp_code": "02030166",
+      "name": "엔에이치기업인수목적34호",
+      "first_filing_date": "20260729",
+      "last_rcept_no": "20260729000264",
+      "forecast_start": "2026-08-24",
+      "forecast_end": "2026-08-25",
+      "sub_start": "2026-09-01",
+      "sub_end": "2026-09-02",
+      "payment_date": "2026-09-01",
+      "underwriter": "NH투자증권",
+      "market": "코스닥",
+      "offer_shares": 8500000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
       "corp_code": "01876251",
       "name": "네오사피엔스",
       "first_filing_date": "20260723",
@@ -335,6 +356,29 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
+    },
+    {
+      "corp_code": "01867688",
+      "name": "와이즈플래닛컴퍼니",
+      "first_filing_date": "20260729",
+      "last_rcept_no": "20260729000302",
+      "band_low": 10000,
+      "band_high": 12000,
+      "forecast_start": "2026-09-04",
+      "forecast_end": "2026-09-10",
+      "sub_start": "2026-09-14",
+      "sub_end": "2026-09-15",
+      "payment_date": "2026-09-17",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 1600000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 3,
+      "withdrawn": false,
+      "commit_apply_missing": 3,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01564514",
@@ -397,246 +441,6 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -16871,38 +16675,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "2625000"
-    },
-    {
-      "date": "2026-07-19",
       "name": "한텍",
       "type": "수기변경(검토필요)",
       "field": "신청_미확약",
@@ -20868,6 +20640,38 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "스카이랩스",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-08-03",
+      "new": "2026-08-14"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "스카이랩스",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-08-07",
+      "new": "2026-08-21"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "스카이랩스",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-13",
+      "new": "2026-08-26"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "스카이랩스",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-08-14",
+      "new": "2026-08-27"
     }
   ],
   "seed_pending": [],
