@@ -4506,10 +4506,19 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
 
     hidden_codes: set[str] = set()
     hidden_names: set[str] = set()
+    # 종목별 분석 콘텐츠 링크 — 종목관리 탭의 콘텐츠링크 열(운영자 입력)
+    content_by_code: dict[str, str] = {}
+    content_by_name: dict[str, str] = {}
     management_path = ROOT_DIR / "data" / "stock_management.json"
     if management_path.exists():
         try:
             for command in json.loads(management_path.read_text(encoding="utf-8")):
+                url = str(command.get("content_url") or "").strip()
+                if url:
+                    if command.get("stock_code"):
+                        content_by_code[normalize_stock_code(command.get("stock_code"))] = url
+                    if command.get("name"):
+                        content_by_name[managed_name(command.get("name"))] = url
                 if command.get("visibility") != "비공개":
                     continue
                 if command.get("stock_code"):
@@ -4537,12 +4546,17 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             "listing_date": r.get("listing_date"),
             # 홈페이지의 비율·시가총액은 최근 KRX 상장주식수를 기준으로 통일한다.
             "shares": _to_int(r.get("current_shares")) or _to_int(r.get("shares")),
+            # 공모가 기준 시가총액 산출용 — 상장 시점 주식수(증자 반영 전)
+            "initial_shares": _to_int(r.get("shares")),
             "close_price": _to_int(r.get("close_price")),
             # KRX 일별매매정보의 MKTCAP을 우선 사용하고, 미제공 시에만 계산한다.
             "market_cap": _to_int(r.get("market_cap")) or (
                 (_to_int(r.get("current_shares")) or _to_int(r.get("shares"))) * _to_int(r.get("close_price"))
             ),
             "ipo_price": 0,
+            "content_url": content_by_code.get(normalize_stock_code(code))
+            or content_by_name.get(managed_name(r.get("name")))
+            or "",
             "events": [],
             "holders": [],
         })

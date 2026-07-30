@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getStockByCode, getEventGroupsByStock, getSiteData } from "@/lib/data";
 import { BackButton } from "@/components/BackButton";
 import { StockEventSections } from "@/components/StockEventSections";
+import { StockHero } from "@/components/StockHero";
 
 
 const BUILD_NOW = Date.now();
@@ -72,24 +73,15 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
 
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-8">
-      <div className="mb-8">
+    <main className="mx-auto max-w-[980px] px-5 py-6">
+      <div className="mb-4">
         <BackButton />
-        <span className="inline-flex rounded-full border border-gray-200 bg-white px-2.5 py-0.5 text-xs font-medium text-gray-500">
-          {stock.market}
-        </span>
-        <h1 className="mt-3 text-[28px] font-bold leading-tight">{stock.name} 락업 해제 일정</h1>
-        <p className="mt-1.5 text-sm text-gray-500">
-          상장일 {stock.listing_date} · 공모가{" "}
-          {stock.ipo_price ? `${stock.ipo_price.toLocaleString("ko-KR")}원` : "미확인"}
-        </p>
       </div>
-      <StockEventSections
-        groups={groups}
-        initialNow={BUILD_NOW}
-        updated={updated}
-        marketCap={stock.market_cap || stock.shares * stock.close_price}
-      />
+      <StockHero stock={stock} updated={updated} initialNow={BUILD_NOW} />
+      <h2 className="sr-only">{stock.name} 락업 해제 일정</h2>
+      <div className="mt-10">
+        <StockEventSections groups={groups} initialNow={BUILD_NOW} />
+      </div>
     </main>
   );
 }

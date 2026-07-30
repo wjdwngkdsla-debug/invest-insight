@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { displayStatus, type FlatRow } from "@/lib/data";
+import { formatKrwEok } from "@/lib/format";
 
 // 화면용 합산 행 — 같은 종목·같은 해제일의 IPO기관/기존주주 물량을 하나로 합친다
 interface MergedRow {
@@ -49,9 +50,7 @@ const COLUMNS: { key: SortKey; label: string; align?: "right" }[] = [
 ];
 
 function formatEok(won: number): string {
-  const eok = won / 1e8;
-  if (eok >= 10) return `${Math.round(eok).toLocaleString("ko-KR")}억원`;
-  return `${(Math.round(eok * 10) / 10).toLocaleString("ko-KR")}억원`;
+  return formatKrwEok(won, { decimal: true });
 }
 
 function mergeRows(rows: FlatRow[]): MergedRow[] {

@@ -3,6 +3,7 @@ import { getPastIpoItems, getSortedIpoItems, dateRange, yymmdd, bandPosition, ty
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { PastDateGate } from "@/components/PastDateGate";
 import { IpoHistoryToggle } from "@/components/IpoHistoryToggle";
+import { formatKrwEok } from "@/lib/format";
 
 
 
@@ -75,8 +76,7 @@ function formatOfferSize(item: IpoItem): string {
   const shares = item.offer_shares || 0;
   const price = item.final_price || item.band_high || 0;
   if (!shares || !price) return "미정";
-  const amount = Math.round((shares * price) / 100_000_000);
-  return `${amount.toLocaleString()}억원`;
+  return formatKrwEok(shares * price);
 }
 
 
