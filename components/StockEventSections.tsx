@@ -125,21 +125,16 @@ export function StockEventSections({
     };
   }, [groups, nowMs]);
 
-  const totalUpcoming = upcoming.reduce((sum, group) => sum + group.qty, 0);
-
   return (
     <>
       {upcoming.length > 0 && (
         <section className="mb-9">
-          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+          <div className="mb-3 flex flex-wrap items-baseline gap-2">
             <h2 className="flex items-center gap-2 text-lg font-bold">
               <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-blue-500" />
               예정된 해제
               <span className="text-sm font-medium text-gray-400">{upcoming.length}건</span>
             </h2>
-            <p className="text-sm text-gray-500">
-              합계 <span className="font-semibold text-gray-800">{formatQty(totalUpcoming)}주</span>
-            </p>
           </div>
           <ul className="space-y-3">
             {upcoming.map((group) => <EventRow key={group.tradable_date} group={group} tone="upcoming" nowMs={nowMs} />)}

@@ -22,7 +22,7 @@ function ReturnGauge({ pct }: { pct: number }) {
   const stroke = up ? "#e11d48" : "#2563eb";
 
   return (
-    <svg viewBox="0 0 200 110" className="h-[80px] w-[142px] md:h-[106px] md:w-[190px]" aria-hidden>
+    <svg viewBox="0 0 200 110" className="h-[72px] w-[128px] md:h-[76px] md:w-[136px]" aria-hidden>
       <path d={`M ${cx - r},${cy} A ${r},${r} 0 0 1 ${cx + r},${cy}`} fill="none" stroke="rgba(15,23,42,0.10)" strokeWidth="8" strokeLinecap="round" />
       <path
         d={`M ${cx},${cy - r} A ${r},${r} 0 0 ${up ? 1 : 0} ${edge.x},${edge.y}`}
@@ -62,15 +62,15 @@ function GlassTile({
   sub?: string;
 }) {
   return (
-    <div className="rounded-xl border border-white/60 bg-white/55 px-3 py-2.5 shadow-[0_6px_24px_-8px_rgba(30,41,59,0.18)] backdrop-blur-xl md:rounded-2xl md:px-4 md:py-3.5">
+    <div className="rounded-xl border border-white/60 bg-white/55 px-3 py-2.5 shadow-[0_6px_24px_-8px_rgba(30,41,59,0.18)] backdrop-blur-xl md:h-[88px] md:px-3 md:py-2.5">
       <div className="flex items-center gap-1.5 md:gap-2">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/70 text-slate-500 shadow-sm md:h-7 md:w-7 md:rounded-lg">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/70 text-slate-500 shadow-sm">
           {icon}
         </span>
-        <p className="break-keep text-[10.5px] font-medium leading-tight text-slate-500 md:truncate md:text-[11.5px]">{label}</p>
+        <p className="break-keep text-[10.5px] font-medium leading-tight text-slate-500 md:text-[11.5px]">{label}</p>
       </div>
-      <p className="mt-1.5 break-keep text-[15px] font-bold leading-tight tracking-tight text-slate-900 md:mt-2.5 md:text-[18px]">{value}</p>
-      <p className="mt-0.5 break-keep text-[9.5px] leading-[12px] text-slate-400 md:text-[10.5px] md:leading-[13px] md:h-[13px]">{sub || ""}</p>
+      <p className="mt-1.5 break-keep text-[15px] font-bold leading-tight tracking-tight text-slate-900 md:text-[18px]">{value}</p>
+      <p className="mt-0.5 break-keep text-[9.5px] leading-3 text-slate-400 md:h-3.5 md:text-[10.5px]">{sub || ""}</p>
     </div>
   );
 }
@@ -121,23 +121,17 @@ export function StockHero({ stock, updated, initialNow }: { stock: StockLockup; 
   ];
 
   return (
-    <div className="relative overflow-hidden rounded-[24px] bg-slate-50 px-4 py-5 md:rounded-[32px] md:px-8 md:py-8">
+    <div className="relative overflow-hidden rounded-[24px] bg-slate-50 px-4 py-5 md:rounded-[26px] md:px-6 md:py-4">
       {/* 배경 메시 그라디언트 — 유리 카드가 이 색을 머금는다 */}
       <div aria-hidden className="pointer-events-none absolute -left-24 -top-28 h-80 w-80 rounded-full bg-indigo-400/30 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -right-20 -top-16 h-72 w-72 rounded-full bg-sky-400/25 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-24 left-1/4 h-72 w-72 rounded-full bg-violet-400/20 blur-3xl" />
 
-      <div className="relative grid gap-5 md:grid-cols-[minmax(0,430px)_1fr] md:gap-10">
+      <div className="relative grid gap-5 md:grid-cols-[minmax(0,350px)_1fr] md:gap-5">
         {/* 좌: 배경 위에 그대로 얹은 종목 요약 */}
-        <div className="flex flex-col justify-between gap-3 md:gap-4">
+        <div className="flex flex-col justify-center gap-3">
           <div>
-            <h1 className="text-[26px] font-bold leading-tight tracking-tight text-slate-900 md:text-[32px]">{stock.name}</h1>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-white/70 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur">
-                {stock.market}
-              </span>
-              <span className="text-[11px] font-medium text-slate-400">{stock.code}</span>
-            </div>
+            <h1 className="text-[26px] font-bold leading-tight tracking-tight text-slate-900 md:text-[28px]">{stock.name}</h1>
           </div>
 
           <div className="flex items-end justify-between gap-1">
@@ -145,12 +139,12 @@ export function StockHero({ stock, updated, initialNow }: { stock: StockLockup; 
               <p className="text-[11px] font-medium text-slate-500">공모가 대비</p>
               {hasReturn ? (
                 <>
-                  <p className={`mt-1 text-[38px] font-bold leading-none tracking-tight md:text-[48px] ${up ? "text-rose-600" : "text-blue-600"}`}>
+                  <p className={`mt-1 text-[38px] font-bold leading-none tracking-tight md:text-[40px] ${up ? "text-rose-600" : "text-blue-600"}`}>
                     {up ? "+" : ""}
                     {changePct.toFixed(1)}
-                    <span className="text-[21px] md:text-[26px]">%</span>
+                    <span className="text-[21px] md:text-[23px]">%</span>
                   </p>
-                  <p className="mt-2 whitespace-nowrap text-[11px] text-slate-500 md:text-[12px]">
+                  <p className="mt-1.5 whitespace-nowrap text-[11px] text-slate-500">
                     {ipoPrice.toLocaleString("ko-KR")}원 → {stock.close_price.toLocaleString("ko-KR")}원
                   </p>
                 </>
@@ -181,38 +175,45 @@ export function StockHero({ stock, updated, initialNow }: { stock: StockLockup; 
               </div>
             ))}
           </div>
-          <Link
-            href={contentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 px-4 py-3 text-[13px] font-bold text-white shadow-[0_10px_28px_-10px_rgba(79,70,229,0.65)]"
-          >
-            {contentLabel}
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-          </Link>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="shrink-0 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur">
+              {stock.market}
+            </span>
+            <Link
+              href={contentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 px-4 py-3 text-[13px] font-bold text-white shadow-[0_10px_28px_-10px_rgba(79,70,229,0.65)]"
+            >
+              {contentLabel}
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </Link>
+          </div>
         </div>
 
-        {/* 데스크톱: 분석 CTA를 좌상단에 두고 지표 5칸이 뒤따른다 (2열 3행) */}
-        <div className="hidden grid-cols-2 gap-3 md:grid">
-          <Link
-            href={contentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col justify-between rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 px-4 py-3.5 shadow-[0_10px_28px_-10px_rgba(79,70,229,0.65)] transition-shadow hover:shadow-[0_14px_32px_-10px_rgba(79,70,229,0.8)]"
-          >
-            <div className="flex items-start justify-between">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/20 text-white">
-                <svg {...iconProps}><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" /><path d="M14 3v6h6M8.5 13h7M8.5 17h4.5" /></svg>
-              </span>
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-indigo-700 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-              </span>
-            </div>
-            <p className="mt-3 text-[13px] font-bold leading-snug text-white">{contentLabel}</p>
-          </Link>
-          {metrics.map((metric) => (
-            <GlassTile key={metric.label} label={metric.label} value={metric.value} sub={metric.sub} icon={metric.icon} />
-          ))}
+        {/* 데스크톱: CTA는 작은 버튼으로 낮추고, 지표는 핵심 3개 + 시총 2개의 3/2 구조로 정리한다. */}
+        <div className="hidden flex-col justify-center gap-3 md:flex">
+          <div className="flex items-center gap-2 self-end">
+            <span className="rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur">
+              {stock.market}
+            </span>
+            <Link
+              href={contentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex h-8 items-center gap-1.5 rounded-full bg-indigo-600 px-3.5 text-[11.5px] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(79,70,229,0.7)] transition-colors hover:bg-indigo-700"
+            >
+              {contentLabel}
+              <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+            </Link>
+          </div>
+          <div className="grid grid-cols-6 gap-2.5">
+            {metrics.map((metric, index) => (
+              <div key={metric.label} className={index < 3 ? "col-span-2" : "col-span-3"}>
+                <GlassTile label={metric.label} value={metric.value} sub={metric.sub} icon={metric.icon} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
