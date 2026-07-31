@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31 13:52",
+  "updated": "2026-07-31 21:59",
   "items": [
     {
       "corp_code": "00104069",
@@ -115,7 +115,7 @@
       "corp_code": "01461730",
       "name": "딜리셔스",
       "first_filing_date": "20260624",
-      "last_rcept_no": "20260716000038",
+      "last_rcept_no": "20260731000443",
       "band_low": 5000,
       "band_high": 7000,
       "forecast_start": "2026-07-23",
@@ -134,10 +134,38 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 3,
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
       "content_url": "https://blog.naver.com/vericap/224363555723",
       "provisional_fields": [
         "content_url"
+      ],
+      "final_price": 7000,
+      "demand_ratio": 184.06,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 32000,
+          "pct": 0.01
+        },
+        {
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.0
+        },
+        {
+          "period": "15일",
+          "qty": 266000,
+          "pct": 0.09
+        },
+        {
+          "period": "미확약",
+          "qty": 303391500,
+          "pct": 99.9
+        }
       ]
     },
     {
