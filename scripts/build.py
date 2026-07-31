@@ -2395,9 +2395,19 @@ def apply_api_updates(
     새로 생성하므로 먼저 걷어내고, 그 event_id 목록을 호출부에 돌려줘 정리시킨다.
     """
     raw_items = fetch_public_lockup_returns(target["name"])
-    api_items = [normalize_public_return_item(x) for x in raw_items]
+    normalized_items = [normalize_public_return_item(x) for x in raw_items]
+    target_code = normalize_stock_code(code)
+    api_items = [
+        item
+        for item in normalized_items
+        if not item.get("stock_code")
+        or normalize_stock_code(item.get("stock_code")) == target_code
+    ]
     logs: list[dict] = []
     reviews: list[dict] = []
+    dropped = len(normalized_items) - len(api_items)
+    if dropped:
+        print(f"  [API] 종목코드 불일치 응답 {dropped}건 제외", file=sys.stderr)
     print(f"  [API] 금융위 반환정보 {len(api_items)}건", file=sys.stderr)
 
 
@@ -4654,6 +4664,74 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
 
 
 
+def build_dart_rows_or_preserve(
+    target: dict,
+    code: str,
+    meta: dict,
+    listing_date: str,
+    shares: int,
+    existing_stock_rows: list[dict],
+    existing_by_id: dict[str, dict],
+) -> tuple[list[dict], list[dict]]:
+    """DART 재파싱 실패 시 기존 행을 보존해 호출부가 API 보강을 계속할 수 있게 한다."""
+    name = target["name"]
+    reviews: list[dict] = []
+    try:
+        stock_rows = build_ipo_events(target, code, meta, listing_date, shares)
+        float_rows, float_reviews = build_float_summary_events(
+            target, code, meta, listing_date, shares, int(listing_date[:4])
+        )
+        stock_rows.extend(float_rows)
+        reviews.extend(float_reviews)
+        if target.get("operator_forced_ipo") and not any(
+            row.get("category") == CATEGORY_IPO for row in stock_rows
+        ):
+            reviews.append({
+                "detected_at": _now(),
+                "event_id": "",
+                "code": code,
+                "name": name,
+                "category": CATEGORY_IPO,
+                "period": "",
+                "issue": "운영자 IPO 선택 종목의 IPO기관 락업 파싱 결과 없음",
+                "planned_date": "",
+                "planned_qty": "",
+                "api_return_date": "",
+                "api_return_qty": "",
+                "manual_date": "",
+                "manual_qty": "",
+                "memo": target.get("review_memo", ""),
+            })
+        return [
+            carry_manual_fields(row, existing_by_id.get(row["event_id"]))
+            for row in stock_rows
+        ], reviews
+    except Exception as dart_exc:
+        # DART 장애가 금융위 API 보강까지 막지 않도록 기존 행을 보존하고 계속한다.
+        # 기존 행이 없는 신규 종목도 빈 행 목록으로 API 단독 이벤트 생성을 시도한다.
+        print(
+            f"  [DART ERROR] {name} 파싱 실패 → 기존값 유지, API 조회 계속: {dart_exc}",
+            file=sys.stderr,
+        )
+        reviews.append({
+            "detected_at": _now(),
+            "event_id": "",
+            "code": code,
+            "name": name,
+            "category": "DART처리오류",
+            "period": "",
+            "issue": f"DART 파싱 실패 — 기존값 유지 후 금융위 API 보강 계속: {dart_exc}",
+            "planned_date": "",
+            "planned_qty": "",
+            "api_return_date": "",
+            "api_return_qty": "",
+            "manual_date": "",
+            "manual_qty": "",
+            "memo": "다음 배치에서 DART 자동 재시도됨",
+        })
+        return [dict(row) for row in existing_stock_rows], reviews
+
+
 def main() -> None:
     require_env()
     args = parse_args()
@@ -4889,31 +4967,16 @@ def main() -> None:
             else:
                 if incomplete_reasons and not args.reparse_existing:
                     print(f"  [DART] 미완성 영역 재파싱: {', '.join(incomplete_reasons)}", file=sys.stderr)
-                stock_rows = []
-                stock_rows.extend(build_ipo_events(target, code, meta, listing_date, shares))
-                float_rows, float_reviews = build_float_summary_events(target, code, meta, listing_date, shares, int(listing_date[:4]))
-                stock_rows.extend(float_rows)
-                all_reviews.extend(float_reviews)
-                if target.get("operator_forced_ipo") and not any(
-                    row.get("category") == CATEGORY_IPO for row in stock_rows
-                ):
-                    all_reviews.append({
-                        "detected_at": _now(),
-                        "event_id": "",
-                        "code": code,
-                        "name": name,
-                        "category": CATEGORY_IPO,
-                        "period": "",
-                        "issue": "운영자 IPO 선택 종목의 IPO기관 락업 파싱 결과 없음",
-                        "planned_date": "",
-                        "planned_qty": "",
-                        "api_return_date": "",
-                        "api_return_qty": "",
-                        "manual_date": "",
-                        "manual_qty": "",
-                        "memo": target.get("review_memo", ""),
-                    })
-                stock_rows = [carry_manual_fields(row, existing_by_id.get(row["event_id"])) for row in stock_rows]
+                stock_rows, dart_reviews = build_dart_rows_or_preserve(
+                    target,
+                    code,
+                    meta,
+                    listing_date,
+                    shares,
+                    existing_stock_rows,
+                    existing_by_id,
+                )
+                all_reviews.extend(dart_reviews)
 
 
 
