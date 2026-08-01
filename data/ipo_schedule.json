@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31 21:59",
+  "updated": "2026-08-01 13:13",
   "items": [
     {
       "corp_code": "00104069",
@@ -24,23 +24,6 @@
       "sub_start": "2026-02-05",
       "sub_end": "2026-02-09",
       "payment_date": "2026-02-10",
-      "ipo_parse_version": 3,
-      "withdrawn": false,
-      "commit_apply_missing": 3,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": true,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "first_filing_date": "20260102",
-      "last_rcept_no": "20260611000015",
-      "sub_start": "2026-05-21",
-      "sub_end": "2026-06-10",
-      "payment_date": "2026-06-11",
       "ipo_parse_version": 3,
       "withdrawn": false,
       "commit_apply_missing": 3,
@@ -166,7 +149,8 @@
           "qty": 303391500,
           "pct": 99.9
         }
-      ]
+      ],
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "00920731",
@@ -20716,13 +20700,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-07-31",
+      "excluded_at": "2026-08-01",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-07-31",
+      "excluded_at": "2026-08-01",
       "memo": "운영자 삭제 요청 이관"
     }
   }
