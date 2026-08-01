@@ -4,6 +4,8 @@ import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { PastDateGate } from "@/components/PastDateGate";
 import { IpoHistoryToggle } from "@/components/IpoHistoryToggle";
 import { formatKrwEok } from "@/lib/format";
+import { getSiteData } from "@/lib/data";
+import Link from "next/link";
 
 
 
@@ -240,7 +242,7 @@ function CommitTable({ item }: { item: IpoItem }) {
 
 
 
-function IpoCard({ item }: { item: IpoItem }) {
+function IpoCard({ item, lockupHref }: { item: IpoItem; lockupHref?: string }) {
   const hasCommit = Boolean(item.commit_apply?.length || item.commit_alloc?.length);
   const band = item.band_low && item.band_high ? `${item.band_low.toLocaleString()}~${item.band_high.toLocaleString()}원` : "미정";
   const bandPos = bandPosition(item);
@@ -263,22 +265,34 @@ function IpoCard({ item }: { item: IpoItem }) {
   return (
     <div
       tabIndex={hasCommit ? 0 : undefined}
-      className="group rounded-lg border border-gray-200 bg-white p-5 pb-4 outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300"
+      className="group rounded-[20px] border border-gray-200 bg-white p-5 pb-4 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300"
     >
       <div className="flex flex-wrap items-center gap-2">
         <IpoStatusChip item={item} />
-        <span className={`font-semibold text-gray-900 ${item.withdrawn ? "line-through text-gray-400" : ""}`}>{item.name}</span>
-        <span className="text-xs text-gray-500">
-          {item.market || "시장 미정"} · 주관 {item.underwriter || "미정"}
+        {/* 락업 상세 페이지가 있는 종목은 이름을 눌러 바로 이동한다 */}
+        {lockupHref ? (
+          <Link
+            href={lockupHref}
+            className={`font-semibold text-gray-900 underline-offset-4 hover:text-blue-700 hover:underline ${item.withdrawn ? "text-gray-400 line-through" : ""}`}
+          >
+            {item.name}
+          </Link>
+        ) : (
+          <span className={`font-semibold text-gray-900 ${item.withdrawn ? "text-gray-400 line-through" : ""}`}>{item.name}</span>
+        )}
+        <span className="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+          {item.market || "시장 미정"}
         </span>
+        <span className="text-xs text-gray-500">주관 {item.underwriter || "미정"}</span>
         {item.content_url && (
           <a
             href={item.content_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50 px-2.5 py-1 text-[12px] font-semibold text-blue-700 transition-colors hover:bg-blue-100"
+            className="group/cta ml-auto inline-flex h-8 items-center gap-1.5 rounded-full bg-blue-600 px-3.5 text-[11.5px] font-semibold text-white transition-colors hover:bg-blue-700"
           >
-            {item.name} 분석 콘텐츠 보러가기 <span aria-hidden>↗</span>
+            {item.name} 분석 콘텐츠 보러가기
+            <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
           </a>
         )}
       </div>
@@ -298,18 +312,19 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 
 
+      {/* 일정 3종 — 색은 홈 캘린더와 연결되므로 유지하고, 테두리·라운드만 상세 페이지 타일과 통일 */}
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-violet-50/70 px-3 py-2 sm:block sm:flex-[5]">
-          <p className="text-[11px] text-violet-500">수요예측일</p>
-          <p className="truncate text-[13px] font-bold text-violet-700">{dateRange(item.forecast_start, item.forecast_end)}</p>
+        <div className="flex min-w-0 items-baseline justify-between rounded-xl border border-violet-100 bg-violet-50/70 px-3 py-2 sm:block sm:flex-[5]">
+          <p className="text-[11px] font-medium text-violet-500">수요예측일</p>
+          <p className="truncate text-[13px] font-bold text-violet-700 sm:mt-0.5">{dateRange(item.forecast_start, item.forecast_end)}</p>
         </div>
-        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-amber-50 px-3 py-2 sm:block sm:flex-[2.2]">
-          <p className="text-[11px] text-amber-800">청약일</p>
-          <p className="truncate text-[13px] font-bold text-amber-800">{dateRange(item.sub_start, item.sub_end)}</p>
+        <div className="flex min-w-0 items-baseline justify-between rounded-xl border border-amber-100 bg-amber-50/80 px-3 py-2 sm:block sm:flex-[2.2]">
+          <p className="text-[11px] font-medium text-amber-700">청약일</p>
+          <p className="truncate text-[13px] font-bold text-amber-800 sm:mt-0.5">{dateRange(item.sub_start, item.sub_end)}</p>
         </div>
-        <div className="flex min-w-0 items-baseline justify-between rounded-lg bg-emerald-50 px-3 py-2 sm:block sm:flex-[1.8]">
-          <p className="text-[11px] text-emerald-800">상장일</p>
-          <p className="truncate text-[13px] font-bold text-emerald-800">{item.listing_date ? yymmdd(item.listing_date) : "미정"}</p>
+        <div className="flex min-w-0 items-baseline justify-between rounded-xl border border-emerald-100 bg-emerald-50/80 px-3 py-2 sm:block sm:flex-[1.8]">
+          <p className="text-[11px] font-medium text-emerald-700">상장일</p>
+          <p className="truncate text-[13px] font-bold text-emerald-800 sm:mt-0.5">{item.listing_date ? yymmdd(item.listing_date) : "미정"}</p>
         </div>
       </div>
 
@@ -328,23 +343,24 @@ function IpoCard({ item }: { item: IpoItem }) {
 
 
 
-      <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-1 px-0.5 text-[13px]">
+      {/* 공모 지표 — 상세 페이지의 회색 스펙 패널과 같은 톤으로 묶는다 */}
+      <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-1.5 rounded-xl border border-gray-200 bg-gray-50/80 px-3.5 py-2.5 text-[13px]">
         <span>
-          <span className="text-gray-500">희망가액</span> <span className="font-semibold">{band}</span>
+          <span className="text-slate-500">희망가액</span> <span className="font-bold text-slate-900">{band}</span>
         </span>
         <span>
-          <span className="text-gray-500">확정공모가</span>{" "}
-          <span className="font-semibold">{item.final_price ? `${item.final_price.toLocaleString()}원` : "미정"}</span>
-          {bandPos && <span className="ml-1 text-[11px] font-bold text-red-600">{bandPos}</span>}
+          <span className="text-slate-500">확정공모가</span>{" "}
+          <span className="font-bold text-slate-900">{item.final_price ? `${item.final_price.toLocaleString()}원` : "미정"}</span>
+          {bandPos && <span className="ml-1 text-[11px] font-bold text-rose-600">{bandPos}</span>}
         </span>
         <span>
-          <span className="text-gray-500">공모 규모</span> <span className="font-semibold">{formatOfferSize(item)}</span>
+          <span className="text-slate-500">공모 규모</span> <span className="font-bold text-slate-900">{formatOfferSize(item)}</span>
         </span>
         <span>
-          <span className="text-gray-500">수요예측</span> <span className="font-semibold tabular-nums">{ratioText(item.demand_ratio)}</span>
+          <span className="text-slate-500">수요예측</span> <span className="font-bold tabular-nums text-slate-900">{ratioText(item.demand_ratio)}</span>
         </span>
         <span>
-          <span className="text-gray-500">개인청약</span> <span className="font-semibold tabular-nums">{ratioText(item.sub_ratio)}</span>
+          <span className="text-slate-500">개인청약</span> <span className="font-bold tabular-nums text-slate-900">{ratioText(item.sub_ratio)}</span>
         </span>
       </div>
 
@@ -397,12 +413,16 @@ function IpoCard({ item }: { item: IpoItem }) {
 export default function IpoSchedulePage() {
   const items = getSortedIpoItems();
   const pastItems = getPastIpoItems();
+  // 락업 상세 페이지가 실제로 생성된 종목코드만 링크한다(없는 코드로 보내면 404).
+  const lockupCodes = new Set(getSiteData().stocks.map((stock) => stock.code));
+  const hrefFor = (item: IpoItem) =>
+    item.stock_code && lockupCodes.has(item.stock_code) ? `/stock/${item.stock_code}` : undefined;
 
   const currentCards = (
     <div className="space-y-3">
       {items.map((item) => (
         <PastDateGate key={item.corp_code} date={item.listing_date}>
-          <IpoCard item={item} />
+          <IpoCard item={item} lockupHref={hrefFor(item)} />
         </PastDateGate>
       ))}
       {items.length === 0 && (
@@ -415,13 +435,13 @@ export default function IpoSchedulePage() {
     <div className="space-y-3">
       {pastItems.map((item) => (
         <div key={item.corp_code} data-ipo-history-card data-ipo-name={item.name}>
-          <IpoCard item={item} />
+          <IpoCard item={item} lockupHref={hrefFor(item)} />
         </div>
       ))}
       {items.map((item) => (
         <PastDateGate key={`live-${item.corp_code}`} date={item.listing_date} showWhen="past">
           <div data-ipo-history-card data-ipo-name={item.name}>
-            <IpoCard item={item} />
+            <IpoCard item={item} lockupHref={hrefFor(item)} />
           </div>
         </PastDateGate>
       ))}
