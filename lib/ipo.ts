@@ -42,6 +42,9 @@ export interface IpoItem {
   withdrawn?: boolean;
   content_url?: string; // 시트 IPO일정 탭의 콘텐츠링크 열 (운영자 입력)
   first_filing_date?: string;
+  last_rcept_no?: string;
+  withdrawn_date?: string;
+  offering_attempt?: number; // 과거 철회 후 재공모면 2 이상
   review_pending?: boolean; // IPO 신호 부족 → 검토대기(비공개). 사이트 노출 제외
   manual_entry?: boolean; // 종목관리에서 이름만 먼저 편입한 항목(빈 값은 미정 노출)
   fixed_excluded?: boolean; // 운영자 제외고정. 새 공시가 나와도 자동 부활하지 않음
@@ -67,56 +70,107 @@ export interface IpoStatus {
   tone: IpoTone;
 }
 
+type IpoEventKind = "listing" | "subscription" | "forecast";
+
+interface IpoFocusEvent {
+  kind: IpoEventKind;
+  day: number;
+  active: boolean;
+}
+
+const EVENT_PRIORITY: Record<IpoEventKind, number> = {
+  listing: 0,
+  subscription: 1,
+  forecast: 2,
+};
+
+// 각 기업에서 지금 진행 중이거나 오늘 이후 가장 가까운 일정 하나를 고른다.
+// 같은 날에는 상장 → 청약 → 수요예측 순으로 보여준다.
+function ipoFocusEvent(item: IpoItem, today = new Date()): IpoFocusEvent | null {
+  const active: IpoFocusEvent[] = [];
+  const upcoming: IpoFocusEvent[] = [];
+  const addRange = (kind: IpoEventKind, start?: string, end?: string) => {
+    if (!start) return;
+    const startDay = dDay(start, today);
+    const endDay = end ? dDay(end, today) : startDay;
+    if (startDay <= 0 && endDay >= 0) {
+      active.push({ kind, day: 0, active: true });
+    } else if (startDay >= 0) {
+      upcoming.push({ kind, day: startDay, active: false });
+    }
+  };
+
+  if (item.listing_date) {
+    const day = dDay(item.listing_date, today);
+    if (day === 0) active.push({ kind: "listing", day: 0, active: true });
+    else if (day > 0) upcoming.push({ kind: "listing", day, active: false });
+  }
+  addRange("subscription", item.sub_start, item.sub_end);
+  addRange("forecast", item.forecast_start, item.forecast_end);
+
+  const byDateThenType = (a: IpoFocusEvent, b: IpoFocusEvent) =>
+    a.day - b.day || EVENT_PRIORITY[a.kind] - EVENT_PRIORITY[b.kind];
+  return active.sort(byDateThenType)[0] || upcoming.sort(byDateThenType)[0] || null;
+}
+
 // 오늘 뭔가 진행 중 = 빨강(active), 대기 = 파랑(waiting), 끝난 상태 = 회색(done)
 export function ipoStatus(item: IpoItem, today = new Date()): IpoStatus {
   if (item.withdrawn) return { label: "공모 철회", tone: "done" };
-  const d = (s?: string) => (s ? dDay(s, today) : null);
+  const event = ipoFocusEvent(item, today);
+  if (event) {
+    if (event.kind === "listing") {
+      return { label: event.active ? "오늘 상장" : `상장 예정 D-${event.day}`, tone: event.active ? "active" : "waiting" };
+    }
+    if (event.kind === "subscription") {
+      return { label: event.active ? "청약 중" : `청약 D-${event.day}`, tone: event.active ? "active" : "waiting" };
+    }
+    return { label: event.active ? "수요예측 중" : `수요예측 D-${event.day}`, tone: event.active ? "active" : "waiting" };
+  }
 
-  const listing = d(item.listing_date);
+  const listing = item.listing_date ? dDay(item.listing_date, today) : null;
   if (listing !== null && listing < 0) return { label: "상장 완료", tone: "done" };
-  if (listing !== null) return { label: listing === 0 ? "오늘 상장" : `상장 D-${listing}`, tone: "waiting" };
-
-  const subStart = d(item.sub_start);
-  const subEnd = d(item.sub_end);
-  if (subStart !== null && subStart <= 0 && subEnd !== null && subEnd >= 0) return { label: "청약 중", tone: "active" };
+  const subEnd = item.sub_end ? dDay(item.sub_end, today) : null;
   // 확정공모가 없이 청약일만 지난 경우 = 공모가 확정 없이 청약이 진행될 수 없으므로 일정 연기로 본다
   if (subEnd !== null && subEnd < 0 && !item.final_price) return { label: "일정 미정", tone: "waiting" };
   if (subEnd !== null && subEnd < 0) return { label: "청약 완료", tone: "done" };
-
-  const fcStart = d(item.forecast_start);
-  const fcEnd = d(item.forecast_end);
-  if (fcStart !== null && fcStart <= 0 && fcEnd !== null && fcEnd >= 0) return { label: "수요예측 중", tone: "active" };
-  if (fcEnd !== null && fcEnd < 0) return { label: "청약 예정", tone: "waiting" };
-  if (fcStart !== null) return { label: "수요예측 예정", tone: "waiting" };
+  const forecastEnd = item.forecast_end ? dDay(item.forecast_end, today) : null;
+  if (forecastEnd !== null && forecastEnd < 0) return { label: "청약 예정", tone: "waiting" };
   return { label: "공모 준비", tone: "waiting" };
 }
 
-// 노출 우선순위: 임박한 상장일 → 임박한 청약일 → 임박한 수요예측일 → 나머지 → 철회
-export function ipoSortKey(item: IpoItem, today = new Date()): [number, string, string] {
-  if (item.withdrawn) return [4, "", item.name];
-  if (item.listing_date && dDay(item.listing_date, today) >= 0) return [0, item.listing_date, item.name];
-  if (item.sub_start && dDay(item.sub_start, today) >= 0) return [1, item.sub_start, item.name];
-  if (item.forecast_start && dDay(item.forecast_start, today) >= 0) return [2, item.forecast_start, item.name];
-  return [3, item.first_filing_date || "", item.name];
+// 노출 우선순위: 오늘 진행 중 → 가장 가까운 다음 일정 → 나머지.
+// 같은 날이면 상장 → 청약 → 수요예측 순이다.
+export function ipoSortKey(item: IpoItem, today = new Date()): [number, number, number, string] {
+  const event = ipoFocusEvent(item, today);
+  if (event) {
+    return [event.active ? 0 : 1, event.day, EVENT_PRIORITY[event.kind], item.name];
+  }
+  return [2, Number.MAX_SAFE_INTEGER, 9, item.name];
 }
 
 export function getSortedIpoItems(today = new Date()): IpoItem[] {
   // 검토대기(review_pending) 종목은 사이트 비노출 — 시트에서 승인해야 뜬다
   return [...getIpoSchedule().items]
-    .filter((item) => !item.review_pending && !item.fixed_excluded && !item.management_hidden && !item.schedule_hidden)
+    .filter((item) => !item.withdrawn && !item.review_pending && !item.fixed_excluded && !item.management_hidden && !item.schedule_hidden)
     .sort((a, b) => {
       const ka = ipoSortKey(a, today);
       const kb = ipoSortKey(b, today);
-      return ka[0] - kb[0] || ka[1].localeCompare(kb[1]) || ka[2].localeCompare(kb[2]);
+      return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2] || ka[3].localeCompare(kb[3]);
     });
 }
 
 export function getPastIpoItems(): IpoItem[] {
-  return [...(getIpoSchedule().past_items || [])]
+  // 다음 배치가 JSON의 철회 종목을 past_items로 옮기기 전이라도 화면에서는 즉시 이력으로 보낸다.
+  const schedule = getIpoSchedule();
+  const combined = [...(schedule.past_items || []), ...schedule.items.filter((item) => item.withdrawn)];
+  const deduped = [...new Map(combined.map((item) => [`${item.corp_code}:${item.last_rcept_no || item.first_filing_date || ""}`, item])).values()];
+  return deduped
     .filter((item) => !item.review_pending && !item.fixed_excluded && !item.management_hidden && !item.schedule_hidden)
     .sort(
       (a, b) =>
-        (b.listing_date || "").localeCompare(a.listing_date || "") ||
+        (b.withdrawn_date || b.listing_date || b.first_filing_date || "").localeCompare(
+          a.withdrawn_date || a.listing_date || a.first_filing_date || ""
+        ) ||
         a.name.localeCompare(b.name)
     );
 }

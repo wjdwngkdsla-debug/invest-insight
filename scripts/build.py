@@ -1858,6 +1858,7 @@ def build_float_summary_events(target: dict, code: str, meta: dict, listing_date
             "planned_date_display": date_display,
             "planned_qty": inc,
             "planned_pct": pct(inc, shares),
+            "quantity_unit": row.get("quantity_unit") or "주",
             "dart_rcp": chosen.get("rcept_no") or "",
             "dart_source": "투자설명서 유통가능 요약표",
             "parse_note": note,
@@ -4239,6 +4240,10 @@ def apply_manual_events(
 
 
 
+        # 종목코드 발급 전 캡처값은 시트 보존용이다. 공식 DART 파싱이 가능한
+        # 시점까지 오류로 반복 알림하지 않는다.
+        if not code and entry.get("pending_only"):
+            continue
         if not code:
             review(entry, "종목코드가 비어 있음")
             continue
@@ -4578,6 +4583,7 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             "date_display": r.get("final_date_display") or r.get("planned_date_display") or final_date,
             "tradable_date": final_tradable,
             "qty": final_qty,
+            "unit": r.get("quantity_unit") or "주",
             "pct": _to_float(r.get("final_pct")),
             "type": "IPO확약" if r.get("category") == CATEGORY_IPO else "보호예수",
             "category": r.get("category"),

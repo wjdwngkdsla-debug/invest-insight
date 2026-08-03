@@ -151,6 +151,12 @@ def _parse_table_rows(table_xml: str) -> list[list[str]]:
 def _period_from_label(label: str) -> str | None:
     if "상장일" in label:
         return "상장일"
+    # "상장 후 2년 6개월"을 2년으로 잘라 읽으면 실제 30개월 물량이
+    # 24개월로 당겨진다. 복합 기간은 월 단위로 정규화한다.
+    compound = re.search(r"상장\s*후\s*(\d+)\s*년\s*(\d+)\s*개월", label)
+    if compound:
+        months = int(compound.group(1)) * 12 + int(compound.group(2))
+        return f"{months}개월"
     m = re.search(r"상장\s*후\s*(\d+)\s*(개월|년)", label)
     if not m:
         return None
@@ -173,8 +179,15 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
         rows = _parse_table_rows(table_xml)
         if len(rows) < 3:
             continue
-        header_text = " ".join(rows[0])
-        if not ("구분" in header_text and "주식수" in header_text and "유통가능" in header_text and "비율" in header_text):
+        # DART 표는 공모 후 기준/스톡옵션 행사 시나리오 때문에 헤더가
+        # 2~3행으로 합쳐지는 경우가 많다. 첫 행만 보면 정상 표도 누락된다.
+        header_text = " ".join(cell for row in rows[:3] for cell in row)
+        if not (
+            "구분" in header_text
+            and ("주식수" in header_text or "물량" in header_text)
+            and "유통가능" in header_text
+            and "비율" in header_text
+        ):
             continue
 
         parsed_rows: list[dict[str, Any]] = []
@@ -185,17 +198,22 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
             period = _period_from_label(line)
             if not period:
                 continue
-            nums = [clean_int(c) for c in row]
+            # 첫 번째 비율이 속한 "공모 후 기준" 수량을 사용한다. max()를
+            # 쓰면 딜리셔스처럼 오른쪽의 스톡옵션 행사 시 수량을 고르게 된다.
+            nums = [clean_int(c) for c in row[1:] if "%" not in c]
             nums = [n for n in nums if n is not None]
             if not nums:
                 continue
-            cumulative = max(nums)
+            cumulative = nums[0]
             pct_match = re.search(r"(\d+(?:\.\d+)?)\s*%", line)
             parsed_rows.append({
                 "period": period,
                 "row_text": line,
                 "cumulative_float": cumulative,
                 "float_pct": float(pct_match.group(1)) if pct_match else None,
+                # 해외주식예탁증권 상장사는 표의 단위가 DR이다. 숫자를 보통주로
+                # 환산하지 않고 공시 단위를 그대로 보존한다.
+                "quantity_unit": "DR" if re.search(r"(?:^|\s)DR(?:\s|$)", line, flags=re.I) else "주",
             })
 
         periods = {r["period"] for r in parsed_rows}

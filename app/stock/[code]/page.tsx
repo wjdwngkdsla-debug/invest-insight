@@ -32,10 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
     .sort((a, b) => a.localeCompare(b));
   const firstDate = sortedDates[0];
   const totalQty = stock.events.reduce((sum, event) => sum + event.qty, 0);
+  const quantityUnit = stock.events.some((event) => event.unit === "DR") ? "DR" : "주";
   const title = `${stock.name} 락업 해제 일정`;
   const description = `${stock.name}(${stock.market}) IPO 락업 해제일, 보호예수 해제 일정, 의무보유확약 물량 ${totalQty.toLocaleString(
     "ko-KR",
-  )}주${firstDate ? `, 주요 해제일 ${firstDate}` : ""} 정보를 확인하세요.`;
+  )}${quantityUnit}${firstDate ? `, 주요 해제일 ${firstDate}` : ""} 정보를 확인하세요.`;
 
 
   return {
@@ -81,7 +82,7 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
       <h2 className="sr-only">{stock.name} 락업 해제 일정</h2>
       {/* 아래 목록은 위 지표 섹션과 다른 면(surface)으로 분리한다 — 레퍼런스의 섹션 구분 디테일 */}
       <section className="mt-4 rounded-[24px] border border-slate-200/70 bg-slate-50/70 px-4 py-5 shadow-[0_2px_20px_-14px_rgba(15,23,42,0.4)] md:mt-5 md:rounded-[32px] md:px-8 md:py-7">
-        <StockEventSections groups={groups} initialNow={BUILD_NOW} />
+        <StockEventSections groups={groups} initialNow={BUILD_NOW} shares={stock.shares} />
       </section>
     </main>
   );

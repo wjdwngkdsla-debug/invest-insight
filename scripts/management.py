@@ -254,6 +254,7 @@ def apply_stock_management(
                     "name": name,
                     "listing_date": row.get("listing_date") or old.get("listing_date") or "",
                     "code": row.get("stock_code") or old.get("code") or "",
+                    "shares": row.get("initial_shares") or old.get("shares") or "",
                     "manual_ipo_price": row.get("manual_ipo_price") or old.get("manual_ipo_price") or "",
                     "manual_ipo_price_locked": row.get("manual_ipo_price_locked") or old.get("manual_ipo_price_locked") or "N",
                 }
@@ -319,6 +320,8 @@ def apply_stock_management(
             existing["market"] = row["market"]
         if row.get("listing_date"):
             existing["listing_date"] = row["listing_date"]
+        if row.get("initial_shares"):
+            existing["initial_shares"] = row["initial_shares"]
         if row.get("manual_ipo_price"):
             try:
                 existing["final_price"] = int(str(row["manual_ipo_price"]).replace(",", ""))

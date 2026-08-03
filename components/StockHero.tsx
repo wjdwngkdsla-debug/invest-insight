@@ -98,8 +98,7 @@ export function StockHero({
   const contentLabel = stock.content_url ? "종목 분석 보러가기" : "기업 분석 포스팅 보러가기";
   const priceDate = updated.slice(5);
 
-  // 데스크톱은 카드 5장, 모바일은 같은 값을 한 패널의 5행으로 그린다.
-  // mobileSub: 모바일에서는 공간이 없어 상장주식수 같은 부연은 생략하고 기준일만 남긴다.
+  // 핵심 지표 4개를 데스크톱 2×2, 모바일 2열 패널로 그린다.
   const metrics: { label: string; value: string; sub?: string; mobileSub?: string; icon: React.ReactNode }[] = [
     {
       label: "상장일",
@@ -119,7 +118,6 @@ export function StockHero({
     {
       label: `시가총액(${priceDate})`,
       value: closeCap ? formatKrwEok(closeCap) : "-",
-      sub: stock.shares ? `상장주식수 ${stock.shares.toLocaleString("ko-KR")}주` : "",
       icon: <svg {...iconProps}><path d="M20.5 7.5v9l-8.5 4.5-8.5-4.5v-9L12 3z" /><path d="m3.8 7.4 8.2 4.4 8.2-4.4M12 21v-9.2" /></svg>,
     },
   ];

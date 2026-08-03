@@ -284,16 +284,25 @@ function IpoCard({ item, lockupHref }: { item: IpoItem; lockupHref?: string }) {
           {item.market || "시장 미정"}
         </span>
         <span className="text-xs text-gray-500">주관 {item.underwriter || "미정"}</span>
-        {item.content_url && (
-          <a
-            href={item.content_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/cta ml-auto inline-flex h-8 items-center gap-1.5 rounded-full bg-blue-600 px-3.5 text-[11.5px] font-semibold text-white transition-colors hover:bg-blue-700"
-          >
-            {item.name} 분석 콘텐츠 보러가기
-            <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-          </a>
+        {(Number(item.offering_attempt || 1) > 1 || item.content_url) && (
+          <span className="ml-auto flex flex-wrap items-center justify-end gap-2">
+            {!item.withdrawn && Number(item.offering_attempt || 1) > 1 && (
+              <span className="inline-flex h-8 items-center rounded-full border border-amber-200 bg-amber-50 px-3 text-[11.5px] font-bold text-amber-700">
+                ↻ {item.offering_attempt}차 공모 도전
+              </span>
+            )}
+            {item.content_url && (
+              <a
+                href={item.content_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/cta inline-flex h-8 items-center gap-1.5 rounded-full bg-blue-600 px-3.5 text-[11.5px] font-semibold text-white transition-colors hover:bg-blue-700"
+              >
+                {item.name} 분석 콘텐츠 보러가기
+                <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+              </a>
+            )}
+          </span>
         )}
       </div>
 

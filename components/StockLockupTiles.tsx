@@ -39,6 +39,7 @@ export function StockLockupTiles({
     }
   }
   const pct = (qty: number) => (shares > 0 ? ((qty / shares) * 100).toFixed(1) : "0.0");
+  const unit = events.some((event) => event.unit === "DR") ? "DR" : "주";
 
   const trackedLockup = remaining + released;
   const remainingShare = trackedLockup > 0 ? (remaining / trackedLockup) * 100 : 0;
@@ -56,7 +57,6 @@ export function StockLockupTiles({
             {pct(remaining)}
             <span className="text-[12px] font-semibold text-slate-400">%</span>
           </p>
-          <p className="text-[10.5px] leading-3.5 text-slate-400">{remaining.toLocaleString("ko-KR")}주</p>
         </div>
         <div className="text-right">
           <p className="flex items-center justify-end gap-1.5 text-[11.5px] font-semibold text-slate-600">
@@ -67,17 +67,22 @@ export function StockLockupTiles({
             {pct(released)}
             <span className="text-[12px] font-semibold text-slate-400">%</span>
           </p>
-          <p className="text-[10.5px] leading-3.5 text-slate-400">{released.toLocaleString("ko-KR")}주</p>
         </div>
       </div>
 
       <div
-        className="mt-2 flex h-2.5 w-full overflow-hidden rounded-full bg-slate-900/10"
+        className="relative mt-2 h-6 w-full overflow-hidden rounded-md bg-slate-900/10"
         role="img"
         aria-label={`전체 락업 물량 중 잔여 ${remainingShare.toFixed(1)}%, 해제 완료 ${releasedShare.toFixed(1)}%`}
       >
-        <span className="h-full bg-blue-600" style={{ width: `${remainingShare}%` }} />
-        <span className="h-full bg-slate-300" style={{ width: `${releasedShare}%` }} />
+        <div className="absolute inset-0 flex">
+          <span className="h-full bg-blue-600" style={{ width: `${remainingShare}%` }} />
+          <span className="h-full bg-slate-300" style={{ width: `${releasedShare}%` }} />
+        </div>
+        <div className="relative z-10 flex h-full items-center justify-between px-2 text-[9.5px] font-semibold tabular-nums">
+          <span className="text-white drop-shadow-sm">{remaining.toLocaleString("ko-KR")}{unit}</span>
+          <span className="text-slate-600">{released.toLocaleString("ko-KR")}{unit}</span>
+        </div>
       </div>
     </div>
   );

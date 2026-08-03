@@ -88,11 +88,19 @@
       "offer_shares": 5000000,
       "demand_ratio": 50.4,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
-      "commit_apply_missing": 3,
-      "listing_date": "",
+      "ipo_parse_version": 4,
+      "listing_date": "2026-08-18",
       "stock_code": "",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": 49489111,
+      "quantity_unit": "DR",
+      "commit_apply": [
+        {"period": "6개월", "qty": 0, "pct": 0.0},
+        {"period": "3개월", "qty": 45000, "pct": 0.02},
+        {"period": "1개월", "qty": 3750000, "pct": 1.98},
+        {"period": "15일", "qty": 418407, "pct": 0.22},
+        {"period": "미확약", "qty": 184900059, "pct": 97.77}
+      ]
     },
     {
       "corp_code": "01461730",
@@ -110,7 +118,7 @@
       "market": "코스닥",
       "offer_shares": 2200000,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-08-12",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -150,7 +158,8 @@
           "pct": 99.9
         }
       ],
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": 21878960
     },
     {
       "corp_code": "00920731",

@@ -47,7 +47,7 @@ ADMIN_COLUMNS = [
     "dart_rcp", "dart_source", "parse_note",
     "api_return_date", "api_return_qty", "api_reason",
     "manual_date", "manual_qty", "manual_lock", "manual_mode", "sheet_visible",
-    "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct",
+    "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct", "quantity_unit",
     "status", "review_needed", "memo", "updated_at",
 ]
 
@@ -188,13 +188,16 @@ IPO_EDITABLE_COLUMNS = {
 # 수기입력 탭 — 운영자가 필수값만 채우면 배치가 나머지를 자동으로 채워 편입한다
 MANUAL_EVENTS_PATH = ROOT_DIR / "data" / "manual_events.json"
 MANUAL_EVENT_TAB = "수기입력"
-MANUAL_EVENT_HEADERS = ["종목코드", "구분", "락업기간", "해제일", "물량"]
+MANUAL_EVENT_HEADERS = ["종목명", "DART기업코드", "종목코드", "구분", "락업기간", "해제일", "물량", "단위"]
 MANUAL_EVENT_KEYS = {
+    "종목명": "name",
+    "DART기업코드": "corp_code",
     "종목코드": "code",
     "구분": "category",
     "락업기간": "period",
     "해제일": "date",
     "물량": "qty",
+    "단위": "quantity_unit",
 }
 
 
@@ -293,7 +296,7 @@ IPO_INSTITUTION_HEADERS = [
 ]
 HOLDER_HEADERS = [
     "고정", "노출", "종목명", "종목코드", "락업기간", "해제일", "물량",
-    "현재주식수기준비중(%)", "검증상태", "검증사유", "이벤트ID",
+    "단위", "현재주식수기준비중(%)", "검증상태", "검증사유", "이벤트ID", "DART기업코드",
 ]
 
 
@@ -887,8 +890,17 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
     by_corp, by_name = _schedule_by_corp_or_name(schedule)
     state = load_simple_sheet_state()
     manual_events = read_json_list(MANUAL_EVENTS_PATH)
-    manual_event_keys = {
-        (str(row.get("code") or ""), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
+    def manual_owner(row: dict) -> str:
+        code = str(row.get("code") or "").strip()
+        if code:
+            return code.zfill(6) if code.isdigit() and len(code) < 6 else code
+        corp = str(row.get("corp_code") or "").strip()
+        if corp:
+            return f"corp:{corp.zfill(8) if corp.isdigit() else corp}"
+        return f"name:{norm_name(row.get('name'))}"
+
+    manual_event_by_key = {
+        (manual_owner(row), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or "")): row
         for row in manual_events
     }
 
@@ -930,15 +942,25 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                         event["manual_mode"] = "고정" if locked else "임시"
                         if current != old:
                             history.append({"date": today, "name": event.get("name") or "", "type": "수기변경", "field": sheet_field, "old": old, "new": current})
-            elif kind == "holder" and raw.get("종목코드") and period and raw.get("해제일") and number(raw.get("물량")):
-                manual_key = (str(raw.get("종목코드") or "").zfill(6), "기존주주", period, str(raw.get("해제일") or ""))
-                if manual_key not in manual_event_keys:
-                    manual_events.append({
-                        "code": manual_key[0], "category": "기존주주",
-                        "period": period, "date": manual_key[3], "qty": number(raw.get("물량")),
-                        "sheet_visible": visible, "manual_lock": "Y" if locked else "N",
-                    })
-                    manual_event_keys.add(manual_key)
+            elif kind == "holder" and period and number(raw.get("물량")):
+                pending = {
+                    "name": str(raw.get("종목명") or "").strip(),
+                    "corp_code": str(raw.get("DART기업코드") or "").strip(),
+                    "code": str(raw.get("종목코드") or "").strip(),
+                    "category": "기존주주", "period": period,
+                    "date": str(raw.get("해제일") or "").strip(),
+                    "qty": number(raw.get("물량")),
+                    "quantity_unit": str(raw.get("단위") or "주").strip() or "주",
+                    "sheet_visible": visible, "manual_lock": "Y" if locked else "N",
+                    "pending_only": not bool(raw.get("종목코드") and raw.get("해제일")),
+                }
+                manual_key = (manual_owner(pending), "기존주주", period, pending["date"])
+                existing_manual = manual_event_by_key.get(manual_key)
+                if existing_manual:
+                    existing_manual.update(pending)
+                else:
+                    manual_events.append(pending)
+                    manual_event_by_key[manual_key] = pending
             if kind == "ipo":
                 item = by_corp.get(corp_code) or by_name.get(norm_name(raw.get("종목명")))
                 if item:
@@ -949,7 +971,7 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                     old = number(old_text)
                     # "0" 명시 입력 = 실값 0 (빈칸과 구분)
                     explicit_zero = bool(apply_text) and apply_text.strip("0") == ""
-                    if (current or explicit_zero) and (locked or (previous and apply_text != old_text and not old)):
+                    if (current or explicit_zero) and (locked or not previous or (apply_text != old_text and not old)):
                         manual[period] = {"qty": current, "locked": locked, "visible": visible == "Y"}
                         if current != old:
                             history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": f"기관신청물량({period})", "old": old, "new": current})
@@ -2412,11 +2434,43 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             event.get("manual_lock") == "Y", event.get("sheet_visible") != "N",
             event.get("name", ""), event.get("code", ""), event.get("period", ""),
             event.get("final_date") or event.get("planned_date") or "", qty or "",
+            event.get("quantity_unit") or "주",
             round(qty / current_shares * 100, 2) if qty and current_shares else "",
-            status, reason, event.get("event_id", ""),
+            status, reason, event.get("event_id", ""), "",
         ]
         holder_rows.append(values)
         holder_state[str(event["event_id"])] = dict(zip(HOLDER_HEADERS, [str(value) for value in values]))
+
+    # 종목코드가 아직 발급되지 않은 예비 IPO도 캡처값을 기존주주 탭에서
+    # 잃지 않도록 보관한다. 추후 공식 DART 이벤트가 같은 회사·기간으로
+    # 생성되면 자동행을 우선하고 이 임시행은 숨긴다.
+    official_holder_keys = {
+        (norm_name(row.get("name")), str(row.get("period") or ""))
+        for row in admin if row.get("category") == "구주·보호예수"
+    }
+    for pending in read_json_list(MANUAL_EVENTS_PATH):
+        if str(pending.get("category") or "") not in {"기존주주", "구주·보호예수"}:
+            continue
+        key = (norm_name(pending.get("name")), str(pending.get("period") or ""))
+        if key[0] and key in official_holder_keys:
+            continue
+        qty = number(pending.get("qty"))
+        if not key[0] or not key[1] or not qty:
+            continue
+        event_id = "pending:{corp}:{period}:{date}".format(
+            corp=pending.get("corp_code") or f"name:{key[0]}",
+            period=key[1], date=pending.get("date") or "미정",
+        )
+        values = [
+            str(pending.get("manual_lock") or "N").upper() == "Y",
+            str(pending.get("sheet_visible") or "Y").upper() != "N",
+            pending.get("name", ""), pending.get("code", ""), key[1],
+            pending.get("date", ""), qty, pending.get("quantity_unit") or "주", "",
+            "수기임시", "공식 DART 값 수집 시 자동 교체", event_id,
+            pending.get("corp_code", ""),
+        ]
+        holder_rows.append(values)
+        holder_state[event_id] = dict(zip(HOLDER_HEADERS, [str(value) for value in values]))
 
     state["ipo_institution"], state["holders"] = ipo_state, holder_state
     SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -2434,7 +2488,7 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             print(f"[SHEET] IPO기관 수기전용(빨강) 표시: {len(ipo_red_cells)}셀", file=sys.stderr)
         except Exception as exc:
             print(f"[SHEET] IPO기관 빨간 표시 실패(무시): {exc}", file=sys.stderr)
-    _push_simple_table(spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows, ["고정", "노출"], ["이벤트ID"])
+    _push_simple_table(spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
 
 
 def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:

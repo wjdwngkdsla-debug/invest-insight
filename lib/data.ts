@@ -54,6 +54,7 @@ export interface EventBreakdown {
   category: LockupCategory;
   qty: number;
   pct: number;
+  unit: "주" | "DR";
   items: LockupEvent[];
 }
 
@@ -76,6 +77,7 @@ export interface UpcomingGroup {
   date_display: string;
   periods: string[];
   qty: number;
+  unit: "주" | "DR";
   pct: number;
   status: string;
   breakdown: EventBreakdown[];
@@ -235,6 +237,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
           category,
           items,
           qty: categoryQty,
+          unit: (items.some((item) => item.unit === "DR") ? "DR" : "주") as "DR" | "주",
           pct: stock.shares ? Number(((categoryQty / stock.shares) * 100).toFixed(2)) : 0,
         };
       })
@@ -260,6 +263,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
       date_display: events[0]?.date_display || tradableDate,
       periods: [...new Set(events.map((ev) => displayPeriod(ev.period, stock.listing_date, ev.tradable_date)))],
       qty,
+      unit: events.some((event) => event.unit === "DR") ? "DR" : "주",
       pct: stock.shares ? Number(((qty / stock.shares) * 100).toFixed(2)) : 0,
       status: [...events].sort((a, b) => statusOrder(a.status) - statusOrder(b.status))[0]?.status || "예정",
       breakdown,

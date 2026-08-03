@@ -7,6 +7,7 @@ export interface LockupEvent {
   date_display: string;
   tradable_date: string;
   qty: number;
+  unit?: "주" | "DR";
   pct: number;
   type: "IPO확약" | "보호예수";
   status: EventStatus;

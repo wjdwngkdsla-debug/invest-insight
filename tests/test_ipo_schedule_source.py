@@ -76,6 +76,34 @@ class IpoScheduleDemandTableTest(unittest.TestCase):
             },
         )
 
+    def test_final_row_named_gae_is_accepted_as_total(self) -> None:
+        from scripts.sources.ipo_schedule import _parse_demand_tables
+
+        doc = """
+        <TABLE>
+          <TR><TD>구분</TD><TD>합계</TD><TD>합계</TD><TD>신청가격</TD></TR>
+          <TR><TD>6개월 확약</TD><TD>-</TD><TD>-</TD><TD>-</TD></TR>
+          <TR><TD>3개월 확약</TD><TD>3</TD><TD>45,000</TD><TD>13,458</TD></TR>
+          <TR><TD>1개월 확약</TD><TD>1</TD><TD>3,750,000</TD><TD>14,500</TD></TR>
+          <TR><TD>15일 확약</TD><TD>24</TD><TD>418,407</TD><TD>8,976</TD></TR>
+          <TR><TD>미확약</TD><TD>279</TD><TD>184,900,059</TD><TD>13,114</TD></TR>
+          <TR><TD>계</TD><TD>307</TD><TD>189,113,466</TD><TD>12,819</TD></TR>
+        </TABLE>
+        """
+
+        _, apply = _parse_demand_tables(doc)
+
+        self.assertEqual(
+            {row["period"]: row["qty"] for row in apply},
+            {
+                "6개월": 0,
+                "3개월": 45_000,
+                "1개월": 3_750_000,
+                "15일": 418_407,
+                "미확약": 184_900_059,
+            },
+        )
+
 
 class IpoScheduleResultReportGateTest(unittest.TestCase):
     @classmethod

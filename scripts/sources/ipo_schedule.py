@@ -38,7 +38,7 @@ MAX_DOCS_PER_CORP = 4
 
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
-IPO_PARSE_VERSION = 3
+IPO_PARSE_VERSION = 4
 
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
@@ -326,7 +326,10 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                     # 구간 행이 표에 있는데 값이 전부 "-" = 확정된 0. 기록해서
                     # 사이트의 '미정'(미수집)과 구분한다 (토모큐브 1개월·15일 케이스)
                     tiers[tier] = total_quantity(r)
-                elif "합계" in label and len(nums) >= 2:
+                # 일부 발행조건확정 신고서는 최종 행을 "합계"가 아닌 "계"로
+                # 표기한다(인제니아테라퓨틱스). 구간을 모두 읽고도 total=0으로
+                # 폐기하던 누락을 막는다.
+                elif r and r[0].replace(" ", "") in {"계", "합계"} and len(nums) >= 2:
                     total = total_quantity(r)
             if total and len(tiers) >= 3:
                 # 모든 종목은 5구간(미확약·15일·1개월·3개월·6개월)을 갖는다.
@@ -964,6 +967,10 @@ def refresh_ipo_schedule(
         # (미트박스·서울보증보험·온코크로스 등)은 5년 창에 옛 철회가 걸려도 철회가 아니다.
         # (any() 판정은 백필 창 확대 후 이들 파싱을 통째로 스킵시키던 버그였음)
         withdrawn = "철회신고서" in (newest.get("report_nm") or "")
+        withdrawal_count = sum(
+            1 for filing in corp_filings if "철회신고서" in (filing.get("report_nm") or "")
+        )
+        offering_attempt = max(1, withdrawal_count + (0 if withdrawn else 1))
         official_periods = {
             str(value.get("period") or "")
             for value in ((old or {}).get("commit_apply") or [])
@@ -984,7 +991,14 @@ def refresh_ipo_schedule(
             and not _needs_offering_backfill(old)
             and not _commit_apply_below_alloc_all_tiers(old)
         ):
-            return apply_manual_commit_values(old)  # 새 공시 없음 → 문서 재다운로드 생략
+            cached = dict(old)
+            cached["withdrawn"] = withdrawn
+            cached["offering_attempt"] = offering_attempt
+            if withdrawn:
+                cached["withdrawn_date"] = newest.get("rcept_dt") or ""
+            else:
+                cached.pop("withdrawn_date", None)
+            return apply_manual_commit_values(cached)  # 새 공시 없음 → 문서 재다운로드 생략
 
         log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
         item = dict(old or {})
@@ -993,6 +1007,7 @@ def refresh_ipo_schedule(
             "name": name,
             "first_filing_date": corp_filings[-1].get("rcept_dt") or "",
             "last_rcept_no": newest.get("rcept_no") or "",
+            "offering_attempt": offering_attempt,
         })
         if not withdrawn:
             merged: dict[str, Any] = {}
@@ -1064,6 +1079,10 @@ def refresh_ipo_schedule(
             else:
                 item.pop("provisional_fields", None)
         item["withdrawn"] = withdrawn
+        if withdrawn:
+            item["withdrawn_date"] = newest.get("rcept_dt") or ""
+        else:
+            item.pop("withdrawn_date", None)
         # 파싱을 끝냈는데도 확약신청이 없으면 마커를 남겨 다음 배치가 재시도하지 않게 한다.
         # 새 공시(rcept_no 변경)가 나오면 마커와 무관하게 다시 파싱된다.
         has_official_apply = any(
@@ -1327,7 +1346,7 @@ def refresh_ipo_schedule(
             except Exception as exc:
                 log(f"실적보고서 실패 {item.get('name')}: {exc}")
 
-        # 정리 규칙: 상장 다음날부터 제외 / 철회 후 30일 지남 / 무소식 210일
+        # 정리 규칙: 상장 다음날부터 제외 / 철회 즉시 이전 이력 / 무소식 210일
         # 상장 후는 락업 캘린더가 이어받으므로 IPO일정에는 남길 필요가 없다.
         listing = item.get("listing_date") or ""
         first = item.get("first_filing_date") or ""
@@ -1335,7 +1354,7 @@ def refresh_ipo_schedule(
         past_listing = bool(listing and listing < today)
         if past_listing:
             drop = True
-        if item.get("withdrawn") and first and first < (now_kst - timedelta(days=30)).strftime("%Y%m%d"):
+        if item.get("withdrawn"):
             drop = True
         if not listing and first and first < (now_kst - timedelta(days=days_back)).strftime("%Y%m%d"):
             drop = True
@@ -1354,7 +1373,7 @@ def refresh_ipo_schedule(
                 })
             item["review_pending"] = weak
 
-        if past_listing:
+        if past_listing or item.get("withdrawn"):
             item["archived_at"] = item.get("archived_at") or today
             # 백필 루프가 이미 채워둔 과거 항목을 비어 있는 복사본으로 덮지 않는다.
             # 기존 archived(백필로 밴드·일정·확약이 채워짐)를 베이스로 두고, item의
