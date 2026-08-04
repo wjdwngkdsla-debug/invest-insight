@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03 22:38",
+  "updated": "2026-08-04 10:30",
   "items": [
     {
       "corp_code": "00104069",
@@ -24,31 +24,33 @@
       "sub_start": "2026-02-05",
       "sub_end": "2026-02-09",
       "payment_date": "2026-02-10",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": true,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01721933",
       "name": "투게더아트",
-      "first_filing_date": "20260327",
+      "first_filing_date": "20260512",
       "last_rcept_no": "20260529000528",
       "sub_start": "2026-05-22",
       "sub_end": "2026-05-28",
       "payment_date": "2026-05-29",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": true,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01936340",
@@ -58,14 +60,15 @@
       "payment_date": "2026-06-29",
       "sub_start": "2026-06-29",
       "sub_end": "2026-07-10",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": true,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "02031369",
@@ -92,15 +95,68 @@
       "listing_date": "2026-08-18",
       "stock_code": "",
       "schedule_hidden": false,
-      "initial_shares": 49489111,
+      "initial_shares": "49489111",
       "quantity_unit": "DR",
       "commit_apply": [
-        {"period": "6개월", "qty": 0, "pct": 0.0},
-        {"period": "3개월", "qty": 45000, "pct": 0.02},
-        {"period": "1개월", "qty": 3750000, "pct": 1.98},
-        {"period": "15일", "qty": 418407, "pct": 0.22},
-        {"period": "미확약", "qty": 184900059, "pct": 97.77}
-      ]
+        {
+          "period": "미확약",
+          "qty": 184900059,
+          "pct": 97.77,
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 418407,
+          "pct": 0.22,
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 3750000,
+          "pct": 1.98,
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 45000,
+          "pct": 0.02,
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "visible": true
+        }
+      ],
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 184900059,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 418407,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 3750000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 45000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "offering_attempt": 1
     },
     {
       "corp_code": "01461730",
@@ -123,7 +179,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "content_url": "https://blog.naver.com/vericap/224363555723",
       "provisional_fields": [
@@ -159,7 +215,8 @@
         }
       ],
       "manual_commit_apply": {},
-      "initial_shares": 21878960
+      "initial_shares": "21878960",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00920731",
@@ -182,7 +239,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "final_price": 11000,
       "demand_ratio": 938.24,
@@ -212,7 +269,9 @@
           "qty": 1659465500,
           "pct": 99.22
         }
-      ]
+      ],
+      "manual_commit_apply": {},
+      "offering_attempt": 1
     },
     {
       "corp_code": "00229085",
@@ -235,9 +294,10 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01588897",
@@ -260,9 +320,10 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01947443",
@@ -284,10 +345,11 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "payment_date": "2026-08-11",
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01801026",
@@ -310,9 +372,10 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01586923",
@@ -335,9 +398,10 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "02030166",
@@ -353,14 +417,15 @@
       "market": "코스닥",
       "offer_shares": 8500000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01876251",
@@ -378,14 +443,15 @@
       "market": "코스닥",
       "offer_shares": 2000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01867688",
@@ -403,14 +469,15 @@
       "market": "코스닥",
       "offer_shares": 1600000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01564514",
@@ -428,14 +495,15 @@
       "market": "코스닥",
       "offer_shares": 4000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "00960623",
@@ -453,14 +521,15 @@
       "market": "코스닥",
       "offer_shares": 3000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "offering_attempt": 1
     },
     {
       "corp_code": "01722066",
@@ -483,9 +552,10 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 3
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
     },
     {
       "corp_code": "00683283",
@@ -552,7 +622,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "sub_ratio": 667.18,
@@ -584,7 +654,8 @@
         }
       ],
       "report_rcp": "20260716000654",
-      "archived_at": "2026-07-25"
+      "archived_at": "2026-07-25",
+      "initial_shares": "7782161"
     },
     {
       "corp_code": "01501764",
@@ -666,9 +737,10 @@
       "review_pending": false,
       "archived_at": "2026-07-14",
       "management_status": "자동",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "7625791"
     },
     {
       "corp_code": "01424261",
@@ -728,7 +800,7 @@
       ],
       "report_rcp": "20260629000505",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -757,7 +829,6 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -806,7 +877,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13351559",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01379129",
@@ -864,7 +937,7 @@
       ],
       "report_rcp": "20260626000469",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -893,7 +966,6 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -937,7 +1009,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "18807400",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01370517",
@@ -1020,9 +1094,10 @@
           "pct": 100.0
         }
       ],
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "53255138"
     },
     {
       "corp_code": "00577593",
@@ -1080,7 +1155,7 @@
       ],
       "report_rcp": "20260623000136",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -1109,7 +1184,6 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -1153,7 +1227,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12050305",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01755259",
@@ -1210,7 +1286,7 @@
       ],
       "report_rcp": "20260529001298",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -1239,7 +1315,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -1283,7 +1359,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "14168911",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01709065",
@@ -1335,7 +1413,7 @@
       "offer_shares": 2635000,
       "demand_ratio": 1196.08,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 2807.79,
       "commit_alloc": [
         {
@@ -1369,7 +1447,6 @@
       "report_rcp": "20260514001096",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -1413,7 +1490,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "17754736",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01565364",
@@ -1467,7 +1546,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 3169.86,
       "commit_alloc": [
         {
@@ -1498,7 +1577,8 @@
       ],
       "report_rcp": "20260508000515",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "25182861"
     },
     {
       "corp_code": "01802928",
@@ -1552,7 +1632,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 2013.8,
       "commit_alloc": [
         {
@@ -1583,7 +1663,8 @@
       ],
       "report_rcp": "20260430001330",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "32108906"
     },
     {
       "corp_code": "01279698",
@@ -1636,7 +1717,7 @@
       "offer_shares": 10000000,
       "demand_ratio": 55.23,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 302.11,
       "commit_alloc": [
         {
@@ -1670,7 +1751,7 @@
       "report_rcp": "20260424000220",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -1714,7 +1795,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "46949591",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01869710",
@@ -1761,7 +1844,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2026-04-02",
       "stock_code": "0007J0",
@@ -1798,7 +1881,8 @@
       "archived_at": "2026-07-17",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "7865714"
     },
     {
       "corp_code": "01685677",
@@ -1852,7 +1936,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 2094.09,
       "commit_alloc": [
         {
@@ -1883,7 +1967,8 @@
       ],
       "report_rcp": "20260324000387",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "10850298"
     },
     {
       "corp_code": "01780608",
@@ -1937,7 +2022,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 2428.25,
       "commit_alloc": [
         {
@@ -1968,7 +2053,8 @@
       ],
       "report_rcp": "20260319000286",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "9717750"
     },
     {
       "corp_code": "01445024",
@@ -2022,7 +2108,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 1671.46,
       "commit_alloc": [
         {
@@ -2053,7 +2139,8 @@
       ],
       "report_rcp": "20260319000561",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "10572000"
     },
     {
       "corp_code": "01859500",
@@ -2107,7 +2194,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 1805.8,
       "commit_alloc": [
         {
@@ -2138,7 +2225,8 @@
       ],
       "report_rcp": "20260316001249",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "14776110"
     },
     {
       "corp_code": "01782183",
@@ -2192,7 +2280,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 1899.29,
       "commit_alloc": [
         {
@@ -2223,7 +2311,8 @@
       ],
       "report_rcp": "20260310002388",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "12956030"
     },
     {
       "corp_code": "01554508",
@@ -2276,7 +2365,7 @@
       "offer_shares": 2300000,
       "demand_ratio": 1124.21,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 2711.06,
       "commit_alloc": [
         {
@@ -2310,7 +2399,7 @@
       "report_rcp": "20260226002277",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -2354,7 +2443,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9333740",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01379563",
@@ -2444,7 +2535,7 @@
       "is_listing_ipo": true,
       "forecast_start": "2026-02-06",
       "forecast_end": "2026-02-12",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 1960.87,
       "commit_alloc": [
         {
@@ -2484,7 +2575,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8683200",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01203312",
@@ -2537,7 +2630,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 157.92,
       "commit_alloc": [
         {
@@ -2568,7 +2661,8 @@
       ],
       "report_rcp": "20260225005229",
       "archived_at": "2026-07-15",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "initial_shares": "405695151"
     },
     {
       "corp_code": "01516933",
@@ -2615,7 +2709,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2026-01-30",
       "stock_code": "0001A0",
@@ -2652,7 +2746,8 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "24791195"
     },
     {
       "corp_code": "01627363",
@@ -2705,7 +2800,7 @@
       "offer_shares": 5400000,
       "demand_ratio": 436.89,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "sub_ratio": 967.6,
       "commit_alloc": [
         {
@@ -2739,7 +2834,7 @@
       "report_rcp": "20251222000160",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -2783,7 +2878,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "34025440",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01385005",
@@ -2803,7 +2900,7 @@
       "offer_shares": 2470000,
       "demand_ratio": 231.87,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-12-24",
       "stock_code": "491000",
@@ -2869,7 +2966,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -2913,7 +3010,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "25004391",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01370322",
@@ -2933,7 +3032,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 1303.874,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-12-22",
       "stock_code": "0013V0",
@@ -3003,7 +3102,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3047,7 +3146,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9918656",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01596920",
@@ -3100,7 +3201,7 @@
       "offer_shares": 2060000,
       "demand_ratio": 848.91,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1865.96,
@@ -3134,7 +3235,7 @@
         }
       ],
       "report_rcp": "20251212000302",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3178,7 +3279,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "14027718",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01787355",
@@ -3198,7 +3301,7 @@
       "is_listing_ipo": true,
       "forecast_start": "2025-11-26",
       "forecast_end": "2025-12-02",
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-12-17",
       "stock_code": "478340",
@@ -3264,7 +3367,7 @@
         }
       ],
       "report_rcp": "20251211000109",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3308,7 +3411,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11570133",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01829819",
@@ -3361,7 +3466,7 @@
       "offer_shares": 1800000,
       "demand_ratio": 790.49,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1130.33,
@@ -3395,7 +3500,6 @@
         }
       ],
       "report_rcp": "20251209000239",
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3439,7 +3543,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8030324",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00949161",
@@ -3458,7 +3564,7 @@
       "offer_shares": 6100000,
       "demand_ratio": 959.96,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-12-15",
       "stock_code": "217590",
@@ -3524,7 +3630,7 @@
         }
       ],
       "report_rcp": "20251208000371",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3568,7 +3674,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "24094225",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01671285",
@@ -3622,7 +3730,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 607.39,
@@ -3653,7 +3761,8 @@
           "pct": 28.02
         }
       ],
-      "report_rcp": "20251205000407"
+      "report_rcp": "20251205000407",
+      "initial_shares": "11482113"
     },
     {
       "corp_code": "01211889",
@@ -3700,7 +3809,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-12-11",
       "stock_code": "261520",
@@ -3737,7 +3846,8 @@
       ],
       "report_rcp": "20251205000422",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "10277800"
     },
     {
       "corp_code": "01817920",
@@ -3791,7 +3901,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1429.63,
@@ -3822,7 +3932,8 @@
           "pct": 33.78
         }
       ],
-      "report_rcp": "20251204000409"
+      "report_rcp": "20251204000409",
+      "initial_shares": "9866730"
     },
     {
       "corp_code": "01957282",
@@ -3873,7 +3984,7 @@
       "underwriter": "삼성증권",
       "demand_ratio": 646.0,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 42.75,
@@ -3907,7 +4018,7 @@
         }
       ],
       "report_rcp": "20251126000196",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "offer_shares": 5000000,
       "commit_apply": [
         {
@@ -3952,7 +4063,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "35517731",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01781999",
@@ -4004,7 +4117,7 @@
       "offer_shares": 6430000,
       "demand_ratio": 671.98,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1736.77,
@@ -4038,7 +4151,6 @@
         }
       ],
       "report_rcp": "20251126000523",
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4082,7 +4194,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "64671161",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01381805",
@@ -4135,7 +4249,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 1152.98,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 2865.18,
@@ -4169,7 +4283,6 @@
         }
       ],
       "report_rcp": "20251121000203",
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4213,7 +4326,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12576922",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01194607",
@@ -4267,7 +4382,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 762.0,
@@ -4298,7 +4413,8 @@
           "pct": 25.6
         }
       ],
-      "report_rcp": "20251114002314"
+      "report_rcp": "20251114002314",
+      "initial_shares": "28976443"
     },
     {
       "corp_code": "01529982",
@@ -4350,7 +4466,7 @@
       "offer_shares": 1000000,
       "demand_ratio": 756.19,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1833.02,
@@ -4384,7 +4500,6 @@
         }
       ],
       "report_rcp": "20251114003028",
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4428,7 +4543,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9654438",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01138364",
@@ -4448,7 +4565,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 615.89,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-11-18",
       "stock_code": "403850",
@@ -4514,7 +4631,7 @@
         }
       ],
       "report_rcp": "20251111000120",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4558,7 +4675,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "14351010",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00677486",
@@ -4604,7 +4723,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-11-17",
       "stock_code": "0015G0",
@@ -4641,7 +4760,8 @@
           "pct": 4.76
         }
       ],
-      "report_rcp": "20251111000104"
+      "report_rcp": "20251111000104",
+      "initial_shares": "11702541"
     },
     {
       "corp_code": "01010615",
@@ -4695,7 +4815,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 884.88,
@@ -4726,7 +4846,8 @@
           "pct": 23.0
         }
       ],
-      "report_rcp": "20251107000275"
+      "report_rcp": "20251107000275",
+      "initial_shares": "5467550"
     },
     {
       "corp_code": "01786958",
@@ -4780,7 +4901,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 2203.97,
@@ -4811,7 +4932,8 @@
           "pct": 2.1
         }
       ],
-      "report_rcp": "20251107000220"
+      "report_rcp": "20251107000220",
+      "initial_shares": "7629882"
     },
     {
       "corp_code": "01745173",
@@ -4831,7 +4953,7 @@
       "offer_shares": 1760000,
       "demand_ratio": 1072.41,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-11-07",
       "stock_code": "469610",
@@ -4901,7 +5023,6 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4945,7 +5066,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8942900",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01810477",
@@ -4964,7 +5087,7 @@
       "offer_shares": 2916000,
       "demand_ratio": 1058.2,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-11-03",
       "stock_code": "486990",
@@ -5030,7 +5153,6 @@
         }
       ],
       "report_rcp": "20251028000334",
-      "commit_apply_missing": 3,
       "commit_apply": [
         {
           "period": "미확약",
@@ -5074,7 +5196,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "21346230",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00179489",
@@ -5128,7 +5252,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 704.4,
@@ -5159,7 +5283,8 @@
           "pct": 10.26
         }
       ],
-      "report_rcp": "20250923000309"
+      "report_rcp": "20250923000309",
+      "initial_shares": "14600000"
     },
     {
       "corp_code": "01803635",
@@ -5238,7 +5363,7 @@
       ],
       "report_rcp": "20250915000298",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 11400,
       "band_high": 13200,
       "final_price": 13200,
@@ -5251,7 +5376,7 @@
       "offer_shares": 1580000,
       "demand_ratio": 1145.4,
       "is_listing_ipo": true,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -5295,7 +5420,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "10803486",
+      "offering_attempt": 2
     },
     {
       "corp_code": "01565054",
@@ -5315,7 +5442,7 @@
       "offer_shares": 1950000,
       "demand_ratio": 182.15,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-08-25",
       "stock_code": "318060",
@@ -5448,7 +5575,9 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11187177",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00185301",
@@ -5502,7 +5631,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1154.54,
@@ -5533,7 +5662,8 @@
           "pct": 93.4
         }
       ],
-      "report_rcp": "20250814001459"
+      "report_rcp": "20250814001459",
+      "initial_shares": "5105400"
     },
     {
       "corp_code": "00683061",
@@ -5674,7 +5804,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "36502352"
     },
     {
       "corp_code": "01294110",
@@ -5728,7 +5859,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1472.48,
@@ -5772,7 +5903,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9436564"
     },
     {
       "corp_code": "00141583",
@@ -5826,7 +5958,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 927.51,
@@ -5857,7 +5989,8 @@
           "pct": 20.64
         }
       ],
-      "report_rcp": "20250808000484"
+      "report_rcp": "20250808000484",
+      "initial_shares": "41210450"
     },
     {
       "corp_code": "01577952",
@@ -5911,7 +6044,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 470.11,
@@ -5955,7 +6088,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "16629426"
     },
     {
       "corp_code": "00914341",
@@ -6009,7 +6143,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1880.77,
@@ -6040,7 +6174,8 @@
           "pct": 46.42
         }
       ],
-      "report_rcp": "20250731000455"
+      "report_rcp": "20250731000455",
+      "initial_shares": "12783001"
     },
     {
       "corp_code": "00182696",
@@ -6087,7 +6222,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-08-01",
       "stock_code": "439260",
@@ -6124,7 +6259,8 @@
           "pct": 19.92
         }
       ],
-      "report_rcp": "20250725000629"
+      "report_rcp": "20250725000629",
+      "initial_shares": "38088730"
     },
     {
       "corp_code": "01688568",
@@ -6254,7 +6390,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11035208"
     },
     {
       "corp_code": "01708163",
@@ -6315,7 +6452,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 577.03,
@@ -6355,7 +6492,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "10898683"
     },
     {
       "corp_code": "01782004",
@@ -6401,7 +6539,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-07-25",
       "stock_code": "380550",
@@ -6451,7 +6589,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12198866"
     },
     {
       "corp_code": "01380578",
@@ -6581,7 +6720,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "10957422"
     },
     {
       "corp_code": "01649620",
@@ -6722,7 +6862,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9750991"
     },
     {
       "corp_code": "00874168",
@@ -6863,7 +7004,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "23605000"
     },
     {
       "corp_code": "01639508",
@@ -6992,7 +7134,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8879200"
     },
     {
       "corp_code": "01432598",
@@ -7130,7 +7273,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "23650793"
     },
     {
       "corp_code": "01764099",
@@ -7183,7 +7327,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 999.59,
@@ -7214,7 +7358,8 @@
           "pct": 93.73
         }
       ],
-      "report_rcp": "20250530002147"
+      "report_rcp": "20250530002147",
+      "initial_shares": "5752032"
     },
     {
       "corp_code": "00204323",
@@ -7261,7 +7406,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-06-02",
       "stock_code": "475430",
@@ -7298,7 +7443,8 @@
       ],
       "report_rcp": "20250527000474",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "17848110"
     },
     {
       "corp_code": "01374443",
@@ -7344,7 +7490,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-05-23",
       "stock_code": "287840",
@@ -7395,7 +7541,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "15021960"
     },
     {
       "corp_code": "01649204",
@@ -7442,7 +7589,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-05-22",
       "stock_code": "483650",
@@ -7479,7 +7626,8 @@
           "pct": 59.26
         }
       ],
-      "report_rcp": "20250519000048"
+      "report_rcp": "20250519000048",
+      "initial_shares": "12484665"
     },
     {
       "corp_code": "01657197",
@@ -7616,7 +7764,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "15044430"
     },
     {
       "corp_code": "01203659",
@@ -7775,7 +7924,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "91272269"
     },
     {
       "corp_code": "01335143",
@@ -7823,7 +7973,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-05-12",
       "stock_code": "376900",
@@ -7896,7 +8046,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "15873789"
     },
     {
       "corp_code": "00488244",
@@ -7943,7 +8094,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-05-09",
       "stock_code": "136150",
@@ -7980,7 +8131,8 @@
           "pct": 49.31
         }
       ],
-      "report_rcp": "20250429000162"
+      "report_rcp": "20250429000162",
+      "initial_shares": "8381030"
     },
     {
       "corp_code": "01626391",
@@ -8026,7 +8178,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-05-09",
       "stock_code": "476040",
@@ -8064,7 +8216,8 @@
         }
       ],
       "report_rcp": "20250430001326",
-      "offer_shares": 1200000
+      "offer_shares": 1200000,
+      "initial_shares": "6585760"
     },
     {
       "corp_code": "01594791",
@@ -8201,7 +8354,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12978382"
     },
     {
       "corp_code": "00406222",
@@ -8248,7 +8402,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-04-28",
       "stock_code": "081180",
@@ -8300,7 +8454,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8825535"
     },
     {
       "corp_code": "01803927",
@@ -8346,7 +8501,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-04-03",
       "stock_code": "481070",
@@ -8397,7 +8552,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "14330250"
     },
     {
       "corp_code": "01563667",
@@ -8445,7 +8601,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-03-24",
       "stock_code": "462860",
@@ -8510,7 +8666,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "71756523"
     },
     {
       "corp_code": "01590980",
@@ -8530,7 +8687,7 @@
       "offer_shares": 920000,
       "demand_ratio": 1213.84,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-03-21",
       "stock_code": "444530",
@@ -8660,7 +8817,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "6418644"
     },
     {
       "corp_code": "00404941",
@@ -8800,7 +8958,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11121141"
     },
     {
       "corp_code": "01458161",
@@ -8929,7 +9088,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "15450915"
     },
     {
       "corp_code": "01210677",
@@ -8972,7 +9132,7 @@
         }
       },
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 13500,
       "band_high": 15000,
       "final_price": 15000,
@@ -9045,7 +9205,8 @@
           "pct": 0.0,
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "32481408"
     },
     {
       "corp_code": "00112998",
@@ -9062,7 +9223,7 @@
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 26000,
       "band_high": 31800,
       "final_price": 26000,
@@ -9130,7 +9291,8 @@
           "pct": 51.35
         }
       ],
-      "report_rcp": "20250310000183"
+      "report_rcp": "20250310000183",
+      "initial_shares": "69821598"
     },
     {
       "corp_code": "01022142",
@@ -9177,7 +9339,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-03-07",
       "stock_code": "226590",
@@ -9214,7 +9376,8 @@
           "pct": 80.6
         }
       ],
-      "report_rcp": "20250227005984"
+      "report_rcp": "20250227005984",
+      "initial_shares": "10716784"
     },
     {
       "corp_code": "01549472",
@@ -9350,7 +9513,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "17850820"
     },
     {
       "corp_code": "01747977",
@@ -9396,7 +9560,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-02-25",
       "stock_code": "489500",
@@ -9433,7 +9597,8 @@
           "pct": 72.17
         }
       ],
-      "report_rcp": "20250218001236"
+      "report_rcp": "20250218001236",
+      "initial_shares": "6391238"
     },
     {
       "corp_code": "01137860",
@@ -9498,7 +9663,8 @@
       "report_rcp": "20250218000018",
       "schedule_hidden": false,
       "manual_commit_apply": {},
-      "commit_apply_missing": 3
+      "commit_apply_missing": 3,
+      "initial_shares": "7126000"
     },
     {
       "corp_code": "00367400",
@@ -9631,7 +9797,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12390358"
     },
     {
       "corp_code": "01233465",
@@ -9651,7 +9818,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 117.83,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-02-17",
       "stock_code": "303810",
@@ -9781,7 +9948,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "31984140"
     },
     {
       "corp_code": "01658831",
@@ -9842,7 +10010,7 @@
       ],
       "report_rcp": "20250207000188",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 24000,
       "band_high": 30000,
       "final_price": 20000,
@@ -9895,7 +10063,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "21719590"
     },
     {
       "corp_code": "01073261",
@@ -9941,7 +10110,7 @@
       ],
       "report_rcp": "20250206000508",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 9000,
       "band_high": 10500,
       "final_price": 10500,
@@ -9980,7 +10149,8 @@
           "pct": 94.23
         }
       ],
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "initial_shares": "20933940"
     },
     {
       "corp_code": "01208751",
@@ -10125,7 +10295,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9714978"
     },
     {
       "corp_code": "00139834",
@@ -10172,7 +10343,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-02-05",
       "stock_code": "064400",
@@ -10222,7 +10393,8 @@
           "locked": false,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "96885948"
     },
     {
       "corp_code": "01429220",
@@ -10296,7 +10468,7 @@
       ],
       "report_rcp": "20250123000207",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 4000,
       "band_high": 5000,
       "final_price": 5000,
@@ -10348,7 +10520,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "36028500"
     },
     {
       "corp_code": "01728167",
@@ -10396,7 +10569,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-02-04",
       "stock_code": "462980",
@@ -10461,7 +10634,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "18234437"
     },
     {
       "corp_code": "00863533",
@@ -10508,7 +10682,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-02-03",
       "stock_code": "482630",
@@ -10545,7 +10719,8 @@
           "pct": 96.21
         }
       ],
-      "report_rcp": "20250121000382"
+      "report_rcp": "20250121000382",
+      "initial_shares": "21888280"
     },
     {
       "corp_code": "00351427",
@@ -10565,7 +10740,7 @@
       "offer_shares": 900000,
       "demand_ratio": 64.85,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-01-24",
       "stock_code": "096250",
@@ -10695,7 +10870,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13106609"
     },
     {
       "corp_code": "01590528",
@@ -10745,7 +10921,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-01-24",
       "stock_code": "450950",
@@ -10831,7 +11007,8 @@
           "visible": true
         }
       },
-      "underwriter": "DB금융투자"
+      "underwriter": "DB금융투자",
+      "initial_shares": "37627592"
     },
     {
       "corp_code": "01455492",
@@ -10988,7 +11165,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13807469"
     },
     {
       "corp_code": "01374717",
@@ -11146,7 +11324,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "5646525"
     },
     {
       "corp_code": "01455410",
@@ -11192,7 +11371,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-12-26",
       "stock_code": "387570",
@@ -11230,7 +11409,8 @@
         }
       ],
       "report_rcp": "20241219000098",
-      "offer_shares": 900000
+      "offer_shares": 900000,
+      "initial_shares": "5625900"
     },
     {
       "corp_code": "00870065",
@@ -11381,7 +11561,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9627600"
     },
     {
       "corp_code": "01632912",
@@ -11429,7 +11610,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-12-19",
       "stock_code": "476060",
@@ -11481,7 +11662,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "45407840"
     },
     {
       "corp_code": "01423916",
@@ -11633,7 +11815,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12195957"
     },
     {
       "corp_code": "01519790",
@@ -11790,7 +11973,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "9153900"
     },
     {
       "corp_code": "01453944",
@@ -11837,7 +12021,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-12-16",
       "stock_code": "457600",
@@ -11874,7 +12058,8 @@
           "pct": 86.22
         }
       ],
-      "report_rcp": "20241209000122"
+      "report_rcp": "20241209000122",
+      "initial_shares": "13707500"
     },
     {
       "corp_code": "01445440",
@@ -11894,7 +12079,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 997.37,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-20",
       "stock_code": "459100",
@@ -12024,7 +12209,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13466100"
     },
     {
       "corp_code": "01207901",
@@ -12044,7 +12230,7 @@
       "offer_shares": 1010000,
       "demand_ratio": 1163.2,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-19",
       "stock_code": "466410",
@@ -12174,7 +12360,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "5037023"
     },
     {
       "corp_code": "01563922",
@@ -12193,7 +12380,7 @@
       "market": "코스닥",
       "demand_ratio": 343.66,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-18",
       "stock_code": "413390",
@@ -12324,7 +12511,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11580180"
     },
     {
       "corp_code": "01383779",
@@ -12482,7 +12670,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "7929835"
     },
     {
       "corp_code": "01506617",
@@ -12501,7 +12690,7 @@
       "market": "코스닥",
       "demand_ratio": 254.59,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-14",
       "stock_code": "394800",
@@ -12597,7 +12786,8 @@
           "pct": 0.93,
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "31822553"
     },
     {
       "corp_code": "01605282",
@@ -12749,7 +12939,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "18406089"
     },
     {
       "corp_code": "01703849",
@@ -12895,7 +13086,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11059322"
     },
     {
       "corp_code": "01663116",
@@ -12941,7 +13133,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-08",
       "stock_code": "163280",
@@ -12987,7 +13179,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13603078"
     },
     {
       "corp_code": "01573336",
@@ -13131,7 +13324,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "13476174"
     },
     {
       "corp_code": "00968607",
@@ -13178,7 +13372,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-06",
       "stock_code": "475560",
@@ -13215,7 +13409,8 @@
           "pct": 49.64
         }
       ],
-      "report_rcp": "20241031000389"
+      "report_rcp": "20241031000389",
+      "initial_shares": "14827970"
     },
     {
       "corp_code": "01480708",
@@ -13231,7 +13426,7 @@
       "final_price": 23000,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "corp_verified": true,
       "last_rcept_no": "20241022000107",
       "band_low": 16400,
@@ -13351,7 +13546,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "7203187"
     },
     {
       "corp_code": "00814582",
@@ -13481,7 +13677,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "39145558"
     },
     {
       "corp_code": "01641600",
@@ -13500,7 +13697,7 @@
       "market": "코스닥",
       "demand_ratio": 973.12,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-01",
       "stock_code": "475580",
@@ -13627,7 +13824,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13624900"
     },
     {
       "corp_code": "00319272",
@@ -13673,7 +13871,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-31",
       "stock_code": "458650",
@@ -13711,7 +13909,8 @@
       "report_rcp": "20241024000340",
       "schedule_hidden": false,
       "manual_commit_apply": {},
-      "offer_shares": 3000000
+      "offer_shares": 3000000,
+      "initial_shares": "15045670"
     },
     {
       "corp_code": "01784914",
@@ -13850,7 +14049,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "25459239"
     },
     {
       "corp_code": "01270749",
@@ -14002,7 +14202,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "13149010"
     },
     {
       "corp_code": "01588189",
@@ -14024,7 +14225,7 @@
       },
       "archived_at": "2026-07-18",
       "schedule_hidden": false,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "corp_verified": true,
       "last_rcept_no": "20241014000124",
       "band_low": 20000,
@@ -14104,7 +14305,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "11806894"
     },
     {
       "corp_code": "01016309",
@@ -14150,7 +14352,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-22",
       "stock_code": "457370",
@@ -14187,7 +14389,8 @@
           "pct": 81.25
         }
       ],
-      "report_rcp": "20241011000495"
+      "report_rcp": "20241011000495",
+      "initial_shares": "8062134"
     },
     {
       "corp_code": "01636565",
@@ -14339,7 +14542,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "17817696"
     },
     {
       "corp_code": "01284876",
@@ -14386,7 +14590,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-18",
       "stock_code": "465480",
@@ -14439,7 +14643,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "10137772"
     },
     {
       "corp_code": "01023211",
@@ -14487,7 +14692,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-18",
       "stock_code": "209640",
@@ -14539,7 +14744,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "28443146"
     },
     {
       "corp_code": "01275489",
@@ -14679,7 +14885,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "12905251"
     },
     {
       "corp_code": "01293485",
@@ -14694,7 +14901,7 @@
       "management_status": "자동",
       "market": "코스닥",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "last_rcept_no": "20240913000394",
       "band_low": 28000,
       "band_high": 34000,
@@ -14766,7 +14973,8 @@
       ],
       "report_rcp": "20240924000019",
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "initial_shares": "13117920"
     },
     {
       "corp_code": "01706794",
@@ -14906,7 +15114,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "13993263"
     },
     {
       "corp_code": "00657224",
@@ -15050,7 +15259,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "13323933"
     },
     {
       "corp_code": "01544468",
@@ -15097,7 +15307,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-08-23",
       "stock_code": "456070",
@@ -15134,7 +15344,8 @@
           "pct": 97.8
         }
       ],
-      "report_rcp": "20240816000109"
+      "report_rcp": "20240816000109",
+      "initial_shares": "11029517"
     },
     {
       "corp_code": "01704680",
@@ -15181,7 +15392,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-08-22",
       "stock_code": "476080",
@@ -15233,7 +15444,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "8077000"
     },
     {
       "corp_code": "01232192",
@@ -15279,7 +15491,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-08-21",
       "stock_code": "464280",
@@ -15317,7 +15529,8 @@
         }
       ],
       "report_rcp": "20240814003667",
-      "offer_shares": 1000000
+      "offer_shares": 1000000,
+      "initial_shares": "5530000"
     },
     {
       "corp_code": "01689266",
@@ -15469,7 +15682,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "7486442"
     },
     {
       "corp_code": "01385050",
@@ -15606,7 +15820,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "8277286"
     },
     {
       "corp_code": "00372129",
@@ -15740,7 +15955,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "14592545"
     },
     {
       "corp_code": "00407294",
@@ -15884,7 +16100,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "4364368"
     },
     {
       "corp_code": "01138595",
@@ -16030,7 +16247,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "10196588"
     },
     {
       "corp_code": "01678312",
@@ -16160,7 +16378,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "15119370"
     },
     {
       "corp_code": "01419205",
@@ -16306,7 +16525,8 @@
           "source": "manual_fixed",
           "visible": true
         }
-      ]
+      ],
+      "initial_shares": "13455280"
     },
     {
       "corp_code": "00366438",
@@ -16436,7 +16656,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "30615850"
     },
     {
       "corp_code": "01492217",
@@ -16596,7 +16817,8 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "17294394"
     },
     {
       "corp_code": "01384787",
@@ -16726,74 +16948,11 @@
           "locked": true,
           "visible": true
         }
-      }
+      },
+      "initial_shares": "58741890"
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "2197622700"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "301000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "3070100"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "60513400"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "12594000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "166418000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
     {
       "date": "2026-07-19",
       "name": "동국생명과학",
@@ -20729,6 +20888,70 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "인제니아테라퓨틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(미확약)",
+      "old": 0,
+      "new": 184900059
+    },
+    {
+      "date": "2026-08-04",
+      "name": "인제니아테라퓨틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(15일)",
+      "old": 0,
+      "new": 418407
+    },
+    {
+      "date": "2026-08-04",
+      "name": "인제니아테라퓨틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(1개월)",
+      "old": 0,
+      "new": 3750000
+    },
+    {
+      "date": "2026-08-04",
+      "name": "인제니아테라퓨틱스",
+      "type": "수기변경",
+      "field": "기관신청물량(3개월)",
+      "old": 0,
+      "new": 45000
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -20743,13 +20966,13 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-03",
+      "excluded_at": "2026-08-04",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-03",
+      "excluded_at": "2026-08-04",
       "memo": "운영자 삭제 요청 이관"
     }
   }
