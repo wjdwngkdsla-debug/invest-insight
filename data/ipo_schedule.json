@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04 13:05",
+  "updated": "2026-08-04 23:13",
   "items": [
     {
       "corp_code": "00104069",
@@ -75,7 +75,7 @@
       "name": "인제니아테라퓨틱스",
       "management_name": "인제니아테라퓨틱스",
       "first_filing_date": "20260610",
-      "last_rcept_no": "20260728000402",
+      "last_rcept_no": "20260804000371",
       "withdrawn": false,
       "review_pending": false,
       "management_status": "자동",
@@ -156,7 +156,36 @@
           "visible": true
         }
       },
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "sub_ratio": 3.09,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 45000,
+          "pct": 1.2
+        },
+        {
+          "period": "1개월",
+          "qty": 72358,
+          "pct": 2.0
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "미확약",
+          "qty": 3588138,
+          "pct": 96.8
+        }
+      ],
+      "report_rcp": "20260804000371"
     },
     {
       "corp_code": "01461730",
@@ -352,32 +381,6 @@
       "offering_attempt": 1
     },
     {
-      "corp_code": "01801026",
-      "name": "브릴스",
-      "first_filing_date": "20260713",
-      "last_rcept_no": "20260713000275",
-      "band_low": 16500,
-      "band_high": 19500,
-      "forecast_start": "2026-08-14",
-      "forecast_end": "2026-08-21",
-      "sub_start": "2026-08-25",
-      "sub_end": "2026-08-26",
-      "payment_date": "2026-08-28",
-      "underwriter": "아이비케이투자증권",
-      "market": "코스닥",
-      "offer_shares": 1200000,
-      "is_listing_ipo": true,
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "ipo_parse_version": 4,
-      "schedule_hidden": false,
-      "commit_apply_missing": 4,
-      "offering_attempt": 1
-    },
-    {
       "corp_code": "01586923",
       "name": "스카이랩스",
       "first_filing_date": "20260707",
@@ -454,6 +457,32 @@
       "offering_attempt": 1
     },
     {
+      "corp_code": "01801026",
+      "name": "브릴스",
+      "first_filing_date": "20260713",
+      "last_rcept_no": "20260804000332",
+      "band_low": 16500,
+      "band_high": 19500,
+      "forecast_start": "2026-08-31",
+      "forecast_end": "2026-09-04",
+      "sub_start": "2026-09-08",
+      "sub_end": "2026-09-09",
+      "payment_date": "2026-09-11",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "offer_shares": 1200000,
+      "is_listing_ipo": true,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "ipo_parse_version": 4,
+      "schedule_hidden": false,
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
+    },
+    {
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
@@ -509,7 +538,7 @@
       "corp_code": "00960623",
       "name": "덕산넵코어스",
       "first_filing_date": "20260724",
-      "last_rcept_no": "20260724000342",
+      "last_rcept_no": "20260804000402",
       "band_low": 12400,
       "band_high": 14600,
       "forecast_start": "2026-09-08",
@@ -10251,7 +10280,7 @@
       ],
       "report_rcp": "20250206000139",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 9700,
       "band_high": 11400,
       "final_price": 11400,
@@ -10264,7 +10293,7 @@
       "offer_shares": 1300000,
       "demand_ratio": 1148.16,
       "is_listing_ipo": true,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -10319,7 +10348,8 @@
           "visible": true
         }
       },
-      "initial_shares": "9714978"
+      "initial_shares": "9714978",
+      "offering_attempt": 2
     },
     {
       "corp_code": "00139834",
@@ -10544,7 +10574,8 @@
           "visible": true
         }
       },
-      "initial_shares": "36028500"
+      "initial_shares": "36028500",
+      "offering_attempt": 2
     },
     {
       "corp_code": "01728167",
@@ -10658,7 +10689,8 @@
           "visible": true
         }
       },
-      "initial_shares": "18234437"
+      "initial_shares": "18234437",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00863533",
@@ -10894,7 +10926,8 @@
           "visible": true
         }
       },
-      "initial_shares": "13106609"
+      "initial_shares": "13106609",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01590528",
@@ -11031,7 +11064,8 @@
         }
       },
       "underwriter": "DB금융투자",
-      "initial_shares": "37627592"
+      "initial_shares": "37627592",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01455492",
@@ -11050,7 +11084,7 @@
       "offer_shares": 1361000,
       "demand_ratio": 114.98,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2025-01-24",
       "stock_code": "373160",
@@ -11097,7 +11131,7 @@
         }
       ],
       "report_rcp": "20250120000324",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_apply": {
         "미확약": {
           "qty": 117361700,
@@ -11189,7 +11223,8 @@
           "visible": true
         }
       },
-      "initial_shares": "13807469"
+      "initial_shares": "13807469",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01374717",
@@ -11206,7 +11241,7 @@
       "final_price": 19000,
       "schedule_hidden": false,
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 19000,
       "band_high": 23000,
       "forecast_start": "2025-01-02",
@@ -11256,7 +11291,7 @@
         }
       ],
       "report_rcp": "20250116000090",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_apply": {
         "미확약": {
           "qty": 637463600,
@@ -11348,7 +11383,8 @@
           "visible": true
         }
       },
-      "initial_shares": "5646525"
+      "initial_shares": "5646525",
+      "offering_attempt": 2
     },
     {
       "corp_code": "01455410",
@@ -11452,7 +11488,7 @@
       "offer_shares": 1857400,
       "demand_ratio": 129.1,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-12-24",
       "stock_code": "177900",
@@ -11525,7 +11561,7 @@
         }
       ],
       "report_rcp": "20241218000273",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -11585,7 +11621,8 @@
           "visible": true
         }
       },
-      "initial_shares": "9627600"
+      "initial_shares": "9627600",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01632912",
@@ -11686,7 +11723,8 @@
           "visible": true
         }
       },
-      "initial_shares": "45407840"
+      "initial_shares": "45407840",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01423916",
@@ -11767,7 +11805,7 @@
       ],
       "report_rcp": "20241212000146",
       "corp_verified": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "band_low": 10100,
       "band_high": 12300,
       "final_price": 7300,
@@ -11779,7 +11817,7 @@
       "offer_shares": 1423000,
       "demand_ratio": 635.05,
       "is_listing_ipo": true,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -11839,7 +11877,8 @@
           "visible": true
         }
       },
-      "initial_shares": "12195957"
+      "initial_shares": "12195957",
+      "offering_attempt": 2
     },
     {
       "corp_code": "01519790",
@@ -11858,7 +11897,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 8.18,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-12-16",
       "stock_code": "484870",
@@ -11905,7 +11944,7 @@
         }
       ],
       "report_rcp": "20241210000560",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_apply": {
         "미확약": {
           "qty": 10803000,
@@ -11997,7 +12036,8 @@
           "visible": true
         }
       },
-      "initial_shares": "9153900"
+      "initial_shares": "9153900",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01453944",
@@ -12233,7 +12273,8 @@
           "visible": true
         }
       },
-      "initial_shares": "13466100"
+      "initial_shares": "13466100",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01207901",
@@ -12384,7 +12425,8 @@
           "visible": true
         }
       },
-      "initial_shares": "5037023"
+      "initial_shares": "5037023",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01563922",
@@ -12535,7 +12577,8 @@
           "visible": true
         }
       },
-      "initial_shares": "11580180"
+      "initial_shares": "11580180",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01383779",
@@ -12555,7 +12598,7 @@
       "offer_shares": 1950000,
       "demand_ratio": 283.9,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-18",
       "stock_code": "475660",
@@ -12602,7 +12645,7 @@
       ],
       "report_rcp": "20241112000145",
       "schedule_hidden": false,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_apply": {
         "미확약": {
           "qty": 391499000,
@@ -12694,7 +12737,8 @@
           "visible": true
         }
       },
-      "initial_shares": "7929835"
+      "initial_shares": "7929835",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01506617",
@@ -16978,70 +17022,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "아이에스티이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이에스티이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "13994000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이에스티이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "4914000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "2554565004"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "1809000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "2150000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "12275000"
-    },
-    {
-      "date": "2026-07-19",
       "name": "와이즈넛",
       "type": "수기변경(검토필요)",
       "field": "신청_미확약",
@@ -20951,6 +20931,70 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "브릴스",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-08-14",
+      "new": "2026-08-31"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "브릴스",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-08-21",
+      "new": "2026-09-04"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "브릴스",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-25",
+      "new": "2026-09-08"
+    },
+    {
+      "date": "2026-08-04",
+      "name": "브릴스",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-08-26",
+      "new": "2026-09-09"
     },
     {
       "date": "2026-08-04",
