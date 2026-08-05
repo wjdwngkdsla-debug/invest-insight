@@ -23,9 +23,6 @@ export default function NavTabs() {
         className={`${TAB_BASE} ${TAB_IDLE} inline-flex items-center gap-1`}
       >
         인사이트
-        <span aria-hidden className="text-[11px] leading-none text-gray-400">
-          ↗
-        </span>
       </Link>
     </nav>
   );

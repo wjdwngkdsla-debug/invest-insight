@@ -116,6 +116,13 @@ function ipoFocusEvent(item: IpoItem, today = new Date()): IpoFocusEvent | null 
 // 오늘 뭔가 진행 중 = 빨강(active), 대기 = 파랑(waiting), 끝난 상태 = 회색(done)
 export function ipoStatus(item: IpoItem, today = new Date()): IpoStatus {
   if (item.withdrawn) return { label: "공모 철회", tone: "done" };
+  // 상장일이 확정된 종목은 다른 진행 일정과 관계없이 상장 상태를 절대 우선한다.
+  // 청약·수요예측이 끝난 뒤 다시 아래로 내려가는 일을 막는다.
+  if (item.listing_date) {
+    const listingDay = dDay(item.listing_date, today);
+    if (listingDay === 0) return { label: "오늘 상장", tone: "active" };
+    if (listingDay > 0) return { label: `상장 예정 D-${listingDay}`, tone: "waiting" };
+  }
   const event = ipoFocusEvent(item, today);
   if (event) {
     if (event.kind === "listing") {
@@ -138,14 +145,18 @@ export function ipoStatus(item: IpoItem, today = new Date()): IpoStatus {
   return { label: "공모 준비", tone: "waiting" };
 }
 
-// 노출 우선순위: 오늘 진행 중 → 가장 가까운 다음 일정 → 나머지.
-// 같은 날이면 상장 → 청약 → 수요예측 순이다.
+// 절대 우선순위: 상장일 확정 종목 → 오늘 진행 중 → 가장 가까운 다음 일정 → 나머지.
+// 상장 예정끼리는 상장일이 가까운 순서다.
 export function ipoSortKey(item: IpoItem, today = new Date()): [number, number, number, string] {
+  if (item.listing_date) {
+    const listingDay = dDay(item.listing_date, today);
+    if (listingDay >= 0) return [0, listingDay, EVENT_PRIORITY.listing, item.name];
+  }
   const event = ipoFocusEvent(item, today);
   if (event) {
-    return [event.active ? 0 : 1, event.day, EVENT_PRIORITY[event.kind], item.name];
+    return [event.active ? 1 : 2, event.day, EVENT_PRIORITY[event.kind], item.name];
   }
-  return [2, Number.MAX_SAFE_INTEGER, 9, item.name];
+  return [3, Number.MAX_SAFE_INTEGER, 9, item.name];
 }
 
 export function getSortedIpoItems(today = new Date()): IpoItem[] {

@@ -180,7 +180,6 @@ export function StockHero({
               className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-3 text-[13px] font-bold text-white transition-colors hover:bg-blue-700"
             >
               {contentLabel}
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
             </Link>
           </div>
         </div>
@@ -198,7 +197,6 @@ export function StockHero({
               className="group inline-flex h-8 items-center gap-1.5 rounded-full bg-blue-600 px-3.5 text-[11.5px] font-semibold text-white transition-colors hover:bg-blue-700"
             >
               {contentLabel}
-              <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-2.5">

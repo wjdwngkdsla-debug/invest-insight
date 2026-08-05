@@ -20,17 +20,21 @@ function groupTitle(group: UpcomingGroup): string {
 }
 
 
-// 공모가 대비 등락률 + 추세 화살표 — 상승 빨강, 하락 파랑 (국내 시장 관례)
-function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: number }) {
+// 메인에서는 상세 설명을 덜고 추세만 보여준다. 거래정지 종목은 오래된 종가 대신 상태를 표시한다.
+function TrendBadge({ ipoPrice, closePrice, tradingSuspended }: { ipoPrice: number; closePrice: number; tradingSuspended?: boolean }) {
+  if (tradingSuspended) {
+    return (
+      <span className="flex shrink-0 items-center rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-bold text-gray-600">
+        거래정지
+      </span>
+    );
+  }
   if (!ipoPrice || !closePrice) return null;
   const pct = ((closePrice - ipoPrice) / ipoPrice) * 100;
   const rounded = Math.round(pct * 10) / 10;
   const isUp = rounded >= 0;
   return (
-    <span
-      className={`flex shrink-0 flex-col items-center gap-0.5 ${isUp ? "text-red-600" : "text-blue-600"}`}
-      title="공모가 대비 등락률"
-    >
+    <span className={`flex shrink-0 flex-col items-center gap-0.5 ${isUp ? "text-red-600" : "text-blue-600"}`}>
       <svg width="34" height="20" viewBox="0 0 34 20" fill="none" aria-hidden>
         {isUp ? (
           <>
@@ -48,7 +52,6 @@ function TrendBadge({ ipoPrice, closePrice }: { ipoPrice: number; closePrice: nu
         {isUp ? "+" : ""}
         {rounded}%
       </span>
-      <span className="text-[10px] leading-none text-gray-400">공모가 대비</span>
     </span>
   );
 }
@@ -105,7 +108,7 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
               {formatQty(event.qty)}주 ({event.pct}%)
             </p>
           </div>
-          <TrendBadge ipoPrice={event.ipoPrice} closePrice={event.closePrice} />
+          <TrendBadge ipoPrice={event.ipoPrice} closePrice={event.closePrice} tradingSuspended={event.tradingSuspended} />
         </div>
       </Link>
       <EventHoverCard event={event} />

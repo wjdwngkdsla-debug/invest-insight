@@ -45,6 +45,7 @@ export interface StockLockup {
   shares: number; // 최근 상장주식수(KRX) — 비율·종가 시가총액 기준
   initial_shares?: number; // 상장 시점 주식수 — 공모가 기준 시가총액 산출용
   close_price: number;
+  trading_suspended?: boolean; // KRX 종목기본정보에는 있으나 당일 시세에서 빠진 거래정지 종목
   market_cap?: number;
   ipo_price?: number; // 확정 공모가(원). 0 또는 없음 = 미확인
   content_url?: string; // 종목 분석 포스팅 링크(종목관리 탭 입력). 없으면 기본 블로그

@@ -72,6 +72,7 @@ export interface UpcomingGroup {
   listing_date: string;
   shares: number;
   closePrice: number;
+  tradingSuspended?: boolean;
   ipoPrice: number;
   tradable_date: string;
   date_display: string;
@@ -258,6 +259,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
       listing_date: stock.listing_date,
       shares: stock.shares,
       closePrice: stock.close_price,
+      tradingSuspended: stock.trading_suspended,
       ipoPrice: stock.ipo_price || 0,
       tradable_date: tradableDate,
       date_display: events[0]?.date_display || tradableDate,

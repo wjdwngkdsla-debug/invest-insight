@@ -88,6 +88,14 @@ const GROUP_BG: Record<CalendarEventKind, string> = {
   listing: "bg-emerald-50/70",
 };
 
+// 일정이 있는 날은 날짜 머리 부분만 채워 빈 줄이나 렌더링 장애처럼 보이지 않게 한다.
+const DAY_HEADER_STYLE: Record<CalendarEventKind, string> = {
+  lockup: "bg-blue-100 text-blue-700",
+  forecast: "bg-violet-100 text-violet-700",
+  sub: "bg-amber-100 text-amber-800",
+  listing: "bg-emerald-100 text-emerald-800",
+};
+
 
 
 
@@ -298,6 +306,18 @@ export function LockupCalendar({
     return ev.kind === "lockup" ? `/stock/${ev.code}` : "/ipo";
   }
 
+  function dayHeaderKind(dateStr: string): CalendarEventKind | null {
+    const kinds: CalendarEventKind[] = [];
+    for (const event of eventsByDate.get(dateStr) || []) {
+      const kind = event.kind || "lockup";
+      if (active.has(kind)) kinds.push(kind);
+    }
+    for (const event of rangeEvents) {
+      if (active.has(event.kind) && event.start <= dateStr && dateStr <= event.end) kinds.push(event.kind);
+    }
+    return kinds.sort((a, b) => KIND_ORDER[a] - KIND_ORDER[b])[0] || null;
+  }
+
 
 
 
@@ -406,10 +426,17 @@ export function LockupCalendar({
               <div className="relative grid min-h-20 grid-cols-5 gap-x-1.5 pb-1" style={{ gridAutoRows: "min-content" }}>
                 {week.map((cell, i) => {
                   const holidayName = cell ? holidays[cell.dateStr] : undefined;
+                  const headerKind = cell && !holidayName ? dayHeaderKind(cell.dateStr) : null;
                   return (
-                    <div key={`day-${i}`} style={{ gridColumn: i + 1, gridRow: 1 }} className="px-1.5 pb-0.5 pt-1.5">
+                    <div
+                      key={`day-${i}`}
+                      style={{ gridColumn: i + 1, gridRow: 1 }}
+                      className={`mx-px rounded-t-md px-1.5 pb-1 pt-1.5 ${
+                        holidayName ? "bg-rose-50 text-rose-500" : headerKind ? DAY_HEADER_STYLE[headerKind] : "text-gray-400"
+                      }`}
+                    >
                       {cell && (
-                        <p className={`truncate text-[11px] font-semibold ${holidayName ? "text-rose-400" : "text-gray-400"}`}>
+                        <p className="truncate text-[11px] font-semibold">
                           {cell.day}
                           {holidayName ? ` · ${holidayName}` : ""}
                         </p>

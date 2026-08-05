@@ -108,7 +108,7 @@ if str(ROOT_DIR) not in sys.path:
 
 
 from scripts.config import require_env
-from scripts.sources.krx import find_stock_by_name, krx_snapshot
+from scripts.sources.krx import find_stock_by_name, krx_snapshot, latest_base_info
 from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
@@ -3697,12 +3697,30 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
     if not close_date:
         print("[KRX] 최근 10일 내 거래일 스냅샷을 찾지 못해 종가 갱신을 건너뜁니다.", file=sys.stderr)
         return None, []
+    # 기본정보에는 있는데 당일 시세에서 빠진 종목은 거래정지로 본다.
+    # 한 시장 API가 통째로 실패한 경우에는 오탐 방지를 위해 판정하지 않는다.
+    _, base_info = latest_base_info()
+
+    def market_key(value: object) -> str:
+        text = str(value or "").upper()
+        if "코스닥" in text or "KOSDAQ" in text:
+            return "KOSDAQ"
+        if "코스피" in text or "KOSPI" in text:
+            return "KOSPI"
+        return text
+
+    received_markets = {market_key(meta.get("market")) for meta in snap.values() if meta.get("market")}
     updated = 0
     logs: list[dict] = []
     for row in rows:
-        meta = snap.get(str(row.get("code") or ""))
+        code = str(row.get("code") or "")
+        meta = snap.get(code)
         if not meta:
+            base = base_info.get(code) or {}
+            row_market = market_key(row.get("market") or base.get("market"))
+            row["trading_suspended"] = bool(base and row_market in received_markets)
             continue
+        row["trading_suspended"] = False
         current_shares = _to_int(meta.get("shrs"))
         if current_shares:
             old_shares = _to_int(row.get("current_shares")) or _to_int(row.get("shares"))
@@ -4574,6 +4592,7 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             # 공모가 기준 시가총액 산출용 — 상장 시점 주식수(증자 반영 전)
             "initial_shares": _to_int(r.get("shares")),
             "close_price": _to_int(r.get("close_price")),
+            "trading_suspended": r.get("trading_suspended") is True,
             # KRX 일별매매정보의 MKTCAP을 우선 사용하고, 미제공 시에만 계산한다.
             "market_cap": _to_int(r.get("market_cap")) or (
                 (_to_int(r.get("current_shares")) or _to_int(r.get("shares"))) * _to_int(r.get("close_price"))

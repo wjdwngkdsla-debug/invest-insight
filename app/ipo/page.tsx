@@ -143,9 +143,9 @@ function CommitTable({ item }: { item: IpoItem }) {
     const a = apply.find((t) => t.period === period);
     const b = alloc.find((t) => t.period === period);
     // 배정률 = 신청 물량 중 실제로 배정받은 비율
-    const allocRate = a?.qty && b?.qty ? (b.qty / a.qty) * 100 : null;
+    const allocRate = a?.qty && b?.qty !== undefined ? (b.qty / a.qty) * 100 : null;
     // 배정 비중 = 전체 기관 배정 중 이 구간의 몫 (합 100%)
-    const allocShare = b?.qty && totalAlloc ? (b.qty / totalAlloc) * 100 : null;
+    const allocShare = b?.qty !== undefined && totalAlloc ? (b.qty / totalAlloc) * 100 : null;
     return { period, applyQty: a?.qty ?? null, allocQty: b?.qty ?? null, allocRate, allocShare };
   });
   const commitShare = rows.filter((r) => r.period !== "미확약").reduce((s, r) => s + (r.allocShare ?? 0), 0);
@@ -196,7 +196,7 @@ function CommitTable({ item }: { item: IpoItem }) {
                       <span className="h-1.5 flex-1 rounded-full bg-gray-100">
                         <span
                           className={`block h-1.5 rounded-full ${muted ? "bg-gray-300" : "bg-blue-600"}`}
-                          style={{ width: `${Math.max(2, Math.round(row.allocShare))}%` }}
+                          style={{ width: `${row.allocShare > 0 ? Math.max(2, Math.round(row.allocShare)) : 0}%` }}
                         />
                       </span>
                       <span className={`min-w-[44px] text-right font-bold tabular-nums ${muted ? "text-gray-400" : "text-blue-600"}`}>
@@ -299,7 +299,6 @@ function IpoCard({ item, lockupHref }: { item: IpoItem; lockupHref?: string }) {
                 className="group/cta inline-flex h-8 items-center gap-1.5 rounded-full bg-blue-600 px-3.5 text-[11.5px] font-semibold text-white transition-colors hover:bg-blue-700"
               >
                 {item.name} 분석 콘텐츠 보러가기
-                <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
               </a>
             )}
           </span>
