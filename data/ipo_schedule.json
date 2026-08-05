@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05 23:45",
+  "updated": "2026-08-06 08:29",
   "items": [
     {
       "corp_code": "00104069",
@@ -20,7 +20,7 @@
       "corp_code": "01645448",
       "name": "열매컴퍼니",
       "first_filing_date": "20260108",
-      "last_rcept_no": "20260116000086",
+      "last_rcept_no": "20260205000085",
       "sub_start": "2026-02-05",
       "sub_end": "2026-02-09",
       "payment_date": "2026-02-10",
@@ -42,24 +42,6 @@
       "sub_start": "2026-05-22",
       "sub_end": "2026-05-28",
       "payment_date": "2026-05-29",
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": true,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "offering_attempt": 1
-    },
-    {
-      "corp_code": "01936340",
-      "name": "데이터젠",
-      "first_filing_date": "20260107",
-      "last_rcept_no": "20260714000008",
-      "payment_date": "2026-06-29",
-      "sub_start": "2026-06-29",
-      "sub_end": "2026-07-10",
       "ipo_parse_version": 4,
       "withdrawn": false,
       "commit_apply_missing": 4,
@@ -15079,7 +15061,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 1152.850023,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-09-23",
       "stock_code": "464500",
@@ -15150,7 +15132,7 @@
         }
       ],
       "report_rcp": "20240912000065",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -15200,7 +15182,8 @@
           "visible": true
         }
       },
-      "initial_shares": "13993263"
+      "initial_shares": "13993263",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00657224",
@@ -17038,38 +17021,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "637463600"
-    },
     {
       "date": "2026-07-19",
       "name": "미트박스",
@@ -21037,6 +20988,38 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21051,19 +21034,19 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-05",
+      "excluded_at": "2026-08-06",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-05",
+      "excluded_at": "2026-08-06",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-08-05",
+      "excluded_at": "2026-08-06",
       "memo": "자동 제외(스팩)"
     }
   }
