@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04 23:13",
+  "updated": "2026-08-05 13:59",
   "items": [
     {
       "corp_code": "00104069",
@@ -12857,7 +12857,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "31822553"
+      "initial_shares": "31822553",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01605282",
@@ -12877,7 +12878,7 @@
       "offer_shares": 1200000,
       "demand_ratio": 1082.35,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-13",
       "stock_code": "464580",
@@ -12950,7 +12951,7 @@
         }
       ],
       "report_rcp": "20241107000185",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -13010,7 +13011,8 @@
           "visible": true
         }
       },
-      "initial_shares": "18406089"
+      "initial_shares": "18406089",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01703849",
@@ -13030,7 +13032,7 @@
       "offer_shares": 1130000,
       "demand_ratio": 288.0,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-12",
       "stock_code": "473980",
@@ -13102,7 +13104,7 @@
         }
       ],
       "report_rcp": "20241107000133",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -13157,7 +13159,8 @@
           "visible": true
         }
       },
-      "initial_shares": "11059322"
+      "initial_shares": "11059322",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01663116",
@@ -13270,7 +13273,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 967.71,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-07",
       "stock_code": "475960",
@@ -13340,7 +13343,7 @@
         }
       ],
       "report_rcp": "20241031000452",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_alloc": {
         "15일": {
           "qty": 0,
@@ -13395,7 +13398,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "13476174"
+      "initial_shares": "13476174",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00968607",
@@ -13617,7 +13621,8 @@
           "visible": true
         }
       },
-      "initial_shares": "7203187"
+      "initial_shares": "7203187",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00814582",
@@ -13637,7 +13642,7 @@
       "offer_shares": 2500000,
       "demand_ratio": 841.12,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-11-01",
       "stock_code": "336680",
@@ -13703,7 +13708,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -13748,7 +13753,8 @@
           "visible": true
         }
       },
-      "initial_shares": "39145558"
+      "initial_shares": "39145558",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01641600",
@@ -13895,7 +13901,8 @@
           "visible": true
         }
       },
-      "initial_shares": "13624900"
+      "initial_shares": "13624900",
+      "offering_attempt": 1
     },
     {
       "corp_code": "00319272",
@@ -17023,46 +17030,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "40727750"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "130000"
-    },
     {
       "date": "2026-07-19",
       "name": "아스테라시스",
@@ -21030,6 +20997,38 @@
       "field": "대상구분",
       "old": "일반 IPO",
       "new": "스팩(비노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21044,14 +21043,20 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-04",
+      "excluded_at": "2026-08-05",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-04",
+      "excluded_at": "2026-08-05",
       "memo": "운영자 삭제 요청 이관"
+    },
+    "corp:02030166": {
+      "name": "엔에이치기업인수목적34호",
+      "corp_code": "02030166",
+      "excluded_at": "2026-08-05",
+      "memo": "자동 제외(스팩)"
     }
   }
 }
