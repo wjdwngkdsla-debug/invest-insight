@@ -3700,6 +3700,18 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
     # 기본정보에는 있는데 당일 시세에서 빠진 종목은 거래정지로 본다.
     # 한 시장 API가 통째로 실패한 경우에는 오탐 방지를 위해 판정하지 않는다.
     _, base_info = latest_base_info()
+    previous_by_code: dict[str, dict] = {}
+    previous_site_path = ROOT_DIR / "data" / "site_data.json"
+    if previous_site_path.exists():
+        try:
+            previous_site = json.loads(previous_site_path.read_text(encoding="utf-8"))
+            previous_by_code = {
+                str(stock.get("code") or ""): stock
+                for stock in previous_site.get("stocks", [])
+                if stock.get("code")
+            }
+        except Exception:
+            previous_by_code = {}
 
     def market_key(value: object) -> str:
         text = str(value or "").upper()
@@ -3718,9 +3730,23 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
         if not meta:
             base = base_info.get(code) or {}
             row_market = market_key(row.get("market") or base.get("market"))
-            row["trading_suspended"] = bool(base and row_market in received_markets)
+            previous = previous_by_code.get(code) or {}
+            # 해당 시장 시세가 정상 수신됐을 때만 '종목 누락=거래정지'로 판정한다.
+            # 시장 API 전체가 실패한 날은 직전 상태를 유지해 오탐 해제를 막는다.
+            if base and row_market in received_markets:
+                suspended = True
+            elif base and row_market not in received_markets:
+                suspended = previous.get("trading_suspended") is True
+            else:
+                suspended = False
+            row["trading_suspended"] = suspended
+            if suspended:
+                row["trading_suspended_since"] = previous.get("trading_suspended_since") or close_date
+            else:
+                row["trading_suspended_since"] = ""
             continue
         row["trading_suspended"] = False
+        row["trading_suspended_since"] = ""
         current_shares = _to_int(meta.get("shrs"))
         if current_shares:
             old_shares = _to_int(row.get("current_shares")) or _to_int(row.get("shares"))
@@ -4593,6 +4619,7 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             "initial_shares": _to_int(r.get("shares")),
             "close_price": _to_int(r.get("close_price")),
             "trading_suspended": r.get("trading_suspended") is True,
+            "trading_suspended_since": str(r.get("trading_suspended_since") or ""),
             # KRX 일별매매정보의 MKTCAP을 우선 사용하고, 미제공 시에만 계산한다.
             "market_cap": _to_int(r.get("market_cap")) or (
                 (_to_int(r.get("current_shares")) or _to_int(r.get("shares"))) * _to_int(r.get("close_price"))

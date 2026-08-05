@@ -97,6 +97,8 @@ export function StockHero({
   const contentUrl = stock.content_url || DEFAULT_BLOG_URL;
   const contentLabel = stock.content_url ? "종목 분석 보러가기" : "기업 분석 포스팅 보러가기";
   const priceDate = updated.slice(5);
+  const suspended = stock.trading_suspended === true;
+  const suspendedSince = stock.trading_suspended_since || "";
 
   // 핵심 지표 4개를 데스크톱 2×2, 모바일 2열 패널로 그린다.
   const metrics: { label: string; value: string; sub?: string; mobileSub?: string; icon: React.ReactNode }[] = [
@@ -111,12 +113,12 @@ export function StockHero({
       icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 7v10M9.5 9.8h5M9.5 14.2h5" /></svg>,
     },
     {
-      label: `최근 종가(${priceDate})`,
+      label: suspended ? "거래정지 전 종가" : `최근 종가(${priceDate})`,
       value: stock.close_price ? `${stock.close_price.toLocaleString("ko-KR")}원` : "-",
       icon: <svg {...iconProps}><path d="M3 16.5 9 10l4 4 7.5-7.5M15 6.5h5.5V12" /></svg>,
     },
     {
-      label: `시가총액(${priceDate})`,
+      label: suspended ? "거래정지 전 시가총액" : `시가총액(${priceDate})`,
       value: closeCap ? formatKrwEok(closeCap) : "-",
       icon: <svg {...iconProps}><path d="M20.5 7.5v9l-8.5 4.5-8.5-4.5v-9L12 3z" /><path d="m3.8 7.4 8.2 4.4 8.2-4.4M12 21v-9.2" /></svg>,
     },
@@ -130,7 +132,14 @@ export function StockHero({
 
           <div className="flex min-w-0 items-center justify-between gap-2">
             <div>
-              {hasReturn ? (
+              {suspended ? (
+                <div>
+                  <p className="text-[30px] font-bold leading-none tracking-tight text-slate-700 md:text-[34px]">거래정지</p>
+                  <p className="mt-2 text-[12px] font-medium text-slate-500 md:text-[13px]">
+                    {suspendedSince ? `${suspendedSince}부터` : "거래정지 시작일 확인 중"}
+                  </p>
+                </div>
+              ) : hasReturn ? (
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-[18px] font-semibold tracking-tight text-slate-600 md:text-[20px]">공모가 대비</span>
                   <span className={`text-[30px] font-bold leading-none tracking-tight md:text-[34px] ${up ? "text-rose-600" : "text-blue-600"}`}>
@@ -146,7 +155,7 @@ export function StockHero({
                 </div>
               )}
             </div>
-            {hasReturn && <ReturnGauge pct={changePct} />}
+            {!suspended && hasReturn && <ReturnGauge pct={changePct} />}
           </div>
 
           <StockLockupTiles

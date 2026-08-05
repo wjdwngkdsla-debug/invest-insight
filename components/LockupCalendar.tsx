@@ -88,17 +88,6 @@ const GROUP_BG: Record<CalendarEventKind, string> = {
   listing: "bg-emerald-50/70",
 };
 
-// 일정이 있는 날은 날짜 머리 부분만 채워 빈 줄이나 렌더링 장애처럼 보이지 않게 한다.
-const DAY_HEADER_STYLE: Record<CalendarEventKind, string> = {
-  lockup: "bg-blue-100 text-blue-700",
-  forecast: "bg-violet-100 text-violet-700",
-  sub: "bg-amber-100 text-amber-800",
-  listing: "bg-emerald-100 text-emerald-800",
-};
-
-
-
-
 interface DayCell {
   day: number;
   dateStr: string;
@@ -306,21 +295,6 @@ export function LockupCalendar({
     return ev.kind === "lockup" ? `/stock/${ev.code}` : "/ipo";
   }
 
-  function dayHeaderKind(dateStr: string): CalendarEventKind | null {
-    const kinds: CalendarEventKind[] = [];
-    for (const event of eventsByDate.get(dateStr) || []) {
-      const kind = event.kind || "lockup";
-      if (active.has(kind)) kinds.push(kind);
-    }
-    for (const event of rangeEvents) {
-      if (active.has(event.kind) && event.start <= dateStr && dateStr <= event.end) kinds.push(event.kind);
-    }
-    return kinds.sort((a, b) => KIND_ORDER[a] - KIND_ORDER[b])[0] || null;
-  }
-
-
-
-
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -407,13 +381,12 @@ export function LockupCalendar({
                 {week.map((cell, i) => {
                   if (!cell) return <div key={i} className="rounded-lg bg-gray-50/60" />;
                   const holidayName = holidays[cell.dateStr];
-                  const isToday = cell.dateStr === today.dateStr;
                   return (
                     <div
                       key={i}
                       className={`rounded-lg border ${
                         holidayName ? "border-rose-100 bg-rose-50/70" : "border-gray-100 bg-white"
-                      } ${isToday ? "ring-2 ring-blue-400" : ""}`}
+                      }`}
                     />
                   );
                 })}
@@ -426,13 +399,17 @@ export function LockupCalendar({
               <div className="relative grid min-h-20 grid-cols-5 gap-x-1.5 pb-1" style={{ gridAutoRows: "min-content" }}>
                 {week.map((cell, i) => {
                   const holidayName = cell ? holidays[cell.dateStr] : undefined;
-                  const headerKind = cell && !holidayName ? dayHeaderKind(cell.dateStr) : null;
+                  const isToday = cell?.dateStr === today.dateStr;
                   return (
                     <div
                       key={`day-${i}`}
                       style={{ gridColumn: i + 1, gridRow: 1 }}
                       className={`mx-px rounded-t-md px-1.5 pb-1 pt-1.5 ${
-                        holidayName ? "bg-rose-50 text-rose-500" : headerKind ? DAY_HEADER_STYLE[headerKind] : "text-gray-400"
+                        isToday
+                          ? "bg-blue-500 text-white"
+                          : holidayName
+                            ? "bg-rose-50 text-rose-500"
+                            : "text-gray-400"
                       }`}
                     >
                       {cell && (
