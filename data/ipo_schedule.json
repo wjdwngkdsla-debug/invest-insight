@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05 13:59",
+  "updated": "2026-08-05 21:59",
   "items": [
     {
       "corp_code": "00104069",
@@ -14034,7 +14034,7 @@
       "payment_date": "2026-08-24",
       "underwriter": "미래에셋증권",
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1037.41,
@@ -14078,7 +14078,7 @@
       "forecast_end": "2024-10-14",
       "offer_shares": 3000000,
       "demand_ratio": 933.9,
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_alloc": {
         "3개월": {
           "qty": 0,
@@ -14128,7 +14128,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "25459239"
+      "initial_shares": "25459239",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01270749",
@@ -14148,7 +14149,7 @@
       "offer_shares": 1490000,
       "demand_ratio": 1159.89,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-25",
       "stock_code": "289930",
@@ -14221,7 +14222,7 @@
         }
       ],
       "report_rcp": "20241022000173",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_alloc": {
         "미확약": {
           "qty": 1116283,
@@ -14281,7 +14282,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "13149010"
+      "initial_shares": "13149010",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01588189",
@@ -14384,7 +14386,8 @@
           "visible": true
         }
       },
-      "initial_shares": "11806894"
+      "initial_shares": "11806894",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01016309",
@@ -14488,7 +14491,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 13.1,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-21",
       "stock_code": "474170",
@@ -14561,7 +14564,7 @@
         }
       ],
       "report_rcp": "20241015000383",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_alloc": {
         "미확약": {
           "qty": 1799000,
@@ -14621,7 +14624,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "17817696"
+      "initial_shares": "17817696",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01284876",
@@ -17031,38 +17035,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "underwriter",
-      "old": "",
-      "new": "DB금융투자"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "117361700"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
     {
       "date": "2026-07-19",
       "name": "데이원컴퍼니",
@@ -20998,6 +20970,38 @@
       "field": "대상구분",
       "old": "일반 IPO",
       "new": "스팩(비노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     },
     {
       "date": "2026-08-05",
