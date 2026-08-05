@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05 21:59",
+  "updated": "2026-08-05 23:45",
   "items": [
     {
       "corp_code": "00104069",
@@ -14726,7 +14726,8 @@
           "visible": true
         }
       },
-      "initial_shares": "10137772"
+      "initial_shares": "10137772",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01023211",
@@ -14827,7 +14828,8 @@
           "visible": true
         }
       },
-      "initial_shares": "28443146"
+      "initial_shares": "28443146",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01275489",
@@ -14847,7 +14849,7 @@
       "offer_shares": 1911000,
       "demand_ratio": 1050.19,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-10-16",
       "stock_code": "308430",
@@ -14918,7 +14920,7 @@
         }
       ],
       "report_rcp": "20241011000490",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -14968,7 +14970,8 @@
           "visible": true
         }
       },
-      "initial_shares": "12905251"
+      "initial_shares": "12905251",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01293485",
@@ -17035,38 +17038,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1020750"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "데이원컴퍼니",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
     {
       "date": "2026-07-19",
       "name": "데이원컴퍼니",
@@ -20970,6 +20941,38 @@
       "field": "대상구분",
       "old": "일반 IPO",
       "new": "스팩(비노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-03-17",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-03-30",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     },
     {
       "date": "2026-08-05",
