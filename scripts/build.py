@@ -113,6 +113,7 @@ from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
+from scripts.management import is_spac_name
 
 
 
@@ -1247,6 +1248,17 @@ def load_manual_targets() -> list[dict]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _without_spac_targets(targets: list[dict], source_label: str) -> list[dict]:
+    spac_targets = [target for target in targets if is_spac_name(target.get("name"))]
+    kept = [target for target in targets if not is_spac_name(target.get("name"))]
+    print(
+        f"[TARGET] {source_label} 기준 {len(kept)}개 종목"
+        + (f" / 스팩 자동 제외 {len(spac_targets)}개" if spac_targets else ""),
+        file=sys.stderr,
+    )
+    return kept
+
+
 
 
 
@@ -1316,8 +1328,7 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
     새 종목은 운영자가 IPO종목 탭에 한 줄 추가하면 다음 배치에서 편입된다.
     """
     if args.manual_targets:
-        print("[TARGET] manual_targets.json 사용", file=sys.stderr)
-        return load_manual_targets()
+        return _without_spac_targets(load_manual_targets(), "manual_targets.json")
 
 
 
@@ -1359,8 +1370,7 @@ def load_targets(args: argparse.Namespace) -> list[dict]:
     targets = json.loads(path.read_text(encoding="utf-8"))
     if not targets:
         raise ValueError("시트 IPO종목 탭이 비어 있습니다.")
-    print(f"[TARGET] 시트 IPO종목 탭 기준 {len(targets)}개 종목", file=sys.stderr)
-    return targets
+    return _without_spac_targets(targets, "시트 IPO종목 탭")
 
 
 def _compact_code(value: Any) -> str:

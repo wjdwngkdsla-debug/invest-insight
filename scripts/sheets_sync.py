@@ -29,6 +29,7 @@ from scripts.management import (
     apply_schedule_correction,
     apply_stock_management,
     build_correction_tasks,
+    is_spac_name,
     merge_stock_management,
     norm_name,
     release_schedule_correction,
@@ -2317,7 +2318,7 @@ def push_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         "sub_start", "sub_end", "demand_ratio", "sub_ratio", "underwriter",
     }
     for item in sorted(all_schedule_items(schedule), key=lambda value: (value.get("listing_date") or "9999", value.get("name") or "")):
-        if item.get("fixed_excluded"):
+        if item.get("fixed_excluded") or is_spac_name(item.get("name")):
             continue
         snapshot = _schedule_snapshot(item)
         status, reason = _schedule_validation(item)
@@ -2346,9 +2347,12 @@ def _period_order(period: object) -> int:
 
 
 def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
-    admin = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+    admin = [
+        row for row in read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
+        if not is_spac_name(row.get("name"))
+    ]
     schedule = read_schedule_data()
-    items = all_schedule_items(schedule)
+    items = [item for item in all_schedule_items(schedule) if not is_spac_name(item.get("name"))]
     by_code = {str(item.get("stock_code") or ""): item for item in items if item.get("stock_code")}
     by_name = {norm_name(item.get("name")): item for item in items if norm_name(item.get("name"))}
     state = load_simple_sheet_state()
@@ -2450,6 +2454,8 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
     }
     for pending in read_json_list(MANUAL_EVENTS_PATH):
         if str(pending.get("category") or "") not in {"기존주주", "구주·보호예수"}:
+            continue
+        if is_spac_name(pending.get("name")):
             continue
         key = (norm_name(pending.get("name")), str(pending.get("period") or ""))
         if key[0] and key in official_holder_keys:
@@ -2856,7 +2862,7 @@ def sync_ipo_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     # '상장 완료' 필터로 과거 데이터만 따로 볼 수 있고 홈페이지 노출에는 영향이 없다.
     view_items = items + past_items
     for item in view_items:
-        if item.get("fixed_excluded"):
+        if item.get("fixed_excluded") or is_spac_name(item.get("name")):
             continue
         name = item.get("name") or ""
         band_low, band_high = item.get("band_low") or 0, item.get("band_high") or 0
@@ -2951,7 +2957,10 @@ def append_missing_ipo_targets(spreadsheet: gspread.Spreadsheet) -> None:
         data = json.loads(IPO_SCHEDULE_PATH.read_text(encoding="utf-8"))
     except Exception:
         return
-    candidates = [i for i in data.get("items", []) if i.get("listing_date") and not i.get("withdrawn")]
+    candidates = [
+        i for i in data.get("items", [])
+        if i.get("listing_date") and not i.get("withdrawn") and not is_spac_name(i.get("name"))
+    ]
     if not candidates:
         return
     try:

@@ -426,8 +426,11 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
+      "review_reason": "스팩 자동 제외",
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "fixed_excluded": true,
       "offering_attempt": 1
     },
     {
@@ -21019,6 +21022,14 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "엔에이치기업인수목적34호",
+      "type": "자동제외",
+      "field": "대상구분",
+      "old": "일반 IPO",
+      "new": "스팩(비노출)"
     }
   ],
   "seed_pending": [

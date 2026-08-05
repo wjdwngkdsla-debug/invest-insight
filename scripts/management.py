@@ -43,6 +43,23 @@ def norm_name(name: object) -> str:
     return re.sub(r"[\s㈜()\[\]]|주식회사", "", str(name or ""))
 
 
+def is_spac_name(name: object) -> bool:
+    """기업인수목적회사(SPAC)는 일반 IPO·락업 집계 대상에서 제외한다."""
+    compact = norm_name(name)
+    return bool(re.search(r"기업인수목적|스팩|SPAC", compact, re.IGNORECASE))
+
+
+def _apply_spac_exclusion(row: dict[str, Any]) -> None:
+    if not is_spac_name(row.get("name")):
+        return
+    row["management_status"] = "제외고정"
+    row["visibility"] = "비공개"
+    row["validation_status"] = "삭제"
+    row["validation_reason"] = "스팩 자동 제외"
+    if not str(row.get("memo") or "").strip():
+        row["memo"] = "자동 제외(스팩)"
+
+
 def manual_corp_code(name: str) -> str:
     digest = hashlib.sha1(norm_name(name).encode("utf-8")).hexdigest()[:12]
     return f"manual-{digest}"
@@ -102,6 +119,7 @@ def merge_stock_management(
     # Saved operator decisions always win.  Later sources only fill blanks.
     for row in saved:
         cleaned = {column: str(row.get(column) or "").strip() for column in MANAGEMENT_COLUMNS}
+        _apply_spac_exclusion(cleaned)
         if cleaned.get("name") or cleaned.get("corp_code") or cleaned.get("stock_code"):
             merged[_row_key(cleaned)] = cleaned
 
@@ -120,7 +138,7 @@ def merge_stock_management(
 
     all_items = list(schedule.get("items") or []) + list(schedule.get("past_items") or [])
     for item in all_items:
-        if item.get("fixed_excluded"):
+        if item.get("fixed_excluded") or is_spac_name(item.get("name")):
             status, visibility = "제외고정", "비공개"
         elif item.get("manual_entry") or item.get("review_approved"):
             status, visibility = "수동편입", "노출"
@@ -185,6 +203,7 @@ def merge_stock_management(
 
     rows: list[dict[str, str]] = []
     for row in merged.values():
+        _apply_spac_exclusion(row)
         if not row.get("management_status"):
             row["management_status"] = "수동편입" if "IPO일정" in _scope_parts(row.get("scope")) else "자동"
         if not row.get("visibility"):

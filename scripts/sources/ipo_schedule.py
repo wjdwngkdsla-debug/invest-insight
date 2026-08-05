@@ -13,7 +13,7 @@ import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
 from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports
-from scripts.management import apply_stock_management, is_fixed_excluded, merge_stock_management
+from scripts.management import apply_stock_management, is_fixed_excluded, is_spac_name, merge_stock_management
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
@@ -640,6 +640,9 @@ def seed_new_items(
         name = str(raw or "").strip()
         if not name:
             continue
+        if is_spac_name(name):
+            log(f"수동추가 무시(스팩 자동 제외): {name}")
+            continue
         existing = find_by_name(_norm_name(name))
         if existing and (existing.get("band_low") or existing.get("forecast_start")):
             mark_resolved(name)
@@ -929,6 +932,30 @@ def refresh_ipo_schedule(
     today = now_kst.strftime("%Y-%m-%d")
     listing_map = load_listing_map()
 
+    def mark_spac_excluded(item: dict[str, Any], corp_code: str = "", name: str = "") -> dict[str, Any]:
+        was_excluded = bool(item.get("fixed_excluded"))
+        if corp_code:
+            item["corp_code"] = corp_code
+        if name:
+            item["name"] = name
+        item["fixed_excluded"] = True
+        item["management_status"] = "제외고정"
+        item["management_hidden"] = True
+        item["schedule_hidden"] = True
+        item["review_pending"] = False
+        item["review_reason"] = "스팩 자동 제외"
+        item["ipo_parse_version"] = IPO_PARSE_VERSION
+        if not was_excluded:
+            history.append({
+                "date": today,
+                "name": item.get("name") or name,
+                "type": "자동제외",
+                "field": "대상구분",
+                "old": "일반 IPO",
+                "new": "스팩(비노출)",
+            })
+        return item
+
     def apply_manual_commit_values(item: dict[str, Any]) -> dict[str, Any]:
         """수기 확약값(신청·배정)은 공식 파싱 실패 시만 쓰고, 고정한 기간만 계속 유지한다."""
         for field, manual_field in (("commit_apply", "manual_commit_apply"), ("commit_alloc", "manual_commit_alloc")):
@@ -1099,6 +1126,11 @@ def refresh_ipo_schedule(
     for corp_code, corp_filings in grouped.items():
         name = corp_filings[0].get("corp_name") or ""
         newest_rcp = corp_filings[0].get("rcept_no") or ""
+        if is_spac_name(name):
+            prior = items_by_corp.get(corp_code) or archived_by_corp.pop(corp_code, None) or {}
+            items_by_corp[corp_code] = mark_spac_excluded(prior, corp_code, name)
+            log(f"스팩 자동 제외(문서 파싱 생략): {name}")
+            continue
         if is_fixed_excluded(corp_code, name, fixed_exclusions):
             continue
         tomb = deleted_corps.get(corp_code)
@@ -1149,6 +1181,9 @@ def refresh_ipo_schedule(
     # grouped에 들어오지 않는다. 기관 신청물량이 없는 과거 이력은 기업코드로 직접
     # 공시를 찾아 한 번 보강하고, 파서 버전을 저장해 매일 반복 조회하지 않는다.
     for corp_code, archived in list(archived_by_corp.items()):
+        if is_spac_name(archived.get("name")):
+            archived_by_corp[corp_code] = mark_spac_excluded(archived, corp_code)
+            continue
         if archived.get("fixed_excluded"):
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
             continue
@@ -1305,6 +1340,9 @@ def refresh_ipo_schedule(
     # 상장일 연결 + 실적보고서 보강 + 정리
     kept: list[dict[str, Any]] = []
     for item in items_by_corp.values():
+        if is_spac_name(item.get("name")):
+            kept.append(mark_spac_excluded(item, str(item.get("corp_code") or "")))
+            continue
         if item.get("fixed_excluded") or is_fixed_excluded(
             str(item.get("corp_code") or ""), str(item.get("name") or ""), fixed_exclusions
         ):

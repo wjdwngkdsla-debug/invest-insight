@@ -7,12 +7,33 @@ from scripts.management import (
     apply_schedule_correction,
     apply_stock_management,
     build_correction_tasks,
+    is_spac_name,
     merge_stock_management,
     release_schedule_correction,
 )
 
 
 class StockManagementMigrationTest(unittest.TestCase):
+    def test_spac_is_forced_to_excluded_and_private(self) -> None:
+        name = "엔에이치기업인수목적34호"
+        self.assertTrue(is_spac_name(name))
+        self.assertTrue(is_spac_name("IBKS제24호스팩"))
+        self.assertTrue(is_spac_name("Example SPAC 1"))
+        self.assertFalse(is_spac_name("일반바이오"))
+
+        rows = merge_stock_management([{
+            "scope": "IPO일정+락업",
+            "name": name,
+            "corp_code": "02030166",
+            "management_status": "자동",
+            "visibility": "노출",
+        }], [], {"items": [], "past_items": []})
+
+        self.assertEqual(rows[0]["management_status"], "제외고정")
+        self.assertEqual(rows[0]["visibility"], "비공개")
+        self.assertEqual(rows[0]["validation_reason"], "스팩 자동 제외")
+        self.assertEqual(rows[0]["memo"], "자동 제외(스팩)")
+
     def test_saved_exclusion_wins_without_dropping_existing_data(self) -> None:
         saved = [{
             "scope": "IPO일정", "name": "LS전선", "corp_code": "00683283",
