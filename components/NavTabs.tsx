@@ -11,10 +11,14 @@ const TAB_IDLE = "text-gray-500 hover:bg-gray-100 hover:text-gray-900";
 export default function NavTabs() {
   const pathname = usePathname();
   const ipoActive = pathname.startsWith("/ipo");
+  const rankingActive = pathname.startsWith("/ranking");
   return (
     <nav className="flex items-center gap-1">
       <Link href="/ipo" className={`${TAB_BASE} ${ipoActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
         IPO 일정
+      </Link>
+      <Link href="/ranking" className={`${TAB_BASE} ${rankingActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
+        IPO 랭킹
       </Link>
       <Link
         href="https://blog.naver.com/vericap"

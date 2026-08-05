@@ -4569,9 +4569,76 @@ def apply_manual_events(
 
 
 
+LISTING_DAY_PATH = ROOT_DIR / "data" / "listing_day.json"
+
+
+def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
+    """상장일 당일의 KRX 시세를 종목별로 캐시한다.
+
+    site_data의 shares(최초 편입 시점 주식수)는 배치가 그 종목을 처음 담은 날의 값이라
+    상장일과 다를 수 있다. 랭킹의 "공모가 대비 상장일 종가" 계산과 정확한 상장일
+    주식수를 위해 상장일 스냅샷을 직접 받아 둔다.
+
+    같은 상장일 종목은 한 번만 호출하고, 한 번 받은 종목은 캐시에서 재사용한다.
+    """
+    cache: dict[str, dict] = {}
+    if LISTING_DAY_PATH.exists():
+        try:
+            cache = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            cache = {}
+
+    wanted: dict[str, set[str]] = {}
+    for row in rows:
+        code = normalize_stock_code(row.get("code"))
+        listing = str(row.get("listing_date") or "").strip()
+        if not code or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", listing):
+            continue
+        cached = cache.get(code)
+        if cached and cached.get("listing_date") == listing:
+            continue  # 이미 받은 종목 — 상장일이 바뀐 경우에만 다시 받는다
+        wanted.setdefault(listing.replace("-", ""), set()).add(code)
+
+    if not wanted:
+        return cache
+
+    print(f"[KRX] 상장일 시세 조회: {len(wanted)}일 / {sum(len(v) for v in wanted.values())}종목", file=sys.stderr)
+    filled = 0
+    for bas_dd in sorted(wanted):
+        try:
+            snapshot = krx_snapshot(bas_dd)
+        except Exception as exc:
+            print(f"  [KRX] {bas_dd} 조회 실패(무시): {exc}", file=sys.stderr)
+            continue
+        if not snapshot:
+            continue
+        listing = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:]}"
+        for code in wanted[bas_dd]:
+            meta = snapshot.get(code)
+            if not meta:
+                continue  # 상장 당일 시세에 없으면(신규 코드 반영 지연 등) 다음 배치에서 재시도
+            cache[code] = {
+                "listing_date": listing,
+                "close_price": _to_int(meta.get("close_price")),
+                "shares": _to_int(meta.get("shrs")),
+            }
+            filled += 1
+    if filled:
+        LISTING_DAY_PATH.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[KRX] 상장일 시세 저장: {filled}종목 (누적 {len(cache)})", file=sys.stderr)
+    return cache
+
+
 def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
     def managed_name(value: object) -> str:
         return re.sub(r"[\s㈜()\[\]]|주식회사", "", str(value or ""))
+
+    listing_day: dict[str, dict] = {}
+    if LISTING_DAY_PATH.exists():
+        try:
+            listing_day = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            listing_day = {}
 
     hidden_codes: set[str] = set()
     hidden_names: set[str] = set()
@@ -4615,8 +4682,11 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
             "listing_date": r.get("listing_date"),
             # 홈페이지의 비율·시가총액은 최근 KRX 상장주식수를 기준으로 통일한다.
             "shares": _to_int(r.get("current_shares")) or _to_int(r.get("shares")),
-            # 공모가 기준 시가총액 산출용 — 상장 시점 주식수(증자 반영 전)
-            "initial_shares": _to_int(r.get("shares")),
+            # 공모가 기준 시가총액 산출용 — 상장 시점 주식수(증자 반영 전).
+            # 상장일 스냅샷이 있으면 그 값이 정확하므로 우선 사용한다.
+            "initial_shares": _to_int((listing_day.get(code) or {}).get("shares")) or _to_int(r.get("shares")),
+            # 상장일 종가 — 공모가 대비 상장일 수익률(시초 성과) 계산용
+            "listing_close": _to_int((listing_day.get(code) or {}).get("close_price")),
             "close_price": _to_int(r.get("close_price")),
             "trading_suspended": r.get("trading_suspended") is True,
             "trading_suspended_since": str(r.get("trading_suspended_since") or ""),
@@ -5566,6 +5636,12 @@ def main() -> None:
 
 
 
+
+    # 상장일 당일 시세 캐시 보강 (랭킹의 상장일 종가·정확한 상장 시점 주식수)
+    try:
+        refresh_listing_day_snapshot(all_rows)
+    except Exception as exc:
+        print(f"[KRX] 상장일 시세 갱신 실패(무시): {exc}", file=sys.stderr)
 
     out_path = data_dir / "site_data.json"
     previous_price_date = None
