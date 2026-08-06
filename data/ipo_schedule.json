@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06 14:04",
+  "updated": "2026-08-06 21:56",
   "items": [
     {
       "corp_code": "00104069",
@@ -57,18 +57,19 @@
       "name": "데이터젠",
       "management_name": "데이터젠",
       "first_filing_date": "20260129",
-      "last_rcept_no": "20260626000400",
+      "last_rcept_no": "20260714000008",
       "withdrawn": false,
       "review_pending": true,
       "management_status": "자동",
       "offering_attempt": 1,
-      "payment_date": "2026-07-14",
+      "payment_date": "2026-06-29",
       "sub_start": "2026-06-29",
       "sub_end": "2026-07-10",
       "ipo_parse_version": 4,
       "commit_apply_missing": 4,
       "listing_date": "",
-      "stock_code": ""
+      "stock_code": "",
+      "schedule_hidden": false
     },
     {
       "corp_code": "02031369",
@@ -191,7 +192,7 @@
       "corp_code": "01461730",
       "name": "딜리셔스",
       "first_filing_date": "20260624",
-      "last_rcept_no": "20260731000443",
+      "last_rcept_no": "20260806000333",
       "band_low": 5000,
       "band_high": 7000,
       "forecast_start": "2026-07-23",
@@ -245,7 +246,37 @@
       ],
       "manual_commit_apply": {},
       "initial_shares": "21878960",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "sub_ratio": 10.29,
+      "commit_alloc": [
+        {
+          "period": "3개월",
+          "qty": 4000,
+          "pct": 0.24
+        },
+        {
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.61
+        },
+        {
+          "period": "15일",
+          "qty": 89000,
+          "pct": 5.39
+        },
+        {
+          "period": "미확약",
+          "qty": 1547000,
+          "pct": 93.76
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "zero_missing"
+        }
+      ],
+      "report_rcp": "20260806000333"
     },
     {
       "corp_code": "00920731",
@@ -15221,7 +15252,7 @@
       "offer_shares": 2460000,
       "demand_ratio": 31.26,
       "is_listing_ipo": true,
-      "ipo_parse_version": 3,
+      "ipo_parse_version": 4,
       "withdrawn": false,
       "listing_date": "2024-08-30",
       "stock_code": "461300",
@@ -15291,7 +15322,7 @@
         }
       ],
       "report_rcp": "20240826000056",
-      "commit_apply_missing": 3,
+      "commit_apply_missing": 4,
       "manual_commit_alloc": {
         "1개월": {
           "qty": 0,
@@ -15346,7 +15377,8 @@
           "visible": true
         }
       ],
-      "initial_shares": "13323933"
+      "initial_shares": "13323933",
+      "offering_attempt": 1
     },
     {
       "corp_code": "01544468",
@@ -17039,38 +17071,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "171746400"
-    },
     {
       "date": "2026-07-19",
       "name": "쓰리에이로직스",
@@ -21038,14 +21038,41 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
-    {
-      "name": "데이터젠",
-      "status": "pending",
-      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%A0"
-    },
     {
       "name": "스탁키퍼",
       "status": "pending",
