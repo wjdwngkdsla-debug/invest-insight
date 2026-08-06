@@ -114,12 +114,12 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
     if (filtered.length === 0) return null;
     const comparable = filtered.filter((row) => row.returnPct !== null);
     const total = comparable.reduce((sum, row) => sum + (row.returnPct ?? 0), 0);
-    const winners = comparable.filter((row) => (row.returnPct ?? -Infinity) >= 0).length;
+    const listed = filtered.filter((row) => row.listingReturnPct !== null);
+    const listedTotal = listed.reduce((sum, row) => sum + (row.listingReturnPct ?? 0), 0);
     return {
       count: filtered.length,
       average: comparable.length ? total / comparable.length : null,
-      winners,
-      winRate: comparable.length ? (winners / comparable.length) * 100 : 0,
+      listingAverage: listed.length ? listedTotal / listed.length : null,
     };
   }, [filtered]);
 
@@ -203,16 +203,17 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             <p className="mt-0.5 text-[17px] font-bold tabular-nums text-slate-900">{summary.count}개</p>
           </div>
           <div className="rounded-xl border border-gray-200 bg-gray-50/80 px-3.5 py-2.5">
-            <p className="text-[11px] font-medium text-slate-500">평균 등락률</p>
-            <p className="mt-0.5 text-[17px]">
+            <p className="text-[11px] font-medium text-slate-500">현재 평균 수익률</p>
+            <p className="mt-0.5 flex items-baseline gap-1 text-[17px]">
               <ReturnText pct={summary.average} />
+              <span className="text-[10.5px] font-medium text-slate-400">{priceDate} 기준</span>
             </p>
           </div>
           <div className="rounded-xl border border-gray-200 bg-gray-50/80 px-3.5 py-2.5">
-            <p className="text-[11px] font-medium text-slate-500">공모가 이상</p>
-            <p className="mt-0.5 text-[17px] font-bold tabular-nums text-slate-900">
-              {summary.winners}개
-              <span className="ml-1 text-[12px] font-semibold text-slate-400">{summary.winRate.toFixed(0)}%</span>
+            <p className="text-[11px] font-medium text-slate-500">상장일 평균 수익률</p>
+            <p className="mt-0.5 flex items-baseline gap-1 text-[17px]">
+              <ReturnText pct={summary.listingAverage} />
+              <span className="text-[10.5px] font-medium text-slate-400">상장 첫날</span>
             </p>
           </div>
         </div>
@@ -312,10 +313,11 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
       )}
 
       <p className="px-1 text-[11px] leading-relaxed text-slate-400">
-        공모가 대비 = (최근 종가 − 공모가) ÷ 공모가 ({priceDate} 종가 기준) · 상장일 수익률 = (상장일 종가 − 공모가) ÷ 공모가.
+        <span className="font-semibold text-slate-500">공모가 대비</span>는 공모주를 받아 지금까지 보유했을 때,{" "}
+        <span className="font-semibold text-slate-500">상장일 수익률</span>은 상장 첫날 종가에 팔았을 때의 수익률입니다.
         <br />
-        주가만 비교한 값이라 무상증자·액면분할 등 주식수 변동은 반영하지 않습니다.
-        거래정지 종목은 마지막 체결가가 현재가처럼 보이지 않도록 현재 수익률과 평균·승률 집계에서 제외합니다.
+        무상증자·액면분할처럼 주식수가 바뀐 종목은 토스 수정주가 기준으로 공모가를 보정해 실제 수익률에 맞춥니다.
+        거래정지 종목은 마지막 체결가가 현재가처럼 보이지 않도록 수익률과 평균에서 제외합니다.
       </p>
     </div>
   );
