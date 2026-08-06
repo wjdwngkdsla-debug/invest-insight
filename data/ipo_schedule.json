@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06 08:29",
+  "updated": "2026-08-06 14:04",
   "items": [
     {
       "corp_code": "00104069",
@@ -51,6 +51,24 @@
       "management_status": "자동",
       "schedule_hidden": false,
       "offering_attempt": 1
+    },
+    {
+      "corp_code": "01936340",
+      "name": "데이터젠",
+      "management_name": "데이터젠",
+      "first_filing_date": "20260129",
+      "last_rcept_no": "20260626000400",
+      "withdrawn": false,
+      "review_pending": true,
+      "management_status": "자동",
+      "offering_attempt": 1,
+      "payment_date": "2026-07-14",
+      "sub_start": "2026-06-29",
+      "sub_end": "2026-07-10",
+      "ipo_parse_version": 4,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": ""
     },
     {
       "corp_code": "02031369",
@@ -315,7 +333,7 @@
       "corp_code": "01588897",
       "name": "니어스랩",
       "first_filing_date": "20260625",
-      "last_rcept_no": "20260721000296",
+      "last_rcept_no": "20260806000050",
       "band_low": 30000,
       "band_high": 41200,
       "forecast_start": "2026-08-03",
@@ -17025,54 +17043,6 @@
       "date": "2026-07-19",
       "name": "미트박스",
       "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "750000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "미트박스",
-      "type": "수기변경(검토필요)",
       "field": "배정_1개월",
       "old": "",
       "new": "0"
@@ -21020,9 +20990,62 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
+    {
+      "name": "데이터젠",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%A0"
+    },
     {
       "name": "스탁키퍼",
       "status": "pending",
