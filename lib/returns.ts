@@ -11,8 +11,8 @@ export function priceReturnPct(basePrice: number, currentPrice: number): number 
  * 거래정지 중인 종목의 종가는 과거 마지막 체결가이므로 현재 수익률로 취급하지 않는다.
  */
 export function currentIpoReturnPct(
-  stock: Pick<StockLockup, "ipo_price" | "close_price" | "trading_suspended">,
+  stock: Pick<StockLockup, "ipo_price" | "adjusted_ipo_price" | "close_price" | "trading_suspended">,
 ): number | null {
   if (stock.trading_suspended) return null;
-  return priceReturnPct(stock.ipo_price || 0, stock.close_price || 0);
+  return priceReturnPct(stock.adjusted_ipo_price || stock.ipo_price || 0, stock.close_price || 0);
 }

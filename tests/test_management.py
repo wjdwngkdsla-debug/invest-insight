@@ -14,6 +14,20 @@ from scripts.management import (
 
 
 class StockManagementMigrationTest(unittest.TestCase):
+    def test_toss_adjustment_fields_survive_management_merge(self) -> None:
+        saved = [{
+            "scope": "IPO일정+락업", "name": "조정회사", "stock_code": "123456",
+            "management_status": "자동", "visibility": "노출",
+            "adjusted_ipo_price": "5000", "ipo_adjustment_factor": "0.5",
+            "ipo_adjustment_checked_at": "2026-08-06", "ipo_adjustment_status": "조정적용",
+        }]
+
+        rows = merge_stock_management(saved, [], {"items": [], "past_items": []})
+
+        self.assertEqual(rows[0]["adjusted_ipo_price"], "5000")
+        self.assertEqual(rows[0]["ipo_adjustment_factor"], "0.5")
+        self.assertEqual(rows[0]["ipo_adjustment_status"], "조정적용")
+
     def test_spac_is_forced_to_excluded_and_private(self) -> None:
         name = "엔에이치기업인수목적34호"
         self.assertTrue(is_spac_name(name))

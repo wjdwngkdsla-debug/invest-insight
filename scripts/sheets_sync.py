@@ -129,6 +129,7 @@ STOCK_MANAGEMENT_HEADERS = [
     "관리", "홈페이지노출", "기업명", "DART기업코드", "종목코드", "시장",
     "상장일", "상장일고정", "공모가", "공모가고정",
     "최초상장주식수", "현재상장주식수", "상장주식수기준일", "종가",
+    "수정공모가", "공모가조정계수", "수정주가확인일", "수정주가상태",
     "콘텐츠링크", "검증상태", "검증사유", "메모",
 ]
 STOCK_MANAGEMENT_KEYS = {
@@ -138,6 +139,8 @@ STOCK_MANAGEMENT_KEYS = {
     "공모가": "manual_ipo_price", "공모가고정": "manual_ipo_price_locked",
     "최초상장주식수": "initial_shares", "현재상장주식수": "current_shares",
     "상장주식수기준일": "shares_date", "종가": "close_price",
+    "수정공모가": "adjusted_ipo_price", "공모가조정계수": "ipo_adjustment_factor",
+    "수정주가확인일": "ipo_adjustment_checked_at", "수정주가상태": "ipo_adjustment_status",
     "콘텐츠링크": "content_url", "검증상태": "validation_status",
     "검증사유": "validation_reason", "메모": "memo",
 }
@@ -2279,7 +2282,11 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
             row.get("listing_date", ""), row.get("listing_date_locked") == "Y",
             number(row.get("manual_ipo_price")) or "", row.get("manual_ipo_price_locked") == "Y",
             number(row.get("initial_shares")) or "", number(row.get("current_shares")) or "",
-            row.get("shares_date", ""), number(row.get("close_price")) or "", row.get("content_url", ""),
+            row.get("shares_date", ""), number(row.get("close_price")) or "",
+            float(row.get("adjusted_ipo_price")) if str(row.get("adjusted_ipo_price") or "").strip() else "",
+            float(row.get("ipo_adjustment_factor")) if str(row.get("ipo_adjustment_factor") or "").strip() else "",
+            row.get("ipo_adjustment_checked_at", ""), row.get("ipo_adjustment_status", ""),
+            row.get("content_url", ""),
             row.get("validation_status", ""), row.get("validation_reason", ""), row.get("memo", ""),
         ])
         state_rows[key] = {
@@ -2292,6 +2299,7 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
     _push_simple_table(
         spreadsheet, STOCK_MANAGEMENT_TAB, STOCK_MANAGEMENT_HEADERS, values,
         ["관리", "홈페이지노출", "상장일고정", "공모가고정"],
+        ["수정공모가", "공모가조정계수", "수정주가확인일", "수정주가상태"],
     )
 
 

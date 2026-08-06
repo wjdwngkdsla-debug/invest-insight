@@ -53,6 +53,7 @@ export function getIpoRanking(): IpoRankingRow[] {
       closePrice,
       returnPct: currentIpoReturnPct({
         ipo_price: ipoPrice,
+        adjusted_ipo_price: stock.adjusted_ipo_price,
         close_price: closePrice,
         trading_suspended: stock.trading_suspended,
       }),

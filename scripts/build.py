@@ -4642,7 +4642,11 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
     return cache
 
 
-def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
+def rows_to_site_data(
+    rows: list[dict],
+    price_date: str | None = None,
+    management_rows: list[dict] | None = None,
+) -> dict:
     def managed_name(value: object) -> str:
         return re.sub(r"[\s㈜()\[\]]|주식회사", "", str(value or ""))
 
@@ -4658,10 +4662,23 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
     # 종목별 분석 콘텐츠 링크 — 종목관리 탭의 콘텐츠링크 열(운영자 입력)
     content_by_code: dict[str, str] = {}
     content_by_name: dict[str, str] = {}
+    adjustment_by_code: dict[str, dict] = {}
+    adjustment_by_name: dict[str, dict] = {}
     management_path = ROOT_DIR / "data" / "stock_management.json"
-    if management_path.exists():
+    if management_rows is not None or management_path.exists():
         try:
-            for command in json.loads(management_path.read_text(encoding="utf-8")):
+            commands = management_rows if management_rows is not None else json.loads(management_path.read_text(encoding="utf-8"))
+            for command in commands:
+                adjustment = {
+                    "adjusted_ipo_price": _to_float(command.get("adjusted_ipo_price")),
+                    "ipo_adjustment_factor": _to_float(command.get("ipo_adjustment_factor")),
+                    "ipo_adjustment_checked_at": str(command.get("ipo_adjustment_checked_at") or ""),
+                }
+                if adjustment["adjusted_ipo_price"] > 0:
+                    if command.get("stock_code"):
+                        adjustment_by_code[normalize_stock_code(command.get("stock_code"))] = adjustment
+                    if command.get("name"):
+                        adjustment_by_name[managed_name(command.get("name"))] = adjustment
                 url = str(command.get("content_url") or "").strip()
                 if url:
                     if command.get("stock_code"):
@@ -4688,6 +4705,7 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
         if not final_qty or not final_date:
             continue
         code = r["code"]
+        adjustment = adjustment_by_code.get(normalize_stock_code(code)) or adjustment_by_name.get(managed_name(r.get("name"))) or {}
         stock = stocks_map.setdefault(code, {
             "code": code,
             "name": r.get("name"),
@@ -4708,6 +4726,9 @@ def rows_to_site_data(rows: list[dict], price_date: str | None = None) -> dict:
                 (_to_int(r.get("current_shares")) or _to_int(r.get("shares"))) * _to_int(r.get("close_price"))
             ),
             "ipo_price": 0,
+            "adjusted_ipo_price": adjustment.get("adjusted_ipo_price") or 0,
+            "ipo_adjustment_factor": adjustment.get("ipo_adjustment_factor") or 0,
+            "ipo_adjustment_checked_at": adjustment.get("ipo_adjustment_checked_at") or "",
             "content_url": content_by_code.get(normalize_stock_code(code))
             or content_by_name.get(managed_name(r.get("name")))
             or "",

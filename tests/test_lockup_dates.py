@@ -61,6 +61,26 @@ class SiteDataVisibilityTest(unittest.TestCase):
         self.assertEqual(result["stocks"][0]["name"], "주식회사 테스트")
         self.assertEqual(result["stocks"][0]["shares"], 1100)
 
+    def test_site_data_carries_adjusted_ipo_basis_without_replacing_original_price(self) -> None:
+        rows = [{
+            "event_id": "123456-IPO-1개월", "code": "123456", "name": "조정회사",
+            "market": "코스닥", "listing_date": "2026-07-01", "shares": "1000",
+            "current_shares": "1000", "close_price": "7500", "ipo_price": "10000",
+            "category": "IPO기관", "period": "1개월", "final_date": "2026-08-01",
+            "final_qty": "100", "sheet_visible": "Y",
+        }]
+        management = [{
+            "name": "조정회사", "stock_code": "123456", "adjusted_ipo_price": "5000",
+            "ipo_adjustment_factor": "0.5", "ipo_adjustment_checked_at": "2026-08-06",
+        }]
+
+        result = rows_to_site_data(rows, "2026-08-06", management)
+        stock = result["stocks"][0]
+
+        self.assertEqual(stock["ipo_price"], 10000)
+        self.assertEqual(stock["adjusted_ipo_price"], 5000)
+        self.assertEqual(stock["ipo_adjustment_factor"], 0.5)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -17,6 +17,7 @@ MANAGEMENT_COLUMNS = [
     "management_status", "visibility", "listing_date_locked", "manual_ipo_price",
     "manual_ipo_price_locked", "listing_date_edited", "manual_ipo_price_edited",
     "initial_shares", "current_shares", "shares_date",
+    "adjusted_ipo_price", "ipo_adjustment_factor", "ipo_adjustment_checked_at", "ipo_adjustment_status",
     "close_price", "content_url", "validation_status", "validation_reason", "memo",
 ]
 

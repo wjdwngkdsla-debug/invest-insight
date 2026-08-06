@@ -112,6 +112,38 @@ GitHub의 `Actions` → `Update lockup data` → `Run workflow`에서 실행합�
 - 시트만 새로 만들기: `reset_sheet=true`, `reparse_existing=false`
 - 기존 DART 문서를 정말 다시 읽어야 할 때만: `reparse_existing=true`
 
+## 토스 수정주가 주간 확인(맥북 전용)
+
+공모가 대비 현재 수익률은 액면분할·병합·무상증자 등 주식 단위 변경을 반영하기 위해
+토스 일봉의 수정주가를 사용합니다. 토스 API는 허용 IP를 검사하므로 GitHub 호스팅
+러너에서는 호출하지 않고, 허용 IP가 등록된 맥북에서만 주 1회 실행합니다.
+
+1. GitHub Desktop에서 `Pull origin`을 완료합니다.
+2. 저장소 루트의 `run_weekly_ipo_adjustment.command`를 더블클릭합니다.
+3. 완료 메시지가 나오면 창을 닫습니다.
+4. 다음 09:30/20:00 GitHub 일일 배치가 시트 값을 내려받아 홈페이지에 반영합니다.
+   즉시 반영하려면 GitHub의 `Update lockup data`를 일반 옵션으로 한 번 실행합니다.
+
+터미널에서 실행할 때는 다음 명령을 사용합니다.
+
+```bash
+cd /Users/jungjuhang/Documents/Codex/2026-07-10/new-chat/invest-insight-spac
+python3 -m scripts.toss_ipo_adjustment
+```
+
+처리 구조:
+
+- 최초 공모가는 변경하지 않습니다.
+- KRX 상장일 원종가와 토스 상장일 수정종가로 조정계수를 계산합니다.
+- `종목관리`의 숨김 기술 컬럼 `수정공모가`, `공모가조정계수`,
+  `수정주가확인일`, `수정주가상태`만 갱신합니다.
+- 상장일 수익률은 최초 공모가를 유지하고, 현재 수익률·IPO 랭킹만 수정공모가를 사용합니다.
+- 토스 조회 실패 시 기존 저장값을 지우지 않습니다.
+- 결과는 10종목마다 시트에 중간 저장합니다.
+
+토스 키는 맥북의 별도 `.env`에만 저장합니다. GitHub Actions/Vercel에는
+`TOSS_CLIENT_ID`, `TOSS_CLIENT_SECRET`을 추가하지 않습니다.
+
 시트 초기화는 커밋된 JSON/CSV를 재사용하므로 기존 종목 전체 파싱이 발생하지 않습니다.
 
 ## GitHub Repository Secrets

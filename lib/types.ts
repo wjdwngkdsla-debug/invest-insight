@@ -50,6 +50,9 @@ export interface StockLockup {
   trading_suspended_since?: string; // 최초 거래정지 감지일(YYYY-MM-DD). 재개 전까지 유지
   market_cap?: number;
   ipo_price?: number; // 확정 공모가(원). 0 또는 없음 = 미확인
+  adjusted_ipo_price?: number; // 기업행사 반영 현재 수익률 계산용 공모가. 화면의 원 공모가는 바꾸지 않는다.
+  ipo_adjustment_factor?: number;
+  ipo_adjustment_checked_at?: string;
   content_url?: string; // 종목 분석 포스팅 링크(종목관리 탭 입력). 없으면 기본 블로그
   events: LockupEvent[];
   holders?: LockupHolder[];
