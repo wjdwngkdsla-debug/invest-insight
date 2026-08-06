@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { StockLockup } from "@/lib/types";
 import { StockLockupTiles } from "@/components/StockLockupTiles";
 import { formatKrwEok } from "@/lib/format";
+import { currentIpoReturnPct } from "@/lib/returns";
 
 const DEFAULT_BLOG_URL = "https://blog.naver.com/vericap";
 
@@ -91,9 +92,10 @@ export function StockHero({
 }) {
   const ipoPrice = stock.ipo_price || 0;
   const closeCap = stock.market_cap || stock.shares * stock.close_price;
-  const changePct = ipoPrice ? ((stock.close_price - ipoPrice) / ipoPrice) * 100 : 0;
-  const hasReturn = Boolean(ipoPrice && stock.close_price);
-  const up = changePct >= 0;
+  const changePct = currentIpoReturnPct(stock);
+  const hasReturn = changePct !== null;
+  const displayChangePct = changePct ?? 0;
+  const up = displayChangePct >= 0;
   const contentUrl = stock.content_url || DEFAULT_BLOG_URL;
   const contentLabel = stock.content_url ? "종목 분석 보러가기" : "기업 분석 포스팅 보러가기";
   const priceDate = updated.slice(5);
@@ -144,7 +146,7 @@ export function StockHero({
                   <span className="text-[18px] font-semibold tracking-tight text-slate-600 md:text-[20px]">공모가 대비</span>
                   <span className={`text-[30px] font-bold leading-none tracking-tight md:text-[34px] ${up ? "text-rose-600" : "text-blue-600"}`}>
                     {up ? "+" : ""}
-                    {changePct.toFixed(1)}
+                    {displayChangePct.toFixed(1)}
                     <span className="text-[20px] md:text-[22px]">%</span>
                   </span>
                 </div>
@@ -155,7 +157,7 @@ export function StockHero({
                 </div>
               )}
             </div>
-            {!suspended && hasReturn && <ReturnGauge pct={changePct} />}
+            {!suspended && hasReturn && <ReturnGauge pct={displayChangePct} />}
           </div>
 
           <StockLockupTiles

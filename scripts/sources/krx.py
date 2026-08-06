@@ -91,6 +91,7 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
                 "shrs": _to_int(it.get("LIST_SHRS")),
                 "close_price": _to_int(it.get("TDD_CLSPRC")),
                 "market_cap": _to_int(it.get("MKTCAP")),
+                "volume": _to_int(it.get("ACC_TRDVOL")) if "ACC_TRDVOL" in it else None,
             }
         time.sleep(0.15)
     return None if empty else out

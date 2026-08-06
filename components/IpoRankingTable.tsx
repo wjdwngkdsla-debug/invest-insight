@@ -28,7 +28,8 @@ function yymmdd(date: string): string {
   return date ? date.slice(2).replaceAll("-", ".") : "-";
 }
 
-function ReturnText({ pct, className = "" }: { pct: number | null; className?: string }) {
+function ReturnText({ pct, suspended = false, className = "" }: { pct: number | null; suspended?: boolean; className?: string }) {
+  if (suspended) return <span className={`font-semibold text-slate-500 ${className}`}>거래정지</span>;
   if (pct === null) return <span className="text-slate-300">-</span>;
   const up = pct >= 0;
   return (
@@ -79,8 +80,8 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
     () =>
       rows.filter((row) => {
         if (market !== "all" && row.market !== market) return false;
-        if (outcome === "win" && row.returnPct < 0) return false;
-        if (outcome === "loss" && row.returnPct >= 0) return false;
+        if (outcome === "win" && (row.returnPct === null || row.returnPct < 0)) return false;
+        if (outcome === "loss" && (row.returnPct === null || row.returnPct >= 0)) return false;
         if (from && row.listingDate < from) return false;
         if (to && row.listingDate > to) return false;
         return true;
@@ -90,28 +91,35 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
 
   const sorted = useMemo(() => {
     const list = [...filtered].sort((a, b) => {
-      if (sortKey === "listingDate") return a.listingDate.localeCompare(b.listingDate);
-      if (sortKey === "listingReturnPct") {
-        // 상장일 시세를 못 받은 종목은 정렬 방향과 무관하게 뒤로 보낸다
-        if (a.listingReturnPct === null && b.listingReturnPct === null) return 0;
-        if (a.listingReturnPct === null) return asc ? 1 : -1;
-        if (b.listingReturnPct === null) return asc ? -1 : 1;
-        return a.listingReturnPct - b.listingReturnPct;
+      if (sortKey === "listingDate") {
+        const diff = a.listingDate.localeCompare(b.listingDate);
+        return asc ? diff : -diff;
       }
-      return a[sortKey] - b[sortKey];
+      if (sortKey === "listingReturnPct" || sortKey === "returnPct") {
+        const av = a[sortKey];
+        const bv = b[sortKey];
+        // 시세 미확인·거래정지는 정렬 방향과 무관하게 뒤로 보낸다.
+        if (av === null && bv === null) return 0;
+        if (av === null) return 1;
+        if (bv === null) return -1;
+        return asc ? av - bv : bv - av;
+      }
+      const diff = a[sortKey] - b[sortKey];
+      return asc ? diff : -diff;
     });
-    return asc ? list : list.reverse();
+    return list;
   }, [filtered, sortKey, asc]);
 
   const summary = useMemo(() => {
     if (filtered.length === 0) return null;
-    const total = filtered.reduce((sum, row) => sum + row.returnPct, 0);
-    const winners = filtered.filter((row) => row.returnPct >= 0).length;
+    const comparable = filtered.filter((row) => row.returnPct !== null);
+    const total = comparable.reduce((sum, row) => sum + (row.returnPct ?? 0), 0);
+    const winners = comparable.filter((row) => (row.returnPct ?? -Infinity) >= 0).length;
     return {
       count: filtered.length,
-      average: total / filtered.length,
+      average: comparable.length ? total / comparable.length : null,
       winners,
-      winRate: (winners / filtered.length) * 100,
+      winRate: comparable.length ? (winners / comparable.length) * 100 : 0,
     };
   }, [filtered]);
 
@@ -253,7 +261,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-slate-600">{formatKrwEok(row.marketCap)}</td>
                     <td className="px-3 py-2.5 text-right">
-                      <ReturnText pct={row.returnPct} />
+                      <ReturnText pct={row.returnPct} suspended={row.suspended} />
                     </td>
                     <td className="px-3 py-2.5 text-right">
                       <ReturnText pct={row.listingReturnPct} />
@@ -278,7 +286,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                       {row.name}
                     </Link>
                   </div>
-                  <ReturnText pct={row.returnPct} className="shrink-0 text-[17px]" />
+                  <ReturnText pct={row.returnPct} suspended={row.suspended} className="shrink-0 text-[17px]" />
                 </div>
                 <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 text-[11px]">
                   <span className="text-slate-500">
@@ -307,6 +315,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
         공모가 대비 = (최근 종가 − 공모가) ÷ 공모가 ({priceDate} 종가 기준) · 상장일 수익률 = (상장일 종가 − 공모가) ÷ 공모가.
         <br />
         주가만 비교한 값이라 무상증자·액면분할 등 주식수 변동은 반영하지 않습니다.
+        거래정지 종목은 마지막 체결가가 현재가처럼 보이지 않도록 현재 수익률과 평균·승률 집계에서 제외합니다.
       </p>
     </div>
   );

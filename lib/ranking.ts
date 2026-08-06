@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/data";
 import { getIpoSchedule } from "@/lib/ipo";
+import { currentIpoReturnPct, priceReturnPct } from "@/lib/returns";
 
 /** IPO 랭킹 한 줄 — 공모가 대비 수익률을 중심으로 공모 지표를 함께 본다.
  *
@@ -14,7 +15,7 @@ export interface IpoRankingRow {
   listingDate: string;
   ipoPrice: number;
   closePrice: number;
-  returnPct: number;
+  returnPct: number | null;
   /** 공모가 대비 상장일 종가 수익률. 상장일 시세를 못 받은 종목은 null */
   listingReturnPct: number | null;
   demandRatio: number;
@@ -50,13 +51,17 @@ export function getIpoRanking(): IpoRankingRow[] {
       listingDate,
       ipoPrice,
       closePrice,
-      returnPct: ((closePrice - ipoPrice) / ipoPrice) * 100,
-      listingReturnPct: stock.listing_close ? ((stock.listing_close - ipoPrice) / ipoPrice) * 100 : null,
+      returnPct: currentIpoReturnPct({
+        ipo_price: ipoPrice,
+        close_price: closePrice,
+        trading_suspended: stock.trading_suspended,
+      }),
+      listingReturnPct: priceReturnPct(ipoPrice, stock.listing_close || 0),
       demandRatio: item.demand_ratio || 0,
       subRatio: item.sub_ratio || 0,
       marketCap: stock.market_cap || stock.shares * closePrice,
       suspended: Boolean(stock.trading_suspended),
     });
   }
-  return rows.sort((a, b) => b.returnPct - a.returnPct);
+  return rows.sort((a, b) => (b.returnPct ?? -Infinity) - (a.returnPct ?? -Infinity));
 }

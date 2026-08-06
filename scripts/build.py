@@ -3745,8 +3745,21 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
             else:
                 row["trading_suspended_since"] = ""
             continue
-        row["trading_suspended"] = False
-        row["trading_suspended_since"] = ""
+        previous = previous_by_code.get(code) or {}
+        # KRX 일별시세에는 거래정지 종목도 직전 종가로 남을 수 있다.
+        # 당일 누적거래량 0을 함께 확인해야 오래된 종가를 현재 수익률로 오인하지 않는다.
+        volume = meta.get("volume")
+        suspended = (
+            _to_int(volume) == 0
+            if volume is not None
+            else previous.get("trading_suspended") is True
+        )
+        row["trading_suspended"] = suspended
+        row["trading_suspended_since"] = (
+            previous.get("trading_suspended_since") or close_date
+            if suspended
+            else ""
+        )
         current_shares = _to_int(meta.get("shrs"))
         if current_shares:
             old_shares = _to_int(row.get("current_shares")) or _to_int(row.get("shares"))

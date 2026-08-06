@@ -6,6 +6,7 @@ import { getIpoSchedule } from "@/lib/ipo";
 import { DdayBadge } from "@/components/DdayBadge";
 import { PastDateGate } from "@/components/PastDateGate";
 import holidays from "@/data/holidays.json";
+import { currentIpoReturnPct } from "@/lib/returns";
 
 
 
@@ -29,8 +30,8 @@ function TrendBadge({ ipoPrice, closePrice, tradingSuspended }: { ipoPrice: numb
       </span>
     );
   }
-  if (!ipoPrice || !closePrice) return null;
-  const pct = ((closePrice - ipoPrice) / ipoPrice) * 100;
+  const pct = currentIpoReturnPct({ ipo_price: ipoPrice, close_price: closePrice, trading_suspended: false });
+  if (pct === null) return null;
   const rounded = Math.round(pct * 10) / 10;
   const isUp = rounded >= 0;
   return (
