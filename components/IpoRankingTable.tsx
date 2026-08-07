@@ -69,6 +69,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
     return { min: dates[0] || "", max: dates[dates.length - 1] || "" };
   }, [rows]);
 
+  const [query, setQuery] = useState("");
   const [market, setMarket] = useState<MarketKey>("all");
   const [outcome, setOutcome] = useState<OutcomeKey>("all");
   const [from, setFrom] = useState("");
@@ -76,9 +77,11 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
   const [sortKey, setSortKey] = useState<SortKey>("returnPct");
   const [asc, setAsc] = useState(false);
 
+  const keyword = query.trim();
   const filtered = useMemo(
     () =>
       rows.filter((row) => {
+        if (keyword && !row.name.includes(keyword)) return false;
         if (market !== "all" && row.market !== market) return false;
         if (outcome === "win" && (row.returnPct === null || row.returnPct < 0)) return false;
         if (outcome === "loss" && (row.returnPct === null || row.returnPct >= 0)) return false;
@@ -86,7 +89,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
         if (to && row.listingDate > to) return false;
         return true;
       }),
-    [rows, market, outcome, from, to],
+    [rows, keyword, market, outcome, from, to],
   );
 
   const sorted = useMemo(() => {
@@ -192,6 +195,14 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
               기간 해제
             </button>
           )}
+          {/* 홈 캘린더와 동일한 종목명 검색 (칩 줄 높이에 맞춰 크기만 축소) */}
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="종목명 검색"
+            aria-label="종목명 검색"
+            className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-auto sm:w-44"
+          />
         </div>
       </div>
 
