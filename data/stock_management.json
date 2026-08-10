@@ -1669,8 +1669,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "44400",
     "content_url": "",
-    "validation_status": "정상",
-    "validation_reason": "",
+    "validation_status": "확인필요",
+    "validation_reason": "KRX 상장일 불일치(관리 2026-07-14 / KRX 2025-03-14)",
     "memo": ""
   },
   {
@@ -3019,8 +3019,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "13330",
     "content_url": "",
-    "validation_status": "정상",
-    "validation_reason": "",
+    "validation_status": "확인필요",
+    "validation_reason": "KRX 상장일 불일치(관리 2026-07-15 / KRX 2025-12-15)",
     "memo": ""
   },
   {
