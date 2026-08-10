@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 import re
+from urllib.parse import unquote
+
 import requests
 
 from scripts.config import DATA_GO_KR_API_KEY, PUBLIC_LOCKUP_API_URL
@@ -43,8 +45,12 @@ def fetch_public_lockup_returns(corp_name: str) -> list[dict]:
     주의: 이 API는 기본적으로 '반환실적' 성격이 강하므로, 신규상장 예정 종목의 미래 기존주주 락업이
     항상 미리 내려온다고 가정하면 안 된다.
     """
+    # 공공데이터포털은 같은 키를 Encoding/Decoding 두 형식으로 제공한다.
+    # requests의 params에 인코딩 키를 그대로 넘기면 '%'가 다시 인코딩되어
+    # SERVICE_KEY_IS_NOT_REGISTERED_ERROR가 발생하므로 호출 직전에 정규화한다.
+    service_key = unquote(DATA_GO_KR_API_KEY or "")
     params = {
-        "serviceKey": DATA_GO_KR_API_KEY,
+        "serviceKey": service_key,
         "pageNo": 1,
         "numOfRows": 100,
         "resultType": "json",

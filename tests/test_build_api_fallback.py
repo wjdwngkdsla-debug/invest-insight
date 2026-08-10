@@ -1,16 +1,28 @@
 from __future__ import annotations
 
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from scripts.build import (
     CATEGORY_IPO,
     apply_api_updates,
     build_dart_rows_or_preserve,
 )
+from scripts.sources.public_lockup_api import fetch_public_lockup_returns
 
 
 class DartApiFallbackTest(unittest.TestCase):
+    @patch("scripts.sources.public_lockup_api.requests.get")
+    @patch("scripts.sources.public_lockup_api.DATA_GO_KR_API_KEY", "abc%2Bdef%2Fghi%3D")
+    def test_public_api_accepts_portal_encoding_key(self, mock_get: Mock) -> None:
+        response = Mock()
+        response.json.return_value = {"response": {"body": {"items": {}}}}
+        mock_get.return_value = response
+
+        fetch_public_lockup_returns("테스트")
+
+        self.assertEqual(mock_get.call_args.kwargs["params"]["serviceKey"], "abc+def/ghi=")
+
     def test_dart_failure_preserves_existing_rows_for_api_step(self) -> None:
         existing = [{
             "event_id": "0156T0-IPO기관-1M-2026-08-24",
