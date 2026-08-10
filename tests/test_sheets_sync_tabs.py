@@ -21,6 +21,7 @@ if "gspread" not in sys.modules:
 
 from scripts.sheets_sync import (
     OBSOLETE_TABS,
+    _listing_day_snapshot_issue,
     _management_stats,
     _review_fill_gaps,
     cleanup_obsolete_tabs,
@@ -69,6 +70,7 @@ class SheetTabCleanupTest(unittest.TestCase):
 
         self.assertEqual(stats["373110"]["initial_shares"], 10830212)
         self.assertEqual(stats["373110"]["current_shares"], "17294394")
+        self.assertEqual(stats["373110"]["initial_shares_issue"], "")
         self.assertEqual(stats["name:엑셀세라퓨틱스"]["initial_shares"], 10830212)
 
     def test_management_ignores_stale_listing_day_snapshot(self):
@@ -83,6 +85,20 @@ class SheetTabCleanupTest(unittest.TestCase):
         stats = _management_stats(rows, listing_day)
 
         self.assertEqual(stats["373110"]["initial_shares"], "17294394")
+        self.assertIn("KRX 상장일 불일치", stats["373110"]["initial_shares_issue"])
+
+    def test_missing_listing_day_snapshot_requires_review(self):
+        self.assertEqual(
+            _listing_day_snapshot_issue("373110", "2024-07-15", {}),
+            "KRX 상장일 자료 없음",
+        )
+        self.assertEqual(
+            _listing_day_snapshot_issue(
+                "373110", "2024-07-15",
+                {"373110": {"listing_date": "2024-07-15", "shares": 0}},
+            ),
+            "KRX 상장일 주식수 없음",
+        )
 
     def test_removes_only_known_legacy_tabs(self):
         retained = [

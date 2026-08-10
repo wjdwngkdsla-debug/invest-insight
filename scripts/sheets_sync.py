@@ -1310,6 +1310,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     schedule = read_schedule_data()
     admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
     float_codes = {row.get("code") for row in admin_rows if row.get("category") == "구주·보호예수"}
+    listing_day = _load_listing_day_snapshot()
     today = date.today().isoformat()
 
     written = _load_review_fill_written()
@@ -1343,7 +1344,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     rows: list[dict[str, str]] = []
     snapshot: dict[str, dict[str, str]] = {}
     for item in all_schedule_items(schedule):
-        if item.get("withdrawn") or item.get("fixed_excluded") or item.get("review_pending"):
+        if item.get("withdrawn") or item.get("fixed_excluded"):
             continue
         if item.get("management_hidden") or item.get("schedule_hidden"):
             continue
@@ -1351,12 +1352,17 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         listing = str(item.get("listing_date") or "")
         if not code or not listing or listing > today:
             continue
+        listing_day_issue = _listing_day_snapshot_issue(code, listing, listing_day)
+        if item.get("review_pending") and not listing_day_issue:
+            continue
         gaps = _review_fill_gaps(item, code in float_codes)
+        if listing_day_issue:
+            gaps.append("최초상장주식수 확인")
         if not gaps:
             continue
         row = {
             "종목코드": code, "기업명": item.get("name") or "", "상장일": listing,
-            "부족한값": ", ".join(gaps), "메모": "",
+            "부족한값": ", ".join(gaps), "메모": listing_day_issue,
             "시장": item.get("market") or "",
             "확정공모가": str(number(item.get("final_price")) or ""),
             "희망가하단": str(number(item.get("band_low")) or ""),
@@ -2233,6 +2239,31 @@ def _apply_below_alloc_all_tiers(item: dict) -> bool:
     return all(allocs[period] > 0 and applies[period] < allocs[period] for period in COMMIT_TIER_ORDER)
 
 
+def _listing_day_snapshot_issue(
+    code: object, listing_date: object, listing_day: dict[str, dict],
+) -> str:
+    raw_code = str(code or "").strip()
+    normalized_code = raw_code.zfill(6) if raw_code.isdigit() and len(raw_code) < 6 else raw_code
+    listing = str(listing_date or "").strip()
+    snapshot = listing_day.get(normalized_code) or {}
+    if not snapshot:
+        return "KRX 상장일 자료 없음"
+    snapshot_date = str(snapshot.get("listing_date") or "").strip()
+    if snapshot_date != listing:
+        return f"KRX 상장일 불일치(관리 {listing or '-'} / KRX {snapshot_date or '-'})"
+    if not number(snapshot.get("shares")):
+        return "KRX 상장일 주식수 없음"
+    return ""
+
+
+def _load_listing_day_snapshot() -> dict[str, dict]:
+    try:
+        value = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
 def _management_stats(admin_rows: list[dict], listing_day: dict[str, dict] | None = None) -> dict[str, dict]:
     """종목관리용 주식수/종가를 모은다.
 
@@ -2246,11 +2277,8 @@ def _management_stats(admin_rows: list[dict], listing_day: dict[str, dict] | Non
         code = str(row.get("code") or "").strip()
         normalized_code = code.zfill(6) if code.isdigit() and len(code) < 6 else code
         snapshot = listing_day.get(normalized_code) or {}
-        snapshot_matches = (
-            snapshot
-            and str(snapshot.get("listing_date") or "") == str(row.get("listing_date") or "")
-        )
-        initial_shares = snapshot.get("shares") if snapshot_matches else row.get("shares")
+        issue = _listing_day_snapshot_issue(normalized_code, row.get("listing_date"), listing_day)
+        initial_shares = snapshot.get("shares") if not issue else row.get("shares")
         keys = [normalized_code, f"name:{norm_name(row.get('name'))}"]
         for key in keys:
             if not key or key == "name:":
@@ -2260,6 +2288,7 @@ def _management_stats(admin_rows: list[dict], listing_day: dict[str, dict] | Non
             current["current_shares"] = row.get("current_shares") or current.get("current_shares") or ""
             current["shares_date"] = row.get("shares_date") or current.get("shares_date") or ""
             current["close_price"] = row.get("close_price") or current.get("close_price") or ""
+            current["initial_shares_issue"] = issue
     return stats
 
 
@@ -2268,12 +2297,7 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
     rows = merge_stock_management(
         read_json_list(STOCK_MANAGEMENT_PATH), read_json_list(IPO_TARGETS_PATH), schedule,
     )
-    try:
-        listing_day = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
-        if not isinstance(listing_day, dict):
-            listing_day = {}
-    except (FileNotFoundError, json.JSONDecodeError):
-        listing_day = {}
+    listing_day = _load_listing_day_snapshot()
     stats = _management_stats(
         read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv"), listing_day,
     )
@@ -2294,6 +2318,12 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
         row["manual_ipo_price"] = official_price
         if item.get("fixed_excluded") or row.get("management_status") == "제외고정":
             row["validation_status"], row["validation_reason"] = "삭제", "관리 체크 해제 + 홈페이지 비공개"
+        elif metric.get("initial_shares_issue"):
+            extra_reason = str(item.get("review_reason") or "") if item.get("review_pending") else ""
+            row["validation_status"] = "확인필요"
+            row["validation_reason"] = " / ".join(
+                reason for reason in (metric["initial_shares_issue"], extra_reason) if reason
+            )
         elif item.get("review_pending"):
             row["validation_status"], row["validation_reason"] = "확인필요", str(item.get("review_reason") or "DART/API 확인 필요")
         elif item.get("provisional_fields"):
