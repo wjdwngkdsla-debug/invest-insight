@@ -21,6 +21,7 @@ import requests
 from gspread import Cell
 
 from scripts.sheets_sync import DEFAULT_SHEET_ID, build_client
+from scripts.utils.redaction import redact_sensitive_text
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -258,7 +259,10 @@ def main() -> None:
             print(f"  [{index}/{len(targets)}] {name}: {status} (계수 {factor})")
         except Exception as exc:
             failed += 1
-            print(f"  [{index}/{len(targets)}] {name}: 실패 - {exc}", file=sys.stderr)
+            print(
+                f"  [{index}/{len(targets)}] {name}: 실패 - {redact_sensitive_text(exc)}",
+                file=sys.stderr,
+            )
         if index % 10 == 0:
             flush()
     flush()

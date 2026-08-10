@@ -14,6 +14,7 @@ import requests
 from scripts.config import DART_API_KEY, ROOT_DIR
 from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports
 from scripts.management import apply_stock_management, is_fixed_excluded, is_spac_name, merge_stock_management
+from scripts.utils.redaction import redact_sensitive_text
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 SCHEDULE_PATH = ROOT_DIR / "data" / "ipo_schedule.json"
@@ -676,7 +677,7 @@ def seed_new_items(
             # 과거 상장 종목 백필까지 커버하도록 넓은 창 사용 (corp 지정 조회라 호출 1번)
             filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
         except Exception as exc:
-            log(f"수동추가 조회 실패: {name} ({exc})")
+            log(f"수동추가 조회 실패: {name} ({redact_sensitive_text(exc)})")
             unresolved.append({"name": name, "status": "pending", "link": link})
             continue
 
@@ -910,7 +911,7 @@ def refresh_ipo_schedule(
             management_rows = merge_stock_management(saved_management, targets, state)
             _, state, _ = apply_stock_management(management_rows, targets, state)
         except Exception as exc:
-            log(f"종목관리 사전 적용 실패(기존 상태로 계속): {exc}")
+            log(f"종목관리 사전 적용 실패(기존 상태로 계속): {redact_sensitive_text(exc)}")
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
     archived_by_corp: dict[str, dict[str, Any]] = {
         i["corp_code"]: i for i in state.get("past_items", []) if i.get("corp_code")
@@ -1058,7 +1059,7 @@ def refresh_ipo_schedule(
                 try:
                     doc = download_document_text(f["rcept_no"])
                 except Exception as exc:
-                    log(f"  문서 실패 {f['rcept_no']}: {exc}")
+                    log(f"  문서 실패 {f['rcept_no']}: {redact_sensitive_text(exc)}")
                     continue
                 parsed = parse_offering_doc(doc)
                 for key, val in parsed.items():
@@ -1274,7 +1275,10 @@ def refresh_ipo_schedule(
                     log(f"과거 이력 기관신청 공시 없음: {archived.get('name')}")
             except Exception as exc:
                 # 다음 배치에서 재시도할 수 있게 버전은 올리지 않는다.
-                log(f"과거 이력 기관신청 보강 실패 {archived.get('name')}: {exc}")
+                log(
+                    f"과거 이력 기관신청 보강 실패 {archived.get('name')}: "
+                    f"{redact_sensitive_text(exc)}"
+                )
 
         # ② 실적보고서 보강 (확약 배정·개인청약경쟁률) — 상장일 주변 창으로 조회.
         #    이전엔 이 단계가 없어서 과거 종목의 배정 데이터가 영영 비어 있었다.
@@ -1330,7 +1334,10 @@ def refresh_ipo_schedule(
                     archived["result_report_missing"] = True
                     log(f"과거 이력 실적보고서 없음: {archived.get('name')}")
             except Exception as exc:
-                log(f"과거 이력 실적보강 실패 {archived.get('name')}: {exc}")
+                log(
+                    f"과거 이력 실적보강 실패 {archived.get('name')}: "
+                    f"{redact_sensitive_text(exc)}"
+                )
 
     # KRX로 상장일 자동 감지·확정 (상장일은 종목기본정보 LIST_DD만 사용)
     if (krx_snapshot or krx_base_info) and krx_trading_date:
@@ -1382,7 +1389,7 @@ def refresh_ipo_schedule(
                         item["report_rcp"] = report["rcept_no"]
                         log(f"실적보고서 반영: {item.get('name')} (개인청약 {parsed.get('sub_ratio')}:1)")
             except Exception as exc:
-                log(f"실적보고서 실패 {item.get('name')}: {exc}")
+                log(f"실적보고서 실패 {item.get('name')}: {redact_sensitive_text(exc)}")
 
         # 정리 규칙: 상장 다음날부터 제외 / 철회 즉시 이전 이력 / 무소식 210일
         # 상장 후는 락업 캘린더가 이어받으므로 IPO일정에는 남길 필요가 없다.

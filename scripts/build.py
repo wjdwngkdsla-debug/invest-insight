@@ -113,6 +113,7 @@ from scripts.sources.dart import parse_ipo_lockup
 from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
+from scripts.utils.redaction import redact_sensitive_text
 from scripts.management import is_spac_name
 
 
@@ -4621,7 +4622,7 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
         try:
             snapshot = krx_snapshot(bas_dd)
         except Exception as exc:
-            print(f"  [KRX] {bas_dd} 조회 실패(무시): {exc}", file=sys.stderr)
+            print(f"  [KRX] {bas_dd} 조회 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
             continue
         if not snapshot:
             continue
@@ -4991,7 +4992,10 @@ def main() -> None:
                     })
                 schedule_path.write_text(json.dumps(schedule_data, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception as exc:
-            print(f"[BUILD] IPO일정 정정이력 크로스 기록 실패(무시): {exc}", file=sys.stderr)
+            print(
+                f"[BUILD] IPO일정 정정이력 크로스 기록 실패(무시): {redact_sensitive_text(exc)}",
+                file=sys.stderr,
+            )
 
 
 
@@ -5272,11 +5276,12 @@ def main() -> None:
                 all_logs.extend(logs)
                 all_rows_by_id[finalized["event_id"]] = finalized
         except Exception as exc:
-            print(f"  [ERROR] {name} 처리 실패 → 건너뛰고 계속: {exc}", file=sys.stderr)
+            safe_error = redact_sensitive_text(exc)
+            print(f"  [ERROR] {name} 처리 실패 → 건너뛰고 계속: {safe_error}", file=sys.stderr)
             all_reviews.append({
                 "detected_at": _now(), "event_id": "", "code": code, "name": name,
                 "category": "처리오류", "period": "",
-                "issue": f"종목 처리 중 오류로 건너뜀: {exc}",
+                "issue": f"종목 처리 중 오류로 건너뜀: {safe_error}",
                 "memo": "다음 배치에서 자동 재시도됨",
             })
             continue
@@ -5455,7 +5460,10 @@ def main() -> None:
                 all_logs.extend(logs)
                 all_rows_by_id[finalized["event_id"]] = finalized
         except Exception as exc:
-            print(f"  [ERROR] {name} API 갱신 실패 → 건너뛰고 계속: {exc}", file=sys.stderr)
+            print(
+                f"  [ERROR] {name} API 갱신 실패 → 건너뛰고 계속: {redact_sensitive_text(exc)}",
+                file=sys.stderr,
+            )
             continue
 
 
@@ -5675,7 +5683,7 @@ def main() -> None:
     try:
         refresh_listing_day_snapshot(all_rows)
     except Exception as exc:
-        print(f"[KRX] 상장일 시세 갱신 실패(무시): {exc}", file=sys.stderr)
+        print(f"[KRX] 상장일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
 
     out_path = data_dir / "site_data.json"
     previous_price_date = None
@@ -5710,7 +5718,10 @@ def main() -> None:
         # 못 읽은 종목(삼진식품·로킷헬스케어 등)은 재파싱 대신 락업 값을 복사한다.
         sync_commit_alloc_from_lockup(data_dir / "ipo_schedule.json", list(all_rows_by_id.values()))
     except Exception as exc:
-        print(f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {exc}", file=sys.stderr)
+        print(
+            f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {redact_sensitive_text(exc)}",
+            file=sys.stderr,
+        )
 
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
 
