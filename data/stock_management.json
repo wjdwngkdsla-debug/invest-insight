@@ -1660,7 +1660,7 @@
     "manual_ipo_price_locked": "N",
     "listing_date_edited": "N",
     "manual_ipo_price_edited": "N",
-    "initial_shares": 69821598,
+    "initial_shares": "69821598",
     "current_shares": "69821598",
     "shares_date": "2026-08-07",
     "adjusted_ipo_price": "26000",
@@ -1669,8 +1669,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "44400",
     "content_url": "",
-    "validation_status": "확인필요",
-    "validation_reason": "KRX 상장일 불일치(관리 2026-07-14 / KRX 2025-03-14)",
+    "validation_status": "정상",
+    "validation_reason": "",
     "memo": ""
   },
   {
@@ -2902,7 +2902,7 @@
     "manual_ipo_price_locked": "N",
     "listing_date_edited": "N",
     "manual_ipo_price_edited": "N",
-    "initial_shares": 35517731,
+    "initial_shares": "35517731",
     "current_shares": "35517731",
     "shares_date": "2026-08-07",
     "adjusted_ipo_price": "8000",
@@ -2911,8 +2911,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "2360",
     "content_url": "",
-    "validation_status": "정상",
-    "validation_reason": "",
+    "validation_status": "확인필요",
+    "validation_reason": "KRX 상장일 불일치(관리 2025-12-09 / KRX 2026-07-14)",
     "memo": ""
   },
   {
@@ -3010,7 +3010,7 @@
     "manual_ipo_price_locked": "N",
     "listing_date_edited": "N",
     "manual_ipo_price_edited": "N",
-    "initial_shares": 24094225,
+    "initial_shares": "24094225",
     "current_shares": "24094225",
     "shares_date": "2026-08-07",
     "adjusted_ipo_price": "9300",
@@ -3019,8 +3019,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "13330",
     "content_url": "",
-    "validation_status": "확인필요",
-    "validation_reason": "KRX 상장일 불일치(관리 2026-07-15 / KRX 2025-12-15)",
+    "validation_status": "정상",
+    "validation_reason": "",
     "memo": ""
   },
   {
