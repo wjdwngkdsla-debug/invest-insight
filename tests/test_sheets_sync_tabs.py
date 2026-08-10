@@ -21,6 +21,7 @@ if "gspread" not in sys.modules:
 
 from scripts.sheets_sync import (
     OBSOLETE_TABS,
+    _management_stats,
     _review_fill_gaps,
     cleanup_obsolete_tabs,
     _review_pending_ranges,
@@ -46,6 +47,43 @@ class _Spreadsheet:
 
 
 class SheetTabCleanupTest(unittest.TestCase):
+    def test_management_uses_krx_listing_day_shares_as_initial_shares(self):
+        rows = [{
+            "code": "373110",
+            "name": "엑셀세라퓨틱스",
+            "listing_date": "2024-07-15",
+            "shares": "17294394",
+            "current_shares": "17294394",
+            "shares_date": "2026-08-07",
+            "close_price": "1314",
+        }]
+        listing_day = {
+            "373110": {
+                "listing_date": "2024-07-15",
+                "close_price": 8330,
+                "shares": 10830212,
+            }
+        }
+
+        stats = _management_stats(rows, listing_day)
+
+        self.assertEqual(stats["373110"]["initial_shares"], 10830212)
+        self.assertEqual(stats["373110"]["current_shares"], "17294394")
+        self.assertEqual(stats["name:엑셀세라퓨틱스"]["initial_shares"], 10830212)
+
+    def test_management_ignores_stale_listing_day_snapshot(self):
+        rows = [{
+            "code": "373110", "name": "엑셀세라퓨틱스",
+            "listing_date": "2024-07-16", "shares": "17294394",
+        }]
+        listing_day = {
+            "373110": {"listing_date": "2024-07-15", "shares": 10830212}
+        }
+
+        stats = _management_stats(rows, listing_day)
+
+        self.assertEqual(stats["373110"]["initial_shares"], "17294394")
+
     def test_removes_only_known_legacy_tabs(self):
         retained = [
             "종목관리", "IPO일정", "IPO기관", "기존주주", "휴장일", "로그",

@@ -125,6 +125,7 @@ IPO_TARGET_TAB = "IPO종목"
 # 새 운영 구조. 기존 탭/파일은 첫 배치 이관과 하위 호환에만 사용한다.
 STOCK_MANAGEMENT_PATH = ROOT_DIR / "data" / "stock_management.json"
 STOCK_MANAGEMENT_TAB = "종목관리"
+LISTING_DAY_PATH = ROOT_DIR / "data" / "listing_day.json"
 STOCK_MANAGEMENT_HEADERS = [
     "관리", "홈페이지노출", "기업명", "DART기업코드", "종목코드", "시장",
     "상장일", "상장일고정", "공모가", "공모가고정",
@@ -2232,15 +2233,30 @@ def _apply_below_alloc_all_tiers(item: dict) -> bool:
     return all(allocs[period] > 0 and applies[period] < allocs[period] for period in COMMIT_TIER_ORDER)
 
 
-def _management_stats(admin_rows: list[dict]) -> dict[str, dict]:
+def _management_stats(admin_rows: list[dict], listing_day: dict[str, dict] | None = None) -> dict[str, dict]:
+    """종목관리용 주식수/종가를 모은다.
+
+    lockup_admin의 shares는 배치 시점의 공시/API 주식수일 수 있으므로
+    `최초상장주식수`에는 사용할 수 없다. KRX 상장일 스냅샷이 있으면 해당
+    날짜의 LIST_SHRS를 최우선으로 쓰고, 없는 종목만 기존 값을 fallback한다.
+    """
     stats: dict[str, dict] = {}
+    listing_day = listing_day or {}
     for row in admin_rows:
-        keys = [str(row.get("code") or ""), f"name:{norm_name(row.get('name'))}"]
+        code = str(row.get("code") or "").strip()
+        normalized_code = code.zfill(6) if code.isdigit() and len(code) < 6 else code
+        snapshot = listing_day.get(normalized_code) or {}
+        snapshot_matches = (
+            snapshot
+            and str(snapshot.get("listing_date") or "") == str(row.get("listing_date") or "")
+        )
+        initial_shares = snapshot.get("shares") if snapshot_matches else row.get("shares")
+        keys = [normalized_code, f"name:{norm_name(row.get('name'))}"]
         for key in keys:
             if not key or key == "name:":
                 continue
             current = stats.setdefault(key, {})
-            current["initial_shares"] = current.get("initial_shares") or row.get("shares") or ""
+            current["initial_shares"] = current.get("initial_shares") or initial_shares or ""
             current["current_shares"] = row.get("current_shares") or current.get("current_shares") or ""
             current["shares_date"] = row.get("shares_date") or current.get("shares_date") or ""
             current["close_price"] = row.get("close_price") or current.get("close_price") or ""
@@ -2252,7 +2268,15 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
     rows = merge_stock_management(
         read_json_list(STOCK_MANAGEMENT_PATH), read_json_list(IPO_TARGETS_PATH), schedule,
     )
-    stats = _management_stats(read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv"))
+    try:
+        listing_day = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
+        if not isinstance(listing_day, dict):
+            listing_day = {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        listing_day = {}
+    stats = _management_stats(
+        read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv"), listing_day,
+    )
     by_item = {item_key(item): item for item in all_schedule_items(schedule)}
     state = load_simple_sheet_state()
     state_rows: dict[str, dict] = {}
