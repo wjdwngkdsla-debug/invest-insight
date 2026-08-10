@@ -157,3 +157,26 @@ python3 -m scripts.toss_ipo_adjustment
 - `GOOGLE_SHEET_ID`
 
 `.env`와 Google 서비스 계정 JSON은 GitHub에 커밋하지 않습니다.
+
+### API 키 갱신 순서
+
+Google Sheets의 `API키관리` 탭에는 실제 키 값이 아니라 Secret 이름, 발급일,
+만료일, 남은 일수, 다음 확인일만 기록합니다. 실제 키를 시트나 Git 저장소에
+붙여 넣지 않습니다.
+
+1. 발급처에서 키 또는 활용기간을 갱신합니다.
+2. `API키관리` 탭의 발급일·만료일을 수정합니다.
+3. GitHub Actions에서 사용하는 키라면 같은 이름의 Repository Secret을 새 값으로 덮어씁니다.
+4. `Update lockup data`를 수동 실행하고 `Pull manual edits from Google Sheet`,
+   `Build lockup data`, `Update Google Sheet` 단계가 모두 성공하는지 확인합니다.
+5. `API키관리` 탭의 `갱신완료`를 체크하고 메모에 확인 결과를 남깁니다.
+
+Google 연결값은 다음처럼 관리합니다.
+
+- `GOOGLE_SERVICE_ACCOUNT_JSON`: 서비스 계정 JSON 파일의 **전체 내용**을 Secret으로 저장합니다.
+- `GOOGLE_SHEET_ID`: 관리 대상 Google Sheets URL의 `/d/`와 `/edit` 사이 문자열을 저장합니다.
+- 서비스 계정 JSON 원본 파일은 로컬에서 소유자만 읽을 수 있도록 권한을 `600`으로 유지합니다.
+
+토스 수정주가 API는 허용 IP가 등록된 맥북에서만 실행하므로 GitHub Secret에
+등록하지 않습니다. 토스 키를 갱신한 뒤에는 로컬 `.env`를 교체하고 주간 실행을
+한 번 수동 확인합니다.
