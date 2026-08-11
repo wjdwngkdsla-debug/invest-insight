@@ -2911,8 +2911,8 @@
     "ipo_adjustment_status": "미조정",
     "close_price": "2360",
     "content_url": "",
-    "validation_status": "확인필요",
-    "validation_reason": "KRX 상장일 불일치(관리 2025-12-09 / KRX 2026-07-14)",
+    "validation_status": "정상",
+    "validation_reason": "",
     "memo": ""
   },
   {
@@ -3801,7 +3801,7 @@
     "ipo_adjustment_checked_at": "",
     "ipo_adjustment_status": "",
     "close_price": "",
-    "content_url": "",
+    "content_url": "https://blog.naver.com/vericap/224373624776",
     "validation_status": "정상",
     "validation_reason": "",
     "memo": "수량 단위 DR"

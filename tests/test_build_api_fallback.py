@@ -7,11 +7,57 @@ from scripts.build import (
     CATEGORY_IPO,
     apply_api_updates,
     build_dart_rows_or_preserve,
+    discard_stale_listing_date_rows,
 )
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns
 
 
 class DartApiFallbackTest(unittest.TestCase):
+    def test_discards_automatic_rows_with_obsolete_listing_date(self) -> None:
+        rows = [
+            {
+                "event_id": "old",
+                "code": "031210",
+                "name": "서울보증보험",
+                "listing_date": "2026-07-14",
+                "dart_source": "증권발행실적보고서",
+            },
+            {
+                "event_id": "current",
+                "code": "031210",
+                "name": "서울보증보험",
+                "listing_date": "2025-03-14",
+                "dart_source": "증권발행실적보고서",
+            },
+        ]
+
+        kept, removed = discard_stale_listing_date_rows(
+            rows,
+            [{"code": "031210", "name": "서울보증보험", "listing_date": "2025-03-14"}],
+        )
+
+        self.assertEqual([row["event_id"] for row in kept], ["current"])
+        self.assertEqual(removed["031210"]["count"], 1)
+        self.assertEqual(removed["031210"]["dates"], {"2026-07-14"})
+
+    def test_preserves_operator_owned_row_with_old_listing_date(self) -> None:
+        row = {
+            "event_id": "manual",
+            "code": "031210",
+            "name": "서울보증보험",
+            "listing_date": "2026-07-14",
+            "dart_source": "수기입력",
+            "manual_lock": "Y",
+        }
+
+        kept, removed = discard_stale_listing_date_rows(
+            [row],
+            [{"code": "031210", "name": "서울보증보험", "listing_date": "2025-03-14"}],
+        )
+
+        self.assertEqual(kept, [row])
+        self.assertEqual(removed, {})
+
     @patch("scripts.sources.public_lockup_api.requests.get")
     @patch("scripts.sources.public_lockup_api.DATA_GO_KR_API_KEY", "abc%2Bdef%2Fghi%3D")
     def test_public_api_accepts_portal_encoding_key(self, mock_get: Mock) -> None:

@@ -4899,6 +4899,57 @@ def build_dart_rows_or_preserve(
         return [dict(row) for row in existing_stock_rows], reviews
 
 
+def discard_stale_listing_date_rows(
+    rows: list[dict], targets: list[dict]
+) -> tuple[list[dict], dict[str, dict[str, object]]]:
+    """Remove automatic events created with an obsolete listing date.
+
+    Event IDs include the calculated release date.  Before listing dates became
+    authoritative in the management sheet, correcting a listing date therefore
+    created a second set of events while the old set survived under different
+    IDs.  Those rows must not participate in the KRX listing-day snapshot: one
+    stock with two listing dates otherwise makes the cache flip between them.
+
+    Rows whose source is the manual-entry sheet are preserved so an operator
+    decision is never deleted silently.
+    """
+    listing_by_code = {
+        normalize_stock_code(target.get("code")): str(target.get("listing_date") or "").strip()
+        for target in targets
+        if normalize_stock_code(target.get("code"))
+        and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(target.get("listing_date") or "").strip())
+    }
+    listing_by_name = {
+        _compact_name(target.get("name")): str(target.get("listing_date") or "").strip()
+        for target in targets
+        if _compact_name(target.get("name"))
+        and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(target.get("listing_date") or "").strip())
+    }
+
+    kept: list[dict] = []
+    removed: dict[str, dict[str, object]] = {}
+    for row in rows:
+        canonical = listing_by_code.get(normalize_stock_code(row.get("code")))
+        if not canonical:
+            canonical = listing_by_name.get(_compact_name(row.get("name")))
+        current = str(row.get("listing_date") or "").strip()
+        # IPO기관/기존주주 탭의 고정은 물량·날짜 보존용이다. 자동 DART 행이
+        # 잘못된 상장일로 생성된 사실까지 고정하는 뜻은 아니므로, 실제 수기입력
+        # 출처만 예외로 둔다.
+        operator_owned = str(row.get("dart_source") or "").strip() == "수기입력"
+        if canonical and current and current != canonical and not operator_owned:
+            key = normalize_stock_code(row.get("code")) or _compact_name(row.get("name"))
+            stat = removed.setdefault(
+                key,
+                {"name": row.get("name") or "", "canonical": canonical, "dates": set(), "count": 0},
+            )
+            stat["dates"].add(current)
+            stat["count"] += 1
+            continue
+        kept.append(row)
+    return kept, removed
+
+
 def main() -> None:
     require_env()
     args = parse_args()
@@ -4939,12 +4990,28 @@ def main() -> None:
 
 
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
-    existing_by_id = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     targets = load_targets(args)
+    existing_rows, stale_listing_rows = discard_stale_listing_date_rows(existing_rows, targets)
+    existing_by_id = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     schedule_items = _load_schedule_items(data_dir / "ipo_schedule.json")
     all_rows_by_id: dict[str, dict] = {r["event_id"]: r for r in existing_rows if r.get("event_id")}
     all_reviews: list[dict] = []
     all_logs: list[dict] = []
+
+    for key, info in stale_listing_rows.items():
+        old_dates = ", ".join(sorted(info["dates"]))
+        all_logs.append({
+            "event_id": "", "code": key if len(key) == 6 else "", "name": info["name"],
+            "field": "상장일 정정 중복 제거", "old_value": old_dates,
+            "new_value": info["canonical"],
+            "reason": f"관리 상장일과 다른 자동 이벤트 {info['count']}건 제거",
+            "updated_at": _now(),
+        })
+        print(
+            f"[BUILD] 상장일 정정 중복 제거: {info['name']} "
+            f"{old_dates} → {info['canonical']} ({info['count']}건)",
+            file=sys.stderr,
+        )
 
     # IPO종목 탭에서 삭제된 종목의 락업 이벤트를 정리한다.
     # 규칙: 기존 lockup_admin.csv에 이벤트가 있는데 targets에 없으면 → 그 종목의 모든 이벤트 제거.
