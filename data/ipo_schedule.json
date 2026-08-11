@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 22:06",
+  "updated": "2026-08-11 12:51",
   "items": [
     {
       "corp_code": "00104069",
@@ -382,7 +382,7 @@
       "corp_code": "01588897",
       "name": "니어스랩",
       "first_filing_date": "20260625",
-      "last_rcept_no": "20260810000143",
+      "last_rcept_no": "20260811000064",
       "band_low": 30000,
       "band_high": 41200,
       "forecast_start": "2026-08-03",
@@ -401,8 +401,36 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 4,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "final_price": 41200,
+      "demand_ratio": 743.49,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 70000,
+          "pct": 0.01
+        },
+        {
+          "period": "3개월",
+          "qty": 1527000,
+          "pct": 0.3
+        },
+        {
+          "period": "1개월",
+          "qty": 763500,
+          "pct": 0.15
+        },
+        {
+          "period": "15일",
+          "qty": 4034000,
+          "pct": 0.79
+        },
+        {
+          "period": "미확약",
+          "qty": 501039552,
+          "pct": 98.74
+        }
+      ]
     },
     {
       "corp_code": "01947443",
@@ -504,7 +532,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -679,266 +707,6 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -3982,22 +3750,30 @@
         {
           "period": "15일",
           "qty": 922425,
-          "pct": 23.67
+          "pct": 23.67,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 792720,
-          "pct": 20.35
+          "pct": 20.35,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 1003854,
-          "pct": 25.76
+          "pct": 25.76,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 615860,
-          "pct": 15.81
+          "pct": 15.81,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20251208000371",
@@ -4044,10 +3820,34 @@
           "qty": 561373,
           "locked": true,
           "visible": true
+        },
+        "15일": {
+          "qty": 922425,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 792720,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 1003854,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 615860,
+          "locked": true,
+          "visible": true
         }
       },
       "initial_shares": "24094225",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "manual_fields": [
+        "final_price",
+        "market"
+      ]
     },
     {
       "corp_code": "01671285",
@@ -4370,22 +4170,30 @@
         {
           "period": "15일",
           "qty": 1610257,
-          "pct": 42.94
+          "pct": 42.94,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 754204,
-          "pct": 20.11
+          "pct": 20.11,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 112506,
-          "pct": 3.0
+          "pct": 3.0,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 385972,
-          "pct": 10.29
+          "pct": 10.29,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20251126000196",
@@ -4433,10 +4241,34 @@
           "qty": 887061,
           "locked": true,
           "visible": true
+        },
+        "15일": {
+          "qty": 1610257,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 754204,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 112506,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 385972,
+          "locked": true,
+          "visible": true
         }
       },
       "initial_shares": "35517731",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "manual_fields": [
+        "final_price",
+        "market"
+      ]
     },
     {
       "corp_code": "01781999",
@@ -9610,7 +9442,33 @@
       "archived_at": "2026-07-16",
       "management_status": "자동",
       "schedule_hidden": false,
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 773859460,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 29551000,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 39896000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 52803000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 28547000,
+          "locked": false,
+          "visible": true
+        }
+      },
       "corp_verified": true,
       "ipo_parse_version": 4,
       "band_low": 26000,
@@ -9624,29 +9482,34 @@
       "demand_ratio": 240.78,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 28547000,
-          "pct": 3.09
-        },
-        {
-          "period": "3개월",
-          "qty": 52803000,
-          "pct": 5.71
-        },
-        {
-          "period": "1개월",
-          "qty": 39896000,
-          "pct": 4.31
+          "period": "미확약",
+          "qty": 773859460,
+          "pct": 83.69,
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 29551000,
-          "pct": 3.2
+          "pct": 3.2,
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 773859460,
-          "pct": 83.69
+          "period": "1개월",
+          "qty": 39896000,
+          "pct": 4.31,
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 52803000,
+          "pct": 5.71,
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 28547000,
+          "pct": 3.09,
+          "visible": true
         }
       ],
       "is_listing_ipo": true,
@@ -9655,33 +9518,75 @@
       "sub_ratio": 8.59,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 1329609,
-          "pct": 34.13
-        },
-        {
-          "period": "3개월",
-          "qty": 343410,
-          "pct": 8.81
-        },
-        {
-          "period": "1개월",
-          "qty": 133610,
-          "pct": 3.43
+          "period": "미확약",
+          "qty": 2000616,
+          "pct": 51.35,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 88800,
-          "pct": 2.28
+          "pct": 2.28,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 2000616,
-          "pct": 51.35
+          "period": "1개월",
+          "qty": 133610,
+          "pct": 3.43,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 343410,
+          "pct": 8.81,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 1329609,
+          "pct": 34.13,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20250310000183",
-      "initial_shares": "69821598"
+      "initial_shares": "69821598",
+      "manual_fields": [
+        "final_price",
+        "market"
+      ],
+      "manual_commit_alloc": {
+        "미확약": {
+          "qty": 2000616,
+          "locked": true,
+          "visible": true
+        },
+        "15일": {
+          "qty": 88800,
+          "locked": true,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 133610,
+          "locked": true,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 343410,
+          "locked": true,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 1329609,
+          "locked": true,
+          "visible": true
+        }
+      },
+      "offering_attempt": 2
     },
     {
       "corp_code": "01022142",
@@ -17381,182 +17286,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "엔알비",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아우토크립트",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "7830"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "싸이닉솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "24085"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "지씨지놈",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "나우로보틱스",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "대진첨단소재",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "대진첨단소재",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "대진첨단소재",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "도우인시스",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이에스티이",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이에스티이",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "온코크로스",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
       "name": "한텍",
       "type": "고정변경",
       "field": "ipo:1개월",
@@ -21378,6 +21107,182 @@
       "field": "content_url",
       "old": "",
       "new": "https://blog.naver.com/vericap/224373624776"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "티엠씨",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "922425"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "티엠씨",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "792720"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "티엠씨",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "1003854"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "티엠씨",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "615860"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "테라뷰",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "1610257"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "테라뷰",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "754204"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "테라뷰",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "112506"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "테라뷰",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "385972"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "신청_미확약",
+      "old": "",
+      "new": "773859460"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "신청_15일",
+      "old": "",
+      "new": "29551000"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "신청_1개월",
+      "old": "",
+      "new": "39896000"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "신청_3개월",
+      "old": "",
+      "new": "52803000"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "28547000"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "배정_미확약",
+      "old": "",
+      "new": "2000616"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "배정_15일",
+      "old": "",
+      "new": "88800"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "배정_1개월",
+      "old": "",
+      "new": "133610"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "배정_3개월",
+      "old": "",
+      "new": "343410"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "서울보증보험",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "1329609"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
