@@ -22,6 +22,10 @@ export interface LockupEvent {
   reason?: string | null;
   /** 같은 날 해제분의 주체별 물량 (최대주주·벤처금융·주식매수선택권 등) */
   reason_breakdown?: ReasonShare[];
+  /** 해제일 당일 종가 */
+  release_close?: number;
+  /** 해제일 당일 등락률(%) — 거래소 FLUC_RT */
+  release_fluc_rt?: number;
   lockup_reg_date?: string | null;
 }
 

@@ -15,7 +15,19 @@ KRX_BASE_INFO_URLS = [
 
 
 def _to_int(value: object) -> int:
-    return int(re.sub(r"[^\d]", "", str(value or "0")) or 0)
+    # 전일대비(CMPPREVDD_PRC)는 음수가 올 수 있어 선행 부호만 살린다.
+    text = str(value or "0").strip()
+    digits = re.sub(r"[^\d]", "", text)
+    if not digits:
+        return 0
+    return -int(digits) if text.startswith("-") else int(digits)
+
+
+def _to_float(value: object) -> float:
+    try:
+        return float(str(value or "0").replace(",", "").strip() or 0)
+    except ValueError:
+        return 0.0
 
 
 def krx_base_info(bas_dd: str) -> dict[str, dict] | None:
@@ -92,6 +104,10 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
                 "close_price": _to_int(it.get("TDD_CLSPRC")),
                 "market_cap": _to_int(it.get("MKTCAP")),
                 "volume": _to_int(it.get("ACC_TRDVOL")) if "ACC_TRDVOL" in it else None,
+                # 거래소가 계산한 전일 대비 등락률. 권리락이 낀 날은 기준가 대비로
+                # 나오므로 우리가 종가끼리 나누는 것보다 정확하다.
+                "fluc_rt": _to_float(it.get("FLUC_RT")),
+                "prev_diff": _to_int(it.get("CMPPREVDD_PRC")),
             }
         time.sleep(0.15)
     return None if empty else out

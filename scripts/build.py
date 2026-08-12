@@ -4706,6 +4706,76 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
     return cache
 
 
+RELEASE_DAY_PATH = ROOT_DIR / "data" / "release_day.json"
+MAX_RELEASE_DAYS_PER_RUN = 80
+
+
+def refresh_release_day_prices(rows: list[dict]) -> dict[str, dict]:
+    """확약 해제일 당일의 종가·등락률을 캐시한다 (락업 랭킹용).
+
+    등락률은 우리가 종가끼리 나누지 않고 거래소가 준 FLUC_RT를 그대로 쓴다.
+    권리락이 낀 날은 전일 종가가 아니라 기준가 대비로 계산돼야 맞는데,
+    그 판단은 거래소 값이 이미 하고 있다.
+
+    같은 날짜는 한 번만 호출하고 받은 종목은 재사용한다. 최초 채움이 260일
+    가까이 되므로 한 배치에서 처리할 날짜 수에 상한을 둬 배치가 길어지지 않게 한다.
+    """
+    cache: dict[str, dict] = {}
+    if RELEASE_DAY_PATH.exists():
+        try:
+            cache = json.loads(RELEASE_DAY_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            cache = {}
+
+    today = datetime.today().strftime("%Y-%m-%d")
+    wanted: dict[str, set[str]] = {}
+    for row in rows:
+        if row.get("category") != CATEGORY_IPO:
+            continue
+        code = normalize_stock_code(row.get("code"))
+        released = str(row.get("final_tradable_date") or row.get("planned_tradable_date") or "").strip()
+        if not code or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", released) or released > today:
+            continue
+        if (cache.get(code) or {}).get(released) is not None:
+            continue
+        wanted.setdefault(released.replace("-", ""), set()).add(code)
+
+    if not wanted:
+        return cache
+
+    targets = sorted(wanted, reverse=True)[:MAX_RELEASE_DAYS_PER_RUN]
+    skipped = len(wanted) - len(targets)
+    print(
+        f"[KRX] 해제일 시세 조회: {len(targets)}일 / {sum(len(wanted[d]) for d in targets)}건"
+        + (f" (남은 {skipped}일은 다음 배치)" if skipped else ""),
+        file=sys.stderr,
+    )
+    filled = 0
+    for bas_dd in targets:
+        try:
+            snapshot = krx_snapshot(bas_dd)
+        except Exception as exc:
+            print(f"  [KRX] {bas_dd} 조회 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+            continue
+        if not snapshot:
+            continue  # 휴장일 — 해제일이 휴장일일 수 없지만 방어적으로 넘어간다
+        released = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:]}"
+        for code in wanted[bas_dd]:
+            meta = snapshot.get(code)
+            if not meta:
+                continue
+            cache.setdefault(code, {})[released] = {
+                "close": _to_int(meta.get("close_price")),
+                "fluc_rt": _to_float(meta.get("fluc_rt")),
+                "prev_diff": _to_int(meta.get("prev_diff")),
+            }
+            filled += 1
+    if filled:
+        RELEASE_DAY_PATH.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[KRX] 해제일 시세 저장: {filled}건 (누적 {sum(len(v) for v in cache.values())})", file=sys.stderr)
+    return cache
+
+
 def _parse_reason_breakdown(value: object) -> list[dict]:
     """CSV에 JSON 문자열로 저장된 사유별 물량 내역을 되살린다.
 
@@ -4740,6 +4810,13 @@ def rows_to_site_data(
             listing_day = json.loads(LISTING_DAY_PATH.read_text(encoding="utf-8"))
         except Exception:
             listing_day = {}
+
+    release_day: dict[str, dict] = {}
+    if RELEASE_DAY_PATH.exists():
+        try:
+            release_day = json.loads(RELEASE_DAY_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            release_day = {}
 
     hidden_codes: set[str] = set()
     hidden_names: set[str] = set()
@@ -4821,6 +4898,7 @@ def rows_to_site_data(
         })
         if not stock["ipo_price"] and _to_int(r.get("ipo_price")):
             stock["ipo_price"] = _to_int(r.get("ipo_price"))
+        release_price = (release_day.get(normalize_stock_code(code)) or {}).get(final_tradable) or {}
         stock["events"].append({
             "period": r.get("period"),
             "date": final_date,
@@ -4843,6 +4921,15 @@ def rows_to_site_data(
             "reason": r.get("api_reason") or r.get("parse_note") or None,
             # 같은 날 해제분의 주체별 물량 (최대주주·벤처금융·스톡옵션 등)
             "reason_breakdown": _parse_reason_breakdown(r.get("api_reason_breakdown")),
+            # 해제일 당일 종가·등락률 (거래소 FLUC_RT — 락업 랭킹용)
+            **(
+                {
+                    "release_close": _to_int(release_price.get("close")),
+                    "release_fluc_rt": _to_float(release_price.get("fluc_rt")),
+                }
+                if release_price
+                else {}
+            ),
         })
     for stock in stocks_map.values():
         stock["events"] = sorted(stock["events"], key=lambda e: e["tradable_date"])
@@ -5853,6 +5940,14 @@ def main() -> None:
     except Exception as exc:
         print(f"[KRX] 상장일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
     phase_seconds["상장일 스냅샷"] = time.perf_counter() - snapshot_started
+
+    # 확약 해제일 당일 시세 (락업 랭킹의 해제일 등락률)
+    release_started = time.perf_counter()
+    try:
+        refresh_release_day_prices(all_rows)
+    except Exception as exc:
+        print(f"[KRX] 해제일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+    phase_seconds["해제일 시세"] = time.perf_counter() - release_started
 
     out_path = data_dir / "site_data.json"
     previous_price_date = None
