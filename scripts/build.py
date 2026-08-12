@@ -192,7 +192,7 @@ ADMIN_COLUMNS = [
     "category", "type", "period",
     "planned_date", "planned_tradable_date", "planned_date_display", "planned_qty", "planned_pct",
     "dart_rcp", "dart_source", "parse_note",
-    "api_return_date", "api_return_qty", "api_reason",
+    "api_return_date", "api_return_qty", "api_reason", "api_reason_breakdown",
     "manual_date", "manual_qty", "manual_lock", "manual_mode", "sheet_visible",
     "final_date", "final_tradable_date", "final_date_display", "final_qty", "final_pct",
     "status", "review_needed", "memo", "updated_at",
@@ -2378,6 +2378,7 @@ def create_api_only_row(api_item: dict, target: dict, code: str, meta: dict, lis
         "api_return_date": rd,
         "api_return_qty": rq,
         "api_reason": api_item.get("reason") or "",
+        "api_reason_breakdown": api_item.get("breakdown") or "",
         "manual_date": "",
         "manual_qty": "",
         "manual_lock": "N",
@@ -2592,11 +2593,14 @@ def apply_api_updates(
         rq = int(api.get("return_qty") or 0)
         if not rd or not rq:
             continue
-        group = groups.setdefault(rd, {"qty": 0, "reasons": []})
+        group = groups.setdefault(rd, {"qty": 0, "reasons": [], "by_reason": {}})
         group["qty"] += rq
         reason = (api.get("reason") or "").strip()
         if reason and reason not in group["reasons"]:
             group["reasons"].append(reason)
+        # 같은 날 반환분을 한 행으로 합치면 "최대주주 + 벤처금융 + ..." 문자열만 남아
+        # 주체별 물량이 사라진다. 종목 상세에서 펼쳐 보여주려고 내역을 따로 모은다.
+        group["by_reason"][reason or "구분없음"] = group["by_reason"].get(reason or "구분없음", 0) + rq
 
 
 
@@ -2635,10 +2639,15 @@ def apply_api_updates(
             continue
         total = groups[rd]["qty"]
         reason = " + ".join(groups[rd]["reasons"])
+        breakdown = json.dumps(
+            [{"reason": name, "qty": qty}
+             for name, qty in sorted(groups[rd]["by_reason"].items(), key=lambda kv: -kv[1])],
+            ensure_ascii=False,
+        )
         row = match_api_group_to_row(rd, total, rows)
         if row is None:
             new_row = create_api_only_row(
-                {"return_date": rd, "return_qty": total, "reason": reason},
+                {"return_date": rd, "return_qty": total, "reason": reason, "breakdown": breakdown},
                 target, code, meta, listing_date, shares,
             )
             if new_row:
@@ -2649,6 +2658,7 @@ def apply_api_updates(
         row["api_return_date"] = rd
         row["api_return_qty"] = total
         row["api_reason"] = reason
+        row["api_reason_breakdown"] = breakdown
         if str(old_api_date) != str(rd):
             logs.append(log_change(row, "api_return_date", old_api_date, rd, "금융위 API 반환정보 확인"))
         if str(old_api_qty) != str(total):
@@ -4696,6 +4706,26 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
     return cache
 
 
+def _parse_reason_breakdown(value: object) -> list[dict]:
+    """CSV에 JSON 문자열로 저장된 사유별 물량 내역을 되살린다.
+
+    운영자가 시트에서 실수로 건드려 깨질 수 있으므로 파싱 실패는 조용히 무시한다.
+    """
+    if not value:
+        return []
+    try:
+        parsed = json.loads(str(value))
+    except (json.JSONDecodeError, TypeError):
+        return []
+    if not isinstance(parsed, list):
+        return []
+    return [
+        {"reason": str(item.get("reason") or ""), "qty": _to_int(item.get("qty"))}
+        for item in parsed
+        if isinstance(item, dict) and _to_int(item.get("qty"))
+    ]
+
+
 def rows_to_site_data(
     rows: list[dict],
     price_date: str | None = None,
@@ -4811,6 +4841,8 @@ def rows_to_site_data(
             "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
             "holder_name": r.get("api_reason") or None,
             "reason": r.get("api_reason") or r.get("parse_note") or None,
+            # 같은 날 해제분의 주체별 물량 (최대주주·벤처금융·스톡옵션 등)
+            "reason_breakdown": _parse_reason_breakdown(r.get("api_reason_breakdown")),
         })
     for stock in stocks_map.values():
         stock["events"] = sorted(stock["events"], key=lambda e: e["tradable_date"])

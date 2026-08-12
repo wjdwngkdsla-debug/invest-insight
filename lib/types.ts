@@ -20,7 +20,14 @@ export interface LockupEvent {
   api_source?: string;
   holder_name?: string | null;
   reason?: string | null;
+  /** 같은 날 해제분의 주체별 물량 (최대주주·벤처금융·주식매수선택권 등) */
+  reason_breakdown?: ReasonShare[];
   lockup_reg_date?: string | null;
+}
+
+export interface ReasonShare {
+  reason: string;
+  qty: number;
 }
 
 export interface LockupHolder {

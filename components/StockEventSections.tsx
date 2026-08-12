@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { UpcomingGroup } from "@/lib/data";
+import type { EventBreakdown, UpcomingGroup } from "@/lib/data";
 
 const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
 const DAY_MS = 86_400_000;
@@ -36,18 +36,46 @@ function groupTitle(group: UpcomingGroup): string {
   return "락업 해제";
 }
 
+/** 같은 날 해제분을 주체별로 합산한다. 금융위 반환정보가 있는 기존주주 건에만 붙는다. */
+function reasonShares(item: EventBreakdown): { reason: string; qty: number }[] {
+  const totals = new Map<string, number>();
+  for (const event of item.items) {
+    for (const share of event.reason_breakdown || []) {
+      totals.set(share.reason, (totals.get(share.reason) || 0) + share.qty);
+    }
+  }
+  return [...totals.entries()]
+    .map(([reason, qty]) => ({ reason, qty }))
+    .sort((a, b) => b.qty - a.qty);
+}
+
 function Breakdown({ group }: { group: UpcomingGroup }) {
   if (group.breakdown.length === 0) return null;
   return (
-    <div className="mt-1 space-y-0.5 text-right text-xs leading-snug text-gray-400">
-      {group.breakdown.map((item) => (
-        <p key={item.category}>
-          <span className="mr-1">{item.category}</span>
-          <span className="font-medium text-gray-500">
-            {formatQty(item.qty)}{item.unit || "주"} ({item.pct}%)
-          </span>
-        </p>
-      ))}
+    <div className="mt-1 space-y-1 text-right text-xs leading-snug text-gray-400">
+      {group.breakdown.map((item) => {
+        const shares = reasonShares(item);
+        return (
+          <div key={item.category}>
+            <p>
+              <span className="mr-1">{item.category}</span>
+              <span className="font-medium text-gray-500">
+                {formatQty(item.qty)}{item.unit || "주"} ({item.pct}%)
+              </span>
+            </p>
+            {shares.length > 0 && (
+              <ul className="mt-0.5 space-y-0.5 text-[11px] text-gray-400">
+                {shares.map((share) => (
+                  <li key={share.reason}>
+                    <span className="mr-1">{share.reason}</span>
+                    <span className="tabular-nums">{formatQty(share.qty)}주</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
