@@ -21,6 +21,9 @@ from pathlib import Path
 import gspread
 from gspread.utils import rowcol_to_a1
 
+# .env 로드용 — GitHub Actions는 시크릿을 환경변수로 넣어주지만 로컬 실행은
+# 이 import가 없으면 GOOGLE_SERVICE_ACCOUNT_JSON을 찾지 못한다.
+import scripts.config  # noqa: F401
 from scripts.management import (
     CORRECTION_COLUMNS,
     MANAGEMENT_COLUMNS,
@@ -295,12 +298,14 @@ ADMIN_TAB_CONFIG = [("IPO기관", "IPO기관", IPO_ADMIN_SHEET_COLUMNS), ("기�
 LEGACY_ADMIN_TABS = ("운영_락업일정", "락업이벤트", "lockup_admin")
 
 SIMPLE_SHEET_STATE_PATH = ROOT_DIR / "data" / "simple_sheet_state.json"
+# 해제일 = 계산 원본(상장일 + N개월), 거래가능일 = 주말·휴장일 보정 후 실제 거래 재개일.
+# 사이트가 노출하는 값은 거래가능일이므로 시트에도 함께 보여 두 값이 어긋나지 않게 한다.
 IPO_INSTITUTION_HEADERS = [
     "고정", "노출", "종목명", "종목코드", "기간", "신청물량", "배정물량",
-    "배정률(%)", "배정비중(%)", "해제일", "검증상태", "검증사유", "이벤트ID", "DART기업코드",
+    "배정률(%)", "배정비중(%)", "해제일", "거래가능일", "검증상태", "검증사유", "이벤트ID", "DART기업코드",
 ]
 HOLDER_HEADERS = [
-    "고정", "노출", "종목명", "종목코드", "락업기간", "해제일", "물량",
+    "고정", "노출", "종목명", "종목코드", "락업기간", "해제일", "거래가능일", "물량",
     "단위", "현재주식수기준비중(%)", "검증상태", "검증사유", "이벤트ID", "DART기업코드",
 ]
 
@@ -2474,7 +2479,9 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             _qty_display(apply_qty, apply_tier), _qty_display(alloc_qty, alloc_tier),
             round(alloc_qty / apply_qty * 100, 2) if apply_qty and alloc_qty else "",
             round(alloc_qty / total_alloc * 100, 2) if total_alloc and alloc_qty else "",
-            event.get("final_date") or event.get("planned_date") or "", status, reason,
+            event.get("final_date") or event.get("planned_date") or "",
+            event.get("final_tradable_date") or event.get("planned_tradable_date") or "",
+            status, reason,
             event_id, item.get("corp_code", ""),
         ]
         ipo_rows.append(row_values)
@@ -2499,7 +2506,9 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         values = [
             event.get("manual_lock") == "Y", event.get("sheet_visible") != "N",
             event.get("name", ""), event.get("code", ""), event.get("period", ""),
-            event.get("final_date") or event.get("planned_date") or "", qty or "",
+            event.get("final_date") or event.get("planned_date") or "",
+            event.get("final_tradable_date") or event.get("planned_tradable_date") or "",
+            qty or "",
             event.get("quantity_unit") or "주",
             round(qty / current_shares * 100, 2) if qty and current_shares else "",
             status, reason, event.get("event_id", ""), "",

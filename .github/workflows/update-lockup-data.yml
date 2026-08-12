@@ -11,6 +11,11 @@ on:
     - cron: "0 11 * * *"
   workflow_dispatch:
     inputs:
+      quick_only:
+        description: "빠른 갱신만 (시트 수거 → 사이트 데이터 재생성, 30초). DART·금융위 조회 없음 — 콘텐츠 링크·표시 변경·수기 보정 반영용"
+        required: true
+        default: false
+        type: boolean
       reset_sheet:
         description: "Google Sheet의 기존 탭을 지우고 한글 헤더로 초기화"
         required: true
@@ -77,7 +82,14 @@ jobs:
         run: python -m scripts.sheets_sync pull-admin
 
 
+      # 빠른 갱신 — 시트 수거는 위 단계에서 이미 끝났으므로 사이트 데이터만 다시 만든다.
+      # DART·금융위·KRX 조회를 전부 건너뛰어 30초 안에 끝난다.
+      - name: Quick refresh (site data only)
+        if: ${{ github.event.inputs.quick_only == 'true' }}
+        run: python -m scripts.quick_refresh --no-pull
+
       - name: Build lockup data
+        if: ${{ github.event.inputs.quick_only != 'true' }}
         shell: bash
         run: |
           ARGS=()
