@@ -26,6 +26,7 @@ from scripts.build import (
     _read_csv,
     _to_int,
     _write_csv,
+    align_final_dates_with_api,
     finalize_row,
     pct,
     refresh_market_data,
@@ -66,11 +67,19 @@ def main() -> None:
     # 수기 입력(수기물량·수기일자·잠금)을 확정값에 반영한다. 계산만 하고 외부 호출은 없다.
     # normalize_row_period는 일부러 돌리지 않는다 — 전체 배치가 기간 라벨을 손대지 않는
     # 구간(스캔 연도 밖 과거 종목)까지 여기서 바꿔버리면 두 경로의 결과가 갈린다.
-    finalized: list[dict] = []
+    originals = [dict(row) for row in rows]  # finalize_row는 원본 dict를 제자리에서 고친다
+    finalized = [finalize_row(row)[0] for row in rows]
+
+    # 같은 예정일을 공유하는 행들을 예탁원 실제 반환일에 맞춘다. 전체 배치도 finalize
+    # 뒤에 이 단계를 돌리므로, 빼면 정렬된 날짜가 원본으로 되돌아간다
+    # (리센스메디컬 1개월 05-04 → 04-30처럼 화면 해제일이 밀린다).
+    align_final_dates_with_api({r["event_id"]: r for r in finalized if r.get("event_id")})
+
     changed = 0
-    for row in rows:
-        original = dict(row)  # finalize_row는 원본 dict를 제자리에서 고친다
-        updated = finalize_row(row)[0]
+    # 비교는 CSV에 실제로 쓰이는 컬럼만 본다. finalize_row가 덧붙이는 파생 키
+    # (market_cap·trading_suspended 등)는 저장되지 않으므로 변경으로 치면 안 된다.
+    written = [col for col in ADMIN_COLUMNS if col != "updated_at"]
+    for original, updated in zip(originals, finalized):
         # finalize_row는 편입 시점 주식수(shares)로 비율을 내지만, 전체 배치는 그 뒤
         # refresh_market_data가 현재 상장주식수(current_shares) 기준으로 덮어쓴 값을
         # 최종본으로 저장한다. 같은 기준을 쓰지 않으면 두 경로가 매번 서로 값을 되돌린다.
@@ -80,14 +89,10 @@ def main() -> None:
             updated["final_pct"] = pct(_to_int(updated.get("final_qty")), current_shares)
         # 내용이 그대로면 갱신시각도 그대로 둔다 — 매 실행마다 1,000행이 통째로
         # 바뀐 것처럼 보이면 실제 변경을 diff에서 찾을 수 없다.
-        # 비교는 CSV에 실제로 쓰이는 컬럼만 본다. finalize_row가 덧붙이는 파생 키
-        # (market_cap·trading_suspended 등)는 저장되지 않으므로 변경으로 치면 안 된다.
-        written = [col for col in ADMIN_COLUMNS if col != "updated_at"]
         if all(str(updated.get(col, "")) == str(original.get(col, "")) for col in written):
             updated["updated_at"] = original.get("updated_at", "")
         else:
             changed += 1
-        finalized.append(updated)
     _write_csv(admin_path, finalized, ADMIN_COLUMNS)
     lap(f"수기값 확정 {len(finalized)}행 (실제 변경 {changed}행)", step)
 
@@ -104,11 +109,23 @@ def main() -> None:
     # KRX를 돌지 않았으면 기존 site_data의 종가 기준일을 그대로 유지한다.
     # 실행일로 덮으면 오래된 가격이 오늘 가격처럼 보인다.
     previous_price_date = None
+    previous_stocks: dict[str, dict] = {}
     if out_path.exists():
         try:
-            previous_price_date = json.loads(out_path.read_text(encoding="utf-8")).get("updated")
+            previous = json.loads(out_path.read_text(encoding="utf-8"))
+            previous_price_date = previous.get("updated")
+            previous_stocks = {str(s.get("code")): s for s in previous.get("stocks") or []}
         except (OSError, json.JSONDecodeError):
             previous_price_date = None
+
+    # 거래정지 여부는 KRX 시세에서만 나오고 CSV에는 저장되지 않는다. 시세를 갱신하지
+    # 않는 실행에서는 직전 site_data의 판정을 그대로 이어받아야 정지 종목이 풀리지 않는다.
+    if not close_date and previous_stocks:
+        for row in finalized:
+            stock = previous_stocks.get(str(row.get("code") or ""))
+            if stock:
+                row["trading_suspended"] = stock.get("trading_suspended") is True
+                row["trading_suspended_since"] = str(stock.get("trading_suspended_since") or "")
 
     step = time.perf_counter()
     site_data = rows_to_site_data(finalized, close_date or previous_price_date)
