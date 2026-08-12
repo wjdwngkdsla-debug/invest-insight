@@ -533,7 +533,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -708,6 +708,266 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
+    },
+    {
+      "corp_code": "01760118",
+      "name": "스탁키퍼",
+      "management_name": "스탁키퍼",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "01645448",
+      "name": "열매컴퍼니",
+      "management_name": "열매컴퍼니",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -17287,22 +17547,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "피아이이",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이지넷",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
       "name": "아이지넷",
       "type": "수기변경(검토필요)",
       "field": "신청_3개월",
@@ -21284,6 +21528,22 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-12",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-12",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
     }
   ],
   "seed_pending": [
