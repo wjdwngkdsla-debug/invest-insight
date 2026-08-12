@@ -1016,6 +1016,56 @@ def build_event_id(code: str, category: str, period: str, date: str) -> str:
     return f"{code}-{safe_category}-{normalize_period_for_id(period)}-{date}"
 
 
+def discard_id_drifted_duplicates(all_rows_by_id: dict[str, dict]) -> list[dict]:
+    """거래가능일이 바뀌어 ID가 갈라진 같은 이벤트의 옛 행을 지운다.
+
+    이벤트ID는 거래가능일로 만든다. 운영자가 휴장일 탭에 공휴일을 추가하면
+    보정 결과가 바뀌어(마키나락스 3년: 2029-05-21 → 05-22, 석가탄신일 대체휴일
+    추가) 같은 해제 건이 새 ID로 하나 더 생기고 옛 행이 그대로 남는다.
+    화면에서는 같은 물량이 두 번 잡히므로 배치가 스스로 정리한다.
+
+    같은 종목·구분·기간·물량·거래가능일인데 ID만 다른 경우만 대상으로 하고,
+    ID 접미사가 현재 거래가능일과 일치하는 행(=보정 후)을 남긴다.
+    수동고정(manual_lock=Y) 행은 운영자 입력이므로 건드리지 않는다.
+    """
+    groups: dict[tuple, list[tuple[str, dict]]] = {}
+    for event_id, row in all_rows_by_id.items():
+        tradable = row.get("final_tradable_date") or row.get("planned_tradable_date") or ""
+        key = (
+            row.get("code"), row.get("category"),
+            normalize_period_for_id(str(row.get("period") or "")),
+            _to_int(row.get("final_qty")), tradable,
+        )
+        if key[0] and key[4] and key[3]:
+            groups.setdefault(key, []).append((event_id, row))
+
+    logs: list[dict] = []
+    for key, entries in groups.items():
+        if len(entries) < 2:
+            continue
+        tradable = key[4]
+        keep = next(
+            (pair for pair in entries if str(pair[0]).endswith(f"-{tradable}")),
+            max(entries, key=lambda pair: str(pair[1].get("updated_at") or "")),
+        )
+        for event_id, row in entries:
+            if event_id == keep[0] or str(row.get("manual_lock") or "N").upper() == "Y":
+                continue
+            all_rows_by_id.pop(event_id, None)
+            logs.append({
+                "event_id": event_id, "code": row.get("code", ""), "name": row.get("name", ""),
+                "field": "중복 이벤트 제거", "old_value": event_id, "new_value": keep[0],
+                "reason": "휴장일 반영으로 거래가능일이 바뀌어 ID가 갈라진 같은 해제 건",
+                "updated_at": _now(),
+            })
+            print(
+                f"[BUILD] 중복 이벤트 제거: {row.get('name')} {row.get('period')} "
+                f"{event_id} → {keep[0]}",
+                file=sys.stderr,
+            )
+    return logs
+
+
 
 
 
@@ -5618,6 +5668,8 @@ def main() -> None:
 
     # 같은 해제 건인데 API 확인 여부에 따라 날짜가 갈라지는 것 방지
     all_logs.extend(align_final_dates_with_api(all_rows_by_id))
+    # 휴장일 추가로 거래가능일이 바뀌어 ID만 갈라진 옛 행 정리
+    all_logs.extend(discard_id_drifted_duplicates(all_rows_by_id))
 
 
 

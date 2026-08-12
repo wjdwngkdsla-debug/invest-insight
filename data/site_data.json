@@ -22215,27 +22215,6 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null
-        },
-        {
-          "period": "3년",
-          "date": "2029-05-20",
-          "date_display": "2029-05-22",
-          "tradable_date": "2029-05-22",
-          "qty": 5477016,
-          "unit": "주",
-          "pct": 30.85,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "예정",
-          "source": "투자설명서",
-          "source_label": "투자설명서 유통가능 요약표",
-          "rcp": "20260508000924",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
           "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"
         }
       ],

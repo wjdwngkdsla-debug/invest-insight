@@ -27,6 +27,7 @@ from scripts.build import (
     _to_int,
     _write_csv,
     align_final_dates_with_api,
+    discard_id_drifted_duplicates,
     finalize_row,
     pct,
     refresh_market_data,
@@ -73,7 +74,13 @@ def main() -> None:
     # 같은 예정일을 공유하는 행들을 예탁원 실제 반환일에 맞춘다. 전체 배치도 finalize
     # 뒤에 이 단계를 돌리므로, 빼면 정렬된 날짜가 원본으로 되돌아간다
     # (리센스메디컬 1개월 05-04 → 04-30처럼 화면 해제일이 밀린다).
-    align_final_dates_with_api({r["event_id"]: r for r in finalized if r.get("event_id")})
+    by_id = {r["event_id"]: r for r in finalized if r.get("event_id")}
+    align_final_dates_with_api(by_id)
+    # 휴장일 추가로 거래가능일이 바뀌어 ID만 갈라진 옛 행 정리 (전체 배치와 동일 단계)
+    discard_id_drifted_duplicates(by_id)
+    dropped = [r for r in finalized if r.get("event_id") and r["event_id"] not in by_id]
+    finalized = [r for r in finalized if not (r.get("event_id") and r["event_id"] not in by_id)]
+    originals = [o for o in originals if not any(o.get("event_id") == d.get("event_id") for d in dropped)]
 
     changed = 0
     # 비교는 CSV에 실제로 쓰이는 컬럼만 본다. finalize_row가 덧붙이는 파생 키
