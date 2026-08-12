@@ -182,6 +182,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     load_env_file(ROOT_DIR / ".env.local")
+    load_env_file(ROOT_DIR / ".env")
     toss_env = Path(args.toss_env or os.getenv("TOSS_ENV_FILE") or DEFAULT_TOSS_ENV).expanduser()
     load_env_file(toss_env)
 
