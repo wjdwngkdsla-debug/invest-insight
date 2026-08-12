@@ -36,6 +36,7 @@ import csv
 import json
 import re
 import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -5099,9 +5100,14 @@ def main() -> None:
     processed_codes: set[str] = set()
     new_ingested = 0
     skipped_new = 0
+    # 배치가 느려졌을 때 어느 종목·어느 단계가 먹었는지 로그만 보고 알 수 있게 시간을 잰다.
+    phase_seconds: dict[str, float] = {}
+    stock_seconds: list[tuple[float, str]] = []
+    loop_started = time.perf_counter()
     for idx, target in enumerate(targets, start=1):
         name = target["name"]
         listing_date = target["listing_date"]
+        stock_started = time.perf_counter()
         print(f"[BUILD] {idx}/{len(targets)} {name}", file=sys.stderr)
         code = str(target.get("code") or "")
         # 종목코드와 상장일이 모두 없는 예비 IPO는 아직 KRX에 존재하지 않는다.
@@ -5342,7 +5348,9 @@ def main() -> None:
                 all_reviews.extend(reviews)
                 all_logs.extend(logs)
                 all_rows_by_id[finalized["event_id"]] = finalized
+            stock_seconds.append((time.perf_counter() - stock_started, name))
         except Exception as exc:
+            stock_seconds.append((time.perf_counter() - stock_started, f"{name}(실패)"))
             safe_error = redact_sensitive_text(exc)
             print(f"  [ERROR] {name} 처리 실패 → 건너뛰고 계속: {safe_error}", file=sys.stderr)
             all_reviews.append({
@@ -5460,6 +5468,9 @@ def main() -> None:
 
 
 
+
+    phase_seconds["종목 루프"] = time.perf_counter() - loop_started
+    leftover_started = time.perf_counter()
 
     # 올해 스캔 대상이 아닌 기존 편입 종목도, 반환 미확인 이벤트가 남아 있으면 금융위 API 검증을 계속한다
     leftover_by_code: dict[str, list[dict]] = {}
@@ -5671,8 +5682,11 @@ def main() -> None:
 
 
     # 편입된 전 종목의 최근 상장주식수·종가·비율을 같은 KRX 기준일로 갱신한다.
+    phase_seconds["스캔 연도 외 API 검증"] = time.perf_counter() - leftover_started
+    market_started = time.perf_counter()
     close_date, market_logs = refresh_market_data(all_rows)
     all_logs.extend(market_logs)
+    phase_seconds["KRX 시세"] = time.perf_counter() - market_started
 
 
 
@@ -5747,10 +5761,12 @@ def main() -> None:
 
 
     # 상장일 당일 시세 캐시 보강 (랭킹의 상장일 종가·정확한 상장 시점 주식수)
+    snapshot_started = time.perf_counter()
     try:
         refresh_listing_day_snapshot(all_rows)
     except Exception as exc:
         print(f"[KRX] 상장일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+    phase_seconds["상장일 스냅샷"] = time.perf_counter() - snapshot_started
 
     out_path = data_dir / "site_data.json"
     previous_price_date = None
@@ -5769,6 +5785,7 @@ def main() -> None:
 
     # IPO 일정 갱신 — 락업 배치와 완전히 분리된 부가 단계라 실패해도 배치 결과에 영향을 주지 않는다.
     # KRX 스냅샷을 함께 넘겨 상장일 자동 감지(운영자가 시트에 안 넣어도 상장 다음날 배치가 잡음)
+    schedule_started = time.perf_counter()
     try:
         from scripts.sources.ipo_schedule import refresh_ipo_schedule
         from scripts.sources.krx import latest_base_info
@@ -5789,6 +5806,15 @@ def main() -> None:
             f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {redact_sensitive_text(exc)}",
             file=sys.stderr,
         )
+    phase_seconds["IPO일정"] = time.perf_counter() - schedule_started
+
+    total = sum(phase_seconds.values())
+    print(f"[TIME] 총 {total/60:.1f}분", file=sys.stderr)
+    for label, seconds in sorted(phase_seconds.items(), key=lambda kv: -kv[1]):
+        share = seconds / total * 100 if total else 0
+        print(f"[TIME]   {seconds:7.1f}s ({share:4.1f}%) {label}", file=sys.stderr)
+    for seconds, stock in sorted(stock_seconds, reverse=True)[:5]:
+        print(f"[TIME]   느린 종목 {seconds:6.1f}s {stock}", file=sys.stderr)
 
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
 
