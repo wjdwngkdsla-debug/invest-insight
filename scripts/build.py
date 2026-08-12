@@ -3254,8 +3254,10 @@ def finalize_row(row: dict) -> tuple[dict, list[dict], list[dict]]:
         api_qty = 0
         api_date = ""
     planned_qty = _to_int(row.get("planned_qty"))
-    # 원본 예정일 우선 — 주말/휴장일 보정을 하지 않기로 해서(2026-07-09)
-    # 과거에 저장된 보정일(planned_tradable_date)보다 원래 해제일을 쓴다.
+    # final_date에는 계산 원본을 넣는다. 보정된 거래가능일은 아래에서
+    # release_display로 따로 구해 final_tradable_date에 저장하므로, 여기서
+    # planned_tradable_date를 쓰면 원본 칸에 보정일이 들어가 두 값이 섞인다.
+    # (화면의 "해제일"은 전부 final_tradable_date 쪽을 쓴다)
     planned_date = row.get("planned_date") or row.get("planned_tradable_date") or ""
 
 
