@@ -22,13 +22,18 @@ import time
 
 from scripts.build import (
     ADMIN_COLUMNS,
+    REVIEW_COLUMNS,
     ROOT_DIR,
     _read_csv,
     _to_int,
     _write_csv,
+    apply_manual_events,
     align_final_dates_with_api,
     discard_id_drifted_duplicates,
     finalize_row,
+    load_manual_events,
+    merge_review_history,
+    normalize_stock_code,
     pct,
     refresh_market_data,
     rows_to_site_data,
@@ -64,6 +69,41 @@ def main() -> None:
     rows = _read_csv(admin_path, ADMIN_COLUMNS)
     if not rows:
         raise SystemExit(f"[QUICK] {admin_path} 가 비어 있습니다 — 전체 배치를 먼저 실행하세요")
+
+    # 시트에 새로 추가한 수기 이벤트도 빠른 갱신에서 즉시 운영 데이터로 승격한다.
+    # 종목코드가 이미 운영 CSV에 있으면 그 메타데이터를 재사용하므로 별도 KRX 조회도 없다.
+    manual_entries = load_manual_events()
+    manual_reviews: list[dict] = []
+    added_manual_entries: list[dict] = []
+    if manual_entries:
+        existing_by_id = {row["event_id"]: row for row in rows if row.get("event_id")}
+        all_rows_by_id = dict(existing_by_id)
+        existing_signatures = {
+            (
+                normalize_stock_code(row.get("code")),
+                "기존주주" if str(row.get("category") or "") == "구주·보호예수" else str(row.get("category") or ""),
+                str(row.get("period") or "").strip(),
+            )
+            for row in rows
+        }
+        added_manual_entries = [
+            entry for entry in manual_entries
+            if (
+                normalize_stock_code(entry.get("code")),
+                str(entry.get("category") or "").strip(),
+                str(entry.get("period") or "").strip(),
+            ) not in existing_signatures
+        ]
+        manual_reviews, _manual_logs = apply_manual_events(
+            added_manual_entries, rows, existing_by_id, all_rows_by_id
+        )
+        rows = sorted(
+            all_rows_by_id.values(),
+            key=lambda row: (
+                row.get("final_tradable_date") or row.get("planned_tradable_date") or "9999-99-99",
+                row.get("code") or "",
+            ),
+        )
 
     # 수기 입력(수기물량·수기일자·잠금)을 확정값에 반영한다. 계산만 하고 외부 호출은 없다.
     # normalize_row_period는 일부러 돌리지 않는다 — 전체 배치가 기간 라벨을 손대지 않는
@@ -103,6 +143,30 @@ def main() -> None:
     _write_csv(admin_path, finalized, ADMIN_COLUMNS)
     lap(f"수기값 확정 {len(finalized)}행 (실제 변경 {changed}행)", step)
 
+    # 수기 기존주주 이벤트가 하나라도 정상 편입되면 DART 표 미발견 검토는 해소된 것이다.
+    # 빠른 갱신은 DART를 재조회하지 않으므로 다른 검토 건은 건드리지 않는다.
+    manual_float_codes = {
+        normalize_stock_code(entry.get("code"))
+        for entry in added_manual_entries
+        if str(entry.get("category") or "").strip() in {"기존주주", "구주·보호예수"}
+        and normalize_stock_code(entry.get("code"))
+        and int(str(entry.get("qty") or "0").replace(",", "") or 0) > 0
+    }
+    if manual_float_codes:
+        review_path = data_dir / "review_needed.csv"
+        current_reviews = _read_csv(review_path, REVIEW_COLUMNS)
+        resolved_ids = {
+            str(row.get("review_id") or "")
+            for row in current_reviews
+            if normalize_stock_code(row.get("code")) in manual_float_codes
+            and (
+                "유통가능" in str(row.get("issue") or "")
+                or str(row.get("target") or "").startswith("구주·보호예수")
+            )
+        }
+        review_history = merge_review_history(review_path, manual_reviews, resolved_ids)
+        _write_csv(review_path, review_history, REVIEW_COLUMNS)
+
     close_date = None
     if args.prices:
         step = time.perf_counter()
@@ -136,6 +200,34 @@ def main() -> None:
 
     step = time.perf_counter()
     site_data = rows_to_site_data(finalized, close_date or previous_price_date)
+    # 빠른 갱신은 외부 시세를 새로 받지 않으므로 기존 사이트의 API 사유 세부내역과
+    # 해제일 종가/등락률처럼 CSV 밖에만 남는 파생값을 그대로 보존한다.
+    if previous_stocks:
+        for stock in site_data.get("stocks") or []:
+            previous_stock = previous_stocks.get(str(stock.get("code") or ""))
+            if not previous_stock:
+                continue
+            previous_events = {
+                (
+                    str(event.get("category") or ""),
+                    str(event.get("period") or ""),
+                    str(event.get("tradable_date") or ""),
+                    int(event.get("qty") or 0),
+                ): event
+                for event in previous_stock.get("events") or []
+            }
+            for event in stock.get("events") or []:
+                old = previous_events.get((
+                    str(event.get("category") or ""),
+                    str(event.get("period") or ""),
+                    str(event.get("tradable_date") or ""),
+                    int(event.get("qty") or 0),
+                ))
+                if not old:
+                    continue
+                for field in ("reason_breakdown", "release_close", "release_fluc_rt"):
+                    if field in old:
+                        event[field] = old[field]
     out_path.write_text(json.dumps(site_data, ensure_ascii=False, indent=2), encoding="utf-8")
     lap(f"site_data 재생성 {len(site_data.get('stocks') or [])}종목", step)
 

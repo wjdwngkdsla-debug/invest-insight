@@ -1110,9 +1110,17 @@ def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
         gaps.append("확약신청")
     elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
         gaps.append("확약신청 0확인")
-    if not any(number(tier.get("qty")) for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
+    alloc_tiers = [tier for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)]
+    manual_alloc = item.get("manual_commit_alloc") or {}
+    alloc_confirmed = bool(alloc_tiers) and all(
+        number(tier.get("qty")) > 0
+        or str(tier.get("source") or "") != "zero_missing"
+        or str((manual_alloc.get(str(tier.get("period") or "")) or {}).get("qty", "")).strip() == "0"
+        for tier in alloc_tiers
+    )
+    if not any(number(tier.get("qty")) for tier in alloc_tiers) and not alloc_confirmed:
         gaps.append("확약배정")
-    elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)):
+    elif not alloc_confirmed:
         gaps.append("확약배정 0확인")
     if _apply_below_alloc_all_tiers(item):
         gaps.append("확약신청 오류(신청건수 오인 의심)")

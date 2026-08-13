@@ -4350,6 +4350,17 @@ def apply_manual_events(
         if r.get("code") and r.get("listing_date")
     }
     target_by_code: dict[str, dict] = {}
+    meta_by_code: dict[str, dict] = {}
+    for existing in existing_rows:
+        existing_code = normalize_stock_code(existing.get("code"))
+        if not existing_code or existing_code in meta_by_code:
+            continue
+        meta_by_code[existing_code] = {
+            "name": existing.get("name") or "",
+            "market": existing.get("market") or "",
+            "shrs": _to_int(existing.get("current_shares") or existing.get("shares")),
+            "close_price": _to_int(existing.get("close_price")),
+        }
     target_path = ROOT_DIR / "data" / "ipo_targets.json"
     if target_path.exists():
         for target in json.loads(target_path.read_text(encoding="utf-8")):
@@ -4481,8 +4492,10 @@ def apply_manual_events(
 
 
 
-        _, snap = latest_krx_snapshot()
-        meta = snap.get(code)
+        meta = meta_by_code.get(code)
+        if not meta:
+            _, snap = latest_krx_snapshot()
+            meta = snap.get(code)
         if not meta:
             target = target_by_code.get(code, {})
             target_name = target.get("name") or ""
@@ -4529,21 +4542,41 @@ def apply_manual_events(
 
 
         shares = _to_int(meta.get("shrs"))
+        stock_snapshot = next(
+            (existing for existing in existing_rows if normalize_stock_code(existing.get("code")) == code),
+            {},
+        )
+        planned_date = date
+        tradable_date = date
+        listing_date = listing_by_code.get(code, "")
+        if listing_date and period:
+            try:
+                calculated_date, _display_date, calculated_tradable = calc_release_date(listing_date, period)
+                # 수기 탭은 종전부터 거래가능일을 입력값으로 사용해 왔다. 계산값과
+                # 일치하면 원래 해제일과 거래가능일을 분리해 시트에 정확히 표시한다.
+                if date == calculated_tradable:
+                    planned_date = calculated_date
+                    tradable_date = calculated_tradable
+            except (TypeError, ValueError):
+                pass
         event_id = build_event_id(code, category, period, date)
         row = {
             "event_id": event_id,
             "code": code,
             "name": meta.get("name"),
             "market": meta.get("market"),
-            "listing_date": listing_by_code.get(code, ""),
+            "listing_date": listing_date,
             "shares": shares,
+            "current_shares": _to_int(stock_snapshot.get("current_shares")) or shares,
+            "shares_date": stock_snapshot.get("shares_date") or "",
             "close_price": _to_int(meta.get("close_price")),
+            "ipo_price": _to_int(stock_snapshot.get("ipo_price")),
             "category": category,
             "type": "IPO확약" if category == CATEGORY_IPO else "보호예수",
             "period": period,
-            "planned_date": date,
-            "planned_tradable_date": date,
-            "planned_date_display": date,
+            "planned_date": planned_date,
+            "planned_tradable_date": tradable_date,
+            "planned_date_display": tradable_date,
             "planned_qty": qty,
             "planned_pct": pct(qty, shares),
             "dart_rcp": "",
@@ -5857,11 +5890,28 @@ def main() -> None:
 
     # 시트 수기입력 탭에서 내려받은 이벤트 편입 (스팩합병 등 자동 파싱이 안 되는 종목용)
     manual_entries = load_manual_events()
+    manual_float_codes: set[str] = set()
     if manual_entries:
         print(f"[BUILD] 수기입력 이벤트 {len(manual_entries)}건 처리", file=sys.stderr)
         manual_reviews, manual_logs = apply_manual_events(manual_entries, existing_rows, existing_by_id, all_rows_by_id)
         all_reviews.extend(manual_reviews)
         all_logs.extend(manual_logs)
+        manual_float_codes = {
+            normalize_stock_code(entry.get("code"))
+            for entry in manual_entries
+            if str(entry.get("category") or "").strip() in {"기존주주", "구주·보호예수"}
+            and normalize_stock_code(entry.get("code"))
+            and _to_int(entry.get("qty")) > 0
+        }
+        # 수기 투자설명서 값이 운영 이벤트로 정상 편입됐으면 동일 종목의
+        # DART 유통가능표 미발견 알림은 더 이상 현재 문제로 남기지 않는다.
+        all_reviews = [
+            review for review in all_reviews
+            if not (
+                normalize_stock_code(review.get("code")) in manual_float_codes
+                and "유통가능" in str(review.get("issue") or "")
+            )
+        ]
 
 
 
@@ -6006,6 +6056,7 @@ def main() -> None:
         for row in all_rows
         if row.get("code") and _to_int(row.get("ipo_price"))
     }
+    resolved_review_ids.update(f"{code}-데이터확인" for code in manual_float_codes)
     review_history = merge_review_history(review_path, all_reviews, resolved_review_ids)
     _write_csv(admin_path, all_rows, ADMIN_COLUMNS)
     _write_csv(review_path, review_history, REVIEW_COLUMNS)
