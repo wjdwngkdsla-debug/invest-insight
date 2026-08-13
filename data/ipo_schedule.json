@@ -255,7 +255,7 @@
       "market": "코스닥",
       "offer_shares": 1700000,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-08-21",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -310,7 +310,7 @@
       "market": "코스닥",
       "offer_shares": 910000,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-08-24",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -364,7 +364,7 @@
       "market": "코스닥",
       "offer_shares": 1000000,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-08-25",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -633,7 +633,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01645448",
@@ -643,7 +644,248 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
     },
     {
       "corp_code": "manual-",
@@ -918,8 +1160,18 @@
       "demand_ratio": 184.06,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 0,
+          "period": "미확약",
+          "qty": 303391500,
+          "pct": 99.9
+        },
+        {
+          "period": "15일",
+          "qty": 266000,
+          "pct": 0.09
+        },
+        {
+          "period": "1개월",
+          "qty": 10000,
           "pct": 0.0
         },
         {
@@ -928,35 +1180,28 @@
           "pct": 0.01
         },
         {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.0
-        },
-        {
-          "period": "15일",
-          "qty": 266000,
-          "pct": 0.09
-        },
-        {
-          "period": "미확약",
-          "qty": 303391500,
-          "pct": 99.9
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
-      "manual_commit_apply": {},
+      "manual_commit_apply": {
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
       "initial_shares": "21878960",
       "offering_attempt": 1,
       "sub_ratio": 10.29,
       "commit_alloc": [
         {
-          "period": "3개월",
-          "qty": 4000,
-          "pct": 0.24
-        },
-        {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.61
+          "period": "미확약",
+          "qty": 1547000,
+          "pct": 93.76
         },
         {
           "period": "15일",
@@ -964,19 +1209,32 @@
           "pct": 5.39
         },
         {
-          "period": "미확약",
-          "qty": 1547000,
-          "pct": 93.76
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.61
+        },
+        {
+          "period": "3개월",
+          "qty": 4000,
+          "pct": 0.24
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
-          "source": "zero_missing"
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20260806000333",
-      "archived_at": "2026-08-13"
+      "archived_at": "2026-08-13",
+      "manual_commit_alloc": {
+        "6개월": {
+          "qty": 0,
+          "locked": true,
+          "visible": true
+        }
+      }
     },
     {
       "corp_code": "00624244",
@@ -17556,22 +17814,6 @@
       "date": "2026-07-19",
       "name": "에이럭스",
       "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "에이럭스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "에이럭스",
-      "type": "수기변경(검토필요)",
       "field": "배정_3개월",
       "old": "",
       "new": "0"
@@ -21551,6 +21793,22 @@
       "field": "ipo:15일",
       "old": "N",
       "new": "Y"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "딜리셔스",
+      "type": "수기변경(검토필요)",
+      "field": "신청_6개월",
+      "old": "",
+      "new": "0"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "딜리셔스",
+      "type": "수기변경(검토필요)",
+      "field": "배정_6개월",
+      "old": "",
+      "new": "0"
     }
   ],
   "seed_pending": [

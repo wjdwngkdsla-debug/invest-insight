@@ -568,6 +568,18 @@
       "listing_date": "2026-08-18",
       "manual_ipo_price": "12000"
     },
+    "00229085": {
+      "listing_date": "2026-08-21",
+      "manual_ipo_price": "28400"
+    },
+    "01588897": {
+      "listing_date": "2026-08-24",
+      "manual_ipo_price": "41200"
+    },
+    "01947443": {
+      "listing_date": "2026-08-25",
+      "manual_ipo_price": "23000"
+    },
     "manual-": {
       "listing_date": "",
       "manual_ipo_price": ""
@@ -580,17 +592,9 @@
       "listing_date": "",
       "manual_ipo_price": ""
     },
-    "00229085": {
-      "listing_date": "",
-      "manual_ipo_price": "28400"
-    },
     "01876251": {
       "listing_date": "",
       "manual_ipo_price": ""
-    },
-    "01588897": {
-      "listing_date": "",
-      "manual_ipo_price": "41200"
     },
     "00960623": {
       "listing_date": "",
@@ -635,10 +639,6 @@
     "01721933": {
       "listing_date": "",
       "manual_ipo_price": ""
-    },
-    "01947443": {
-      "listing_date": "",
-      "manual_ipo_price": "23000"
     }
   },
   "schedule": {
@@ -2062,6 +2062,36 @@
       "underwriter": "삼성증권",
       "content_url": "https://blog.naver.com/vericap/224373624776"
     },
+    "00229085": {
+      "band": "24,800 ~ 28,400",
+      "offer_shares": "1,700,000",
+      "forecast": "2026-07-31 ~ 2026-08-06",
+      "subscription": "2026-08-11 ~ 2026-08-12",
+      "demand_ratio": "213.31",
+      "sub_ratio": "",
+      "underwriter": "미래에셋증권",
+      "content_url": ""
+    },
+    "01588897": {
+      "band": "30,000 ~ 41,200",
+      "offer_shares": "910,000",
+      "forecast": "2026-08-03 ~ 2026-08-07",
+      "subscription": "2026-08-12 ~ 2026-08-13",
+      "demand_ratio": "743.49",
+      "sub_ratio": "",
+      "underwriter": "삼성증권",
+      "content_url": ""
+    },
+    "01947443": {
+      "band": "23,000 ~ 28,000",
+      "offer_shares": "1,000,000",
+      "forecast": "2026-08-03 ~ 2026-08-07",
+      "subscription": "2026-08-12 ~ 2026-08-13",
+      "demand_ratio": "101.91",
+      "sub_ratio": "",
+      "underwriter": "DB증권",
+      "content_url": ""
+    },
     "manual-": {
       "band": "",
       "offer_shares": "",
@@ -2082,16 +2112,6 @@
       "underwriter": "한국투자증권",
       "content_url": ""
     },
-    "00229085": {
-      "band": "24,800 ~ 28,400",
-      "offer_shares": "1,700,000",
-      "forecast": "2026-07-31 ~ 2026-08-06",
-      "subscription": "2026-08-11 ~ 2026-08-12",
-      "demand_ratio": "213.31",
-      "sub_ratio": "",
-      "underwriter": "미래에셋증권",
-      "content_url": ""
-    },
     "01876251": {
       "band": "13,800 ~ 15,800",
       "offer_shares": "2,000,000",
@@ -2100,16 +2120,6 @@
       "demand_ratio": "",
       "sub_ratio": "",
       "underwriter": "대신증권",
-      "content_url": ""
-    },
-    "01588897": {
-      "band": "30,000 ~ 41,200",
-      "offer_shares": "910,000",
-      "forecast": "2026-08-03 ~ 2026-08-07",
-      "subscription": "2026-08-12 ~ 2026-08-13",
-      "demand_ratio": "743.49",
-      "sub_ratio": "",
-      "underwriter": "삼성증권",
       "content_url": ""
     },
     "00960623": {
@@ -2200,16 +2210,6 @@
       "demand_ratio": "",
       "sub_ratio": "",
       "underwriter": "",
-      "content_url": ""
-    },
-    "01947443": {
-      "band": "23,000 ~ 28,000",
-      "offer_shares": "1,000,000",
-      "forecast": "2026-08-03 ~ 2026-08-07",
-      "subscription": "2026-08-12 ~ 2026-08-13",
-      "demand_ratio": "101.91",
-      "sub_ratio": "",
-      "underwriter": "DB증권",
       "content_url": ""
     }
   },
@@ -4408,13 +4408,13 @@
       "DART기업코드": "01461730"
     },
     "ipo:01461730:6개월": {
-      "고정": "False",
+      "고정": "True",
       "노출": "True",
       "종목명": "딜리셔스",
       "종목코드": "483350",
       "기간": "6개월",
       "신청물량": "0",
-      "배정물량": "",
+      "배정물량": "0",
       "배정률(%)": "",
       "배정비중(%)": "",
       "해제일": "",
