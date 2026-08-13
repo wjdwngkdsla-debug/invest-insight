@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12 20:44",
+  "updated": "2026-08-13 10:53",
   "items": [
     {
       "corp_code": "00104069",
@@ -32,7 +32,8 @@
       "review_pending": true,
       "management_status": "자동",
       "schedule_hidden": false,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "result_parse_version": 2
     },
     {
       "corp_code": "01936340",
@@ -51,7 +52,8 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "result_parse_version": 2
     },
     {
       "corp_code": "02031369",
@@ -175,96 +177,6 @@
       ]
     },
     {
-      "corp_code": "01461730",
-      "name": "딜리셔스",
-      "first_filing_date": "20260624",
-      "last_rcept_no": "20260806000333",
-      "band_low": 5000,
-      "band_high": 7000,
-      "forecast_start": "2026-07-23",
-      "forecast_end": "2026-07-29",
-      "sub_start": "2026-08-03",
-      "sub_end": "2026-08-04",
-      "payment_date": "2026-08-03",
-      "underwriter": "한국투자증권",
-      "market": "코스닥",
-      "offer_shares": 2200000,
-      "withdrawn": false,
-      "listing_date": "2026-08-12",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "schedule_hidden": false,
-      "content_url": "https://blog.naver.com/vericap/224363555723",
-      "provisional_fields": [
-        "content_url"
-      ],
-      "final_price": 7000,
-      "demand_ratio": 184.06,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0
-        },
-        {
-          "period": "3개월",
-          "qty": 32000,
-          "pct": 0.01
-        },
-        {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.0
-        },
-        {
-          "period": "15일",
-          "qty": 266000,
-          "pct": 0.09
-        },
-        {
-          "period": "미확약",
-          "qty": 303391500,
-          "pct": 99.9
-        }
-      ],
-      "manual_commit_apply": {},
-      "initial_shares": "21878960",
-      "offering_attempt": 1,
-      "sub_ratio": 10.29,
-      "commit_alloc": [
-        {
-          "period": "3개월",
-          "qty": 4000,
-          "pct": 0.24
-        },
-        {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.61
-        },
-        {
-          "period": "15일",
-          "qty": 89000,
-          "pct": 5.39
-        },
-        {
-          "period": "미확약",
-          "qty": 1547000,
-          "pct": 93.76
-        },
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "zero_missing"
-        }
-      ],
-      "report_rcp": "20260806000333"
-    },
-    {
       "corp_code": "00920731",
       "name": "케이앤에스아이앤씨",
       "first_filing_date": "20260612",
@@ -281,7 +193,7 @@
       "offer_shares": 2400000,
       "content_url": "https://blog.naver.com/vericap/224368383592",
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-08-13",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -321,7 +233,11 @@
       "offering_attempt": 1,
       "sub_ratio": 1079.55,
       "commit_alloc": [],
-      "report_rcp": "20260807000525"
+      "report_rcp": "20260807000525",
+      "manual_fields": [
+        "listing_date"
+      ],
+      "result_parse_version": 2
     },
     {
       "corp_code": "00229085",
@@ -533,7 +449,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -708,269 +624,100 @@
       "review_pending": true,
       "fixed_excluded": true,
       "management_status": "제외고정"
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
+    {
+      "corp_code": "01461730",
+      "name": "딜리셔스",
+      "first_filing_date": "20260624",
+      "last_rcept_no": "20260806000333",
+      "band_low": 5000,
+      "band_high": 7000,
+      "forecast_start": "2026-07-23",
+      "forecast_end": "2026-07-29",
+      "sub_start": "2026-08-03",
+      "sub_end": "2026-08-04",
+      "payment_date": "2026-08-03",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 2200000,
+      "withdrawn": false,
+      "listing_date": "2026-08-12",
+      "stock_code": "483350",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "schedule_hidden": false,
+      "content_url": "https://blog.naver.com/vericap/224363555723",
+      "provisional_fields": [
+        "content_url"
+      ],
+      "final_price": 7000,
+      "demand_ratio": 184.06,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 32000,
+          "pct": 0.01
+        },
+        {
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.0
+        },
+        {
+          "period": "15일",
+          "qty": 266000,
+          "pct": 0.09
+        },
+        {
+          "period": "미확약",
+          "qty": 303391500,
+          "pct": 99.9
+        }
+      ],
+      "manual_commit_apply": {},
+      "initial_shares": "21878960",
+      "offering_attempt": 1,
+      "sub_ratio": 10.29,
+      "commit_alloc": [
+        {
+          "period": "3개월",
+          "qty": 4000,
+          "pct": 0.24
+        },
+        {
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.61
+        },
+        {
+          "period": "15일",
+          "qty": 89000,
+          "pct": 5.39
+        },
+        {
+          "period": "미확약",
+          "qty": 1547000,
+          "pct": 93.76
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "zero_missing"
+        }
+      ],
+      "report_rcp": "20260806000333",
+      "archived_at": "2026-08-13"
+    },
     {
       "corp_code": "00624244",
       "name": "에이치엘지노믹스",
@@ -17547,38 +17294,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "아이지넷",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이지넷",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이지넷",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
       "name": "아스테라시스",
       "type": "수기변경(검토필요)",
       "field": "신청_6개월",
@@ -21544,6 +21259,38 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-13",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21563,19 +21310,19 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-12",
+      "excluded_at": "2026-08-13",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-12",
+      "excluded_at": "2026-08-13",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-08-12",
+      "excluded_at": "2026-08-13",
       "memo": "자동 제외(스팩)"
     }
   }
