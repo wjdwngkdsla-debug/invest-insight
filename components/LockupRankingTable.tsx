@@ -6,7 +6,10 @@ import type { LockupPeriod, LockupRankingRow } from "@/lib/lockupRanking";
 import { LOCKUP_PERIODS } from "@/lib/lockupRanking";
 import { formatKrwEok } from "@/lib/format";
 
-type SortKey = LockupPeriod | "marketCap";
+type SortKey = LockupPeriod | "marketCap" | "listingDate";
+
+const DATE_INPUT =
+  "rounded-lg border border-gray-200 bg-white px-2 py-1 text-[12px] font-medium text-slate-700 focus:border-blue-400 focus:outline-none";
 
 function ReturnText({ pct }: { pct: number | null }) {
   if (pct === null) return <span className="text-slate-300">-</span>;
@@ -23,17 +26,36 @@ function RankBadge({ rank }: { rank: number }) {
 }
 
 export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
+  const bounds = useMemo(() => {
+    const dates = rows.map((row) => row.listingDate).filter(Boolean).sort();
+    return { min: dates[0] || "", max: dates[dates.length - 1] || "" };
+  }, [rows]);
+  const [query, setQuery] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("1개월");
   const [asc, setAsc] = useState(false);
 
-  const sorted = useMemo(() => [...rows].sort((a, b) => {
+  const filtered = useMemo(() => rows.filter((row) => {
+    const keyword = query.trim();
+    if (keyword && !row.name.includes(keyword)) return false;
+    if (from && row.listingDate < from) return false;
+    if (to && row.listingDate > to) return false;
+    return true;
+  }), [rows, query, from, to]);
+
+  const sorted = useMemo(() => [...filtered].sort((a, b) => {
+    if (sortKey === "listingDate") {
+      const diff = a.listingDate.localeCompare(b.listingDate);
+      return asc ? diff : -diff;
+    }
     const av = sortKey === "marketCap" ? a.marketCap : a.returns[sortKey];
     const bv = sortKey === "marketCap" ? b.marketCap : b.returns[sortKey];
     if (av === null && bv === null) return a.name.localeCompare(b.name, "ko");
     if (av === null) return 1;
     if (bv === null) return -1;
     return asc ? av - bv : bv - av;
-  }), [rows, sortKey, asc]);
+  }), [filtered, sortKey, asc]);
 
   const toggleSort = (key: SortKey) => {
     if (key === sortKey) setAsc((value) => !value);
@@ -45,12 +67,23 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
 
   return (
     <div className="space-y-3">
+      <div className="rounded-[20px] border border-gray-200 bg-white p-3.5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)]">
+        <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-2">
+          <span className="text-[11.5px] font-semibold text-slate-400">상장일</span>
+          <input type="date" value={from} min={bounds.min} max={to || bounds.max} onChange={(event) => setFrom(event.target.value)} className={DATE_INPUT} aria-label="상장일 시작" />
+          <span className="text-[12px] text-slate-400">~</span>
+          <input type="date" value={to} min={from || bounds.min} max={bounds.max} onChange={(event) => setTo(event.target.value)} className={DATE_INPUT} aria-label="상장일 종료" />
+          {(from || to) && <button type="button" onClick={() => { setFrom(""); setTo(""); }} className="text-[12px] font-semibold text-slate-400 underline-offset-2 hover:text-slate-600 hover:underline">기간 해제</button>}
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-2 sm:w-44" />
+        </div>
+      </div>
       <div className="hidden overflow-hidden rounded-[20px] border border-gray-200 bg-white shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] md:block">
         <table className="w-full text-[13px]">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50/80 text-[11.5px] font-semibold text-slate-500">
               <th className="w-14 px-3 py-3 text-left">순위</th>
               <th className="px-3 py-3 text-left">종목</th>
+              <th className="whitespace-nowrap px-3 py-3 text-right"><button type="button" onClick={() => toggleSort("listingDate")} className={sortKey === "listingDate" ? "text-blue-600" : "hover:text-slate-900"}>상장일{mark("listingDate")}</button></th>
               {LOCKUP_PERIODS.map((period) => (
                 <th key={period} className="whitespace-nowrap px-3 py-3 text-right">
                   <button type="button" onClick={() => toggleSort(period)} className={period === sortKey ? "text-blue-600" : "hover:text-slate-900"}>
@@ -70,6 +103,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
               <tr key={row.code} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/60">
                 <td className="px-3 py-3"><RankBadge rank={index + 1} /></td>
                 <td className="px-3 py-3"><Link href={`/stock/${row.code}`} className="font-semibold text-slate-900 underline-offset-4 hover:text-blue-700 hover:underline">{row.name}</Link></td>
+                <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums text-slate-500">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</td>
                 {LOCKUP_PERIODS.map((period) => <td key={period} className="px-3 py-3 text-right"><ReturnText pct={row.returns[period]} /></td>)}
                 <td className="px-3 py-3 text-right tabular-nums text-slate-600">{formatKrwEok(row.marketCap)}</td>
               </tr>
@@ -81,7 +115,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
       <ul className="space-y-2.5 md:hidden">
         {sorted.map((row, index) => (
           <li key={row.code} className="rounded-[18px] border border-gray-200 bg-white p-3.5">
-            <div className="flex items-center gap-2"><RankBadge rank={index + 1} /><Link href={`/stock/${row.code}`} className="font-bold text-slate-900">{row.name}</Link><span className="ml-auto text-[11px] text-slate-400">{formatKrwEok(row.marketCap)}</span></div>
+            <div className="flex items-center gap-2"><RankBadge rank={index + 1} /><Link href={`/stock/${row.code}`} className="font-bold text-slate-900">{row.name}</Link><span className="text-[10.5px] tabular-nums text-slate-400">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</span><span className="ml-auto text-[11px] text-slate-400">{formatKrwEok(row.marketCap)}</span></div>
             <div className="mt-3 grid grid-cols-4 gap-1.5 rounded-xl bg-gray-50 p-2">
               {LOCKUP_PERIODS.map((period) => <div key={period} className="text-center"><p className="text-[10px] text-slate-400">{period}</p><p className="mt-0.5 text-[11px]"><ReturnText pct={row.returns[period]} /></p></div>)}
             </div>

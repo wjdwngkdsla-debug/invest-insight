@@ -40,6 +40,9 @@ MAX_DOCS_PER_CORP = 4
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
 IPO_PARSE_VERSION = 4
+# 실적보고서(개인청약·기관 배정) 파서는 신고서 파서와 별도 버전으로 관리한다.
+# report_rcp만 저장된 채 배정표가 비었던 과거 결과도 파서 개선 후 한 번 재처리한다.
+RESULT_PARSE_VERSION = 2
 
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
@@ -486,7 +489,9 @@ def parse_result_report(doc: str) -> dict[str, Any]:
                 out["sub_ratio"] = round(qty / alloc, 2)
 
     # 기간별 확약 배정현황 — 각 행의 마지막 (수량, 비중) 쌍이 합계 열
-    seg_at = plain.find("의무보유확약기간별 배정현황")
+    # 보고서마다 제목의 띄어쓰기가 달라서 정확 문자열 비교로는 같은 표를 놓친다.
+    section = re.search(r"의무\s*보유\s*확약\s*기간별\s*배정\s*현황", plain)
+    seg_at = section.start() if section else -1
     if seg_at >= 0:
         seg = plain[seg_at : seg_at + 1600]
         alloc_rows: list[dict[str, Any]] = []
@@ -525,7 +530,13 @@ def _should_fetch_result_report(item: dict[str, Any], today: str) -> bool:
         not item.get("withdrawn")
         and sub_end
         and sub_end <= today
-        and not item.get("report_rcp")
+        and (
+            not item.get("report_rcp")
+            or (
+                not item.get("commit_alloc")
+                and int(item.get("result_parse_version") or 0) < RESULT_PARSE_VERSION
+            )
+        )
     )
 
 
@@ -1283,15 +1294,21 @@ def refresh_ipo_schedule(
         # ② 실적보고서 보강 (확약 배정·개인청약경쟁률) — 상장일 주변 창으로 조회.
         #    이전엔 이 단계가 없어서 과거 종목의 배정 데이터가 영영 비어 있었다.
         has_report = bool(archived.get("report_rcp"))
+        reparse_saved_result = bool(
+            has_report
+            and not archived.get("commit_alloc")
+            and int(archived.get("result_parse_version") or 0) < RESULT_PARSE_VERSION
+        )
         needs_result = (
-            not has_report
-            and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
-            and (
-                # "실적보고서 없음" 판정을 받았으면 파서 버전이 오르기 전까지 재조회하지 않는다.
-                # (예전의 `or not sub_ratio` 예외는 보고서가 원래 없는 종목을 매 배치
-                #  재조회하게 만들어 배치당 상한 25건을 허탕으로 소진시키던 원인)
-                not archived.get("result_report_missing")
-                or int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
+            reparse_saved_result
+            or (
+                not has_report
+                and (not archived.get("commit_alloc") or not archived.get("sub_ratio"))
+                and (
+                    # "실적보고서 없음" 판정을 받았으면 파서 버전이 오르기 전까지 재조회하지 않는다.
+                    not archived.get("result_report_missing")
+                    or int(archived.get("ipo_parse_version") or 0) < IPO_PARSE_VERSION
+                )
             )
         )
         # 정정 실적보고서 탐지 — 이미 반영한 보고서보다 새 접수번호가 있으면 다시 읽는다.
@@ -1305,12 +1322,23 @@ def refresh_ipo_schedule(
         )
         if (needs_result or recheck_correction) and heavy_budget["left"] > 0:
             try:
-                report = find_result_report(
-                    corp_code,
-                    listing_date=_trusted_listing_date(archived),
-                    sub_end=archived.get("sub_end") or "",
+                report = (
+                    {"rcept_no": archived["report_rcp"]}
+                    if reparse_saved_result
+                    else find_result_report(
+                        corp_code,
+                        listing_date=_trusted_listing_date(archived),
+                        sub_end=archived.get("sub_end") or "",
+                    )
                 )
-                if recheck_correction:
+                if reparse_saved_result and report:
+                    heavy_budget["left"] -= 1
+                    parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                    if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
+                        archived.update(parsed)
+                        log(f"저장 실적보고서 재파싱: {archived.get('name')} ({report['rcept_no']})")
+                    archived["result_parse_version"] = RESULT_PARSE_VERSION
+                elif recheck_correction:
                     # 접수번호가 저장값보다 새것일 때만 문서를 내려받는다(상한 차감도 그때만)
                     if report and str(report["rcept_no"]) > str(archived.get("report_rcp") or ""):
                         heavy_budget["left"] -= 1
@@ -1318,6 +1346,7 @@ def refresh_ipo_schedule(
                         if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                             archived.update(parsed)
                             archived["report_rcp"] = report["rcept_no"]
+                            archived["result_parse_version"] = RESULT_PARSE_VERSION
                             log(f"정정 실적보고서 반영: {archived.get('name')} ({report['rcept_no']})")
                 elif report:
                     heavy_budget["left"] -= 1
@@ -1325,6 +1354,7 @@ def refresh_ipo_schedule(
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
                         archived["report_rcp"] = report["rcept_no"]
+                        archived["result_parse_version"] = RESULT_PARSE_VERSION
                         log(f"과거 이력 실적보강: {archived.get('name')} (개인청약 {parsed.get('sub_ratio')}:1)")
                     else:
                         archived["result_report_missing"] = True
@@ -1377,10 +1407,14 @@ def refresh_ipo_schedule(
         # 저녁 배치부터 바로 조회한다. KRX 시세/종목 존재 여부와는 무관하다.
         if _should_fetch_result_report(item, today):
             try:
-                report = find_result_report(
-                    item["corp_code"],
-                    listing_date=_trusted_listing_date(item),
-                    sub_end=item.get("sub_end") or "",
+                report = (
+                    {"rcept_no": item["report_rcp"]}
+                    if item.get("report_rcp") and not item.get("commit_alloc")
+                    else find_result_report(
+                        item["corp_code"],
+                        listing_date=_trusted_listing_date(item),
+                        sub_end=item.get("sub_end") or "",
+                    )
                 )
                 if report:
                     parsed = parse_result_report(download_document_text(report["rcept_no"]))
@@ -1388,6 +1422,7 @@ def refresh_ipo_schedule(
                         item.update(parsed)
                         item["report_rcp"] = report["rcept_no"]
                         log(f"실적보고서 반영: {item.get('name')} (개인청약 {parsed.get('sub_ratio')}:1)")
+                    item["result_parse_version"] = RESULT_PARSE_VERSION
             except Exception as exc:
                 log(f"실적보고서 실패 {item.get('name')}: {redact_sensitive_text(exc)}")
 

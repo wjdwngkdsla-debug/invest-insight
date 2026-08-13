@@ -117,6 +117,34 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
 
         self.assertTrue(_should_fetch_result_report(item, "2026-07-14"))
 
+    def test_saved_report_without_allocation_is_reparsed_after_parser_upgrade(self) -> None:
+        from scripts.sources.ipo_schedule import _should_fetch_result_report
+
+        item = {
+            "sub_end": "2026-07-14", "withdrawn": False,
+            "report_rcp": "20260714000001", "commit_alloc": [],
+        }
+
+        self.assertTrue(_should_fetch_result_report(item, "2026-07-14"))
+
+    def test_result_report_title_allows_spaces(self) -> None:
+        from scripts.sources.ipo_schedule import parse_result_report
+
+        doc = """
+        의무 보유 확약 기간별 배정 현황
+        6개월 확약 1 600 10.0
+        3개월 확약 2 300 5.0
+        1개월 확약 3 100 2.0
+        15일 확약 4 50 1.0
+        미확약 5 5,000 82.0
+        """
+
+        parsed = parse_result_report(doc)
+
+        self.assertEqual({row["period"]: row["qty"] for row in parsed["commit_alloc"]}, {
+            "6개월": 600, "3개월": 300, "1개월": 100, "15일": 50, "미확약": 5_000,
+        })
+
     def test_result_report_waits_until_subscription_end_date(self) -> None:
         from scripts.sources.ipo_schedule import _should_fetch_result_report
 
@@ -191,6 +219,7 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
             "first_filing_date": "20260701", "is_listing_ipo": True, "forecast_start": "2026-07-01",
             "sub_start": "2026-07-05", "sub_end": "2026-07-06", "listing_date": "2026-07-10",
             "withdrawn": False, "report_rcp": "20260707000001",
+            "result_parse_version": ipo_schedule.RESULT_PARSE_VERSION,
         }
         filing = {
             "corp_code": "00000001", "corp_name": "과거회사", "corp_cls": "E",
@@ -248,12 +277,13 @@ class IpoScheduleResultReportGateTest(unittest.TestCase):
         self.assertTrue(result["items"][0]["fixed_excluded"])
 
     def test_existing_result_report_is_not_fetched_again(self) -> None:
-        from scripts.sources.ipo_schedule import _should_fetch_result_report
+        from scripts.sources.ipo_schedule import RESULT_PARSE_VERSION, _should_fetch_result_report
 
         item = {
             "sub_end": "2026-07-14",
             "withdrawn": False,
             "report_rcp": "20260714000001",
+            "result_parse_version": RESULT_PARSE_VERSION,
         }
 
         self.assertFalse(_should_fetch_result_report(item, "2026-07-14"))

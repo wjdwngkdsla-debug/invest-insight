@@ -37,6 +37,7 @@ from scripts.management import (
     norm_name,
     release_schedule_correction,
 )
+from scripts.utils.dates import calc_release_date
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -2496,7 +2497,21 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                 return 0
             return ""
         event_id = str(event.get("event_id") or f"ipo:{item_key(item) if item else norm_name(name)}:{period}")
+        release_date = str(event.get("final_date") or event.get("planned_date") or "")
+        tradable_date = str(event.get("final_tradable_date") or event.get("planned_tradable_date") or "")
+        listing_date = str(item.get("listing_date") or event.get("listing_date") or "")
+        # 배정물량과 상장일이 있으면 해제일은 공시를 다시 읽지 않아도 결정된다.
+        # 시트 표시뿐 아니라 build.py가 같은 규칙으로 실제 홈페이지 이벤트를 생성한다.
+        if alloc_qty and period != "미확약" and listing_date and (not release_date or not tradable_date):
+            try:
+                release_date, _display_date, tradable_date = calc_release_date(listing_date, period)
+            except (TypeError, ValueError):
+                pass
         status, reason = _event_validation(event) if event else ("정상" if apply_qty or alloc_qty else "확인필요", "" if apply_qty or alloc_qty else "기관 수량 미수집")
+        if alloc_qty and period != "미확약" and (not release_date or not tradable_date):
+            status, reason = "확인필요", "배정물량은 있으나 상장일 또는 해제일을 계산할 수 없음"
+        if period == "미확약":
+            release_date, tradable_date = "", ""
         if (
             item
             and item_key(item) in apply_below_alloc_flagged
@@ -2511,8 +2526,7 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             _qty_display(apply_qty, apply_tier), _qty_display(alloc_qty, alloc_tier),
             round(alloc_qty / apply_qty * 100, 2) if apply_qty and alloc_qty else "",
             round(alloc_qty / total_alloc * 100, 2) if total_alloc and alloc_qty else "",
-            event.get("final_date") or event.get("planned_date") or "",
-            event.get("final_tradable_date") or event.get("planned_tradable_date") or "",
+            release_date, tradable_date,
             status, reason,
             event_id, item.get("corp_code", ""),
         ]
@@ -2583,7 +2597,10 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
 
     state["ipo_institution"], state["holders"] = ipo_state, holder_state
     SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
-    ipo_ws = _push_simple_table(spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
+    ipo_ws = _push_simple_table(
+        spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows,
+        ["고정", "노출"], ["이벤트ID", "DART기업코드"], ["해제일", "거래가능일"],
+    )
     if ipo_red_cells:
         red_format = {
             "backgroundColor": {"red": 1.0, "green": 0.87, "blue": 0.87},
@@ -2597,7 +2614,10 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             print(f"[SHEET] IPO기관 수기전용(빨강) 표시: {len(ipo_red_cells)}셀", file=sys.stderr)
         except Exception as exc:
             print(f"[SHEET] IPO기관 빨간 표시 실패(무시): {exc}", file=sys.stderr)
-    _push_simple_table(spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows, ["고정", "노출"], ["이벤트ID", "DART기업코드"])
+    _push_simple_table(
+        spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows,
+        ["고정", "노출"], ["이벤트ID", "DART기업코드"], ["해제일", "거래가능일"],
+    )
 
 
 def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:

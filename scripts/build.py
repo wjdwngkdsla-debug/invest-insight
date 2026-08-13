@@ -520,6 +520,7 @@ def _now() -> str:
 def _to_int(value: Any) -> int:
     if value in (None, ""):
         return 0
+    schedule_pre_refreshed = False
     try:
         return int(str(value).replace(",", ""))
     except Exception:
@@ -5217,6 +5218,27 @@ def main() -> None:
 
 
 
+    # IPO일정의 실적보고서 배정표를 먼저 갱신해야 같은 실행에서 IPO기관 이벤트와
+    # 홈페이지까지 이어진다. 예전 순서는 사이트 저장 뒤 일정 갱신이라 최소 두 번의
+    # 배치가 필요했고, 당일 상장 종목은 첫 배치에서 빈 상태로 보였다.
+    try:
+        from scripts.sources.ipo_schedule import refresh_ipo_schedule
+
+        schedule_snap_date, schedule_snap = latest_krx_snapshot()
+        schedule_base_date, schedule_base = latest_base_info()
+        refresh_ipo_schedule(
+            krx_snapshot=schedule_snap,
+            krx_trading_date=schedule_snap_date or schedule_base_date,
+            krx_base_info=schedule_base,
+            backfill_all=bool(getattr(args, "backfill_all", False)),
+        )
+        schedule_pre_refreshed = True
+    except Exception as exc:
+        print(
+            f"[IPO일정] 선행 갱신 실패(기존 스냅샷으로 계속): {redact_sensitive_text(exc)}",
+            file=sys.stderr,
+        )
+
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
     targets = load_targets(args)
     existing_rows, stale_listing_rows = discard_stale_listing_date_rows(existing_rows, targets)
@@ -5448,23 +5470,36 @@ def main() -> None:
                 )
                 all_reviews.extend(dart_reviews)
 
-            # 일정 파서는 확약 배정량을 확보했는데 락업 파서만 행을 못 만든 경우
-            # (엑셀세라퓨틱스 등), 같은 공식 보고서의 값을 이용해 이벤트를 복구한다.
-            if not any(row.get("category") == CATEGORY_IPO for row in stock_rows):
-                schedule_item = _schedule_item_for_target(target, code, schedule_items) or {}
-                recovered = build_ipo_events_from_schedule_alloc(
-                    target, code, meta, listing_date, shares, schedule_item
-                )
-                if recovered:
-                    stock_rows.extend(recovered)
-                    all_reviews = [
-                        review for review in all_reviews
-                        if not (
-                            str(review.get("code") or "") == str(code)
-                            and review.get("category") == CATEGORY_IPO
-                            and "파싱 결과 없음" in str(review.get("issue") or "")
-                        )
-                    ]
+            # 일정 파서는 확약 배정량을 확보했는데 락업 파서가 전부 또는 일부 기간을
+            # 못 만든 경우(엑셀세라퓨틱스 등), 같은 공식 보고서의 값을 기간별로 복구한다.
+            # 예전에는 IPO기관 행이 하나도 없을 때만 복구해 15일만 있고 1·3·6개월이
+            # 빠진 종목은 영구 누락될 수 있었다.
+            schedule_item = _schedule_item_for_target(target, code, schedule_items) or {}
+            recovered = build_ipo_events_from_schedule_alloc(
+                target, code, meta, listing_date, shares, schedule_item
+            )
+            existing_ipo_periods = {
+                str(row.get("period") or "")
+                for row in stock_rows
+                if row.get("category") == CATEGORY_IPO
+                and (_to_int(row.get("final_qty")) or _to_int(row.get("planned_qty")))
+                and (row.get("final_date") or row.get("planned_date"))
+            }
+            missing_period_rows = [
+                carry_manual_fields(row, existing_by_id.get(row["event_id"]))
+                for row in recovered
+                if str(row.get("period") or "") not in existing_ipo_periods
+            ]
+            if missing_period_rows:
+                stock_rows.extend(missing_period_rows)
+                all_reviews = [
+                    review for review in all_reviews
+                    if not (
+                        str(review.get("code") or "") == str(code)
+                        and review.get("category") == CATEGORY_IPO
+                        and "파싱 결과 없음" in str(review.get("issue") or "")
+                    )
+                ]
 
 
 
@@ -6038,21 +6073,22 @@ def main() -> None:
     print(f"[SAVE] review={review_path}", file=sys.stderr)
     print(f"[SAVE] site_data={out_path}", file=sys.stderr)
 
-    # IPO 일정 갱신 — 락업 배치와 완전히 분리된 부가 단계라 실패해도 배치 결과에 영향을 주지 않는다.
-    # KRX 스냅샷을 함께 넘겨 상장일 자동 감지(운영자가 시트에 안 넣어도 상장 다음날 배치가 잡음)
+    # 일정의 배정표 갱신은 이제 빌드 앞에서 수행한다. 여기서는 락업 파서 쪽에만
+    # 있던 확약값을 일정 데이터에 역보강해 다음 실행의 스냅샷을 완성한다.
     schedule_started = time.perf_counter()
     try:
-        from scripts.sources.ipo_schedule import refresh_ipo_schedule
-        from scripts.sources.krx import latest_base_info
+        # 선행 갱신이 네트워크 문제로 실패했으면 기존처럼 마지막에 한 번 더 시도한다.
+        if not schedule_pre_refreshed:
+            from scripts.sources.ipo_schedule import refresh_ipo_schedule
 
-        snap_date, snap = latest_krx_snapshot()
-        base_date, base = latest_base_info()  # 종목기본정보 LIST_DD로 정확한 상장일 확정
-        refresh_ipo_schedule(
-            krx_snapshot=snap,
-            krx_trading_date=snap_date or base_date,
-            krx_base_info=base,
-            backfill_all=bool(getattr(args, "backfill_all", False)),
-        )
+            retry_snap_date, retry_snap = latest_krx_snapshot()
+            retry_base_date, retry_base = latest_base_info()
+            refresh_ipo_schedule(
+                krx_snapshot=retry_snap,
+                krx_trading_date=retry_snap_date or retry_base_date,
+                krx_base_info=retry_base,
+                backfill_all=bool(getattr(args, "backfill_all", False)),
+            )
         # 같은 실적보고서를 락업 파서와 일정 파서가 따로 읽는데 일정 쪽만 배정표를
         # 못 읽은 종목(삼진식품·로킷헬스케어 등)은 재파싱 대신 락업 값을 복사한다.
         sync_commit_alloc_from_lockup(data_dir / "ipo_schedule.json", list(all_rows_by_id.values()))

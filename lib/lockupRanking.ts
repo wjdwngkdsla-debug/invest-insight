@@ -8,6 +8,7 @@ export interface LockupRankingRow {
   code: string;
   name: string;
   market: string;
+  listingDate: string;
   marketCap: number;
   returns: Record<LockupPeriod, number | null>;
 }
@@ -32,6 +33,7 @@ export function getLockupRanking(): LockupRankingRow[] {
       code: stock.code,
       name: stock.name,
       market: stock.market || "",
+      listingDate: stock.listing_date || "",
       marketCap: stock.market_cap || 0,
       returns,
     });
