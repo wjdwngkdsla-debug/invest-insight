@@ -1774,6 +1774,62 @@ def build_ipo_events(target: dict, code: str, meta: dict, listing_date: str, sha
     return rows
 
 
+def build_ipo_events_from_schedule_alloc(
+    target: dict,
+    code: str,
+    meta: dict,
+    listing_date: str,
+    shares: int,
+    schedule_item: dict,
+) -> list[dict]:
+    """일정 파서가 확보한 확약 배정량으로 누락된 IPO기관 이벤트를 복구한다.
+
+    증권발행실적보고서 표를 두 파서가 별도로 읽기 때문에 일정의 commit_alloc은
+    있는데 락업 행만 없을 수 있다. 미확약은 해제 이벤트가 아니므로 제외한다.
+    """
+    ipo_price = _to_int(target.get("manual_ipo_price")) or _to_int(schedule_item.get("final_price"))
+    rows: list[dict] = []
+    for tier in schedule_item.get("commit_alloc") or []:
+        if not isinstance(tier, dict):
+            continue
+        period = str(tier.get("period") or "").strip()
+        qty = _to_int(tier.get("qty"))
+        if period not in {"15일", "1개월", "3개월", "6개월"} or qty <= 0:
+            continue
+        date, date_display, tradable_date = calc_release_date(listing_date, period)
+        rows.append({
+            "event_id": build_event_id(code, CATEGORY_IPO, period, tradable_date),
+            "code": code,
+            "name": target.get("name") or schedule_item.get("name") or meta.get("name"),
+            "market": meta.get("market"),
+            "listing_date": listing_date,
+            "shares": shares,
+            "close_price": int(meta.get("close_price") or 0),
+            "ipo_price": ipo_price,
+            "category": CATEGORY_IPO,
+            "type": "IPO확약",
+            "period": period,
+            "planned_date": date,
+            "planned_tradable_date": tradable_date,
+            "planned_date_display": date_display,
+            "planned_qty": qty,
+            "planned_pct": pct(qty, shares),
+            "dart_rcp": schedule_item.get("report_rcp") or "",
+            "dart_source": "증권발행실적보고서(IPO일정 확약배정)",
+            "parse_note": "IPO일정 확약배정값으로 누락 이벤트 자동 복구",
+            "api_return_date": "",
+            "api_return_qty": "",
+            "api_reason": "",
+            "manual_date": "",
+            "manual_qty": "",
+            "manual_lock": "N",
+            "memo": "",
+        })
+    if rows:
+        print(f"  [DART] IPO일정 확약배정값으로 IPO기관 이벤트 {len(rows)}건 복구", file=sys.stderr)
+    return rows
+
+
 
 
 
@@ -5391,6 +5447,24 @@ def main() -> None:
                     existing_by_id,
                 )
                 all_reviews.extend(dart_reviews)
+
+            # 일정 파서는 확약 배정량을 확보했는데 락업 파서만 행을 못 만든 경우
+            # (엑셀세라퓨틱스 등), 같은 공식 보고서의 값을 이용해 이벤트를 복구한다.
+            if not any(row.get("category") == CATEGORY_IPO for row in stock_rows):
+                schedule_item = _schedule_item_for_target(target, code, schedule_items) or {}
+                recovered = build_ipo_events_from_schedule_alloc(
+                    target, code, meta, listing_date, shares, schedule_item
+                )
+                if recovered:
+                    stock_rows.extend(recovered)
+                    all_reviews = [
+                        review for review in all_reviews
+                        if not (
+                            str(review.get("code") or "") == str(code)
+                            and review.get("category") == CATEGORY_IPO
+                            and "파싱 결과 없음" in str(review.get("issue") or "")
+                        )
+                    ]
 
 
 

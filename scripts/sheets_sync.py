@@ -2193,15 +2193,21 @@ def _push_simple_table(
     rows: list[list[object]],
     checkbox_columns: list[str],
     hidden_columns: list[str] | None = None,
+    date_columns: list[str] | None = None,
 ) -> gspread.Worksheet:
     values = [headers] + rows
     worksheet = get_or_create_worksheet(spreadsheet, title, len(values) + 30, len(headers))
     worksheet.clear()
-    # clear()는 값만 지우고 서식은 남긴다 — 이전 회차의 빨간 표시가 값이 채워진 뒤에도
-    # 잔재로 남던 원인. 매 재작성마다 서식을 통째로 초기화한다 (헤더·색은 아래서 재적용).
+    # clear()는 값만 지우고 서식·데이터 유효성은 남긴다. 열 구조가 바뀐 뒤 예전
+    # 드롭다운이 새 날짜 열에 남을 수 있으므로 둘 다 초기화하고 필요한 체크박스만
+    # 아래에서 다시 적용한다.
     try:
         spreadsheet.batch_update({"requests": [{
-            "repeatCell": {"range": {"sheetId": worksheet.id}, "fields": "userEnteredFormat"}
+            "repeatCell": {
+                "range": {"sheetId": worksheet.id},
+                "cell": {},
+                "fields": "userEnteredFormat,dataValidation",
+            }
         }]})
     except Exception as exc:
         print(f"[SHEET] {title} 서식 초기화 실패(무시): {exc}", file=sys.stderr)
@@ -2213,6 +2219,31 @@ def _push_simple_table(
         "textFormat": {"bold": True}, "horizontalAlignment": "CENTER",
     })
     requests = [_checkbox_request(worksheet, headers, column) for column in checkbox_columns]
+    for column in date_columns or []:
+        index = headers.index(column)
+        requests.extend([
+            {
+                "setDataValidation": {
+                    "range": {
+                        "sheetId": worksheet.id, "startRowIndex": 1,
+                        "endRowIndex": worksheet.row_count,
+                        "startColumnIndex": index, "endColumnIndex": index + 1,
+                    },
+                    "rule": {"condition": {"type": "DATE_IS_VALID"}, "strict": True, "showCustomUi": True},
+                }
+            },
+            {
+                "repeatCell": {
+                    "range": {
+                        "sheetId": worksheet.id, "startRowIndex": 1,
+                        "endRowIndex": worksheet.row_count,
+                        "startColumnIndex": index, "endColumnIndex": index + 1,
+                    },
+                    "cell": {"userEnteredFormat": {"numberFormat": {"type": "DATE", "pattern": "yyyy-mm-dd"}}},
+                    "fields": "userEnteredFormat.numberFormat",
+                }
+            },
+        ])
     requests.extend(_hide_columns_request(worksheet, headers, hidden_columns or []))
     if requests:
         spreadsheet.batch_update({"requests": requests})
@@ -2359,6 +2390,7 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
         spreadsheet, STOCK_MANAGEMENT_TAB, STOCK_MANAGEMENT_HEADERS, values,
         ["관리", "홈페이지노출", "상장일고정", "공모가고정"],
         ["수정공모가", "공모가조정계수", "수정주가확인일", "수정주가상태"],
+        ["상장일"],
     )
 
 
