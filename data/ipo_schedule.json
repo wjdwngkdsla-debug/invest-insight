@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13 20:40",
+  "updated": "2026-08-14 12:07",
   "items": [
     {
       "corp_code": "00104069",
@@ -175,69 +175,6 @@
       "provisional_fields": [
         "content_url"
       ]
-    },
-    {
-      "corp_code": "00920731",
-      "name": "케이앤에스아이앤씨",
-      "first_filing_date": "20260612",
-      "last_rcept_no": "20260807000525",
-      "band_low": 9000,
-      "band_high": 11000,
-      "forecast_start": "2026-07-27",
-      "forecast_end": "2026-07-31",
-      "sub_start": "2026-08-04",
-      "sub_end": "2026-08-05",
-      "payment_date": "2026-08-07",
-      "underwriter": "아이비케이투자증권",
-      "market": "코스닥",
-      "offer_shares": 2400000,
-      "content_url": "https://blog.naver.com/vericap/224368383592",
-      "withdrawn": false,
-      "listing_date": "2026-08-13",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "schedule_hidden": false,
-      "final_price": 11000,
-      "demand_ratio": 938.24,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 7314000,
-          "pct": 0.44
-        },
-        {
-          "period": "3개월",
-          "qty": 142000,
-          "pct": 0.01
-        },
-        {
-          "period": "1개월",
-          "qty": 541500,
-          "pct": 0.03
-        },
-        {
-          "period": "15일",
-          "qty": 5034000,
-          "pct": 0.3
-        },
-        {
-          "period": "미확약",
-          "qty": 1659465500,
-          "pct": 99.22
-        }
-      ],
-      "manual_commit_apply": {},
-      "offering_attempt": 1,
-      "sub_ratio": 1079.55,
-      "commit_alloc": [],
-      "report_rcp": "20260807000525",
-      "manual_fields": [
-        "listing_date"
-      ],
-      "result_parse_version": 2
     },
     {
       "corp_code": "00229085",
@@ -638,6 +575,95 @@
     }
   ],
   "past_items": [
+    {
+      "corp_code": "00920731",
+      "name": "케이앤에스아이앤씨",
+      "first_filing_date": "20260612",
+      "last_rcept_no": "20260807000525",
+      "band_low": 9000,
+      "band_high": 11000,
+      "forecast_start": "2026-07-27",
+      "forecast_end": "2026-07-31",
+      "sub_start": "2026-08-04",
+      "sub_end": "2026-08-05",
+      "payment_date": "2026-08-07",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "offer_shares": 2400000,
+      "content_url": "https://blog.naver.com/vericap/224368383592",
+      "withdrawn": false,
+      "listing_date": "2026-08-13",
+      "stock_code": "487400",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "schedule_hidden": false,
+      "final_price": 11000,
+      "demand_ratio": 938.24,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 7314000,
+          "pct": 0.44
+        },
+        {
+          "period": "3개월",
+          "qty": 142000,
+          "pct": 0.01
+        },
+        {
+          "period": "1개월",
+          "qty": 541500,
+          "pct": 0.03
+        },
+        {
+          "period": "15일",
+          "qty": 5034000,
+          "pct": 0.3
+        },
+        {
+          "period": "미확약",
+          "qty": 1659465500,
+          "pct": 99.22
+        }
+      ],
+      "manual_commit_apply": {},
+      "offering_attempt": 1,
+      "sub_ratio": 1079.55,
+      "commit_alloc": [
+        {
+          "period": "15일",
+          "qty": 369985,
+          "pct": 29.06,
+          "source": "IPO기관 락업"
+        },
+        {
+          "period": "1개월",
+          "qty": 317416,
+          "pct": 24.93,
+          "source": "IPO기관 락업"
+        },
+        {
+          "period": "3개월",
+          "qty": 79993,
+          "pct": 6.28,
+          "source": "IPO기관 락업"
+        },
+        {
+          "period": "6개월",
+          "qty": 505739,
+          "pct": 39.72,
+          "source": "IPO기관 락업"
+        }
+      ],
+      "report_rcp": "20260807000525",
+      "manual_fields": [
+        "listing_date"
+      ],
+      "result_parse_version": 2,
+      "archived_at": "2026-08-14"
+    },
     {
       "corp_code": "01461730",
       "name": "딜리셔스",
@@ -17321,54 +17347,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "웨이비스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "씨메스로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "씨메스로보틱스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "루미르",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1799000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "루미르",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "루미르",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
       "name": "루미르",
       "type": "수기변경(검토필요)",
       "field": "배정_6개월",
@@ -21318,6 +21296,54 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21337,19 +21363,25 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-13",
+      "excluded_at": "2026-08-14",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-13",
+      "excluded_at": "2026-08-14",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-08-13",
+      "excluded_at": "2026-08-14",
+      "memo": "자동 제외(스팩)"
+    },
+    "corp:02032155": {
+      "name": "케이비제34호기업인수목적",
+      "corp_code": "02032155",
+      "excluded_at": "2026-08-14",
       "memo": "자동 제외(스팩)"
     }
   }
