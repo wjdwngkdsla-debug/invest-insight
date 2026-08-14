@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { StockLockup } from "@/lib/types";
 import { StockLockupTiles } from "@/components/StockLockupTiles";
 import { formatKrwEok } from "@/lib/format";
-import { currentIpoReturnPct } from "@/lib/returns";
+import { currentIpoReturnPct, listingFloatPct, listingMarketCap } from "@/lib/returns";
 
 const DEFAULT_BLOG_URL = "https://blog.naver.com/vericap";
 
@@ -101,6 +101,8 @@ export function StockHero({
   const priceDate = updated.slice(5);
   const suspended = stock.trading_suspended === true;
   const suspendedSince = stock.trading_suspended_since || "";
+  const listingCap = listingMarketCap(stock);
+  const floatPct = listingFloatPct(stock);
 
   // 핵심 지표 4개를 데스크톱 2×2, 모바일 2열 패널로 그린다.
   const metrics: { label: string; value: string; sub?: string; mobileSub?: string; icon: React.ReactNode }[] = [
@@ -123,6 +125,17 @@ export function StockHero({
       label: suspended ? "거래정지 전 시가총액" : `시가총액(${priceDate})`,
       value: closeCap ? formatKrwEok(closeCap) : "-",
       icon: <svg {...iconProps}><path d="M20.5 7.5v9l-8.5 4.5-8.5-4.5v-9L12 3z" /><path d="m3.8 7.4 8.2 4.4 8.2-4.4M12 21v-9.2" /></svg>,
+    },
+    {
+      label: "상장일 시가총액",
+      value: listingCap ? formatKrwEok(listingCap) : "-",
+      icon: <svg {...iconProps}><path d="M4 20h16M7 20V9m5 11V4m5 16v-7" /></svg>,
+    },
+    {
+      // 상장 당일 매도 제한이 없던 물량 비중 — 보호예수·기관확약을 모두 뺀 값
+      label: "상장일 유통가능",
+      value: floatPct === null ? "-" : `${floatPct.toFixed(1)}%`,
+      icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v9l6.4 3.7" /></svg>,
     },
   ];
 
@@ -210,7 +223,8 @@ export function StockHero({
               {contentLabel}
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-2.5">
+          {/* 타일이 6개로 늘어 3열 2행으로 배치한다. 2열이면 3행이 되어 왼쪽 열보다 높아진다. */}
+          <div className="grid grid-cols-3 gap-2.5">
             {metrics.map((metric) => (
               <div key={metric.label}>
                 <GlassTile label={metric.label} value={metric.value} sub={metric.sub} icon={metric.icon} />

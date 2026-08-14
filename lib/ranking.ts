@@ -1,6 +1,6 @@
 import { getSiteData } from "@/lib/data";
 import { getIpoSchedule } from "@/lib/ipo";
-import { currentIpoReturnPct, priceReturnPct } from "@/lib/returns";
+import { currentIpoReturnPct, listingFloatPct, priceReturnPct } from "@/lib/returns";
 
 /** IPO 랭킹 한 줄 — 공모가 대비 수익률을 중심으로 공모 지표를 함께 본다.
  *
@@ -18,6 +18,8 @@ export interface IpoRankingRow {
   returnPct: number | null;
   /** 공모가 대비 상장일 종가 수익률. 상장일 시세를 못 받은 종목은 null */
   listingReturnPct: number | null;
+  /** 상장 당일 매도 제한이 없던 물량 비중. 락업 데이터가 없으면 null */
+  listingFloatPct: number | null;
   demandRatio: number;
   subRatio: number;
   marketCap: number;
@@ -58,6 +60,7 @@ export function getIpoRanking(): IpoRankingRow[] {
         trading_suspended: stock.trading_suspended,
       }),
       listingReturnPct: priceReturnPct(ipoPrice, stock.listing_close || 0),
+      listingFloatPct: listingFloatPct(stock),
       demandRatio: item.demand_ratio || 0,
       subRatio: item.sub_ratio || 0,
       marketCap: stock.market_cap || stock.shares * closePrice,

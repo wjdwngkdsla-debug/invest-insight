@@ -16,3 +16,36 @@ export function currentIpoReturnPct(
   if (stock.trading_suspended) return null;
   return priceReturnPct(stock.adjusted_ipo_price || stock.ipo_price || 0, stock.close_price || 0);
 }
+
+/** 상장 시점 주식수. KRX 상장일 스냅샷(LIST_SHRS)이 원천이고, 없으면 편입 시점 값으로 대체한다. */
+export function listingShares(stock: Pick<StockLockup, "initial_shares" | "shares">): number {
+  return stock.initial_shares || stock.shares || 0;
+}
+
+/**
+ * 상장일 유통가능비율 — 상장 당일 매도 제한이 없던 주식의 비중.
+ *
+ * 분모는 상장일 상장주식수, 분자에서 빼는 물량은 기존주주 보호예수와 기관 의무보유확약
+ * 전부다. 확약은 최소 15일이라 상장 당일에는 팔 수 없으므로 유통물량이 아니다.
+ * (투자설명서의 '유통가능물량'은 확약분을 포함해 계산하므로 이 값보다 크게 나온다.)
+ *
+ * 락업 데이터가 없거나 상장주식수를 모르면 계산하지 않는다 — 0건을 100% 유통으로
+ * 표시하면 데이터 공백이 지표처럼 보인다.
+ */
+export function listingFloatPct(
+  stock: Pick<StockLockup, "initial_shares" | "shares" | "events">,
+): number | null {
+  const base = listingShares(stock);
+  const locked = (stock.events || []).reduce((sum, event) => sum + (event.qty || 0), 0);
+  if (!base || !locked || locked > base) return null;
+  return ((base - locked) / base) * 100;
+}
+
+/** 상장일 시가총액 — 상장일 상장주식수 × 상장일 종가. */
+export function listingMarketCap(
+  stock: Pick<StockLockup, "initial_shares" | "shares" | "listing_close">,
+): number | null {
+  const base = listingShares(stock);
+  if (!base || !stock.listing_close) return null;
+  return base * stock.listing_close;
+}

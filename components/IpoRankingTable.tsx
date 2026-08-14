@@ -7,12 +7,20 @@ import { formatKrwEok } from "@/lib/format";
 
 type MarketKey = "all" | "코스피" | "코스닥";
 type OutcomeKey = "all" | "win" | "loss";
-type SortKey = "marketCap" | "returnPct" | "listingReturnPct" | "demandRatio" | "subRatio" | "listingDate";
+type SortKey =
+  | "marketCap"
+  | "returnPct"
+  | "listingReturnPct"
+  | "listingFloatPct"
+  | "demandRatio"
+  | "subRatio"
+  | "listingDate";
 
 const COLUMNS: { key: SortKey; label: string }[] = [
   { key: "marketCap", label: "시가총액" },
   { key: "returnPct", label: "공모가 대비" },
   { key: "listingReturnPct", label: "상장일 수익률" },
+  { key: "listingFloatPct", label: "상장일 유통" },
   { key: "demandRatio", label: "수요예측" },
   { key: "subRatio", label: "개인청약" },
   { key: "listingDate", label: "상장일" },
@@ -98,7 +106,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
         const diff = a.listingDate.localeCompare(b.listingDate);
         return asc ? diff : -diff;
       }
-      if (sortKey === "listingReturnPct" || sortKey === "returnPct") {
+      if (sortKey === "listingReturnPct" || sortKey === "returnPct" || sortKey === "listingFloatPct") {
         const av = a[sortKey];
         const bv = b[sortKey];
         // 시세 미확인·거래정지는 정렬 방향과 무관하게 뒤로 보낸다.
@@ -278,6 +286,9 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                     <td className="px-3 py-2.5 text-right">
                       <ReturnText pct={row.listingReturnPct} />
                     </td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-slate-600">
+                      {row.listingFloatPct === null ? <span className="text-slate-300">-</span> : `${row.listingFloatPct.toFixed(1)}%`}
+                    </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-slate-600">{ratioText(row.demandRatio)}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-slate-600">{ratioText(row.subRatio)}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-slate-500">{yymmdd(row.listingDate)}</td>
@@ -308,6 +319,12 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                     상장일 수익률 <ReturnText pct={row.listingReturnPct} className="text-[11px]" />
                   </span>
                   <span className="text-slate-500">
+                    상장일 유통{" "}
+                    <span className="font-semibold tabular-nums text-slate-700">
+                      {row.listingFloatPct === null ? "-" : `${row.listingFloatPct.toFixed(1)}%`}
+                    </span>
+                  </span>
+                  <span className="text-slate-500">
                     수요예측 <span className="font-semibold tabular-nums text-slate-700">{ratioText(row.demandRatio)}</span>
                   </span>
                   <span className="text-slate-500">
@@ -325,7 +342,10 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
 
       <p className="px-1 text-[11px] leading-relaxed text-slate-400">
         <span className="font-semibold text-slate-500">공모가 대비</span>는 공모주를 받아 지금까지 보유했을 때,{" "}
-        <span className="font-semibold text-slate-500">상장일 수익률</span>은 상장 첫날 종가에 팔았을 때의 수익률입니다.
+        <span className="font-semibold text-slate-500">상장일 수익률</span>은 상장 첫날 종가에 팔았을 때의 수익률입니다.{" "}
+        <span className="font-semibold text-slate-500">상장일 유통</span>은 상장 당일 매도 제한이 없던 물량의 비중으로,
+        상장일 상장주식수에서 기존주주 보호예수와 기관 의무보유확약을 뺀 값입니다. 확약은 최소 15일이라 상장 당일에는 팔 수
+        없어 유통물량에서 제외합니다(투자설명서의 유통가능물량은 확약분을 포함해 이보다 큽니다).
         <br />
         무상증자·액면분할처럼 주식수가 바뀐 종목은 토스 수정주가 기준으로 공모가를 보정해 실제 수익률에 맞춥니다.
         거래정지 종목은 마지막 체결가가 현재가처럼 보이지 않도록 수익률과 평균에서 제외합니다.
