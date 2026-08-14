@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14 12:07",
+  "updated": "2026-08-14 20:37",
   "items": [
     {
       "corp_code": "00104069",
@@ -180,7 +180,7 @@
       "corp_code": "00229085",
       "name": "기도산업",
       "first_filing_date": "20260626",
-      "last_rcept_no": "20260810000684",
+      "last_rcept_no": "20260814001904",
       "band_low": 24800,
       "band_high": 28400,
       "forecast_start": "2026-07-31",
@@ -229,7 +229,8 @@
           "pct": 100.0
         }
       ],
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_parse_version": 2
     },
     {
       "corp_code": "01588897",
@@ -398,7 +399,7 @@
       "corp_code": "01876251",
       "name": "네오사피엔스",
       "first_filing_date": "20260723",
-      "last_rcept_no": "20260813001707",
+      "last_rcept_no": "20260814003426",
       "band_low": 13800,
       "band_high": 15800,
       "forecast_start": "2026-08-31",
@@ -502,7 +503,7 @@
       "corp_code": "00960623",
       "name": "덕산넵코어스",
       "first_filing_date": "20260724",
-      "last_rcept_no": "20260804000402",
+      "last_rcept_no": "20260814004199",
       "band_low": 12400,
       "band_high": 14600,
       "forecast_start": "2026-09-08",
@@ -565,6 +566,17 @@
     {
       "corp_code": "02032155",
       "name": "케이비제34호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 4
+    },
+    {
+      "corp_code": "02029258",
+      "name": "한국제17호기업인수목적",
       "fixed_excluded": true,
       "management_status": "제외고정",
       "management_hidden": true,
@@ -662,7 +674,8 @@
         "listing_date"
       ],
       "result_parse_version": 2,
-      "archived_at": "2026-08-14"
+      "archived_at": "2026-08-14",
+      "initial_shares": "10260882"
     },
     {
       "corp_code": "01461730",
@@ -17347,62 +17360,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "루미르",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "인스피언",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "인스피언",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이제이링크",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이제이링크",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이스크림미디어",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이스크림미디어",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
       "name": "M83",
       "type": "수기변경(검토필요)",
       "field": "신청_15일",
@@ -21312,6 +21269,62 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-08-27",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-10",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "한국제17호기업인수목적",
+      "type": "자동제외",
+      "field": "대상구분",
+      "old": "일반 IPO",
+      "new": "스팩(비노출)"
     },
     {
       "date": "2026-08-14",
