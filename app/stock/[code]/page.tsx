@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getStockByCode, getEventGroupsByStock, getSiteData } from "@/lib/data";
+import { listingShares } from "@/lib/returns";
 import { BackButton } from "@/components/BackButton";
 import { StockEventSections } from "@/components/StockEventSections";
 import { StockHero } from "@/components/StockHero";
@@ -82,7 +83,8 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
       <h2 className="sr-only">{stock.name} 락업 해제 일정</h2>
       {/* 아래 목록은 위 지표 섹션과 다른 면(surface)으로 분리한다 — 레퍼런스의 섹션 구분 디테일 */}
       <section className="mt-4 rounded-[24px] border border-slate-200/70 bg-slate-50/70 px-4 py-5 shadow-[0_2px_20px_-14px_rgba(15,23,42,0.4)] md:mt-5 md:rounded-[32px] md:px-8 md:py-7">
-        <StockEventSections groups={groups} initialNow={BUILD_NOW} shares={stock.shares} />
+        {/* 비중이 상장일 상장주식수 기준이므로 함께 보여주는 주식수도 같은 기준으로 맞춘다 */}
+        <StockEventSections groups={groups} initialNow={BUILD_NOW} shares={listingShares(stock)} />
       </section>
     </main>
   );

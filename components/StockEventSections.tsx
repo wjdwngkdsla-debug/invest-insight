@@ -143,7 +143,7 @@ export function StockEventSections({
             </h2>
             {shares > 0 && (
               <p className="text-sm text-gray-400">
-                상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
+                상장일 상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
               </p>
             )}
           </div>

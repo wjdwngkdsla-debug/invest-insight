@@ -20,7 +20,7 @@ const COLUMNS: { key: SortKey; label: string }[] = [
   { key: "marketCap", label: "시가총액" },
   { key: "returnPct", label: "공모가 대비" },
   { key: "listingReturnPct", label: "상장일 수익률" },
-  { key: "listingFloatPct", label: "상장일 유통" },
+  { key: "listingFloatPct", label: "상장일 유통가능" },
   { key: "demandRatio", label: "수요예측" },
   { key: "subRatio", label: "개인청약" },
   { key: "listingDate", label: "상장일" },
@@ -319,7 +319,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                     상장일 수익률 <ReturnText pct={row.listingReturnPct} className="text-[11px]" />
                   </span>
                   <span className="text-slate-500">
-                    상장일 유통{" "}
+                    상장일 유통가능{" "}
                     <span className="font-semibold tabular-nums text-slate-700">
                       {row.listingFloatPct === null ? "-" : `${row.listingFloatPct.toFixed(1)}%`}
                     </span>

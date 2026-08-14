@@ -1,5 +1,6 @@
 import siteData from "@/data/site_data.json";
 import type { SiteData, StockLockup, LockupEvent } from "./types";
+import { listingShares } from "./returns";
 
 
 
@@ -41,6 +42,18 @@ export function getStockByCode(code: string): StockLockup | undefined {
 
 export function getEventCategory(ev: Pick<LockupEvent, "type">): LockupCategory {
   return ev.type === "보호예수" ? "기존주주" : "IPO기관";
+}
+
+
+/** 락업 비중의 단일 기준 — 상장일 상장주식수로 나눈다.
+ *
+ *  락업 물량은 상장 시점에 공시된 값이라 분모도 그때의 주식수여야 한다. 현재
+ *  주식수로 나누면 무상증자 종목의 비중이 배수만큼 줄어들고, 잔여·해제·유통가능이
+ *  100%로 떨어지지 않는다.
+ */
+export function lockupPct(qty: number, stock: Pick<StockLockup, "initial_shares" | "shares">): number {
+  const base = listingShares(stock);
+  return base ? Number(((qty / base) * 100).toFixed(2)) : 0;
 }
 
 
@@ -240,7 +253,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
           items,
           qty: categoryQty,
           unit: (items.some((item) => item.unit === "DR") ? "DR" : "주") as "DR" | "주",
-          pct: stock.shares ? Number(((categoryQty / stock.shares) * 100).toFixed(2)) : 0,
+          pct: lockupPct(categoryQty, stock),
         };
       })
       .filter((b) => b.qty > 0)
@@ -268,7 +281,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
       periods: [...new Set(events.map((ev) => displayPeriod(ev.period, stock.listing_date, ev.tradable_date)))],
       qty,
       unit: events.some((event) => event.unit === "DR") ? "DR" : "주",
-      pct: stock.shares ? Number(((qty / stock.shares) * 100).toFixed(2)) : 0,
+      pct: lockupPct(qty, stock),
       status: [...events].sort((a, b) => statusOrder(a.status) - statusOrder(b.status))[0]?.status || "예정",
       breakdown,
     };
@@ -356,7 +369,9 @@ export function getFlatRows(): FlatRow[] {
         period: displayPeriod(ev.period, stock.listing_date, ev.tradable_date),
         date_display: ev.date_display,
         qty: ev.qty,
-        pct: ev.pct,
+        // 락업 비중은 전부 상장일 상장주식수 기준으로 통일한다 — 물량이 상장 시점
+        // 공시값이라 현재 주식수로 나누면 무상증자 종목이 배수만큼 작게 나온다.
+        pct: lockupPct(ev.qty, stock),
         marketCap: stock.market_cap || stock.shares * stock.close_price,
         close_price: stock.close_price,
         status: ev.status,
