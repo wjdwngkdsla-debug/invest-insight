@@ -29,14 +29,20 @@ export function listingShares(stock: Pick<StockLockup, "initial_shares" | "share
  * 전부다. 확약은 최소 15일이라 상장 당일에는 팔 수 없으므로 유통물량이 아니다.
  * (투자설명서의 '유통가능물량'은 확약분을 포함해 계산하므로 이 값보다 크게 나온다.)
  *
- * 락업 데이터가 없거나 상장주식수를 모르면 계산하지 않는다 — 0건을 100% 유통으로
- * 표시하면 데이터 공백이 지표처럼 보인다.
+ * 투자설명서 유통가능 요약표에서 보호예수를 받은 종목만 계산한다. 공공데이터 API는
+ * '반환 실적'이라 아직 안 풀린 장기 보호예수가 통째로 빠지고, 그러면 유통물량이
+ * 실제보다 훨씬 크게 나온다(이뮨온시아: 3년 보호예수 4,889만주 누락 → 92.6%로 표시).
  */
 export function listingFloatPct(
   stock: Pick<StockLockup, "initial_shares" | "shares" | "events">,
 ): number | null {
+  const events = stock.events || [];
+  const fromProspectus = events.some(
+    (event) => event.type === "보호예수" && (event.source_label || "").includes("투자설명서"),
+  );
+  if (!fromProspectus) return null;
   const base = listingShares(stock);
-  const locked = (stock.events || []).reduce((sum, event) => sum + (event.qty || 0), 0);
+  const locked = events.reduce((sum, event) => sum + (event.qty || 0), 0);
   if (!base || !locked || locked > base) return null;
   return ((base - locked) / base) * 100;
 }

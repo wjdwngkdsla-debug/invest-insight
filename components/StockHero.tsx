@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { StockLockup } from "@/lib/types";
 import { StockLockupTiles } from "@/components/StockLockupTiles";
 import { formatKrwEok } from "@/lib/format";
-import { currentIpoReturnPct, listingFloatPct, listingMarketCap } from "@/lib/returns";
+import { currentIpoReturnPct, listingFloatPct, listingMarketCap, listingShares } from "@/lib/returns";
 
 const DEFAULT_BLOG_URL = "https://blog.naver.com/vericap";
 
@@ -122,9 +122,10 @@ export function StockHero({
       icon: <svg {...iconProps}><path d="M3 16.5 9 10l4 4 7.5-7.5M15 6.5h5.5V12" /></svg>,
     },
     {
-      label: suspended ? "거래정지 전 시가총액" : `시가총액(${priceDate})`,
-      value: closeCap ? formatKrwEok(closeCap) : "-",
-      icon: <svg {...iconProps}><path d="M20.5 7.5v9l-8.5 4.5-8.5-4.5v-9L12 3z" /><path d="m3.8 7.4 8.2 4.4 8.2-4.4M12 21v-9.2" /></svg>,
+      // 상장 당일 매도 제한이 없던 물량 비중 — 보호예수·기관확약을 모두 뺀 값
+      label: "상장일 유통가능",
+      value: floatPct === null ? "-" : `${floatPct.toFixed(1)}%`,
+      icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v9l6.4 3.7" /></svg>,
     },
     {
       label: "상장일 시가총액",
@@ -132,10 +133,9 @@ export function StockHero({
       icon: <svg {...iconProps}><path d="M4 20h16M7 20V9m5 11V4m5 16v-7" /></svg>,
     },
     {
-      // 상장 당일 매도 제한이 없던 물량 비중 — 보호예수·기관확약을 모두 뺀 값
-      label: "상장일 유통가능",
-      value: floatPct === null ? "-" : `${floatPct.toFixed(1)}%`,
-      icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v9l6.4 3.7" /></svg>,
+      label: suspended ? "거래정지 전 시가총액" : `시가총액(${priceDate})`,
+      value: closeCap ? formatKrwEok(closeCap) : "-",
+      icon: <svg {...iconProps}><path d="M20.5 7.5v9l-8.5 4.5-8.5-4.5v-9L12 3z" /><path d="m3.8 7.4 8.2 4.4 8.2-4.4M12 21v-9.2" /></svg>,
     },
   ];
 
@@ -173,9 +173,12 @@ export function StockHero({
             {!suspended && hasReturn && <ReturnGauge pct={displayChangePct} />}
           </div>
 
+          {/* 락업 물량은 상장 시점 기준으로 공시된 값이라 상장일 상장주식수로 나눠야
+              맞다. 현재 주식수로 나누면 무상증자 종목의 비중이 배수만큼 줄어들고,
+              잔여+해제+상장일 유통가능이 100%가 되지 않는다(지투지바이오). */}
           <StockLockupTiles
             events={stock.events}
-            shares={stock.shares}
+            shares={listingShares(stock)}
             initialNow={initialNow}
           />
         </div>
