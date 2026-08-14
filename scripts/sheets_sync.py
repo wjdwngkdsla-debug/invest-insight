@@ -37,7 +37,7 @@ from scripts.management import (
     norm_name,
     release_schedule_correction,
 )
-from scripts.utils.dates import calc_release_date
+from scripts.utils.dates import calc_release_date, parse_date, release_display
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -2392,6 +2392,10 @@ def push_stock_management_tab(spreadsheet: gspread.Spreadsheet) -> None:
             "listing_date": str(row.get("listing_date") or ""),
             "manual_ipo_price": str(number(row.get("manual_ipo_price")) or ""),
         }
+    # 관리·노출을 끈 종목은 운영 대상이 아니라 목록 맨 아래로 내린다. 위쪽은 현재
+    # 관리 중인 종목만 남아 훑기 쉽다. 수거는 기업코드·이름으로 매칭하므로 순서를
+    # 바꿔도 수기값에는 영향이 없다. (values[0]=관리, values[1]=홈페이지노출)
+    values.sort(key=lambda row: (not row[0], not row[1]))
     STOCK_MANAGEMENT_PATH.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
     state["management"] = state_rows
     SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -2515,7 +2519,16 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                 release_date, _display_date, tradable_date = calc_release_date(listing_date, period)
             except (TypeError, ValueError):
                 pass
-        status, reason = _event_validation(event) if event else ("정상" if apply_qty or alloc_qty else "확인필요", "" if apply_qty or alloc_qty else "기관 수량 미수집")
+        # 확정된 0(파싱·수기로 값이 들어온 0)은 "그 구간 확약이 없었다"는 사실이지
+        # 미수집이 아니다. zero_missing(0 추정)만 확인필요로 남긴다.
+        apply_confirmed = bool(apply_tier) and str(apply_tier.get("source") or "") != "zero_missing"
+        alloc_confirmed = bool(event) or (bool(alloc_tier) and str(alloc_tier.get("source") or "") != "zero_missing")
+        if event:
+            status, reason = _event_validation(event)
+        elif apply_qty or alloc_qty or (apply_confirmed and alloc_confirmed):
+            status, reason = "정상", ""
+        else:
+            status, reason = "확인필요", "기관 수량 미수집"
         if alloc_qty and period != "미확약" and (not release_date or not tradable_date):
             status, reason = "확인필요", "배정물량은 있으나 상장일 또는 해제일을 계산할 수 없음"
         if period == "미확약":
@@ -2542,8 +2555,6 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         ipo_state[event_id] = dict(zip(IPO_INSTITUTION_HEADERS, [str(value) for value in row_values]))
         row_no = len(ipo_rows) + 1  # 헤더 다음부터
         # 확정된 0(구간 값이 파싱·수기로 존재)은 빨간 대상이 아니다 — 미수집만 칠한다
-        apply_confirmed = bool(apply_tier) and str(apply_tier.get("source") or "") != "zero_missing"
-        alloc_confirmed = bool(event) or (bool(alloc_tier) and str(alloc_tier.get("source") or "") != "zero_missing")
         if not apply_qty and not apply_confirmed and int(item.get("commit_apply_missing") or 0) >= _parse_version:
             ipo_red_cells.append((row_no, apply_col))
         if not alloc_qty and not alloc_confirmed and item.get("result_report_missing") and not item.get("report_rcp"):
@@ -2592,11 +2603,19 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             corp=pending.get("corp_code") or f"name:{key[0]}",
             period=key[1], date=pending.get("date") or "미정",
         )
+        # 수기임시 행에도 거래가능일 칸을 채운다. 비워두면 컬럼이 한 칸씩 밀려
+        # 물량이 날짜 칸에 들어가 이상한 값으로 표시된다(인제니아테라퓨틱스 케이스).
+        release_date = str(pending.get("date") or "")
+        try:
+            _display, tradable = release_display(parse_date(release_date))
+            tradable_date = tradable.strftime("%Y-%m-%d")
+        except (TypeError, ValueError):
+            tradable_date = ""
         values = [
             str(pending.get("manual_lock") or "N").upper() == "Y",
             str(pending.get("sheet_visible") or "Y").upper() != "N",
             pending.get("name", ""), pending.get("code", ""), key[1],
-            pending.get("date", ""), qty, pending.get("quantity_unit") or "주", "",
+            release_date, tradable_date, qty, pending.get("quantity_unit") or "주", "",
             "수기임시", "공식 DART 값 수집 시 자동 교체", event_id,
             pending.get("corp_code", ""),
         ]

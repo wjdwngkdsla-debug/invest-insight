@@ -53,9 +53,14 @@ export function StockLockupTiles({
             <span className="h-2 w-2 rounded-full bg-blue-600" />
             <p className="text-[11.5px] font-semibold text-slate-600">잔여 락업</p>
           </div>
-          <p className="mt-0.5 text-[18px] font-bold leading-tight tracking-tight text-slate-900">
-            {pct(remaining)}
-            <span className="text-[12px] font-semibold text-slate-400">%</span>
+          <p className="mt-0.5 flex items-baseline gap-1.5">
+            <span className="text-[18px] font-bold leading-tight tracking-tight text-slate-900">
+              {pct(remaining)}
+              <span className="text-[12px] font-semibold text-slate-400">%</span>
+            </span>
+            <span className="text-[10.5px] font-medium tabular-nums text-slate-400">
+              {remaining.toLocaleString("ko-KR")}{unit}
+            </span>
           </p>
         </div>
         <div className="text-right">
@@ -63,26 +68,27 @@ export function StockLockupTiles({
             해제 완료
             <span className="h-2 w-2 rounded-full bg-slate-300" />
           </p>
-          <p className="mt-0.5 text-[18px] font-bold leading-tight tracking-tight text-slate-900">
-            {pct(released)}
-            <span className="text-[12px] font-semibold text-slate-400">%</span>
+          <p className="mt-0.5 flex items-baseline justify-end gap-1.5">
+            <span className="text-[10.5px] font-medium tabular-nums text-slate-400">
+              {released.toLocaleString("ko-KR")}{unit}
+            </span>
+            <span className="text-[18px] font-bold leading-tight tracking-tight text-slate-900">
+              {pct(released)}
+              <span className="text-[12px] font-semibold text-slate-400">%</span>
+            </span>
           </p>
         </div>
       </div>
 
+      {/* 물량 숫자는 위 라벨 옆으로 뺐다. 막대 안에 두면 한쪽 구간이 좁아질 때
+          숫자가 반대편 색 위로 올라타 안 보인다(해제 완료가 적은 종목). */}
       <div
-        className="relative mt-2 h-6 w-full overflow-hidden rounded-md bg-slate-900/10"
+        className="mt-2 flex h-2.5 w-full overflow-hidden rounded-full bg-slate-900/10"
         role="img"
         aria-label={`전체 락업 물량 중 잔여 ${remainingShare.toFixed(1)}%, 해제 완료 ${releasedShare.toFixed(1)}%`}
       >
-        <div className="absolute inset-0 flex">
-          <span className="h-full bg-blue-600" style={{ width: `${remainingShare}%` }} />
-          <span className="h-full bg-slate-300" style={{ width: `${releasedShare}%` }} />
-        </div>
-        <div className="relative z-10 flex h-full items-center justify-between px-2 text-[9.5px] font-semibold tabular-nums">
-          <span className="text-white drop-shadow-sm">{remaining.toLocaleString("ko-KR")}{unit}</span>
-          <span className="text-slate-600">{released.toLocaleString("ko-KR")}{unit}</span>
-        </div>
+        <span className="h-full bg-blue-600" style={{ width: `${remainingShare}%` }} />
+        <span className="h-full bg-slate-300" style={{ width: `${releasedShare}%` }} />
       </div>
     </div>
   );
