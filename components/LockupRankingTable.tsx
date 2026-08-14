@@ -62,8 +62,9 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
     else { setSortKey(key); setAsc(false); }
   };
   const mark = (key: SortKey) => key === sortKey ? (asc ? " ↑" : " ↓") : "";
-
-  if (!sorted.length) return <p className="rounded-[20px] border border-gray-200 bg-white p-6 text-sm text-gray-400">해제일 시세가 확인된 기관 확약 종목이 없습니다.</p>;
+  // 결과가 0건이어도 필터 줄은 계속 그린다. 여기서 조기 반환하면 검색창까지 사라져
+  // 검색어를 지울 방법이 없어진다(빈 화면에 갇힘).
+  const filteredOut = rows.length > 0 && sorted.length === 0;
 
   return (
     <div className="space-y-3">
@@ -77,7 +78,34 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-2 sm:w-44" />
         </div>
       </div>
-      <div className="hidden overflow-hidden rounded-[20px] border border-gray-200 bg-white shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] md:block">
+      {sorted.length === 0 && (
+        <div className="rounded-[20px] border border-gray-200 bg-white p-6 text-sm text-gray-400">
+          {filteredOut ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <span>검색 조건에 맞는 종목이 없습니다.</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery("");
+                  setFrom("");
+                  setTo("");
+                }}
+                className="font-semibold text-blue-600 underline-offset-2 hover:underline"
+              >
+                조건 초기화
+              </button>
+            </div>
+          ) : (
+            "해제일 시세가 확인된 기관 확약 종목이 없습니다."
+          )}
+        </div>
+      )}
+
+      <div
+        className={`overflow-hidden rounded-[20px] border border-gray-200 bg-white shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] ${
+          sorted.length === 0 ? "hidden" : "hidden md:block"
+        }`}
+      >
         <table className="w-full text-[13px]">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50/80 text-[11.5px] font-semibold text-slate-500">
@@ -112,7 +140,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
         </table>
       </div>
 
-      <ul className="space-y-2.5 md:hidden">
+      <ul className={`space-y-2.5 ${sorted.length === 0 ? "hidden" : "md:hidden"}`}>
         {sorted.map((row, index) => (
           <li key={row.code} className="rounded-[18px] border border-gray-200 bg-white p-3.5">
             <div className="flex items-center gap-2"><RankBadge rank={index + 1} /><Link href={`/stock/${row.code}`} className="font-bold text-slate-900">{row.name}</Link><span className="text-[10.5px] tabular-nums text-slate-400">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</span><span className="ml-auto text-[11px] text-slate-400">{formatKrwEok(row.marketCap)}</span></div>
