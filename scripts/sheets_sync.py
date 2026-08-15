@@ -444,6 +444,24 @@ def number(value: object) -> int:
         return 0
 
 
+def _norm_corp_code(value: object) -> str:
+    text = str(value or "").strip()
+    return text.zfill(8) if text.isdigit() else text
+
+
+def _owner_key(code: object = "", corp_code: object = "", name: object = "") -> str:
+    raw_code = str(code or "").strip()
+    if raw_code.startswith("corp:"):
+        return f"corp:{_norm_corp_code(raw_code.split(':', 1)[1])}"
+    normalized_code = _pad_code(raw_code)
+    if normalized_code:
+        return normalized_code
+    corp = _norm_corp_code(corp_code)
+    if corp:
+        return f"corp:{corp}"
+    return f"name:{norm_name(name)}"
+
+
 def decimal(value: object) -> float:
     text = str(value or "").replace(",", "").replace("%", "").replace(":1", "").strip()
     try:
@@ -1109,9 +1127,14 @@ def _review_fill_gaps(item: dict, has_float_rows: bool, float_pct_known: bool | 
         gaps.append("수요예측경쟁률")
     if not decimal(item.get("sub_ratio")):
         gaps.append("개인청약경쟁률")
-    if not any(number(tier.get("qty")) for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
+    apply_tiers = [tier for tier in item.get("commit_apply") or [] if isinstance(tier, dict)]
+    apply_confirmed = bool(apply_tiers) and all(
+        number(tier.get("qty")) > 0 or str(tier.get("source") or "") != "zero_missing"
+        for tier in apply_tiers
+    )
+    if not any(number(tier.get("qty")) for tier in apply_tiers) and not apply_confirmed:
         gaps.append("확약신청")
-    elif any(str(tier.get("source")) == "zero_missing" for tier in item.get("commit_apply") or [] if isinstance(tier, dict)):
+    elif any(str(tier.get("source")) == "zero_missing" for tier in apply_tiers):
         gaps.append("확약신청 0확인")
     alloc_tiers = [tier for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)]
     manual_alloc = item.get("manual_commit_alloc") or {}
@@ -1162,7 +1185,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     ipo_codes = {row.get("code") for row in admin_rows if row.get("category") == "IPO기관"}
     manual_events = read_json_list(MANUAL_EVENTS_PATH)
     manual_event_keys = {
-        (str(row.get("code") or ""), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
+        (_owner_key(row.get("code"), row.get("corp_code"), row.get("name")), str(row.get("category") or ""), str(row.get("period") or ""), str(row.get("date") or ""))
         for row in manual_events
     }
     by_code: dict[str, dict] = {}
@@ -1171,7 +1194,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         if code:
             by_code.setdefault(code, item)
         # 상장 전 종목은 종목코드가 없어 DART기업코드를 키로 쓴다(regenerate와 동일 규칙)
-        corp = str(item.get("corp_code") or "").strip()
+        corp = _norm_corp_code(item.get("corp_code"))
         if corp:
             by_code.setdefault(f"corp:{corp}", item)
 
@@ -1277,7 +1300,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                     _, _, tradable = calc_release_date(listing, period)
                 except Exception:
                     continue
-                key = (code, "IPO기관", period, tradable)
+                key = (_owner_key(code, (item or {}).get("corp_code"), (item or {}).get("name")), "IPO기관", period, tradable)
                 if key not in manual_event_keys:
                     manual_events.append({"code": code, "category": "IPO기관", "period": period, "date": tradable, "qty": qty})
                     manual_event_keys.add(key)
@@ -1294,7 +1317,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 _, _, tradable = calc_release_date(listing, period)
             except Exception:
                 continue
-            key = (code, "기존주주", period, tradable)
+            key = (_owner_key(code, (item or {}).get("corp_code"), (item or {}).get("name")), "기존주주", period, tradable)
             if key not in manual_event_keys:
                 manual_events.append({"code": code, "category": "기존주주", "period": period, "date": tradable, "qty": qty})
                 manual_event_keys.add(key)
@@ -1357,6 +1380,11 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     schedule = read_schedule_data()
     admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
     float_codes = {row.get("code") for row in admin_rows if row.get("category") == "구주·보호예수"}
+    manual_float_keys = {
+        _owner_key(row.get("code"), row.get("corp_code"), row.get("name"))
+        for row in read_json_list(MANUAL_EVENTS_PATH)
+        if str(row.get("category") or "") == "기존주주" and number(row.get("qty")) > 0
+    }
     # 상장일 유통가능비율을 계산할 근거가 있는 종목 — 투자설명서에서 온 보호예수 행이
     # 있거나, 본문 문장에서 유통가능물량을 직접 읽었거나.
     float_pct_codes = {
@@ -1419,7 +1447,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         if upcoming and not (item.get("band_low") or item.get("forecast_start")):
             continue
         if not code:
-            corp = str(item.get("corp_code") or "").strip()
+            corp = _norm_corp_code(item.get("corp_code"))
             if not corp:
                 continue
             code = f"corp:{corp}"
@@ -1427,7 +1455,9 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         if item.get("review_pending") and not listing_day_issue:
             continue
         gaps = _review_fill_gaps(
-            item, code in float_codes, None if upcoming else code in float_pct_codes,
+            item,
+            code in float_codes or code in manual_float_keys or _owner_key("", item.get("corp_code"), item.get("name")) in manual_float_keys,
+            None if upcoming else code in float_pct_codes,
         )
         if listing_day_issue:
             gaps.append("최초상장주식수 확인")

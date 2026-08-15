@@ -465,6 +465,33 @@ def find_result_report(corp_code: str, listing_date: str = "", sub_end: str = ""
 _NUM_TOKEN = r"(?:\s+(?:[\d,]+(?:\.\d+)?|-)(?=\s|$))"
 
 
+def _parse_tail_qty_pct(tokens: list[str]) -> tuple[int, float, bool]:
+    """기간별 확약 배정표의 마지막 합계 (수량, 비중) 쌍을 읽는다.
+
+    DART 표에서 "-"는 행 부재가 아니라 해당 구간 값이 0이라는 뜻으로 쓰이는
+    경우가 있다. 마지막 합계 쌍이 "-" 또는 "0" 조합이면 확정 0으로 돌려준다.
+    """
+    if len(tokens) < 2:
+        return 0, 0.0, False
+    qty_text, pct_text = tokens[-2], tokens[-1]
+    if qty_text == "-" and pct_text == "-":
+        return 0, 0.0, True
+    if qty_text == "-":
+        try:
+            return 0, float(pct_text.replace(",", "")), True
+        except ValueError:
+            return 0, 0.0, False
+    if pct_text == "-":
+        try:
+            return _to_int(qty_text), 0.0, True
+        except ValueError:
+            return 0, 0.0, False
+    try:
+        return _to_int(qty_text), float(pct_text.replace(",", "")), True
+    except ValueError:
+        return 0, 0.0, False
+
+
 def parse_result_report(doc: str) -> dict[str, Any]:
     plain = _clean_text(doc)
     out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": []}
@@ -501,16 +528,8 @@ def parse_result_report(doc: str) -> dict[str, Any]:
             if not m:
                 continue
             tokens = m.group(1).split()
-            nums = [t for t in tokens if t != "-"]
-            if len(nums) < 2:
-                # 구간이 표에 있는데 값이 전부 "-" = 확정된 0으로 기록 ('미정'과 구분)
-                if tokens and all(t == "-" for t in tokens):
-                    alloc_rows.append({"period": tier, "qty": 0, "pct": 0.0})
-                continue
-            try:
-                qty = _to_int(nums[-2])
-                pct = float(nums[-1].replace(",", ""))
-            except ValueError:
+            qty, pct, parsed = _parse_tail_qty_pct(tokens)
+            if not parsed:
                 continue
             alloc_rows.append({"period": tier, "qty": qty, "pct": pct})
         if len(alloc_rows) >= 3:
