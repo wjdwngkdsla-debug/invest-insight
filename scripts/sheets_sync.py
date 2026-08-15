@@ -224,6 +224,9 @@ REVIEW_FILL_HEADERS = [
     "신청_미확약", "신청_15일", "신청_1개월", "신청_3개월", "신청_6개월",
     "배정_미확약", "배정_15일", "배정_1개월", "배정_3개월", "배정_6개월",
     "구주_기간1", "구주_물량1", "구주_기간2", "구주_물량2", "구주_기간3", "구주_물량3",
+    # 투자설명서 "상장 직후 유통가능물량" 주식수. 표 파싱이 실패한 종목은 이 칸 하나만
+    # 채워 주면 상장일 유통가능비율이 살아난다(락업 행을 다 넣을 필요가 없다).
+    "상장일유통가능물량",
 ]
 
 
@@ -1086,7 +1089,7 @@ def _load_review_fill_written() -> dict[str, dict[str, str]]:
         return {}
 
 
-def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
+def _review_fill_gaps(item: dict, has_float_rows: bool, float_pct_known: bool | None = None) -> list[str]:
     gaps: list[str] = []
     if not item.get("market"):
         gaps.append("시장")
@@ -1126,6 +1129,8 @@ def _review_fill_gaps(item: dict, has_float_rows: bool) -> list[str]:
         gaps.append("확약신청 오류(신청건수 오인 의심)")
     if not has_float_rows:
         gaps.append("구주물량")
+    if float_pct_known is False:
+        gaps.append("상장일유통가능")
     return gaps
 
 
@@ -1172,6 +1177,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
 
     changed = 0
     mgmt_prices: dict[str, int] = {}
+    manual_float: dict[str, int] = {}
     for rec in table_records(values, {header: header for header in REVIEW_FILL_HEADERS}):
         code = _pad_code(rec.get("종목코드") or "")
         if not code:
@@ -1198,6 +1204,13 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                     item[field] = value
                     changed += 1
                 manual_fields.add(field)
+
+            # 상장일 유통가능물량은 IPO일정 항목이 아니라 별도 캐시로 간다.
+            # 락업 행을 다 채우지 않아도 이 숫자 하나면 유통가능비율이 살아난다.
+            free_shares = number(entered("상장일유통가능물량"))
+            if free_shares and not code.startswith("corp:"):
+                manual_float[code] = int(free_shares)
+                changed += 1
 
             text = entered("시장")
             if text:
@@ -1293,6 +1306,22 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         MANUAL_EVENTS_PATH.write_text(json.dumps(manual_events, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"[SHEET] 검토필요 수기값 {changed}건 반영", file=sys.stderr)
 
+    # 수기로 적은 상장일 유통가능물량은 파싱 결과와 같은 캐시에 넣는다.
+    # 다음 배치의 rows_to_site_data가 그대로 읽어 유통가능비율을 만든다.
+    if manual_float:
+        path = ROOT_DIR / "data" / "listing_float.json"
+        try:
+            cache = json.loads(path.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            cache = {}
+        for code, free in manual_float.items():
+            entry = dict(cache.get(code) or {})
+            entry["float_shares"] = free
+            entry["source"] = "수기입력"
+            cache[code] = entry
+        path.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[SHEET] 검토필요 → 상장일 유통가능물량 {len(manual_float)}건 반영", file=sys.stderr)
+
     # 확정공모가는 종목관리 탭에도 기입해 뒤이은 pull_stock_management가 수거하게 한다
     if mgmt_prices:
         try:
@@ -1328,6 +1357,17 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     schedule = read_schedule_data()
     admin_rows = read_csv_dicts(ROOT_DIR / "data" / "lockup_admin.csv")
     float_codes = {row.get("code") for row in admin_rows if row.get("category") == "구주·보호예수"}
+    # 상장일 유통가능비율을 계산할 근거가 있는 종목 — 투자설명서에서 온 보호예수 행이
+    # 있거나, 본문 문장에서 유통가능물량을 직접 읽었거나.
+    float_pct_codes = {
+        row.get("code")
+        for row in admin_rows
+        if row.get("category") == "구주·보호예수" and "투자설명서" in (row.get("dart_source") or "")
+    }
+    try:
+        float_pct_codes |= set(json.loads((ROOT_DIR / "data" / "listing_float.json").read_text(encoding="utf-8")))
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
     listing_day = _load_listing_day_snapshot()
     today = date.today().isoformat()
 
@@ -1386,7 +1426,9 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         listing_day_issue = "" if upcoming else _listing_day_snapshot_issue(code, listing, listing_day)
         if item.get("review_pending") and not listing_day_issue:
             continue
-        gaps = _review_fill_gaps(item, code in float_codes)
+        gaps = _review_fill_gaps(
+            item, code in float_codes, None if upcoming else code in float_pct_codes,
+        )
         if listing_day_issue:
             gaps.append("최초상장주식수 확인")
         if not gaps:

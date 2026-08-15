@@ -11,17 +11,16 @@ type SortKey = LockupPeriod | "marketCap" | "listingDate";
 const DATE_INPUT =
   "rounded-lg border border-gray-200 bg-white px-2 py-1 text-[12px] font-medium text-slate-700 focus:border-blue-400 focus:outline-none";
 
-/** 빈칸의 이유를 구분해 보여준다.
- *  · 확약 없음  = 그 구간에 기관 확약이 아예 없었다(정상). 아주 연한 가운뎃점.
- *  · 미수집     = 확약은 있는데 해제일 시세를 못 받았다(보완 필요). 회색 물음표.
- */
-function ReturnText({ pct, absent }: { pct: number | null; absent?: boolean }) {
+/** 빈칸이 세 가지 뜻으로 섞이지 않게 문구를 나눈다. 기호 대신 말로 쓴다. */
+function ReturnText({ pct, state }: { pct: number | null; state?: "none" | "upcoming" | "missing" | "ok" }) {
   if (pct === null) {
-    return absent ? (
-      <span className="text-slate-200" title="해당 구간 확약 없음">·</span>
-    ) : (
-      <span className="text-slate-400" title="해제일 시세 미수집">?</span>
-    );
+    if (state === "upcoming") {
+      return <span className="text-[11px] text-slate-400" title="해제일이 아직 오지 않았습니다">해제 전</span>;
+    }
+    if (state === "missing") {
+      return <span className="text-[11px] text-amber-600" title="해제일 시세를 아직 받지 못했습니다">확인 중</span>;
+    }
+    return <span className="text-[11px] text-slate-300" title="이 구간에는 기관 확약이 없었습니다">확약 없음</span>;
   }
   return (
     <span className={`font-bold tabular-nums ${pct >= 0 ? "text-rose-600" : "text-blue-600"}`}>
@@ -142,7 +141,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
                 <td className="px-3 py-3"><RankBadge rank={index + 1} /></td>
                 <td className="px-3 py-3"><Link href={`/stock/${row.code}`} className="font-semibold text-slate-900 underline-offset-4 hover:text-blue-700 hover:underline">{row.name}</Link></td>
                 <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums text-slate-500">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</td>
-                {LOCKUP_PERIODS.map((period) => <td key={period} className="px-3 py-3 text-right"><ReturnText pct={row.returns[period]} absent={row.absent?.[period]} /></td>)}
+                {LOCKUP_PERIODS.map((period) => <td key={period} className="px-3 py-3 text-right"><ReturnText pct={row.returns[period]} state={row.state?.[period]} /></td>)}
                 <td className="px-3 py-3 text-right tabular-nums text-slate-600">{formatKrwEok(row.marketCap)}</td>
               </tr>
             ))}
@@ -155,15 +154,15 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
           <li key={row.code} className="rounded-[18px] border border-gray-200 bg-white p-3.5">
             <div className="flex items-center gap-2"><RankBadge rank={index + 1} /><Link href={`/stock/${row.code}`} className="font-bold text-slate-900">{row.name}</Link><span className="text-[10.5px] tabular-nums text-slate-400">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</span><span className="ml-auto text-[11px] text-slate-400">{formatKrwEok(row.marketCap)}</span></div>
             <div className="mt-3 grid grid-cols-4 gap-1.5 rounded-xl bg-gray-50 p-2">
-              {LOCKUP_PERIODS.map((period) => <div key={period} className="text-center"><p className="text-[10px] text-slate-400">{period}</p><p className="mt-0.5 text-[11px]"><ReturnText pct={row.returns[period]} absent={row.absent?.[period]} /></p></div>)}
+              {LOCKUP_PERIODS.map((period) => <div key={period} className="text-center"><p className="text-[10px] text-slate-400">{period}</p><p className="mt-0.5 text-[11px]"><ReturnText pct={row.returns[period]} state={row.state?.[period]} /></p></div>)}
             </div>
           </li>
         ))}
       </ul>
       <p className="px-1 text-[11px] leading-relaxed text-slate-400">
         각 숫자는 기관 의무보유확약 물량이 거래 가능해진 날의 한국거래소 등락률입니다. 열 제목을 누르면 해당 기간 기준으로
-        순위가 바뀝니다. <span className="text-slate-300">·</span> 은 그 구간에 확약이 없었다는 뜻이고,{" "}
-        <span className="text-slate-400">?</span> 는 해제일 시세를 아직 못 받은 구간입니다.
+        순위가 바뀝니다. <span className="text-slate-400">확약 없음</span>은 수요예측에서 그 구간을 확약한 기관이 없었다는
+        뜻이고, <span className="text-slate-400">해제 전</span>은 해제일이 아직 오지 않은 구간입니다.
       </p>
     </div>
   );
