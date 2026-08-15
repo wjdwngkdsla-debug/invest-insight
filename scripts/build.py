@@ -5117,8 +5117,11 @@ def rows_to_site_data(
             "initial_shares": _to_int((listing_day.get(code) or {}).get("shares")) or _to_int(r.get("shares")),
             # 상장일 종가 — 공모가 대비 상장일 수익률(시초 성과) 계산용
             "listing_close": _to_int((listing_day.get(code) or {}).get("close_price")),
-            # 투자설명서 본문이 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준)
-            "listing_float_shares": _to_int((listing_float.get(code) or {}).get("float_shares")),
+            # 투자설명서가 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준).
+            # 상장 전에 미리 적어 둔 값은 종목코드가 없어 기업명으로 저장돼 있다.
+            "listing_float_shares": _to_int(
+                (listing_float.get(code) or listing_float.get(f"name:{managed_name(r.get('name'))}") or {}).get("float_shares")
+            ),
             "close_price": _to_int(r.get("close_price")),
             "trading_suspended": r.get("trading_suspended") is True,
             "trading_suspended_since": str(r.get("trading_suspended_since") or ""),
