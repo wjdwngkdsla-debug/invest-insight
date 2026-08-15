@@ -180,9 +180,9 @@
       "trading_suspended_since": "",
       "market_cap": 22500006594,
       "ipo_price": 10000,
-      "adjusted_ipo_price": 8815.1261,
-      "ipo_adjustment_factor": 0.88151261,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 8815.403,
+      "ipo_adjustment_factor": 0.8815403,
+      "ipo_adjustment_checked_at": "2025-10-01",
       "content_url": "",
       "events": [
         {
@@ -304,7 +304,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-10-01",
+          "factor": 0.8815403
+        }
+      ]
     },
     {
       "code": "062040",
@@ -694,9 +700,9 @@
       "trading_suspended_since": "",
       "market_cap": 77771518400,
       "ipo_price": 22000,
-      "adjusted_ipo_price": 11000.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 11000.0858,
+      "ipo_adjustment_factor": 0.5000039,
+      "ipo_adjustment_checked_at": "2025-11-07",
       "content_url": "",
       "events": [
         {
@@ -818,7 +824,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-11-07",
+          "factor": 0.5000039
+        }
+      ]
     },
     {
       "code": "079900",
@@ -2671,9 +2683,9 @@
       "trading_suspended_since": "",
       "market_cap": 89201856000,
       "ipo_price": 40000,
-      "adjusted_ipo_price": 13340.0,
-      "ipo_adjustment_factor": 0.3335,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 13338.42,
+      "ipo_adjustment_factor": 0.3334605,
+      "ipo_adjustment_checked_at": "2025-01-24",
       "content_url": "",
       "events": [
         {
@@ -2842,7 +2854,13 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-01-24",
+          "factor": 0.3334605
+        }
+      ]
     },
     {
       "code": "308430",
@@ -3547,9 +3565,9 @@
       "trading_suspended_since": "",
       "market_cap": 832517115300,
       "ipo_price": 13000,
-      "adjusted_ipo_price": 12313.2075,
-      "ipo_adjustment_factor": 0.94716981,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 12313.7495,
+      "ipo_adjustment_factor": 0.9472115,
+      "ipo_adjustment_checked_at": "2026-07-06",
       "content_url": "",
       "events": [
         {
@@ -3747,7 +3765,13 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-07-06",
+          "factor": 0.9472115
+        }
+      ]
     },
     {
       "code": "458650",
@@ -3929,9 +3953,9 @@
       "trading_suspended_since": "",
       "market_cap": 105381855930,
       "ipo_price": 12000,
-      "adjusted_ipo_price": 6000.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 5999.934,
+      "ipo_adjustment_factor": 0.4999945,
+      "ipo_adjustment_checked_at": "2025-09-04",
       "content_url": "",
       "events": [
         {
@@ -4114,7 +4138,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-09-04",
+          "factor": 0.4999945
+        }
+      ]
     },
     {
       "code": "336680",
@@ -4130,9 +4160,9 @@
       "trading_suspended_since": "",
       "market_cap": 103540000910,
       "ipo_price": 18000,
-      "adjusted_ipo_price": 9000.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 9000.0198,
+      "ipo_adjustment_factor": 0.5000011,
+      "ipo_adjustment_checked_at": "2025-05-29",
       "content_url": "",
       "events": [
         {
@@ -4280,7 +4310,13 @@
           "release_fluc_rt": -1.18
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-05-29",
+          "factor": 0.5000011
+        }
+      ]
     },
     {
       "code": "465480",
@@ -5428,7 +5464,7 @@
       "ipo_price": 23000,
       "adjusted_ipo_price": 11500.0,
       "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "ipo_adjustment_checked_at": "2026-03-09",
       "content_url": "",
       "events": [
         {
@@ -5619,7 +5655,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-03-09",
+          "factor": 0.5
+        }
+      ]
     },
     {
       "code": "475960",
@@ -6101,9 +6143,9 @@
       "trading_suspended_since": "",
       "market_cap": 33775173315,
       "ipo_price": 13000,
-      "adjusted_ipo_price": 6500.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 6500.1001,
+      "ipo_adjustment_factor": 0.5000077,
+      "ipo_adjustment_checked_at": "2025-06-12",
       "content_url": "",
       "events": [
         {
@@ -6249,7 +6291,13 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-06-12",
+          "factor": 0.5000077
+        }
+      ]
     },
     {
       "code": "394800",
@@ -7344,9 +7392,9 @@
       "trading_suspended_since": "",
       "market_cap": 672490110400,
       "ipo_price": 13000,
-      "adjusted_ipo_price": 3250.0,
-      "ipo_adjustment_factor": 0.25,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 3250.1157,
+      "ipo_adjustment_factor": 0.2500089,
+      "ipo_adjustment_checked_at": "2025-10-10",
       "content_url": "",
       "events": [
         {
@@ -7521,7 +7569,13 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-10-10",
+          "factor": 0.2500089
+        }
+      ]
     },
     {
       "code": "387570",
@@ -7946,9 +8000,9 @@
       "trading_suspended_since": "",
       "market_cap": 323946544000,
       "ipo_price": 18000,
-      "adjusted_ipo_price": 9000.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 9000.1782,
+      "ipo_adjustment_factor": 0.5000099,
+      "ipo_adjustment_checked_at": "2026-02-20",
       "content_url": "",
       "events": [
         {
@@ -8154,7 +8208,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-02-20",
+          "factor": 0.5000099
+        }
+      ]
     },
     {
       "code": "064400",
@@ -11310,9 +11370,9 @@
       "trading_suspended_since": "",
       "market_cap": 47357892864,
       "ipo_price": 15000,
-      "adjusted_ipo_price": 5062.8998,
-      "ipo_adjustment_factor": 0.33752665,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 5062.017,
+      "ipo_adjustment_factor": 0.3374678,
+      "ipo_adjustment_checked_at": "2026-02-27",
       "content_url": "",
       "events": [
         {
@@ -11496,7 +11556,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-02-27",
+          "factor": 0.3374678
+        }
+      ]
     },
     {
       "code": "098070",
@@ -12357,9 +12423,9 @@
       "trading_suspended_since": "",
       "market_cap": 146383306920,
       "ipo_price": 9000,
-      "adjusted_ipo_price": 3002.9703,
-      "ipo_adjustment_factor": 0.33366337,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 3003.4017,
+      "ipo_adjustment_factor": 0.3337113,
+      "ipo_adjustment_checked_at": "2025-04-21",
       "content_url": "",
       "events": [
         {
@@ -12604,7 +12670,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-04-21",
+          "factor": 0.3337113
+        }
+      ]
     },
     {
       "code": "081180",
@@ -12855,9 +12927,9 @@
       "trading_suspended_since": "",
       "market_cap": 75802411800,
       "ipo_price": 9000,
-      "adjusted_ipo_price": 4500.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 4499.9298,
+      "ipo_adjustment_factor": 0.4999922,
+      "ipo_adjustment_checked_at": "2025-08-07",
       "content_url": "",
       "events": [
         {
@@ -12998,7 +13070,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-08-07",
+          "factor": 0.4999922
+        }
+      ]
     },
     {
       "code": "136150",
@@ -13415,9 +13493,9 @@
       "trading_suspended_since": "",
       "market_cap": 299587029520,
       "ipo_price": 3600,
-      "adjusted_ipo_price": 3463.68,
-      "ipo_adjustment_factor": 0.96213333,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 3463.5899,
+      "ipo_adjustment_factor": 0.9621083,
+      "ipo_adjustment_checked_at": "2026-04-03",
       "content_url": "",
       "events": [
         {
@@ -13573,7 +13651,13 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-04-03",
+          "factor": 0.9621083
+        }
+      ]
     },
     {
       "code": "489460",
@@ -17548,9 +17632,9 @@
       "trading_suspended_since": "",
       "market_cap": 733357686600,
       "ipo_price": 58000,
-      "adjusted_ipo_price": 19342.8145,
-      "ipo_adjustment_factor": 0.3334968,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 19343.783,
+      "ipo_adjustment_factor": 0.3335135,
+      "ipo_adjustment_checked_at": "2025-11-05",
       "content_url": "",
       "events": [
         {
@@ -17809,7 +17893,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2025-11-05",
+          "factor": 0.3335135
+        }
+      ]
     },
     {
       "code": "484590",
@@ -19973,9 +20063,9 @@
       "trading_suspended_since": "",
       "market_cap": 178539238800,
       "ipo_price": 22000,
-      "adjusted_ipo_price": 11004.5,
-      "ipo_adjustment_factor": 0.50020455,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 11004.0568,
+      "ipo_adjustment_factor": 0.5001844,
+      "ipo_adjustment_checked_at": "2026-07-15",
       "content_url": "",
       "events": [
         {
@@ -20193,7 +20283,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-07-15",
+          "factor": 0.5001844
+        }
+      ]
     },
     {
       "code": "061090",
@@ -21614,8 +21710,8 @@
       "market_cap": 489367494000,
       "ipo_price": 0,
       "adjusted_ipo_price": 21664.5753,
-      "ipo_adjustment_factor": 0.33330116,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "ipo_adjustment_factor": 0.3333315,
+      "ipo_adjustment_checked_at": "2026-06-26",
       "content_url": "",
       "events": [
         {
@@ -21641,7 +21737,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-06-26",
+          "factor": 0.3333315
+        }
+      ]
     },
     {
       "code": "0009K0",
@@ -23301,9 +23403,9 @@
       "trading_suspended_since": "",
       "market_cap": 988954119000,
       "ipo_price": 22500,
-      "adjusted_ipo_price": 11250.0,
-      "ipo_adjustment_factor": 0.5,
-      "ipo_adjustment_checked_at": "2026-08-06",
+      "adjusted_ipo_price": 11250.414,
+      "ipo_adjustment_factor": 0.5000184,
+      "ipo_adjustment_checked_at": "2026-06-29",
       "content_url": "",
       "events": [
         {
@@ -23473,7 +23575,13 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "adjustment_events": [
+        {
+          "date": "2026-06-29",
+          "factor": 0.5000184
+        }
+      ]
     },
     {
       "code": "478340",

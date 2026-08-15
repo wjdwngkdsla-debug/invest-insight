@@ -56,6 +56,22 @@ function Breakdown({ group }: { group: UpcomingGroup }) {
   );
 }
 
+/** 무상증자·분할로 주식수가 바뀐 종목에만 붙는 한 줄.
+ *  상장일 상장주식수는 조정 전 숫자라, 그대로 두면 지금 주식수와 안 맞아 보인다.
+ */
+function AdjustmentNote({ events }: { events?: { date: string; factor: number }[] }) {
+  if (!events || events.length === 0) return null;
+  const total = events.reduce((product, event) => product * (event.factor || 1), 1);
+  if (!total || Math.abs(total - 1) < 0.001) return null;
+  const multiple = 1 / total;
+  const last = events[events.length - 1]?.date || "";
+  return (
+    <p className="text-[11px] text-blue-600">
+      이후 주식수 {multiple.toFixed(2)}배 증가{last ? ` · ${last} 권리락` : ""}
+    </p>
+  );
+}
+
 function EventRow({ group, tone, nowMs }: { group: UpcomingGroup; tone: "upcoming" | "past"; nowMs: number }) {
   const days = daysUntil(group.tradable_date, nowMs);
   const status = days >= 0 ? "예정" : "해제완료";
@@ -106,10 +122,12 @@ export function StockEventSections({
   groups,
   initialNow,
   shares,
+  adjustmentEvents,
 }: {
   groups: UpcomingGroup[];
   initialNow: number;
   shares: number;
+  adjustmentEvents?: { date: string; factor: number }[];
 }) {
   const [nowMs, setNowMs] = useState(initialNow);
   useEffect(() => {
@@ -142,9 +160,12 @@ export function StockEventSections({
               <span className="text-sm font-medium text-gray-400">{upcoming.length}건</span>
             </h2>
             {shares > 0 && (
-              <p className="text-sm text-gray-400">
-                상장일 상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
-              </p>
+              <div className="text-right">
+                <AdjustmentNote events={adjustmentEvents} />
+                <p className="text-sm text-gray-400">
+                  상장일 상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
+                </p>
+              </div>
             )}
           </div>
           <ul className="space-y-3">

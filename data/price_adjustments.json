@@ -1,0 +1,836 @@
+{
+ "last_date": "2026-08-14",
+ "stocks": {
+  "462870": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 31700
+  },
+  "373110": {
+   "factor": 0.8815403,
+   "events": [
+    {
+     "date": "2025-10-01",
+     "factor": 0.8815403,
+     "prev_close": 2785,
+     "base_price": 2455
+    }
+   ],
+   "prev_close": 1301
+  },
+  "062040": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 182500
+  },
+  "460940": {
+   "factor": 0.5000039,
+   "events": [
+    {
+     "date": "2025-11-07",
+     "factor": 0.5000039,
+     "prev_close": 20500,
+     "base_price": 10250
+    }
+   ],
+   "prev_close": 5780
+  },
+  "460470": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3050
+  },
+  "199480": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3520
+  },
+  "088340": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7390
+  },
+  "079900": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 35400
+  },
+  "389650": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 37300
+  },
+  "431190": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 2655
+  },
+  "464280": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5820
+  },
+  "476080": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4330
+  },
+  "456070": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6160
+  },
+  "461300": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 18200
+  },
+  "464500": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 1980
+  },
+  "381620": {
+   "factor": 0.3334605,
+   "events": [
+    {
+     "date": "2025-01-24",
+     "factor": 0.3334605,
+     "prev_close": 29600,
+     "base_price": 9870
+    }
+   ],
+   "prev_close": 6800
+  },
+  "308430": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 15000
+  },
+  "209640": {
+   "factor": 0.4999945,
+   "events": [
+    {
+     "date": "2025-09-04",
+     "factor": 0.4999945,
+     "prev_close": 7660,
+     "base_price": 3830
+    }
+   ],
+   "prev_close": 3705
+  },
+  "465480": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3430
+  },
+  "474170": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7170
+  },
+  "457370": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8850
+  },
+  "475400": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 21550
+  },
+  "289930": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7120
+  },
+  "466100": {
+   "factor": 0.9472115,
+   "events": [
+    {
+     "date": "2026-07-06",
+     "factor": 0.9472115,
+     "prev_close": 29350,
+     "base_price": 27801
+    }
+   ],
+   "prev_close": 32700
+  },
+  "458650": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8430
+  },
+  "336680": {
+   "factor": 0.5000011,
+   "events": [
+    {
+     "date": "2025-05-29",
+     "factor": 0.5000011,
+     "prev_close": 10960,
+     "base_price": 5480
+    }
+   ],
+   "prev_close": 2645
+  },
+  "475580": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8280
+  },
+  "376270": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 45350
+  },
+  "475560": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 15890
+  },
+  "475960": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 36200
+  },
+  "163280": {
+   "factor": 0.5,
+   "events": [
+    {
+     "date": "2026-03-09",
+     "factor": 0.5,
+     "prev_close": 14240,
+     "base_price": 7120
+    }
+   ],
+   "prev_close": 3395
+  },
+  "473980": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11400
+  },
+  "464580": {
+   "factor": 0.5000077,
+   "events": [
+    {
+     "date": "2025-06-12",
+     "factor": 0.5000077,
+     "prev_close": 7000,
+     "base_price": 3500
+    }
+   ],
+   "prev_close": 1835
+  },
+  "394800": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6230
+  },
+  "413390": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7110
+  },
+  "475660": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3475
+  },
+  "466410": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8970
+  },
+  "459100": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4600
+  },
+  "457600": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4390
+  },
+  "484870": {
+   "factor": 0.3333315,
+   "events": [
+    {
+     "date": "2026-06-26",
+     "factor": 0.3333315,
+     "prev_close": 75600,
+     "base_price": 25200
+    }
+   ],
+   "prev_close": 17820
+  },
+  "382150": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3700
+  },
+  "476060": {
+   "factor": 0.2500089,
+   "events": [
+    {
+     "date": "2025-10-10",
+     "factor": 0.2500089,
+     "prev_close": 65200,
+     "base_price": 16301
+    }
+   ],
+   "prev_close": 14810
+  },
+  "177900": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4135
+  },
+  "387570": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5790
+  },
+  "475460": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6370
+  },
+  "096250": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6480
+  },
+  "373160": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3040
+  },
+  "450950": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6050
+  },
+  "482630": {
+   "factor": 0.5000099,
+   "events": [
+    {
+     "date": "2026-02-20",
+     "factor": 0.5000099,
+     "prev_close": 40700,
+     "base_price": 20350
+    }
+   ],
+   "prev_close": 14800
+  },
+  "452450": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3440
+  },
+  "462980": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 1475
+  },
+  "064400": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 79900
+  },
+  "212710": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8020
+  },
+  "240550": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6650
+  },
+  "475830": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 68100
+  },
+  "303810": {
+   "factor": 0.4999922,
+   "events": [
+    {
+     "date": "2025-08-07",
+     "factor": 0.4999922,
+     "prev_close": 9780,
+     "base_price": 4890
+    }
+   ],
+   "prev_close": 2370
+  },
+  "463480": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4335
+  },
+  "479960": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6570
+  },
+  "489500": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 21650
+  },
+  "393970": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 2825
+  },
+  "226590": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12670
+  },
+  "031210": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 44900
+  },
+  "480370": {
+   "factor": 0.3374678,
+   "events": [
+    {
+     "date": "2026-02-27",
+     "factor": 0.3374678,
+     "prev_close": 10460,
+     "base_price": 3530
+    }
+   ],
+   "prev_close": 1458
+  },
+  "098070": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 28600
+  },
+  "484810": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 17490
+  },
+  "444530": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4775
+  },
+  "462860": {
+   "factor": 0.3337113,
+   "events": [
+    {
+     "date": "2025-04-21",
+     "factor": 0.3337113,
+     "prev_close": 8540,
+     "base_price": 2850
+    }
+   ],
+   "prev_close": 2040
+  },
+  "481070": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 19990
+  },
+  "081180": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6110
+  },
+  "459510": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 17600
+  },
+  "136150": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8130
+  },
+  "476040": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8230
+  },
+  "376900": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 32250
+  },
+  "424870": {
+   "factor": 0.9621083,
+   "events": [
+    {
+     "date": "2026-04-03",
+     "factor": 0.9621083,
+     "prev_close": 7910,
+     "base_price": 7610
+    }
+   ],
+   "prev_close": 3280
+  },
+  "489460": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12210
+  },
+  "483650": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 228500
+  },
+  "287840": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 22250
+  },
+  "475430": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4575
+  },
+  "474650": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 27200
+  },
+  "340450": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5620
+  },
+  "463020": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 10030
+  },
+  "234030": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3290
+  },
+  "331740": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7000
+  },
+  "484120": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 21100
+  },
+  "380550": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8890
+  },
+  "475230": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8430
+  },
+  "468530": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 37600
+  },
+  "439260": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 54700
+  },
+  "309710": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 21000
+  },
+  "456160": {
+   "factor": 0.3335135,
+   "events": [
+    {
+     "date": "2025-11-05",
+     "factor": 0.3335135,
+     "prev_close": 185000,
+     "base_price": 61700
+    }
+   ],
+   "prev_close": 44100
+  },
+  "484590": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 6700
+  },
+  "0008Z0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 24700
+  },
+  "125490": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12590
+  },
+  "0010V0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8880
+  },
+  "318060": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 20400
+  },
+  "488280": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11540
+  },
+  "317450": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 47650
+  },
+  "486990": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 21000
+  },
+  "469610": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 17980
+  },
+  "494120": {
+   "factor": 0.5001844,
+   "events": [
+    {
+     "date": "2026-07-15",
+     "factor": 0.5001844,
+     "prev_close": 25550,
+     "base_price": 12780
+    }
+   ],
+   "prev_close": 11700
+  },
+  "061090": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 45250
+  },
+  "0015G0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 16880
+  },
+  "403850": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11500
+  },
+  "388210": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 80800
+  },
+  "488900": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11130
+  },
+  "0015N0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8550
+  },
+  "0009K0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 27250
+  },
+  "950250": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 2520
+  },
+  "0015S0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 7310
+  },
+  "261520": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4155
+  },
+  "464490": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5830
+  },
+  "217590": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 13560
+  },
+  "0007C0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 17240
+  },
+  "478340": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12000
+  },
+  "476830": {
+   "factor": 0.5000184,
+   "events": [
+    {
+     "date": "2026-06-29",
+     "factor": 0.5000184,
+     "prev_close": 81500,
+     "base_price": 40751
+    }
+   ],
+   "prev_close": 35250
+  },
+  "0013V0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5390
+  },
+  "491000": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 45900
+  },
+  "490470": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 18250
+  },
+  "0001A0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8920
+  },
+  "279570": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5720
+  },
+  "458350": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3715
+  },
+  "0011A0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 10100
+  },
+  "0082N0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 15540
+  },
+  "493280": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 19030
+  },
+  "408470": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5820
+  },
+  "0088M0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12990
+  },
+  "394420": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11730
+  },
+  "0007J0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8260
+  },
+  "0011T0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5290
+  },
+  "439960": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 16770
+  },
+  "487580": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3745
+  },
+  "477850": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 28550
+  },
+  "0117P0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5470
+  },
+  "153890": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 12980
+  },
+  "475040": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 3290
+  },
+  "0039P0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 8160
+  },
+  "365660": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 5430
+  },
+  "387690": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 11070
+  },
+  "0156T0": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 9490
+  },
+  "483350": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 4625
+  },
+  "487400": {
+   "factor": 1.0,
+   "events": [],
+   "prev_close": 14860
+  }
+ }
+}

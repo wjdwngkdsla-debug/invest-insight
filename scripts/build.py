@@ -4869,6 +4869,7 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
     return cache
 
 
+PRICE_ADJUST_PATH = ROOT_DIR / "data" / "price_adjustments.json"
 LISTING_FLOAT_PATH = ROOT_DIR / "data" / "listing_float.json"
 
 
@@ -5040,6 +5041,15 @@ def rows_to_site_data(
         except (OSError, json.JSONDecodeError):
             listing_float = {}
 
+    # KRX 등락률로 역산한 권리락 조정계수. 토스 수정주가와 18종목 전부 일치했고
+    # 허용 IP 등록이 필요 없어 Actions에서도 돈다.
+    price_adjust: dict[str, dict] = {}
+    if PRICE_ADJUST_PATH.exists():
+        try:
+            price_adjust = json.loads(PRICE_ADJUST_PATH.read_text(encoding="utf-8")).get("stocks") or {}
+        except (OSError, json.JSONDecodeError):
+            price_adjust = {}
+
     hidden_codes: set[str] = set()
     hidden_names: set[str] = set()
     # 종목별 분석 콘텐츠 링크 — 종목관리 탭의 콘텐츠링크 열(운영자 입력)
@@ -5157,6 +5167,21 @@ def rows_to_site_data(
         })
     for stock in stocks_map.values():
         stock["events"] = sorted(stock["events"], key=lambda e: e["tradable_date"])
+        # 조정계수는 KRX 역산값을 우선한다. 시트(토스) 값은 갱신이 수동이라 뒤처진다.
+        entry = price_adjust.get(normalize_stock_code(stock["code"])) or {}
+        factor = _to_float(entry.get("factor"))
+        if factor and abs(factor - 1) > 1e-6:
+            stock["ipo_adjustment_factor"] = factor
+            if stock.get("ipo_price"):
+                stock["adjusted_ipo_price"] = round(stock["ipo_price"] * factor, 4)
+            events = entry.get("events") or []
+            stock["adjustment_events"] = [
+                {"date": str(e.get("date") or ""), "factor": _to_float(e.get("factor"))}
+                for e in events
+                if isinstance(e, dict)
+            ]
+            if events:
+                stock["ipo_adjustment_checked_at"] = str(events[-1].get("date") or "")
     # updated = 종가 기준일 (시가총액 표기의 기준). 종가 갱신 실패 시에만 실행일로 대체.
     return {
         "updated": price_date or datetime.today().strftime("%Y-%m-%d"),
@@ -6234,6 +6259,16 @@ def main() -> None:
     except Exception as exc:
         print(f"[KRX] 상장일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
     phase_seconds["상장일 스냅샷"] = time.perf_counter() - snapshot_started
+
+    # 권리락 조정계수 — 마지막으로 본 거래일 이후만 이어서 훑는다(하루 2콜)
+    adjust_started = time.perf_counter()
+    try:
+        from scripts.price_adjustments import scan as scan_price_adjustments
+
+        scan_price_adjustments()
+    except Exception as exc:
+        print(f"[KRX] 조정계수 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+    phase_seconds["조정계수"] = time.perf_counter() - adjust_started
 
     # 확약 해제일 당일 시세 (락업 랭킹의 해제일 등락률)
     release_started = time.perf_counter()
