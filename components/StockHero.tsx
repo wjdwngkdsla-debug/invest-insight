@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { StockLockup } from "@/lib/types";
 import { StockLockupTiles } from "@/components/StockLockupTiles";
 import { formatKrwEok } from "@/lib/format";
-import { currentIpoReturnPct, listingFloatPct, listingMarketCap, listingShares } from "@/lib/returns";
+import { currentIpoReturnPct, listingFloatPct, listingShares, offerMarketCap } from "@/lib/returns";
 
 const DEFAULT_BLOG_URL = "https://blog.naver.com/vericap";
 
@@ -101,7 +101,7 @@ export function StockHero({
   const priceDate = updated.slice(5);
   const suspended = stock.trading_suspended === true;
   const suspendedSince = stock.trading_suspended_since || "";
-  const listingCap = listingMarketCap(stock);
+  const offerCap = offerMarketCap(stock);
   const floatPct = listingFloatPct(stock);
 
   // 핵심 지표 4개를 데스크톱 2×2, 모바일 2열 패널로 그린다.
@@ -128,8 +128,8 @@ export function StockHero({
       icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v9l6.4 3.7" /></svg>,
     },
     {
-      label: "상장일 시가총액",
-      value: listingCap ? formatKrwEok(listingCap) : "-",
+      label: "시가총액(공모가 기준)",
+      value: offerCap ? formatKrwEok(offerCap) : "-",
       icon: <svg {...iconProps}><path d="M4 20h16M7 20V9m5 11V4m5 16v-7" /></svg>,
     },
     {

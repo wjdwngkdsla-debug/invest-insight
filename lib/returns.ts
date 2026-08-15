@@ -47,11 +47,15 @@ export function listingFloatPct(
   return ((base - locked) / base) * 100;
 }
 
-/** 상장일 시가총액 — 상장일 상장주식수 × 상장일 종가. */
-export function listingMarketCap(
-  stock: Pick<StockLockup, "initial_shares" | "shares" | "listing_close">,
+/** 공모가 기준 시가총액 — 상장일 상장주식수 × 공모가.
+ *
+ *  상장일 종가가 아니라 공모가를 쓴다. 공모 당시 회사가 평가받은 몸값이라
+ *  현재 시가총액과 나란히 두면 상장 이후 가치 변화가 바로 읽힌다.
+ */
+export function offerMarketCap(
+  stock: Pick<StockLockup, "initial_shares" | "shares" | "ipo_price">,
 ): number | null {
   const base = listingShares(stock);
-  if (!base || !stock.listing_close) return null;
-  return base * stock.listing_close;
+  if (!base || !stock.ipo_price) return null;
+  return base * stock.ipo_price;
 }
