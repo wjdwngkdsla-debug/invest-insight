@@ -1165,6 +1165,10 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         code = _pad_code(str(item.get("stock_code") or ""))
         if code:
             by_code.setdefault(code, item)
+        # 상장 전 종목은 종목코드가 없어 DART기업코드를 키로 쓴다(regenerate와 동일 규칙)
+        corp = str(item.get("corp_code") or "").strip()
+        if corp:
+            by_code.setdefault(f"corp:{corp}", item)
 
     changed = 0
     mgmt_prices: dict[str, int] = {}
@@ -1364,9 +1368,22 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             continue
         code = _pad_code(str(item.get("stock_code") or ""))
         listing = str(item.get("listing_date") or "")
-        if not code or not listing or listing > today:
+        if not listing:
             continue
-        listing_day_issue = _listing_day_snapshot_issue(code, listing, listing_day)
+        # 상장 전 종목도 올린다. 투자설명서는 이미 나와 있어 수기로 미리 채울 수 있고,
+        # 상장 후에도 공공데이터 API가 바로 오지 않아 기다리면 늦는다. 종목코드가 아직
+        # 없으므로 DART기업코드를 대체 키로 쓴다.
+        upcoming = listing > today
+        # 신고서도 안 나온 초기 종목까지 올리면 탭이 빈칸으로 넘친다. 희망가나
+        # 수요예측 일정이 잡힌 뒤부터 대상으로 본다.
+        if upcoming and not (item.get("band_low") or item.get("forecast_start")):
+            continue
+        if not code:
+            corp = str(item.get("corp_code") or "").strip()
+            if not corp:
+                continue
+            code = f"corp:{corp}"
+        listing_day_issue = "" if upcoming else _listing_day_snapshot_issue(code, listing, listing_day)
         if item.get("review_pending") and not listing_day_issue:
             continue
         gaps = _review_fill_gaps(item, code in float_codes)
