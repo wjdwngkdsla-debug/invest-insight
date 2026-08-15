@@ -43,8 +43,6 @@ export function listingFloatPct(
     | "listing_float_shares"
     | "listing_float_pct"
     | "listing_float_excludes_ipo_commitment"
-    | "adjustment_events"
-    | "ipo_adjustment_factor"
   >,
 ): number | null {
   const events = stock.events || [];
@@ -67,12 +65,8 @@ export function listingFloatPct(
     (event) => event.type === "보호예수" && (event.source_label || "").includes("투자설명서"),
   );
   if (!fromProspectus) return null;
-  const hasIncompleteCumulativeTable = events.some(
-    (event) => (event.reason || "").includes("마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"),
-  );
-  const hasShareAdjustment =
-    (stock.adjustment_events || []).length > 0 || Math.abs((stock.ipo_adjustment_factor || 1) - 1) > 0.001;
-  if (hasIncompleteCumulativeTable && !hasShareAdjustment) return null;
+  // 투자설명서 누적표의 마지막 유통가능 주식수와 KRX 상장일 주식수가 조금 달라도,
+  // 분모는 더 안정적인 KRX 상장일 주식수를 쓰고 제한 물량 합계가 분모를 넘지 않으면 계산한다.
   const locked = events.reduce((sum, event) => sum + (event.qty || 0), 0);
   if (!base || !locked || locked > base) return null;
   return ((base - locked) / base) * 100;
