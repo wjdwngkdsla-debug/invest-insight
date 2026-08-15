@@ -19956,7 +19956,7 @@
       "shares": 21346230,
       "initial_shares": 21161880,
       "listing_close": 31000,
-      "listing_float_shares": 0,
+      "listing_float_shares": 6163200,
       "close_price": 21000,
       "trading_suspended": false,
       "trading_suspended_since": "",
@@ -19974,7 +19974,7 @@
           "tradable_date": "2025-11-18",
           "qty": 657430,
           "unit": "주",
-          "pct": 3.07,
+          "pct": 2.84,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -19998,7 +19998,7 @@
           "tradable_date": "2025-12-03",
           "qty": 341430,
           "unit": "주",
-          "pct": 1.6,
+          "pct": 1.47,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -20022,7 +20022,7 @@
           "tradable_date": "2025-12-03",
           "qty": 3653200,
           "unit": "주",
-          "pct": 17.08,
+          "pct": 15.77,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -20059,7 +20059,7 @@
           "tradable_date": "2026-02-03",
           "qty": 546870,
           "unit": "주",
-          "pct": 2.56,
+          "pct": 2.36,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -20083,7 +20083,7 @@
           "tradable_date": "2026-02-03",
           "qty": 3465980,
           "unit": "주",
-          "pct": 16.2,
+          "pct": 14.96,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -20124,7 +20124,7 @@
           "tradable_date": "2026-05-04",
           "qty": 463640,
           "unit": "주",
-          "pct": 2.17,
+          "pct": 2.0,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -20148,7 +20148,7 @@
           "tradable_date": "2026-05-04",
           "qty": 2148600,
           "unit": "주",
-          "pct": 10.04,
+          "pct": 9.27,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -20163,12 +20163,12 @@
           "reason": "벤처금융 + 기타 보호예수 필요 주주",
           "reason_breakdown": [
             {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1434900
+              "reason": "벤처금융",
+              "qty": 1359300
             },
             {
-              "reason": "벤처금융",
-              "qty": 713700
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 789300
             }
           ],
           "release_close": 34700,
@@ -20179,9 +20179,9 @@
           "date": "2026-11-03",
           "date_display": "2026-11-03",
           "tradable_date": "2026-11-03",
-          "qty": 1329000,
+          "qty": 1498500,
           "unit": "주",
-          "pct": 6.21,
+          "pct": 6.47,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -20192,9 +20192,18 @@
           "api_return_date": null,
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
-          "reason_breakdown": []
+          "holder_name": "기존주주 등 + 우리사주조합",
+          "reason": "기존주주 등 + 우리사주조합",
+          "reason_breakdown": [
+            {
+              "reason": "기존주주 등",
+              "qty": 1329000
+            },
+            {
+              "reason": "우리사주조합",
+              "qty": 169500
+            }
+          ]
         },
         {
           "period": "3년",
@@ -20203,7 +20212,7 @@
           "tradable_date": "2028-11-03",
           "qty": 4232400,
           "unit": "주",
-          "pct": 19.78,
+          "pct": 18.27,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -20214,13 +20223,15 @@
           "api_return_date": null,
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "holder_name": "최대주주 등",
+          "reason": "최대주주 등",
           "reason_breakdown": []
         }
       ],
       "holders": [],
-      "current_shares": 21392430
+      "current_shares": 21392430,
+      "listing_float_pct": 26.59,
+      "listing_float_excludes_ipo_commitment": true
     },
     {
       "code": "469610",
@@ -22218,7 +22229,7 @@
       "shares": 64671161,
       "initial_shares": 64156161,
       "listing_close": 44000,
-      "listing_float_shares": 0,
+      "listing_float_shares": 10814526,
       "close_price": 27250,
       "trading_suspended": false,
       "trading_suspended_since": "",
@@ -22260,7 +22271,7 @@
           "tradable_date": "2026-01-05",
           "qty": 569980,
           "unit": "주",
-          "pct": 0.88,
+          "pct": 0.89,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -22282,9 +22293,9 @@
           "date": "2026-02-04",
           "date_display": "2026-02-04",
           "tradable_date": "2026-02-04",
-          "qty": 10595547,
+          "qty": 8566480,
           "unit": "주",
-          "pct": 16.38,
+          "pct": 13.35,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -22295,12 +22306,12 @@
           "api_return_date": "2026-02-04",
           "api_return_qty": 10595547,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "기타 보호예수 필요 주주",
-          "reason": "기타 보호예수 필요 주주",
+          "holder_name": "기존주주 등",
+          "reason": "기존주주 등",
           "reason_breakdown": [
             {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 10595547
+              "reason": "기존주주 등",
+              "qty": 8566480
             }
           ]
         },
@@ -22311,7 +22322,7 @@
           "tradable_date": "2026-03-04",
           "qty": 1331300,
           "unit": "주",
-          "pct": 2.06,
+          "pct": 2.08,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -22335,7 +22346,7 @@
           "tradable_date": "2026-06-04",
           "qty": 2377220,
           "unit": "주",
-          "pct": 3.68,
+          "pct": 3.71,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "수동확인",
@@ -22357,9 +22368,9 @@
           "date": "2026-06-04",
           "date_display": "2026-06-04",
           "tradable_date": "2026-06-04",
-          "qty": 885411,
+          "qty": 2914478,
           "unit": "주",
-          "pct": 1.37,
+          "pct": 4.54,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -22370,16 +22381,12 @@
           "api_return_date": "2026-06-04",
           "api_return_qty": 885411,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": "상장주선인(기준비율이상) + 기타 보호예수 필요 주주",
-          "reason": "상장주선인(기준비율이상) + 기타 보호예수 필요 주주",
+          "holder_name": "기존주주 등",
+          "reason": "기존주주 등",
           "reason_breakdown": [
             {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 655394
-            },
-            {
-              "reason": "상장주선인(기준비율이상)",
-              "qty": 230017
+              "reason": "기존주주 등",
+              "qty": 2914478
             }
           ],
           "release_close": 27700,
@@ -22392,7 +22399,7 @@
           "tradable_date": "2026-12-04",
           "qty": 11799426,
           "unit": "주",
-          "pct": 18.25,
+          "pct": 18.39,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -22403,18 +22410,18 @@
           "api_return_date": null,
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "holder_name": "기존주주 등",
+          "reason": "기존주주 등",
           "reason_breakdown": []
         },
         {
-          "period": "2년",
+          "period": "24개월",
           "date": "2027-12-04",
-          "date_display": "2027-12-06",
+          "date_display": "2027-12-04 (거래가능 12-06)",
           "tradable_date": "2027-12-06",
-          "qty": 22164757,
+          "qty": 3225919,
           "unit": "주",
-          "pct": 34.27,
+          "pct": 5.03,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -22425,13 +22432,42 @@
           "api_return_date": null,
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "holder_name": "기존주주 등",
+          "reason": "기존주주 등",
+          "reason_breakdown": [
+            {
+              "reason": "기존주주 등",
+              "qty": 3225919
+            }
+          ]
+        },
+        {
+          "period": "30개월",
+          "date": "2028-06-04",
+          "date_display": "2028-06-04 (거래가능 06-05)",
+          "tradable_date": "2028-06-05",
+          "qty": 22164757,
+          "unit": "주",
+          "pct": 34.55,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20251120000448",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": "최대주주 등",
+          "reason": "최대주주 등",
           "reason_breakdown": []
         }
       ],
       "holders": [],
-      "current_shares": 64671161
+      "current_shares": 64671161,
+      "listing_float_pct": 16.85,
+      "listing_float_excludes_ipo_commitment": true
     },
     {
       "code": "950250",

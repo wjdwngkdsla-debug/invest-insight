@@ -122,6 +122,8 @@ export function StockHero({
     listing_float_shares: stock.listing_float_shares
       ? Math.round(stock.listing_float_shares * quantityFactor)
       : stock.listing_float_shares,
+    listing_float_pct: stock.listing_float_pct,
+    listing_float_excludes_ipo_commitment: stock.listing_float_excludes_ipo_commitment,
     events: displayEvents,
   }), [activeShares, displayEvents, returnBasePrice, quantityFactor, stock]);
   const closeCap = stock.market_cap || stock.shares * stock.close_price;

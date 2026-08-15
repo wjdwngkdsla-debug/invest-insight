@@ -57,8 +57,12 @@ export interface StockLockup {
   current_shares?: number; // 최근 상장주식수(KRX) — 현재 시가총액 기준
   initial_shares?: number; // 상장 시점 주식수 — 공모가 기준 시가총액 산출용
   listing_close?: number; // 상장일 종가(KRX 상장일 스냅샷). 공모가 대비 시초 성과 계산용
-  /** 투자설명서가 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준) */
+  /** 투자설명서가 직접 밝힌 상장 직후 유통가능물량 */
   listing_float_shares?: number;
+  /** 투자설명서가 직접 밝힌 상장 직후 유통가능비율 */
+  listing_float_pct?: number;
+  /** true면 listing_float_shares가 이미 기관 확약 물량을 제외한 유통가능 기준이다. */
+  listing_float_excludes_ipo_commitment?: boolean;
   /** 권리락 이력 — 무상증자·분할로 주가와 주식수가 조정된 날과 그 배수 */
   adjustment_events?: { date: string; factor: number }[];
   close_price: number;

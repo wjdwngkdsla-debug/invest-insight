@@ -35,17 +35,28 @@ export function listingShares(stock: Pick<StockLockup, "initial_shares" | "share
  * 실제보다 훨씬 크게 나온다(이뮨온시아: 3년 보호예수 4,889만주 누락 → 92.6%로 표시).
  */
 export function listingFloatPct(
-  stock: Pick<StockLockup, "initial_shares" | "shares" | "events" | "listing_float_shares">,
+  stock: Pick<
+    StockLockup,
+    | "initial_shares"
+    | "shares"
+    | "events"
+    | "listing_float_shares"
+    | "listing_float_pct"
+    | "listing_float_excludes_ipo_commitment"
+  >,
 ): number | null {
   const events = stock.events || [];
   const base = listingShares(stock);
 
   // 투자설명서 본문이 유통가능물량을 직접 밝힌 종목은 그 값이 가장 권위 있다.
-  // 다만 그 수치는 기관 확약분을 유통가능에 포함하므로 확약 물량은 빼고 본다.
+  // 일부 표는 기관 확약분을 유통가능에 포함하고, 일부 표는 유통제한으로 이미 제외한다.
   if (stock.listing_float_shares && base) {
-    const committed = events
-      .filter((event) => event.type === "IPO확약")
-      .reduce((sum, event) => sum + (event.qty || 0), 0);
+    if (stock.listing_float_excludes_ipo_commitment && stock.listing_float_pct) {
+      return stock.listing_float_pct;
+    }
+    const committed = stock.listing_float_excludes_ipo_commitment
+      ? 0
+      : events.filter((event) => event.type === "IPO확약").reduce((sum, event) => sum + (event.qty || 0), 0);
     const free = stock.listing_float_shares - committed;
     if (free > 0 && free <= base) return (free / base) * 100;
   }

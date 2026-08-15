@@ -489,5 +489,19 @@
   "float_shares": 26075572,
   "float_pct": 48.91,
   "source": "수기확인(첨부 이상종목정리)"
+ },
+ "486990": {
+  "total_shares": 23171250,
+  "float_shares": 6163200,
+  "float_pct": 26.59,
+  "excludes_ipo_commitment": true,
+  "source": "수기확인(Finuts 유통가능물량 상세)"
+ },
+ "0009K0": {
+  "total_shares": 64156161,
+  "float_shares": 10814526,
+  "float_pct": 16.85,
+  "excludes_ipo_commitment": true,
+  "source": "수기확인(Finuts 유통가능물량 상세)"
  }
 }
