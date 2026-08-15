@@ -111,7 +111,12 @@ if str(ROOT_DIR) not in sys.path:
 from scripts.config import require_env
 from scripts.sources.krx import find_stock_by_name, krx_snapshot, latest_base_info
 from scripts.sources.dart import parse_ipo_lockup
-from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups, parse_holder_lockups
+from scripts.sources.dart_api import (
+    get_corp_code,
+    parse_float_summary_lockups,
+    parse_holder_lockups,
+    parse_listing_float_sentence,
+)
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 from scripts.utils.redaction import redact_sensitive_text
@@ -4864,6 +4869,48 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
     return cache
 
 
+LISTING_FLOAT_PATH = ROOT_DIR / "data" / "listing_float.json"
+
+
+def refresh_listing_float(rows: list[dict]) -> dict[str, dict]:
+    """투자설명서 본문이 직접 밝힌 상장 직후 유통가능물량을 캐시한다.
+
+    "상장예정주식수 N주 중 약 X%에 해당하는 M주는 상장 직후 유통가능물량입니다"라는
+    문장이다. 표를 못 읽은 종목도 이 문장은 있는 경우가 있어 마지막 보루로 쓴다.
+    한 번 찾으면 다시 조회하지 않는다(상장 시점 값이라 바뀌지 않는다).
+    """
+    cache: dict[str, dict] = {}
+    if LISTING_FLOAT_PATH.exists():
+        try:
+            cache = json.loads(LISTING_FLOAT_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            cache = {}
+
+    seen: set[str] = set()
+    filled = 0
+    for row in rows:
+        code = normalize_stock_code(row.get("code"))
+        listing = str(row.get("listing_date") or "")
+        if not code or code in seen or code in cache or not listing:
+            continue
+        seen.add(code)
+        try:
+            total, free, ratio, note = parse_listing_float_sentence(
+                row.get("name") or "", year=int(listing[:4]), stock_code=code,
+            )
+        except Exception as exc:
+            print(f"  [DART] {row.get('name')} 유통가능 문장 조회 실패: {redact_sensitive_text(exc)}", file=sys.stderr)
+            continue
+        if not (total and free):
+            continue
+        cache[code] = {"total_shares": total, "float_shares": free, "float_pct": ratio}
+        filled += 1
+    if filled:
+        LISTING_FLOAT_PATH.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[DART] 상장 직후 유통가능물량 저장: {filled}종목 (누적 {len(cache)})", file=sys.stderr)
+    return cache
+
+
 RELEASE_DAY_PATH = ROOT_DIR / "data" / "release_day.json"
 MAX_RELEASE_DAYS_PER_RUN = 80
 
@@ -4986,6 +5033,13 @@ def rows_to_site_data(
         except (OSError, json.JSONDecodeError):
             release_day = {}
 
+    listing_float: dict[str, dict] = {}
+    if LISTING_FLOAT_PATH.exists():
+        try:
+            listing_float = json.loads(LISTING_FLOAT_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            listing_float = {}
+
     hidden_codes: set[str] = set()
     hidden_names: set[str] = set()
     # 종목별 분석 콘텐츠 링크 — 종목관리 탭의 콘텐츠링크 열(운영자 입력)
@@ -5047,6 +5101,8 @@ def rows_to_site_data(
             "initial_shares": _to_int((listing_day.get(code) or {}).get("shares")) or _to_int(r.get("shares")),
             # 상장일 종가 — 공모가 대비 상장일 수익률(시초 성과) 계산용
             "listing_close": _to_int((listing_day.get(code) or {}).get("close_price")),
+            # 투자설명서 본문이 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준)
+            "listing_float_shares": _to_int((listing_float.get(code) or {}).get("float_shares")),
             "close_price": _to_int(r.get("close_price")),
             "trading_suspended": r.get("trading_suspended") is True,
             "trading_suspended_since": str(r.get("trading_suspended_since") or ""),

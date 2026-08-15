@@ -56,6 +56,8 @@ export interface StockLockup {
   shares: number; // 최근 상장주식수(KRX) — 비율·종가 시가총액 기준
   initial_shares?: number; // 상장 시점 주식수 — 공모가 기준 시가총액 산출용
   listing_close?: number; // 상장일 종가(KRX 상장일 스냅샷). 공모가 대비 시초 성과 계산용
+  /** 투자설명서가 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준) */
+  listing_float_shares?: number;
   close_price: number;
   trading_suspended?: boolean; // KRX 종목기본정보에는 있으나 당일 시세에서 빠진 거래정지 종목
   trading_suspended_since?: string; // 최초 거래정지 감지일(YYYY-MM-DD). 재개 전까지 유지

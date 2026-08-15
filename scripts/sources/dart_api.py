@@ -357,6 +357,42 @@ def parse_holder_lockups(
     return by_period, str(selected.get("rcept_no") or ""), note
 
 
+_FLOAT_SENTENCE = re.compile(
+    r"상장예정주식수[^.]{0,40}?([\d,]{6,})\s*주[^.]{0,80}?([\d.]+)\s*%에\s*해당하는\s*([\d,]{5,})\s*주"
+)
+
+
+def parse_listing_float_sentence(
+    company_name: str, year: int | None = None, stock_code: str = "",
+) -> tuple[int, int, float, str]:
+    """투자설명서 본문에서 상장 직후 유통가능물량 문장을 읽는다.
+
+    "상장예정주식수 30,445,200주 중 약 20.45%에 해당하는 6,227,100주는 상장 직후
+    유통가능물량입니다" — 표가 없어도 이 문장은 있는 경우가 있어 마지막 보루로 쓴다.
+    다만 모든 문서에 있는 건 아니다(이뮨온시아·아스테라시스·클로봇에는 없다).
+
+    반환: (상장예정주식수, 유통가능주식수, 비율, note)
+    """
+    corp = get_corp_code(company_name, stock_code=stock_code)
+    if not corp:
+        return 0, 0, 0.0, "DART corpCode 미발견"
+    start = f"{year}0101" if year else "20250101"
+    end = f"{year + 1}1231" if year else "20261231"
+    selected = select_latest_investment_report(get_reports(corp["corp_code"], start_date=start, end_date=end))
+    if not selected:
+        return 0, 0, 0.0, "투자설명서/증권신고서 미발견"
+    match = _FLOAT_SENTENCE.search(download_document_text(selected["rcept_no"]))
+    if not match:
+        return 0, 0, 0.0, "유통가능물량 문장 미발견"
+    total = clean_int(match.group(1)) or 0
+    free = clean_int(match.group(3)) or 0
+    try:
+        pct_value = float(match.group(2))
+    except ValueError:
+        pct_value = 0.0
+    return total, free, pct_value, ""
+
+
 def choose_float_summary_table(candidates: list[dict[str, Any]], expected_shares: int | None = None) -> dict[str, Any] | None:
     if not candidates:
         return None
