@@ -4842,14 +4842,24 @@ def refresh_release_day_prices(rows: list[dict]) -> dict[str, dict]:
     )
     filled = 0
     for bas_dd in targets:
-        try:
-            snapshot = krx_snapshot(bas_dd)
-        except Exception as exc:
-            print(f"  [KRX] {bas_dd} 조회 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
-            continue
-        if not snapshot:
-            continue  # 휴장일 — 해제일이 휴장일일 수 없지만 방어적으로 넘어간다
         released = f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:]}"
+        # 해제일이 휴장일로 굳어 있으면(휴장일 탭에 그 해가 없던 시절 계산된 값)
+        # 그 날짜 스냅샷이 통째로 비어 영영 못 채운다. 다음 거래일까지 밀어 가며 찾는다.
+        snapshot = None
+        probe = bas_dd
+        for _ in range(7):
+            try:
+                snapshot = krx_snapshot(probe)
+            except Exception as exc:
+                print(f"  [KRX] {probe} 조회 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+                snapshot = None
+            if snapshot:
+                break
+            probe = (datetime.strptime(probe, "%Y%m%d") + timedelta(days=1)).strftime("%Y%m%d")
+        if not snapshot:
+            continue
+        if probe != bas_dd:
+            print(f"  [KRX] {released}는 휴장일 — {probe[:4]}-{probe[4:6]}-{probe[6:]} 시세로 대체", file=sys.stderr)
         for code in wanted[bas_dd]:
             meta = snapshot.get(code)
             if not meta:
