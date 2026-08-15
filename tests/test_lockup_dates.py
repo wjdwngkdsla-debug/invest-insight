@@ -59,7 +59,8 @@ class SiteDataVisibilityTest(unittest.TestCase):
         result = rows_to_site_data(rows, "2026-07-15")
 
         self.assertEqual(result["stocks"][0]["name"], "주식회사 테스트")
-        self.assertEqual(result["stocks"][0]["shares"], 1100)
+        self.assertEqual(result["stocks"][0]["shares"], 1000)
+        self.assertEqual(result["stocks"][0]["current_shares"], 1100)
 
     def test_site_data_carries_adjusted_ipo_basis_without_replacing_original_price(self) -> None:
         rows = [{

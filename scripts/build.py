@@ -955,6 +955,20 @@ def normalize_period_for_id(period: str) -> str:
     return period.replace("개월", "M").replace("년", "Y").replace("일", "D").replace(" ", "")
 
 
+def equivalent_period_key(period: str) -> str:
+    """같은 해제기간을 다른 표기로 입력해도 중복 비교에서는 같은 값으로 본다."""
+    normalized = normalize_period_for_id(period)
+    aliases = {
+        "1Y": "12M",
+        "2Y": "24M",
+        "2Y6M": "30M",
+        "3Y": "36M",
+        "4Y": "48M",
+        "5Y": "60M",
+    }
+    return aliases.get(normalized, normalized)
+
+
 
 
 
@@ -1039,7 +1053,7 @@ def discard_id_drifted_duplicates(all_rows_by_id: dict[str, dict]) -> list[dict]
         tradable = row.get("final_tradable_date") or row.get("planned_tradable_date") or ""
         key = (
             row.get("code"), row.get("category"),
-            normalize_period_for_id(str(row.get("period") or "")),
+            equivalent_period_key(str(row.get("period") or "")),
             _to_int(row.get("final_qty")), tradable,
         )
         if key[0] and key[4] and key[3]:
@@ -1050,10 +1064,15 @@ def discard_id_drifted_duplicates(all_rows_by_id: dict[str, dict]) -> list[dict]
         if len(entries) < 2:
             continue
         tradable = key[4]
-        keep = next(
-            (pair for pair in entries if str(pair[0]).endswith(f"-{tradable}")),
-            max(entries, key=lambda pair: str(pair[1].get("updated_at") or "")),
-        )
+        def keep_priority(pair: tuple[str, dict]) -> tuple[int, int, str]:
+            event_id, row = pair
+            source = str(row.get("dart_source") or "")
+            manual_mode = str(row.get("manual_mode") or "")
+            source_score = 2 if "수기입력" not in source and manual_mode != "임시" else 0
+            tradable_score = 1 if str(event_id).endswith(f"-{tradable}") else 0
+            return source_score, tradable_score, str(row.get("updated_at") or "")
+
+        keep = max(entries, key=keep_priority)
         for event_id, row in entries:
             if event_id == keep[0] or str(row.get("manual_lock") or "N").upper() == "Y":
                 continue
@@ -3967,8 +3986,9 @@ def refresh_market_data(rows: list[dict]) -> tuple[str | None, list[dict]]:
                 logs.append(log_change(row, "current_shares", old_shares, current_shares, f"KRX 최근 상장주식수 갱신 ({close_date})"))
             row["current_shares"] = current_shares
             row["shares_date"] = close_date
-            row["planned_pct"] = pct(_to_int(row.get("planned_qty")), current_shares)
-            row["final_pct"] = pct(_to_int(row.get("final_qty")), current_shares)
+            lockup_base_shares = _to_int(row.get("shares")) or current_shares
+            row["planned_pct"] = pct(_to_int(row.get("planned_qty")), lockup_base_shares)
+            row["final_pct"] = pct(_to_int(row.get("final_qty")), lockup_base_shares)
         if meta.get("close_price"):
             row["close_price"] = meta["close_price"]
         if meta.get("market_cap"):
@@ -5110,8 +5130,10 @@ def rows_to_site_data(
             "name": r.get("name"),
             "market": r.get("market"),
             "listing_date": r.get("listing_date"),
-            # 홈페이지의 비율·시가총액은 최근 KRX 상장주식수를 기준으로 통일한다.
-            "shares": _to_int(r.get("current_shares")) or _to_int(r.get("shares")),
+            # 락업 비율과 상세 페이지 상장주식수는 투자설명서/상장 당시 기준을 쓴다.
+            # 최신 KRX 상장주식수는 시가총액 계산용으로만 별도 보존한다.
+            "shares": _to_int(r.get("shares")) or _to_int(r.get("current_shares")),
+            "current_shares": _to_int(r.get("current_shares")) or _to_int(r.get("shares")),
             # 공모가 기준 시가총액 산출용 — 상장 시점 주식수(증자 반영 전).
             # 상장일 스냅샷이 있으면 그 값이 정확하므로 우선 사용한다.
             "initial_shares": _to_int((listing_day.get(code) or {}).get("shares")) or _to_int(r.get("shares")),
@@ -5572,7 +5594,9 @@ def main() -> None:
             if not code or not meta:
                 print(f"  [KRX] 종목 검색 실패: {name}", file=sys.stderr)
                 continue
-            shares = int(meta.get("shrs") or target.get("shares") or 0)
+            # 락업 비율은 투자설명서/상장 당시 기준 주식수를 우선한다.
+            # 최신 KRX 상장주식수는 current_shares로 따로 보존해 시가총액에만 쓴다.
+            shares = int(target.get("shares") or meta.get("shrs") or 0)
             existing_stock_rows = rows_for_stock(existing_rows, code)
 
 

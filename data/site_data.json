@@ -186,7 +186,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 58741890
     },
     {
       "code": "373110",
@@ -479,14 +480,15 @@
           "date": "2025-10-01",
           "factor": 0.8815403
         }
-      ]
+      ],
+      "current_shares": 17294394
     },
     {
       "code": "062040",
       "name": "산일전기",
       "market": "코스피",
       "listing_date": "2024-07-29",
-      "shares": 30642850,
+      "shares": 30615850,
       "initial_shares": 30445200,
       "listing_close": 50200,
       "listing_float_shares": 6227100,
@@ -643,14 +645,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 30642850
     },
     {
       "code": "460470",
       "name": "아이빔테크놀로지",
       "market": "코스닥",
       "listing_date": "2024-08-06",
-      "shares": 15119370,
+      "shares": 14965620,
       "initial_shares": 14965620,
       "listing_close": 13360,
       "listing_float_shares": 3037960,
@@ -719,7 +722,7 @@
           "tradable_date": "2024-09-06",
           "qty": 3992820,
           "unit": "주",
-          "pct": 26.41,
+          "pct": 26.68,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -767,7 +770,7 @@
           "tradable_date": "2024-11-06",
           "qty": 3684840,
           "unit": "주",
-          "pct": 24.37,
+          "pct": 24.62,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -815,7 +818,7 @@
           "tradable_date": "2027-08-06",
           "qty": 4250000,
           "unit": "주",
-          "pct": 28.11,
+          "pct": 28.4,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -829,31 +832,10 @@
           "holder_name": null,
           "reason": "운영자가 투자설명서 표에서 직접 확인",
           "reason_breakdown": []
-        },
-        {
-          "period": "36개월",
-          "date": "2027-08-06",
-          "date_display": "2027-08-06",
-          "tradable_date": "2027-08-06",
-          "qty": 4250000,
-          "unit": "주",
-          "pct": 28.11,
-          "type": "보호예수",
-          "category": "구주·보호예수",
-          "status": "예정",
-          "source": "투자설명서",
-          "source_label": "수기입력",
-          "rcp": "",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
-          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "시트 수기입력 탭에서 편입",
-          "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 15119370
     },
     {
       "code": "460940",
@@ -999,7 +981,8 @@
           "date": "2025-11-07",
           "factor": 0.5000039
         }
-      ]
+      ],
+      "current_shares": 13455280
     },
     {
       "code": "079900",
@@ -1217,7 +1200,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14592545
     },
     {
       "code": "464280",
@@ -1451,7 +1435,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5530000
     },
     {
       "code": "456070",
@@ -1666,7 +1651,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11029517
     },
     {
       "code": "199480",
@@ -1827,7 +1813,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10196588
     },
     {
       "code": "088340",
@@ -1990,14 +1977,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 4364368
     },
     {
       "code": "461300",
       "name": "아이스크림미디어",
       "market": "코스닥",
       "listing_date": "2024-08-30",
-      "shares": 13333933,
+      "shares": 13323933,
       "initial_shares": 13063433,
       "listing_close": 22500,
       "listing_float_shares": 0,
@@ -2140,7 +2128,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13333933
     },
     {
       "code": "389650",
@@ -2327,7 +2316,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8277286
     },
     {
       "code": "431190",
@@ -2480,7 +2470,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7486442
     },
     {
       "code": "476080",
@@ -2688,7 +2679,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8077000
     },
     {
       "code": "464500",
@@ -2907,14 +2899,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13993263
     },
     {
       "code": "381620",
       "name": "제닉스",
       "market": "코스닥",
       "listing_date": "2024-09-30",
-      "shares": 13117920,
+      "shares": 4372640,
       "initial_shares": 4372640,
       "listing_close": 46000,
       "listing_float_shares": 1290272,
@@ -2935,7 +2928,7 @@
           "tradable_date": "2024-10-30",
           "qty": 7153,
           "unit": "주",
-          "pct": 0.05,
+          "pct": 0.16,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -2959,7 +2952,7 @@
           "tradable_date": "2024-12-30",
           "qty": 28173,
           "unit": "주",
-          "pct": 0.21,
+          "pct": 0.64,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -2983,7 +2976,7 @@
           "tradable_date": "2024-12-30",
           "qty": 81705,
           "unit": "주",
-          "pct": 0.62,
+          "pct": 1.87,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -3007,7 +3000,7 @@
           "tradable_date": "2025-03-31",
           "qty": 5672,
           "unit": "주",
-          "pct": 0.04,
+          "pct": 0.13,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -3031,7 +3024,7 @@
           "tradable_date": "2025-03-31",
           "qty": 930302,
           "unit": "주",
-          "pct": 7.09,
+          "pct": 21.28,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -3055,7 +3048,7 @@
           "tradable_date": "2025-09-30",
           "qty": 470361,
           "unit": "주",
-          "pct": 3.59,
+          "pct": 10.76,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -3077,7 +3070,7 @@
           "tradable_date": "2027-03-30",
           "qty": 1600000,
           "unit": "주",
-          "pct": 12.2,
+          "pct": 36.59,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -3099,7 +3092,8 @@
           "date": "2025-01-24",
           "factor": 0.3334605
         }
-      ]
+      ],
+      "current_shares": 13117920
     },
     {
       "code": "308430",
@@ -3370,7 +3364,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12905251
     },
     {
       "code": "474170",
@@ -3527,14 +3522,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 17817696
     },
     {
       "code": "457370",
       "name": "한켐",
       "market": "코스닥",
       "listing_date": "2024-10-22",
-      "shares": 8067134,
+      "shares": 8062134,
       "initial_shares": 8027134,
       "listing_close": 22800,
       "listing_float_shares": 0,
@@ -3788,7 +3784,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8067134
     },
     {
       "code": "466100",
@@ -4010,7 +4007,8 @@
           "date": "2026-07-06",
           "factor": 0.9472115
         }
-      ]
+      ],
+      "current_shares": 25459239
     },
     {
       "code": "458650",
@@ -4176,14 +4174,15 @@
           "release_fluc_rt": -0.61
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 15045670
     },
     {
       "code": "209640",
       "name": "와이제이링크",
       "market": "코스닥",
       "listing_date": "2024-10-18",
-      "shares": 28443146,
+      "shares": 14221573,
       "initial_shares": 14221573,
       "listing_close": 21800,
       "listing_float_shares": 3560000,
@@ -4204,7 +4203,7 @@
           "tradable_date": "2024-11-18",
           "qty": 3664,
           "unit": "주",
-          "pct": 0.01,
+          "pct": 0.03,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -4228,7 +4227,7 @@
           "tradable_date": "2024-11-18",
           "qty": 1207620,
           "unit": "주",
-          "pct": 4.25,
+          "pct": 8.49,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -4265,7 +4264,7 @@
           "tradable_date": "2025-01-20",
           "qty": 15044,
           "unit": "주",
-          "pct": 0.05,
+          "pct": 0.11,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -4289,7 +4288,7 @@
           "tradable_date": "2025-01-20",
           "qty": 780653,
           "unit": "주",
-          "pct": 2.74,
+          "pct": 5.49,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -4350,7 +4349,7 @@
           "tradable_date": "2025-04-18",
           "qty": 2577060,
           "unit": "주",
-          "pct": 9.06,
+          "pct": 18.12,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -4387,7 +4386,7 @@
           "tradable_date": "2026-04-20",
           "qty": 6096240,
           "unit": "주",
-          "pct": 21.43,
+          "pct": 42.87,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "확정(경과)",
@@ -4409,7 +4408,8 @@
           "date": "2025-09-04",
           "factor": 0.4999945
         }
-      ]
+      ],
+      "current_shares": 28443146
     },
     {
       "code": "336680",
@@ -4581,7 +4581,8 @@
           "date": "2025-05-29",
           "factor": 0.5000011
         }
-      ]
+      ],
+      "current_shares": 39145558
     },
     {
       "code": "465480",
@@ -4763,7 +4764,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10137772
     },
     {
       "code": "475560",
@@ -4958,7 +4960,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14827970
     },
     {
       "code": "289930",
@@ -5153,7 +5156,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13149010
     },
     {
       "code": "475400",
@@ -5374,7 +5378,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11806894
     },
     {
       "code": "475580",
@@ -5542,7 +5547,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13624900
     },
     {
       "code": "376270",
@@ -5711,7 +5717,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7219147
     },
     {
       "code": "163280",
@@ -5926,7 +5933,8 @@
           "date": "2026-03-09",
           "factor": 0.5
         }
-      ]
+      ],
+      "current_shares": 13603078
     },
     {
       "code": "475960",
@@ -6125,14 +6133,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13476174
     },
     {
       "code": "473980",
       "name": "노머스",
       "market": "코스닥",
       "listing_date": "2024-11-12",
-      "shares": 10882752,
+      "shares": 11059322,
       "initial_shares": 10709617,
       "listing_close": 19400,
       "listing_float_shares": 0,
@@ -6392,7 +6401,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10882752
     },
     {
       "code": "464580",
@@ -6562,7 +6572,8 @@
           "date": "2025-06-12",
           "factor": 0.5000077
         }
-      ]
+      ],
+      "current_shares": 18406089
     },
     {
       "code": "394800",
@@ -6758,7 +6769,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 31822553
     },
     {
       "code": "413390",
@@ -6940,7 +6952,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11580180
     },
     {
       "code": "475660",
@@ -7121,7 +7134,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7929835
     },
     {
       "code": "466410",
@@ -7302,14 +7316,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5037023
     },
     {
       "code": "382150",
       "name": "온코크로스",
       "market": "코스닥",
       "listing_date": "2024-12-18",
-      "shares": 13046354,
+      "shares": 12195957,
       "initial_shares": 11857937,
       "listing_close": 8960,
       "listing_float_shares": 0,
@@ -7475,7 +7490,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13046354
     },
     {
       "code": "457600",
@@ -7641,7 +7657,8 @@
           "release_fluc_rt": 1.03
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13707500
     },
     {
       "code": "476060",
@@ -7840,7 +7857,8 @@
           "date": "2025-10-10",
           "factor": 0.2500089
         }
-      ]
+      ],
+      "current_shares": 45407840
     },
     {
       "code": "387570",
@@ -8059,7 +8077,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5625900
     },
     {
       "code": "177900",
@@ -8249,7 +8268,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9627600
     },
     {
       "code": "482630",
@@ -8479,7 +8499,8 @@
           "date": "2026-02-20",
           "factor": 0.5000099
         }
-      ]
+      ],
+      "current_shares": 21888280
     },
     {
       "code": "064400",
@@ -8643,7 +8664,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 96885948
     },
     {
       "code": "459100",
@@ -8753,14 +8775,15 @@
           "release_fluc_rt": 0.79
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13466100
     },
     {
       "code": "096250",
       "name": "와이즈넛",
       "market": "코스닥",
       "listing_date": "2025-01-24",
-      "shares": 11814881,
+      "shares": 13106609,
       "initial_shares": 13065612,
       "listing_close": 10800,
       "listing_float_shares": 0,
@@ -8927,7 +8950,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11814881
     },
     {
       "code": "373160",
@@ -9095,7 +9119,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13807469
     },
     {
       "code": "450950",
@@ -9272,7 +9297,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 37627592
     },
     {
       "code": "475460",
@@ -9422,7 +9448,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5646525
     },
     {
       "code": "240550",
@@ -9657,7 +9684,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 20933940
     },
     {
       "code": "452450",
@@ -9899,7 +9927,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 36028500
     },
     {
       "code": "462980",
@@ -10078,7 +10107,8 @@
           "release_fluc_rt": -5.83
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 18234437
     },
     {
       "code": "463480",
@@ -10280,7 +10310,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12390358
     },
     {
       "code": "212710",
@@ -10527,7 +10558,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9714978
     },
     {
       "code": "489500",
@@ -10762,7 +10794,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 6391238
     },
     {
       "code": "475830",
@@ -10956,7 +10989,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 21719590
     },
     {
       "code": "393970",
@@ -11147,7 +11181,8 @@
           "release_fluc_rt": -1.52
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 17850820
     },
     {
       "code": "226590",
@@ -11430,7 +11465,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10716784
     },
     {
       "code": "479960",
@@ -11580,7 +11616,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7126000
     },
     {
       "code": "031210",
@@ -11725,7 +11762,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 69821598
     },
     {
       "code": "480370",
@@ -11933,7 +11971,8 @@
           "date": "2026-02-27",
           "factor": 0.3374678
         }
-      ]
+      ],
+      "current_shares": 32481408
     },
     {
       "code": "098070",
@@ -12109,7 +12148,8 @@
           "release_fluc_rt": -2.4
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11121141
     },
     {
       "code": "484810",
@@ -12389,7 +12429,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 15450915
     },
     {
       "code": "481070",
@@ -12617,14 +12658,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14330250
     },
     {
       "code": "444530",
       "name": "심플랫폼",
       "market": "코스닥",
       "listing_date": "2025-03-21",
-      "shares": 6431786,
+      "shares": 6418644,
       "initial_shares": 6135447,
       "listing_close": 14500,
       "listing_float_shares": 0,
@@ -12778,7 +12820,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 6431786
     },
     {
       "code": "462860",
@@ -13047,7 +13090,8 @@
           "date": "2025-04-21",
           "factor": 0.3337113
         }
-      ]
+      ],
+      "current_shares": 71756523
     },
     {
       "code": "081180",
@@ -13282,7 +13326,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8825535
     },
     {
       "code": "303810",
@@ -13447,7 +13492,8 @@
           "date": "2025-08-07",
           "factor": 0.4999922
         }
-      ]
+      ],
+      "current_shares": 31984140
     },
     {
       "code": "136150",
@@ -13645,7 +13691,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8381030
     },
     {
       "code": "476040",
@@ -13848,14 +13895,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 6585760
     },
     {
       "code": "424870",
       "name": "이뮨온시아",
       "market": "코스닥",
       "listing_date": "2025-05-19",
-      "shares": 91337509,
+      "shares": 91272269,
       "initial_shares": 73004309,
       "listing_close": 7500,
       "listing_float_shares": 21460852,
@@ -14028,7 +14076,8 @@
           "date": "2026-04-03",
           "factor": 0.9621083
         }
-      ]
+      ],
+      "current_shares": 91337509
     },
     {
       "code": "489460",
@@ -14276,7 +14325,8 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14753287
     },
     {
       "code": "287840",
@@ -14517,7 +14567,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 15021960
     },
     {
       "code": "459510",
@@ -14716,14 +14767,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12978382
     },
     {
       "code": "483650",
       "name": "달바글로벌",
       "market": "코스피",
       "listing_date": "2025-05-22",
-      "shares": 12493915,
+      "shares": 12484665,
       "initial_shares": 12069665,
       "listing_close": 110100,
       "listing_float_shares": 3949909,
@@ -14960,14 +15012,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12493915
     },
     {
       "code": "376900",
       "name": "로킷헬스케어",
       "market": "코스닥",
       "listing_date": "2025-05-12",
-      "shares": 17409290,
+      "shares": 15417639,
       "initial_shares": 15417639,
       "listing_close": 14750,
       "listing_float_shares": 5598871,
@@ -14988,7 +15041,7 @@
           "tradable_date": "2025-06-12",
           "qty": 5212009,
           "unit": "주",
-          "pct": 29.94,
+          "pct": 33.81,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -15017,7 +15070,7 @@
           "tradable_date": "2025-06-12",
           "qty": 28681,
           "unit": "주",
-          "pct": 0.16,
+          "pct": 0.19,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -15041,7 +15094,7 @@
           "tradable_date": "2025-08-12",
           "qty": 46800,
           "unit": "주",
-          "pct": 0.27,
+          "pct": 0.3,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -15070,7 +15123,7 @@
           "tradable_date": "2025-08-12",
           "qty": 306081,
           "unit": "주",
-          "pct": 1.76,
+          "pct": 1.99,
           "type": "IPO확약",
           "category": "IPO기관",
           "status": "확정(경과)",
@@ -15094,7 +15147,7 @@
           "tradable_date": "2026-05-12",
           "qty": 653135,
           "unit": "주",
-          "pct": 3.75,
+          "pct": 4.24,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -15129,7 +15182,7 @@
           "tradable_date": "2028-05-12",
           "qty": 3906824,
           "unit": "주",
-          "pct": 22.44,
+          "pct": 25.34,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "예정",
@@ -15145,7 +15198,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 17409290
     },
     {
       "code": "475430",
@@ -15392,7 +15446,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 17848110
     },
     {
       "code": "474650",
@@ -15629,7 +15684,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5752032
     },
     {
       "code": "340450",
@@ -15810,14 +15866,15 @@
           ]
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 23650793
     },
     {
       "code": "463020",
       "name": "뉴엔AI",
       "market": "코스닥",
       "listing_date": "2025-07-04",
-      "shares": 8987200,
+      "shares": 8879200,
       "initial_shares": 8879200,
       "listing_close": 38400,
       "listing_float_shares": 2485236,
@@ -16020,7 +16077,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8987200
     },
     {
       "code": "234030",
@@ -16251,7 +16309,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 23605000
     },
     {
       "code": "331740",
@@ -16439,7 +16498,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9750991
     },
     {
       "code": "484120",
@@ -16727,7 +16787,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10957422
     },
     {
       "code": "380550",
@@ -16972,7 +17033,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12198866
     },
     {
       "code": "475230",
@@ -17208,7 +17270,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10898683
     },
     {
       "code": "468530",
@@ -17496,7 +17559,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11035208
     },
     {
       "code": "439260",
@@ -17731,7 +17795,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 38088730
     },
     {
       "code": "309710",
@@ -17992,7 +18057,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12783001
     },
     {
       "code": "456160",
@@ -18275,7 +18341,8 @@
           "date": "2025-11-05",
           "factor": 0.3335135
         }
-      ]
+      ],
+      "current_shares": 16629426
     },
     {
       "code": "484590",
@@ -18477,7 +18544,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 41210450
     },
     {
       "code": "0008Z0",
@@ -18723,7 +18791,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9436564
     },
     {
       "code": "125490",
@@ -18976,7 +19045,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 36502352
     },
     {
       "code": "0010V0",
@@ -19236,7 +19306,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5105400
     },
     {
       "code": "318060",
@@ -19422,14 +19493,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11187177
     },
     {
       "code": "488280",
       "name": "에스투더블유",
       "market": "코스닥",
       "listing_date": "2025-09-19",
-      "shares": 10825486,
+      "shares": 10803486,
       "initial_shares": 10587956,
       "listing_close": 23950,
       "listing_float_shares": 3290084,
@@ -19703,7 +19775,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10825486
     },
     {
       "code": "317450",
@@ -19872,14 +19945,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14600000
     },
     {
       "code": "486990",
       "name": "노타",
       "market": "코스닥",
       "listing_date": "2025-11-03",
-      "shares": 21392430,
+      "shares": 21346230,
       "initial_shares": 21161880,
       "listing_close": 31000,
       "listing_float_shares": 0,
@@ -20145,7 +20219,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 21392430
     },
     {
       "code": "469610",
@@ -20423,14 +20498,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8942900
     },
     {
       "code": "494120",
       "name": "큐리오시스",
       "market": "코스닥",
       "listing_date": "2025-11-13",
-      "shares": 15259764,
+      "shares": 7629882,
       "initial_shares": 7606082,
       "listing_close": 88000,
       "listing_float_shares": 2506834,
@@ -20665,7 +20741,8 @@
           "date": "2026-07-15",
           "factor": 0.5001844
         }
-      ]
+      ],
+      "current_shares": 15259764
     },
     {
       "code": "061090",
@@ -20878,7 +20955,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 5467550
     },
     {
       "code": "0015G0",
@@ -21102,7 +21180,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11702541
     },
     {
       "code": "403850",
@@ -21333,7 +21412,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14351010
     },
     {
       "code": "388210",
@@ -21591,7 +21671,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9654438
     },
     {
       "code": "488900",
@@ -21804,7 +21885,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 28976443
     },
     {
       "code": "0015N0",
@@ -22069,7 +22151,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12576922
     },
     {
       "code": "484870",
@@ -22124,7 +22207,8 @@
           "date": "2026-06-26",
           "factor": 0.3333315
         }
-      ]
+      ],
+      "current_shares": 27461700
     },
     {
       "code": "0009K0",
@@ -22346,7 +22430,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 64671161
     },
     {
       "code": "950250",
@@ -22597,7 +22682,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 35517731
     },
     {
       "code": "0015S0",
@@ -22793,7 +22879,8 @@
           "release_fluc_rt": -3.26
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9866730
     },
     {
       "code": "261520",
@@ -23032,7 +23119,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10277800
     },
     {
       "code": "464490",
@@ -23311,7 +23399,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11482113
     },
     {
       "code": "217590",
@@ -23511,7 +23600,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 24094225
     },
     {
       "code": "0007C0",
@@ -23768,14 +23858,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8030324
     },
     {
       "code": "476830",
       "name": "알지노믹스",
       "market": "코스닥",
       "listing_date": "2025-12-18",
-      "shares": 28055436,
+      "shares": 14027718,
       "initial_shares": 13756000,
       "listing_close": 90000,
       "listing_float_shares": 0,
@@ -23976,7 +24067,8 @@
           "date": "2026-06-29",
           "factor": 0.5000184
         }
-      ]
+      ],
+      "current_shares": 28055436
     },
     {
       "code": "478340",
@@ -24225,7 +24317,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 11570133
     },
     {
       "code": "0013V0",
@@ -24427,14 +24520,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9918656
     },
     {
       "code": "491000",
       "name": "리브스메드",
       "market": "코스닥",
       "listing_date": "2025-12-24",
-      "shares": 25255271,
+      "shares": 25004391,
       "initial_shares": 24681691,
       "listing_close": 49600,
       "listing_float_shares": 7897858,
@@ -24676,7 +24770,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 25255271
     },
     {
       "code": "490470",
@@ -24977,14 +25072,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 34025440
     },
     {
       "code": "0001A0",
       "name": "덕양에너젠",
       "market": "코스닥",
       "listing_date": "2026-01-30",
-      "shares": 25468962,
+      "shares": 24791195,
       "initial_shares": 24791195,
       "listing_close": 34850,
       "listing_float_shares": 8021423,
@@ -25230,7 +25326,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 25468962
     },
     {
       "code": "279570",
@@ -25419,7 +25516,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 405695151
     },
     {
       "code": "458350",
@@ -25625,7 +25723,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 8683200
     },
     {
       "code": "0011A0",
@@ -25874,14 +25973,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9333740
     },
     {
       "code": "0082N0",
       "name": "카나프테라퓨틱스",
       "market": "코스닥",
       "listing_date": "2026-03-16",
-      "shares": 13300580,
+      "shares": 12956030,
       "initial_shares": 12956030,
       "listing_close": 50600,
       "listing_float_shares": 5275252,
@@ -26104,14 +26204,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13300580
     },
     {
       "code": "493280",
       "name": "아이엠바이오로직스",
       "market": "코스닥",
       "listing_date": "2026-03-20",
-      "shares": 14836549,
+      "shares": 14776110,
       "initial_shares": 14776110,
       "listing_close": 104000,
       "listing_float_shares": 0,
@@ -26348,7 +26449,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14836549
     },
     {
       "code": "408470",
@@ -26601,14 +26703,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10572000
     },
     {
       "code": "0088M0",
       "name": "메쥬",
       "market": "코스닥",
       "listing_date": "2026-03-26",
-      "shares": 9881750,
+      "shares": 9717750,
       "initial_shares": 9717750,
       "listing_close": 39000,
       "listing_float_shares": 3203076,
@@ -26876,14 +26979,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 9881750
     },
     {
       "code": "394420",
       "name": "리센스메디컬",
       "market": "코스닥",
       "listing_date": "2026-03-31",
-      "shares": 10999701,
+      "shares": 10850298,
       "initial_shares": 10850298,
       "listing_close": 18450,
       "listing_float_shares": 0,
@@ -27167,7 +27271,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10999701
     },
     {
       "code": "0007J0",
@@ -27406,7 +27511,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7865714
     },
     {
       "code": "0011T0",
@@ -27595,14 +27701,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 46949591
     },
     {
       "code": "439960",
       "name": "코스모로보틱스",
       "market": "코스닥",
       "listing_date": "2026-05-11",
-      "shares": 32450626,
+      "shares": 32108906,
       "initial_shares": 32108906,
       "listing_close": 24000,
       "listing_float_shares": 10413804,
@@ -27840,7 +27947,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 32450626
     },
     {
       "code": "487580",
@@ -28096,7 +28204,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 25182861
     },
     {
       "code": "477850",
@@ -28358,7 +28467,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 17754736
     },
     {
       "code": "0117P0",
@@ -28584,7 +28694,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 14168911
     },
     {
       "code": "153890",
@@ -28793,7 +28904,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 12050305
     },
     {
       "code": "475040",
@@ -28995,7 +29107,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 53255138
     },
     {
       "code": "0039P0",
@@ -29230,14 +29343,15 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 18807400
     },
     {
       "code": "365660",
       "name": "레몬헬스케어",
       "market": "코스닥",
       "listing_date": "2026-07-06",
-      "shares": 13455559,
+      "shares": 13351559,
       "initial_shares": 13351559,
       "listing_close": 9400,
       "listing_float_shares": 0,
@@ -29439,7 +29553,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 13455559
     },
     {
       "code": "387690",
@@ -29687,7 +29802,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7625791
     },
     {
       "code": "0156T0",
@@ -29843,7 +29959,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 7782161
     },
     {
       "code": "483350",
@@ -30063,7 +30180,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 21878960
     },
     {
       "code": "487400",
@@ -30261,7 +30379,8 @@
           "reason_breakdown": []
         }
       ],
-      "holders": []
+      "holders": [],
+      "current_shares": 10260882
     }
   ]
 }
