@@ -43,6 +43,8 @@ export function listingFloatPct(
     | "listing_float_shares"
     | "listing_float_pct"
     | "listing_float_excludes_ipo_commitment"
+    | "adjustment_events"
+    | "ipo_adjustment_factor"
   >,
 ): number | null {
   const events = stock.events || [];
@@ -68,7 +70,9 @@ export function listingFloatPct(
   const hasIncompleteCumulativeTable = events.some(
     (event) => (event.reason || "").includes("마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"),
   );
-  if (hasIncompleteCumulativeTable) return null;
+  const hasShareAdjustment =
+    (stock.adjustment_events || []).length > 0 || Math.abs((stock.ipo_adjustment_factor || 1) - 1) > 0.001;
+  if (hasIncompleteCumulativeTable && !hasShareAdjustment) return null;
   const locked = events.reduce((sum, event) => sum + (event.qty || 0), 0);
   if (!base || !locked || locked > base) return null;
   return ((base - locked) / base) * 100;
