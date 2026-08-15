@@ -127,13 +127,13 @@ def main() -> None:
     # (market_cap·trading_suspended 등)는 저장되지 않으므로 변경으로 치면 안 된다.
     written = [col for col in ADMIN_COLUMNS if col != "updated_at"]
     for original, updated in zip(originals, finalized):
-        # finalize_row는 편입 시점 주식수(shares)로 비율을 내지만, 전체 배치는 그 뒤
-        # refresh_market_data가 현재 상장주식수(current_shares) 기준으로 덮어쓴 값을
-        # 최종본으로 저장한다. 같은 기준을 쓰지 않으면 두 경로가 매번 서로 값을 되돌린다.
+        # 락업 물량은 공모/상장 당시 기준 주식수로 공시된다. 빠른 갱신에서도 전체
+        # 배치와 같이 shares를 분모로 유지해야 권리락·무상증자 종목 비율이 되돌아가지 않는다.
         current_shares = _to_int(updated.get("current_shares"))
-        if current_shares:
-            updated["planned_pct"] = pct(_to_int(updated.get("planned_qty")), current_shares)
-            updated["final_pct"] = pct(_to_int(updated.get("final_qty")), current_shares)
+        lockup_base_shares = _to_int(updated.get("shares")) or current_shares
+        if lockup_base_shares:
+            updated["planned_pct"] = pct(_to_int(updated.get("planned_qty")), lockup_base_shares)
+            updated["final_pct"] = pct(_to_int(updated.get("final_qty")), lockup_base_shares)
         # 내용이 그대로면 갱신시각도 그대로 둔다 — 매 실행마다 1,000행이 통째로
         # 바뀐 것처럼 보이면 실제 변경을 diff에서 찾을 수 없다.
         if all(str(updated.get(col, "")) == str(original.get(col, "")) for col in written):

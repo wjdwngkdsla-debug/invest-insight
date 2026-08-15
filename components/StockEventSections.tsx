@@ -36,17 +36,26 @@ function groupTitle(group: UpcomingGroup): string {
   return "락업 해제";
 }
 
-function Breakdown({ group }: { group: UpcomingGroup }) {
+function adjustedQty(qty: number, unit: string | undefined, quantityFactor: number): number {
+  return unit === "DR" ? qty : Math.round(qty * quantityFactor);
+}
+
+function pct(qty: number, shares: number): string {
+  return shares > 0 ? ((qty / shares) * 100).toFixed(2).replace(/\.?0+$/, "") : "0";
+}
+
+function Breakdown({ group, shares, quantityFactor }: { group: UpcomingGroup; shares: number; quantityFactor: number }) {
   if (group.breakdown.length === 0) return null;
   return (
     <div className="mt-1 space-y-1 text-right text-xs leading-snug text-gray-400">
       {group.breakdown.map((item) => {
+        const qty = adjustedQty(item.qty, item.unit, quantityFactor);
         return (
           <div key={item.category}>
             <p>
               <span className="mr-1">{item.category}</span>
               <span className="font-medium text-gray-500">
-                {formatQty(item.qty)}{item.unit || "주"} ({item.pct}%)
+                {formatQty(qty)}{item.unit || "주"} ({pct(qty, shares)}%)
               </span>
             </p>
           </div>
@@ -72,11 +81,24 @@ function AdjustmentNote({ events }: { events?: { date: string; factor: number }[
   );
 }
 
-function EventRow({ group, tone, nowMs }: { group: UpcomingGroup; tone: "upcoming" | "past"; nowMs: number }) {
+function EventRow({
+  group,
+  tone,
+  nowMs,
+  shares,
+  quantityFactor,
+}: {
+  group: UpcomingGroup;
+  tone: "upcoming" | "past";
+  nowMs: number;
+  shares: number;
+  quantityFactor: number;
+}) {
   const days = daysUntil(group.tradable_date, nowMs);
   const status = days >= 0 ? "예정" : "해제완료";
   const badge = days === 0 ? "D-DAY" : `D-${days}`;
   const imminent = days <= 3;
+  const qty = adjustedQty(group.qty, group.unit, quantityFactor);
   return (
     <li
       className={`overflow-hidden rounded-2xl border shadow-[0_2px_10px_rgba(15,23,42,0.04)] ${
@@ -108,9 +130,9 @@ function EventRow({ group, tone, nowMs }: { group: UpcomingGroup; tone: "upcomin
           </div>
           <div className="shrink-0 text-right">
             <p className={`font-semibold ${tone === "upcoming" ? "text-gray-900" : "text-gray-500"}`}>
-              {formatQty(group.qty)}{group.unit} ({group.pct}%)
+              {formatQty(qty)}{group.unit} ({pct(qty, shares)}%)
             </p>
-            <Breakdown group={group} />
+            <Breakdown group={group} shares={shares} quantityFactor={quantityFactor} />
           </div>
         </div>
       </div>
@@ -123,11 +145,15 @@ export function StockEventSections({
   initialNow,
   shares,
   adjustmentEvents,
+  quantityFactor = 1,
+  adjustedMode = false,
 }: {
   groups: UpcomingGroup[];
   initialNow: number;
   shares: number;
   adjustmentEvents?: { date: string; factor: number }[];
+  quantityFactor?: number;
+  adjustedMode?: boolean;
 }) {
   const [nowMs, setNowMs] = useState(initialNow);
   useEffect(() => {
@@ -163,13 +189,22 @@ export function StockEventSections({
               <div className="text-right">
                 <AdjustmentNote events={adjustmentEvents} />
                 <p className="text-sm text-gray-400">
-                  상장일 상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
+                  {adjustedMode ? "조정 후 기준주식수" : "상장일 상장주식수"} <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
                 </p>
               </div>
             )}
           </div>
           <ul className="space-y-3">
-            {upcoming.map((group) => <EventRow key={group.tradable_date} group={group} tone="upcoming" nowMs={nowMs} />)}
+            {upcoming.map((group) => (
+              <EventRow
+                key={group.tradable_date}
+                group={group}
+                tone="upcoming"
+                nowMs={nowMs}
+                shares={shares}
+                quantityFactor={quantityFactor}
+              />
+            ))}
           </ul>
         </section>
       )}
@@ -183,7 +218,7 @@ export function StockEventSections({
           </h2>
           {upcoming.length === 0 && shares > 0 && (
             <p className="text-sm text-gray-400">
-              상장주식수 <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
+              {adjustedMode ? "조정 후 기준주식수" : "상장주식수"} <span className="font-semibold tabular-nums text-gray-600">{formatQty(shares)}주</span>
             </p>
           )}
         </div>
@@ -191,7 +226,16 @@ export function StockEventSections({
           <p className="text-sm text-gray-400">아직 지난 해제 내역이 없습니다.</p>
         ) : (
           <ul className="space-y-3">
-            {past.map((group) => <EventRow key={group.tradable_date} group={group} tone="past" nowMs={nowMs} />)}
+            {past.map((group) => (
+              <EventRow
+                key={group.tradable_date}
+                group={group}
+                tone="past"
+                nowMs={nowMs}
+                shares={shares}
+                quantityFactor={quantityFactor}
+              />
+            ))}
           </ul>
         )}
       </section>

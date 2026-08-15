@@ -2708,7 +2708,7 @@ def apply_api_updates(
 
     # 금융위 API의 상장주식수(lblProtTsumIssuStckCnt)는 보호예수 등록 시점 값이라
     # 최신 KRX 값과 다른 게 정상 — 비교 기록을 만들면 노이즈만 쌓여서 사용하지 않는다.
-    # 비율·시가총액의 분모는 항상 최근 거래일 KRX(current_shares)로 통일한다.
+    # 시가총액은 최근 KRX(current_shares)를 쓰지만, 락업 비율은 공모/상장 당시 shares를 쓴다.
 
 
 

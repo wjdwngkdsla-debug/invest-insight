@@ -53,7 +53,8 @@ export interface StockLockup {
   name: string;
   market: "코스피" | "코스닥";
   listing_date: string;
-  shares: number; // 최근 상장주식수(KRX) — 비율·종가 시가총액 기준
+  shares: number; // 공모/상장 당시 기준 주식수 — 락업 비율 기준
+  current_shares?: number; // 최근 상장주식수(KRX) — 현재 시가총액 기준
   initial_shares?: number; // 상장 시점 주식수 — 공모가 기준 시가총액 산출용
   listing_close?: number; // 상장일 종가(KRX 상장일 스냅샷). 공모가 대비 시초 성과 계산용
   /** 투자설명서가 직접 밝힌 상장 직후 유통가능물량 (기관 확약 포함 기준) */

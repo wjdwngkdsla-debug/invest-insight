@@ -11,10 +11,10 @@ export function priceReturnPct(basePrice: number, currentPrice: number): number 
  * 거래정지 중인 종목의 종가는 과거 마지막 체결가이므로 현재 수익률로 취급하지 않는다.
  */
 export function currentIpoReturnPct(
-  stock: Pick<StockLockup, "ipo_price" | "adjusted_ipo_price" | "close_price" | "trading_suspended">,
+  stock: Pick<StockLockup, "ipo_price" | "close_price" | "trading_suspended">,
 ): number | null {
   if (stock.trading_suspended) return null;
-  return priceReturnPct(stock.adjusted_ipo_price || stock.ipo_price || 0, stock.close_price || 0);
+  return priceReturnPct(stock.ipo_price || 0, stock.close_price || 0);
 }
 
 /** 상장 시점 주식수. KRX 상장일 스냅샷(LIST_SHRS)이 원천이고, 없으면 편입 시점 값으로 대체한다. */
@@ -53,6 +53,10 @@ export function listingFloatPct(
     (event) => event.type === "보호예수" && (event.source_label || "").includes("투자설명서"),
   );
   if (!fromProspectus) return null;
+  const hasIncompleteCumulativeTable = events.some(
+    (event) => (event.reason || "").includes("마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"),
+  );
+  if (hasIncompleteCumulativeTable) return null;
   const locked = events.reduce((sum, event) => sum + (event.qty || 0), 0);
   if (!base || !locked || locked > base) return null;
   return ((base - locked) / base) * 100;
