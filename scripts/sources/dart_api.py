@@ -229,6 +229,134 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
     return candidates
 
 
+_HOLDER_PERIOD = re.compile(r"(\d+)\s*(개월|년|일)")
+
+
+def _holder_period(cell: str) -> str | None:
+    """'상장일로부터 6개월', '3년', '6개월' → '6개월'/'3년'. 기간이 아니면 None."""
+    text = _clean_text(cell)
+    if not text or "%" in text:
+        return None
+    # 날짜(2025.05.19)나 각주(주1)가 잘못 걸리지 않게 기간 표기만 인정한다
+    if re.search(r"\d{4}[.\-/]\d{1,2}", text):
+        return None
+    m = _HOLDER_PERIOD.search(text)
+    if not m:
+        return None
+    n, unit = int(m.group(1)), m.group(2)
+    if unit == "일":
+        return f"{n}일" if n in (15, 30) else None
+    # "2024년"처럼 연도가 적힌 칸을 기간으로 읽으면 안 된다. 의무보유는 길어야 5년.
+    if unit == "년" and n > 5:
+        return None
+    if unit == "개월" and n > 60:
+        return None
+    return f"{n}{unit}"
+
+
+def extract_holder_lockup_tables(document_text: str, expected_shares: int | None = None) -> list[dict[str, Any]]:
+    """주주별 세부내역 표에서 (의무보유 기간, 매각제한 물량)을 뽑는다.
+
+    누적 요약표('상장 후 유통가능 주식수 현황')를 싣지 않는 투자설명서가 많다.
+    그런 문서는 주주 단위 표에 매각제한 물량과 의무보유 기간을 적는데, 형식이
+    세 가지쯤 된다(유통가능·매각제한 병렬 / 매각제한만 / 가능여부 컬럼).
+
+    컬럼 위치가 제각각이라 위치 대신 규칙으로 읽는다.
+      · 행에서 기간 표기를 찾는다 → 없으면 소계·합계·유통가능 행이므로 건너뛴다
+      · 기간 앞쪽의 마지막 비율 아닌 숫자 = 그 주주의 매각제한 물량
+    """
+    tables = re.findall(r"<TABLE[\s\S]*?</TABLE>", document_text, flags=re.I)
+    candidates: list[dict[str, Any]] = []
+    for table_idx, table_xml in enumerate(tables, start=1):
+        rows = _parse_table_rows(table_xml)
+        if len(rows) < 4:
+            continue
+        header = " ".join(cell for row in rows[:3] for cell in row)
+        if not (
+            ("주주명" in header or "성명" in header or "주주" in header)
+            and ("의무보유" in header or "매각제한" in header or "유통제한" in header)
+        ):
+            continue
+
+        parsed: list[dict[str, Any]] = []
+        subtotals: list[int] = []
+        for row in rows:
+            line = " ".join(row)
+            # 소계·합계는 개별 물량이 아니라 요약이다. 대신 검산에 쓸 수 있게 모아 둔다.
+            if any(word in line for word in ("소계", "합계")):
+                for cell in row:
+                    text = _clean_text(cell)
+                    if "%" in text:
+                        continue
+                    value = clean_int(text)
+                    if value and value > 1000:
+                        subtotals.append(value)
+                continue
+            period_at = next(
+                (index for index, cell in enumerate(row) if _holder_period(cell)), None,
+            )
+            if period_at is None:
+                continue
+            qty = None
+            for cell in row[:period_at]:
+                text = _clean_text(cell)
+                if "%" in text:
+                    continue
+                value = clean_int(text)
+                if value:
+                    qty = value
+            if not qty:
+                continue
+            parsed.append({"period": _holder_period(row[period_at]), "qty": qty})
+
+        if len(parsed) < 2:
+            continue
+        total = sum(item["qty"] for item in parsed)
+        # 물량 합이 상장주식수를 넘으면 다른 표(공모 전 지분 등)를 잘못 잡은 것이다
+        if expected_shares and total > expected_shares:
+            continue
+        # 표에 적힌 소계 중 우리 합계와 맞는 값이 있으면 읽기가 맞았다는 뜻이다.
+        # 맞는 값이 하나도 없으면 rowspan 등으로 행이 빠졌을 수 있어 검토 대상이다.
+        verified = any(abs(value - total) <= max(1, total // 1000) for value in subtotals)
+        candidates.append({
+            "table_index": table_idx, "rows": parsed, "total": total,
+            "verified": verified, "subtotals": subtotals,
+        })
+    return candidates
+
+
+def choose_holder_lockup_table(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """소계와 맞아떨어지는 표를 우선하고, 없으면 물량이 가장 많은 표를 고른다."""
+    if not candidates:
+        return None
+    verified = [c for c in candidates if c.get("verified")]
+    pool = verified or candidates
+    return max(pool, key=lambda c: (c["total"], len(c["rows"])))
+
+
+def parse_holder_lockups(
+    company_name: str, expected_shares: int | None = None, year: int | None = None, stock_code: str = "",
+) -> tuple[dict[str, int], str, str]:
+    """주주별 표를 기간별 물량으로 합산해 돌려준다. 반환: ({기간: 물량}, 접수번호, note)"""
+    corp = get_corp_code(company_name, stock_code=stock_code)
+    if not corp:
+        return {}, "", "DART corpCode 미발견"
+    start = f"{year}0101" if year else "20250101"
+    end = f"{year + 1}1231" if year else "20261231"
+    selected = select_latest_investment_report(get_reports(corp["corp_code"], start_date=start, end_date=end))
+    if not selected:
+        return {}, "", "투자설명서/증권신고서 미발견"
+    doc = download_document_text(selected["rcept_no"])
+    chosen = choose_holder_lockup_table(extract_holder_lockup_tables(doc, expected_shares=expected_shares))
+    if not chosen:
+        return {}, "", "주주별 매각제한 표 미발견"
+    by_period: dict[str, int] = {}
+    for item in chosen["rows"]:
+        by_period[item["period"]] = by_period.get(item["period"], 0) + item["qty"]
+    note = "" if chosen.get("verified") else "표의 소계와 합계가 맞지 않음 — 수기 확인 필요"
+    return by_period, str(selected.get("rcept_no") or ""), note
+
+
 def choose_float_summary_table(candidates: list[dict[str, Any]], expected_shares: int | None = None) -> dict[str, Any] | None:
     if not candidates:
         return None

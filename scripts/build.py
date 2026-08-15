@@ -111,7 +111,7 @@ if str(ROOT_DIR) not in sys.path:
 from scripts.config import require_env
 from scripts.sources.krx import find_stock_by_name, krx_snapshot, latest_base_info
 from scripts.sources.dart import parse_ipo_lockup
-from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups
+from scripts.sources.dart_api import get_corp_code, parse_float_summary_lockups, parse_holder_lockups
 from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 from scripts.utils.redaction import redact_sensitive_text
@@ -1893,11 +1893,79 @@ def build_ipo_events_from_schedule_alloc(
 
 
 
+def build_holder_lockup_events(
+    target: dict, code: str, meta: dict, listing_date: str, shares: int, year: int,
+) -> tuple[list[dict], list[dict]]:
+    """주주별 매각제한 표에서 기간별 보호예수 이벤트를 만든다.
+
+    누적 요약표가 없는 투자설명서용 대체 경로다. 표의 소계와 합계가 맞지 않으면
+    행이 빠졌을 수 있으므로 검토필요로 올려 운영자가 확인하게 한다.
+    """
+    name = target["name"]
+    by_period, rcept_no, note = parse_holder_lockups(
+        name, expected_shares=shares, year=year, stock_code=code,
+    )
+    if not by_period:
+        return [], []
+
+    rows: list[dict] = []
+    reviews: list[dict] = []
+    for period, qty in sorted(by_period.items(), key=lambda kv: kv[1], reverse=True):
+        try:
+            date, date_display, tradable_date = calc_release_date(listing_date, period)
+        except ValueError:
+            reviews.append({
+                "detected_at": _now(), "event_id": "", "code": code, "name": name,
+                "category": CATEGORY_FLOAT, "period": period,
+                "issue": f"주주별 표의 의무보유 기간 '{period}'을 해석하지 못함",
+                "memo": "",
+            })
+            continue
+        rows.append({
+            "event_id": build_event_id(code, CATEGORY_FLOAT, period, tradable_date),
+            "code": code, "name": name, "market": meta.get("market", ""),
+            "listing_date": listing_date, "shares": shares,
+            "close_price": meta.get("close_price", ""), "ipo_price": "",
+            "category": CATEGORY_FLOAT, "type": "보호예수", "period": period,
+            "planned_date": date,
+            "planned_tradable_date": tradable_date,
+            "planned_date_display": date_display,
+            "planned_qty": qty,
+            "planned_pct": pct(qty, shares),
+            "quantity_unit": "주",
+            "dart_rcp": rcept_no,
+            "dart_source": "투자설명서 주주별 매각제한 내역",
+            "parse_note": note,
+            "api_return_date": "", "api_return_qty": "", "api_reason": "",
+            "manual_date": "", "manual_qty": "", "manual_lock": "N", "memo": "",
+        })
+    if note:
+        reviews.append({
+            "detected_at": _now(), "event_id": "", "code": code, "name": name,
+            "category": CATEGORY_FLOAT, "period": "",
+            "issue": f"주주별 매각제한 표 검산 불일치 — {note}",
+            "memo": "",
+        })
+    print(
+        f"  [DART API] 주주별 매각제한 이벤트 {len(rows)}건 / 합계 {sum(by_period.values()):,}주"
+        f"{' / ' + note if note else ''}",
+        file=sys.stderr,
+    )
+    return rows, reviews
+
+
 def build_float_summary_events(target: dict, code: str, meta: dict, listing_date: str, shares: int, year: int) -> tuple[list[dict], list[dict]]:
     name = target["name"]
     chosen, candidates, note = parse_float_summary_lockups(name, expected_shares=shares, year=year, stock_code=code)
     reviews: list[dict] = []
     if not chosen:
+        # 누적 요약표가 없는 투자설명서가 141종목 중 34건이다. 그런 문서는 주주별
+        # 세부내역 표에 매각제한 물량과 의무보유 기간을 적으므로 그쪽에서 읽는다.
+        holder_rows, holder_reviews = build_holder_lockup_events(
+            target, code, meta, listing_date, shares, year,
+        )
+        if holder_rows:
+            return holder_rows, holder_reviews
         print(f"  [DART API] 유통가능 요약표 실패: {note}", file=sys.stderr)
         reviews.append({
             "detected_at": _now(), "event_id": "", "code": code, "name": name, "category": CATEGORY_FLOAT, "period": "",
