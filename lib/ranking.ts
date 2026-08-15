@@ -40,6 +40,7 @@ export function getIpoRanking(): IpoRankingRow[] {
     if (!stock) continue; // 락업 데이터가 없는 종목 = 아직 상장 전
     // 공모가는 배치가 확정한 값(site_data) 우선, 없으면 IPO일정의 확정공모가로 보완
     const ipoPrice = stock.ipo_price || item.final_price || 0;
+    const adjustedIpoPrice = stock.adjusted_ipo_price || 0;
     const closePrice = stock.close_price || 0;
     const listingDate = stock.listing_date || item.listing_date || "";
     if (!ipoPrice || !closePrice || !listingDate) continue;
@@ -55,6 +56,7 @@ export function getIpoRanking(): IpoRankingRow[] {
       closePrice,
       returnPct: currentIpoReturnPct({
         ipo_price: ipoPrice,
+        adjusted_ipo_price: adjustedIpoPrice,
         close_price: closePrice,
         trading_suspended: stock.trading_suspended,
       }),

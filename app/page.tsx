@@ -22,7 +22,17 @@ function groupTitle(group: UpcomingGroup): string {
 
 
 // 메인에서는 상세 설명을 덜고 추세만 보여준다. 거래정지 종목은 오래된 종가 대신 상태를 표시한다.
-function TrendBadge({ ipoPrice, closePrice, tradingSuspended }: { ipoPrice: number; closePrice: number; tradingSuspended?: boolean }) {
+function TrendBadge({
+  ipoPrice,
+  adjustedIpoPrice,
+  closePrice,
+  tradingSuspended,
+}: {
+  ipoPrice: number;
+  adjustedIpoPrice?: number;
+  closePrice: number;
+  tradingSuspended?: boolean;
+}) {
   if (tradingSuspended) {
     return (
       <span className="flex shrink-0 items-center rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-bold text-gray-600">
@@ -32,6 +42,7 @@ function TrendBadge({ ipoPrice, closePrice, tradingSuspended }: { ipoPrice: numb
   }
   const pct = currentIpoReturnPct({
     ipo_price: ipoPrice,
+    adjusted_ipo_price: adjustedIpoPrice,
     close_price: closePrice,
     trading_suspended: false,
   });
@@ -113,7 +124,7 @@ function UpcomingEventCard({ event }: { event: UpcomingGroup }) {
               {formatQty(event.qty)}주 ({event.pct}%)
             </p>
           </div>
-          <TrendBadge ipoPrice={event.ipoPrice} closePrice={event.closePrice} tradingSuspended={event.tradingSuspended} />
+          <TrendBadge ipoPrice={event.ipoPrice} adjustedIpoPrice={event.adjustedIpoPrice} closePrice={event.closePrice} tradingSuspended={event.tradingSuspended} />
         </div>
       </Link>
       <EventHoverCard event={event} />

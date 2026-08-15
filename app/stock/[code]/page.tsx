@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getStockByCode, getEventGroupsByStock, getSiteData } from "@/lib/data";
-import { BackButton } from "@/components/BackButton";
 import { StockDetailClient } from "@/components/StockDetailClient";
 
 
@@ -74,9 +73,6 @@ export default async function StockPage({ params }: { params: Promise<{ code: st
 
   return (
     <main className="mx-auto max-w-[1040px] px-5 py-6">
-      <div className="mb-4">
-        <BackButton />
-      </div>
       <StockDetailClient stock={stock} groups={groups} updated={updated} initialNow={BUILD_NOW} />
     </main>
   );

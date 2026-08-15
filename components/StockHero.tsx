@@ -90,7 +90,6 @@ export function StockHero({
   updated,
   initialNow,
   adjustedMode = false,
-  onAdjustedModeChange,
   quantityFactor = 1,
   displayShares,
 }: {
@@ -98,18 +97,15 @@ export function StockHero({
   updated: string;
   initialNow: number;
   adjustedMode?: boolean;
-  onAdjustedModeChange?: (value: boolean) => void;
   quantityFactor?: number;
   displayShares?: number;
 }) {
-  const hasAdjustment = Boolean(
-    stock.adjustment_events?.length
-    && stock.ipo_adjustment_factor
-    && Math.abs((stock.ipo_adjustment_factor || 1) - 1) >= 0.001,
-  );
   const baseShares = listingShares(stock);
   const activeShares = displayShares || Math.round(baseShares * quantityFactor);
-  const ipoPrice = adjustedMode && stock.adjusted_ipo_price ? stock.adjusted_ipo_price : stock.ipo_price || 0;
+  const originalIpoPrice = stock.ipo_price || 0;
+  const adjustedIpoPrice = stock.adjusted_ipo_price || 0;
+  const returnBasePrice = adjustedIpoPrice || originalIpoPrice;
+  const displayIpoPrice = adjustedMode && adjustedIpoPrice ? Math.round(adjustedIpoPrice) : originalIpoPrice;
   const displayEvents = useMemo(() => {
     if (Math.abs(quantityFactor - 1) < 0.001) return stock.events;
     return stock.events.map((event) => ({
@@ -119,7 +115,7 @@ export function StockHero({
   }, [quantityFactor, stock.events]);
   const displayStock = useMemo(() => ({
     ...stock,
-    ipo_price: ipoPrice,
+    ipo_price: returnBasePrice,
     adjusted_ipo_price: 0,
     shares: activeShares,
     initial_shares: activeShares,
@@ -127,9 +123,9 @@ export function StockHero({
       ? Math.round(stock.listing_float_shares * quantityFactor)
       : stock.listing_float_shares,
     events: displayEvents,
-  }), [activeShares, displayEvents, ipoPrice, quantityFactor, stock]);
+  }), [activeShares, displayEvents, returnBasePrice, quantityFactor, stock]);
   const closeCap = stock.market_cap || stock.shares * stock.close_price;
-  const changePct = stock.trading_suspended ? null : priceReturnPct(ipoPrice, stock.close_price || 0);
+  const changePct = stock.trading_suspended ? null : priceReturnPct(returnBasePrice, stock.close_price || 0);
   const hasReturn = changePct !== null;
   const displayChangePct = changePct ?? 0;
   const up = displayChangePct >= 0;
@@ -138,10 +134,8 @@ export function StockHero({
   const priceDate = updated.slice(5);
   const suspended = stock.trading_suspended === true;
   const suspendedSince = stock.trading_suspended_since || "";
-  const offerCap = activeShares && ipoPrice ? activeShares * ipoPrice : null;
+  const offerCap = baseShares && originalIpoPrice ? baseShares * originalIpoPrice : null;
   const floatPct = listingFloatPct(displayStock);
-  const adjustmentFactor = stock.ipo_adjustment_factor || 1;
-  const adjustmentMultiple = adjustmentFactor ? 1 / adjustmentFactor : 1;
 
   // 핵심 지표 4개를 데스크톱 2×2, 모바일 2열 패널로 그린다.
   const metrics: { label: string; value: string; sub?: string; mobileSub?: string; icon: ReactNode }[] = [
@@ -152,7 +146,7 @@ export function StockHero({
     },
     {
       label: adjustedMode ? "조정 공모가" : "공모가",
-      value: ipoPrice ? `${ipoPrice.toLocaleString("ko-KR")}원` : "미확인",
+      value: displayIpoPrice ? `${displayIpoPrice.toLocaleString("ko-KR")}원` : "미확인",
       icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 7v10M9.5 9.8h5M9.5 14.2h5" /></svg>,
     },
     {
@@ -167,7 +161,7 @@ export function StockHero({
       icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 3v9l6.4 3.7" /></svg>,
     },
     {
-      label: adjustedMode ? "조정 공모가 시총" : "시가총액(공모가 기준)",
+      label: "시가총액(공모가 기준)",
       value: offerCap ? formatKrwEok(offerCap) : "-",
       icon: <svg {...iconProps}><path d="M4 20h16M7 20V9m5 11V4m5 16v-7" /></svg>,
     },
@@ -248,42 +242,11 @@ export function StockHero({
               {contentLabel}
             </Link>
           </div>
-          {hasAdjustment && onAdjustedModeChange && (
-            <button
-              type="button"
-              onClick={() => onAdjustedModeChange(!adjustedMode)}
-              className={`mt-2 w-full rounded-2xl border px-4 py-3 text-[13px] font-bold transition-colors ${
-                adjustedMode
-                  ? "border-blue-600 bg-blue-600 text-white hover:bg-blue-700"
-                  : "border-blue-100 bg-blue-50 text-blue-700 hover:bg-blue-100"
-              }`}
-            >
-              {adjustedMode ? "상장 당시 기준" : "주식수 조정 반영"}
-            </button>
-          )}
-          {hasAdjustment && (
-            <p className="mt-2 text-center text-[11px] font-medium text-slate-400">
-              {adjustedMode ? "조정 후 기준" : "공모 당시 기준"} · 주식수 {adjustmentMultiple.toFixed(2)}배 변동
-            </p>
-          )}
         </div>
 
         {/* 데스크톱: CTA는 작은 버튼으로 낮추고, 지표는 핵심 3개 + 시총 2개의 3/2 구조로 정리한다. */}
         <div className="hidden flex-col justify-center gap-3 md:flex">
           <div className="flex items-center gap-2 self-end">
-            {hasAdjustment && onAdjustedModeChange && (
-              <button
-                type="button"
-                onClick={() => onAdjustedModeChange(!adjustedMode)}
-                className={`h-8 rounded-full border px-3.5 text-[11.5px] font-semibold transition-colors ${
-                  adjustedMode
-                    ? "border-blue-600 bg-blue-600 text-white hover:bg-blue-700"
-                    : "border-blue-100 bg-blue-50 text-blue-700 hover:bg-blue-100"
-                }`}
-              >
-                {adjustedMode ? "상장 당시 기준" : "주식수 조정 반영"}
-              </button>
-            )}
             <span className="rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700">
               {stock.market}
             </span>

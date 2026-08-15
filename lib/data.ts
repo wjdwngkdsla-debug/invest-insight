@@ -9,7 +9,7 @@ import { listingShares } from "./returns";
 
 
 
-export type LockupCategory = "IPO기관" | "기존주주";
+export type LockupCategory = "IPO기관" | "기존주주" | "자발적 매각제한";
 
 
 
@@ -40,7 +40,14 @@ export function getStockByCode(code: string): StockLockup | undefined {
 
 
 
-export function getEventCategory(ev: Pick<LockupEvent, "type">): LockupCategory {
+export function getEventCategory(ev: Pick<LockupEvent, "type" | "period" | "reason" | "holder_name">): LockupCategory {
+  if (
+    (ev.period || "").includes("자발적")
+    || (ev.reason || "").includes("자발적")
+    || (ev.holder_name || "").includes("자발적")
+  ) {
+    return "자발적 매각제한";
+  }
   return ev.type === "보호예수" ? "기존주주" : "IPO기관";
 }
 
@@ -244,7 +251,7 @@ export function getEventGroupsByStock(stock: StockLockup): UpcomingGroup[] {
 
 
 
-    const breakdown: EventBreakdown[] = (["IPO기관", "기존주주"] as LockupCategory[])
+    const breakdown: EventBreakdown[] = (["IPO기관", "기존주주", "자발적 매각제한"] as LockupCategory[])
       .map((category) => {
         const items = breakdownMap.get(category) || [];
         const categoryQty = items.reduce((sum, ev) => sum + ev.qty, 0);

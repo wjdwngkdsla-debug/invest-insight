@@ -8,13 +8,14 @@ export function priceReturnPct(basePrice: number, currentPrice: number): number 
 
 /**
  * 현재 공모가 대비 수익률의 단일 기준.
+ * 무상증자·분할 조정 이력이 있으면 수정공모가를 우선 사용한다.
  * 거래정지 중인 종목의 종가는 과거 마지막 체결가이므로 현재 수익률로 취급하지 않는다.
  */
 export function currentIpoReturnPct(
-  stock: Pick<StockLockup, "ipo_price" | "close_price" | "trading_suspended">,
+  stock: Pick<StockLockup, "ipo_price" | "adjusted_ipo_price" | "close_price" | "trading_suspended">,
 ): number | null {
   if (stock.trading_suspended) return null;
-  return priceReturnPct(stock.ipo_price || 0, stock.close_price || 0);
+  return priceReturnPct(stock.adjusted_ipo_price || stock.ipo_price || 0, stock.close_price || 0);
 }
 
 /** 상장 시점 주식수. KRX 상장일 스냅샷(LIST_SHRS)이 원천이고, 없으면 편입 시점 값으로 대체한다. */
