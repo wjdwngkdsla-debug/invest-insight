@@ -130,7 +130,13 @@
     "category": "기존주주",
     "period": "36개월",
     "date": "2027-08-06",
-    "qty": "4250000"
+    "qty": 4250000,
+    "name": "아이빔테크놀로지",
+    "corp_code": "",
+    "quantity_unit": "주",
+    "sheet_visible": "Y",
+    "manual_lock": "N",
+    "pending_only": false
   },
   {
     "code": "460470",
@@ -567,7 +573,7 @@
   },
   {
     "name": "기도산업",
-    "corp_code": "00229085",
+    "corp_code": "229085",
     "code": "",
     "category": "기존주주",
     "period": "6개월",
@@ -580,7 +586,7 @@
   },
   {
     "name": "기도산업",
-    "corp_code": "00229085",
+    "corp_code": "229085",
     "code": "",
     "category": "기존주주",
     "period": "12개월",
@@ -593,7 +599,7 @@
   },
   {
     "name": "기도산업",
-    "corp_code": "00229085",
+    "corp_code": "229085",
     "code": "",
     "category": "기존주주",
     "period": "24개월",
@@ -606,7 +612,7 @@
   },
   {
     "name": "해치텍",
-    "corp_code": "01947443",
+    "corp_code": "1947443",
     "code": "",
     "category": "기존주주",
     "period": "6개월",
@@ -619,7 +625,7 @@
   },
   {
     "name": "해치텍",
-    "corp_code": "01947443",
+    "corp_code": "1947443",
     "code": "",
     "category": "기존주주",
     "period": "1년",
@@ -632,7 +638,7 @@
   },
   {
     "name": "해치텍",
-    "corp_code": "01947443",
+    "corp_code": "1947443",
     "code": "",
     "category": "기존주주",
     "period": "3년",
@@ -645,7 +651,7 @@
   },
   {
     "name": "니어스랩",
-    "corp_code": "01588897",
+    "corp_code": "1588897",
     "code": "",
     "category": "기존주주",
     "period": "2개월",
@@ -658,7 +664,7 @@
   },
   {
     "name": "니어스랩",
-    "corp_code": "01588897",
+    "corp_code": "1588897",
     "code": "",
     "category": "기존주주",
     "period": "6개월",
@@ -671,7 +677,7 @@
   },
   {
     "name": "니어스랩",
-    "corp_code": "01588897",
+    "corp_code": "1588897",
     "code": "",
     "category": "기존주주",
     "period": "1년",
@@ -684,7 +690,7 @@
   },
   {
     "name": "니어스랩",
-    "corp_code": "01588897",
+    "corp_code": "1588897",
     "code": "",
     "category": "기존주주",
     "period": "3년",
@@ -694,5 +700,31 @@
     "sheet_visible": "Y",
     "manual_lock": "Y",
     "pending_only": true
+  },
+  {
+    "name": "에임드바이오",
+    "corp_code": "",
+    "code": "0009K0",
+    "category": "기존주주",
+    "period": "2년",
+    "date": "2027-12-04",
+    "qty": 22164757,
+    "quantity_unit": "주",
+    "sheet_visible": "Y",
+    "manual_lock": "N",
+    "pending_only": false
+  },
+  {
+    "name": "엠디바이스",
+    "corp_code": "",
+    "code": "226590",
+    "category": "기존주주",
+    "period": "2년",
+    "date": "2027-03-07",
+    "qty": 48000,
+    "quantity_unit": "주",
+    "sheet_visible": "Y",
+    "manual_lock": "N",
+    "pending_only": false
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15 15:59",
+  "updated": "2026-08-15 20:11",
   "items": [
     {
       "corp_code": "00104069",
@@ -416,7 +416,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -599,7 +599,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -610,269 +610,9 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -8623,7 +8363,7 @@
           "visible": true
         }
       },
-      "initial_shares": "9669449",
+      "initial_shares": "15417639",
       "offering_attempt": 1
     },
     {
@@ -17649,246 +17389,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "심플랫폼",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "한텍",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1252179"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "한텍",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "27046"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "모티브링크",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1910177"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1442020"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "동국생명과학",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "600419"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "와이즈넛",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "20054"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "1636179"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아스테라시스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1328450"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "쓰리에이로직스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "온코크로스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1066630"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "온코크로스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "온코크로스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "온코크로스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "위츠",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "2231577"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "위츠",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "위츠",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "위츠",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "사이냅소프트",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "654305"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "사이냅소프트",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
       "name": "사이냅소프트",
       "type": "수기변경(검토필요)",
       "field": "배정_1개월",
@@ -21646,6 +21146,246 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "지씨지놈",
+      "type": "수기변경",
+      "field": "배정물량",
+      "old": "9456000",
+      "new": "9561"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "지씨지놈",
+      "type": "수기변경",
+      "field": "배정물량",
+      "old": "1539000",
+      "new": "18155"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "지씨지놈",
+      "type": "수기변경",
+      "field": "배정물량",
+      "old": "6049000",
+      "new": "15051"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스트라드비젼",
+      "type": "고정변경",
+      "field": "holder:3개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스트라드비젼",
+      "type": "고정변경",
+      "field": "holder:6개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스트라드비젼",
+      "type": "고정변경",
+      "field": "holder:1년",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스트라드비젼",
+      "type": "고정변경",
+      "field": "holder:3년",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "고정변경",
+      "field": "holder:1개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "고정변경",
+      "field": "holder:3개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "고정변경",
+      "field": "holder:6개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "고정변경",
+      "field": "holder:1년",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "고정변경",
+      "field": "holder:5년",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "와이즈넛",
+      "type": "고정변경",
+      "field": "holder:1개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "와이즈넛",
+      "type": "고정변경",
+      "field": "holder:3개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "와이즈넛",
+      "type": "고정변경",
+      "field": "holder:12개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "와이즈넛",
+      "type": "고정변경",
+      "field": "holder:24개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "와이즈넛",
+      "type": "고정변경",
+      "field": "holder:36개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "채비",
+      "type": "고정변경",
+      "field": "holder:1개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "채비",
+      "type": "고정변경",
+      "field": "holder:6개월",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "채비",
+      "type": "고정변경",
+      "field": "holder:1년",
+      "old": "Y",
+      "new": "N"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "채비",
+      "type": "행삭제",
+      "field": "holder:30개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스트라드비젼",
+      "type": "행삭제",
+      "field": "holder:자발적 1개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "에임드바이오",
+      "type": "행삭제",
+      "field": "holder:24개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "에임드바이오",
+      "type": "행삭제",
+      "field": "holder:30개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "엠디바이스",
+      "type": "행삭제",
+      "field": "holder:30개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "페스카로",
+      "type": "행삭제",
+      "field": "holder:36개월",
+      "old": "노출",
+      "new": "비노출"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
