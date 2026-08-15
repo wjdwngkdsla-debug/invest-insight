@@ -341,13 +341,13 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
       )}
 
       <p className="px-1 text-[11px] leading-relaxed text-slate-400">
-        <span className="font-semibold text-slate-500">공모가 대비</span>는 공모주를 받아 지금까지 보유했을 때,{" "}
-        <span className="font-semibold text-slate-500">상장일 수익률</span>은 상장 첫날 종가에 팔았을 때의 수익률입니다.{" "}
-        <span className="font-semibold text-slate-500">상장일 유통</span>은 상장 당일 매도 제한이 없던 물량의 비중으로,
-        상장일 상장주식수에서 기존주주 보호예수와 기관 의무보유확약을 뺀 값입니다. 확약은 최소 15일이라 상장 당일에는 팔 수
-        없어 유통물량에서 제외합니다(투자설명서의 유통가능물량은 확약분을 포함해 이보다 큽니다).
+        <span className="font-semibold text-slate-500">공모가 대비</span>는 공모주를 현재까지 보유한 기준,{" "}
+        <span className="font-semibold text-slate-500">상장일 수익률</span>은 상장 첫날 종가 기준입니다.
         <br />
-        무상증자·액면분할처럼 주식수가 바뀐 종목은 토스 수정주가 기준으로 공모가를 보정해 실제 수익률에 맞춥니다.
+        <span className="font-semibold text-slate-500">상장일 유통</span>은 상장 당일 매도 제한이 없던 물량의 비중으로,
+        상장 당시 주식수에서 기존주주 보호예수와 기관 의무보유확약을 뺀 값입니다. 기관 확약은 상장 당일 팔 수 없어 제외합니다.
+        <br />
+        무상증자·액면분할 등 주식수 조정이 확인된 종목은 조정 공모가 기준으로 수익률을 계산합니다.
         거래정지 종목은 마지막 체결가가 현재가처럼 보이지 않도록 수익률과 평균에서 제외합니다.
       </p>
     </div>
