@@ -35,9 +35,10 @@
   "float_pct": 32.73
  },
  "340450": {
-  "total_shares": 23666666,
+  "total_shares": 23650793,
   "float_shares": 10051128,
-  "float_pct": 42.47
+  "float_pct": 42.5,
+  "source": "수기확인(투자설명서)"
  },
  "331740": {
   "total_shares": 9569672,
@@ -434,5 +435,29 @@
   "float_shares": 2146145,
   "float_pct": 37.15,
   "source": "수기입력(상장전)"
+ },
+ "460470": {
+  "total_shares": 14965620,
+  "float_shares": 3037960,
+  "float_pct": 20.3,
+  "source": "수기확인(투자설명서)"
+ },
+ "381620": {
+  "total_shares": 4372640,
+  "float_shares": 1290272,
+  "float_pct": 29.51,
+  "source": "수기확인(투자설명서)"
+ },
+ "209640": {
+  "total_shares": 14221573,
+  "float_shares": 3560000,
+  "float_pct": 25.03,
+  "source": "수기확인(투자설명서)"
+ },
+ "376900": {
+  "total_shares": 15417639,
+  "float_shares": 5598871,
+  "float_pct": 36.31,
+  "source": "수기확인(투자설명서)"
  }
 }
