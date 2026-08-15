@@ -1913,6 +1913,20 @@ def build_holder_lockup_events(
     if not by_period:
         return [], []
 
+    total = sum(by_period.values())
+    # 표의 소계와 검산이 안 맞으면 부분표를 잡았을 수 있다. 그대로 쓰면 이미 있는
+    # 금융위 API 데이터보다 나빠진다(유라클 48,730주 = 유통 98.9%). 물량이 상장주식수의
+    # 5% 미만인 경우도 같은 증상이라 함께 막고, 검토필요로만 올린다.
+    if note or (shares and total < shares * 0.05):
+        reason = note or f"매각제한 합계 {total:,}주가 상장주식수의 5% 미만"
+        print(f"  [DART API] 주주별 매각제한 표 신뢰 불가 — 반영 안 함 ({reason})", file=sys.stderr)
+        return [], [{
+            "detected_at": _now(), "event_id": "", "code": code, "name": name,
+            "category": CATEGORY_FLOAT, "period": "",
+            "issue": f"주주별 매각제한 표를 믿을 수 없어 반영하지 않음 — {reason}",
+            "memo": "검토필요 탭의 상장일유통가능물량에 투자설명서 숫자를 적으면 해결됩니다",
+        }]
+
     rows: list[dict] = []
     reviews: list[dict] = []
     for period, qty in sorted(by_period.items(), key=lambda kv: kv[1], reverse=True):
@@ -1944,16 +1958,8 @@ def build_holder_lockup_events(
             "api_return_date": "", "api_return_qty": "", "api_reason": "",
             "manual_date": "", "manual_qty": "", "manual_lock": "N", "memo": "",
         })
-    if note:
-        reviews.append({
-            "detected_at": _now(), "event_id": "", "code": code, "name": name,
-            "category": CATEGORY_FLOAT, "period": "",
-            "issue": f"주주별 매각제한 표 검산 불일치 — {note}",
-            "memo": "",
-        })
     print(
-        f"  [DART API] 주주별 매각제한 이벤트 {len(rows)}건 / 합계 {sum(by_period.values()):,}주"
-        f"{' / ' + note if note else ''}",
+        f"  [DART API] 주주별 매각제한 이벤트 {len(rows)}건 / 합계 {total:,}주",
         file=sys.stderr,
     )
     return rows, reviews
@@ -6259,6 +6265,14 @@ def main() -> None:
     except Exception as exc:
         print(f"[KRX] 상장일 시세 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
     phase_seconds["상장일 스냅샷"] = time.perf_counter() - snapshot_started
+
+    # 투자설명서 본문의 상장 직후 유통가능물량 — 캐시에 없는 종목만 새로 찾는다
+    float_started = time.perf_counter()
+    try:
+        refresh_listing_float(all_rows)
+    except Exception as exc:
+        print(f"[DART] 유통가능물량 문장 갱신 실패(무시): {redact_sensitive_text(exc)}", file=sys.stderr)
+    phase_seconds["유통가능 문장"] = time.perf_counter() - float_started
 
     # 권리락 조정계수 — 마지막으로 본 거래일 이후만 이어서 훑는다(하루 2콜)
     adjust_started = time.perf_counter()
