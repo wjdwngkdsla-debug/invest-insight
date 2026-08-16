@@ -24856,20 +24856,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
           "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1485053
-            },
-            {
-              "reason": "벤처금융",
-              "qty": 894462
-            },
-            {
-              "reason": "기관투자가",
-              "qty": 162114
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 80800,
           "release_fluc_rt": 29.9
         },
@@ -24893,20 +24880,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
           "reason": "벤처금융 + 기관투자가 + 기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1422315
-            },
-            {
-              "reason": "벤처금융",
-              "qty": 839820
-            },
-            {
-              "reason": "기관투자가",
-              "qty": 162117
-            }
-          ]
+          "reason_breakdown": []
         },
         {
           "period": "3개월",
@@ -24952,20 +24926,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기관투자가 + 상장주선인(국내기업)",
           "reason": "벤처금융 + 기관투자가 + 상장주선인(국내기업)",
-          "reason_breakdown": [
-            {
-              "reason": "벤처금융",
-              "qty": 1065104
-            },
-            {
-              "reason": "기관투자가",
-              "qty": 216156
-            },
-            {
-              "reason": "상장주선인(국내기업)",
-              "qty": 18181
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 75200,
           "release_fluc_rt": 3.58
         },
