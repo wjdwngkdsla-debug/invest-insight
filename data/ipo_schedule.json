@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16 20:12",
+  "updated": "2026-08-17 20:17",
   "items": [
     {
       "corp_code": "00104069",
@@ -417,7 +417,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -600,7 +600,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -611,269 +611,9 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
     }
   ],
   "past_items": [
@@ -17652,38 +17392,6 @@
       "date": "2026-07-19",
       "name": "노머스",
       "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "59000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "1879000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "840990"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "수기변경(검토필요)",
       "field": "배정_1개월",
       "old": "",
       "new": "0"
@@ -21647,6 +21355,38 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
