@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18 10:59",
+  "updated": "2026-08-19 11:04",
   "items": [
     {
       "corp_code": "00104069",
@@ -54,127 +54,6 @@
       "stock_code": "",
       "schedule_hidden": false,
       "result_parse_version": 2
-    },
-    {
-      "corp_code": "02031369",
-      "name": "인제니아테라퓨틱스",
-      "management_name": "인제니아테라퓨틱스",
-      "first_filing_date": "20260610",
-      "last_rcept_no": "20260804000371",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동",
-      "band_low": 12000,
-      "band_high": 14500,
-      "final_price": 12000,
-      "forecast_start": "2026-07-20",
-      "forecast_end": "2026-07-24",
-      "sub_start": "2026-07-30",
-      "sub_end": "2026-07-31",
-      "underwriter": "삼성증권",
-      "market": "코스닥",
-      "offer_shares": 5000000,
-      "demand_ratio": 50.4,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "listing_date": "2026-08-18",
-      "stock_code": "",
-      "schedule_hidden": false,
-      "initial_shares": "49489111",
-      "quantity_unit": "DR",
-      "commit_apply": [
-        {
-          "period": "미확약",
-          "qty": 184900059,
-          "pct": 97.77,
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 418407,
-          "pct": 0.22,
-          "visible": true
-        },
-        {
-          "period": "1개월",
-          "qty": 3750000,
-          "pct": 1.98,
-          "visible": true
-        },
-        {
-          "period": "3개월",
-          "qty": 45000,
-          "pct": 0.02,
-          "visible": true
-        },
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "visible": true
-        }
-      ],
-      "manual_commit_apply": {
-        "미확약": {
-          "qty": 184900059,
-          "locked": false,
-          "visible": true
-        },
-        "15일": {
-          "qty": 418407,
-          "locked": false,
-          "visible": true
-        },
-        "1개월": {
-          "qty": 3750000,
-          "locked": false,
-          "visible": true
-        },
-        "3개월": {
-          "qty": 45000,
-          "locked": false,
-          "visible": true
-        },
-        "6개월": {
-          "qty": 0,
-          "locked": false,
-          "visible": true
-        }
-      },
-      "offering_attempt": 1,
-      "sub_ratio": 3.09,
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0
-        },
-        {
-          "period": "3개월",
-          "qty": 45000,
-          "pct": 1.2
-        },
-        {
-          "period": "1개월",
-          "qty": 72358,
-          "pct": 2.0
-        },
-        {
-          "period": "15일",
-          "qty": 0,
-          "pct": 0.0
-        },
-        {
-          "period": "미확약",
-          "qty": 3588138,
-          "pct": 96.8
-        }
-      ],
-      "report_rcp": "20260804000371",
-      "content_url": "https://blog.naver.com/vericap/224373624776",
-      "provisional_fields": [
-        "content_url"
-      ]
     },
     {
       "corp_code": "00229085",
@@ -345,7 +224,8 @@
         }
       ],
       "report_rcp": "20260818000030",
-      "result_parse_version": 2
+      "result_parse_version": 2,
+      "content_url": "https://blog.naver.com/vericap/224381545395"
     },
     {
       "corp_code": "01947443",
@@ -541,7 +421,7 @@
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
-      "last_rcept_no": "20260729000302",
+      "last_rcept_no": "20260818000130",
       "band_low": 10000,
       "band_high": 12000,
       "forecast_start": "2026-09-04",
@@ -677,6 +557,128 @@
     }
   ],
   "past_items": [
+    {
+      "corp_code": "02031369",
+      "name": "인제니아테라퓨틱스",
+      "management_name": "인제니아테라퓨틱스",
+      "first_filing_date": "20260610",
+      "last_rcept_no": "20260804000371",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동",
+      "band_low": 12000,
+      "band_high": 14500,
+      "final_price": 12000,
+      "forecast_start": "2026-07-20",
+      "forecast_end": "2026-07-24",
+      "sub_start": "2026-07-30",
+      "sub_end": "2026-07-31",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 5000000,
+      "demand_ratio": 50.4,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "listing_date": "2026-08-18",
+      "stock_code": "",
+      "schedule_hidden": false,
+      "initial_shares": "49489111",
+      "quantity_unit": "DR",
+      "commit_apply": [
+        {
+          "period": "미확약",
+          "qty": 184900059,
+          "pct": 97.77,
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 418407,
+          "pct": 0.22,
+          "visible": true
+        },
+        {
+          "period": "1개월",
+          "qty": 3750000,
+          "pct": 1.98,
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 45000,
+          "pct": 0.02,
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "visible": true
+        }
+      ],
+      "manual_commit_apply": {
+        "미확약": {
+          "qty": 184900059,
+          "locked": false,
+          "visible": true
+        },
+        "15일": {
+          "qty": 418407,
+          "locked": false,
+          "visible": true
+        },
+        "1개월": {
+          "qty": 3750000,
+          "locked": false,
+          "visible": true
+        },
+        "3개월": {
+          "qty": 45000,
+          "locked": false,
+          "visible": true
+        },
+        "6개월": {
+          "qty": 0,
+          "locked": false,
+          "visible": true
+        }
+      },
+      "offering_attempt": 1,
+      "sub_ratio": 3.09,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 45000,
+          "pct": 1.2
+        },
+        {
+          "period": "1개월",
+          "qty": 72358,
+          "pct": 2.0
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "미확약",
+          "qty": 3588138,
+          "pct": 96.8
+        }
+      ],
+      "report_rcp": "20260804000371",
+      "content_url": "https://blog.naver.com/vericap/224373624776",
+      "provisional_fields": [
+        "content_url"
+      ],
+      "archived_at": "2026-08-19"
+    },
     {
       "corp_code": "00920731",
       "name": "케이앤에스아이앤씨",
@@ -17450,54 +17452,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "에이치이엠파마",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "에이치이엠파마",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "0"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "에이치이엠파마",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "5017"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "에이치이엠파마",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "2706"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "탑런토탈솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1549780000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "탑런토탈솔루션",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "7254000"
-    },
-    {
-      "date": "2026-07-19",
       "name": "탑런토탈솔루션",
       "type": "수기변경(검토필요)",
       "field": "신청_1개월",
@@ -21447,6 +21401,54 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-19",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21466,31 +21468,31 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-08-18",
+      "excluded_at": "2026-08-19",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-08-18",
+      "excluded_at": "2026-08-19",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-08-18",
+      "excluded_at": "2026-08-19",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-08-18",
+      "excluded_at": "2026-08-19",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-08-18",
+      "excluded_at": "2026-08-19",
       "memo": "자동 제외(스팩)"
     }
   }
