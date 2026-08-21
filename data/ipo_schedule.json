@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21 11:09",
+  "updated": "2026-08-21 20:17",
   "items": [
     {
       "corp_code": "00104069",
@@ -316,7 +316,7 @@
       "corp_code": "01586923",
       "name": "스카이랩스",
       "first_filing_date": "20260707",
-      "last_rcept_no": "20260729000518",
+      "last_rcept_no": "20260821000340",
       "band_low": 13000,
       "band_high": 16000,
       "forecast_start": "2026-08-14",
@@ -444,6 +444,32 @@
       "offering_attempt": 1
     },
     {
+      "corp_code": "01722066",
+      "name": "빅웨이브로보틱스",
+      "first_filing_date": "20260701",
+      "last_rcept_no": "20260821000538",
+      "band_low": 15000,
+      "band_high": 18000,
+      "forecast_start": "2026-09-07",
+      "forecast_end": "2026-09-11",
+      "sub_start": "2026-09-15",
+      "sub_end": "2026-09-16",
+      "payment_date": "2026-09-18",
+      "underwriter": "유진투자증권·미래에셋증권",
+      "market": "코스닥",
+      "offer_shares": 2000000,
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "schedule_hidden": false,
+      "commit_apply_missing": 4,
+      "offering_attempt": 1
+    },
+    {
       "corp_code": "01564514",
       "name": "글로벌테크놀로지",
       "first_filing_date": "20260728",
@@ -496,30 +522,51 @@
       "offering_attempt": 1
     },
     {
-      "corp_code": "01722066",
-      "name": "빅웨이브로보틱스",
-      "first_filing_date": "20260701",
-      "last_rcept_no": "20260803000319",
-      "band_low": 20000,
-      "band_high": 24000,
-      "forecast_start": "2026-09-07",
-      "forecast_end": "2026-09-11",
-      "sub_start": "2026-09-16",
-      "sub_end": "2026-09-17",
-      "payment_date": "2026-09-21",
-      "underwriter": "유진투자증권·미래에셋증권",
+      "corp_code": "01754737",
+      "name": "엘리스그룹",
+      "first_filing_date": "20260821",
+      "last_rcept_no": "20260821000670",
+      "offering_attempt": 1,
+      "band_low": 70400,
+      "band_high": 90500,
+      "forecast_start": "2026-09-09",
+      "forecast_end": "2026-09-15",
+      "sub_start": "2026-09-18",
+      "sub_end": "2026-09-21",
+      "underwriter": "미래에셋증권·삼성증권",
       "market": "코스닥",
-      "offer_shares": 2000000,
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
+      "offer_shares": 2222000,
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
-      "schedule_hidden": false,
+      "withdrawn": false,
       "commit_apply_missing": 4,
-      "offering_attempt": 1
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "01028933",
+      "name": "멜콘",
+      "first_filing_date": "20260821",
+      "last_rcept_no": "20260821000368",
+      "offering_attempt": 1,
+      "band_low": 10700,
+      "band_high": 12300,
+      "forecast_start": "2026-09-16",
+      "forecast_end": "2026-09-22",
+      "sub_start": "2026-10-01",
+      "sub_end": "2026-10-02",
+      "payment_date": "2026-10-07",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2500000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "00683283",
@@ -17452,86 +17499,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "1375121000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "6404000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "14213000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "59647000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "49806000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "1135622"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "3864"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이언디바이스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "2437146000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이언디바이스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "100000"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "아이언디바이스",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "933000"
-    },
-    {
-      "date": "2026-07-19",
       "name": "아이언디바이스",
       "type": "수기변경(검토필요)",
       "field": "신청_3개월",
@@ -21417,6 +21384,86 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "희망가액(하단)",
+      "old": "20000",
+      "new": "15000"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "희망가액(상단)",
+      "old": "24000",
+      "new": "18000"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-16",
+      "new": "2026-09-15"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-17",
+      "new": "2026-09-16"
     },
     {
       "date": "2026-08-21",
