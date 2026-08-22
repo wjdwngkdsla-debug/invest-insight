@@ -8315,9 +8315,9 @@
           "date": "2025-03-24",
           "date_display": "2025-03-24",
           "tradable_date": "2025-03-24",
-          "qty": 16716,
+          "qty": 39006,
           "unit": "주",
-          "pct": 0.17,
+          "pct": 0.41,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -8326,14 +8326,14 @@
           "rcp": "20241212000615",
           "api_checked": true,
           "api_return_date": "2025-03-24",
-          "api_return_qty": 16716,
+          "api_return_qty": 39006,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)",
           "reason_breakdown": [
             {
               "reason": "상장주선인(국내기업)",
-              "qty": 16716
+              "qty": 39006
             }
           ]
         },
@@ -26582,12 +26582,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1400526
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 61300,
           "release_fluc_rt": 5.33
         },
@@ -26635,16 +26630,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 3501576
-            },
-            {
-              "reason": "상장주선인(국내기업)",
-              "qty": 38461
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 22600,
           "release_fluc_rt": -6.03
         },
@@ -26898,9 +26884,9 @@
           "date": "2026-06-25",
           "date_display": "2026-06-25",
           "tradable_date": "2026-06-25",
-          "qty": 395237,
+          "qty": 375437,
           "unit": "주",
-          "pct": 3.74,
+          "pct": 3.55,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -26909,7 +26895,7 @@
           "rcp": "20260313000893",
           "api_checked": true,
           "api_return_date": "2026-06-25",
-          "api_return_qty": 395237,
+          "api_return_qty": 375437,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기관투자가 + 상장주선인(국내기업)",
           "reason": "기관투자가 + 상장주선인(국내기업)",
@@ -26920,7 +26906,7 @@
             },
             {
               "reason": "상장주선인(국내기업)",
-              "qty": 26400
+              "qty": 6600
             }
           ],
           "release_close": 5650,
