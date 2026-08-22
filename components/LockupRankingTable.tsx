@@ -6,10 +6,14 @@ import type { LockupPeriod, LockupRankingRow } from "@/lib/lockupRanking";
 import { LOCKUP_PERIODS } from "@/lib/lockupRanking";
 import { formatKrwEok } from "@/lib/format";
 
+type MarketKey = "all" | "코스피" | "코스닥";
 type SortKey = LockupPeriod | "marketCap" | "listingDate";
 
 const DATE_INPUT =
   "rounded-lg border border-gray-200 bg-white px-2 py-1 text-[12px] font-medium text-slate-700 focus:border-blue-400 focus:outline-none";
+const CHIP_BASE = "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors";
+const CHIP_ON = "bg-blue-600 text-white";
+const CHIP_OFF = "border border-gray-200 bg-white text-slate-600 hover:bg-gray-50";
 
 /** 빈칸이 세 가지 뜻으로 섞이지 않게 문구를 나눈다. 기호 대신 말로 쓴다. */
 function ReturnText({ pct, state }: { pct: number | null; state?: "none" | "upcoming" | "missing" | "ok" }) {
@@ -34,12 +38,24 @@ function RankBadge({ rank }: { rank: number }) {
   return <span className={`inline-flex h-6 min-w-6 items-center justify-center rounded-md px-1.5 text-[11.5px] font-bold tabular-nums ${tone}`}>{rank}</span>;
 }
 
+function normalizeMarket(value: string): MarketKey {
+  if (value.includes("코스피") || value.toUpperCase().includes("KOSPI")) return "코스피";
+  if (value.includes("코스닥") || value.toUpperCase().includes("KOSDAQ")) return "코스닥";
+  return "all";
+}
+
+function formatAverage(value: number | null): string {
+  if (value === null) return "-";
+  return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
+
 export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
   const bounds = useMemo(() => {
     const dates = rows.map((row) => row.listingDate).filter(Boolean).sort();
     return { min: dates[0] || "", max: dates[dates.length - 1] || "" };
   }, [rows]);
   const [query, setQuery] = useState("");
+  const [market, setMarket] = useState<MarketKey>("all");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("1개월");
@@ -48,10 +64,37 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
   const filtered = useMemo(() => rows.filter((row) => {
     const keyword = query.trim();
     if (keyword && !row.name.includes(keyword)) return false;
+    if (market !== "all" && normalizeMarket(row.market) !== market) return false;
     if (from && row.listingDate < from) return false;
     if (to && row.listingDate > to) return false;
     return true;
-  }), [rows, query, from, to]);
+  }), [rows, query, market, from, to]);
+
+  const average = useMemo(() => {
+    const selectedPeriod = LOCKUP_PERIODS.includes(sortKey as LockupPeriod) ? sortKey as LockupPeriod : null;
+    let total = 0;
+    let valueCount = 0;
+    const companies = new Set<string>();
+
+    for (const row of filtered) {
+      const periods = selectedPeriod ? [selectedPeriod] : LOCKUP_PERIODS;
+      let hasValue = false;
+      for (const period of periods) {
+        const value = row.returns[period];
+        if (value === null) continue;
+        total += value;
+        valueCount += 1;
+        hasValue = true;
+      }
+      if (hasValue) companies.add(row.code);
+    }
+
+    return {
+      label: selectedPeriod ? `${selectedPeriod} 평균` : "전체 평균",
+      value: valueCount > 0 ? total / valueCount : null,
+      companyCount: companies.size,
+    };
+  }, [filtered, sortKey]);
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     if (sortKey === "listingDate") {
@@ -78,13 +121,29 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
   return (
     <div className="space-y-3">
       <div className="rounded-[20px] border border-gray-200 bg-white p-3.5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)]">
-        <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-2">
-          <span className="text-[11.5px] font-semibold text-slate-400">상장일</span>
-          <input type="date" value={from} min={bounds.min} max={to || bounds.max} onChange={(event) => setFrom(event.target.value)} className={DATE_INPUT} aria-label="상장일 시작" />
-          <span className="text-[12px] text-slate-400">~</span>
-          <input type="date" value={to} min={from || bounds.min} max={bounds.max} onChange={(event) => setTo(event.target.value)} className={DATE_INPUT} aria-label="상장일 종료" />
-          {(from || to) && <button type="button" onClick={() => { setFrom(""); setTo(""); }} className="text-[12px] font-semibold text-slate-400 underline-offset-2 hover:text-slate-600 hover:underline">기간 해제</button>}
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-2 sm:w-44" />
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
+              <button key={key} type="button" onClick={() => setMarket(key)} className={`${CHIP_BASE} ${market === key ? CHIP_ON : CHIP_OFF}`}>
+                {key === "all" ? "전체" : key}
+              </button>
+            ))}
+            <div className="flex min-w-[210px] items-baseline gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5">
+              <span className="text-[11px] font-semibold text-slate-500">{average.label}</span>
+              <span className={`text-[14px] font-bold tabular-nums ${average.value !== null && average.value >= 0 ? "text-rose-600" : "text-blue-600"}`}>
+                {formatAverage(average.value)}
+              </span>
+              <span className="text-[10.5px] font-medium text-slate-400">{average.companyCount}개 기업</span>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-2">
+            <span className="text-[11.5px] font-semibold text-slate-400">상장일</span>
+            <input type="date" value={from} min={bounds.min} max={to || bounds.max} onChange={(event) => setFrom(event.target.value)} className={DATE_INPUT} aria-label="상장일 시작" />
+            <span className="text-[12px] text-slate-400">~</span>
+            <input type="date" value={to} min={from || bounds.min} max={bounds.max} onChange={(event) => setTo(event.target.value)} className={DATE_INPUT} aria-label="상장일 종료" />
+            {(from || to) && <button type="button" onClick={() => { setFrom(""); setTo(""); }} className="text-[12px] font-semibold text-slate-400 underline-offset-2 hover:text-slate-600 hover:underline">기간 해제</button>}
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-2 sm:w-44" />
+          </div>
         </div>
       </div>
       {sorted.length === 0 && (
