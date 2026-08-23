@@ -4017,9 +4017,9 @@
           "date": "2025-10-28",
           "date_display": "2025-10-28",
           "tradable_date": "2025-10-28",
-          "qty": 1823443,
+          "qty": 1685143,
           "unit": "주",
-          "pct": 7.62,
+          "pct": 7.04,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인",
@@ -4028,7 +4028,7 @@
           "rcp": "",
           "api_checked": true,
           "api_return_date": "2025-10-28",
-          "api_return_qty": 1823443,
+          "api_return_qty": 1685143,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
           "reason": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
@@ -4043,7 +4043,7 @@
             },
             {
               "reason": "주식매수선택권",
-              "qty": 268400
+              "qty": 130100
             }
           ]
         },
@@ -8315,9 +8315,9 @@
           "date": "2025-03-24",
           "date_display": "2025-03-24",
           "tradable_date": "2025-03-24",
-          "qty": 39006,
+          "qty": 16716,
           "unit": "주",
-          "pct": 0.41,
+          "pct": 0.17,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -8326,14 +8326,14 @@
           "rcp": "20241212000615",
           "api_checked": true,
           "api_return_date": "2025-03-24",
-          "api_return_qty": 39006,
+          "api_return_qty": 16716,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)",
           "reason_breakdown": [
             {
               "reason": "상장주선인(국내기업)",
-              "qty": 39006
+              "qty": 16716
             }
           ]
         },
