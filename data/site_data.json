@@ -2683,7 +2683,7 @@
           "pct": 29.17,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "예정",
+          "status": "확정(경과)",
           "source": "투자설명서",
           "source_label": "수기입력",
           "rcp": "",
@@ -26582,7 +26582,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 1400526
+            }
+          ],
           "release_close": 61300,
           "release_fluc_rt": 5.33
         },
@@ -26630,7 +26635,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 3501576
+            },
+            {
+              "reason": "상장주선인(국내기업)",
+              "qty": 38461
+            }
+          ],
           "release_close": 22600,
           "release_fluc_rt": -6.03
         },
