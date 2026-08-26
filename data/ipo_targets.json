@@ -37,6 +37,15 @@
   },
   {
     "market": "코스닥",
+    "name": "래블업",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
     "name": "멜콘",
     "listing_date": "",
     "code": "",
@@ -67,7 +76,7 @@
     "name": "스카이랩스",
     "listing_date": "",
     "code": "",
-    "manual_ipo_price": "",
+    "manual_ipo_price": "10000",
     "manual_ipo_price_locked": "N",
     "shares": ""
   },
