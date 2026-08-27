@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27 19:10",
+  "updated": "2026-08-28 05:51",
   "items": [
     {
       "corp_code": "00104069",
@@ -33,26 +33,6 @@
       "management_status": "자동",
       "schedule_hidden": false,
       "offering_attempt": 1,
-      "result_parse_version": 2
-    },
-    {
-      "corp_code": "01936340",
-      "name": "데이터젠",
-      "management_name": "데이터젠",
-      "first_filing_date": "20260129",
-      "last_rcept_no": "20260714000008",
-      "withdrawn": false,
-      "review_pending": true,
-      "management_status": "자동",
-      "offering_attempt": 1,
-      "payment_date": "2026-06-29",
-      "sub_start": "2026-06-29",
-      "sub_end": "2026-07-10",
-      "ipo_parse_version": 4,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "schedule_hidden": false,
       "result_parse_version": 2
     },
     {
@@ -17576,54 +17556,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "넥스트바이오메디컬",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "노머스",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "닷밀",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "루미르",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "뱅크웨어글로벌",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
       "name": "뱅크웨어글로벌",
       "type": "고정변경",
       "field": "ipo:6개월",
@@ -21568,6 +21500,54 @@
     },
     {
       "date": "2026-08-27",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-27",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-27",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-08-28",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-08-28",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-08-28",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-08-28",
       "name": "열매컴퍼니",
       "type": "검토대기",
       "field": "노출",
