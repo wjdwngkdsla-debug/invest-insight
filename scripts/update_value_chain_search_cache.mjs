@@ -254,7 +254,12 @@ const dryRun = process.argv.includes("--dry-run");
 const clientId = process.env.NAVER_CLIENT_ID;
 const clientSecret = process.env.NAVER_CLIENT_SECRET;
 if (!clientId || !clientSecret) {
-  throw new Error("NAVER_CLIENT_ID and NAVER_CLIENT_SECRET are required.");
+  // 검색 트렌드는 부가 지표다. 여기서 throw 하면 잡이 죽어 뒤따르는 KRX 거래대금·
+  // DART 재무 갱신까지 통째로 건너뛴다. 키가 없으면 이 단계만 건너뛴다.
+  console.warn(
+    "[naver-datalab] NAVER_CLIENT_ID/NAVER_CLIENT_SECRET missing; skipped search trend cache update",
+  );
+  process.exit(0);
 }
 
 const companies = readJson(path.join(dataDir, "companies.json"), []);

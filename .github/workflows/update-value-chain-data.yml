@@ -50,12 +50,18 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Update Naver search trend cache
+        # 세 캐시는 서로 독립이다. 하나가 실패해도 나머지는 갱신되게 둔다.
+        continue-on-error: true
         run: pnpm run value-chain:update-search
 
       - name: Update KRX trading value and return cache
+        # 세 캐시는 서로 독립이다. 하나가 실패해도 나머지는 갱신되게 둔다.
+        continue-on-error: true
         run: pnpm run value-chain:update-market
 
       - name: Update DART financial cache
+        # 세 캐시는 서로 독립이다. 하나가 실패해도 나머지는 갱신되게 둔다.
+        continue-on-error: true
         run: pnpm run value-chain:update-financials
 
       - name: Validate value-chain data

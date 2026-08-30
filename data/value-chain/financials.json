@@ -1,7 +1,7 @@
 [
   {
     "companyId": "samsung",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -10,26 +10,26 @@
     "marketCap": 15024936,
     "annual": {
       "sales": [
-        3022310,
-        2589350,
-        2581600
+        2589355,
+        3008709,
+        3336059
       ],
       "operatingProfit": [
-        433770,
         65670,
-        65670
+        327260,
+        436011
       ],
-      "opMargin": 2.5,
+      "opMargin": 13.1,
       "per": 18.4
     },
     "recentQuarter": {
-      "sales": 645400,
-      "operatingProfit": 16418
+      "sales": 1714995,
+      "operatingProfit": 894924
     }
   },
   {
     "companyId": "skhynix",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -38,26 +38,26 @@
     "marketCap": 12075039,
     "annual": {
       "sales": [
-        446216,
         327657,
-        327657
+        661930,
+        971467
       ],
       "operatingProfit": [
-        68094,
-        -77300,
-        -77300
+        -77303,
+        234673,
+        472063
       ],
-      "opMargin": -23.6,
+      "opMargin": 48.6,
       "per": 16.2
     },
     "recentQuarter": {
-      "sales": 81914,
-      "operatingProfit": -19325
+      "sales": 793187,
+      "operatingProfit": 605426
     }
   },
   {
     "companyId": "dbhitek",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -66,26 +66,26 @@
     "marketCap": 40851,
     "annual": {
       "sales": [
-        12147,
-        11578,
-        11578
+        11542,
+        11312,
+        13972
       ],
       "operatingProfit": [
-        7687,
-        2635,
-        2635
+        2654,
+        1908,
+        2773
       ],
-      "opMargin": 22.8,
+      "opMargin": 19.8,
       "per": 9.4
     },
     "recentQuarter": {
-      "sales": 2895,
-      "operatingProfit": 659
+      "sales": 4145,
+      "operatingProfit": 1052
     }
   },
   {
     "companyId": "lxsemicon",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -94,26 +94,26 @@
     "marketCap": 6050,
     "annual": {
       "sales": [
-        18988,
-        19015,
-        19015
+        19014,
+        18656,
+        16391
       ],
       "operatingProfit": [
-        3106,
         1290,
-        1290
+        1671,
+        1089
       ],
-      "opMargin": 6.8,
+      "opMargin": 6.6,
       "per": 10.8
     },
     "recentQuarter": {
-      "sales": 4754,
-      "operatingProfit": 323
+      "sales": 4012,
+      "operatingProfit": 220
     }
   },
   {
     "companyId": "telechips",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -122,21 +122,21 @@
     "marketCap": 1457,
     "annual": {
       "sales": [
-        1504,
         1911,
-        1911
+        1866,
+        1928
       ],
       "operatingProfit": [
-        92,
         168,
-        168
+        49,
+        -62
       ],
-      "opMargin": 8.8,
+      "opMargin": -3.2,
       "per": 18.1
     },
     "recentQuarter": {
-      "sales": 478,
-      "operatingProfit": 42
+      "sales": 592,
+      "operatingProfit": 32
     }
   },
   {
@@ -168,7 +168,7 @@
   },
   {
     "companyId": "wonikips",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -177,26 +177,26 @@
     "marketCap": 54532,
     "annual": {
       "sales": [
-        4552,
-        6193,
-        7704
+        6903,
+        7482,
+        9098
       ],
       "operatingProfit": [
-        862,
-        1249,
-        1695
+        -181,
+        106,
+        738
       ],
-      "opMargin": 22,
+      "opMargin": 8.1,
       "per": 13.8
     },
     "recentQuarter": {
-      "sales": 1926,
-      "operatingProfit": 424
+      "sales": 2165,
+      "operatingProfit": 184
     }
   },
   {
     "companyId": "jusung",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -205,26 +205,26 @@
     "marketCap": 9320,
     "annual": {
       "sales": [
-        5362,
-        6452,
-        7093
+        2847,
+        4094,
+        3107
       ],
       "operatingProfit": [
-        1051,
-        1150,
-        1262
+        289,
+        972,
+        313
       ],
-      "opMargin": 17.8,
+      "opMargin": 10.1,
       "per": 12.6
     },
     "recentQuarter": {
-      "sales": 1773,
-      "operatingProfit": 316
+      "sales": 599,
+      "operatingProfit": 14
     }
   },
   {
     "companyId": "hpsp",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -233,26 +233,26 @@
     "marketCap": 42055,
     "annual": {
       "sales": [
-        918,
-        1593,
-        1791
+        1791,
+        0,
+        1730
       ],
       "operatingProfit": [
-        452,
-        852,
-        980
+        952,
+        939,
+        899
       ],
-      "opMargin": 54.7,
+      "opMargin": 52.0,
       "per": 29.5
     },
     "recentQuarter": {
-      "sales": 448,
-      "operatingProfit": 245
+      "sales": 461,
+      "operatingProfit": 283
     }
   },
   {
     "companyId": "yujintech",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -261,26 +261,26 @@
     "marketCap": 6710,
     "annual": {
       "sales": [
-        2910,
-        3574,
-        4256
+        2765,
+        3381,
+        3503
       ],
       "operatingProfit": [
-        572,
-        685,
-        834
+        243,
+        612,
+        517
       ],
-      "opMargin": 19.6,
+      "opMargin": 14.7,
       "per": 11.2
     },
     "recentQuarter": {
-      "sales": 1064,
-      "operatingProfit": 209
+      "sales": 1221,
+      "operatingProfit": 182
     }
   },
   {
     "companyId": "psk",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -289,26 +289,26 @@
     "marketCap": 5940,
     "annual": {
       "sales": [
-        3312,
+        3519,
         3981,
-        4461
+        4572
       ],
       "operatingProfit": [
-        532,
-        642,
-        718
+        541,
+        839,
+        885
       ],
-      "opMargin": 16.1,
+      "opMargin": 19.4,
       "per": 10.5
     },
     "recentQuarter": {
-      "sales": 1115,
-      "operatingProfit": 180
+      "sales": 1675,
+      "operatingProfit": 503
     }
   },
   {
     "companyId": "kcTech",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -317,26 +317,26 @@
     "marketCap": 5100,
     "annual": {
       "sales": [
-        3850,
-        4020,
-        4480
+        2869,
+        3854,
+        3829
       ],
       "operatingProfit": [
-        510,
-        550,
-        640
+        327,
+        498,
+        600
       ],
-      "opMargin": 14.3,
+      "opMargin": 15.7,
       "per": 9.9
     },
     "recentQuarter": {
-      "sales": 1120,
-      "operatingProfit": 160
+      "sales": 1127,
+      "operatingProfit": 235
     }
   },
   {
     "companyId": "nextin",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -345,26 +345,26 @@
     "marketCap": 6900,
     "annual": {
       "sales": [
-        1146,
-        1495,
-        1660
+        879,
+        1137,
+        669
       ],
       "operatingProfit": [
-        512,
-        610,
-        682
+        362,
+        470,
+        -12
       ],
-      "opMargin": 41.1,
+      "opMargin": -1.7,
       "per": 17
     },
     "recentQuarter": {
-      "sales": 415,
-      "operatingProfit": 171
+      "sales": 208,
+      "operatingProfit": -8
     }
   },
   {
     "companyId": "hanmi",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -373,26 +373,26 @@
     "marketCap": 209210,
     "annual": {
       "sales": [
-        3276,
         1590,
-        5900
+        5589,
+        5767
       ],
       "operatingProfit": [
-        1118,
-        590,
-        2480
+        346,
+        2554,
+        2514
       ],
-      "opMargin": 42,
+      "opMargin": 43.6,
       "per": 38.2
     },
     "recentQuarter": {
-      "sales": 1475,
-      "operatingProfit": 620
+      "sales": 2512,
+      "operatingProfit": 1303
     }
   },
   {
     "companyId": "sfa",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -401,26 +401,26 @@
     "marketCap": 8900,
     "annual": {
       "sales": [
-        6994,
-        6699,
-        7030
+        4376,
+        4005,
+        3674
       ],
       "operatingProfit": [
-        629,
-        400,
-        520
+        -167,
+        0,
+        -196
       ],
-      "opMargin": 7.4,
+      "opMargin": -5.3,
       "per": 15.3
     },
     "recentQuarter": {
-      "sales": 1758,
-      "operatingProfit": 130
+      "sales": 1263,
+      "operatingProfit": -62
     }
   },
   {
     "companyId": "isc",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -429,26 +429,26 @@
     "marketCap": 36756,
     "annual": {
       "sales": [
-        1790,
-        2300,
-        2480
+        1402,
+        1745,
+        2202
       ],
       "operatingProfit": [
-        520,
-        615,
-        710
+        107,
+        448,
+        601
       ],
-      "opMargin": 28.6,
+      "opMargin": 27.3,
       "per": 16.9
     },
     "recentQuarter": {
-      "sales": 620,
-      "operatingProfit": 178
+      "sales": 729,
+      "operatingProfit": 213
     }
   },
   {
     "companyId": "leeno",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -457,26 +457,26 @@
     "marketCap": 50910,
     "annual": {
       "sales": [
-        2802,
         2556,
-        3001
+        2782,
+        3725
       ],
       "operatingProfit": [
-        1171,
-        1040,
-        1220
+        1144,
+        1242,
+        1770
       ],
-      "opMargin": 40.7,
+      "opMargin": 47.5,
       "per": 24.1
     },
     "recentQuarter": {
-      "sales": 750,
-      "operatingProfit": 305
+      "sales": 1432,
+      "operatingProfit": 735
     }
   },
   {
     "companyId": "wits",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -485,26 +485,26 @@
     "marketCap": 2400,
     "annual": {
       "sales": [
-        580,
-        730,
-        850
+        623,
+        703,
+        831
       ],
       "operatingProfit": [
-        48,
-        62,
-        88
+        -78,
+        -82,
+        -18
       ],
-      "opMargin": 10.4,
+      "opMargin": -2.1,
       "per": 21.5
     },
     "recentQuarter": {
-      "sales": 213,
-      "operatingProfit": 22
+      "sales": 271,
+      "operatingProfit": 21
     }
   },
   {
     "companyId": "wonikmaterials",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -513,21 +513,21 @@
     "marketCap": 4161,
     "annual": {
       "sales": [
-        3140,
-        3608,
-        3801
+        3917,
+        3107,
+        3225
       ],
       "operatingProfit": [
-        563,
-        589,
-        620
+        247,
+        519,
+        565
       ],
-      "opMargin": 16.3,
+      "opMargin": 17.5,
       "per": 8.8
     },
     "recentQuarter": {
-      "sales": 950,
-      "operatingProfit": 155
+      "sales": 923,
+      "operatingProfit": 146
     }
   },
   {
@@ -559,7 +559,7 @@
   },
   {
     "companyId": "dongjin",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -568,26 +568,26 @@
     "marketCap": 21611,
     "annual": {
       "sales": [
-        14700,
-        15100,
-        16600
+        13099,
+        14081,
+        11941
       ],
       "operatingProfit": [
-        1880,
-        1930,
-        2140
+        1762,
+        2082,
+        1724
       ],
-      "opMargin": 12.9,
+      "opMargin": 14.4,
       "per": 17.2
     },
     "recentQuarter": {
-      "sales": 4150,
-      "operatingProfit": 535
+      "sales": 3469,
+      "operatingProfit": 593
     }
   },
   {
     "companyId": "tes",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -596,21 +596,21 @@
     "marketCap": 27627,
     "annual": {
       "sales": [
-        3410,
-        3560,
-        3820
+        1469,
+        2401,
+        3511
       ],
       "operatingProfit": [
-        420,
-        455,
-        510
+        -59,
+        385,
+        578
       ],
-      "opMargin": 13.4,
+      "opMargin": 16.5,
       "per": 10.8
     },
     "recentQuarter": {
-      "sales": 955,
-      "operatingProfit": 128
+      "sales": 1237,
+      "operatingProfit": 260
     }
   },
   {
@@ -642,7 +642,7 @@
   },
   {
     "companyId": "zeus",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -651,26 +651,26 @@
     "marketCap": 3192,
     "annual": {
       "sales": [
-        5100,
-        5480,
-        6020
+        4029,
+        4908,
+        3833
       ],
       "operatingProfit": [
-        410,
-        510,
-        640
+        71,
+        492,
+        -45
       ],
-      "opMargin": 10.6,
+      "opMargin": -1.2,
       "per": 13.1
     },
     "recentQuarter": {
-      "sales": 1505,
-      "operatingProfit": 160
+      "sales": 824,
+      "operatingProfit": -96
     }
   },
   {
     "companyId": "auros",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -679,26 +679,26 @@
     "marketCap": 2600,
     "annual": {
       "sales": [
-        390,
-        520,
-        610
+        455,
+        614,
+        521
       ],
       "operatingProfit": [
-        42,
-        58,
-        75
+        24,
+        61,
+        -84
       ],
-      "opMargin": 12.3,
+      "opMargin": -16.1,
       "per": 24.5
     },
     "recentQuarter": {
-      "sales": 153,
-      "operatingProfit": 19
+      "sales": 114,
+      "operatingProfit": -23
     }
   },
   {
     "companyId": "parksystems",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -707,26 +707,26 @@
     "marketCap": 15300,
     "annual": {
       "sales": [
-        1100,
-        1240,
-        1450
+        1448,
+        1751,
+        2056
       ],
       "operatingProfit": [
-        240,
-        285,
-        340
+        276,
+        385,
+        422
       ],
-      "opMargin": 23.4,
+      "opMargin": 20.5,
       "per": 32.1
     },
     "recentQuarter": {
-      "sales": 363,
-      "operatingProfit": 85
+      "sales": 530,
+      "operatingProfit": 42
     }
   },
   {
     "companyId": "exicon",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -735,26 +735,26 @@
     "marketCap": 2800,
     "annual": {
       "sales": [
-        930,
-        1090,
-        1260
+        823,
+        316,
+        660
       ],
       "operatingProfit": [
-        88,
-        112,
-        145
+        15,
+        -159,
+        1
       ],
-      "opMargin": 11.5,
+      "opMargin": 0.1,
       "per": 16.8
     },
     "recentQuarter": {
       "sales": 315,
-      "operatingProfit": 36
+      "operatingProfit": 41
     }
   },
   {
     "companyId": "unitest",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -763,26 +763,26 @@
     "marketCap": 3100,
     "annual": {
       "sales": [
-        1200,
-        1380,
-        1510
+        1678,
+        924,
+        1102
       ],
       "operatingProfit": [
-        70,
-        110,
-        150
+        71,
+        -234,
+        -211
       ],
-      "opMargin": 9.9,
+      "opMargin": -19.1,
       "per": 18.7
     },
     "recentQuarter": {
-      "sales": 378,
-      "operatingProfit": 38
+      "sales": 505,
+      "operatingProfit": 79
     }
   },
   {
     "companyId": "eotechnics",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -791,26 +791,26 @@
     "marketCap": 19800,
     "annual": {
       "sales": [
-        3650,
-        4120,
-        4680
+        3164,
+        3209,
+        3809
       ],
       "operatingProfit": [
-        780,
-        900,
-        1020
+        283,
+        312,
+        808
       ],
-      "opMargin": 21.8,
+      "opMargin": 21.2,
       "per": 22.4
     },
     "recentQuarter": {
-      "sales": 1170,
-      "operatingProfit": 255
+      "sales": 1278,
+      "operatingProfit": 391
     }
   },
   {
     "companyId": "nepes",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -819,26 +819,26 @@
     "marketCap": 4500,
     "annual": {
       "sales": [
-        5200,
-        5480,
-        5710
+        4801,
+        4643,
+        5214
       ],
       "operatingProfit": [
-        -120,
-        80,
-        180
+        -700,
+        34,
+        238
       ],
-      "opMargin": 3.2,
+      "opMargin": 4.6,
       "per": 28.6
     },
     "recentQuarter": {
-      "sales": 1428,
-      "operatingProfit": 45
+      "sales": 1537,
+      "operatingProfit": 146
     }
   },
   {
     "companyId": "simmtech",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -847,26 +847,26 @@
     "marketCap": 9800,
     "annual": {
       "sales": [
-        16900,
-        12800,
-        15100
+        10419,
+        12314,
+        14106
       ],
       "operatingProfit": [
-        2400,
-        680,
-        1320
+        -881,
+        -470,
+        119
       ],
-      "opMargin": 8.7,
+      "opMargin": 0.8,
       "per": 15.4
     },
     "recentQuarter": {
-      "sales": 3775,
-      "operatingProfit": 330
+      "sales": 5146,
+      "operatingProfit": 629
     }
   },
   {
     "companyId": "daeduck",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -875,26 +875,26 @@
     "marketCap": 8900,
     "annual": {
       "sales": [
-        13100,
-        11900,
-        13600
+        9097,
+        8921,
+        10653
       ],
       "operatingProfit": [
-        2300,
-        820,
-        1150
+        237,
+        113,
+        491
       ],
-      "opMargin": 8.5,
+      "opMargin": 4.6,
       "per": 14.2
     },
     "recentQuarter": {
-      "sales": 3400,
-      "operatingProfit": 288
+      "sales": 4010,
+      "operatingProfit": 703
     }
   },
   {
     "companyId": "koreaCircuit",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -903,26 +903,26 @@
     "marketCap": 4100,
     "annual": {
       "sales": [
-        16200,
-        14900,
-        15600
+        13322,
+        14070,
+        15097
       ],
       "operatingProfit": [
-        900,
-        420,
-        610
+        -321,
+        -332,
+        538
       ],
-      "opMargin": 3.9,
+      "opMargin": 3.6,
       "per": 18.3
     },
     "recentQuarter": {
-      "sales": 3900,
-      "operatingProfit": 153
+      "sales": 4072,
+      "operatingProfit": 193
     }
   },
   {
     "companyId": "mecaro",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -931,26 +931,26 @@
     "marketCap": 950,
     "annual": {
       "sales": [
-        730,
-        820,
-        910
+        408,
+        629,
+        946
       ],
       "operatingProfit": [
-        42,
-        55,
-        68
+        -85,
+        41,
+        154
       ],
-      "opMargin": 7.5,
+      "opMargin": 16.2,
       "per": 14.2
     },
     "recentQuarter": {
-      "sales": 228,
-      "operatingProfit": 17
+      "sales": 253,
+      "operatingProfit": 45
     }
   },
   {
     "companyId": "wonikqnc",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -959,26 +959,26 @@
     "marketCap": 8600,
     "annual": {
       "sales": [
-        7100,
-        7820,
-        8400
+        8059,
+        8915,
+        9436
       ],
       "operatingProfit": [
-        1120,
-        1260,
-        1380
+        830,
+        906,
+        596
       ],
-      "opMargin": 16.4,
+      "opMargin": 6.3,
       "per": 13.6
     },
     "recentQuarter": {
-      "sales": 2100,
-      "operatingProfit": 345
+      "sales": 2719,
+      "operatingProfit": 309
     }
   },
   {
     "companyId": "mico",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -987,26 +987,26 @@
     "marketCap": 4100,
     "annual": {
       "sales": [
-        3200,
-        3480,
-        3790
+        3873,
+        5405,
+        9770
       ],
       "operatingProfit": [
-        280,
-        325,
-        370
+        211,
+        946,
+        1010
       ],
-      "opMargin": 9.8,
+      "opMargin": 10.3,
       "per": 15.8
     },
     "recentQuarter": {
-      "sales": 948,
-      "operatingProfit": 93
+      "sales": 3492,
+      "operatingProfit": 195
     }
   },
   {
     "companyId": "snstech",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -1015,26 +1015,26 @@
     "marketCap": 8790,
     "annual": {
       "sales": [
-        1270,
-        1450,
-        1630
+        1503,
+        1760,
+        2437
       ],
       "operatingProfit": [
-        220,
-        270,
-        330
+        250,
+        295,
+        504
       ],
-      "opMargin": 20.2,
+      "opMargin": 20.7,
       "per": 25.1
     },
     "recentQuarter": {
-      "sales": 408,
-      "operatingProfit": 83
+      "sales": 664,
+      "operatingProfit": 136
     }
   },
   {
     "companyId": "fst",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -1043,26 +1043,26 @@
     "marketCap": 6200,
     "annual": {
       "sales": [
-        2100,
-        2360,
-        2650
+        1976,
+        2374,
+        2803
       ],
       "operatingProfit": [
-        240,
-        280,
-        330
+        -108,
+        23,
+        -5
       ],
-      "opMargin": 12.5,
+      "opMargin": -0.2,
       "per": 19.3
     },
     "recentQuarter": {
-      "sales": 663,
-      "operatingProfit": 83
+      "sales": 893,
+      "operatingProfit": 96
     }
   },
   {
     "companyId": "foosung",
-    "asOf": "DART/KRX 자동 수집 예정",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -1071,26 +1071,26 @@
     "marketCap": 7900,
     "annual": {
       "sales": [
-        6100,
-        6500,
-        7030
+        5232,
+        4378,
+        4716
       ],
       "operatingProfit": [
-        420,
-        510,
-        590
+        -461,
+        -96,
+        253
       ],
-      "opMargin": 8.4,
+      "opMargin": 5.4,
       "per": 17.5
     },
     "recentQuarter": {
-      "sales": 1758,
-      "operatingProfit": 148
+      "sales": 1882,
+      "operatingProfit": 234
     }
   },
   {
     "companyId": "soulbrain",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -1099,26 +1099,26 @@
     "marketCap": 26953,
     "annual": {
       "sales": [
-        10700,
-        11600,
-        12400
+        8440,
+        8634,
+        9234
       ],
       "operatingProfit": [
-        2100,
-        2380,
-        2620
+        1335,
+        1679,
+        1336
       ],
-      "opMargin": 21.1,
+      "opMargin": 14.5,
       "per": 14.6
     },
     "recentQuarter": {
-      "sales": 3100,
-      "operatingProfit": 655
+      "sales": 3120,
+      "operatingProfit": 460
     }
   },
   {
     "companyId": "enf",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
       "dart-financials",
@@ -1127,21 +1127,21 @@
     "marketCap": 6465,
     "annual": {
       "sales": [
-        5200,
-        5480,
-        5850
+        5748,
+        5824,
+        6709
       ],
       "operatingProfit": [
-        330,
-        390,
-        450
+        247,
+        593,
+        781
       ],
-      "opMargin": 7.7,
+      "opMargin": 11.6,
       "per": 12.2
     },
     "recentQuarter": {
-      "sales": 1463,
-      "operatingProfit": 113
+      "sales": 1790,
+      "operatingProfit": 273
     }
   },
   {
@@ -1551,562 +1551,562 @@
   },
   {
     "companyId": "gncenergy",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 8586,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        1664,
+        2263,
+        2626
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        110,
+        317,
+        494
       ],
-      "opMargin": 0,
+      "opMargin": 18.8,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 665,
+      "operatingProfit": 102
     }
   },
   {
     "companyId": "hanwhaaero",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 596589,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        93590,
+        112401,
+        267029
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        6911,
+        17319,
+        30893
       ],
-      "opMargin": 0,
+      "opMargin": 11.6,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 92929,
+      "operatingProfit": 13655
     }
   },
   {
     "companyId": "lignex1",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 161480,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        23086,
+        32763,
+        43069
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        1864,
+        2298,
+        3194
       ],
-      "opMargin": 0,
+      "opMargin": 7.4,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 11101,
+      "operatingProfit": 1057
     }
   },
   {
     "companyId": "hyundairotem",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 151817,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        35874,
+        43766,
+        58390
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        2100,
+        4566,
+        10056
       ],
-      "opMargin": 0,
+      "opMargin": 17.2,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 16061,
+      "operatingProfit": 2324
     }
   },
   {
     "companyId": "koreaaerospace",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 129739,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        38193,
+        36337,
+        36964
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        2475,
+        2407,
+        2692
       ],
-      "opMargin": 0,
+      "opMargin": 7.3,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 11679,
+      "operatingProfit": 484
     }
   },
   {
     "companyId": "hanwhasystems",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 143201,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        24531,
+        28037,
+        36642
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        929,
+        2193,
+        1199
       ],
-      "opMargin": 0,
+      "opMargin": 3.3,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 11176,
+      "operatingProfit": 1037
     }
   },
   {
     "companyId": "poongsan",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 24213,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        41253,
+        45544,
+        50486
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        2286,
+        3238,
+        2974
       ],
-      "opMargin": 0,
+      "opMargin": 5.9,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 14703,
+      "operatingProfit": 1252
     }
   },
   {
     "companyId": "sntdynamics",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 10192,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        4860,
+        6145,
+        7120
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        416,
+        1105,
+        855
       ],
-      "opMargin": 0,
+      "opMargin": 12.0,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 1963,
+      "operatingProfit": 172
     }
   },
   {
     "companyId": "soil",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 167974,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        357267,
+        366370,
+        342470
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        13546,
+        4222,
+        2356
       ],
-      "opMargin": 0,
+      "opMargin": 0.7,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 113435,
+      "operatingProfit": 9650
     }
   },
   {
     "companyId": "skinnovation",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 197623,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        772885,
+        747170,
+        802961
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        19039,
+        3155,
+        4487
       ],
-      "opMargin": 0,
+      "opMargin": 0.6,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 291572,
+      "operatingProfit": 34873
     }
   },
   {
     "companyId": "gs",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 120021,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        259785,
+        252975,
+        251841
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        37218,
+        30602,
+        29361
       ],
-      "opMargin": 0,
+      "opMargin": 11.7,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 74131,
+      "operatingProfit": 17174
     }
   },
   {
     "companyId": "koreaPetroleum",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 1428,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        6792,
+        7212,
+        6969
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        152,
+        139,
+        118
       ],
-      "opMargin": 0,
+      "opMargin": 1.7,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 2316,
+      "operatingProfit": 138
     }
   },
   {
     "companyId": "heungguOil",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 1492,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        1267,
+        1169,
+        1079
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        1,
+        -3,
+        -10
       ],
-      "opMargin": 0,
+      "opMargin": -0.9,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 274,
+      "operatingProfit": -7
     }
   },
   {
     "companyId": "joongangEnergy",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 723,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        555,
+        498,
+        496
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        -7,
+        -17,
+        -17
       ],
-      "opMargin": 0,
+      "opMargin": -3.5,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 150,
+      "operatingProfit": -10
     }
   },
   {
     "companyId": "daesungEnergy",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 1906,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        9995,
+        9951,
+        10179
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        204,
+        205,
+        303
       ],
-      "opMargin": 0,
+      "opMargin": 3.0,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 1610,
+      "operatingProfit": 27
     }
   },
   {
     "companyId": "poscointl",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 92711,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        331328,
+        323408,
+        323736
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        11631,
+        11169,
+        11653
       ],
-      "opMargin": 0,
+      "opMargin": 3.6,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 96232,
+      "operatingProfit": 4290
     }
   },
   {
     "companyId": "lxintl",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 14961,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        145143,
+        166376,
+        167063
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        4331,
+        4892,
+        2922
       ],
-      "opMargin": 0,
+      "opMargin": 1.7,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 47763,
+      "operatingProfit": 1178
     }
   },
   {
     "companyId": "koreazinc",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 287003,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        97045,
+        120529,
+        165879
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        6599,
+        7235,
+        12319
       ],
-      "opMargin": 0,
+      "opMargin": 7.4,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 63726,
+      "operatingProfit": 5871
     }
   },
   {
     "companyId": "lsEcoEnergy",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 14057,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        7311,
+        8690,
+        9601
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        295,
+        448,
+        668
       ],
-      "opMargin": 0,
+      "opMargin": 7.0,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 3503,
+      "operatingProfit": 253
     }
   },
   {
     "companyId": "hyundaiEngineering",
-    "asOf": "KRX 2026-08-28",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
     "status": "needsReview",
     "sourceIds": [
-      "krx-market",
-      "dart-financials"
+      "dart-financials",
+      "krx-market"
     ],
     "marketCap": 143538,
     "annual": {
       "sales": [
-        0,
-        0,
-        0
+        296514,
+        326703,
+        310629
       ],
       "operatingProfit": [
-        0,
-        0,
-        0
+        7854,
+        -12634,
+        6530
       ],
-      "opMargin": 0,
+      "opMargin": 2.1,
       "per": null
     },
     "recentQuarter": {
-      "sales": 0,
-      "operatingProfit": 0
+      "sales": 68423,
+      "operatingProfit": 2618
     }
   }
 ]
