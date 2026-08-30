@@ -1407,5 +1407,98 @@
     "processIds": [
       "issue-mongolia-resource"
     ]
+  },
+  {
+    "id": "spg",
+    "name": "에스피지",
+    "ticker": "058610",
+    "layer": "theme",
+    "role": "정밀 감속기·모터",
+    "roleDetail": "로봇 관절 구동에 필요한 정밀 감속기와 모터 부품을 공급해 산업용·서비스 로봇 테마와 연결됩니다.",
+    "processIds": [
+      "theme-robot"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "robot-theme-seed"
+    ]
+  },
+  {
+    "id": "rainbowrobotics",
+    "name": "레인보우로보틱스",
+    "ticker": "277810",
+    "layer": "theme",
+    "role": "협동로봇·휴머노이드",
+    "roleDetail": "협동로봇과 이족보행·휴머노이드 로봇 플랫폼을 보유한 국내 대표 로봇 기업입니다.",
+    "processIds": [
+      "theme-robot"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "robot-theme-seed"
+    ]
+  },
+  {
+    "id": "robotis",
+    "name": "로보티즈",
+    "ticker": "108490",
+    "layer": "theme",
+    "role": "로봇 액추에이터·자율주행로봇",
+    "roleDetail": "로봇 액추에이터와 자율주행 로봇 사업을 함께 보유해 서비스 로봇 상용화 테마와 연결됩니다.",
+    "processIds": [
+      "theme-robot"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "robot-theme-seed"
+    ]
+  },
+  {
+    "id": "higenrnm",
+    "name": "하이젠알앤엠",
+    "ticker": "160190",
+    "layer": "theme",
+    "role": "로봇용 액추에이터·서보모터",
+    "roleDetail": "로봇 관절과 자동화 장비에 쓰이는 액추에이터·서보모터 공급망으로 휴머노이드 로봇 부품 테마와 연결됩니다.",
+    "processIds": [
+      "theme-robot"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "robot-theme-seed"
+    ],
+    "aliases": [
+      "하이젠알엔엠"
+    ]
+  },
+  {
+    "id": "clobot",
+    "name": "클로봇",
+    "ticker": "466100",
+    "layer": "theme",
+    "role": "로봇 자율주행·관제 솔루션",
+    "roleDetail": "서비스 로봇의 자율주행, 관제, 운영 솔루션을 제공해 로봇 상용화 테마와 연결됩니다.",
+    "processIds": [
+      "theme-robot"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "robot-theme-seed"
+    ]
   }
 ]

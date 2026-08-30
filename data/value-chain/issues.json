@@ -563,15 +563,17 @@
     "topicId": "theme-robot",
     "title": "로봇",
     "category": "테마",
-    "description": "산업 자동화와 휴머노이드 기대감이 센서, 제어칩, 자동화 장비로 확장되는 테마입니다.",
+    "description": "휴머노이드와 산업 자동화 투자 기대감이 감속기, 액추에이터, 협동로봇, 자율주행·관제 솔루션 기업으로 확장되는 테마입니다.",
     "companyIds": [
-      "samsung",
-      "telechips",
-      "zeus"
+      "spg",
+      "rainbowrobotics",
+      "robotis",
+      "higenrnm",
+      "clobot"
     ],
     "relatedTopicIds": [
-      "issue-ondevice",
-      "cleaning"
+      "theme-robot",
+      "issue-ondevice"
     ],
     "returnScore": 3.5,
     "searchScore": 3.8,

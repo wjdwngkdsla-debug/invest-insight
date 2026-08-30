@@ -22,6 +22,7 @@ jobs:
       DART_API_KEY: ${{ secrets.DART_API_KEY }}
       NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
       NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+      NAVER: ${{ secrets.NAVER }}
       NAVER_DATALAB_MONTHLY_LIMIT: ${{ secrets.NAVER_DATALAB_MONTHLY_LIMIT || '30000' }}
 
     steps:
@@ -48,6 +49,23 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           python -m pip install -r requirements.txt
+
+      - name: Load combined Naver secret
+        shell: bash
+        run: |
+          if [ -z "${NAVER_CLIENT_ID:-}" ] || [ -z "${NAVER_CLIENT_SECRET:-}" ]; then
+            if [ -n "${NAVER:-}" ]; then
+              while IFS='=' read -r key value; do
+                case "$key" in
+                  NAVER_CLIENT_ID|NAVER_CLIENT_SECRET|NAVER_DATALAB_MONTHLY_LIMIT|NAVER_DATALAB_DAILY_LIMIT|NAVER_DATALAB_API_URL)
+                    if [ -n "$value" ]; then
+                      echo "$key=$value" >> "$GITHUB_ENV"
+                    fi
+                    ;;
+                esac
+              done <<< "$NAVER"
+            fi
+          fi
 
       - name: Update Naver search trend cache
         # 세 캐시는 서로 독립이다. 하나가 실패해도 나머지는 갱신되게 둔다.

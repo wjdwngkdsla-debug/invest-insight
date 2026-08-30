@@ -130,15 +130,35 @@ export interface ValueChainCompanyMetricCache {
   role: string;
   relation: string;
   score: number;
-  week: {
+  day?: {
     searchIndex: ValueChainMetricPoint[];
     tradingValueIndex: ValueChainMetricPoint[];
     returnPct: number;
+    currentPrice?: number;
   };
-  month: {
+  week?: {
     searchIndex: ValueChainMetricPoint[];
     tradingValueIndex: ValueChainMetricPoint[];
     returnPct: number;
+    currentPrice?: number;
+  };
+  month?: {
+    searchIndex: ValueChainMetricPoint[];
+    tradingValueIndex: ValueChainMetricPoint[];
+    returnPct: number;
+    currentPrice?: number;
+  };
+  quarter?: {
+    searchIndex: ValueChainMetricPoint[];
+    tradingValueIndex: ValueChainMetricPoint[];
+    returnPct: number;
+    currentPrice?: number;
+  };
+  half?: {
+    searchIndex: ValueChainMetricPoint[];
+    tradingValueIndex: ValueChainMetricPoint[];
+    returnPct: number;
+    currentPrice?: number;
   };
 }
 

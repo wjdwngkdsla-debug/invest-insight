@@ -22,7 +22,7 @@ export default function NavTabs() {
         IPO 랭킹
       </Link>
       <Link href="/value-chain" className={`${TAB_BASE} ${valueChainActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
-        밸류체인
+        테마맵
       </Link>
       <Link
         href="https://blog.naver.com/vericap"

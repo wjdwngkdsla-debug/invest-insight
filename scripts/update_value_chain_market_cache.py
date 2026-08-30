@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -33,11 +33,44 @@ def write_json(name: str, data) -> None:
         f.write("\n")
 
 
-def trading_days(krx_snapshot, days: int = 45) -> list[tuple[str, dict]]:
-    today = datetime.now(ZoneInfo("Asia/Seoul"))
+def latest_cached_date(metrics: dict) -> date | None:
+    dates: list[str] = []
+    for issue in metrics.get("issues", []):
+        for company in issue.get("companies", []):
+            for period in ("day", "week", "month", "quarter", "half"):
+                for point in company.get(period, {}).get("tradingValueIndex", []):
+                    if point.get("date"):
+                        dates.append(point["date"])
+    if not dates:
+        return None
+    try:
+        return date.fromisoformat(max(dates))
+    except ValueError:
+        return None
+
+
+def find_anchor_date(krx_snapshot, metrics: dict, lookback_days: int = 12) -> date:
+    today = datetime.now(ZoneInfo("Asia/Seoul")).date()
+    cached = latest_cached_date(metrics)
+    if cached and 0 <= (today - cached).days <= lookback_days:
+        return cached
+    for back in range(lookback_days + 1):
+        target = today - timedelta(days=back)
+        snap = krx_snapshot(target.strftime("%Y%m%d"))
+        if snap:
+            return target
+    if cached:
+        return cached
+    raise RuntimeError("KRX snapshots not available")
+
+
+def trading_days(krx_snapshot, metrics: dict, days: int | None = None) -> list[tuple[str, dict]]:
+    if days is None:
+        days = int(os.getenv("VALUE_CHAIN_KRX_LOOKBACK_DAYS", "70"))
+    anchor = find_anchor_date(krx_snapshot, metrics)
     out: list[tuple[str, dict]] = []
     for back in range(days):
-        bas_dd = (today - timedelta(days=back)).strftime("%Y%m%d")
+        bas_dd = (anchor - timedelta(days=back)).strftime("%Y%m%d")
         snap = krx_snapshot(bas_dd)
         if snap:
             out.append((f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:8]}", snap))
@@ -45,8 +78,16 @@ def trading_days(krx_snapshot, days: int = 45) -> list[tuple[str, dict]]:
 
 
 def period_points(days: list[tuple[str, dict]], period: str) -> list[tuple[str, dict]]:
+    if period == "day":
+        return days[-2:]
     if period == "week":
         return days[-7:]
+    if period == "month":
+        return days[-22:]
+    if period == "quarter":
+        return days[-66:]
+    if period == "half":
+        return days[-132:]
     return days[-22:]
 
 
@@ -81,6 +122,7 @@ def build_company_market_series(ticker: str, days: list[tuple[str, dict]], perio
     return {
         "tradingValueIndex": values,
         "returnPct": pct_change(closes[0], closes[-1]) if len(closes) >= 2 else 0.0,
+        "currentPrice": closes[-1] if closes else None,
         "marketCap": market_caps[-1] if market_caps else None,
     }
 
@@ -113,7 +155,10 @@ def ensure_metric_groups(metrics: dict, issues: list[dict], companies_by_id: dic
             metric_groups_by_id[issue_id] = group
 
         metrics_by_company = {item.get("companyId"): item for item in group.get("companies", [])}
-        for company_id in issue.get("companyIds", []):
+        valid_company_ids = [company_id for company_id in issue.get("companyIds", []) if company_id in companies_by_id]
+        group["companies"] = [item for item in group.get("companies", []) if item.get("companyId") in valid_company_ids]
+        metrics_by_company = {item.get("companyId"): item for item in group.get("companies", [])}
+        for company_id in valid_company_ids:
             company = companies_by_id.get(company_id)
             if not company or company_id in metrics_by_company:
                 continue
@@ -130,6 +175,21 @@ def ensure_metric_groups(metrics: dict, issues: list[dict], companies_by_id: dic
                         "returnPct": 0,
                     },
                     "month": {
+                        "searchIndex": [],
+                        "tradingValueIndex": [],
+                        "returnPct": 0,
+                    },
+                    "day": {
+                        "searchIndex": [],
+                        "tradingValueIndex": [],
+                        "returnPct": 0,
+                    },
+                    "quarter": {
+                        "searchIndex": [],
+                        "tradingValueIndex": [],
+                        "returnPct": 0,
+                    },
+                    "half": {
                         "searchIndex": [],
                         "tradingValueIndex": [],
                         "returnPct": 0,
@@ -153,7 +213,7 @@ def main() -> None:
     companies_by_id = {item["id"]: item for item in companies}
     financials_by_id = {item["companyId"]: item for item in financials}
     ensure_metric_groups(metrics, issues, companies_by_id)
-    days = trading_days(krx_snapshot)
+    days = trading_days(krx_snapshot, metrics)
     if not days:
         raise RuntimeError("KRX snapshots not available")
 
@@ -167,11 +227,14 @@ def main() -> None:
             ticker = company.get("ticker") if company else None
             if not ticker:
                 continue
-            for period in ("week", "month"):
+            for period in ("day", "week", "month", "quarter", "half"):
+                metric.setdefault(period, {"searchIndex": [], "tradingValueIndex": [], "returnPct": 0})
                 market = build_company_market_series(ticker, days, period)
                 if market["tradingValueIndex"]:
                     metric[period]["tradingValueIndex"] = market["tradingValueIndex"]
                     metric[period]["returnPct"] = market["returnPct"]
+                    if market["currentPrice"]:
+                        metric[period]["currentPrice"] = market["currentPrice"]
                     updated_metric_rows += 1
                 if market["marketCap"] and company["id"] in financials_by_id:
                     financials_by_id[company["id"]]["marketCap"] = round(market["marketCap"] / KRW_EOK)

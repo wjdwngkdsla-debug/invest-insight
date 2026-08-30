@@ -692,23 +692,29 @@
     "subtitle": "테마",
     "kind": "theme",
     "mode": "theme",
-    "note": "자동화, 휴머노이드, 산업용 로봇 투자 사이클과 반도체·센서 수요가 연결됩니다.",
+    "note": "감속기, 액추에이터, 협동로봇, 자율주행·관제 솔루션으로 이어지는 국내 로봇 테마입니다.",
     "layer": "product",
     "x": 60,
     "y": 80,
     "companyIds": [
-      "samsung",
-      "telechips"
+      "spg",
+      "rainbowrobotics",
+      "robotis",
+      "higenrnm",
+      "clobot"
     ],
     "keywords": [
-      "theme",
-      "theme",
-      "테마"
+      "로봇",
+      "휴머노이드",
+      "협동로봇",
+      "로봇 감속기",
+      "로봇 액추에이터",
+      "서비스 로봇"
     ],
-    "description": "자동화, 휴머노이드, 산업용 로봇 투자 사이클과 반도체·센서 수요가 연결됩니다.",
-    "dataStatus": "draft",
+    "description": "감속기, 액추에이터, 협동로봇, 자율주행·관제 솔루션으로 이어지는 국내 로봇 테마입니다.",
+    "dataStatus": "needsReview",
     "sourceIds": [
-      "manual-demo"
+      "robot-theme-seed"
     ],
     "layerType": "theme"
   },

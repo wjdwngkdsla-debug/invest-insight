@@ -17,7 +17,8 @@ import {
 } from "@/lib/valueChain";
 
 type Metric = "search" | "volume" | "return";
-type Period = "week" | "month";
+type Period = "day" | "week" | "month" | "quarter" | "half";
+type ViewMode = "map" | "returns";
 type OrbitCategory = "산업" | "섹터" | "관련주" | "이슈";
 
 interface Company {
@@ -87,6 +88,13 @@ const CHART_COLORS = ["#60a5fa", "#a78bfa", "#34d399", "#fb923c", "#f472b6", "#3
 const DEFAULT_DETAIL_PANEL_WIDTH = 980;
 const MIN_DETAIL_PANEL_WIDTH = 560;
 const MAX_DETAIL_PANEL_WIDTH = 1180;
+const PERIOD_OPTIONS: Array<{ value: Period; label: string }> = [
+  { value: "day", label: "1일" },
+  { value: "week", label: "1주일" },
+  { value: "month", label: "1개월" },
+  { value: "quarter", label: "3개월" },
+  { value: "half", label: "6개월" },
+];
 
 function scoreCompany(company: ValueChainCompany) {
   const returnScore = company.oneYearReturn ? Math.min(Math.max(company.oneYearReturn, -30), 80) : 0;
@@ -180,8 +188,9 @@ function issueReturnCount(issue: Issue, period: Period) {
 }
 
 function generateSeries(issue: Issue, company: Company, metric: Metric, period: Period, index: number) {
-  const length = period === "week" ? 7 : 5;
-  const periodScale = period === "month" ? (metric === "volume" ? 2.15 : metric === "search" ? 1.85 : 1.45) : 1;
+  const length = period === "day" ? 2 : period === "week" ? 7 : period === "month" ? 5 : period === "quarter" ? 13 : 6;
+  const periodScale =
+    period === "half" ? 2.4 : period === "quarter" ? 2 : period === "month" ? (metric === "volume" ? 2.15 : metric === "search" ? 1.85 : 1.45) : period === "day" ? 0.28 : 1;
   const base =
     metric === "return"
       ? company.returnPct * 0.42
@@ -209,7 +218,11 @@ function fmtPct(value: number) {
 }
 
 function periodReturn(value: number, period: Period) {
-  return period === "month" ? Math.round(value * 1.45 * 10) / 10 : value;
+  if (period === "day") return Math.round(value * 0.18 * 10) / 10;
+  if (period === "month") return Math.round(value * 1.45 * 10) / 10;
+  if (period === "quarter") return Math.round(value * 2.15 * 10) / 10;
+  if (period === "half") return Math.round(value * 2.8 * 10) / 10;
+  return value;
 }
 
 function averageValues(values: number[]) {
@@ -263,6 +276,78 @@ function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
   const start = formatShortDate(dates[0]);
   const end = formatShortDate(dates[dates.length - 1]);
   return start === end ? `${end} 기준` : `${start}~${end}`;
+}
+
+function periodLabel(period: Period) {
+  return PERIOD_OPTIONS.find((option) => option.value === period)?.label ?? "1주일";
+}
+
+function companyMetricForIssue(issue: Issue, companyId: string) {
+  return getIssueMetricCache(issue.id)?.companies.find((metric) => metric.companyId === companyId);
+}
+
+function metricTradingValue(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
+  return sumMetricValues(metric?.[period]?.tradingValueIndex);
+}
+
+function metricSearchAverage(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
+  return averageMetricValues(metric?.[period]?.searchIndex);
+}
+
+function metricCurrentPrice(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
+  return metric?.[period]?.currentPrice ?? metric?.week?.currentPrice ?? metric?.month?.currentPrice ?? 0;
+}
+
+function uniqueIssuesByTitle(issues: Issue[]) {
+  const seen = new Set<string>();
+  return issues.filter((issue) => {
+    const key = issue.title.trim().toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function buildCompanyReturnRows(period: Period) {
+  const rows = new Map<
+    string,
+    {
+      company: Company;
+      issue: Issue;
+      metric?: ValueChainCompanyMetricCache;
+      returnPct: number;
+      tradingValue: number;
+      search: number;
+      currentPrice: number;
+      reason: string;
+    }
+  >();
+
+  for (const issue of VALUE_CHAIN_ISSUES) {
+    for (const companyId of domesticIssueCompanies(issue)) {
+      const company = VALUE_CHAIN_COMPANIES[companyId];
+      if (!company || company.region !== "domestic") continue;
+      const metric = companyMetricForIssue(issue, companyId);
+      const returnPct = metric?.[period]?.returnPct ?? periodReturn(company.returnPct, period);
+      const tradingValue = metricTradingValue(metric, period);
+      const search = metricSearchAverage(metric, period);
+      const currentPrice = metricCurrentPrice(metric, period);
+      const previous = rows.get(companyId);
+      if (previous && previous.returnPct >= returnPct) continue;
+      rows.set(companyId, {
+        company,
+        issue,
+        metric,
+        returnPct,
+        tradingValue,
+        search,
+        currentPrice,
+        reason: `${issue.title} 흐름과 연결됩니다. ${metric?.relation || company.detail}`,
+      });
+    }
+  }
+
+  return [...rows.values()].sort((a, b) => b.returnPct - a.returnPct);
 }
 
 function reviewText(status?: ValueChainDataStatus) {
@@ -699,6 +784,95 @@ function OrbitStage({
   );
 }
 
+function StockReturnTable({
+  period,
+  setPeriod,
+  onSelectIssue,
+  onSelectCompany,
+}: {
+  period: Period;
+  setPeriod: (period: Period) => void;
+  onSelectIssue: (issueId: string) => void;
+  onSelectCompany: (companyId: string) => void;
+}) {
+  const rows = useMemo(() => buildCompanyReturnRows(period).slice(0, 40), [period]);
+  const periodText = rows.length ? metricPeriodText(rows[0].issue, rows.map((row) => row.company), period) : periodLabel(period);
+
+  return (
+    <div className="absolute inset-0 overflow-auto px-8 pb-8 pt-24 text-white">
+      <section className="mx-auto max-w-[1280px] rounded-[30px] border border-white/10 bg-[#0b0d13]/88 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">종목 상승률</p>
+            <h2 className="text-3xl font-black tracking-tight">테마 관련주 상승률</h2>
+            <p className="mt-2 text-xs font-bold text-white/38">
+              {periodText} 기준 · 거래대금은 기간 합산 · 검색 관심도는 네이버 상대지수 평균 · 수익률은 기간 첫 종가 대비 마지막 종가
+            </p>
+          </div>
+          <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
+            {PERIOD_OPTIONS.map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setPeriod(value)}
+                className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-black transition ${
+                  period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/70"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-white/10">
+          <table className="w-full border-collapse text-sm">
+            <thead className="bg-white/[0.05]">
+              <tr className="border-b border-white/10 text-left">
+                {["순위", "종목", "현재가", `${periodLabel(period)} 등락률`, "시가총액", "거래대금", "테마", "상승 이유"].map((head, index) => (
+                  <th
+                    key={head}
+                    className={`px-4 py-3 text-[11px] font-black text-white/42 ${
+                      index >= 2 && index <= 5 ? "text-right" : index === 7 ? "text-left" : ""
+                    }`}
+                  >
+                    {head}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={`return-${row.company.id}`} className="border-t border-white/6 transition hover:bg-white/[0.04]">
+                  <td className="w-14 px-4 py-3 text-center font-black text-white/38">{index + 1}</td>
+                  <td className="px-4 py-3">
+                    <button type="button" onClick={() => onSelectCompany(row.company.id)} className="font-black text-blue-300 hover:text-blue-100">
+                      {row.company.name}
+                    </button>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right font-black tabular-nums text-white">
+                    {row.currentPrice ? `${row.currentPrice.toLocaleString()}원` : "-"}
+                  </td>
+                  <td className={`whitespace-nowrap px-4 py-3 text-right font-black tabular-nums ${row.returnPct >= 0 ? "text-rose-300" : "text-blue-300"}`}>
+                    {fmtPct(row.returnPct)}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{fmtWon(row.company.marketCap)}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{formatTradingValue(row.tradingValue)}</td>
+                  <td className="px-4 py-3">
+                    <button type="button" onClick={() => onSelectIssue(row.issue.id)} className="rounded-full bg-blue-500/14 px-3 py-1 text-xs font-black text-blue-200 hover:bg-blue-500/24">
+                      {row.issue.title}
+                    </button>
+                  </td>
+                  <td className="max-w-[420px] px-4 py-3 text-xs font-semibold leading-5 text-white/45">{row.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function ComparePanel({
   issue,
   companies,
@@ -755,14 +929,14 @@ function ComparePanel({
         </div>
         <div className="flex shrink-0 items-center gap-3">
           <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
-            {(["week", "month"] as const).map((value) => (
+            {PERIOD_OPTIONS.map(({ value, label }) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setPeriod(value)}
                 className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-black transition ${period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/65"}`}
               >
-                {value === "week" ? "1주일" : "1개월"}
+                {label}
               </button>
             ))}
           </div>
@@ -894,6 +1068,7 @@ export function ValueChainDemo() {
   const [menuOpen, setMenuOpen] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>("map");
   const [detailPanelWidth, setDetailPanelWidth] = useState(DEFAULT_DETAIL_PANEL_WIDTH);
   const [focusCompanyId, setFocusCompanyId] = useState<string | null>(null);
   const [period, setPeriod] = useState<Period>("week");
@@ -931,7 +1106,7 @@ export function ValueChainDemo() {
           ...company,
           metric: metric ?? undefined,
           score: metric?.score ?? company.score,
-          returnPct: metric?.[period].returnPct ?? company.returnPct,
+          returnPct: metric?.[period]?.returnPct ?? company.returnPct,
         };
         return enrichedCompany;
       })
@@ -964,7 +1139,7 @@ export function ValueChainDemo() {
   const focusCompanyIssues = useMemo(
     () =>
       focusCompanyId
-        ? VALUE_CHAIN_NAV_ISSUES.filter((issue) => issue.companyIds.includes(focusCompanyId)).sort((a, b) => {
+        ? uniqueIssuesByTitle(VALUE_CHAIN_NAV_ISSUES.filter((issue) => issue.companyIds.includes(focusCompanyId))).sort((a, b) => {
             const aReal = a.id.startsWith("topic-") ? 0 : 1;
             const bReal = b.id.startsWith("topic-") ? 0 : 1;
             return bReal - aReal || (issueAverageReturn(b, period) ?? -999) - (issueAverageReturn(a, period) ?? -999);
@@ -1054,10 +1229,28 @@ export function ValueChainDemo() {
           </button>
           <button
             type="button"
-            onClick={() => setMenuOpen((value) => !value)}
+            onClick={() => {
+              setViewMode("map");
+              setPeriod("week");
+              setMenuOpen((value) => !value);
+            }}
             className="rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-black text-white backdrop-blur-lg transition hover:bg-white/15"
           >
             {menuOpen ? "테마 닫기" : "테마 선택"}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setViewMode((value) => (value === "returns" ? "map" : "returns"));
+              setPanelOpen(false);
+              setMenuOpen(false);
+              setSearchOpen(false);
+            }}
+            className={`rounded-full border px-5 py-2.5 text-sm font-black backdrop-blur-lg transition ${
+              viewMode === "returns" ? "border-blue-400/35 bg-blue-600 text-white" : "border-white/10 bg-white/10 text-white hover:bg-white/15"
+            }`}
+          >
+            종목 상승률
           </button>
         </div>
         <div className={`text-right transition-opacity duration-200 ${panelOpen ? "pointer-events-none opacity-0" : "opacity-100"}`}>
@@ -1071,7 +1264,7 @@ export function ValueChainDemo() {
             <div className="flex items-end justify-between gap-3">
               <h2 className="text-2xl font-black leading-tight">테마 순위</h2>
               <div className="inline-flex rounded-full border border-white/10 bg-black/20 p-1">
-                {(["week", "month"] as const).map((value) => (
+                {PERIOD_OPTIONS.slice(1, 3).map(({ value, label }) => (
                   <button
                     key={value}
                     type="button"
@@ -1080,7 +1273,7 @@ export function ValueChainDemo() {
                       period === value ? "bg-blue-600 text-white" : "text-white/40 hover:text-white/70"
                     }`}
                   >
-                    {value === "week" ? "1주일" : "1개월"}
+                    {label}
                   </button>
                 ))}
               </div>
@@ -1200,20 +1393,35 @@ export function ValueChainDemo() {
           right: panelOpen ? detailPanelWidth : 0,
         }}
       >
-        <OrbitStage
-          center={center}
-          items={orbitItems}
-          onOpenPanel={() => {
-            setPanelOpen(true);
-          }}
-          onOpenItem={(item) => {
-            if (item.type === "company") {
-              pushNavigation({ selectedId, focusCompanyId: item.id });
-              return;
-            }
-            pushNavigation({ selectedId: item.id, focusCompanyId: null });
-          }}
-        />
+        {viewMode === "returns" ? (
+          <StockReturnTable
+            period={period}
+            setPeriod={setPeriod}
+            onSelectIssue={(issueId) => {
+              setViewMode("map");
+              pushNavigation({ selectedId: issueId, focusCompanyId: null });
+            }}
+            onSelectCompany={(companyId) => {
+              setViewMode("map");
+              pushNavigation({ selectedId, focusCompanyId: companyId });
+            }}
+          />
+        ) : (
+          <OrbitStage
+            center={center}
+            items={orbitItems}
+            onOpenPanel={() => {
+              setPanelOpen(true);
+            }}
+            onOpenItem={(item) => {
+              if (item.type === "company") {
+                pushNavigation({ selectedId, focusCompanyId: item.id });
+                return;
+              }
+              pushNavigation({ selectedId: item.id, focusCompanyId: null });
+            }}
+          />
+        )}
       </main>
       {panelOpen ? (
         <ComparePanel

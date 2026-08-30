@@ -9,8 +9,11 @@ const cacheDir = path.join(rootDir, "data", "cache");
 const usagePath = path.join(cacheDir, "naver-datalab-usage.json");
 const apiUrl = process.env.NAVER_DATALAB_API_URL || "https://naverapihub.apigw.ntruss.com/search-trend/v1/search";
 const periods = {
+  day: { days: 1, timeUnit: "date" },
   week: { days: 7, timeUnit: "date" },
   month: { days: 35, timeUnit: "week" },
+  quarter: { days: 95, timeUnit: "week" },
+  half: { days: 185, timeUnit: "month" },
 };
 
 function readJson(filePath, fallback = null) {
@@ -193,7 +196,7 @@ async function fetchIssueSearchSeries({ issue, companiesById, period }) {
 }
 
 function usageCallsNeeded(issues) {
-  return issues.reduce((sum, issue) => sum + chunkIssueCompanies(issue.companyIds).length * 2, 0);
+  return issues.reduce((sum, issue) => sum + chunkIssueCompanies(issue.companyIds).length * Object.keys(periods).length, 0);
 }
 
 function ensureMetricGroups({ marketMetrics, issues, companiesById }) {
@@ -222,8 +225,10 @@ function ensureMetricGroups({ marketMetrics, issues, companiesById }) {
       groupsByIssue.set(issue.id, group);
     }
 
+    const validCompanyIds = (issue.companyIds || []).filter((companyId) => companiesById.has(companyId));
+    group.companies = (group.companies || []).filter((company) => validCompanyIds.includes(company.companyId));
     const metricsByCompany = new Map((group.companies || []).map((company) => [company.companyId, company]));
-    for (const companyId of issue.companyIds || []) {
+    for (const companyId of validCompanyIds) {
       const company = companiesById.get(companyId);
       if (!company || metricsByCompany.has(companyId)) continue;
       group.companies.push({
@@ -238,6 +243,21 @@ function ensureMetricGroups({ marketMetrics, issues, companiesById }) {
           returnPct: 0,
         },
         month: {
+          searchIndex: [],
+          tradingValueIndex: [],
+          returnPct: 0,
+        },
+        day: {
+          searchIndex: [],
+          tradingValueIndex: [],
+          returnPct: 0,
+        },
+        quarter: {
+          searchIndex: [],
+          tradingValueIndex: [],
+          returnPct: 0,
+        },
+        half: {
           searchIndex: [],
           tradingValueIndex: [],
           returnPct: 0,
@@ -281,11 +301,12 @@ for (const issue of issues) {
   const knownCompanyIds = issue.companyIds.filter((id) => companiesById.has(id));
   if (!knownCompanyIds.length) continue;
 
-  for (const period of ["week", "month"]) {
+  for (const period of Object.keys(periods)) {
     const seriesByCompany = await fetchIssueSearchSeries({ issue, companiesById, period });
     for (const metric of metricGroup.companies) {
       const series = seriesByCompany.get(metric.companyId);
       if (series?.length) {
+        metric[period] ||= { searchIndex: [], tradingValueIndex: [], returnPct: 0 };
         metric[period].searchIndex = series;
       }
     }
