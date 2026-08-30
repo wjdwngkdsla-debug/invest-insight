@@ -1,0 +1,246 @@
+[
+  {
+    "source": "design",
+    "target": "fabless",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "fabless",
+    "target": "foundry",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "foundry",
+    "target": "wafer",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "wafer",
+    "target": "oxidation",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "oxidation",
+    "target": "deposition",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "foundry",
+    "target": "deposition",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "deposition",
+    "target": "lithography",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "lithography",
+    "target": "etch",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "etch",
+    "target": "implant",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "implant",
+    "target": "cmp",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "cmp",
+    "target": "cleaning",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "etch",
+    "target": "cleaning",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "cleaning",
+    "target": "inspection",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "inspection",
+    "target": "dicing",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "dicing",
+    "target": "packaging",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "inspection",
+    "target": "packaging",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "packaging",
+    "target": "test",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "packaging",
+    "target": "substrate",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-hbm",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-datacenter",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-iphone",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-auto",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-ai-chip",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-ondevice",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-power",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-localization",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "foundry",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "lithography",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "etch",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-ai-chip",
+    "target": "issue-hbm",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-hbm",
+    "target": "packaging",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-hbm",
+    "target": "test",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-datacenter",
+    "target": "foundry",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-datacenter",
+    "target": "deposition",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-ondevice",
+    "target": "design",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-ondevice",
+    "target": "fabless",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-power",
+    "target": "foundry",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-localization",
+    "target": "lithography",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "issue-localization",
+    "target": "cleaning",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-ukraine",
+    "target": "theme-defense",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-robot",
+    "target": "issue-ondevice",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-content",
+    "target": "issue-iphone",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-politics",
+    "target": "theme-defense",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-nuclear",
+    "target": "issue-power",
+    "dataStatus": "draft"
+  },
+  {
+    "source": "theme-defense",
+    "target": "issue-missile-shortage",
+    "relation": "방산 테마의 미사일·탄약 쇼티지 세부 이슈",
+    "dataStatus": "needsReview"
+  },
+  {
+    "source": "hub-semiconductor",
+    "target": "issue-mongolia-resource",
+    "relation": "전략광물 공급망 관점의 확장 이슈",
+    "dataStatus": "needsReview"
+  },
+  {
+    "source": "issue-datacenter",
+    "target": "issue-oil-price",
+    "relation": "에너지 가격과 전력 인프라 비용 변동",
+    "dataStatus": "needsReview"
+  },
+  {
+    "source": "issue-datacenter",
+    "target": "issue-mongolia-resource",
+    "relation": "전력망·자원 공급망 확장 이슈",
+    "dataStatus": "needsReview"
+  }
+]

@@ -1,0 +1,82 @@
+name: Update value-chain data
+
+on:
+  schedule:
+    # 06:20 Asia/Seoul (= 21:20 UTC) — 전일/최근 KRX 거래대금과 네이버 검색 트렌드 캐시 갱신
+    - cron: "20 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-value-chain-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      KRX_API_KEY: ${{ secrets.KRX_API_KEY }}
+      DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+      NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+      NAVER_DATALAB_MONTHLY_LIMIT: ${{ secrets.NAVER_DATALAB_MONTHLY_LIMIT || '30000' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.10.0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          python -m pip install -r requirements.txt
+
+      - name: Update Naver search trend cache
+        run: pnpm run value-chain:update-search
+
+      - name: Update KRX trading value and return cache
+        run: pnpm run value-chain:update-market
+
+      - name: Update DART financial cache
+        run: pnpm run value-chain:update-financials
+
+      - name: Validate value-chain data
+        run: pnpm run value-chain:validate
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Commit generated value-chain data
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/value-chain
+          if git diff --cached --quiet; then
+            echo "No value-chain data changes."
+            exit 0
+          fi
+          git commit -m "chore: update value-chain data"
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase -X theirs origin main
+          done
+          git push

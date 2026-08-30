@@ -1,0 +1,928 @@
+[
+  {
+    "id": "hub-semiconductor",
+    "title": "반도체",
+    "subtitle": "산업",
+    "kind": "hub",
+    "mode": "valueChain",
+    "note": "산업 밸류체인, 시장 이슈, 관련주를 한 지도에서 연결하는 중심 노드입니다.",
+    "layer": "product",
+    "x": 610,
+    "y": 350,
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "wonikips",
+      "dongjin"
+    ],
+    "keywords": [
+      "hub",
+      "valueChain",
+      "산업"
+    ],
+    "description": "산업 밸류체인, 시장 이슈, 관련주를 한 지도에서 연결하는 중심 노드입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-semiconductor"
+    ],
+    "layerType": "industry"
+  },
+  {
+    "id": "design",
+    "title": "설계/IP",
+    "subtitle": "공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "칩의 구조와 기능을 설계하는 영역입니다. 팹리스와 파운드리로 이어집니다.",
+    "layer": "process",
+    "x": 820,
+    "y": 100,
+    "companyIds": [
+      "samsung",
+      "lxsemicon"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "공정"
+    ],
+    "description": "칩의 구조와 기능을 설계하는 영역입니다. 팹리스와 파운드리로 이어집니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "fabless",
+    "title": "팹리스",
+    "subtitle": "공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "생산 설비 없이 칩을 설계하고 파운드리에 생산을 맡기는 모델입니다.",
+    "layer": "process",
+    "x": 980,
+    "y": 100,
+    "companyIds": [
+      "lxsemicon",
+      "telechips"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "공정"
+    ],
+    "description": "생산 설비 없이 칩을 설계하고 파운드리에 생산을 맡기는 모델입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "foundry",
+    "title": "파운드리",
+    "subtitle": "공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "설계된 칩을 웨이퍼에 제조하는 위탁 생산 영역입니다.",
+    "layer": "process",
+    "x": 1140,
+    "y": 100,
+    "companyIds": [
+      "samsung",
+      "dbhitek",
+      "tsmc"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "공정"
+    ],
+    "description": "설계된 칩을 웨이퍼에 제조하는 위탁 생산 영역입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "wafer",
+    "title": "웨이퍼",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "실리콘 잉곳을 얇게 절단·연마해 반도체 회로가 형성될 기판을 준비하는 단계입니다.",
+    "layer": "process",
+    "x": 820,
+    "y": 300,
+    "companyIds": [
+      "sksiltron",
+      "shinetsu",
+      "sumco"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "실리콘 잉곳을 얇게 절단·연마해 반도체 회로가 형성될 기판을 준비하는 단계입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-journey"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "oxidation",
+    "title": "산화",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "웨이퍼 표면에 산화막을 형성해 절연막이나 보호막으로 쓰는 전공정 단계입니다.",
+    "layer": "process",
+    "x": 980,
+    "y": 300,
+    "companyIds": [
+      "tel",
+      "kcTech"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "웨이퍼 표면에 산화막을 형성해 절연막이나 보호막으로 쓰는 전공정 단계입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-journey"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "deposition",
+    "title": "증착",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "웨이퍼 위에 얇은 막을 쌓는 공정입니다. CVD, ALD 장비와 전구체/특수가스가 연결됩니다.",
+    "layer": "process",
+    "x": 1140,
+    "y": 300,
+    "companyIds": [
+      "wonikips",
+      "jusung",
+      "tes",
+      "amat"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "웨이퍼 위에 얇은 막을 쌓는 공정입니다. CVD, ALD 장비와 전구체/특수가스가 연결됩니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-process"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "lithography",
+    "title": "노광",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "마스크의 회로 패턴을 웨이퍼에 전사하는 핵심 공정입니다.",
+    "layer": "process",
+    "x": 1300,
+    "y": 300,
+    "companyIds": [
+      "asml",
+      "dongjin",
+      "fst",
+      "snstech"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "마스크의 회로 패턴을 웨이퍼에 전사하는 핵심 공정입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-process"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "etch",
+    "title": "식각",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "증착·노광 후 필요 없는 막을 깎아내는 공정입니다. 식각 장비와 불소계 가스가 중요합니다.",
+    "layer": "process",
+    "x": 1460,
+    "y": 300,
+    "companyIds": [
+      "hpsp",
+      "wonikips",
+      "jusung",
+      "semes",
+      "lam"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "증착·노광 후 필요 없는 막을 깎아내는 공정입니다. 식각 장비와 불소계 가스가 중요합니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-process"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "implant",
+    "title": "이온주입",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "웨이퍼에 불순물을 주입해 전기적 특성을 조절하는 공정입니다.",
+    "layer": "process",
+    "x": 1620,
+    "y": 300,
+    "companyIds": [
+      "axcelis",
+      "amat"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "웨이퍼에 불순물을 주입해 전기적 특성을 조절하는 공정입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "samsung-journey"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "cmp",
+    "title": "CMP",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "증착과 식각으로 생긴 단차를 연마해 웨이퍼 표면을 평탄화하는 공정입니다.",
+    "layer": "process",
+    "x": 1780,
+    "y": 300,
+    "companyIds": [
+      "kcTech",
+      "soulbrain",
+      "enf"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "증착과 식각으로 생긴 단차를 연마해 웨이퍼 표면을 평탄화하는 공정입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "cleaning",
+    "title": "세정",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "공정 중 발생하는 잔여물과 오염을 제거합니다. 세정 장비와 케미컬이 연결됩니다.",
+    "layer": "process",
+    "x": 1940,
+    "y": 300,
+    "companyIds": [
+      "psk",
+      "kcTech",
+      "zeus",
+      "soulbrain"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "공정 중 발생하는 잔여물과 오염을 제거합니다. 세정 장비와 케미컬이 연결됩니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "inspection",
+    "title": "검사",
+    "subtitle": "전공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "결함을 찾고 선폭·막질 등을 계측해 수율을 관리합니다.",
+    "layer": "process",
+    "x": 2100,
+    "y": 300,
+    "companyIds": [
+      "nextin",
+      "auros",
+      "parksystems",
+      "kla"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "전공정"
+    ],
+    "description": "결함을 찾고 선폭·막질 등을 계측해 수율을 관리합니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "dicing",
+    "title": "다이싱",
+    "subtitle": "후공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "완성된 웨이퍼를 개별 칩 단위로 절단하는 후공정 진입 단계입니다.",
+    "layer": "process",
+    "x": 1380,
+    "y": 520,
+    "companyIds": [
+      "disco",
+      "eotechnics"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "후공정"
+    ],
+    "description": "완성된 웨이퍼를 개별 칩 단위로 절단하는 후공정 진입 단계입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "packaging",
+    "title": "패키징",
+    "subtitle": "후공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "칩을 보호하고 외부와 연결하는 후공정입니다. HBM 투자와도 연결됩니다.",
+    "layer": "process",
+    "x": 1540,
+    "y": 520,
+    "companyIds": [
+      "hanmi",
+      "sfa",
+      "nepes",
+      "eotechnics"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "후공정"
+    ],
+    "description": "칩을 보호하고 외부와 연결하는 후공정입니다. HBM 투자와도 연결됩니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "test",
+    "title": "테스트",
+    "subtitle": "후공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "완성된 칩의 성능과 불량 여부를 검사합니다. 소켓, 핀, 핸들러가 중요합니다.",
+    "layer": "process",
+    "x": 1700,
+    "y": 520,
+    "companyIds": [
+      "isc",
+      "leeno",
+      "exicon",
+      "unitest"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "후공정"
+    ],
+    "description": "완성된 칩의 성능과 불량 여부를 검사합니다. 소켓, 핀, 핸들러가 중요합니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "substrate",
+    "title": "기판",
+    "subtitle": "후공정",
+    "kind": "process",
+    "mode": "valueChain",
+    "note": "패키징된 칩과 시스템 보드를 연결하는 패키지 기판 영역입니다.",
+    "layer": "process",
+    "x": 1860,
+    "y": 520,
+    "companyIds": [
+      "simmtech",
+      "daeduck",
+      "koreaCircuit",
+      "ibiden"
+    ],
+    "keywords": [
+      "process",
+      "valueChain",
+      "후공정"
+    ],
+    "description": "패키징된 칩과 시스템 보드를 연결하는 패키지 기판 영역입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "process"
+  },
+  {
+    "id": "issue-ai-chip",
+    "title": "AI반도체",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "GPU, HBM, 고성능 패키징이 함께 움직이는 AI 연산 인프라 섹터입니다.",
+    "layer": "product",
+    "x": 260,
+    "y": 70,
+    "companyIds": [
+      "skhynix",
+      "samsung",
+      "tsmc",
+      "hanmi"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "GPU, HBM, 고성능 패키징이 함께 움직이는 AI 연산 인프라 섹터입니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-hbm",
+    "title": "HBM",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "AI 서버 확산으로 고대역폭 메모리와 후공정 장비 수요가 함께 움직입니다.",
+    "layer": "product",
+    "x": 420,
+    "y": 160,
+    "companyIds": [
+      "skhynix",
+      "samsung",
+      "hanmi",
+      "isc",
+      "leeno"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "AI 서버 확산으로 고대역폭 메모리와 후공정 장비 수요가 함께 움직입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-datacenter",
+    "title": "AI 데이터센터",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "데이터센터 투자는 메모리, 파운드리, 장비 투자 사이클과 연결됩니다.",
+    "layer": "product",
+    "x": 260,
+    "y": 250,
+    "companyIds": [
+      "skhynix",
+      "samsung",
+      "tsmc",
+      "wonikips"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "데이터센터 투자는 메모리, 파운드리, 장비 투자 사이클과 연결됩니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-ondevice",
+    "title": "온디바이스AI",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "스마트폰·PC·자동차 안에서 직접 AI를 처리하는 저전력 반도체 수요입니다.",
+    "layer": "product",
+    "x": 420,
+    "y": 340,
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "lxsemicon",
+      "telechips"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "스마트폰·PC·자동차 안에서 직접 AI를 처리하는 저전력 반도체 수요입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-iphone",
+    "title": "아이폰",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "스마트폰 교체 사이클과 모바일 반도체 수요를 함께 보는 영역입니다.",
+    "layer": "product",
+    "x": 260,
+    "y": 430,
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "lxsemicon"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "스마트폰 교체 사이클과 모바일 반도체 수요를 함께 보는 영역입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-auto",
+    "title": "전장",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "전기차와 자율주행 확산으로 차량용 MCU, 전력반도체, 센서 수요가 연결됩니다.",
+    "layer": "product",
+    "x": 420,
+    "y": 520,
+    "companyIds": [
+      "dbhitek",
+      "telechips",
+      "lxsemicon"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "전기차와 자율주행 확산으로 차량용 MCU, 전력반도체, 센서 수요가 연결됩니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-power",
+    "title": "전력반도체",
+    "subtitle": "섹터",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "전기차, 신재생, 전력망에서 전력 변환 효율을 좌우하는 반도체 영역입니다.",
+    "layer": "product",
+    "x": 260,
+    "y": 610,
+    "companyIds": [
+      "dbhitek",
+      "samsung",
+      "onsemi"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "섹터"
+    ],
+    "description": "전기차, 신재생, 전력망에서 전력 변환 효율을 좌우하는 반도체 영역입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "issue-localization",
+    "title": "국산화",
+    "subtitle": "테마",
+    "kind": "market",
+    "mode": "marketIssue",
+    "note": "공급망 리스크가 커질 때 소재·부품 국산화 기업이 함께 주목받습니다.",
+    "layer": "product",
+    "x": 420,
+    "y": 700,
+    "companyIds": [
+      "dongjin",
+      "soulbrain",
+      "enf",
+      "wonikmaterials",
+      "snstech"
+    ],
+    "keywords": [
+      "market",
+      "marketIssue",
+      "테마"
+    ],
+    "description": "공급망 리스크가 커질 때 소재·부품 국산화 기업이 함께 주목받습니다.",
+    "dataStatus": "verified",
+    "sourceIds": [
+      "invest-korea-policy"
+    ],
+    "layerType": "sector"
+  },
+  {
+    "id": "theme-robot",
+    "title": "로봇",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "자동화, 휴머노이드, 산업용 로봇 투자 사이클과 반도체·센서 수요가 연결됩니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 80,
+    "companyIds": [
+      "samsung",
+      "telechips"
+    ],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "자동화, 휴머노이드, 산업용 로봇 투자 사이클과 반도체·센서 수요가 연결됩니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "id": "theme-politics",
+    "title": "정치",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "정치 이벤트, 후보, 정책 키워드에 따라 관련주가 묶이는 영역입니다. 사실관계 검증이 중요합니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 210,
+    "companyIds": [],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "정치 이벤트, 후보, 정책 키워드에 따라 관련주가 묶이는 영역입니다. 사실관계 검증이 중요합니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "id": "theme-ukraine",
+    "title": "우크라이나",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "재건 기대감이 건설기계, 전력, 인프라 기업으로 번지는 테마입니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 340,
+    "companyIds": [],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "재건 기대감이 건설기계, 전력, 인프라 기업으로 번지는 테마입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "id": "theme-defense",
+    "title": "방산",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "전쟁, 수출 계약, 지정학 이슈에 따라 방산 관련주가 움직이는 영역입니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 470,
+    "companyIds": [],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "전쟁, 수출 계약, 지정학 이슈에 따라 방산 관련주가 움직이는 영역입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "id": "theme-nuclear",
+    "title": "원전",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "전력 수요와 에너지 안보 이슈가 원전·전력기기 관련주로 연결되는 테마입니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 600,
+    "companyIds": [],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "전력 수요와 에너지 안보 이슈가 원전·전력기기 관련주로 연결되는 테마입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "id": "theme-content",
+    "title": "콘텐츠",
+    "subtitle": "테마",
+    "kind": "theme",
+    "mode": "theme",
+    "note": "영화, 드라마, 게임 IP 흥행이 제작사·배급사·플랫폼 관련주로 연결되는 영역입니다.",
+    "layer": "product",
+    "x": 60,
+    "y": 730,
+    "companyIds": [],
+    "keywords": [
+      "theme",
+      "theme",
+      "테마"
+    ],
+    "description": "영화, 드라마, 게임 IP 흥행이 제작사·배급사·플랫폼 관련주로 연결되는 영역입니다.",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "layerType": "theme"
+  },
+  {
+    "subtitle": "이슈",
+    "kind": "market",
+    "mode": "marketIssue",
+    "layer": "product",
+    "keywords": [
+      "미사일",
+      "방산",
+      "탄약",
+      "유도무기",
+      "방공"
+    ],
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "layerType": "theme",
+    "id": "issue-missile-shortage",
+    "title": "미사일 숏티지",
+    "note": "글로벌 탄약·미사일 재고 부족과 방산 증설 사이클을 보는 테마입니다.",
+    "description": "글로벌 탄약·미사일 재고 부족과 방산 증설 사이클을 보는 테마입니다.",
+    "x": 360,
+    "y": 520,
+    "companyIds": [
+      "hanwhaaero",
+      "lignex1",
+      "hanwhasystems",
+      "poongsan",
+      "hyundairotem",
+      "koreaaerospace",
+      "sntdynamics"
+    ]
+  },
+  {
+    "subtitle": "이슈",
+    "kind": "market",
+    "mode": "marketIssue",
+    "layer": "product",
+    "keywords": [
+      "몽골",
+      "광물",
+      "희토류",
+      "구리",
+      "자원개발",
+      "인프라"
+    ],
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "layerType": "theme",
+    "id": "issue-mongolia-resource",
+    "title": "몽골",
+    "note": "몽골 광물·자원개발, 전력망, 인프라 투자 기대를 묶은 테마입니다.",
+    "description": "몽골 광물·자원개발, 전력망, 인프라 투자 기대를 묶은 테마입니다.",
+    "x": 360,
+    "y": 660,
+    "companyIds": [
+      "poscointl",
+      "lxintl",
+      "koreazinc",
+      "lsEcoEnergy",
+      "hyundaiEngineering"
+    ]
+  },
+  {
+    "subtitle": "이슈",
+    "kind": "market",
+    "mode": "marketIssue",
+    "layer": "product",
+    "keywords": [
+      "유가",
+      "정유",
+      "석유",
+      "정제마진",
+      "에너지"
+    ],
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "layerType": "theme",
+    "id": "issue-oil-price",
+    "title": "유가",
+    "note": "국제유가, 정제마진, 에너지 공급 차질에 민감한 정유·석유 유통 테마입니다.",
+    "description": "국제유가, 정제마진, 에너지 공급 차질에 민감한 정유·석유 유통 테마입니다.",
+    "x": 360,
+    "y": 800,
+    "companyIds": [
+      "soil",
+      "skinnovation",
+      "gs",
+      "koreaPetroleum",
+      "heungguOil",
+      "joongangEnergy",
+      "daesungEnergy"
+    ]
+  }
+]

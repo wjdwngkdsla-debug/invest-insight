@@ -10,10 +10,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "value-chain:validate": "node scripts/validate_value_chain_data.mjs",
+    "value-chain:update-search": "node scripts/update_value_chain_search_cache.mjs",
+    "value-chain:update-market": "python -m scripts.update_value_chain_market_cache",
+    "value-chain:update-financials": "python -m scripts.update_value_chain_financial_cache"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
+    "@xyflow/react": "^12.11.3",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4"

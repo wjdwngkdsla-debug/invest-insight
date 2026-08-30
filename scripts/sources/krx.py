@@ -104,6 +104,7 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
                 "close_price": _to_int(it.get("TDD_CLSPRC")),
                 "market_cap": _to_int(it.get("MKTCAP")),
                 "volume": _to_int(it.get("ACC_TRDVOL")) if "ACC_TRDVOL" in it else None,
+                "trading_value": _to_int(it.get("ACC_TRDVAL")) if "ACC_TRDVAL" in it else None,
                 # 거래소가 계산한 전일 대비 등락률. 권리락이 낀 날은 기준가 대비로
                 # 나오므로 우리가 종가끼리 나누는 것보다 정확하다.
                 "fluc_rt": _to_float(it.get("FLUC_RT")),

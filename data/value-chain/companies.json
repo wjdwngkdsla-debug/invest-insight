@@ -1,0 +1,1411 @@
+[
+  {
+    "id": "samsung",
+    "name": "삼성전자",
+    "ticker": "005930",
+    "layer": "process",
+    "role": "메모리·파운드리",
+    "roleDetail": "메모리, 파운드리, 모바일 AP를 모두 보유한 국내 대표 종합 반도체 기업입니다.",
+    "processIds": [
+      "mobile",
+      "datacenter",
+      "design",
+      "foundry"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "invest-korea-semiconductor"
+    ]
+  },
+  {
+    "id": "skhynix",
+    "name": "SK하이닉스",
+    "ticker": "000660",
+    "layer": "process",
+    "role": "DRAM·HBM",
+    "roleDetail": "DRAM과 HBM 중심의 메모리 기업으로 AI 데이터센터, HBM, 모바일 메모리 섹터와 연결됩니다.",
+    "processIds": [
+      "mobile",
+      "datacenter"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "invest-korea-semiconductor"
+    ]
+  },
+  {
+    "id": "dbhitek",
+    "name": "DB하이텍",
+    "ticker": "000990",
+    "layer": "process",
+    "role": "8인치 파운드리",
+    "roleDetail": "8인치 파운드리 기반으로 전장, 전력반도체, 시스템반도체 수요와 연결됩니다.",
+    "processIds": [
+      "auto",
+      "foundry"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "lxsemicon",
+    "name": "LX세미콘",
+    "ticker": "108320",
+    "layer": "process",
+    "role": "디스플레이 IC",
+    "roleDetail": "디스플레이 구동칩과 시스템반도체 설계 영역에 속하는 국내 팹리스입니다.",
+    "processIds": [
+      "design",
+      "fabless"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "telechips",
+    "name": "텔레칩스",
+    "ticker": "054450",
+    "layer": "process",
+    "role": "차량용 팹리스",
+    "roleDetail": "차량용 인포테인먼트, MCU, 통신칩 등 전장 팹리스 영역으로 분류했습니다.",
+    "processIds": [
+      "fabless"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "sksiltron",
+    "name": "SK실트론",
+    "ticker": null,
+    "layer": "material",
+    "role": "실리콘 웨이퍼",
+    "roleDetail": "반도체 웨이퍼를 공급하는 국내 핵심 비상장 소재 기업으로, 공정의 출발점인 기판 영역에 연결됩니다.",
+    "processIds": [
+      "wafer",
+      "wafer-substrate"
+    ],
+    "region": "domestic",
+    "listing": "private",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "wonikips",
+    "name": "원익IPS",
+    "ticker": "240810",
+    "layer": "equipment",
+    "role": "증착·식각 장비",
+    "roleDetail": "증착 장비를 중심으로 전공정 장비 사이클과 연결되며 일부 식각 장비 영역도 함께 검토합니다.",
+    "processIds": [
+      "deposition",
+      "etch",
+      "etch-equipment"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "jusung",
+    "name": "주성엔지니어링",
+    "ticker": "036930",
+    "layer": "equipment",
+    "role": "증착·식각 장비",
+    "roleDetail": "ALD/CVD 등 박막 형성 장비 중심으로 증착 공정과 연결됩니다.",
+    "processIds": [
+      "deposition",
+      "etch",
+      "etch-equipment"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "hpsp",
+    "name": "HPSP",
+    "ticker": "403870",
+    "layer": "equipment",
+    "role": "고압 수소 어닐링",
+    "roleDetail": "고압 수소 어닐링 장비 기업으로 미세공정 전공정 장비 테마에서 핵심으로 분류했습니다.",
+    "processIds": [
+      "etch",
+      "etch-equipment"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "yujintech",
+    "name": "유진테크",
+    "ticker": "084370",
+    "layer": "equipment",
+    "role": "증착 장비",
+    "roleDetail": "증착 장비를 중심으로 메모리와 비메모리 전공정 투자 사이클에 연결됩니다.",
+    "processIds": [
+      "etch",
+      "etch-equipment"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "psk",
+    "name": "피에스케이",
+    "ticker": "319660",
+    "layer": "equipment",
+    "role": "세정·Strip 장비",
+    "roleDetail": "Strip, 세정 계열 장비 중심으로 세정 공정과 연결됩니다.",
+    "processIds": [
+      "cleaning"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "kcTech",
+    "name": "케이씨텍",
+    "ticker": "281820",
+    "layer": "equipment",
+    "role": "세정·CMP",
+    "roleDetail": "세정 장비와 CMP 장비를 함께 보는 전공정 장비 기업입니다.",
+    "processIds": [
+      "cleaning"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "nextin",
+    "name": "넥스틴",
+    "ticker": "348210",
+    "layer": "equipment",
+    "role": "검사 장비",
+    "roleDetail": "웨이퍼 결함 검사 장비 기업으로 수율 관리와 검사/계측 공정에 연결됩니다.",
+    "processIds": [
+      "inspection"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "hanmi",
+    "name": "한미반도체",
+    "ticker": "042700",
+    "layer": "equipment",
+    "role": "HBM 후공정 장비",
+    "roleDetail": "본딩, 절단, HBM 후공정 장비 테마에서 핵심 기업으로 분류했습니다.",
+    "processIds": [
+      "packaging"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "sfa",
+    "name": "SFA반도체",
+    "ticker": "036540",
+    "layer": "equipment",
+    "role": "패키징",
+    "roleDetail": "반도체 패키징과 테스트 서비스 영역의 국내 OSAT 기업입니다.",
+    "processIds": [
+      "packaging"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "isc",
+    "name": "ISC",
+    "ticker": "095340",
+    "layer": "equipment",
+    "role": "테스트 소켓",
+    "roleDetail": "반도체 테스트 소켓 기업으로 후공정 테스트와 HBM 테스트 수요에 연결됩니다.",
+    "processIds": [
+      "test",
+      "parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "leeno",
+    "name": "리노공업",
+    "ticker": "058470",
+    "layer": "equipment",
+    "role": "테스트 핀·소켓",
+    "roleDetail": "테스트 핀과 소켓 중심 기업으로 검사·테스트 소모품 영역에 속합니다.",
+    "processIds": [
+      "test",
+      "parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "wits",
+    "name": "와이씨켐",
+    "ticker": "112290",
+    "layer": "material",
+    "role": "소재·케미컬",
+    "roleDetail": "반도체 공정용 케미컬과 소재 영역으로 분류했습니다.",
+    "processIds": [
+      "parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "wonikmaterials",
+    "name": "원익머트리얼즈",
+    "ticker": "104830",
+    "layer": "material",
+    "role": "특수가스",
+    "roleDetail": "반도체 특수가스를 공급하는 소재 기업으로 식각·증착 가스 영역과 연결됩니다.",
+    "processIds": [
+      "etch-gas"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "skmaterials",
+    "name": "SK스페셜티",
+    "ticker": null,
+    "layer": "material",
+    "role": "특수가스",
+    "roleDetail": "반도체용 특수가스를 공급하는 국내 비상장 소재 기업으로, 식각·증착 공정 소재 영역에 연결됩니다.",
+    "processIds": [
+      "etch-gas"
+    ],
+    "region": "domestic",
+    "listing": "private",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "dongjin",
+    "name": "동진쎄미켐",
+    "ticker": "005290",
+    "layer": "material",
+    "role": "PR·케미컬",
+    "roleDetail": "포토레지스트와 반도체 케미컬 중심으로 노광·국산화 테마에 연결됩니다.",
+    "processIds": [
+      "lithography",
+      "photoresist"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "tes",
+    "name": "테스",
+    "ticker": "095610",
+    "layer": "equipment",
+    "role": "증착·세정 장비",
+    "roleDetail": "증착과 세정 장비를 중심으로 전공정 장비 투자 사이클에 연결됩니다.",
+    "processIds": [
+      "deposition",
+      "cleaning"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "semes",
+    "name": "세메스",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "전공정 장비",
+    "roleDetail": "삼성 계열 전공정 장비 기업으로 식각, 세정 등 핵심 장비 영역에 연결됩니다.",
+    "processIds": [
+      "etch",
+      "cleaning"
+    ],
+    "region": "domestic",
+    "listing": "private",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "zeus",
+    "name": "제우스",
+    "ticker": "079370",
+    "layer": "equipment",
+    "role": "세정·로봇 장비",
+    "roleDetail": "세정 장비와 자동화 장비를 함께 보는 전공정 장비 기업입니다.",
+    "processIds": [
+      "cleaning"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "auros",
+    "name": "오로스테크놀로지",
+    "ticker": "322310",
+    "layer": "equipment",
+    "role": "오버레이 계측",
+    "roleDetail": "오버레이 계측 장비 기업으로 노광 이후 정렬 오차와 수율 관리에 연결됩니다.",
+    "processIds": [
+      "inspection"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "parksystems",
+    "name": "파크시스템스",
+    "ticker": "140860",
+    "layer": "equipment",
+    "role": "원자현미경 계측",
+    "roleDetail": "원자현미경 기반 계측 장비 기업으로 미세공정 검사·계측 영역에 속합니다.",
+    "processIds": [
+      "inspection"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "exicon",
+    "name": "엑시콘",
+    "ticker": "092870",
+    "layer": "equipment",
+    "role": "메모리 테스트 장비",
+    "roleDetail": "메모리 테스트 장비 기업으로 후공정 테스트 공정과 연결됩니다.",
+    "processIds": [
+      "test"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "unitest",
+    "name": "유니테스트",
+    "ticker": "086390",
+    "layer": "equipment",
+    "role": "번인·검사 장비",
+    "roleDetail": "번인과 검사 장비 중심으로 후공정 테스트 영역에 속합니다.",
+    "processIds": [
+      "test"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "eotechnics",
+    "name": "이오테크닉스",
+    "ticker": "039030",
+    "layer": "equipment",
+    "role": "레이저 어닐링·마킹",
+    "roleDetail": "레이저 장비 기업으로 다이싱, 마킹, 어닐링 등 후공정·전공정 일부와 연결됩니다.",
+    "processIds": [
+      "packaging"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "nepes",
+    "name": "네패스",
+    "ticker": "033640",
+    "layer": "equipment",
+    "role": "패키징·OSAT",
+    "roleDetail": "반도체 패키징과 OSAT 영역으로 분류했습니다.",
+    "processIds": [
+      "packaging"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "simmtech",
+    "name": "심텍",
+    "ticker": "222800",
+    "layer": "material",
+    "role": "메모리·패키지 기판",
+    "roleDetail": "메모리 모듈 PCB와 패키지 기판 영역의 국내 기판 기업입니다.",
+    "processIds": [
+      "substrate",
+      "package-substrate"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "daeduck",
+    "name": "대덕전자",
+    "ticker": "353200",
+    "layer": "material",
+    "role": "FC-BGA·PCB 기판",
+    "roleDetail": "FC-BGA와 반도체 패키지 기판 영역으로 분류했습니다.",
+    "processIds": [
+      "substrate",
+      "package-substrate"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "koreaCircuit",
+    "name": "코리아써키트",
+    "ticker": "007810",
+    "layer": "material",
+    "role": "반도체 패키지 기판",
+    "roleDetail": "PCB와 반도체 패키지 기판 영역으로 분류했습니다.",
+    "processIds": [
+      "substrate",
+      "package-substrate"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "mecaro",
+    "name": "메카로",
+    "ticker": "241770",
+    "layer": "material",
+    "role": "프리커서",
+    "roleDetail": "증착 공정에 쓰이는 프리커서 소재 기업으로 분류했습니다.",
+    "processIds": [
+      "deposition-material"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "wonikqnc",
+    "name": "원익QnC",
+    "ticker": "074600",
+    "layer": "equipment",
+    "role": "쿼츠·세라믹 부품",
+    "roleDetail": "쿼츠와 세라믹 부품을 공급하는 공정 소모성 부품 기업입니다.",
+    "processIds": [
+      "deposition-parts",
+      "etch-parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "mico",
+    "name": "미코",
+    "ticker": "059090",
+    "layer": "equipment",
+    "role": "세라믹 히터·부품",
+    "roleDetail": "세라믹 히터와 공정 장비 부품 영역으로 분류했습니다.",
+    "processIds": [
+      "deposition-parts",
+      "etch-parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "snstech",
+    "name": "에스앤에스텍",
+    "ticker": "101490",
+    "layer": "equipment",
+    "role": "블랭크마스크",
+    "roleDetail": "블랭크마스크와 펠리클 관련 노광 부품 영역으로 분류했습니다.",
+    "processIds": [
+      "lithography-parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "fst",
+    "name": "에프에스티",
+    "ticker": "036810",
+    "layer": "equipment",
+    "role": "펠리클·칠러",
+    "roleDetail": "펠리클과 칠러를 중심으로 노광 부품·장비 부품 영역에 연결됩니다.",
+    "processIds": [
+      "lithography-parts"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "foosung",
+    "name": "후성",
+    "ticker": "093370",
+    "layer": "material",
+    "role": "불소계 특수가스",
+    "roleDetail": "불소계 특수가스와 소재 영역으로 식각 공정과 연결됩니다.",
+    "processIds": [
+      "etch-gas"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "soulbrain",
+    "name": "솔브레인",
+    "ticker": "357780",
+    "layer": "material",
+    "role": "식각액·세정액",
+    "roleDetail": "식각액, 세정액, CMP 소재 등 전공정 케미컬 영역에 속합니다.",
+    "processIds": [
+      "cleaning-material"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "enf",
+    "name": "이엔에프테크놀로지",
+    "ticker": "102710",
+    "layer": "material",
+    "role": "반도체 케미컬",
+    "roleDetail": "반도체용 케미컬과 세정 소재 영역으로 분류했습니다.",
+    "processIds": [
+      "cleaning-material"
+    ],
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "draft",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "asml",
+    "name": "ASML",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "EUV 노광 장비",
+    "roleDetail": "EUV 노광 장비에서 독점적 지위를 가진 해외 핵심 기업입니다.",
+    "processIds": [
+      "lithography"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "samsung-process"
+    ]
+  },
+  {
+    "id": "tel",
+    "name": "Tokyo Electron",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "산화·증착·세정 장비",
+    "roleDetail": "산화, 증착, 세정 등 다수 전공정 장비를 공급하는 일본 핵심 장비 기업입니다.",
+    "processIds": [
+      "oxidation",
+      "oxidation-equipment",
+      "cleaning"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "samsung-process"
+    ]
+  },
+  {
+    "id": "lam",
+    "name": "Lam Research",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "식각 장비",
+    "roleDetail": "식각 장비에서 글로벌 핵심 지위를 가진 해외 기업으로, 미세공정 난도가 올라갈수록 중요도가 커집니다.",
+    "processIds": [
+      "etch",
+      "etch-equipment"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "samsung-process"
+    ]
+  },
+  {
+    "id": "amat",
+    "name": "Applied Materials",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "증착·식각 장비",
+    "roleDetail": "증착, 식각, 계측 등 반도체 전공정 전반에 장비 포트폴리오를 가진 글로벌 장비 기업입니다.",
+    "processIds": [
+      "deposition"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "samsung-process"
+    ]
+  },
+  {
+    "id": "axcelis",
+    "name": "Axcelis",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "이온주입 장비",
+    "roleDetail": "웨이퍼에 불순물을 주입해 전기적 특성을 만드는 이온주입 장비 기업입니다.",
+    "processIds": [
+      "implant",
+      "implant-equipment"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "tsmc",
+    "name": "TSMC",
+    "ticker": null,
+    "layer": "process",
+    "role": "첨단 파운드리",
+    "roleDetail": "첨단 파운드리 시장의 해외 핵심 기업으로 국내 팹리스·소부장과 비교 기준 역할을 합니다.",
+    "processIds": [
+      "foundry"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "invest-korea-semiconductor"
+    ]
+  },
+  {
+    "id": "kla",
+    "name": "KLA",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "검사·계측",
+    "roleDetail": "결함 검사와 계측 장비의 글로벌 핵심 기업으로, 수율 관리 단계에서 중요합니다.",
+    "processIds": [
+      "inspection"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "samsung-process"
+    ]
+  },
+  {
+    "id": "airliquide",
+    "name": "Air Liquide",
+    "ticker": null,
+    "layer": "material",
+    "role": "산업가스",
+    "roleDetail": "반도체 생산에 필요한 산업가스와 특수가스를 공급하는 해외 소재 기업입니다.",
+    "processIds": [
+      "etch-gas"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "jsr",
+    "name": "JSR",
+    "ticker": null,
+    "layer": "material",
+    "role": "포토레지스트",
+    "roleDetail": "노광 공정에 쓰이는 포토레지스트를 공급하는 일본 소재 기업입니다.",
+    "processIds": [
+      "photoresist"
+    ],
+    "region": "overseas",
+    "listing": "private",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "shinetsu",
+    "name": "Shin-Etsu",
+    "ticker": null,
+    "layer": "material",
+    "role": "실리콘 웨이퍼·소재",
+    "roleDetail": "실리콘 웨이퍼와 반도체 소재에서 글로벌 핵심 지위를 가진 일본 소재 기업입니다.",
+    "processIds": [
+      "wafer",
+      "wafer-substrate"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "sumco",
+    "name": "SUMCO",
+    "ticker": null,
+    "layer": "material",
+    "role": "실리콘 웨이퍼",
+    "roleDetail": "반도체 실리콘 웨이퍼를 공급하는 일본 소재 기업으로 웨이퍼 공급망 비교 기준입니다.",
+    "processIds": [
+      "wafer",
+      "wafer-substrate"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "disco",
+    "name": "DISCO",
+    "ticker": null,
+    "layer": "equipment",
+    "role": "다이싱·그라인더 장비",
+    "roleDetail": "웨이퍼 절단과 연삭 장비에서 강점을 가진 후공정 핵심 장비 기업입니다.",
+    "processIds": [
+      "dicing",
+      "dicing-equipment"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "ibiden",
+    "name": "Ibiden",
+    "ticker": null,
+    "layer": "material",
+    "role": "FC-BGA 기판",
+    "roleDetail": "고성능 반도체 패키지 기판, 특히 FC-BGA 영역의 해외 핵심 기업입니다.",
+    "processIds": [
+      "substrate",
+      "package-substrate"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "dupont",
+    "name": "DuPont",
+    "ticker": null,
+    "layer": "material",
+    "role": "CMP·전자소재",
+    "roleDetail": "CMP 소재와 전자소재를 공급하는 글로벌 화학 기업으로 평탄화 공정에 연결됩니다.",
+    "processIds": [
+      "cmp",
+      "cmp-slurry"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "id": "onsemi",
+    "name": "onsemi",
+    "ticker": null,
+    "layer": "process",
+    "role": "전력반도체",
+    "roleDetail": "전력반도체와 차량용 반도체 영역에서 해외 비교 기업으로 연결했습니다.",
+    "processIds": [
+      "issue-power",
+      "foundry"
+    ],
+    "region": "overseas",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "독점",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "gncenergy",
+    "name": "지엔씨에너지",
+    "ticker": "119850",
+    "role": "데이터센터 비상발전기",
+    "roleDetail": "데이터센터에 비상발전기를 공급하는 국내 시장 독점 성격의 기업으로 AI 데이터센터 전력 안정성 테마와 연결됩니다.",
+    "processIds": [
+      "issue-datacenter",
+      "issue-ai-datacenter"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "hanwhaaero",
+    "name": "한화에어로스페이스",
+    "ticker": "012450",
+    "role": "항공엔진·탄약·방산 체계",
+    "roleDetail": "항공엔진, 지상 방산, 탄약 수요와 연결되는 국내 대표 방산 기업입니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": "핵심",
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "lignex1",
+    "name": "LIG넥스원",
+    "ticker": "079550",
+    "role": "유도무기·미사일",
+    "roleDetail": "유도무기와 방공·정밀타격 체계 중심 기업으로 미사일 재고 부족 이슈와 직접 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "hyundairotem",
+    "name": "현대로템",
+    "ticker": "064350",
+    "role": "지상무기·전차",
+    "roleDetail": "K2 전차 등 지상무기 수출과 방산 증설 사이클에 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "koreaaerospace",
+    "name": "한국항공우주",
+    "ticker": "047810",
+    "role": "항공기·훈련기",
+    "roleDetail": "군용 항공기와 훈련기 플랫폼으로 항공 방산 수요와 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "hanwhasystems",
+    "name": "한화시스템",
+    "ticker": "272210",
+    "role": "방산전자·레이더",
+    "roleDetail": "레이더, 지휘통제, 방산전자 장비로 미사일·방공 체계와 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "poongsan",
+    "name": "풍산",
+    "ticker": "103140",
+    "role": "탄약·동 소재",
+    "roleDetail": "탄약과 방산용 소재를 공급해 탄약·미사일 쇼티지 테마와 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "sntdynamics",
+    "name": "SNT다이내믹스",
+    "ticker": "003570",
+    "role": "방산 파워트레인",
+    "roleDetail": "전차·장갑차 파워트레인과 방산 부품 공급망에 연결됩니다.",
+    "processIds": [
+      "theme-defense",
+      "issue-missile-shortage"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "soil",
+    "name": "S-Oil",
+    "ticker": "010950",
+    "role": "정유",
+    "roleDetail": "정유 사업 중심으로 국제유가와 정제마진 변화에 영향을 받습니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "skinnovation",
+    "name": "SK이노베이션",
+    "ticker": "096770",
+    "role": "정유·에너지",
+    "roleDetail": "정유와 에너지 사업 비중으로 유가와 정제마진 사이클에 연결됩니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "gs",
+    "name": "GS",
+    "ticker": "078930",
+    "role": "정유·에너지 지주",
+    "roleDetail": "GS칼텍스 등 에너지 사업 노출로 유가 및 정제마진 이슈와 연결됩니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "koreaPetroleum",
+    "name": "한국석유",
+    "ticker": "004090",
+    "role": "석유제품·아스팔트",
+    "roleDetail": "유가 변동과 석유제품 가격 민감도가 높은 에너지 테마주로 분류됩니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "heungguOil",
+    "name": "흥구석유",
+    "ticker": "024060",
+    "role": "석유류 유통",
+    "roleDetail": "석유류 유통 사업을 기반으로 국제유가 변동 이슈에 민감하게 반응하는 종목입니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "joongangEnergy",
+    "name": "중앙에너비스",
+    "ticker": "000440",
+    "role": "석유류 판매",
+    "roleDetail": "석유류 판매 사업으로 유가 급등·공급 차질 이슈와 연결됩니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "daesungEnergy",
+    "name": "대성에너지",
+    "ticker": "117580",
+    "role": "도시가스",
+    "roleDetail": "천연가스·에너지 가격 변동 이슈에 연결되는 도시가스 기업입니다.",
+    "processIds": [
+      "issue-oil-price"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "poscointl",
+    "name": "포스코인터내셔널",
+    "ticker": "047050",
+    "role": "자원개발·상사",
+    "roleDetail": "자원개발과 상사 네트워크를 통해 몽골 광물·자원개발 테마와 연결됩니다.",
+    "processIds": [
+      "issue-mongolia-resource"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "lxintl",
+    "name": "LX인터내셔널",
+    "ticker": "001120",
+    "role": "자원·상사",
+    "roleDetail": "광물·에너지 트레이딩과 해외 자원개발 경험으로 몽골 자원 테마와 연결됩니다.",
+    "processIds": [
+      "issue-mongolia-resource"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "koreazinc",
+    "name": "고려아연",
+    "ticker": "010130",
+    "role": "비철금속 제련",
+    "roleDetail": "비철금속 제련과 전략광물 공급망 관점에서 몽골 광물 테마와 연결됩니다.",
+    "processIds": [
+      "issue-mongolia-resource"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "lsEcoEnergy",
+    "name": "LS에코에너지",
+    "ticker": "229640",
+    "role": "전력망·자원개발 기대",
+    "roleDetail": "전력망과 해외 인프라 확장 기대가 몽골 인프라·자원개발 테마와 연결됩니다.",
+    "processIds": [
+      "issue-mongolia-resource"
+    ]
+  },
+  {
+    "layer": "product",
+    "region": "domestic",
+    "listing": "listed",
+    "critical": null,
+    "dataStatus": "needsReview",
+    "sourceIds": [
+      "manual-report-seed"
+    ],
+    "id": "hyundaiEngineering",
+    "name": "현대건설",
+    "ticker": "000720",
+    "role": "해외 인프라",
+    "roleDetail": "해외 인프라·플랜트 수행 경험으로 몽골 인프라 개발 테마와 연결됩니다.",
+    "processIds": [
+      "issue-mongolia-resource"
+    ]
+  }
+]

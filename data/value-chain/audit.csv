@@ -1,0 +1,57 @@
+﻿id,name,region,listing,critical,role,role_detail_status,financial_status,ticker,market,krx_match,krx_market_cap,krx_close_price,krx_shares,dart_corp_code,issues,next_action
+samsung,삼성전자,domestic,listed,핵심,메모리·파운드리,ok,needsReview,005930,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+skhynix,SK하이닉스,domestic,listed,핵심,DRAM·HBM,ok,needsReview,000660,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+dbhitek,DB하이텍,domestic,listed,,8인치 파운드리,ok,needsReview,000990,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+lxsemicon,LX세미콘,domestic,listed,,디스플레이 IC,ok,needsReview,108320,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+telechips,텔레칩스,domestic,listed,,차량용 팹리스,ok,needsReview,054450,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+sksiltron,SK실트론,domestic,private,핵심,실리콘 웨이퍼,ok,needsReview,,,,,,,,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요
+wonikips,원익IPS,domestic,listed,핵심,증착·식각 장비,ok,needsReview,240810,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+jusung,주성엔지니어링,domestic,listed,,증착·식각 장비,ok,needsReview,036930,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+hpsp,HPSP,domestic,listed,핵심,고압 수소 어닐링,ok,needsReview,403870,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+yujintech,유진테크,domestic,listed,,증착 장비,ok,needsReview,084370,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+psk,피에스케이,domestic,listed,,세정·Strip 장비,ok,needsReview,319660,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+kcTech,케이씨텍,domestic,listed,,세정·CMP,ok,needsReview,281820,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+nextin,넥스틴,domestic,listed,,검사 장비,ok,needsReview,348210,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+hanmi,한미반도체,domestic,listed,핵심,HBM 후공정 장비,ok,needsReview,042700,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+sfa,SFA반도체,domestic,listed,,패키징,ok,needsReview,036540,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+isc,ISC,domestic,listed,,테스트 소켓,ok,needsReview,095340,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+leeno,리노공업,domestic,listed,핵심,테스트 핀·소켓,ok,needsReview,058470,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+wits,와이씨켐,domestic,listed,,소재·케미컬,ok,needsReview,112290,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+wonikmaterials,원익머트리얼즈,domestic,listed,,특수가스,ok,needsReview,104830,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+skmaterials,SK스페셜티,domestic,private,핵심,특수가스,ok,needsReview,,,,,,,,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요
+dongjin,동진쎄미켐,domestic,listed,핵심,PR·케미컬,ok,needsReview,005290,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+tes,테스,domestic,listed,,증착·세정 장비,ok,needsReview,095610,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+semes,세메스,domestic,private,핵심,전공정 장비,ok,needsReview,,,,,,,,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요,국내 비상장사: 재무/시총 별도 수기 또는 DeepSearch/Toss 소스 필요
+zeus,제우스,domestic,listed,,세정·로봇 장비,ok,needsReview,079370,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+auros,오로스테크놀로지,domestic,listed,,오버레이 계측,ok,needsReview,322310,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+parksystems,파크시스템스,domestic,listed,핵심,원자현미경 계측,ok,needsReview,140860,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+exicon,엑시콘,domestic,listed,,메모리 테스트 장비,ok,needsReview,092870,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+unitest,유니테스트,domestic,listed,,번인·검사 장비,ok,needsReview,086390,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+eotechnics,이오테크닉스,domestic,listed,핵심,레이저 어닐링·마킹,ok,needsReview,039030,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+nepes,네패스,domestic,listed,,패키징·OSAT,ok,needsReview,033640,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+simmtech,심텍,domestic,listed,핵심,메모리·패키지 기판,ok,needsReview,222800,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+daeduck,대덕전자,domestic,listed,,FC-BGA·PCB 기판,ok,needsReview,353200,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+koreaCircuit,코리아써키트,domestic,listed,,반도체 패키지 기판,ok,needsReview,007810,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+mecaro,메카로,domestic,listed,,프리커서,ok,needsReview,241770,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+wonikqnc,원익QnC,domestic,listed,핵심,쿼츠·세라믹 부품,ok,needsReview,074600,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+mico,미코,domestic,listed,,세라믹 히터·부품,ok,needsReview,059090,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+snstech,에스앤에스텍,domestic,listed,핵심,블랭크마스크,ok,needsReview,101490,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+fst,에프에스티,domestic,listed,,펠리클·칠러,ok,needsReview,036810,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+foosung,후성,domestic,listed,,불소계 특수가스,ok,needsReview,093370,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+soulbrain,솔브레인,domestic,listed,핵심,식각액·세정액,ok,needsReview,357780,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+enf,이엔에프테크놀로지,domestic,listed,,반도체 케미컬,ok,needsReview,102710,,manual-ticker,,,,,KRX API 검증 대기; DART API 검증 대기; DART 최근 3개년 매출/영업이익 자동 치환 필요,KRX API 검증 대기
+asml,ASML,overseas,listed,독점,EUV 노광 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+tel,Tokyo Electron,overseas,listed,핵심,산화·증착·세정 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+lam,Lam Research,overseas,listed,독점,식각 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+amat,Applied Materials,overseas,listed,독점,증착·식각 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+axcelis,Axcelis,overseas,listed,핵심,이온주입 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+tsmc,TSMC,overseas,listed,독점,첨단 파운드리,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+kla,KLA,overseas,listed,독점,검사·계측,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+airliquide,Air Liquide,overseas,listed,,산업가스,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+jsr,JSR,overseas,private,핵심,포토레지스트,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+shinetsu,Shin-Etsu,overseas,listed,독점,실리콘 웨이퍼·소재,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+sumco,SUMCO,overseas,listed,핵심,실리콘 웨이퍼,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+disco,DISCO,overseas,listed,독점,다이싱·그라인더 장비,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+ibiden,Ibiden,overseas,listed,핵심,FC-BGA 기판,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+dupont,DuPont,overseas,listed,핵심,CMP·전자소재,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요
+onsemi,onsemi,overseas,listed,핵심,전력반도체,ok,needsReview,,,,,,,,해외 기업: 별도 해외 IR/API 기준 필요,해외 기업: 별도 해외 IR/API 기준 필요

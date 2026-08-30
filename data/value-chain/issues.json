@@ -1,0 +1,908 @@
+[
+  {
+    "id": "score-hbm",
+    "topicId": "issue-hbm",
+    "title": "HBM",
+    "category": "섹터",
+    "description": "AI 서버 증설이 메모리, 후공정 장비, 테스트 소켓으로 번지는 대표 주도 섹터입니다.",
+    "companyIds": [
+      "skhynix",
+      "hanmi",
+      "isc",
+      "leeno",
+      "samsung"
+    ],
+    "relatedTopicIds": [
+      "packaging",
+      "test",
+      "substrate"
+    ],
+    "netBuyRank": 1,
+    "returnScore": 4.8,
+    "searchScore": 4.6,
+    "volumeScore": 4.7,
+    "avgReturnPct": 39.8,
+    "searchChangePct": 74,
+    "volumeChangePct": 62,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 36,
+        "price": 2.1,
+        "volume": 41
+      },
+      {
+        "date": "08/20",
+        "search": 42,
+        "price": 3.4,
+        "volume": 48
+      },
+      {
+        "date": "08/21",
+        "search": 55,
+        "price": 6.8,
+        "volume": 59
+      },
+      {
+        "date": "08/22",
+        "search": 61,
+        "price": 8.2,
+        "volume": 64
+      },
+      {
+        "date": "08/23",
+        "search": 76,
+        "price": 12.5,
+        "volume": 78
+      },
+      {
+        "date": "08/24",
+        "search": 88,
+        "price": 16.1,
+        "volume": 86
+      },
+      {
+        "date": "08/25",
+        "search": 95,
+        "price": 18.4,
+        "volume": 92
+      }
+    ],
+    "composite": 4.7
+  },
+  {
+    "id": "score-ai-datacenter",
+    "topicId": "issue-datacenter",
+    "title": "AI 데이터센터",
+    "category": "섹터",
+    "description": "GPU 서버와 전력 인프라 투자가 메모리, 파운드리, 장비, 비상발전기 수요로 연결됩니다.",
+    "companyIds": [
+      "skhynix",
+      "samsung",
+      "wonikips",
+      "hpsp",
+      "tes",
+      "gncenergy"
+    ],
+    "relatedTopicIds": [
+      "foundry",
+      "deposition",
+      "etch",
+      "inspection"
+    ],
+    "netBuyRank": 2,
+    "returnScore": 4.4,
+    "searchScore": 4.8,
+    "volumeScore": 4.1,
+    "avgReturnPct": 25.7,
+    "searchChangePct": 91,
+    "volumeChangePct": 45,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 30,
+        "price": 1.2,
+        "volume": 36
+      },
+      {
+        "date": "08/20",
+        "search": 44,
+        "price": 2.8,
+        "volume": 45
+      },
+      {
+        "date": "08/21",
+        "search": 63,
+        "price": 5.5,
+        "volume": 66
+      },
+      {
+        "date": "08/22",
+        "search": 58,
+        "price": 4.9,
+        "volume": 57
+      },
+      {
+        "date": "08/23",
+        "search": 70,
+        "price": 7.4,
+        "volume": 64
+      },
+      {
+        "date": "08/24",
+        "search": 86,
+        "price": 10.8,
+        "volume": 75
+      },
+      {
+        "date": "08/25",
+        "search": 99,
+        "price": 13.1,
+        "volume": 81
+      }
+    ],
+    "composite": 4.4
+  },
+  {
+    "id": "score-ai-chip",
+    "topicId": "issue-ai-chip",
+    "title": "AI반도체",
+    "category": "산업",
+    "description": "고성능 연산 칩, HBM, 첨단 패키징을 함께 보는 가장 넓은 AI 반도체 묶음입니다.",
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "hanmi",
+      "tsmc"
+    ],
+    "relatedTopicIds": [
+      "design",
+      "foundry",
+      "packaging",
+      "test"
+    ],
+    "netBuyRank": 3,
+    "returnScore": 4.2,
+    "searchScore": 4.4,
+    "volumeScore": 4.3,
+    "avgReturnPct": 31,
+    "searchChangePct": 58,
+    "volumeChangePct": 49,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 42,
+        "price": 1.5,
+        "volume": 40
+      },
+      {
+        "date": "08/20",
+        "search": 45,
+        "price": 2.4,
+        "volume": 46
+      },
+      {
+        "date": "08/21",
+        "search": 49,
+        "price": 4.1,
+        "volume": 48
+      },
+      {
+        "date": "08/22",
+        "search": 57,
+        "price": 6.8,
+        "volume": 55
+      },
+      {
+        "date": "08/23",
+        "search": 62,
+        "price": 8.5,
+        "volume": 65
+      },
+      {
+        "date": "08/24",
+        "search": 72,
+        "price": 10.2,
+        "volume": 70
+      },
+      {
+        "date": "08/25",
+        "search": 81,
+        "price": 12.8,
+        "volume": 78
+      }
+    ],
+    "composite": 4.3
+  },
+  {
+    "id": "score-localization",
+    "topicId": "issue-localization",
+    "title": "소부장 국산화",
+    "category": "테마",
+    "description": "공급망 리스크가 커질 때 포토레지스트, 케미컬, 특수가스, 마스크 부품이 같이 움직입니다.",
+    "companyIds": [
+      "dongjin",
+      "soulbrain",
+      "enf",
+      "wonikmaterials",
+      "snstech"
+    ],
+    "relatedTopicIds": [
+      "lithography",
+      "cleaning",
+      "etch",
+      "deposition"
+    ],
+    "returnScore": 3.8,
+    "searchScore": 3.6,
+    "volumeScore": 3.9,
+    "avgReturnPct": 16.9,
+    "searchChangePct": 28,
+    "volumeChangePct": 35,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 28,
+        "price": 0.4,
+        "volume": 33
+      },
+      {
+        "date": "08/20",
+        "search": 30,
+        "price": 1.5,
+        "volume": 35
+      },
+      {
+        "date": "08/21",
+        "search": 34,
+        "price": 2.8,
+        "volume": 37
+      },
+      {
+        "date": "08/22",
+        "search": 38,
+        "price": 3.1,
+        "volume": 42
+      },
+      {
+        "date": "08/23",
+        "search": 41,
+        "price": 5.2,
+        "volume": 46
+      },
+      {
+        "date": "08/24",
+        "search": 49,
+        "price": 6.6,
+        "volume": 55
+      },
+      {
+        "date": "08/25",
+        "search": 53,
+        "price": 7.8,
+        "volume": 59
+      }
+    ],
+    "composite": 3.8
+  },
+  {
+    "id": "score-power",
+    "topicId": "issue-power",
+    "title": "전력반도체",
+    "category": "섹터",
+    "description": "전기차, 충전, 전력망 이슈가 8인치 파운드리와 SiC/GaN 전력반도체 기업으로 이어집니다.",
+    "companyIds": [
+      "dbhitek",
+      "samsung",
+      "onsemi"
+    ],
+    "relatedTopicIds": [
+      "foundry",
+      "implant",
+      "inspection"
+    ],
+    "returnScore": 3.1,
+    "searchScore": 3.9,
+    "volumeScore": 3.4,
+    "avgReturnPct": 8.7,
+    "searchChangePct": 43,
+    "volumeChangePct": 21,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 18,
+        "price": -1.2,
+        "volume": 21
+      },
+      {
+        "date": "08/20",
+        "search": 24,
+        "price": 0.3,
+        "volume": 26
+      },
+      {
+        "date": "08/21",
+        "search": 31,
+        "price": 1.1,
+        "volume": 30
+      },
+      {
+        "date": "08/22",
+        "search": 36,
+        "price": 2,
+        "volume": 34
+      },
+      {
+        "date": "08/23",
+        "search": 43,
+        "price": 2.8,
+        "volume": 39
+      },
+      {
+        "date": "08/24",
+        "search": 51,
+        "price": 4.4,
+        "volume": 43
+      },
+      {
+        "date": "08/25",
+        "search": 60,
+        "price": 5.9,
+        "volume": 49
+      }
+    ],
+    "composite": 3.5
+  },
+  {
+    "id": "score-ondevice",
+    "topicId": "issue-ondevice",
+    "title": "온디바이스AI",
+    "category": "섹터",
+    "description": "스마트폰과 PC 안에서 AI를 처리하는 흐름으로 AP, 메모리, 저전력 칩을 함께 봅니다.",
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "lxsemicon",
+      "telechips"
+    ],
+    "relatedTopicIds": [
+      "design",
+      "fabless",
+      "foundry"
+    ],
+    "returnScore": 3.3,
+    "searchScore": 4.1,
+    "volumeScore": 3.2,
+    "avgReturnPct": 12.4,
+    "searchChangePct": 54,
+    "volumeChangePct": 19,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 22,
+        "price": 0.2,
+        "volume": 18
+      },
+      {
+        "date": "08/20",
+        "search": 25,
+        "price": 1,
+        "volume": 22
+      },
+      {
+        "date": "08/21",
+        "search": 29,
+        "price": 1.4,
+        "volume": 24
+      },
+      {
+        "date": "08/22",
+        "search": 44,
+        "price": 4,
+        "volume": 38
+      },
+      {
+        "date": "08/23",
+        "search": 52,
+        "price": 5.3,
+        "volume": 42
+      },
+      {
+        "date": "08/24",
+        "search": 56,
+        "price": 6.1,
+        "volume": 45
+      },
+      {
+        "date": "08/25",
+        "search": 64,
+        "price": 7,
+        "volume": 50
+      }
+    ],
+    "composite": 3.5
+  },
+  {
+    "id": "score-auto",
+    "topicId": "issue-auto",
+    "title": "전장",
+    "category": "섹터",
+    "description": "차량용 MCU, 전력반도체, 디스플레이 IC, 센서가 전기차·자율주행 투자와 연결됩니다.",
+    "companyIds": [
+      "telechips",
+      "dbhitek",
+      "lxsemicon"
+    ],
+    "relatedTopicIds": [
+      "fabless",
+      "foundry",
+      "test"
+    ],
+    "returnScore": 2.9,
+    "searchScore": 3,
+    "volumeScore": 3.1,
+    "avgReturnPct": 6.4,
+    "searchChangePct": 18,
+    "volumeChangePct": 16,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 18,
+        "price": -0.4,
+        "volume": 20
+      },
+      {
+        "date": "08/20",
+        "search": 19,
+        "price": 0.2,
+        "volume": 22
+      },
+      {
+        "date": "08/21",
+        "search": 21,
+        "price": 1.1,
+        "volume": 23
+      },
+      {
+        "date": "08/22",
+        "search": 25,
+        "price": 1.9,
+        "volume": 27
+      },
+      {
+        "date": "08/23",
+        "search": 27,
+        "price": 2.3,
+        "volume": 29
+      },
+      {
+        "date": "08/24",
+        "search": 29,
+        "price": 3.2,
+        "volume": 31
+      },
+      {
+        "date": "08/25",
+        "search": 33,
+        "price": 4.1,
+        "volume": 34
+      }
+    ],
+    "composite": 3
+  },
+  {
+    "id": "score-iphone",
+    "topicId": "issue-iphone",
+    "title": "아이폰",
+    "category": "테마",
+    "description": "모바일 신제품 사이클이 메모리, 디스플레이 구동칩, 모바일 부품 수요로 이어집니다.",
+    "companyIds": [
+      "samsung",
+      "skhynix",
+      "lxsemicon"
+    ],
+    "relatedTopicIds": [
+      "design",
+      "fabless",
+      "test"
+    ],
+    "returnScore": 2.6,
+    "searchScore": 3.4,
+    "volumeScore": 2.8,
+    "avgReturnPct": 4.8,
+    "searchChangePct": 31,
+    "volumeChangePct": 10,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 20,
+        "price": -0.8,
+        "volume": 17
+      },
+      {
+        "date": "08/20",
+        "search": 23,
+        "price": -0.2,
+        "volume": 18
+      },
+      {
+        "date": "08/21",
+        "search": 25,
+        "price": 0.4,
+        "volume": 20
+      },
+      {
+        "date": "08/22",
+        "search": 30,
+        "price": 1.1,
+        "volume": 25
+      },
+      {
+        "date": "08/23",
+        "search": 42,
+        "price": 2,
+        "volume": 32
+      },
+      {
+        "date": "08/24",
+        "search": 38,
+        "price": 1.8,
+        "volume": 29
+      },
+      {
+        "date": "08/25",
+        "search": 36,
+        "price": 2.6,
+        "volume": 27
+      }
+    ],
+    "composite": 2.9
+  },
+  {
+    "id": "score-robot",
+    "topicId": "theme-robot",
+    "title": "로봇",
+    "category": "테마",
+    "description": "산업 자동화와 휴머노이드 기대감이 센서, 제어칩, 자동화 장비로 확장되는 테마입니다.",
+    "companyIds": [
+      "samsung",
+      "telechips",
+      "zeus"
+    ],
+    "relatedTopicIds": [
+      "issue-ondevice",
+      "cleaning"
+    ],
+    "returnScore": 3.5,
+    "searchScore": 3.8,
+    "volumeScore": 3.7,
+    "avgReturnPct": 15.2,
+    "searchChangePct": 39,
+    "volumeChangePct": 33,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 23,
+        "price": 0.8,
+        "volume": 24
+      },
+      {
+        "date": "08/20",
+        "search": 25,
+        "price": 1.4,
+        "volume": 27
+      },
+      {
+        "date": "08/21",
+        "search": 31,
+        "price": 2.2,
+        "volume": 34
+      },
+      {
+        "date": "08/22",
+        "search": 35,
+        "price": 4.1,
+        "volume": 36
+      },
+      {
+        "date": "08/23",
+        "search": 45,
+        "price": 6.6,
+        "volume": 44
+      },
+      {
+        "date": "08/24",
+        "search": 57,
+        "price": 7.5,
+        "volume": 52
+      },
+      {
+        "date": "08/25",
+        "search": 63,
+        "price": 9,
+        "volume": 60
+      }
+    ],
+    "composite": 3.7
+  },
+  {
+    "id": "score-defense",
+    "topicId": "theme-defense",
+    "title": "방산",
+    "category": "테마",
+    "description": "지정학 이슈와 수출 계약 기대감이 방산·전력·통신 부품주로 번지는 확장 테마입니다.",
+    "companyIds": [
+      "lignex1",
+      "hanwhaaero",
+      "hanwhasystems",
+      "poongsan",
+      "hyundairotem",
+      "koreaaerospace",
+      "sntdynamics"
+    ],
+    "relatedTopicIds": [
+      "theme-politics",
+      "theme-ukraine"
+    ],
+    "returnScore": 3,
+    "searchScore": 4,
+    "volumeScore": 3.5,
+    "avgReturnPct": 9.6,
+    "searchChangePct": 48,
+    "volumeChangePct": 24,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 26,
+        "price": 0.2,
+        "volume": 20
+      },
+      {
+        "date": "08/20",
+        "search": 30,
+        "price": 1.1,
+        "volume": 26
+      },
+      {
+        "date": "08/21",
+        "search": 36,
+        "price": 2.8,
+        "volume": 34
+      },
+      {
+        "date": "08/22",
+        "search": 48,
+        "price": 4.4,
+        "volume": 42
+      },
+      {
+        "date": "08/23",
+        "search": 55,
+        "price": 5.1,
+        "volume": 49
+      },
+      {
+        "date": "08/24",
+        "search": 61,
+        "price": 5.8,
+        "volume": 50
+      },
+      {
+        "date": "08/25",
+        "search": 69,
+        "price": 6.6,
+        "volume": 55
+      }
+    ],
+    "composite": 3.5
+  },
+  {
+    "returnScore": 4.2,
+    "searchScore": 4.1,
+    "volumeScore": 4,
+    "avgReturnPct": 18.5,
+    "searchChangePct": 52,
+    "volumeChangePct": 47,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 36,
+        "price": 2.1,
+        "volume": 42
+      },
+      {
+        "date": "08/20",
+        "search": 41,
+        "price": 3,
+        "volume": 46
+      },
+      {
+        "date": "08/21",
+        "search": 46,
+        "price": 3.9,
+        "volume": 50
+      },
+      {
+        "date": "08/22",
+        "search": 51,
+        "price": 4.8,
+        "volume": 54
+      },
+      {
+        "date": "08/23",
+        "search": 56,
+        "price": 5.7,
+        "volume": 58
+      },
+      {
+        "date": "08/24",
+        "search": 61,
+        "price": 6.6,
+        "volume": 62
+      },
+      {
+        "date": "08/25",
+        "search": 66,
+        "price": 7.5,
+        "volume": 66
+      }
+    ],
+    "composite": 4.1,
+    "id": "score-missile-shortage",
+    "topicId": "issue-missile-shortage",
+    "title": "미사일 숏티지",
+    "category": "이슈",
+    "description": "탄약·미사일 재고 부족과 재무장 흐름이 유도무기, 탄약, 방산전자 기업으로 연결됩니다.",
+    "companyIds": [
+      "lignex1",
+      "hanwhaaero",
+      "hanwhasystems",
+      "poongsan",
+      "hyundairotem",
+      "koreaaerospace",
+      "sntdynamics"
+    ],
+    "relatedTopicIds": [
+      "theme-defense"
+    ]
+  },
+  {
+    "returnScore": 3.4,
+    "searchScore": 3.6,
+    "volumeScore": 3.2,
+    "avgReturnPct": 7.8,
+    "searchChangePct": 39,
+    "volumeChangePct": 28,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 22,
+        "price": 0.4,
+        "volume": 20
+      },
+      {
+        "date": "08/20",
+        "search": 27,
+        "price": 1.3,
+        "volume": 24
+      },
+      {
+        "date": "08/21",
+        "search": 32,
+        "price": 2.2,
+        "volume": 28
+      },
+      {
+        "date": "08/22",
+        "search": 37,
+        "price": 3.1,
+        "volume": 32
+      },
+      {
+        "date": "08/23",
+        "search": 42,
+        "price": 4,
+        "volume": 36
+      },
+      {
+        "date": "08/24",
+        "search": 47,
+        "price": 4.9,
+        "volume": 40
+      },
+      {
+        "date": "08/25",
+        "search": 52,
+        "price": 5.8,
+        "volume": 44
+      }
+    ],
+    "composite": 3.4,
+    "id": "score-mongolia-resource",
+    "topicId": "issue-mongolia-resource",
+    "title": "몽골",
+    "category": "이슈",
+    "description": "몽골의 광물·전력망·인프라 개발 기대를 상사, 비철금속, 전력망 기업 관점에서 묶은 테마입니다.",
+    "companyIds": [
+      "poscointl",
+      "lxintl",
+      "koreazinc",
+      "lsEcoEnergy",
+      "hyundaiEngineering"
+    ],
+    "relatedTopicIds": [
+      "issue-power",
+      "theme-ukraine"
+    ]
+  },
+  {
+    "returnScore": 3.3,
+    "searchScore": 4,
+    "volumeScore": 3.7,
+    "avgReturnPct": 8.9,
+    "searchChangePct": 61,
+    "volumeChangePct": 34,
+    "trend": [
+      {
+        "date": "08/19",
+        "search": 34,
+        "price": 0.6,
+        "volume": 31
+      },
+      {
+        "date": "08/20",
+        "search": 39,
+        "price": 1.5,
+        "volume": 35
+      },
+      {
+        "date": "08/21",
+        "search": 44,
+        "price": 2.4,
+        "volume": 39
+      },
+      {
+        "date": "08/22",
+        "search": 49,
+        "price": 3.3,
+        "volume": 43
+      },
+      {
+        "date": "08/23",
+        "search": 54,
+        "price": 4.2,
+        "volume": 47
+      },
+      {
+        "date": "08/24",
+        "search": 59,
+        "price": 5.1,
+        "volume": 51
+      },
+      {
+        "date": "08/25",
+        "search": 64,
+        "price": 6,
+        "volume": 55
+      }
+    ],
+    "composite": 3.7,
+    "id": "score-oil-price",
+    "topicId": "issue-oil-price",
+    "title": "유가",
+    "category": "이슈",
+    "description": "국제유가와 정제마진, 에너지 공급 차질에 민감한 정유·석유 유통주 테마입니다.",
+    "companyIds": [
+      "soil",
+      "skinnovation",
+      "gs",
+      "koreaPetroleum",
+      "heungguOil",
+      "joongangEnergy",
+      "daesungEnergy"
+    ],
+    "relatedTopicIds": [
+      "issue-power"
+    ]
+  }
+]

@@ -1,0 +1,2112 @@
+[
+  {
+    "companyId": "samsung",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 15024936,
+    "annual": {
+      "sales": [
+        3022310,
+        2589350,
+        2581600
+      ],
+      "operatingProfit": [
+        433770,
+        65670,
+        65670
+      ],
+      "opMargin": 2.5,
+      "per": 18.4
+    },
+    "recentQuarter": {
+      "sales": 645400,
+      "operatingProfit": 16418
+    }
+  },
+  {
+    "companyId": "skhynix",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 12075039,
+    "annual": {
+      "sales": [
+        446216,
+        327657,
+        327657
+      ],
+      "operatingProfit": [
+        68094,
+        -77300,
+        -77300
+      ],
+      "opMargin": -23.6,
+      "per": 16.2
+    },
+    "recentQuarter": {
+      "sales": 81914,
+      "operatingProfit": -19325
+    }
+  },
+  {
+    "companyId": "dbhitek",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 40851,
+    "annual": {
+      "sales": [
+        12147,
+        11578,
+        11578
+      ],
+      "operatingProfit": [
+        7687,
+        2635,
+        2635
+      ],
+      "opMargin": 22.8,
+      "per": 9.4
+    },
+    "recentQuarter": {
+      "sales": 2895,
+      "operatingProfit": 659
+    }
+  },
+  {
+    "companyId": "lxsemicon",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 6050,
+    "annual": {
+      "sales": [
+        18988,
+        19015,
+        19015
+      ],
+      "operatingProfit": [
+        3106,
+        1290,
+        1290
+      ],
+      "opMargin": 6.8,
+      "per": 10.8
+    },
+    "recentQuarter": {
+      "sales": 4754,
+      "operatingProfit": 323
+    }
+  },
+  {
+    "companyId": "telechips",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 1457,
+    "annual": {
+      "sales": [
+        1504,
+        1911,
+        1911
+      ],
+      "operatingProfit": [
+        92,
+        168,
+        168
+      ],
+      "opMargin": 8.8,
+      "per": 18.1
+    },
+    "recentQuarter": {
+      "sales": 478,
+      "operatingProfit": 42
+    }
+  },
+  {
+    "companyId": "sksiltron",
+    "asOf": "비상장 별도 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        18200,
+        20500,
+        21800
+      ],
+      "operatingProfit": [
+        3600,
+        3900,
+        4200
+      ],
+      "opMargin": 19.3,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 5450,
+      "operatingProfit": 1050
+    }
+  },
+  {
+    "companyId": "wonikips",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 54532,
+    "annual": {
+      "sales": [
+        4552,
+        6193,
+        7704
+      ],
+      "operatingProfit": [
+        862,
+        1249,
+        1695
+      ],
+      "opMargin": 22,
+      "per": 13.8
+    },
+    "recentQuarter": {
+      "sales": 1926,
+      "operatingProfit": 424
+    }
+  },
+  {
+    "companyId": "jusung",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 9320,
+    "annual": {
+      "sales": [
+        5362,
+        6452,
+        7093
+      ],
+      "operatingProfit": [
+        1051,
+        1150,
+        1262
+      ],
+      "opMargin": 17.8,
+      "per": 12.6
+    },
+    "recentQuarter": {
+      "sales": 1773,
+      "operatingProfit": 316
+    }
+  },
+  {
+    "companyId": "hpsp",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 42055,
+    "annual": {
+      "sales": [
+        918,
+        1593,
+        1791
+      ],
+      "operatingProfit": [
+        452,
+        852,
+        980
+      ],
+      "opMargin": 54.7,
+      "per": 29.5
+    },
+    "recentQuarter": {
+      "sales": 448,
+      "operatingProfit": 245
+    }
+  },
+  {
+    "companyId": "yujintech",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 6710,
+    "annual": {
+      "sales": [
+        2910,
+        3574,
+        4256
+      ],
+      "operatingProfit": [
+        572,
+        685,
+        834
+      ],
+      "opMargin": 19.6,
+      "per": 11.2
+    },
+    "recentQuarter": {
+      "sales": 1064,
+      "operatingProfit": 209
+    }
+  },
+  {
+    "companyId": "psk",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 5940,
+    "annual": {
+      "sales": [
+        3312,
+        3981,
+        4461
+      ],
+      "operatingProfit": [
+        532,
+        642,
+        718
+      ],
+      "opMargin": 16.1,
+      "per": 10.5
+    },
+    "recentQuarter": {
+      "sales": 1115,
+      "operatingProfit": 180
+    }
+  },
+  {
+    "companyId": "kcTech",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 5100,
+    "annual": {
+      "sales": [
+        3850,
+        4020,
+        4480
+      ],
+      "operatingProfit": [
+        510,
+        550,
+        640
+      ],
+      "opMargin": 14.3,
+      "per": 9.9
+    },
+    "recentQuarter": {
+      "sales": 1120,
+      "operatingProfit": 160
+    }
+  },
+  {
+    "companyId": "nextin",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 6900,
+    "annual": {
+      "sales": [
+        1146,
+        1495,
+        1660
+      ],
+      "operatingProfit": [
+        512,
+        610,
+        682
+      ],
+      "opMargin": 41.1,
+      "per": 17
+    },
+    "recentQuarter": {
+      "sales": 415,
+      "operatingProfit": 171
+    }
+  },
+  {
+    "companyId": "hanmi",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 209210,
+    "annual": {
+      "sales": [
+        3276,
+        1590,
+        5900
+      ],
+      "operatingProfit": [
+        1118,
+        590,
+        2480
+      ],
+      "opMargin": 42,
+      "per": 38.2
+    },
+    "recentQuarter": {
+      "sales": 1475,
+      "operatingProfit": 620
+    }
+  },
+  {
+    "companyId": "sfa",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 8900,
+    "annual": {
+      "sales": [
+        6994,
+        6699,
+        7030
+      ],
+      "operatingProfit": [
+        629,
+        400,
+        520
+      ],
+      "opMargin": 7.4,
+      "per": 15.3
+    },
+    "recentQuarter": {
+      "sales": 1758,
+      "operatingProfit": 130
+    }
+  },
+  {
+    "companyId": "isc",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 36756,
+    "annual": {
+      "sales": [
+        1790,
+        2300,
+        2480
+      ],
+      "operatingProfit": [
+        520,
+        615,
+        710
+      ],
+      "opMargin": 28.6,
+      "per": 16.9
+    },
+    "recentQuarter": {
+      "sales": 620,
+      "operatingProfit": 178
+    }
+  },
+  {
+    "companyId": "leeno",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 50910,
+    "annual": {
+      "sales": [
+        2802,
+        2556,
+        3001
+      ],
+      "operatingProfit": [
+        1171,
+        1040,
+        1220
+      ],
+      "opMargin": 40.7,
+      "per": 24.1
+    },
+    "recentQuarter": {
+      "sales": 750,
+      "operatingProfit": 305
+    }
+  },
+  {
+    "companyId": "wits",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 2400,
+    "annual": {
+      "sales": [
+        580,
+        730,
+        850
+      ],
+      "operatingProfit": [
+        48,
+        62,
+        88
+      ],
+      "opMargin": 10.4,
+      "per": 21.5
+    },
+    "recentQuarter": {
+      "sales": 213,
+      "operatingProfit": 22
+    }
+  },
+  {
+    "companyId": "wonikmaterials",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 4161,
+    "annual": {
+      "sales": [
+        3140,
+        3608,
+        3801
+      ],
+      "operatingProfit": [
+        563,
+        589,
+        620
+      ],
+      "opMargin": 16.3,
+      "per": 8.8
+    },
+    "recentQuarter": {
+      "sales": 950,
+      "operatingProfit": 155
+    }
+  },
+  {
+    "companyId": "skmaterials",
+    "asOf": "비상장 별도 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        6700,
+        7100,
+        7600
+      ],
+      "operatingProfit": [
+        1500,
+        1640,
+        1780
+      ],
+      "opMargin": 23.4,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 1900,
+      "operatingProfit": 445
+    }
+  },
+  {
+    "companyId": "dongjin",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 21611,
+    "annual": {
+      "sales": [
+        14700,
+        15100,
+        16600
+      ],
+      "operatingProfit": [
+        1880,
+        1930,
+        2140
+      ],
+      "opMargin": 12.9,
+      "per": 17.2
+    },
+    "recentQuarter": {
+      "sales": 4150,
+      "operatingProfit": 535
+    }
+  },
+  {
+    "companyId": "tes",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 27627,
+    "annual": {
+      "sales": [
+        3410,
+        3560,
+        3820
+      ],
+      "operatingProfit": [
+        420,
+        455,
+        510
+      ],
+      "opMargin": 13.4,
+      "per": 10.8
+    },
+    "recentQuarter": {
+      "sales": 955,
+      "operatingProfit": 128
+    }
+  },
+  {
+    "companyId": "semes",
+    "asOf": "비상장 별도 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        27000,
+        29100,
+        31800
+      ],
+      "operatingProfit": [
+        3600,
+        3900,
+        4300
+      ],
+      "opMargin": 13.5,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 7950,
+      "operatingProfit": 1075
+    }
+  },
+  {
+    "companyId": "zeus",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 3192,
+    "annual": {
+      "sales": [
+        5100,
+        5480,
+        6020
+      ],
+      "operatingProfit": [
+        410,
+        510,
+        640
+      ],
+      "opMargin": 10.6,
+      "per": 13.1
+    },
+    "recentQuarter": {
+      "sales": 1505,
+      "operatingProfit": 160
+    }
+  },
+  {
+    "companyId": "auros",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 2600,
+    "annual": {
+      "sales": [
+        390,
+        520,
+        610
+      ],
+      "operatingProfit": [
+        42,
+        58,
+        75
+      ],
+      "opMargin": 12.3,
+      "per": 24.5
+    },
+    "recentQuarter": {
+      "sales": 153,
+      "operatingProfit": 19
+    }
+  },
+  {
+    "companyId": "parksystems",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 15300,
+    "annual": {
+      "sales": [
+        1100,
+        1240,
+        1450
+      ],
+      "operatingProfit": [
+        240,
+        285,
+        340
+      ],
+      "opMargin": 23.4,
+      "per": 32.1
+    },
+    "recentQuarter": {
+      "sales": 363,
+      "operatingProfit": 85
+    }
+  },
+  {
+    "companyId": "exicon",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 2800,
+    "annual": {
+      "sales": [
+        930,
+        1090,
+        1260
+      ],
+      "operatingProfit": [
+        88,
+        112,
+        145
+      ],
+      "opMargin": 11.5,
+      "per": 16.8
+    },
+    "recentQuarter": {
+      "sales": 315,
+      "operatingProfit": 36
+    }
+  },
+  {
+    "companyId": "unitest",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 3100,
+    "annual": {
+      "sales": [
+        1200,
+        1380,
+        1510
+      ],
+      "operatingProfit": [
+        70,
+        110,
+        150
+      ],
+      "opMargin": 9.9,
+      "per": 18.7
+    },
+    "recentQuarter": {
+      "sales": 378,
+      "operatingProfit": 38
+    }
+  },
+  {
+    "companyId": "eotechnics",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 19800,
+    "annual": {
+      "sales": [
+        3650,
+        4120,
+        4680
+      ],
+      "operatingProfit": [
+        780,
+        900,
+        1020
+      ],
+      "opMargin": 21.8,
+      "per": 22.4
+    },
+    "recentQuarter": {
+      "sales": 1170,
+      "operatingProfit": 255
+    }
+  },
+  {
+    "companyId": "nepes",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 4500,
+    "annual": {
+      "sales": [
+        5200,
+        5480,
+        5710
+      ],
+      "operatingProfit": [
+        -120,
+        80,
+        180
+      ],
+      "opMargin": 3.2,
+      "per": 28.6
+    },
+    "recentQuarter": {
+      "sales": 1428,
+      "operatingProfit": 45
+    }
+  },
+  {
+    "companyId": "simmtech",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 9800,
+    "annual": {
+      "sales": [
+        16900,
+        12800,
+        15100
+      ],
+      "operatingProfit": [
+        2400,
+        680,
+        1320
+      ],
+      "opMargin": 8.7,
+      "per": 15.4
+    },
+    "recentQuarter": {
+      "sales": 3775,
+      "operatingProfit": 330
+    }
+  },
+  {
+    "companyId": "daeduck",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 8900,
+    "annual": {
+      "sales": [
+        13100,
+        11900,
+        13600
+      ],
+      "operatingProfit": [
+        2300,
+        820,
+        1150
+      ],
+      "opMargin": 8.5,
+      "per": 14.2
+    },
+    "recentQuarter": {
+      "sales": 3400,
+      "operatingProfit": 288
+    }
+  },
+  {
+    "companyId": "koreaCircuit",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 4100,
+    "annual": {
+      "sales": [
+        16200,
+        14900,
+        15600
+      ],
+      "operatingProfit": [
+        900,
+        420,
+        610
+      ],
+      "opMargin": 3.9,
+      "per": 18.3
+    },
+    "recentQuarter": {
+      "sales": 3900,
+      "operatingProfit": 153
+    }
+  },
+  {
+    "companyId": "mecaro",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 950,
+    "annual": {
+      "sales": [
+        730,
+        820,
+        910
+      ],
+      "operatingProfit": [
+        42,
+        55,
+        68
+      ],
+      "opMargin": 7.5,
+      "per": 14.2
+    },
+    "recentQuarter": {
+      "sales": 228,
+      "operatingProfit": 17
+    }
+  },
+  {
+    "companyId": "wonikqnc",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 8600,
+    "annual": {
+      "sales": [
+        7100,
+        7820,
+        8400
+      ],
+      "operatingProfit": [
+        1120,
+        1260,
+        1380
+      ],
+      "opMargin": 16.4,
+      "per": 13.6
+    },
+    "recentQuarter": {
+      "sales": 2100,
+      "operatingProfit": 345
+    }
+  },
+  {
+    "companyId": "mico",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 4100,
+    "annual": {
+      "sales": [
+        3200,
+        3480,
+        3790
+      ],
+      "operatingProfit": [
+        280,
+        325,
+        370
+      ],
+      "opMargin": 9.8,
+      "per": 15.8
+    },
+    "recentQuarter": {
+      "sales": 948,
+      "operatingProfit": 93
+    }
+  },
+  {
+    "companyId": "snstech",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 8790,
+    "annual": {
+      "sales": [
+        1270,
+        1450,
+        1630
+      ],
+      "operatingProfit": [
+        220,
+        270,
+        330
+      ],
+      "opMargin": 20.2,
+      "per": 25.1
+    },
+    "recentQuarter": {
+      "sales": 408,
+      "operatingProfit": 83
+    }
+  },
+  {
+    "companyId": "fst",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 6200,
+    "annual": {
+      "sales": [
+        2100,
+        2360,
+        2650
+      ],
+      "operatingProfit": [
+        240,
+        280,
+        330
+      ],
+      "opMargin": 12.5,
+      "per": 19.3
+    },
+    "recentQuarter": {
+      "sales": 663,
+      "operatingProfit": 83
+    }
+  },
+  {
+    "companyId": "foosung",
+    "asOf": "DART/KRX 자동 수집 예정",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 7900,
+    "annual": {
+      "sales": [
+        6100,
+        6500,
+        7030
+      ],
+      "operatingProfit": [
+        420,
+        510,
+        590
+      ],
+      "opMargin": 8.4,
+      "per": 17.5
+    },
+    "recentQuarter": {
+      "sales": 1758,
+      "operatingProfit": 148
+    }
+  },
+  {
+    "companyId": "soulbrain",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 26953,
+    "annual": {
+      "sales": [
+        10700,
+        11600,
+        12400
+      ],
+      "operatingProfit": [
+        2100,
+        2380,
+        2620
+      ],
+      "opMargin": 21.1,
+      "per": 14.6
+    },
+    "recentQuarter": {
+      "sales": 3100,
+      "operatingProfit": 655
+    }
+  },
+  {
+    "companyId": "enf",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials",
+      "krx-market"
+    ],
+    "marketCap": 6465,
+    "annual": {
+      "sales": [
+        5200,
+        5480,
+        5850
+      ],
+      "operatingProfit": [
+        330,
+        390,
+        450
+      ],
+      "opMargin": 7.7,
+      "per": 12.2
+    },
+    "recentQuarter": {
+      "sales": 1463,
+      "operatingProfit": 113
+    }
+  },
+  {
+    "companyId": "asml",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 4600000,
+    "annual": {
+      "sales": [
+        279000,
+        298000,
+        334000
+      ],
+      "operatingProfit": [
+        92000,
+        98000,
+        111000
+      ],
+      "opMargin": 33.2,
+      "per": 31.5
+    },
+    "recentQuarter": {
+      "sales": 83500,
+      "operatingProfit": 27750
+    }
+  },
+  {
+    "companyId": "tel",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 1300000,
+    "annual": {
+      "sales": [
+        220000,
+        183000,
+        226000
+      ],
+      "operatingProfit": [
+        62000,
+        46000,
+        64000
+      ],
+      "opMargin": 28.3,
+      "per": 25.2
+    },
+    "recentQuarter": {
+      "sales": 56500,
+      "operatingProfit": 16000
+    }
+  },
+  {
+    "companyId": "lam",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 1172000,
+    "annual": {
+      "sales": [
+        502071,
+        630912,
+        707975
+      ],
+      "operatingProfit": [
+        148000,
+        165000,
+        207000
+      ],
+      "opMargin": 29.3,
+      "per": 19.6
+    },
+    "recentQuarter": {
+      "sales": 176994,
+      "operatingProfit": 51750
+    }
+  },
+  {
+    "companyId": "amat",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 1004000,
+    "annual": {
+      "sales": [
+        257233,
+        265359,
+        269738
+      ],
+      "operatingProfit": [
+        64000,
+        69000,
+        74100
+      ],
+      "opMargin": 27.5,
+      "per": 18.1
+    },
+    "recentQuarter": {
+      "sales": 67435,
+      "operatingProfit": 18525
+    }
+  },
+  {
+    "companyId": "axcelis",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 48000,
+    "annual": {
+      "sales": [
+        9200,
+        10600,
+        11200
+      ],
+      "operatingProfit": [
+        2100,
+        2500,
+        2700
+      ],
+      "opMargin": 24.1,
+      "per": 18.9
+    },
+    "recentQuarter": {
+      "sales": 2800,
+      "operatingProfit": 675
+    }
+  },
+  {
+    "companyId": "tsmc",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 5200000,
+    "annual": {
+      "sales": [
+        2263800,
+        2161740,
+        2519600
+      ],
+      "operatingProfit": [
+        1121300,
+        921470,
+        1054200
+      ],
+      "opMargin": 41.8,
+      "per": 24.7
+    },
+    "recentQuarter": {
+      "sales": 629900,
+      "operatingProfit": 263550
+    }
+  },
+  {
+    "companyId": "kla",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 810000,
+    "annual": {
+      "sales": [
+        98000,
+        102000,
+        109000
+      ],
+      "operatingProfit": [
+        38000,
+        39700,
+        42100
+      ],
+      "opMargin": 38.6,
+      "per": 22.8
+    },
+    "recentQuarter": {
+      "sales": 27250,
+      "operatingProfit": 10525
+    }
+  },
+  {
+    "companyId": "airliquide",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 1200000,
+    "annual": {
+      "sales": [
+        293000,
+        301000,
+        316000
+      ],
+      "operatingProfit": [
+        54000,
+        58000,
+        62000
+      ],
+      "opMargin": 19.6,
+      "per": 23.3
+    },
+    "recentQuarter": {
+      "sales": 79000,
+      "operatingProfit": 15500
+    }
+  },
+  {
+    "companyId": "jsr",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        34000,
+        36500,
+        38100
+      ],
+      "operatingProfit": [
+        4200,
+        4800,
+        5100
+      ],
+      "opMargin": 13.4,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 9525,
+      "operatingProfit": 1275
+    }
+  },
+  {
+    "companyId": "shinetsu",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 620000,
+    "annual": {
+      "sales": [
+        280000,
+        242000,
+        255000
+      ],
+      "operatingProfit": [
+        99000,
+        72000,
+        81000
+      ],
+      "opMargin": 31.8,
+      "per": 21.4
+    },
+    "recentQuarter": {
+      "sales": 63750,
+      "operatingProfit": 20250
+    }
+  },
+  {
+    "companyId": "sumco",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 57000,
+    "annual": {
+      "sales": [
+        44000,
+        42500,
+        43800
+      ],
+      "operatingProfit": [
+        7600,
+        6900,
+        7200
+      ],
+      "opMargin": 16.4,
+      "per": 15.7
+    },
+    "recentQuarter": {
+      "sales": 10950,
+      "operatingProfit": 1800
+    }
+  },
+  {
+    "companyId": "disco",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 540000,
+    "annual": {
+      "sales": [
+        28000,
+        31000,
+        36500
+      ],
+      "operatingProfit": [
+        10600,
+        12400,
+        15100
+      ],
+      "opMargin": 41.4,
+      "per": 33.6
+    },
+    "recentQuarter": {
+      "sales": 9125,
+      "operatingProfit": 3775
+    }
+  },
+  {
+    "companyId": "ibiden",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 95000,
+    "annual": {
+      "sales": [
+        41000,
+        37000,
+        43000
+      ],
+      "operatingProfit": [
+        6100,
+        4200,
+        5600
+      ],
+      "opMargin": 13,
+      "per": 22.5
+    },
+    "recentQuarter": {
+      "sales": 10750,
+      "operatingProfit": 1400
+    }
+  },
+  {
+    "companyId": "dupont",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 420000,
+    "annual": {
+      "sales": [
+        118000,
+        121000,
+        126000
+      ],
+      "operatingProfit": [
+        19500,
+        20100,
+        21500
+      ],
+      "opMargin": 17.1,
+      "per": 20.6
+    },
+    "recentQuarter": {
+      "sales": 31500,
+      "operatingProfit": 5375
+    }
+  },
+  {
+    "companyId": "onsemi",
+    "asOf": "해외 IR/API 확인 필요",
+    "status": "needsReview",
+    "sourceIds": [
+      "manual-demo"
+    ],
+    "marketCap": 290000,
+    "annual": {
+      "sales": [
+        83200,
+        82600,
+        84500
+      ],
+      "operatingProfit": [
+        26000,
+        24800,
+        25200
+      ],
+      "opMargin": 29.8,
+      "per": 16.1
+    },
+    "recentQuarter": {
+      "sales": 21125,
+      "operatingProfit": 6300
+    }
+  },
+  {
+    "companyId": "gncenergy",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 8586,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "hanwhaaero",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 596589,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "lignex1",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 161480,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "hyundairotem",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 151817,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "koreaaerospace",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 129739,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "hanwhasystems",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 143201,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "poongsan",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 24213,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "sntdynamics",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 10192,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "soil",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 167974,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "skinnovation",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 197623,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "gs",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 120021,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "koreaPetroleum",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 1428,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "heungguOil",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 1492,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "joongangEnergy",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 723,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "daesungEnergy",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 1906,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "poscointl",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 92711,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "lxintl",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 14961,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "koreazinc",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 287003,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "lsEcoEnergy",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 14057,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  },
+  {
+    "companyId": "hyundaiEngineering",
+    "asOf": "KRX 2026-08-28",
+    "status": "needsReview",
+    "sourceIds": [
+      "krx-market",
+      "dart-financials"
+    ],
+    "marketCap": 143538,
+    "annual": {
+      "sales": [
+        0,
+        0,
+        0
+      ],
+      "operatingProfit": [
+        0,
+        0,
+        0
+      ],
+      "opMargin": 0,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 0,
+      "operatingProfit": 0
+    }
+  }
+]
