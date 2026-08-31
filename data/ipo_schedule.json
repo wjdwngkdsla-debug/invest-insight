@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31 14:58",
+  "updated": "2026-09-01 02:46",
   "items": [
     {
       "corp_code": "00104069",
@@ -39,7 +39,7 @@
       "corp_code": "01586923",
       "name": "스카이랩스",
       "first_filing_date": "20260707",
-      "last_rcept_no": "20260825000417",
+      "last_rcept_no": "20260831001467",
       "band_low": 13000,
       "band_high": 16000,
       "forecast_start": "2026-08-14",
@@ -88,7 +88,37 @@
           "pct": 99.83
         }
       ],
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "sub_ratio": 2.85,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "1개월",
+          "qty": 155000,
+          "pct": 10.33
+        },
+        {
+          "period": "15일",
+          "qty": 9000,
+          "pct": 0.6
+        },
+        {
+          "period": "미확약",
+          "qty": 1336000,
+          "pct": 89.07
+        }
+      ],
+      "report_rcp": "20260831001467",
+      "result_parse_version": 2
     },
     {
       "corp_code": "02030166",
