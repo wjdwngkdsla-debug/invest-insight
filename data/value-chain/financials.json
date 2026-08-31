@@ -2108,5 +2108,140 @@
       "sales": 68423,
       "operatingProfit": 2618
     }
+  },
+  {
+    "companyId": "spg",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        3938,
+        3885,
+        3417
+      ],
+      "operatingProfit": [
+        160,
+        123,
+        179
+      ],
+      "opMargin": 5.3,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 888,
+      "operatingProfit": 40
+    }
+  },
+  {
+    "companyId": "rainbowrobotics",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        153,
+        193,
+        341
+      ],
+      "operatingProfit": [
+        -446,
+        -30,
+        -25
+      ],
+      "opMargin": -7.3,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 123,
+      "operatingProfit": -20
+    }
+  },
+  {
+    "companyId": "robotis",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        291,
+        300,
+        389
+      ],
+      "operatingProfit": [
+        -53,
+        -30,
+        33
+      ],
+      "opMargin": 8.6,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 154,
+      "operatingProfit": 20
+    }
+  },
+  {
+    "companyId": "higenrnm",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        0,
+        759,
+        735
+      ],
+      "operatingProfit": [
+        0,
+        -4,
+        -89
+      ],
+      "opMargin": -12.1,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 208,
+      "operatingProfit": -15
+    }
+  },
+  {
+    "companyId": "clobot",
+    "asOf": "DART 2025 사업보고서 / KRX 시총 별도",
+    "status": "needsReview",
+    "sourceIds": [
+      "dart-financials"
+    ],
+    "marketCap": null,
+    "annual": {
+      "sales": [
+        0,
+        334,
+        414
+      ],
+      "operatingProfit": [
+        0,
+        -75,
+        -32
+      ],
+      "opMargin": -7.7,
+      "per": null
+    },
+    "recentQuarter": {
+      "sales": 89,
+      "operatingProfit": -28
+    }
   }
 ]

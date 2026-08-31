@@ -13,8 +13,8 @@
     "lint": "eslint",
     "value-chain:validate": "node scripts/validate_value_chain_data.mjs",
     "value-chain:update-search": "node scripts/update_value_chain_search_cache.mjs",
-    "value-chain:update-market": "python -m scripts.update_value_chain_market_cache",
-    "value-chain:update-financials": "python -m scripts.update_value_chain_financial_cache"
+    "value-chain:update-market": "node scripts/run_python_module.mjs scripts.update_value_chain_market_cache",
+    "value-chain:update-financials": "node scripts/run_python_module.mjs scripts.update_value_chain_financial_cache"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
