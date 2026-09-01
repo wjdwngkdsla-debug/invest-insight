@@ -263,6 +263,13 @@ function formatShortDate(date?: string) {
   return month && day ? `${month}/${day}` : date;
 }
 
+function formatPeriodDate(date?: string) {
+  if (!date) return "";
+  const [year, month, day] = date.split("-");
+  if (!year || !month || !day) return date;
+  return `${year.slice(2)}/${Number(month)}/${Number(day)}`;
+}
+
 function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
   const dates = companies
     .flatMap((company) => {
@@ -273,8 +280,8 @@ function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
     .sort();
 
   if (!dates.length) return period === "week" ? "7거래일" : "22거래일";
-  const start = formatShortDate(dates[0]);
-  const end = formatShortDate(dates[dates.length - 1]);
+  const start = formatPeriodDate(dates[0]);
+  const end = formatPeriodDate(dates[dates.length - 1]);
   return start === end ? `${end} 기준` : `${start}~${end}`;
 }
 
@@ -285,6 +292,17 @@ function periodLabel(period: Period) {
 function companyMetricForIssue(issue: Issue, companyId: string) {
   return getIssueMetricCache(issue.id)?.companies.find((metric) => metric.companyId === companyId);
 }
+
+const FINANCIAL_TABLE_COLUMNS = [
+  { key: "name", top: "", bottom: "종목", align: "left", tone: "base" },
+  { key: "score", top: "", bottom: "관련도", align: "right", tone: "base" },
+  { key: "marketCap", top: "", bottom: "시가총액", align: "right", tone: "base" },
+  { key: "annualSales", top: "2025년", bottom: "매출", align: "right", tone: "annual" },
+  { key: "annualOp", top: "2025년", bottom: "영업이익", align: "right", tone: "annual" },
+  { key: "quarterSales", top: "26.1Q", bottom: "매출", align: "right", tone: "quarter" },
+  { key: "quarterOp", top: "26.1Q", bottom: "영업이익", align: "right", tone: "quarter" },
+  { key: "return", top: "선택기간", bottom: "수익률", align: "right", tone: "return" },
+] as const;
 
 function metricTradingValue(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
   return sumMetricValues(metric?.[period]?.tradingValueIndex);
@@ -542,7 +560,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
         <div>
           <h3 className="text-xl font-black tracking-tight text-white">테마 종목 분포</h3>
           <p className="mt-1 text-xs font-bold text-white/35">
-            {periodText} 기준 · x축 거래대금 합산 · y축 검색 관심도 평균 · 원 크기 기간 수익률
+            {periodText} · x축 거래대금 합산 · y축 검색지수 평균 · 원 크기 수익률
           </p>
         </div>
         <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-black text-blue-300">수익률 1위 {leader?.company.name}</span>
@@ -572,10 +590,10 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
             거래대금 합산
           </text>
           <text x={padding.left + 4} y={padding.top - 30} fill="rgba(255,255,255,0.58)" fontSize="12" fontWeight="900">
-            검색 관심도 평균
+            검색지수 평균
           </text>
           <text x={padding.left + 94} y={padding.top - 30} fill="rgba(255,255,255,0.28)" fontSize="10" fontWeight="800">
-            높을수록 관심도 큼
+            높을수록 검색 관심도 큼
           </text>
           <text x={padding.left + plotWidth} y={padding.top + plotHeight + 34} textAnchor="end" fill="rgba(255,255,255,0.28)" fontSize="11" fontWeight="800">
             오른쪽일수록 거래대금 합산 큼
@@ -629,13 +647,13 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
               <span className="text-right text-white">{hovered.company.name}</span>
               <span>거래대금 합산</span>
               <span className="text-right text-white">{formatTradingValue(hovered.tradingValue)}</span>
-              <span>검색 관심도 평균</span>
+              <span>검색지수 평균</span>
               <span className="text-right text-white">{Math.round(hovered.search).toLocaleString()}</span>
-              <span>기간 수익률</span>
+              <span>수익률</span>
               <span className="text-right text-white">{fmtPct(hovered.returnPct)}</span>
             </div>
             <p className="mt-3 text-[10px] font-bold leading-4 text-white/35">
-              검색 관심도는 네이버 검색어트렌드 상대지수라 실제 검색 건수가 아닙니다. 거래대금은 KRX 일별 거래대금 합산, 수익률은 선택 기간 첫 종가 대비 마지막 종가 기준입니다.
+              {periodText} 기준. 거래대금은 합산, 검색지수는 네이버 상대지수 평균, 수익률은 첫 종가 대비 마지막 종가입니다.
             </p>
           </div>
         ) : null}
@@ -806,22 +824,25 @@ function StockReturnTable({
             <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">종목 상승률</p>
             <h2 className="text-3xl font-black tracking-tight">테마 관련주 상승률</h2>
             <p className="mt-2 text-xs font-bold text-white/38">
-              {periodText} 기준 · 거래대금은 기간 합산 · 검색 관심도는 네이버 상대지수 평균 · 수익률은 기간 첫 종가 대비 마지막 종가
+              {periodText} · 거래대금 합산 / 검색지수 평균 / 첫 종가 대비 수익률
             </p>
           </div>
-          <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
-            {PERIOD_OPTIONS.map(({ value, label }) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setPeriod(value)}
-                className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-black transition ${
-                  period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/70"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center justify-end gap-3">
+            <span className="rounded-full bg-white/[0.07] px-3 py-2 text-xs font-black text-white/40">{periodText}</span>
+            <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
+              {PERIOD_OPTIONS.map(({ value, label }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setPeriod(value)}
+                  className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-black transition ${
+                    period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/70"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className="overflow-hidden rounded-2xl border border-white/10">
@@ -900,6 +921,7 @@ function ComparePanel({
     () => companies.slice(0, 10).map((company, index) => ({ company, score: Math.max(40, company.score - index) })).sort((a, b) => b.score - a.score),
     [companies],
   );
+  const periodText = metricPeriodText(issue, companies, period);
 
   return (
     <aside
@@ -928,6 +950,7 @@ function ComparePanel({
           <h2 className="text-3xl font-black tracking-tight text-white">{focusCompany ? `${focusCompany.name} 관련 테마` : issue.title}</h2>
         </div>
         <div className="flex shrink-0 items-center gap-3">
+          <span className="rounded-full bg-white/[0.07] px-3 py-2 text-xs font-black text-white/40">{periodText}</span>
           <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
             {PERIOD_OPTIONS.map(({ value, label }) => (
               <button
@@ -1026,9 +1049,15 @@ function ComparePanel({
           <table className="w-full border-collapse text-sm">
             <thead className="bg-white/[0.03]">
               <tr className="border-b border-white/10">
-              {["종목", "관련도", "시가총액", "연매출", "연영업익", "분기매출", "분기영업익", "수익률"].map((head, index) => (
-                  <th key={head} className={`px-4 py-3 text-[10px] font-black uppercase tracking-wider text-white/30 ${index === 0 ? "text-left" : "text-right"}`}>
-                    {head}
+                {FINANCIAL_TABLE_COLUMNS.map((column) => (
+                  <th
+                    key={column.key}
+                    className={`px-4 py-3 text-[10px] font-black tracking-wider text-white/36 ${
+                      column.align === "left" ? "text-left" : "text-right"
+                    } ${column.tone === "quarter" ? "bg-cyan-400/[0.04]" : ""} ${column.tone === "return" ? "bg-blue-500/[0.08]" : ""}`}
+                  >
+                    {column.top ? <span className="block text-[9px] leading-4 text-white/24">{column.top}</span> : null}
+                    <span className="block leading-4">{column.bottom}</span>
                   </th>
                 ))}
               </tr>
@@ -1046,9 +1075,9 @@ function ComparePanel({
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.marketCap)}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.sales)}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.op)}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.quarterSales)}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.quarterOp)}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-right font-black tabular-nums" style={{ color: shownReturn > 0 ? "#4ade80" : "#f87171" }}>
+                    <td className="whitespace-nowrap bg-cyan-400/[0.025] px-4 py-3 text-right font-bold tabular-nums text-white/55">{financialValue(company.quarterSales)}</td>
+                    <td className="whitespace-nowrap bg-cyan-400/[0.025] px-4 py-3 text-right font-bold tabular-nums text-white/55">{financialValue(company.quarterOp)}</td>
+                    <td className="whitespace-nowrap bg-blue-500/[0.045] px-4 py-3 text-right font-black tabular-nums" style={{ color: shownReturn > 0 ? "#4ade80" : "#f87171" }}>
                       {fmtPct(shownReturn)}
                     </td>
                   </tr>
