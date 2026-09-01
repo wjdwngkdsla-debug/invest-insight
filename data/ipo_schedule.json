@@ -139,7 +139,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -171,7 +171,8 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "content_url": "https://blog.naver.com/vericap/224397791999"
     },
     {
       "corp_code": "01867688",
@@ -431,7 +432,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -473,7 +474,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -484,9 +485,249 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
+    },
+    {
+      "corp_code": "manual-",
+      "name": "",
+      "manual_entry": true,
+      "review_approved": true,
+      "review_pending": false,
+      "schedule_hidden": true
     }
   ],
   "past_items": [
