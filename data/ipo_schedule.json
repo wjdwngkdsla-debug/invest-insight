@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02 00:19",
+  "updated": "2026-09-02 13:57",
   "items": [
     {
       "corp_code": "00104069",
@@ -17634,38 +17634,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "셀비온",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "시프트업",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "시프트업",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "시프트업",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
       "name": "시프트업",
       "type": "고정변경",
       "field": "ipo:6개월",
@@ -21631,45 +21599,83 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
-  "seed_pending": [],
+  "seed_pending": [
+    {
+      "name": "스탁키퍼",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%8A%A4%ED%83%81%ED%82%A4%ED%8D%BC"
+    }
+  ],
   "deleted_corps": {},
   "fixed_exclusions": {
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-01",
+      "excluded_at": "2026-09-02",
       "memo": "자동 제외(스팩)"
     }
   }
