@@ -267,7 +267,7 @@ function formatPeriodDate(date?: string) {
   if (!date) return "";
   const [year, month, day] = date.split("-");
   if (!year || !month || !day) return date;
-  return `${year.slice(2)}/${Number(month)}/${Number(day)}`;
+  return `${Number(month)}/${Number(day)}`;
 }
 
 function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
@@ -280,6 +280,21 @@ function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
     .sort();
 
   if (!dates.length) return period === "week" ? "7거래일" : "22거래일";
+  const start = formatPeriodDate(dates[0]);
+  const end = formatPeriodDate(dates[dates.length - 1]);
+  return start === end ? `${end} 기준` : `${start}~${end}`;
+}
+
+function metricPeriodTextFromMetrics(metrics: Array<ValueChainCompanyMetricCache | undefined>, period: Period) {
+  const dates = metrics
+    .flatMap((metric) => {
+      const periodMetric = metric?.[period];
+      return [...(periodMetric?.tradingValueIndex ?? []), ...(periodMetric?.searchIndex ?? [])].map((point) => point.date);
+    })
+    .filter(Boolean)
+    .sort();
+
+  if (!dates.length) return periodLabel(period);
   const start = formatPeriodDate(dates[0]);
   const end = formatPeriodDate(dates[dates.length - 1]);
   return start === end ? `${end} 기준` : `${start}~${end}`;
@@ -814,7 +829,7 @@ function StockReturnTable({
   onSelectCompany: (companyId: string) => void;
 }) {
   const rows = useMemo(() => buildCompanyReturnRows(period).slice(0, 40), [period]);
-  const periodText = rows.length ? metricPeriodText(rows[0].issue, rows.map((row) => row.company), period) : periodLabel(period);
+  const periodText = rows.length ? metricPeriodTextFromMetrics(rows.map((row) => row.metric), period) : periodLabel(period);
 
   return (
     <div className="absolute inset-0 overflow-auto px-8 pb-8 pt-24 text-white">
@@ -823,9 +838,6 @@ function StockReturnTable({
           <div>
             <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">종목 상승률</p>
             <h2 className="text-3xl font-black tracking-tight">테마 관련주 상승률</h2>
-            <p className="mt-2 text-xs font-bold text-white/38">
-              {periodText} · 거래대금 합산 / 검색지수 평균 / 첫 종가 대비 수익률
-            </p>
           </div>
           <div className="flex flex-wrap items-center justify-end gap-3">
             <span className="rounded-full bg-white/[0.07] px-3 py-2 text-xs font-black text-white/40">{periodText}</span>
