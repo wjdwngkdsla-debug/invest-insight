@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04 13:59",
+  "updated": "2026-09-04 23:37",
   "items": [
     {
       "corp_code": "00104069",
@@ -305,31 +305,6 @@
       "offering_attempt": 1
     },
     {
-      "corp_code": "01754737",
-      "name": "엘리스그룹",
-      "first_filing_date": "20260821",
-      "last_rcept_no": "20260821000670",
-      "offering_attempt": 1,
-      "band_low": 70400,
-      "band_high": 90500,
-      "forecast_start": "2026-09-09",
-      "forecast_end": "2026-09-15",
-      "sub_start": "2026-09-18",
-      "sub_end": "2026-09-21",
-      "underwriter": "미래에셋증권·삼성증권",
-      "market": "코스닥",
-      "offer_shares": 2222000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
       "corp_code": "01028933",
       "name": "멜콘",
       "first_filing_date": "20260821",
@@ -354,6 +329,32 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
+    },
+    {
+      "corp_code": "01754737",
+      "name": "엘리스그룹",
+      "first_filing_date": "20260821",
+      "last_rcept_no": "20260904000517",
+      "offering_attempt": 1,
+      "band_low": 70400,
+      "band_high": 90500,
+      "forecast_start": "2026-09-23",
+      "forecast_end": "2026-10-01",
+      "sub_start": "2026-10-07",
+      "sub_end": "2026-10-08",
+      "underwriter": "미래에셋증권·삼성증권",
+      "market": "코스닥",
+      "offer_shares": 2222000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "payment_date": "2026-09-23"
     },
     {
       "corp_code": "01956751",
@@ -382,6 +383,30 @@
       "schedule_hidden": false
     },
     {
+      "corp_code": "01540903",
+      "name": "크리에이츠",
+      "first_filing_date": "20260904",
+      "last_rcept_no": "20260904000286",
+      "offering_attempt": 1,
+      "band_low": 15000,
+      "band_high": 18000,
+      "forecast_start": "2026-10-12",
+      "forecast_end": "2026-10-16",
+      "sub_start": "2026-10-20",
+      "sub_end": "2026-10-21",
+      "payment_date": "2026-10-23",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 1400000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
       "corp_code": "01543043",
       "name": "티앤이코리아",
       "first_filing_date": "20260903",
@@ -403,7 +428,9 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "00683283",
@@ -17642,86 +17669,6 @@
   "history": [
     {
       "date": "2026-07-19",
-      "name": "유라클",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "전진건설로봇",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "전진건설로봇",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "전진건설로봇",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "전진건설로봇",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "케이쓰리아이",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "클로봇",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "클로봇",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "클로봇",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
-      "name": "탑런토탈솔루션",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-19",
       "name": "탑런토탈솔루션",
       "type": "고정변경",
       "field": "ipo:1개월",
@@ -21639,6 +21586,86 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "엘리스그룹",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-09-09",
+      "new": "2026-09-23"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "엘리스그룹",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-09-15",
+      "new": "2026-10-01"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "엘리스그룹",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-18",
+      "new": "2026-10-07"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "엘리스그룹",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-21",
+      "new": "2026-10-08"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21646,6 +21673,11 @@
       "name": "스탁키퍼",
       "status": "pending",
       "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%8A%A4%ED%83%81%ED%82%A4%ED%8D%BC"
+    },
+    {
+      "name": "열매컴퍼니",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EC%97%B4%EB%A7%A4%EC%BB%B4%ED%8D%BC%EB%8B%88"
     }
   ],
   "deleted_corps": {},
