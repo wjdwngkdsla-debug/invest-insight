@@ -148,7 +148,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
   return (
     <div className="space-y-4">
       {/* 필터 한 줄 — 시장 · 성과 · 상장일 기간(캘린더) */}
-      <div className="rounded-[20px] border border-gray-200 bg-white p-3.5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)]">
+      <div className="rounded-[18px] border border-gray-200 bg-white p-3 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] sm:rounded-[20px] sm:p-3.5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
           {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
             <button key={key} type="button" onClick={() => setMarket(key)} className={`${CHIP_BASE} ${market === key ? CHIP_ON : CHIP_OFF}`}>
@@ -178,7 +178,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             min={bounds.min}
             max={to || bounds.max}
             onChange={(event) => setFrom(event.target.value)}
-            className={DATE_INPUT}
+            className={`${DATE_INPUT} min-w-0 flex-1 sm:flex-none`}
             aria-label="상장일 시작"
           />
           <span className="text-[12px] text-slate-400">~</span>
@@ -188,7 +188,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             min={from || bounds.min}
             max={bounds.max}
             onChange={(event) => setTo(event.target.value)}
-            className={DATE_INPUT}
+            className={`${DATE_INPUT} min-w-0 flex-1 sm:flex-none`}
             aria-label="상장일 종료"
           />
           {dateFiltered && (
@@ -209,14 +209,14 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             onChange={(event) => setQuery(event.target.value)}
             placeholder="종목명 검색"
             aria-label="종목명 검색"
-            className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-auto sm:w-44"
+            className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-auto sm:w-44 sm:py-1"
           />
         </div>
       </div>
 
       {/* 요약 — 필터 구간의 공모 성적표 */}
       {summary && (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3">
           <div className="rounded-xl border border-gray-200 bg-gray-50/80 px-3.5 py-2.5">
             <p className="text-[11px] font-medium text-slate-500">대상 종목</p>
             <p className="mt-0.5 text-[17px] font-bold tabular-nums text-slate-900">{summary.count}개</p>

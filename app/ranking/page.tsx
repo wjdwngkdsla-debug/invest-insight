@@ -17,7 +17,7 @@ export default function IpoRankingPage() {
   const { updated } = getSiteData();
 
   return (
-    <main className="mx-auto w-full max-w-[1040px] px-5 py-6">
+    <main className="mx-auto w-full max-w-[1040px] px-3 py-4 sm:px-5 sm:py-6">
       <h1 className="sr-only">IPO 랭킹</h1>
       <RankingSwitcher ipoRows={rows} lockupRows={lockupRows} priceDate={updated.slice(5)} />
     </main>

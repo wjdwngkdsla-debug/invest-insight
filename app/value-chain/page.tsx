@@ -58,7 +58,7 @@ export default function ValueChainPage() {
   };
 
   return (
-    <main className="w-full px-5 py-6">
+    <main className="w-full px-0 py-3 sm:px-5 sm:py-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

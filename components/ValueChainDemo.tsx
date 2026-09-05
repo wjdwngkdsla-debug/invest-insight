@@ -474,10 +474,10 @@ function centerTitleLines(title: string) {
 function centerTitleSize(title: string) {
   const lines = centerTitleLines(title);
   const longest = Math.max(...lines.map((line) => line.length));
-  if (lines.length === 1 && longest <= 5) return "text-[38px]";
-  if (lines.length <= 2 && longest <= 5) return "text-[34px]";
-  if (lines.length <= 2 && longest <= 7) return "text-[28px]";
-  return "text-[24px]";
+  if (lines.length === 1 && longest <= 5) return "text-[clamp(26px,7vw,38px)]";
+  if (lines.length <= 2 && longest <= 5) return "text-[clamp(24px,6.4vw,34px)]";
+  if (lines.length <= 2 && longest <= 7) return "text-[clamp(20px,5.4vw,28px)]";
+  return "text-[clamp(18px,4.8vw,24px)]";
 }
 
 function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: Company[]; period: Period }) {
@@ -570,18 +570,18 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
     : undefined;
 
   return (
-    <section className="rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
-      <div className="mb-4 flex items-center justify-between gap-4">
+    <section className="rounded-[24px] border border-white/10 bg-white/[0.04] p-3.5 sm:rounded-[28px] sm:p-5">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div>
-          <h3 className="text-xl font-black tracking-tight text-white">테마 종목 분포</h3>
-          <p className="mt-1 text-xs font-bold text-white/35">
+          <h3 className="text-lg font-black tracking-tight text-white sm:text-xl">테마 종목 분포</h3>
+          <p className="mt-1 break-keep text-[11px] font-bold text-white/35 sm:text-xs">
             {periodText} · x축 거래대금 합산 · y축 검색지수 평균 · 원 크기 수익률
           </p>
         </div>
-        <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-black text-blue-300">수익률 1위 {leader?.company.name}</span>
+        <span className="w-fit rounded-full bg-blue-500/15 px-3 py-1 text-[11px] font-black text-blue-300 sm:text-xs">수익률 1위 {leader?.company.name}</span>
       </div>
       <div className="relative overflow-hidden rounded-[24px] bg-black/35">
-        <svg viewBox={`0 0 ${width} ${height}`} className="h-[420px] w-full" preserveAspectRatio="none">
+        <svg viewBox={`0 0 ${width} ${height}`} className="h-[300px] w-full sm:h-[420px]" preserveAspectRatio="none">
           <defs>
             <linearGradient id="scatter-grid" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="rgba(96,165,250,0.14)" />
@@ -650,7 +650,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
         </svg>
         {hovered ? (
           <div
-            className="pointer-events-none absolute z-20 w-[240px] rounded-2xl border border-white/10 bg-[#11131a]/95 p-4 text-white shadow-2xl backdrop-blur-xl"
+            className="pointer-events-none absolute z-20 w-[210px] rounded-2xl border border-white/10 bg-[#11131a]/95 p-3 text-white shadow-2xl backdrop-blur-xl sm:w-[240px] sm:p-4"
             style={tooltipPlacement}
           >
             <div className="flex items-start justify-between gap-3">
@@ -702,10 +702,11 @@ function OrbitStage({
       const rect = stage.getBoundingClientRect();
       const cx = rect.width / 2;
       const cy = rect.height / 2;
+      const compact = rect.width < 640;
       const count = Math.max(Math.min(items.length, 12), 1);
-      const sparseBoost = count <= 6 ? 1.16 : 1;
-      const rx = Math.min(rect.width * 0.36 * sparseBoost, 460);
-      const ry = Math.min(rect.height * 0.28 * sparseBoost, 285);
+      const sparseBoost = compact ? 0.95 : count <= 6 ? 1.16 : 1;
+      const rx = Math.min(rect.width * (compact ? 0.32 : 0.36) * sparseBoost, compact ? 155 : 460);
+      const ry = Math.min(rect.height * (compact ? 0.24 : 0.28) * sparseBoost, compact ? 170 : 285);
       const global = ((time - start) / period) * TAU;
       const track = stage.querySelector<SVGEllipseElement>("[data-track]");
       if (track) {
@@ -716,8 +717,8 @@ function OrbitStage({
       }
       stage.querySelectorAll<HTMLElement>("[data-orbit-card]").forEach((card) => {
         const base = Number(card.dataset.angle ?? 0);
-        const width = Number(card.dataset.width ?? 168);
-        const height = Number(card.dataset.height ?? 98);
+        const width = compact ? 112 : Number(card.dataset.width ?? 168);
+        const height = compact ? 92 : Number(card.dataset.height ?? 98);
         const angle = base + global;
         const depth = (Math.sin(angle) + 1) / 2;
         const scale = 0.98 + depth * 0.06;
@@ -765,24 +766,24 @@ function OrbitStage({
             data-angle={baseAngle}
             data-width="164"
             data-height="134"
-            className="absolute left-0 top-0 h-[134px] w-[164px] cursor-pointer select-none rounded-[34px] bg-transparent p-0 will-change-transform hover:!z-[70]"
+            className="absolute left-0 top-0 h-[92px] w-[112px] cursor-pointer select-none rounded-[24px] bg-transparent p-0 will-change-transform hover:!z-[70] sm:h-[134px] sm:w-[164px] sm:rounded-[34px]"
             title={item.detail}
           >
             <div
-              className={`flex h-full flex-col rounded-[34px] border px-4 py-3.5 text-white backdrop-blur-lg transition-colors ${style.card}`}
+              className={`flex h-full flex-col rounded-[24px] border px-3 py-2.5 text-white backdrop-blur-lg transition-colors sm:rounded-[34px] sm:px-4 sm:py-3.5 ${style.card}`}
               style={{
                 boxShadow:
                   `0 8px 32px rgba(0,0,0,0.45), 0 0 calc(var(--orbit-glow, 0) * 30px) ${style.shadow}`,
               }}
             >
               <div className="mb-1.5 flex items-start justify-between gap-2">
-                <span className="min-w-0 break-keep text-[13px] font-black leading-tight tracking-tight">{item.name}</span>
+                <span className="min-w-0 break-keep text-[11px] font-black leading-tight tracking-tight sm:text-[13px]">{item.name}</span>
               </div>
-              <p className="mb-3 truncate text-[11px] font-bold text-blue-200/65">{item.role}</p>
+              <p className="mb-2 truncate text-[9px] font-bold text-blue-200/65 sm:mb-3 sm:text-[11px]">{item.role}</p>
               <div className="mt-auto h-[3px] overflow-hidden rounded-full bg-white/10">
                 <div className={`h-full rounded-full bg-gradient-to-r ${style.gradient}`} style={{ width: `${Math.min(Math.max(item.score, 5), 100)}%` }} />
               </div>
-              <span className={`mt-2 inline-flex w-fit rounded-full px-2 py-0.5 text-[9px] font-black ${style.badge}`}>{item.category}</span>
+              <span className={`mt-1.5 inline-flex w-fit rounded-full px-1.5 py-0.5 text-[8px] font-black sm:mt-2 sm:px-2 sm:text-[9px] ${style.badge}`}>{item.category}</span>
             </div>
           </button>
         );
@@ -795,8 +796,8 @@ function OrbitStage({
         onClick={onOpenPanel}
         className="absolute left-1/2 top-1/2 z-40 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center text-white transition-transform duration-300 hover:scale-[1.04]"
         style={{
-          width: 260,
-          height: 260,
+          width: "clamp(156px, 46vw, 260px)",
+          height: "clamp(156px, 46vw, 260px)",
           borderRadius: 54,
           background: `radial-gradient(circle at 35% 25%, rgba(255,255,255,0.18), transparent 28%), ${style.center}`,
           border: "1px solid rgba(255,255,255,0.16)",
@@ -806,10 +807,10 @@ function OrbitStage({
         <span className="pointer-events-none absolute inset-0 rounded-[54px] border border-white/14 [animation:vc-pulse_2.8s_ease-out_infinite]" />
         <span className="pointer-events-none absolute -inset-3.5 rounded-[60px] border border-white/10 [animation:vc-pulse_3.4s_ease-out_infinite_0.6s]" />
         <span className={`mb-4 rounded-full px-3 py-1 text-[10px] font-black ${style.badge}`}>{center.category}</span>
-        <span className={`max-w-[220px] truncate break-keep px-3 text-center ${centerTitleSize(center.title)} font-black leading-none tracking-tight`}>
+        <span className={`max-w-[136px] truncate break-keep px-2 text-center text-2xl font-black leading-none tracking-tight sm:max-w-[220px] sm:px-3 ${centerTitleSize(center.title)}`}>
           {center.title}
         </span>
-        <span className="mt-4 rounded-full bg-white px-5 py-2 text-[12px] font-black text-blue-700 shadow-lg">비교 보기</span>
+        <span className="mt-3 rounded-full bg-white px-4 py-1.5 text-[11px] font-black text-blue-700 shadow-lg sm:mt-4 sm:px-5 sm:py-2 sm:text-[12px]">비교 보기</span>
       </button>
         );
       })()}
@@ -832,14 +833,14 @@ function StockReturnTable({
   const periodText = rows.length ? metricPeriodTextFromMetrics(rows.map((row) => row.metric), period) : periodLabel(period);
 
   return (
-    <div className="absolute inset-0 overflow-auto px-8 pb-8 pt-24 text-white">
-      <section className="mx-auto max-w-[1280px] rounded-[30px] border border-white/10 bg-[#0b0d13]/88 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
-        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+    <div className="absolute inset-0 overflow-auto px-3 pb-5 pt-20 text-white sm:px-8 sm:pb-8 sm:pt-24">
+      <section className="mx-auto max-w-[1280px] rounded-[24px] border border-white/10 bg-[#0b0d13]/88 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:rounded-[30px] sm:p-6">
+        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
           <div>
             <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">종목 상승률</p>
-            <h2 className="text-3xl font-black tracking-tight">테마 관련주 상승률</h2>
+            <h2 className="text-2xl font-black tracking-tight sm:text-3xl">테마 관련주 상승률</h2>
           </div>
-          <div className="flex flex-wrap items-center justify-end gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end sm:gap-3">
             <span className="rounded-full bg-white/[0.07] px-3 py-2 text-xs font-black text-white/40">{periodText}</span>
             <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
               {PERIOD_OPTIONS.map(({ value, label }) => (
@@ -847,7 +848,7 @@ function StockReturnTable({
                   key={value}
                   type="button"
                   onClick={() => setPeriod(value)}
-                  className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-black transition ${
+                  className={`whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-black transition sm:px-3.5 sm:py-2 sm:text-xs ${
                     period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/70"
                   }`}
                 >
@@ -857,8 +858,8 @@ function StockReturnTable({
             </div>
           </div>
         </div>
-        <div className="overflow-hidden rounded-2xl border border-white/10">
-          <table className="w-full border-collapse text-sm">
+        <div className="overflow-x-auto rounded-2xl border border-white/10">
+          <table className="w-full min-w-[1080px] border-collapse text-sm">
             <thead className="bg-white/[0.05]">
               <tr className="border-b border-white/10 text-left">
                 {["순위", "종목", "현재가", `${periodLabel(period)} 등락률`, "시가총액", "거래대금", "테마", "상승 이유"].map((head, index) => (
@@ -937,17 +938,17 @@ function ComparePanel({
 
   return (
     <aside
-      className="absolute bottom-0 right-0 top-0 z-[80] overflow-auto border-l border-white/10 bg-[#07080b]/95 shadow-[-32px_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl transition-[width] duration-500"
-      style={{ width: panelWidth }}
+      className="absolute inset-x-0 bottom-0 top-0 z-[120] overflow-auto border-l border-white/10 bg-[#07080b]/95 shadow-[-32px_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl transition-[width] duration-500 sm:left-auto"
+      style={{ width: panelWidth, maxWidth: "100%" }}
     >
       <div
         role="separator"
         aria-orientation="vertical"
         aria-label="상세 패널 폭 조절"
         onPointerDown={onResizeStart}
-        className="absolute bottom-0 left-0 top-0 z-[95] w-2 cursor-col-resize border-l border-blue-400/25 bg-blue-400/0 transition hover:bg-blue-400/10"
+        className="absolute bottom-0 left-0 top-0 z-[95] hidden w-2 cursor-col-resize border-l border-blue-400/25 bg-blue-400/0 transition hover:bg-blue-400/10 sm:block"
       />
-      <div className="sticky top-0 z-[90] border-b border-white/10 bg-[#07080b]/95 px-7 py-4 backdrop-blur-2xl">
+      <div className="sticky top-0 z-[90] border-b border-white/10 bg-[#07080b]/95 px-4 py-3 backdrop-blur-2xl sm:px-7 sm:py-4">
         <button
           type="button"
           onClick={onClose}
@@ -956,12 +957,12 @@ function ComparePanel({
         >
           ×
         </button>
-        <div className="flex items-center justify-between gap-4 pl-12">
+        <div className="flex flex-col gap-3 pl-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div>
           <p className="mb-0.5 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">{focusCompany ? "종목 연결망" : "관련주 비교"}</p>
-          <h2 className="text-3xl font-black tracking-tight text-white">{focusCompany ? `${focusCompany.name} 관련 테마` : issue.title}</h2>
+          <h2 className="break-keep text-2xl font-black tracking-tight text-white sm:text-3xl">{focusCompany ? `${focusCompany.name} 관련 테마` : issue.title}</h2>
         </div>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 flex-wrap items-center gap-2 sm:gap-3">
           <span className="rounded-full bg-white/[0.07] px-3 py-2 text-xs font-black text-white/40">{periodText}</span>
           <div className="inline-flex rounded-full border border-white/10 bg-white/10 p-1">
             {PERIOD_OPTIONS.map(({ value, label }) => (
@@ -969,7 +970,7 @@ function ComparePanel({
                 key={value}
                 type="button"
                 onClick={() => setPeriod(value)}
-                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-black transition ${period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/65"}`}
+                className={`whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-black transition sm:px-4 sm:py-2 sm:text-xs ${period === value ? "bg-blue-600 text-white shadow-md" : "text-white/45 hover:text-white/65"}`}
               >
                 {label}
               </button>
@@ -981,13 +982,13 @@ function ComparePanel({
         </div>
         </div>
       </div>
-      <div className="px-7 py-6">
+      <div className="px-4 py-5 sm:px-7 sm:py-6">
         <p className="mb-5 text-sm font-semibold leading-7 text-white/45">
           {focusCompany ? `${focusCompany.name}이 연결된 테마와 섹터를 모아 봅니다. 종목을 기준으로 시장 이슈를 거슬러 올라가는 화면입니다.` : issue.desc}
         </p>
         {focusCompany ? (
-          <div className="mb-6 overflow-hidden rounded-2xl border border-blue-400/20 bg-blue-500/[0.06]">
-            <table className="w-full border-collapse text-sm">
+          <div className="mb-6 overflow-x-auto rounded-2xl border border-blue-400/20 bg-blue-500/[0.06]">
+            <table className="w-full min-w-[760px] border-collapse text-sm">
               <thead className="bg-white/[0.03]">
                 <tr className="border-b border-white/10">
                   {["테마·섹터", "분류", "평균 수익률", "연결 이유"].map((head, index) => (
@@ -1031,8 +1032,8 @@ function ComparePanel({
         )}
         {!focusCompany ? (
           <>
-        <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-          <table className="w-full border-collapse text-sm">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-white/10">
+          <table className="w-full min-w-[620px] border-collapse text-sm">
             <thead className="bg-white/[0.03]">
               <tr className="border-b border-white/10">
                 {["종목", "연관성"].map((head, index) => (
@@ -1057,8 +1058,8 @@ function ComparePanel({
             </tbody>
           </table>
         </div>
-        <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-          <table className="w-full border-collapse text-sm">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-white/10">
+          <table className="w-full min-w-[860px] border-collapse text-sm">
             <thead className="bg-white/[0.03]">
               <tr className="border-b border-white/10">
                 {FINANCIAL_TABLE_COLUMNS.map((column) => (
@@ -1248,7 +1249,7 @@ export function ValueChainDemo() {
   const categoryFilters: Array<"전체" | OrbitCategory> = ["전체", "산업", "섹터", "관련주", "이슈"];
 
   return (
-    <div className="relative h-[calc(100vh-120px)] min-h-[860px] overflow-hidden rounded-[32px] border border-white/10 bg-[#07080b] shadow-[0_40px_120px_rgba(0,0,0,0.8)]">
+    <div className="relative h-[calc(100vh-72px)] min-h-[720px] overflow-hidden rounded-none border border-white/10 bg-[#07080b] shadow-[0_40px_120px_rgba(0,0,0,0.8)] sm:h-[calc(100vh-120px)] sm:min-h-[860px] sm:rounded-[32px]">
       <style>{`
         @keyframes vc-pulse {
           0% { opacity: 1; transform: scale(1); }
@@ -1257,13 +1258,13 @@ export function ValueChainDemo() {
       `}</style>
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.024)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] bg-[size:64px_64px]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(37,99,235,0.16),transparent_38%),radial-gradient(circle_at_14%_22%,rgba(139,92,246,0.1),transparent_28%)]" />
-      <header className="absolute left-8 right-8 top-6 z-[75] flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <header className="absolute left-3 right-3 top-3 z-[75] flex items-start justify-between gap-3 sm:left-8 sm:right-8 sm:top-6 sm:items-center">
+        <div className="flex max-w-[calc(100vw-24px)] gap-2 overflow-x-auto pb-1 sm:max-w-none sm:items-center sm:overflow-visible sm:pb-0">
           <button
             type="button"
             onClick={goBack}
             disabled={!navHistory.length}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-lg font-black text-white backdrop-blur-lg transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-35"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/10 text-base font-black text-white backdrop-blur-lg transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-35 sm:h-10 sm:w-10 sm:text-lg"
             aria-label="이전 탐색으로 돌아가기"
           >
             &lt;
@@ -1275,7 +1276,7 @@ export function ValueChainDemo() {
               setPeriod("week");
               setMenuOpen((value) => !value);
             }}
-            className="rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-black text-white backdrop-blur-lg transition hover:bg-white/15"
+            className="shrink-0 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-black text-white backdrop-blur-lg transition hover:bg-white/15 sm:px-5 sm:py-2.5 sm:text-sm"
           >
             {menuOpen ? "테마 닫기" : "테마 선택"}
           </button>
@@ -1287,7 +1288,7 @@ export function ValueChainDemo() {
               setMenuOpen(false);
               setSearchOpen(false);
             }}
-            className={`rounded-full border px-5 py-2.5 text-sm font-black backdrop-blur-lg transition ${
+            className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black backdrop-blur-lg transition sm:px-5 sm:py-2.5 sm:text-sm ${
               viewMode === "returns" ? "border-blue-400/35 bg-blue-600 text-white" : "border-white/10 bg-white/10 text-white hover:bg-white/15"
             }`}
           >
@@ -1299,11 +1300,11 @@ export function ValueChainDemo() {
         </div>
       </header>
       {menuOpen ? (
-        <aside className="absolute bottom-8 left-8 top-20 z-[70] flex w-[280px] flex-col overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.07] p-5 text-white shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+        <aside className="absolute bottom-4 left-3 right-3 z-[70] flex max-h-[46vh] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.08] p-4 text-white shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl sm:bottom-8 sm:left-8 sm:right-auto sm:top-20 sm:max-h-none sm:w-[280px] sm:rounded-[28px] sm:p-5">
           <div className="mb-4">
             <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">시장 이슈</p>
             <div className="flex items-end justify-between gap-3">
-              <h2 className="text-2xl font-black leading-tight">테마 순위</h2>
+              <h2 className="text-xl font-black leading-tight sm:text-2xl">테마 순위</h2>
               <div className="inline-flex rounded-full border border-white/10 bg-black/20 p-1">
                 {PERIOD_OPTIONS.slice(1, 3).map(({ value, label }) => (
                   <button
@@ -1319,7 +1320,7 @@ export function ValueChainDemo() {
                 ))}
               </div>
             </div>
-            <p className="mt-2 text-[10px] font-bold text-white/35">관련주 평균 수익률 기준</p>
+            <p className="mt-1.5 text-[10px] font-bold text-white/35 sm:mt-2">관련주 평균 수익률 기준</p>
           </div>
           <button
             type="button"
@@ -1364,7 +1365,7 @@ export function ValueChainDemo() {
         </aside>
       ) : null}
       {menuOpen && searchOpen ? (
-        <aside className="absolute bottom-8 left-[328px] top-20 z-[110] flex w-[320px] flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0b0d13]/95 p-5 text-white shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+        <aside className="absolute bottom-4 left-3 right-3 top-20 z-[130] flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#0b0d13]/95 p-4 text-white shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:bottom-8 sm:left-[328px] sm:right-auto sm:w-[320px] sm:rounded-[28px] sm:p-5">
           <div className="mb-4 flex items-start justify-between gap-4">
             <div>
               <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">전체 목록</p>
@@ -1431,7 +1432,7 @@ export function ValueChainDemo() {
         className="absolute inset-0 z-10 transition-all duration-500"
         style={{
           left: 0,
-          right: panelOpen ? detailPanelWidth : 0,
+          right: panelOpen ? `min(${detailPanelWidth}px, 100vw)` : 0,
         }}
       >
         {viewMode === "returns" ? (
