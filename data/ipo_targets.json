@@ -72,15 +72,6 @@
     "shares": ""
   },
   {
-    "market": "코스닥",
-    "name": "스카이랩스",
-    "listing_date": "",
-    "code": "",
-    "manual_ipo_price": "10000",
-    "manual_ipo_price_locked": "N",
-    "shares": ""
-  },
-  {
     "market": "",
     "name": "스탁키퍼",
     "listing_date": "",
@@ -1464,5 +1455,14 @@
     "manual_ipo_price": "23000",
     "manual_ipo_price_locked": "N",
     "shares": "5487150"
+  },
+  {
+    "market": "코스닥",
+    "name": "스카이랩스",
+    "listing_date": "2026-09-04",
+    "code": "386380",
+    "manual_ipo_price": "10000",
+    "manual_ipo_price_locked": "N",
+    "shares": ""
   }
 ]
