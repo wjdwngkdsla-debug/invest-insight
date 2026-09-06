@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent } from "react";
+import { Button, FluentProvider, Input, webDarkTheme } from "@fluentui/react-components";
 import {
   getCompanyFinancial,
   getIssueMetricCache,
@@ -1249,6 +1250,7 @@ export function ValueChainDemo() {
   const categoryFilters: Array<"전체" | OrbitCategory> = ["전체", "산업", "섹터", "관련주", "이슈"];
 
   return (
+    <FluentProvider theme={webDarkTheme} className="contents">
     <div className="relative h-[calc(100vh-72px)] min-h-[720px] overflow-hidden rounded-none border border-white/10 bg-[#07080b] shadow-[0_40px_120px_rgba(0,0,0,0.8)] sm:h-[calc(100vh-120px)] sm:min-h-[860px] sm:rounded-[32px]">
       <style>{`
         @keyframes vc-pulse {
@@ -1260,40 +1262,48 @@ export function ValueChainDemo() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(37,99,235,0.16),transparent_38%),radial-gradient(circle_at_14%_22%,rgba(139,92,246,0.1),transparent_28%)]" />
       <header className="absolute left-3 right-3 top-3 z-[75] flex items-start justify-between gap-3 sm:left-8 sm:right-8 sm:top-6 sm:items-center">
         <div className="flex max-w-[calc(100vw-24px)] gap-2 overflow-x-auto pb-1 sm:max-w-none sm:items-center sm:overflow-visible sm:pb-0">
-          <button
+          <Button
             type="button"
+            appearance="subtle"
+            shape="circular"
             onClick={goBack}
             disabled={!navHistory.length}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/10 text-base font-black text-white backdrop-blur-lg transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-35 sm:h-10 sm:w-10 sm:text-lg"
+            className="!h-9 !min-w-9 !shrink-0 !rounded-full !border !border-white/10 !bg-white/10 !text-base !font-black !text-white backdrop-blur-lg hover:!bg-white/15 disabled:!cursor-not-allowed disabled:!opacity-35 sm:!h-10 sm:!min-w-10 sm:!text-lg"
             aria-label="이전 탐색으로 돌아가기"
           >
             &lt;
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            appearance={menuOpen && viewMode === "map" ? "primary" : "subtle"}
+            shape="rounded"
             onClick={() => {
               setViewMode("map");
               setPeriod("week");
               setMenuOpen((value) => !value);
             }}
-            className="shrink-0 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-black text-white backdrop-blur-lg transition hover:bg-white/15 sm:px-5 sm:py-2.5 sm:text-sm"
+            className={`!h-9 !shrink-0 !rounded-full !border !px-4 !text-xs !font-black backdrop-blur-lg sm:!h-10 sm:!px-5 sm:!text-sm ${
+              menuOpen && viewMode === "map" ? "!border-blue-400/35 !bg-blue-600 !text-white" : "!border-white/10 !bg-white/10 !text-white hover:!bg-white/15"
+            }`}
           >
             {menuOpen ? "테마 닫기" : "테마 선택"}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            appearance={viewMode === "returns" ? "primary" : "subtle"}
+            shape="rounded"
             onClick={() => {
               setViewMode((value) => (value === "returns" ? "map" : "returns"));
               setPanelOpen(false);
               setMenuOpen(false);
               setSearchOpen(false);
             }}
-            className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black backdrop-blur-lg transition sm:px-5 sm:py-2.5 sm:text-sm ${
-              viewMode === "returns" ? "border-blue-400/35 bg-blue-600 text-white" : "border-white/10 bg-white/10 text-white hover:bg-white/15"
+            className={`!h-9 !shrink-0 !rounded-full !border !px-4 !text-xs !font-black backdrop-blur-lg sm:!h-10 sm:!px-5 sm:!text-sm ${
+              viewMode === "returns" ? "!border-blue-400/35 !bg-blue-600 !text-white" : "!border-white/10 !bg-white/10 !text-white hover:!bg-white/15"
             }`}
           >
             종목 상승률
-          </button>
+          </Button>
         </div>
         <div className={`text-right transition-opacity duration-200 ${panelOpen ? "pointer-events-none opacity-0" : "opacity-100"}`}>
           <p className="text-[13px] font-black lowercase tracking-[0.18em] text-white/[0.28]">vericap</p>
@@ -1307,16 +1317,18 @@ export function ValueChainDemo() {
               <h2 className="text-xl font-black leading-tight sm:text-2xl">테마 순위</h2>
               <div className="inline-flex rounded-full border border-white/10 bg-black/20 p-1">
                 {PERIOD_OPTIONS.slice(1, 3).map(({ value, label }) => (
-                  <button
+                  <Button
                     key={value}
                     type="button"
+                    appearance={period === value ? "primary" : "subtle"}
+                    shape="rounded"
                     onClick={() => setPeriod(value)}
-                    className={`rounded-full px-2.5 py-1 text-[10px] font-black transition ${
+                    className={`!h-7 !min-w-0 !rounded-full !px-2.5 !text-[10px] !font-black ${
                       period === value ? "bg-blue-600 text-white" : "text-white/40 hover:text-white/70"
                     }`}
                   >
                     {label}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
@@ -1325,11 +1337,14 @@ export function ValueChainDemo() {
           <button
             type="button"
             onClick={() => setSearchOpen((value) => !value)}
-            className={`mb-3 h-10 w-full rounded-2xl border px-4 text-left text-sm font-black transition ${
-              searchOpen ? "border-blue-400/60 bg-blue-600/20 text-blue-100" : "border-white/10 bg-black/25 text-white/55 hover:text-white"
+            className={`mb-3 flex h-11 w-full items-center justify-between rounded-[18px] border px-4 text-left text-sm font-black transition ${
+              searchOpen
+                ? "border-blue-400/70 bg-blue-600/25 text-blue-100 shadow-[0_0_0_1px_rgba(96,165,250,0.22)]"
+                : "border-white/12 bg-black/30 text-white hover:border-white/20 hover:bg-white/[0.07]"
             }`}
           >
-            검색
+            <span>검색</span>
+            <span className="text-[11px] font-black text-white/35">{searchOpen ? "닫기" : "ㄱㄴㄷ 목록"}</span>
           </button>
           <div className="flex-1 space-y-1.5 overflow-auto pr-0.5">
             {visibleIssues.map((issue, index) => {
@@ -1380,11 +1395,11 @@ export function ValueChainDemo() {
               ×
             </button>
           </div>
-          <input
+          <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="테마·섹터 검색"
-            className="mb-3 h-10 w-full rounded-2xl border border-white/10 bg-black/25 px-4 text-sm font-bold text-white outline-none placeholder:text-white/30 transition focus:border-blue-400"
+            className="mb-3 !h-10 !w-full !rounded-2xl !border !border-white/10 !bg-black/25 !px-2 !text-sm !font-bold !text-white [&_input::placeholder]:!text-white/30 [&_input]:!text-white"
           />
           <div className="mb-3 flex flex-wrap gap-1.5">
             {categoryFilters.map((category) => (
@@ -1480,5 +1495,6 @@ export function ValueChainDemo() {
         />
       ) : null}
     </div>
+    </FluentProvider>
   );
 }

@@ -21,7 +21,8 @@ def load_dotenv(path: Path | None = None) -> None:
         os.environ.setdefault(key, value)
 
 
-load_dotenv()
+load_dotenv(ROOT_DIR / ".env")
+load_dotenv(ROOT_DIR / ".env.local")
 
 KRX_API_KEY = os.getenv("KRX_API_KEY")
 DATA_GO_KR_API_KEY = os.getenv("DATA_GO_KR_API_KEY")

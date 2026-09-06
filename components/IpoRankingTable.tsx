@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Button, Input } from "@fluentui/react-components";
 import type { IpoRankingRow } from "@/lib/ranking";
 import { formatKrwEok } from "@/lib/format";
 
@@ -48,9 +49,6 @@ function ReturnText({ pct, suspended = false, className = "" }: { pct: number | 
   );
 }
 
-const CHIP_BASE = "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors";
-const CHIP_ON = "bg-blue-600 text-white";
-const CHIP_OFF = "border border-gray-200 bg-white text-slate-600 hover:bg-gray-50";
 const DATE_INPUT =
   "rounded-lg border border-gray-200 bg-white px-2 py-1 text-[12px] font-medium text-slate-700 focus:border-blue-400 focus:outline-none";
 
@@ -151,9 +149,9 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
       <div className="rounded-[18px] border border-gray-200 bg-white p-3 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] sm:rounded-[20px] sm:p-3.5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
           {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
-            <button key={key} type="button" onClick={() => setMarket(key)} className={`${CHIP_BASE} ${market === key ? CHIP_ON : CHIP_OFF}`}>
+            <Button key={key} type="button" appearance={market === key ? "primary" : "secondary"} shape="rounded" onClick={() => setMarket(key)} className="!h-8 !min-w-0 !rounded-full !px-3 !text-[12px] !font-semibold">
               {key === "all" ? "전체" : key}
-            </button>
+            </Button>
           ))}
           <span aria-hidden className="mx-1 hidden h-4 w-px bg-gray-200 sm:block" />
           {([
@@ -161,14 +159,16 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             { key: "win", label: "공모가 이상" },
             { key: "loss", label: "공모가 미만" },
           ] as { key: OutcomeKey; label: string }[]).map((option) => (
-            <button
+            <Button
               key={option.key}
               type="button"
+              appearance={outcome === option.key ? "primary" : "secondary"}
+              shape="rounded"
               onClick={() => setOutcome(option.key)}
-              className={`${CHIP_BASE} ${outcome === option.key ? CHIP_ON : CHIP_OFF}`}
+              className="!h-8 !min-w-0 !rounded-full !px-3 !text-[12px] !font-semibold"
             >
               {option.label}
-            </button>
+            </Button>
           ))}
           <span aria-hidden className="mx-1 hidden h-4 w-px bg-gray-200 sm:block" />
           <span className="text-[11.5px] font-semibold text-slate-400">상장일</span>
@@ -204,12 +204,12 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
             </button>
           )}
           {/* 홈 캘린더와 동일한 종목명 검색 (칩 줄 높이에 맞춰 크기만 축소) */}
-          <input
+          <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="종목명 검색"
             aria-label="종목명 검색"
-            className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-auto sm:w-44 sm:py-1"
+            className="!h-9 !w-full !rounded-lg !border !border-gray-300 !bg-white !text-[12px] sm:!ml-auto sm:!w-44"
           />
         </div>
       </div>

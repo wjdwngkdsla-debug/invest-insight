@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Button, Input } from "@fluentui/react-components";
 import type { LockupPeriod, LockupRankingRow } from "@/lib/lockupRanking";
 import { LOCKUP_PERIODS } from "@/lib/lockupRanking";
 import { formatKrwEok } from "@/lib/format";
@@ -11,9 +12,6 @@ type SortKey = LockupPeriod | "marketCap" | "listingDate";
 
 const DATE_INPUT =
   "rounded-lg border border-gray-200 bg-white px-2 py-1 text-[12px] font-medium text-slate-700 focus:border-blue-400 focus:outline-none";
-const CHIP_BASE = "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors";
-const CHIP_ON = "bg-blue-600 text-white";
-const CHIP_OFF = "border border-gray-200 bg-white text-slate-600 hover:bg-gray-50";
 
 /** 빈칸이 세 가지 뜻으로 섞이지 않게 문구를 나눈다. 기호 대신 말로 쓴다. */
 function ReturnText({ pct, state }: { pct: number | null; state?: "none" | "upcoming" | "missing" | "ok" }) {
@@ -124,9 +122,9 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <div className="flex flex-wrap items-center gap-2">
             {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
-              <button key={key} type="button" onClick={() => setMarket(key)} className={`${CHIP_BASE} ${market === key ? CHIP_ON : CHIP_OFF}`}>
+              <Button key={key} type="button" appearance={market === key ? "primary" : "secondary"} shape="rounded" onClick={() => setMarket(key)} className="!h-8 !min-w-0 !rounded-full !px-3 !text-[12px] !font-semibold">
                 {key === "all" ? "전체" : key}
-              </button>
+              </Button>
             ))}
             <div className="flex min-w-[210px] items-baseline gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5">
               <span className="text-[11px] font-semibold text-slate-500">{average.label}</span>
@@ -142,7 +140,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
             <span className="text-[12px] text-slate-400">~</span>
             <input type="date" value={to} min={from || bounds.min} max={bounds.max} onChange={(event) => setTo(event.target.value)} className={DATE_INPUT} aria-label="상장일 종료" />
             {(from || to) && <button type="button" onClick={() => { setFrom(""); setTo(""); }} className="text-[12px] font-semibold text-slate-400 underline-offset-2 hover:text-slate-600 hover:underline">기간 해제</button>}
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="w-full rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[12px] text-gray-900 placeholder:text-gray-400 focus:border-gray-500 focus:outline-none sm:ml-2 sm:w-44" />
+            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="종목명 검색" aria-label="종목명 검색" className="!h-9 !w-full !rounded-lg !border !border-gray-300 !bg-white !text-[12px] sm:!ml-2 sm:!w-44" />
           </div>
         </div>
       </div>

@@ -875,7 +875,9 @@ def _needs_offering_backfill(item: dict[str, Any]) -> bool:
     """DART 증권신고서/발행조건확정 문서 재파싱이 필요한 IPO일정 빈칸."""
     if item.get("withdrawn") or item.get("fixed_excluded"):
         return False
-    if item.get("management_hidden") or item.get("review_pending"):
+    if item.get("management_hidden"):
+        return False
+    if item.get("review_pending") and _core_fields_filled(item):
         return False
     required_any = (
         "band_low", "band_high", "final_price",
@@ -1060,10 +1062,13 @@ def refresh_ipo_schedule(
 
         log(f"파싱: {name} ({len(corp_filings)}건, 최신 {newest.get('report_nm')})")
         item = dict(old or {})
+        discovered_first = corp_filings[-1].get("rcept_dt") or ""
+        previous_first = str((old or {}).get("first_filing_date") or "")
+        first_filing_date = min([date for date in (previous_first, discovered_first) if date], default="")
         item.update({
             "corp_code": corp_code,
             "name": name,
-            "first_filing_date": corp_filings[-1].get("rcept_dt") or "",
+            "first_filing_date": first_filing_date,
             "last_rcept_no": newest.get("rcept_no") or "",
             "offering_attempt": offering_attempt,
         })
