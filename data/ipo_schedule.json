@@ -29,9 +29,12 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
-      "management_status": "자동",
-      "schedule_hidden": false,
+      "review_pending": false,
+      "management_status": "제외고정",
+      "schedule_hidden": true,
+      "management_hidden": true,
+      "fixed_excluded": true,
+      "review_reason": "일반 IPO 아님",
       "offering_attempt": 1,
       "result_parse_version": 2
     },
@@ -368,14 +371,17 @@
       "first_filing_date": "20260213",
       "last_rcept_no": "20260714000008",
       "withdrawn": false,
-      "review_pending": true,
-      "management_status": "자동",
+      "review_pending": false,
+      "management_status": "제외고정",
       "offering_attempt": 1,
       "ipo_parse_version": 4,
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "schedule_hidden": false
+      "schedule_hidden": true,
+      "management_hidden": true,
+      "fixed_excluded": true,
+      "review_reason": "일반 IPO 아님"
     },
     {
       "corp_code": "02032951",
@@ -21738,6 +21744,18 @@
       "corp_code": "00104069",
       "excluded_at": "2026-09-06",
       "memo": "운영자 삭제 요청 이관"
+    },
+    "corp:01721933": {
+      "name": "투게더아트",
+      "corp_code": "01721933",
+      "excluded_at": "2026-09-07",
+      "memo": "일반 IPO 아님"
+    },
+    "corp:01936340": {
+      "name": "데이터젠",
+      "corp_code": "01936340",
+      "excluded_at": "2026-09-07",
+      "memo": "일반 IPO 아님"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
