@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-07 14:06",
+  "updated": "2026-09-08 01:12",
   "items": [
     {
       "corp_code": "00104069",
@@ -29,11 +29,9 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false,
-      "management_status": "제외고정",
-      "schedule_hidden": true,
-      "management_hidden": true,
-      "fixed_excluded": true,
+      "review_pending": true,
+      "management_status": "자동",
+      "schedule_hidden": false,
       "review_reason": "일반 IPO 아님",
       "offering_attempt": 1,
       "result_parse_version": 2
@@ -290,16 +288,9 @@
       "sub_start": "2026-10-06",
       "sub_end": "2026-10-07",
       "underwriter": "하나증권",
-      "provisional_fields": [
-        "band_high",
-        "band_low",
-        "forecast_end",
-        "forecast_start",
-        "offer_shares",
-        "sub_end",
-        "sub_start",
-        "underwriter"
-      ]
+      "payment_date": "2026-10-12",
+      "market": "코스닥",
+      "is_listing_ipo": true
     },
     {
       "corp_code": "01754737",
@@ -352,6 +343,30 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
+    },
+    {
+      "corp_code": "01749559",
+      "name": "엠에스바이오",
+      "first_filing_date": "20260907",
+      "last_rcept_no": "20260907000305",
+      "offering_attempt": 1,
+      "band_low": 6800,
+      "band_high": 7800,
+      "forecast_start": "2026-09-28",
+      "forecast_end": "2026-10-02",
+      "sub_start": "2026-10-12",
+      "sub_end": "2026-10-13",
+      "payment_date": "2026-10-15",
+      "underwriter": "KB증권",
+      "market": "코스닥",
+      "offer_shares": 4000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
     },
     {
       "corp_code": "01540903",
@@ -17698,62 +17713,6 @@
   "history": [
     {
       "date": "2026-07-23",
-      "name": "뉴엔AI",
-      "type": "수기변경",
-      "field": "기관신청물량(3개월)",
-      "old": 153,
-      "new": 100162000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "에스팀",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-23",
-      "name": "에스팀",
-      "type": "수기변경",
-      "field": "기관신청물량(15일)",
-      "old": 709,
-      "new": 510453800
-    },
-    {
-      "date": "2026-07-23",
-      "name": "에스팀",
-      "type": "수기변경",
-      "field": "기관신청물량(미확약)",
-      "old": 1263,
-      "new": 1037075200
-    },
-    {
-      "date": "2026-07-23",
-      "name": "뉴엔AI",
-      "type": "수기변경",
-      "field": "기관신청물량(미확약)",
-      "old": 1941,
-      "new": 1372843000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "이뮨온시아",
-      "type": "수기변경",
-      "field": "기관신청물량(미확약)",
-      "old": 1993,
-      "new": 5646689000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "이뮨온시아",
-      "type": "수기변경",
-      "field": "기관신청물량(15일)",
-      "old": 19,
-      "new": 53866000
-    },
-    {
-      "date": "2026-07-23",
       "name": "이뮨온시아",
       "type": "수기변경",
       "field": "기관신청물량(1개월)",
@@ -21695,6 +21654,62 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-09-08",
+      "new": "2026-05-21"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "스탁키퍼",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-09-22",
+      "new": "2026-06-10"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "투게더아트",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
@@ -21722,18 +21737,6 @@
       "corp_code": "00104069",
       "excluded_at": "2026-09-07",
       "memo": "운영자 삭제 요청 이관"
-    },
-    "corp:01721933": {
-      "name": "투게더아트",
-      "corp_code": "01721933",
-      "excluded_at": "2026-09-07",
-      "memo": "일반 IPO 아님"
-    },
-    "corp:01936340": {
-      "name": "데이터젠",
-      "corp_code": "01936340",
-      "excluded_at": "2026-09-07",
-      "memo": "일반 IPO 아님"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
