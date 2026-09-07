@@ -399,9 +399,28 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "band_low": 9400,
+      "band_high": 11500,
+      "offer_shares": 2000000,
+      "forecast_start": "2026-09-21",
+      "forecast_end": "2026-09-29",
+      "sub_start": "2026-10-06",
+      "sub_end": "2026-10-07",
+      "underwriter": "하나증권",
+      "review_approved": true,
+      "provisional_fields": [
+        "band_high",
+        "band_low",
+        "forecast_end",
+        "forecast_start",
+        "offer_shares",
+        "sub_end",
+        "sub_start",
+        "underwriter"
+      ]
     },
     {
       "corp_code": "02032155",
@@ -433,7 +452,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01645448",
@@ -443,247 +463,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
-    },
-    {
-      "corp_code": "manual-",
-      "name": "",
-      "manual_entry": true,
-      "review_approved": true,
-      "review_pending": false,
-      "schedule_hidden": true
+      "management_status": "자동",
+      "schedule_hidden": false
     }
   ],
   "past_items": [
@@ -17934,46 +17715,6 @@
     {
       "date": "2026-07-23",
       "name": "뉴엔AI",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-23",
-      "name": "뉴엔AI",
-      "type": "수기변경",
-      "field": "기관신청물량(1개월)",
-      "old": 107,
-      "new": 82856000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "에스팀",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-23",
-      "name": "에스팀",
-      "type": "수기변경",
-      "field": "기관신청물량(3개월)",
-      "old": 123,
-      "new": 104590000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "뉴엔AI",
-      "type": "고정변경",
-      "field": "ipo:6개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-23",
-      "name": "뉴엔AI",
       "type": "수기변경",
       "field": "기관신청물량(6개월)",
       "old": 131,
@@ -21930,6 +21671,46 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "엠비디",
+      "type": "수기변경",
+      "field": "band",
+      "old": "",
+      "new": "9,400 ~ 11,500"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "엠비디",
+      "type": "수기변경",
+      "field": "offer_shares",
+      "old": "",
+      "new": "2000000"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "엠비디",
+      "type": "수기변경",
+      "field": "forecast",
+      "old": "",
+      "new": "2026-09-21 ~ 2026-09-29"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "엠비디",
+      "type": "수기변경",
+      "field": "subscription",
+      "old": "",
+      "new": "2026-10-06 ~ 2026-10-07"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "엠비디",
+      "type": "수기변경",
+      "field": "underwriter",
+      "old": "",
+      "new": "하나증권"
     }
   ],
   "seed_pending": [

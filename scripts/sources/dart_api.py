@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 import zipfile
 import xml.etree.ElementTree as ET
 from io import BytesIO
@@ -13,6 +14,8 @@ from scripts.config import DART_API_KEY
 from scripts.utils.parser import clean_int
 
 DART_BASE = "https://opendart.fss.or.kr/api"
+DART_VIEWER_BASE = "https://dart.fss.or.kr"
+DART_VIEWER_HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 
 def _clean_text(x: object) -> str:
@@ -30,6 +33,68 @@ def _decode_bytes(raw: bytes) -> str:
         except Exception:
             continue
     return raw.decode("utf-8", errors="ignore")
+
+
+def _dart_error(text: str) -> tuple[str, str] | None:
+    """OpenDART 오류 XML이면 (상태코드, 메시지)를 돌려준다."""
+    status = re.search(r"<status>\s*([^<]+)\s*</status>", text, flags=re.I)
+    if not status or status.group(1).strip() == "000":
+        return None
+    message = re.search(r"<message>\s*([^<]+)\s*</message>", text, flags=re.I)
+    return status.group(1).strip(), _clean_text(message.group(1) if message else "")
+
+
+def _viewer_root_nodes(index_html: str) -> list[dict[str, str]]:
+    """DART 공개 뷰어 목차에서 중복되지 않는 최상위 문서 조각을 찾는다."""
+    nodes: list[dict[str, str]] = []
+    seen: set[tuple[str, str, str]] = set()
+    for block in re.findall(
+        r"var\s+node1\s*=\s*\{\};([\s\S]*?)treeData\.push\(node1\)",
+        index_html,
+        flags=re.I,
+    ):
+        values: dict[str, str] = {}
+        for key in ("dcmNo", "eleId", "offset", "length", "dtd"):
+            match = re.search(rf"node1\[['\"]{key}['\"]\]\s*=\s*['\"]([^'\"]*)['\"]", block)
+            if match:
+                values[key] = match.group(1)
+        identity = (values.get("dcmNo", ""), values.get("offset", ""), values.get("length", ""))
+        if not all(identity) or identity in seen:
+            continue
+        seen.add(identity)
+        nodes.append(values)
+    return nodes
+
+
+def _download_viewer_document_text(rcept_no: str) -> str:
+    """OpenDART 원문 API 장애·한도 초과 때 공개 DART 뷰어를 대체 경로로 쓴다."""
+    index = requests.get(
+        f"{DART_VIEWER_BASE}/dsaf001/main.do",
+        params={"rcpNo": rcept_no},
+        headers=DART_VIEWER_HEADERS,
+        timeout=60,
+    )
+    index.raise_for_status()
+    nodes = _viewer_root_nodes(index.text)
+    texts: list[str] = []
+    for node in nodes:
+        response = requests.get(
+            f"{DART_VIEWER_BASE}/report/viewer.do",
+            params={
+                "rcpNo": rcept_no,
+                "dcmNo": node["dcmNo"],
+                "eleId": node.get("eleId", ""),
+                "offset": node["offset"],
+                "length": node["length"],
+                "dtd": node.get("dtd", "dart4.xsd"),
+            },
+            headers=DART_VIEWER_HEADERS,
+            timeout=60,
+        )
+        response.raise_for_status()
+        if response.text.strip():
+            texts.append(response.text)
+    return "\n".join(texts)
 
 
 _CORP_LIST: list[dict[str, str]] | None = None
@@ -122,18 +187,43 @@ def select_latest_investment_report(reports: list[dict[str, Any]]) -> dict[str, 
 
 
 def download_document_text(rcept_no: str) -> str:
-    if not DART_API_KEY:
-        return ""
-    res = requests.get(f"{DART_BASE}/document.xml", params={"crtfc_key": DART_API_KEY, "rcept_no": rcept_no}, timeout=60)
-    res.raise_for_status()
-    raw = res.content
-    if raw[:2] != b"PK":
-        return _decode_bytes(raw)
-    zf = zipfile.ZipFile(BytesIO(raw))
-    texts: list[str] = []
-    for name in zf.namelist():
-        texts.append(_decode_bytes(zf.read(name)))
-    return "\n".join(texts)
+    api_error: tuple[str, str] | None = None
+    api_failure = ""
+    if DART_API_KEY:
+        try:
+            res = requests.get(
+                f"{DART_BASE}/document.xml",
+                params={"crtfc_key": DART_API_KEY, "rcept_no": rcept_no},
+                timeout=60,
+            )
+            res.raise_for_status()
+            raw = res.content
+            if raw[:2] == b"PK":
+                zf = zipfile.ZipFile(BytesIO(raw))
+                return "\n".join(_decode_bytes(zf.read(name)) for name in zf.namelist())
+            decoded = _decode_bytes(raw)
+            api_error = _dart_error(decoded)
+            # 정상 원문이 ZIP이 아닌 형태로 오는 예외도 보존한다.
+            if decoded.strip() and not api_error:
+                return decoded
+        except (requests.RequestException, zipfile.BadZipFile) as exc:
+            api_failure = str(exc)
+
+    viewer_text = _download_viewer_document_text(rcept_no)
+    if viewer_text.strip():
+        if api_error:
+            print(
+                f"[DART API] 원문 오류 {api_error[0]} ({api_error[1]}) → 공개 뷰어 대체",
+                file=sys.stderr,
+            )
+        elif api_failure:
+            print(f"[DART API] 원문 요청 실패 ({api_failure}) → 공개 뷰어 대체", file=sys.stderr)
+        elif not DART_API_KEY:
+            print("[DART API] 원문 키 없음 → 공개 뷰어 대체", file=sys.stderr)
+        return viewer_text
+
+    detail = f"{api_error[0]} {api_error[1]}" if api_error else (api_failure or "공개 뷰어 본문 없음")
+    raise RuntimeError(f"DART 원문을 가져오지 못했습니다: {detail}")
 
 
 def _parse_table_rows(table_xml: str) -> list[list[str]]:

@@ -845,6 +845,11 @@ def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     if not rows:
         return
     schedule = read_schedule_data()
+    # 과거 버전이 미리 서식만 잡힌 빈 행을 수기 종목으로 저장한 흔적을 정리한다.
+    schedule["items"] = [
+        item for item in schedule.get("items", [])
+        if norm_name(item.get("name")) or not str(item.get("corp_code") or "").startswith("manual-")
+    ]
     state = load_simple_sheet_state().get("schedule", {})
     items = all_schedule_items(schedule)
     history = list(schedule.get("history") or [])
@@ -852,11 +857,19 @@ def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     domain = {"band_low", "band_high", "offer_shares", "forecast_start", "forecast_end", "sub_start", "sub_end", "demand_ratio", "sub_ratio", "underwriter"}
     changed = 0
     for row in rows:
-        item = _find_schedule_item(schedule, str(row.get("corp_code") or ""), str(row.get("name") or ""))
+        row_name = str(row.get("name") or "").strip()
+        row_corp_code = str(row.get("corp_code") or "").strip()
+        # 표 서식이 미리 내려간 빈 행은 노출/고정 기본값만 있어도 record로 잡힌다.
+        # 이름과 기업코드가 모두 없는 행을 수기 IPO로 만들면 manual- 빈 종목이 누적된다.
+        if not row_name and not row_corp_code:
+            continue
+        item = _find_schedule_item(schedule, row_corp_code, row_name)
+        if not item and not row_name:
+            continue
         if not item:
             item = {
-                "corp_code": row.get("corp_code") or f"manual-{norm_name(row.get('name'))}",
-                "name": row.get("name") or "", "manual_entry": True,
+                "corp_code": row_corp_code or f"manual-{norm_name(row_name)}",
+                "name": row_name, "manual_entry": True,
                 "review_approved": True, "review_pending": False,
             }
             schedule.setdefault("items", []).append(item)
@@ -866,20 +879,28 @@ def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
         locked = yn(row.get("locked"), "N") == "Y"
         manual_fields = set(item.get("manual_fields") or [])
         provisional = set(item.get("provisional_fields") or [])
+        row_changed_fields: set[str] = set()
         if locked:
             # 체크만 해도 현재 표시된 이 탭의 값 전체를 고정한다.
             manual_fields.update(field for field in domain if item.get(field) not in (None, "", 0))
             provisional.difference_update(domain)
         else:
             manual_fields.difference_update(domain)
+        live = _schedule_snapshot(item)
         for cell_key in ("band", "offer_shares", "forecast", "subscription", "demand_ratio", "sub_ratio", "underwriter", "content_url"):
             current = str(row.get(cell_key) or "").strip()
             old = str(previous.get(cell_key) or "").strip()
-            if not previous or current == old:
+            # 같은 시트를 연속으로 내려받아도 이미 반영된 값을 다시 변경 이력에 쌓지 않는다.
+            if not previous or current == old or current == str(live.get(cell_key) or "").strip():
+                continue
+            candidate = dict(item)
+            candidate_fields = _apply_schedule_cell(candidate, cell_key, current)
+            if candidate_fields and all(candidate.get(field) == item.get(field) for field in candidate_fields):
                 continue
             if not locked and old:
                 continue
             fields = set(_apply_schedule_cell(item, cell_key, current))
+            row_changed_fields.update(fields)
             if locked:
                 manual_fields.update(fields)
                 provisional.difference_update(fields)
@@ -887,6 +908,11 @@ def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 provisional.update(fields)
             history.append({"date": today, "name": item.get("name") or "", "type": "수기변경", "field": cell_key, "old": old, "new": current})
             changed += 1
+        # 관리자가 실제 일정 필드를 보완한 종목은 다음 DART 파싱 전에도 즉시 노출한다.
+        # 고정하지 않은 값은 provisional로 남아 이후 공식 파싱값이 오면 자동 교체된다.
+        if row_changed_fields.intersection(domain) and item.get("forecast_start"):
+            item["review_approved"] = True
+            item["review_pending"] = False
         if manual_fields:
             item["manual_fields"] = sorted(manual_fields)
         else:
