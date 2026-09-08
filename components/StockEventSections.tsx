@@ -79,22 +79,21 @@ function EventRow({
   quantityFactor: number;
 }) {
   const days = daysUntil(group.tradable_date, nowMs);
-  const status = days >= 0 ? "예정" : "해제완료";
+  const status = days === 0 ? "오늘 해제" : days > 0 ? "예정" : "해제완료";
   const badge = days === 0 ? "D-DAY" : `D-${days}`;
   const imminent = days <= 3;
   const qty = adjustedQty(group.qty, group.unit, quantityFactor);
   return (
     <li
-      className={`overflow-hidden rounded-2xl border shadow-[0_2px_10px_rgba(15,23,42,0.04)] ${
-        tone === "upcoming" ? "border-blue-100 bg-white" : "border-gray-200 bg-gray-50/80"
+      className={`overflow-hidden rounded-xl border ${
+        tone === "upcoming"
+          ? imminent
+            ? "border-gray-200 bg-white shadow-[0_10px_28px_rgba(239,68,68,0.13),0_1px_2px_rgba(15,23,42,0.04)]"
+            : "border-gray-200 bg-white shadow-[0_10px_28px_rgba(37,99,235,0.12),0_1px_2px_rgba(15,23,42,0.04)]"
+          : "border-gray-200 bg-gray-50/80 shadow-[0_1px_2px_rgba(15,23,42,0.04)]"
       }`}
     >
       <div className="flex items-stretch">
-        {/* 좌측 컬러 바 — 예정(파랑/임박 빨강) vs 지난(회색) 한눈 구분 */}
-        <span
-          aria-hidden
-          className={`w-1.5 shrink-0 ${tone === "upcoming" ? (imminent ? "bg-red-500" : "bg-blue-500") : "bg-gray-300"}`}
-        />
         <div className="flex flex-1 items-start justify-between gap-4 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className={`flex flex-wrap items-center gap-2 font-semibold ${tone === "upcoming" ? "text-gray-900" : "text-gray-500"}`}>
@@ -107,7 +106,15 @@ function EventRow({
             </p>
             <p className="mt-1 text-xs text-gray-400">{group.date_display}</p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              <span className={`rounded-full px-2 py-0.5 font-medium ${status === "예정" ? "bg-blue-50 text-blue-700" : "bg-gray-200/70 text-gray-500"}`}>
+              <span
+                className={`rounded-full px-2.5 py-1 font-semibold ${
+                  status === "오늘 해제"
+                    ? "bg-red-100 text-red-700"
+                    : status === "예정"
+                      ? "bg-blue-100 text-blue-700"
+                      : "bg-gray-200/70 text-gray-500"
+                }`}
+              >
                 {status}
               </span>
             </div>
