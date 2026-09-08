@@ -93,6 +93,12 @@ interface DayCell {
   dateStr: string;
 }
 
+interface DayItem {
+  kind: CalendarEventKind;
+  name: string;
+  code: string;
+}
+
 
 
 
@@ -151,6 +157,56 @@ function shortDate(s: string): string {
   return `${Number(m)}/${Number(d)}`;
 }
 
+function chipHref(ev: { kind: CalendarEventKind; code: string }): string {
+  return ev.kind === "lockup" ? `/stock/${ev.code}` : "/ipo";
+}
+
+function DayDetailContent({
+  dateStr,
+  items,
+  onNavigate,
+}: {
+  dateStr: string;
+  items: DayItem[];
+  onNavigate?: () => void;
+}) {
+  const [, month, day] = dateStr.split("-");
+  const grouped = ALL_KINDS.map((kind) => ({
+    kind,
+    items: items.filter((item) => item.kind === kind),
+  })).filter((group) => group.items.length > 0);
+
+  return (
+    <>
+      <p className="mb-3 px-1 text-base font-bold text-gray-800 sm:text-[12px]">
+        {Number(month)}월 {Number(day)}일 일정 상세
+      </p>
+      <div className="space-y-2 sm:space-y-1.5">
+        {grouped.map((group) => (
+          <div key={group.kind} className={`rounded-lg p-2.5 sm:rounded-md sm:p-1.5 ${GROUP_BG[group.kind]}`}>
+            <p className="px-1 text-xs font-semibold text-gray-500 sm:text-[10px]">
+              {KIND_LABEL[group.kind]} ({group.items.length}건)
+            </p>
+            <div className="mt-1 space-y-1 sm:mt-0.5 sm:space-y-0.5">
+              {group.items.map((item, itemIndex) => (
+                <Link
+                  key={`${item.code}-${itemIndex}`}
+                  href={chipHref(item)}
+                  onClick={onNavigate}
+                  className="flex min-h-9 min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-white/70 sm:min-h-0 sm:gap-1.5 sm:rounded sm:px-1 sm:py-0.5 sm:text-[11px]"
+                >
+                  <span className={`h-2 w-2 shrink-0 rounded-full sm:h-1.5 sm:w-1.5 ${DOT_COLOR[item.kind]}`} />
+                  <span className="truncate">{item.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
 
 
 
@@ -187,7 +243,17 @@ export function LockupCalendar({
   }, []);
   // 범례 = 토글 필터. 초기값은 전체 표시
   const [active, setActive] = useState<Set<CalendarEventKind>>(new Set(ALL_KINDS));
+  const [mobileDetailDate, setMobileDetailDate] = useState<string | null>(null);
   const allActive = active.size === ALL_KINDS.length;
+
+  useEffect(() => {
+    if (!mobileDetailDate) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileDetailDate(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileDetailDate]);
 
 
 
@@ -219,6 +285,7 @@ export function LockupCalendar({
     const moved = new Date(year, month + delta, 1);
     setYear(moved.getFullYear());
     setMonth(moved.getMonth());
+    setMobileDetailDate(null);
   }
 
 
@@ -291,9 +358,7 @@ export function LockupCalendar({
 
 
 
-  function chipHref(ev: { kind: CalendarEventKind; code: string }): string {
-    return ev.kind === "lockup" ? `/stock/${ev.code}` : "/ipo";
-  }
+  const mobileDetailItems = mobileDetailDate ? dayAllItems(mobileDetailDate) : [];
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
@@ -472,17 +537,22 @@ export function LockupCalendar({
                   });
                   if (hiddenCount > 0) {
                     const allItems = dayAllItems(cell.dateStr);
-                    const grouped = ALL_KINDS.map((kind) => ({
-                      kind,
-                      items: allItems.filter((item) => item.kind === kind),
-                    })).filter((group) => group.items.length > 0);
                     nodes.push(
                       <div
                         key={`more-${i}`}
                         style={{ gridColumn: i + 1, gridRow: chipRowBase + visible.length }}
                         className="group relative px-1.5"
                       >
-                        <p className="cursor-default text-[10px] text-gray-400">+{hiddenCount}개 더</p>
+                        <button
+                          type="button"
+                          onClick={() => setMobileDetailDate(cell.dateStr)}
+                          aria-expanded={mobileDetailDate === cell.dateStr}
+                          aria-label={`${month + 1}월 ${cell.day}일 숨은 일정 ${hiddenCount}개 더 보기`}
+                          className="-mx-1 min-h-7 rounded px-1 text-left text-[10px] font-medium text-blue-600 hover:bg-blue-50 lg:hidden"
+                        >
+                          +{hiddenCount}개 더
+                        </button>
+                        <p className="hidden cursor-default text-[10px] text-gray-400 lg:block">+{hiddenCount}개 더</p>
                         {/* 데스크톱 hover 팝오버 — 카테고리별 배경. 캘린더 밖으로 안 나가게 방향 자동 결정. */}
                         {(() => {
                           const horizontal = i >= 3 ? "right-full mr-1.5" : "left-full ml-1.5";
@@ -492,31 +562,8 @@ export function LockupCalendar({
                             <div
                               className={`pointer-events-none absolute z-50 hidden w-60 rounded-lg border border-gray-200 bg-white p-2.5 opacity-0 shadow-xl transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100 lg:block ${horizontal} ${vertical}`}
                             >
-                          <p className="mb-1.5 px-1 text-[12px] font-bold text-gray-700">
-                            {month + 1}월 {cell.day}일 일정 상세
-                          </p>
-                          <div className="space-y-1.5">
-                            {grouped.map((group) => (
-                              <div key={group.kind} className={`rounded-md p-1.5 ${GROUP_BG[group.kind]}`}>
-                                <p className="px-1 text-[10px] font-semibold text-gray-500">
-                                  {KIND_LABEL[group.kind]} ({group.items.length}건)
-                                </p>
-                                <div className="mt-0.5 space-y-0.5">
-                                  {group.items.map((item, itemIndex) => (
-                                    <Link
-                                      key={`${item.code}-${itemIndex}`}
-                                      href={chipHref(item)}
-                                      className="flex min-w-0 items-center gap-1.5 rounded px-1 py-0.5 text-[11px] font-medium text-gray-700 hover:bg-white/70"
-                                    >
-                                      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${DOT_COLOR[item.kind]}`} />
-                                      <span className="truncate">{item.name}</span>
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                              <DayDetailContent dateStr={cell.dateStr} items={allItems} />
+                            </div>
                           );
                         })()}
                       </div>
@@ -529,6 +576,39 @@ export function LockupCalendar({
           );
         })}
       </div>
+
+      {mobileDetailDate && mobileDetailItems.length > 0 ? (
+        <div className="fixed inset-0 z-[200] flex items-end justify-center p-3 lg:hidden" role="presentation">
+          <button
+            type="button"
+            aria-label="일정 상세 닫기"
+            onClick={() => setMobileDetailDate(null)}
+            className="absolute inset-0 bg-gray-950/35 backdrop-blur-[1px]"
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="일정 상세"
+            className="relative max-h-[72vh] w-full max-w-md overflow-y-auto rounded-2xl border border-gray-200 bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-2xl"
+          >
+            <button
+              type="button"
+              onClick={() => setMobileDetailDate(null)}
+              aria-label="닫기"
+              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-500 hover:bg-gray-200"
+            >
+              ×
+            </button>
+            <div className="pr-10">
+              <DayDetailContent
+                dateStr={mobileDetailDate}
+                items={mobileDetailItems}
+                onNavigate={() => setMobileDetailDate(null)}
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
