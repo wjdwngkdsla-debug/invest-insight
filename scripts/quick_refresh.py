@@ -19,6 +19,8 @@ import argparse
 import json
 import sys
 import time
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from scripts.build import (
     ADMIN_COLUMNS,
@@ -39,13 +41,41 @@ from scripts.build import (
     rows_to_site_data,
 )
 from scripts.utils.redaction import redact_sensitive_text
+from scripts.utils.dates import market_holidays
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="시트 수기값만 사이트에 빠르게 반영")
     parser.add_argument("--no-pull", action="store_true", help="Google Sheet 수거를 건너뛰고 로컬 CSV만 사용")
     parser.add_argument("--prices", action="store_true", help="KRX 종가·상장주식수도 함께 갱신")
+    parser.add_argument(
+        "--require-latest-close",
+        action="store_true",
+        help="KRX 종가가 현재 시각 기준 최신 거래일보다 오래되면 실패 처리",
+    )
     return parser.parse_args()
+
+
+def expected_latest_close_date(
+    now: datetime | None = None,
+    holidays: set[str] | None = None,
+) -> str:
+    """현재 시각에 확보돼야 할 최신 종가 기준일을 반환한다.
+
+    예약 실행이 몇 시간 늦어져도 원래 목적은 전 거래일 종가 확인이므로
+    실행 시각과 무관하게 전 거래일을 기대한다. 휴장일 탭을 반영하되
+    파일이 없으면 주말만 건너뛴다.
+    """
+    current = now or datetime.now(ZoneInfo("Asia/Seoul"))
+    if current.tzinfo is None:
+        current = current.replace(tzinfo=ZoneInfo("Asia/Seoul"))
+    else:
+        current = current.astimezone(ZoneInfo("Asia/Seoul"))
+    day = current.date() - timedelta(days=1)
+    closed = market_holidays() if holidays is None else holidays
+    while day.weekday() >= 5 or day.isoformat() in closed:
+        day -= timedelta(days=1)
+    return day.isoformat()
 
 
 def main() -> None:
@@ -176,6 +206,12 @@ def main() -> None:
         except Exception as exc:
             print(f"[QUICK] KRX 갱신 실패(기존 종가 유지): {redact_sensitive_text(exc)}", file=sys.stderr)
         lap("KRX 시세", step)
+        if args.require_latest_close:
+            expected = expected_latest_close_date()
+            if not close_date or close_date < expected:
+                raise SystemExit(
+                    f"[QUICK] KRX 종가가 오래되었습니다: 수신 {close_date or '없음'} / 기대 {expected}"
+                )
 
     # KRX를 돌지 않았으면 기존 site_data의 종가 기준일을 그대로 유지한다.
     # 실행일로 덮으면 오래된 가격이 오늘 가격처럼 보인다.
