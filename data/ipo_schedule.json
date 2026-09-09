@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09 08:48",
+  "updated": "2026-09-09 23:55",
   "items": [
     {
       "corp_code": "00104069",
@@ -75,7 +75,7 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -87,7 +87,7 @@
       "corp_code": "01876251",
       "name": "네오사피엔스",
       "first_filing_date": "20260723",
-      "last_rcept_no": "20260908000068",
+      "last_rcept_no": "20260909000317",
       "band_low": 13800,
       "band_high": 15800,
       "forecast_start": "2026-09-02",
@@ -101,20 +101,48 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
       "offering_attempt": 1,
-      "content_url": "https://blog.naver.com/vericap/224397791999"
+      "content_url": "https://blog.naver.com/vericap/224397791999",
+      "final_price": 10000,
+      "demand_ratio": 219.56,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0
+        },
+        {
+          "period": "15일",
+          "qty": 29569000,
+          "pct": 8.98
+        },
+        {
+          "period": "미확약",
+          "qty": 299772000,
+          "pct": 91.02
+        }
+      ]
     },
     {
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
-      "last_rcept_no": "20260903000071",
+      "last_rcept_no": "20260909000118",
       "band_low": 10000,
       "band_high": 12000,
       "forecast_start": "2026-09-04",
@@ -245,7 +273,7 @@
       "corp_code": "01028933",
       "name": "멜콘",
       "first_filing_date": "20260821",
-      "last_rcept_no": "20260821000368",
+      "last_rcept_no": "20260909000381",
       "offering_attempt": 1,
       "band_low": 10700,
       "band_high": 12300,
@@ -372,6 +400,30 @@
       "schedule_hidden": false
     },
     {
+      "corp_code": "01705573",
+      "name": "유캐스트",
+      "first_filing_date": "20260909",
+      "last_rcept_no": "20260909000378",
+      "offering_attempt": 1,
+      "band_low": 21000,
+      "band_high": 26000,
+      "forecast_start": "2026-10-07",
+      "forecast_end": "2026-10-14",
+      "sub_start": "2026-10-19",
+      "sub_end": "2026-10-20",
+      "payment_date": "2026-10-22",
+      "underwriter": "유진투자증권",
+      "market": "코스닥",
+      "offer_shares": 800000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
       "corp_code": "01540903",
       "name": "크리에이츠",
       "first_filing_date": "20260904",
@@ -468,7 +520,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -479,7 +531,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -490,29 +542,9 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
     }
   ],
   "past_items": [
@@ -17764,22 +17796,6 @@
       "date": "2026-07-23",
       "name": "티엑스알로보틱스",
       "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-07-23",
-      "name": "티엑스알로보틱스",
-      "type": "수기변경",
-      "field": "기관신청물량(1개월)",
-      "old": 43,
-      "new": 53122000
-    },
-    {
-      "date": "2026-07-23",
-      "name": "티엑스알로보틱스",
-      "type": "고정변경",
       "field": "ipo:3개월",
       "old": "N",
       "new": "Y"
@@ -21759,6 +21775,22 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-09",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-09",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
