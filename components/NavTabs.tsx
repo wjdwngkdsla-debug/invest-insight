@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const TAB_BASE = "rounded-lg px-3 py-1.5 text-sm font-bold transition-colors";
+const TAB_BASE = "rounded-lg px-3 py-1.5 text-sm font-bold transition-colors whitespace-nowrap";
 const TAB_IDLE = "text-gray-500 hover:bg-gray-100 hover:text-gray-900";
 
 // 헤더 메뉴 탭 — 현재 페이지 탭만 파란 배경으로 강조.
@@ -13,8 +13,9 @@ export default function NavTabs() {
   const ipoActive = pathname.startsWith("/ipo");
   const rankingActive = pathname.startsWith("/ranking") || pathname.startsWith("/lockup-ranking");
   const valueChainActive = pathname.startsWith("/value-chain");
+  const tradeActive = pathname.startsWith("/trade");
   return (
-    <nav className="flex items-center gap-1">
+    <nav aria-label="주요 메뉴" className="flex flex-wrap items-center gap-1">
       <Link href="/ipo" className={`${TAB_BASE} ${ipoActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
         IPO 일정
       </Link>
@@ -23,6 +24,9 @@ export default function NavTabs() {
       </Link>
       <Link href="/value-chain" className={`${TAB_BASE} ${valueChainActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
         테마맵
+      </Link>
+      <Link href="/trade" aria-current={tradeActive ? "page" : undefined} className={`${TAB_BASE} ${tradeActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
+        수출 동향
       </Link>
       <Link
         href="https://blog.naver.com/vericap"

@@ -1,0 +1,17 @@
+# Trade dashboard notes
+
+- Deployment uses the existing main-branch hosting integration. No trade update schedule was added; the collector is run explicitly.
+- Preview: `/trade`. Previous Magic UI and global design changes were removed.
+- Shared header, ranking, and theme-map design are restored to the existing site.
+- Map uses globe.gl / Three.js and public-domain Natural Earth boundaries. The globe uses the supplied reference's night texture and lime/gold bar palette, without arcs. Flat maps use vector country shapes, with separate light and dark palettes and no rectangular photographic layer. Rotation speed is 1.14, three times the initial 0.38 setting.
+- The right-hand map button transitions to a flat Three.js map with animated cylindrical export bars. Both views use pale country fills and darker, uniform-width bars. Heights use square-root scaling plus a 10% minimum for positive values (shown in the legend); exact amounts and shares remain unchanged in details and tables. Country selection, region filters, hover details, pan, zoom, and reset work in both views. Reduced-motion preferences disable the transition and bar animation.
+- Fullscreen uses the browser Fullscreen API with a viewport-filling fallback. The country list can be hidden and selected countries animate into view.
+- Cache: `data/trade/dram.json` (HS 8542321010, 48 countries/territories across the period), `data/trade/beauty.json` (HS 3304999000, 206). Both cover 36 months through 2026-07.
+- Every monthly request omits the country filter. The sum of all returned country values must equal the API total before cache replacement. Monthly counts vary (latest: DRAM 23, beauty 147). Other codes without coordinates remain in the table and totals.
+- Totals and shares use all destinations for the product, not a manually selected country list. Missing observations are not zero. DRAM modules and company-specific revenues are not inferred.
+- Update manually with `node scripts/run_python_module.mjs scripts.update_trade_dram`. `--probe` checks API access without updating. `--end YYYY-MM` chooses the final complete month. The default is two months before the current month, to avoid unpublished monthly data.
+- Add `--product beauty` or `--product dram` for one dataset. Default updates both.
+- Missing or invalid caches show an empty state, never generated sample values. Only positive exports in the selected month appear in selectors. The page is statically built and included in the sitemap.
+- PharmaResearch: Kiwoom's 2026-01-09 report (page 4, https://bbn.kiwoom.com/rfCR11799) tracks Gangneung HS 3304999000. The connected national product/country API does NOT identify Gangneung or Rejuran. The UI explicitly distinguishes this broader industry reference. City-level sourcing remains pending, not replaced with provincial or national values.
+- Net weight uses expWgt (kg). USD/kg is the aggregate USD divided by aggregate net weight, not an average of country ratios or a product selling price. Zero/missing weight has no unit value. Amount totals must reconcile exactly; independently rounded integer kg totals allow at most (row count + 1) / 2 kg deviation. The official total weight is preserved. Display numbers are rounded; CSV preserves input precision.
+- Geography design references: https://www.mapbox.com/insights/map-design-process and https://docs.mapbox.com/map-styles/reference/light/ (principles only; no Mapbox runtime or service dependency).

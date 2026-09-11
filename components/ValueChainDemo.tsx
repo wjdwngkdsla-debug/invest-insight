@@ -1107,13 +1107,13 @@ function ComparePanel({
   );
 }
 
-export function ValueChainDemo() {
+export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string } = {}) {
   const [menuOpen, setMenuOpen] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("map");
   const [detailPanelWidth, setDetailPanelWidth] = useState(DEFAULT_DETAIL_PANEL_WIDTH);
-  const [focusCompanyId, setFocusCompanyId] = useState<string | null>(null);
+  const [focusCompanyId, setFocusCompanyId] = useState<string | null>(initialCompanyId && VALUE_CHAIN_COMPANIES[initialCompanyId] ? initialCompanyId : null);
   const [period, setPeriod] = useState<Period>("week");
   const [query, setQuery] = useState("");
   const [searchCategory, setSearchCategory] = useState<"전체" | OrbitCategory>("전체");
@@ -1222,7 +1222,7 @@ export function ValueChainDemo() {
     const issueResults: SearchResult[] =
       searchCategory === "관련주"
         ? []
-        : VALUE_CHAIN_NAV_ISSUES.map((issue) => ({
+        : uniqueIssuesByTitle(VALUE_CHAIN_NAV_ISSUES).map((issue) => ({
             id: issue.id,
             type: "issue" as const,
             title: issue.title,

@@ -31,7 +31,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ValueChainPage() {
+export default async function ValueChainPage({ searchParams }: { searchParams: Promise<{ company?: string }> }) {
+  const { company } = await searchParams;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -63,7 +64,7 @@ export default function ValueChainPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <ValueChainDemo />
+      <ValueChainDemo key={company ?? "default"} initialCompanyId={company} />
     </main>
   );
 }

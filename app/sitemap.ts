@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 
   const staticRoutes: MetadataRoute.Sitemap = [
+    { url: `${siteUrl}/trade`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     {
       url: siteUrl,
       lastModified,
