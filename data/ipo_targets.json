@@ -13,7 +13,7 @@
     "name": "네오사피엔스",
     "listing_date": "",
     "code": "",
-    "manual_ipo_price": "",
+    "manual_ipo_price": "10000",
     "manual_ipo_price_locked": "N",
     "shares": ""
   },
@@ -47,6 +47,15 @@
   {
     "market": "코스닥",
     "name": "멜콘",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "바로팜",
     "listing_date": "",
     "code": "",
     "shares": "",
@@ -90,8 +99,17 @@
     "manual_ipo_price_locked": "N"
   },
   {
-    "market": "",
+    "market": "코스닥",
     "name": "엠비디",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "엠에스바이오",
     "listing_date": "",
     "code": "",
     "shares": "",
@@ -115,6 +133,15 @@
     "manual_ipo_price": "",
     "manual_ipo_price_locked": "N",
     "shares": ""
+  },
+  {
+    "market": "코스닥",
+    "name": "유캐스트",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
   },
   {
     "market": "코스닥",
