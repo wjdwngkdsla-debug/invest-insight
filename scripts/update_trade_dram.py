@@ -14,7 +14,7 @@ from scripts.config import DATA_GO_KR_API_KEY, ROOT_DIR
 
 ENDPOINT = "https://apis.data.go.kr/1220000/nitemtrade/getNitemtradeList"
 HS = "8542321010"
-PRODUCTS = {"dram": HS, "beauty": "3304999000"}
+PRODUCTS = {"dram": HS, "beauty": "3304999000", "transformer": "8504230000"}
 
 def shift(month: str, offset: int) -> str:
     year, m = map(int, month.split("-"))

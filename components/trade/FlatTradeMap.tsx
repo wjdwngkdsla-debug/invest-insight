@@ -9,7 +9,7 @@ import {
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import borderData from "@/data/trade/borders.json";
 import { type summarizeTrade } from "@/lib/trade";
-import { exportHeightRatio, inactiveCountryColor, flatBarColor } from "./map-style";
+import { exportHeightRatio, inactiveCountryColor, exportBarColor } from "./map-style";
 
 type Country = ReturnType<typeof summarizeTrade>["countries"][number];
 type Props = {
@@ -115,7 +115,8 @@ export default function FlatTradeMap({ countries, selected, region, active, dark
         for (const c of data.values()) {
           if (c.lat === null || c.lon === null) continue;
           const height = exportHeightRatio(c.usd, max) * 90;
-          const mesh = new Mesh(new CylinderGeometry(1.65, 1.65, 1, 24), new MeshLambertMaterial({ color: flatBarColor(c.usd, max, state.dark) }));
+          const radius = el.clientWidth < 600 ? 2.4 : 1.65;
+          const mesh = new Mesh(new CylinderGeometry(radius, radius, 1, 24), new MeshLambertMaterial({ color: exportBarColor(c.change, state.dark) }));
           mesh.position.set(c.lon, height / 2, -c.lat);
           mesh.userData = { code: c.code, height };
           bars.add(mesh);

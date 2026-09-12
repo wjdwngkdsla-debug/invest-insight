@@ -24,3 +24,14 @@ test("bar palettes remain significantly darker than matching country fills", () 
     assert(contrast > 3, `Country/bar contrast must exceed 3:1 (${change})`);
   }
 });
+
+test("both map themes use red for growth and blue for decline, with neutral unknowns", () => {
+  for (const dark of [true, false]) {
+    const rgb = value => value.slice(1).match(/../g).map(v => parseInt(v, 16));
+    const up = rgb(exportBarColor(12, dark)), down = rgb(exportBarColor(-12, dark));
+    assert(up[0] > up[2]);
+    assert(down[2] > down[0]);
+    assert.equal(exportBarColor(null, dark), exportBarColor(0, dark));
+    assert.notEqual(exportBarColor(12, dark), exportBarColor(null, dark));
+  }
+});

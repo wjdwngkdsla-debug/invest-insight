@@ -7,6 +7,8 @@ export const tradeProducts = [
     note: "D램 칩 기준 · 개별 기업·HBM 매출과 다릅니다." },
   { id: "beauty", name: "기타 미용·기초화장품", hs: "3304999000", companies: [{ name: "파마리서치", id: "" }],
     note: "전국 품목 통계 · 강릉시·리쥬란 수출액이 아닙니다." },
+  { id: "transformer", name: "대형 변압기", hs: "8504230000", companies: [{ name: "HD현대일렉트릭", id: "" }, { name: "효성중공업", id: "" }],
+    note: "용량 10,000kVA 초과 액체절연 변압기의 전국 수출 통계입니다." },
 ] as const;
 export type TradeProduct = (typeof tradeProducts)[number];
 
@@ -73,7 +75,14 @@ export function usdText(value: number) {
 }
 export const kgText = (kg: number | null) => kg === null ? "자료 없음" : `${Math.round(kg).toLocaleString("ko-KR")} kg`;
 export const unitValue = (usd: number | null, kg: number | null) => usd !== null && kg !== null && kg > 0 ? usd / kg : null;
-export function summarizeTrade(data: TradeDataset, month: string, selected = "all") {
+export function tradeMonths(start: string, end: string) {
+  if (![start, end].every(m => /^\d{4}-(0[1-9]|1[0-2])$/.test(m)) || start > end) throw new RangeError("Invalid trade period");
+  const result: string[] = [];
+  for (let m = start; m <= end; m = priorMonth(m, -1)) result.push(m);
+  return result;
+}
+export function summarizeTrade(data: TradeDataset, month: string, selected = "all", start = month) {
+  const period = tradeMonths(start, month);
   const months = [...new Set(data.rows.map(r => r.month))].sort();
   const codes = data.countryCodes ?? [...new Set(data.rows.map(r => r.country))];
   const total = (m: string, country = selected): number | null => {
@@ -82,26 +91,39 @@ export function summarizeTrade(data: TradeDataset, month: string, selected = "al
     if (country === "all" && codes.some(code => !rows.some(r => r.country === code))) return null;
     return rows.length ? rows.reduce((n, r) => n + r.usd, 0) : null;
   };
-  const now = total(month);
   const weight = (m: string, country = selected): number | null => {
     if (country === "all" && data.monthlyWeightTotals) return data.monthlyWeightTotals[m] ?? null;
     const rows = data.rows.filter(r => r.month === m && (country === "all" || r.country === country));
     return rows.length && rows.every(r => r.kg !== undefined) ? rows.reduce((n, r) => n + r.kg!, 0) : null;
   };
-  const kg = weight(month);
-  const previous = total(priorMonth(month, 12));
-  const lastMonth = total(priorMonth(month, 1));
+  const aggregate = (range: string[], country = selected, metric: "usd" | "kg" = "usd"): number | null => {
+    const read = metric === "usd" ? total : weight;
+    if (range.length === 1) return read(range[0], country);
+    // Only a reconciled all-destination month can account for absent country rows.
+    const complete = range.every(m => data.scope === "all-countries" && data.monthlyTotals?.[m] !== undefined);
+    const rows = data.rows.filter(r => range.includes(r.month) && (country === "all" || r.country === country));
+    if (!rows.length) return null;
+    if (country !== "all" && complete) return metric === "usd" ? rows.reduce((sum, r) => sum + r.usd, 0)
+      : rows.every(r => r.kg !== undefined) ? rows.reduce((sum, r) => sum + r.kg!, 0) : null;
+    const values = range.map(m => read(m, country));
+    return values.every(v => v !== null) ? values.reduce<number>((sum, v) => sum + (v ?? 0), 0) : null;
+  };
+  const now = aggregate(period);
+  const kg = aggregate(period, selected, "kg");
+  const previousPeriod = period.map(m => priorMonth(m, 12));
+  const previous = aggregate(previousPeriod);
+  const lastMonth = aggregate(period.map(m => priorMonth(m, period.length)));
   const sum3 = (m: string) => {
     const values = [0, 1, 2].map(offset => total(priorMonth(m, offset)));
     return values.every(v => v !== null) ? values.reduce<number>((a, b) => a + (b ?? 0), 0) : null;
   };
   const recent = sum3(month), prior = sum3(priorMonth(month, 12));
   const countries = codes.map(countryInfo).map(c => {
-    const value = total(month, c.code), old = total(priorMonth(month, 12), c.code);
-    return { ...c, usd: value ?? 0, kg: weight(month, c.code), usdPerKg: unitValue(value, weight(month, c.code)), available: value !== null,
+    const value = aggregate(period, c.code), old = aggregate(previousPeriod, c.code), countryKg = aggregate(period, c.code, "kg");
+    return { ...c, usd: value ?? 0, kg: countryKg, usdPerKg: unitValue(value, countryKg), available: value !== null,
       change: value !== null && old !== null ? growth(value, old) : null,
       delta: value !== null && old !== null ? value - old : null,
-      share: (total(month, "all") ?? 0) > 0 ? (value ?? 0) / total(month, "all")! * 100 : null };
+      share: (aggregate(period, "all") ?? 0) > 0 ? (value ?? 0) / aggregate(period, "all")! * 100 : null };
   }).filter(c => c.available).sort((a, b) => b.usd - a.usd);
   return { now, kg, usdPerKg: unitValue(now, kg), yoy: now !== null && previous !== null ? growth(now, previous) : null,
     mom: now !== null && lastMonth !== null ? growth(now, lastMonth) : null,

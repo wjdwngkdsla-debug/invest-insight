@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { growth, priorMonth, summarizeTrade, validTradeDataset, unitValue, usdText } from "../lib/trade.ts";
+import { growth, priorMonth, summarizeTrade, validTradeDataset, unitValue, usdText, tradeMonths } from "../lib/trade.ts";
 
 test("unit export values use aggregate net kilograms and handle missing weights", () => {
   assert.equal(unitValue(100, 0), null);
   assert.equal(unitValue(100, null), null);
   assert.equal(unitValue(120, 4), 30);
-  for (const id of ["dram", "beauty"]) {
+  for (const id of ["dram", "beauty", "transformer"]) {
     const data = JSON.parse(fs.readFileSync(new URL("../data/trade/" + id + ".json", import.meta.url)));
     for (const [month, kg] of Object.entries(data.monthlyWeightTotals)) {
       const result = summarizeTrade(data, month);
@@ -29,11 +29,11 @@ test("year boundaries and zero baselines do not produce fabricated growth", () =
 });
 
 test("all-country totals and metadata include every API destination", () => {
-  for (const id of ["dram", "beauty"]) {
+  for (const id of ["dram", "beauty", "transformer"]) {
     const data = JSON.parse(fs.readFileSync(new URL("../data/trade/" + id + ".json", import.meta.url)));
     assert.equal(data.scope, "all-countries");
     assert(validTradeDataset(data, data.hs));
-    assert(data.countryCodes.length > (id === "dram" ? 40 : 190));
+    assert(data.countryCodes.length > (id === "beauty" ? 190 : 40));
     for (const [month, total] of Object.entries(data.monthlyTotals)) {
       const summary = summarizeTrade(data, month);
       assert.equal(summary.now, total);
@@ -87,4 +87,33 @@ test("country filter and share denominator use the same reporting month", () => 
   assert.equal(summarizeTrade(data, "2026-07").now, 100);
   assert.equal(summarizeTrade(data, "2026-07", "US").now, 75);
   assert.equal(summarizeTrade(data, "2026-07").countries[0].share, 75);
+});
+
+test("inclusive month ranges sum amounts and weights before calculating growth or unit value", () => {
+  assert.deepEqual(tradeMonths("2025-12", "2026-02"), ["2025-12", "2026-01", "2026-02"]);
+  assert.throws(() => tradeMonths("2026-05", "2026-04"), RangeError);
+  assert.throws(() => tradeMonths("2026-13", "2026-14"), RangeError);
+  const data = { mode: "live", hs: "test", source: "test", scope: "all-countries", rows: [
+    ["2025-04", "US", 100, 10], ["2025-05", "US", 300, 10],
+    ["2026-04", "US", 200, 10], ["2026-05", "US", 600, 30],
+    ["2026-04", "CN", 100, 20],
+  ].map(([month, country, usd, kg]) => ({ month, country, usd, kg })),
+    monthlyTotals: { "2025-04": 100, "2025-05": 300, "2026-04": 300, "2026-05": 600 },
+    monthlyWeightTotals: { "2025-04": 10, "2025-05": 10, "2026-04": 30, "2026-05": 30 } };
+  const all = summarizeTrade(data, "2026-05", "all", "2026-04");
+  assert.equal(all.now, 900);
+  assert.equal(all.kg, 60);
+  assert.equal(all.usdPerKg, 15);
+  assert.equal(all.yoy, 125);
+  const us = summarizeTrade(data, "2026-05", "US", "2026-04");
+  assert.equal(us.now, 800);
+  assert.equal(us.usdPerKg, 20);
+  assert.equal(us.yoy, 100);
+  assert.equal(all.countries.find(c => c.code === "US").share, 800 / 900 * 100);
+  const cn = all.countries.find(c => c.code === "CN");
+  assert.equal(cn.usd, 100);
+  assert.equal(cn.change, null);
+  assert.equal(summarizeTrade(data, "2026-05", "all", "2026-03").now, null);
+  assert.equal(summarizeTrade(data, "2026-05", "CN", "2026-03").now, null);
+  assert.deepEqual(summarizeTrade(data, "2026-05"), summarizeTrade(data, "2026-05", "all", "2026-05"));
 });

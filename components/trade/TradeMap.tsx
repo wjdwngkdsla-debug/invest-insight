@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Globe, { type GlobeInstance } from "globe.gl";
-import { AmbientLight, DirectionalLight, MeshPhongMaterial, Color } from "three";
+import { AmbientLight, DirectionalLight, MeshPhongMaterial, Color, TextureLoader, SRGBColorSpace } from "three";
 import borderData from "@/data/trade/borders.json";
 import { Minus, Plus, RotateCcw, Pause, Play, Maximize, Minimize, Map, Globe2, Sun, Moon, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { countryInfo, signed, usdText, kgText, type summarizeTrade } from "@/lib/trade";
-import { exportHeightRatio, referenceBarColor, flatBarColor } from "./map-style";
+import { exportHeightRatio, exportBarColor } from "./map-style";
 
 const FlatTradeMap = dynamic(() => import("./FlatTradeMap"), { ssr: false });
 
@@ -22,6 +22,8 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
   const host = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const globeRef = useRef<GlobeInstance | null>(null);
+  const applyAppearance = useRef<((dark: boolean) => void) | null>(null);
+  const globeDark = useRef(true);
   const flatApi = useRef<{ zoom: (factor: number) => void; reset: () => void } | null>(null);
   const callbacks = useRef({ countries, onSelect, selected });
   const [rotating, setRotating] = useState(true);
@@ -33,7 +35,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
   const [themes, setThemes] = useState({ globe: true, flat: false });
   const dark = flat ? themes.flat : themes.globe;
   const toggleTheme = () => setThemes(t => ({ ...t, [flat ? "flat" : "globe"]: !dark }));
-  const [showList, setShowList] = useState(true);
+  const [showList, setShowList] = useState(false);
   const [focusRequest, setFocusRequest] = useState(0);
   useEffect(() => { callbacks.current = { countries, onSelect, selected }; }, [countries, onSelect, selected]);
 
@@ -60,7 +62,6 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
         element.dataset.altitude = pov.altitude.toFixed(4);
       });
       g.width(element.clientWidth).height(element.clientHeight).backgroundColor("rgba(0,0,0,0)")
-        .globeImageUrl("/globe/earth-night.jpg").bumpImageUrl("/globe/topology.png")
         .atmosphereColor("#3b82f6").atmosphereAltitude(0.18)
         .polygonsData(features).polygonAltitude(0.003)
         .polygonCapColor(() => "rgba(0,0,0,0)")
@@ -71,12 +72,40 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
         .onPointHover(p => setHovered(p ? (p as Located).code : null))
         .onPointClick(p => pick((p as Located).code))
         .pointLat("lat").pointLng("lon").pointResolution(24)
-        .labelsData([ORIGIN]).labelLat("lat").labelLng("lon").labelText("code")
-        .labelSize(1.5).labelDotRadius(0.18).labelColor(() => "#ffffff").labelAltitude(0.04);
+        .htmlElementsData([ORIGIN]).htmlLat("lat").htmlLng("lon").htmlAltitude(0.04)
+        .htmlElement(d => {
+          if ((d as typeof ORIGIN).code !== "KR") {
+            const label = document.createElement("span");
+            label.className = "map-country-label"; label.textContent = (d as typeof ORIGIN).name;
+            return label;
+          }
+          const marker = document.createElement("img");
+          marker.src = "/flags/kr.svg"; marker.alt = "대한민국 국기"; marker.title = "대한민국";
+          marker.className = "map-origin-flag"; marker.width = 28; marker.height = 21;
+          return marker;
+        });
       const material = g.globeMaterial() as MeshPhongMaterial;
       material.specular = new Color("#222222");
       material.bumpScale = 1;
       material.shininess = 5;
+      const nightTexture = new TextureLoader().load("/globe/earth-night.jpg", texture => {
+        if (!alive) { texture.dispose(); return; }
+        texture.colorSpace = SRGBColorSpace;
+        applyAppearance.current?.(globeDark.current);
+        element.dataset.textureReady = "true";
+      });
+      applyAppearance.current = isDark => {
+        globeDark.current = isDark;
+        material.map = isDark ? nightTexture : null;
+        material.color = new Color(isDark ? "#ffffff" : "#e2edf2");
+        material.emissive.set(isDark ? "#000000" : "#455d6b");
+        material.emissiveIntensity = isDark ? 0 : 0.28;
+        material.specular.set(isDark ? "#222222" : "#71848c");
+        material.needsUpdate = true;
+        g.atmosphereColor(isDark ? "#4c7098" : "#afcbd8").atmosphereAltitude(isDark ? 0.12 : 0.08);
+        element.dataset.surface = isDark ? "night" : "pale";
+      };
+      applyAppearance.current(globeDark.current);
       const sunlight = new DirectionalLight(0xffffff, 0.6);
       sunlight.position.set(-250, 200, 300);
       const fill = new DirectionalLight(0xdbeaff, 0.6);
@@ -102,7 +131,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
       if (reduced) queueMicrotask(() => { if (alive) setRotating(false); });
       return () => {
         alive = false; resize?.disconnect(); controls.removeEventListener("start", onStart);
-        g.pauseAnimation(); g._destructor(); g.renderer().dispose(); globeRef.current = null; delete element.dataset.ready;
+        g.pauseAnimation(); g._destructor(); g.renderer().dispose(); nightTexture.dispose(); applyAppearance.current = null; globeRef.current = null; delete element.dataset.ready;
       };
     } catch {
       queueMicrotask(() => { if (alive) setFailed(true); });
@@ -118,24 +147,33 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
     const max = Math.max(1, ...located.map(c => c.usd));
     g.pointsData(located).pointAltitude(p => exportHeightRatio((p as Located).usd, max) * 0.55)
       .pointRadius(0.72)
-      .pointColor(p => referenceBarColor((p as Located).usd, max));
-    g.polygonCapColor(f => {
-      const id = (f as Feature).id, c = located.find(c => c.code === id);
-      if (id === selected && c) return "rgba(200,255,0,0.16)";
-      return "rgba(0,0,0,0)";
-    });
+      .pointColor(p => exportBarColor((p as Located).change, globeDark.current));
     const c = located.find(c => c.code === selected);
     if (c) {
       g.controls().autoRotate = false;
       queueMicrotask(() => setRotating(false));
       g.pointOfView({ lat: c.lat, lng: c.lon, altitude: Math.max(expanded ? 2.6 : 1.9, (expanded ? 2.8 : 2.2) / ((host.current?.clientWidth ?? 600) / (host.current?.clientHeight ?? 500))) }, 950);
-      g.labelsData([ORIGIN, c]);
-    } else g.labelsData([ORIGIN]);
+      g.htmlElementsData(c.code === "KR" ? [ORIGIN] : [ORIGIN, c]);
+    } else g.htmlElementsData([ORIGIN]);
     if (expanded && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const timer = window.setTimeout(() => setRotating(true), 1200);
       return () => window.clearTimeout(timer);
     }
   }, [countries, selected, region, focusRequest, expanded]);
+
+  useEffect(() => {
+    const g = globeRef.current;
+    if (!g) return;
+    const isDark = themes.globe;
+    applyAppearance.current?.(isDark);
+    const visibleCodes = new Set(countries.filter(c => c.usd > 0 && (region === "all" || c.region === region)).map(c => c.code));
+    g.pointColor(p => exportBarColor((p as Located).change, isDark));
+    g.polygonCapColor(f => {
+      const id = (f as Feature).id;
+      if (isDark) return id === selected ? "rgba(167,199,215,0.26)" : "rgba(0,0,0,0)";
+      return id === selected ? "#a7bdc8" : visibleCodes.has(id) ? "#c3d4d9" : "#e3e9eb";
+    }).polygonStrokeColor(() => isDark ? "rgba(150,179,206,0.24)" : "rgba(255,255,255,0.85)");
+  }, [themes.globe, countries, selected, region]);
 
   useEffect(() => {
     const g = globeRef.current;
@@ -165,7 +203,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
       if (document.fullscreenElement) await document.exitFullscreen().catch(() => {});
       setExpanded(false);
     } else {
-      setExpanded(true); setFlat(false);
+      setExpanded(true); setFlat(false); setShowList(true);
       setRotating(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
       await wrap.current?.requestFullscreen?.().catch(() => {});
     }
@@ -187,18 +225,18 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
     <div className="map-controls">
       <button aria-label={flat ? "지구본으로 보기" : "평면 지도로 보기"} aria-pressed={flat} title={flat ? "지구본으로 보기" : "평면 지도로 보기"} onClick={() => { setFlatLoaded(true); setHovered(null); setFlat(v => !v); }}>{flat ? <Globe2 size={16} /> : <Map size={16} />}</button>
       <button aria-label={dark ? "밝은 지도" : "어두운 지도"} title={dark ? "밝은 지도" : "어두운 지도"} onClick={toggleTheme}>{dark ? <Sun size={16} /> : <Moon size={16} />}</button>
-      {expanded && <button aria-label={showList ? "국가 목록 닫기" : "국가 목록 열기"} title={showList ? "국가 목록 닫기" : "국가 목록 열기"} onClick={() => setShowList(v => !v)}>{showList ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}</button>}
+      <button aria-label={showList ? "국가 목록 닫기" : "국가 목록 열기"} aria-expanded={showList} title={showList ? "국가 목록 닫기" : "국가 목록 열기"} onClick={() => setShowList(v => !v)}>{showList ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}</button>
       <button disabled={flat} aria-label={rotating ? "자동 회전 정지" : "자동 회전 시작"} title={flat ? "지구본에서 자동 회전" : rotating ? "자동 회전 정지" : "자동 회전 시작"} onClick={() => setRotating(v => !v)}>{rotating ? <Pause size={16} /> : <Play size={16} />}</button>
       <button aria-label="지도 확대" title="확대" onClick={() => zoom(1.33)}><Plus size={16} /></button>
       <button aria-label="지도 축소" title="축소" onClick={() => zoom(0.77)}><Minus size={16} /></button>
       <button aria-label="지도 초기화" title="한국 중심으로" onClick={reset}><RotateCcw size={15} /></button>
       <button aria-label={expanded ? "지도 화면 축소" : "지도 화면 확대"} title={expanded ? "화면 축소" : "화면 확대"} onClick={toggleExpanded}>{expanded ? <Minimize size={16} /> : <Maximize size={16} />}</button>
     </div>
-    <aside className={`map-detail-column${expanded && showList ? " with-list" : ""}`}>
+    <aside className={`map-detail-column${showList ? " with-list" : ""}`}>
       {hoveredInfo && hoveredData && <div className="globe-tooltip"><strong>{hoveredInfo.name}</strong><span>{usdText(hoveredData.usd)}</span><span>{kgText(hoveredData.kg)} · {hoveredData.usdPerKg === null ? "kg당 자료 없음" : `${Math.round(hoveredData.usdPerKg).toLocaleString("ko-KR")} 달러/kg`}</span><span>전년 대비 {signed(hoveredData.change)}</span></div>}
-      {expanded && showList && <div className="map-country-list" aria-label="전체화면 국가 목록"><strong>국가별 수출</strong><div>{countries.filter(c => c.usd > 0 && (region === "all" || c.region === region)).map(c => <button key={c.code} aria-pressed={selected === c.code} onClick={() => { onSelect(c.code); setFocusRequest(v => v + 1); setHovered(null); }}><span>{c.name}</span><span>{usdText(c.usd)}</span></button>)}</div></div>}
+      {showList && <div className="map-country-list" aria-label={expanded ? "전체화면 국가 목록" : "국가 목록"}><strong>국가별 수출</strong><div>{countries.filter(c => c.usd > 0 && (region === "all" || c.region === region)).map(c => <button key={c.code} aria-pressed={selected === c.code} onClick={() => { onSelect(c.code); setFocusRequest(v => v + 1); setHovered(null); }}><span>{c.name}</span><span>{usdText(c.usd)}</span></button>)}</div></div>}
     </aside>
-    <div className="map-legend"><span><i style={{ background: flat ? flatBarColor(0, 1, dark) : referenceBarColor(0, 1) }} />수출액 낮음</span><span><i style={{ background: flat ? flatBarColor(1, 1, dark) : referenceBarColor(1, 1) }} />높음</span><span title="수출액의 제곱근에 비례하며 작은 수출국에도 최소 높이를 적용합니다. 정확한 금액과 비중은 국가별 상세 및 표에 표시됩니다.">높이: 제곱근 보정 · 최소 높이 적용</span></div>
+    <div className="map-legend"><span>전년 동기 대비</span><span><i style={{ background: exportBarColor(1, dark) }} />증가</span><span><i style={{ background: exportBarColor(-1, dark) }} />감소</span><span><i style={{ background: exportBarColor(null, dark) }} />보합·비교자료 없음</span><span title="수출액의 제곱근에 비례하며 작은 수출국에도 최소 높이를 적용합니다. 정확한 금액과 비중은 국가별 상세 및 표에 표시됩니다.">높이: 수출액 (제곱근 보정)</span></div>
     {failed && <div className="map-loading">3D 지도를 표시할 수 없습니다. 아래 국가별 표에서 확인할 수 있습니다.</div>}
   </div>;
 }
