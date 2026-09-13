@@ -277,7 +277,8 @@
       "ipo_parse_version": 4,
       "schedule_hidden": false,
       "commit_apply_missing": 4,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "content_url": "https://blog.naver.com/vericap/224409591674"
     },
     {
       "corp_code": "01028933",
@@ -592,7 +593,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01760118",
@@ -602,7 +604,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01645448",
@@ -612,7 +615,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     }
   ],
   "past_items": [
