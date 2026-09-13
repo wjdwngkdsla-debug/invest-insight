@@ -118,15 +118,51 @@ export function summarizeTrade(data: TradeDataset, month: string, selected = "al
     return values.every(v => v !== null) ? values.reduce<number>((a, b) => a + (b ?? 0), 0) : null;
   };
   const recent = sum3(month), prior = sum3(priorMonth(month, 12));
+  const endTotal = total(month, "all"), priorTotal = total(priorMonth(month, 1), "all");
+  const periodTotal = aggregate(period, "all");
   const countries = codes.map(countryInfo).map(c => {
     const value = aggregate(period, c.code), old = aggregate(previousPeriod, c.code), countryKg = aggregate(period, c.code, "kg");
+    const endValue = total(month, c.code), previousValue = total(priorMonth(month, 1), c.code);
+    const endShare = endValue !== null && endTotal !== null && endTotal > 0 ? endValue / endTotal * 100 : null;
+    const previousShare = previousValue !== null && priorTotal !== null && priorTotal > 0 ? previousValue / priorTotal * 100 : null;
     return { ...c, usd: value ?? 0, kg: countryKg, usdPerKg: unitValue(value, countryKg), available: value !== null,
       change: value !== null && old !== null ? growth(value, old) : null,
       delta: value !== null && old !== null ? value - old : null,
-      share: (aggregate(period, "all") ?? 0) > 0 ? (value ?? 0) / aggregate(period, "all")! * 100 : null };
+      mom: endValue !== null && previousValue !== null ? growth(endValue, previousValue) : null,
+      shareChange: endShare !== null && previousShare !== null ? endShare - previousShare : null,
+      share: periodTotal !== null && periodTotal > 0 ? (value ?? 0) / periodTotal * 100 : null };
   }).filter(c => c.available).sort((a, b) => b.usd - a.usd);
   return { now, kg, usdPerKg: unitValue(now, kg), yoy: now !== null && previous !== null ? growth(now, previous) : null,
     mom: now !== null && lastMonth !== null ? growth(now, lastMonth) : null,
     recent, recentGrowth: recent !== null && prior !== null ? growth(recent, prior) : null,
     countries, chart: months.filter(m => m <= month).slice(-24).map(m => ({ month: m, value: total(m), kg: weight(m), usdPerKg: unitValue(total(m), weight(m)), previous: total(priorMonth(m, 12)) })) };
+}
+
+export type TradeCountrySort = "usd" | "kg" | "usdPerKg" | "change" | "mom" | "share" | "shareChange";
+export function sortTradeCountries(countries: ReturnType<typeof summarizeTrade>["countries"], key: TradeCountrySort, direction: "asc" | "desc") {
+  return [...countries].sort((a, b) => {
+    const av = a[key], bv = b[key];
+    if (av === null && bv === null) return a.code.localeCompare(b.code);
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    return (av - bv) * (direction === "asc" ? 1 : -1) || a.code.localeCompare(b.code);
+  });
+}
+export function percentagePoints(value: number | null) {
+  if (value === null) return "비교자료 없음";
+  const rounded = Math.round(value * 10) / 10;
+  return `${rounded > 0 ? "+" : ""}${rounded.toFixed(1)}%p`;
+}
+
+export function chartMonthChanges(history: { month: string; value: number | null; kg: number | null; usdPerKg: number | null }[], metric: "value" | "kg" | "usdPerKg") {
+  const values = new Map(history.map(p => [p.month, p[metric]]));
+  return new Map(history.map(p => {
+    const current = p[metric], previous = values.get(priorMonth(p.month, 1));
+    return [p.month, current !== null && previous !== null && previous !== undefined ? growth(current, previous) : null];
+  }));
+}
+export function chartChangeText(change: number | null) {
+  if (change === null) return "비교자료 없음";
+  const rounded = Math.round(change * 10) / 10;
+  return `${rounded > 0 ? "+" : ""}${rounded.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}%`;
 }
