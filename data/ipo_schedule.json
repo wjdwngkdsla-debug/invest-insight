@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11 08:38",
+  "updated": "2026-09-13 08:40",
   "items": [
     {
       "corp_code": "00104069",
@@ -37,26 +37,6 @@
       "result_parse_version": 2
     },
     {
-      "corp_code": "01936340",
-      "name": "데이터젠",
-      "management_name": "데이터젠",
-      "first_filing_date": "20260213",
-      "last_rcept_no": "20260714000008",
-      "withdrawn": false,
-      "review_pending": true,
-      "management_status": "자동",
-      "offering_attempt": 1,
-      "ipo_parse_version": 4,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "schedule_hidden": false,
-      "payment_date": "2026-06-29",
-      "sub_start": "2026-06-29",
-      "sub_end": "2026-07-10",
-      "result_parse_version": 2
-    },
-    {
       "corp_code": "02030166",
       "name": "엔에이치기업인수목적34호",
       "first_filing_date": "20260729",
@@ -75,7 +55,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -143,7 +123,7 @@
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
-      "last_rcept_no": "20260909000118",
+      "last_rcept_no": "20260911000214",
       "band_low": 10000,
       "band_high": 12000,
       "forecast_start": "2026-09-04",
@@ -157,14 +137,43 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
       "offering_attempt": 1,
-      "content_url": "https://blog.naver.com/vericap/224404527576"
+      "content_url": "https://blog.naver.com/vericap/224404527576",
+      "final_price": 12000,
+      "demand_ratio": 1248.47,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 7003000,
+          "pct": 0.47
+        },
+        {
+          "period": "3개월",
+          "qty": 1621000,
+          "pct": 0.11
+        },
+        {
+          "period": "1개월",
+          "qty": 4378000,
+          "pct": 0.29
+        },
+        {
+          "period": "15일",
+          "qty": 41709000,
+          "pct": 2.78
+        },
+        {
+          "period": "미확약",
+          "qty": 1443451000,
+          "pct": 96.35
+        }
+      ],
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01722066",
@@ -401,6 +410,32 @@
       "schedule_hidden": false
     },
     {
+      "corp_code": "00534729",
+      "name": "디티에스",
+      "first_filing_date": "20260911",
+      "last_rcept_no": "20260911000314",
+      "offering_attempt": 1,
+      "band_low": 17000,
+      "band_high": 18500,
+      "forecast_start": "2026-10-01",
+      "forecast_end": "2026-10-08",
+      "sub_start": "2026-10-13",
+      "sub_end": "2026-10-14",
+      "payment_date": "2026-10-16",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2228917,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
+    },
+    {
       "corp_code": "01705573",
       "name": "유캐스트",
       "first_filing_date": "20260909",
@@ -523,7 +558,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -534,7 +569,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -545,29 +580,9 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
     }
   ],
   "past_items": [
@@ -17816,102 +17831,6 @@
   ],
   "history": [
     {
-      "date": "2026-07-28",
-      "name": "인제니아테라퓨틱스",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-07-28",
-      "name": "데이터젠",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-28",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-28",
-      "name": "투게더아트",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-28",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-07-29",
-      "name": "스카이랩스",
-      "type": "정정공시",
-      "field": "수요예측 시작",
-      "old": "2026-08-03",
-      "new": "2026-08-14"
-    },
-    {
-      "date": "2026-07-29",
-      "name": "스카이랩스",
-      "type": "정정공시",
-      "field": "수요예측 종료",
-      "old": "2026-08-07",
-      "new": "2026-08-21"
-    },
-    {
-      "date": "2026-07-29",
-      "name": "스카이랩스",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-13",
-      "new": "2026-08-26"
-    },
-    {
-      "date": "2026-07-29",
-      "name": "스카이랩스",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-08-14",
-      "new": "2026-08-27"
-    },
-    {
-      "date": "2026-07-31",
-      "name": "딜리셔스",
-      "type": "수기변경",
-      "field": "content_url",
-      "old": "",
-      "new": "https://blog.naver.com/vericap/224363555723"
-    },
-    {
-      "date": "2026-08-01",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-01",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
       "date": "2026-08-02",
       "name": "스탁키퍼",
       "type": "수동편입",
@@ -21814,9 +21733,110 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
+    {
+      "name": "데이터젠",
+      "status": "pending",
+      "link": "https://dart.fss.or.kr/dsab002/main.do?textCrpNm=%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%A0"
+    },
     {
       "name": "스탁키퍼",
       "status": "pending",
@@ -21833,37 +21853,37 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-11",
+      "excluded_at": "2026-09-12",
       "memo": "자동 제외(스팩)"
     }
   }
