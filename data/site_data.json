@@ -8342,9 +8342,9 @@
           "date": "2025-03-24",
           "date_display": "2025-03-24",
           "tradable_date": "2025-03-24",
-          "qty": 16716,
+          "qty": 39006,
           "unit": "주",
-          "pct": 0.17,
+          "pct": 0.41,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -8353,14 +8353,14 @@
           "rcp": "20241212000615",
           "api_checked": true,
           "api_return_date": "2025-03-24",
-          "api_return_qty": 16716,
+          "api_return_qty": 39006,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)",
           "reason_breakdown": [
             {
               "reason": "상장주선인(국내기업)",
-              "qty": 16716
+              "qty": 39006
             }
           ]
         },
@@ -24439,12 +24439,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1756233
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 28200,
           "release_fluc_rt": 0.0
         },
@@ -24492,12 +24487,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융",
           "reason": "벤처금융",
-          "reason_breakdown": [
-            {
-              "reason": "벤처금융",
-              "qty": 1649973
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 35900,
           "release_fluc_rt": 17.13
         },
@@ -24545,12 +24535,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)",
-          "reason_breakdown": [
-            {
-              "reason": "상장주선인(국내기업)",
-              "qty": 51600
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 42450,
           "release_fluc_rt": 1.43
         },
