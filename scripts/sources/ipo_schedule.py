@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import re
 import sys
 from collections import Counter
@@ -141,10 +142,10 @@ def fetch_equity_filings(days_back: int = LOOKBACK_DAYS) -> list[dict[str, Any]]
 
 
 def group_upcoming_ipos(filings: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
-    """미상장 법인(corp_cls=E)만 남긴다 — 상장사의 유상증자 신고서(Y/K)를 걸러내면 곧 예정 IPO 목록."""
+    """기타법인(E)과 코넥스(N)를 후보로 수집하고, 이전상장 공모 여부는 본문에서 검증한다."""
     grouped: dict[str, list[dict[str, Any]]] = {}
     for f in filings:
-        if (f.get("corp_cls") or "") != "E":
+        if (f.get("corp_cls") or "") not in {"E", "N"}:
             continue
         grouped.setdefault(f["corp_code"], []).append(f)
     for corp_filings in grouped.values():
@@ -384,6 +385,8 @@ def parse_offering_doc(doc: str) -> dict[str, Any]:
     forecast = _parse_forecast(plain)
     sub = _parse_subscription(plain)
     demand_ratio, commit_apply = _parse_demand_tables(doc)
+    transfer = re.search(r"(코스닥|유가증권|코스피)\s*(?:시장)?\s*이전\s*상장", plain)
+    transfer_market = ("코스닥" if transfer.group(1) == "코스닥" else "코스피") if transfer else ""
     return {
         "band_low": band[0] if band else 0,
         "band_high": band[1] if band else 0,
@@ -394,7 +397,8 @@ def parse_offering_doc(doc: str) -> dict[str, Any]:
         "sub_end": sub[1] if sub else "",
         "payment_date": _parse_payment(plain),
         "underwriter": _parse_underwriter(plain),
-        "market": _parse_market(plain),
+        "market": transfer_market or _parse_market(plain),
+        "transfer_market": transfer_market,
         "offer_shares": _parse_offer_shares(plain),
         "demand_ratio": demand_ratio,
         "commit_apply": commit_apply,
@@ -407,6 +411,9 @@ def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
 
     강한 IPO 신호: 상장 의도 문구 / 상장 시장 확정 / 수요예측 실시(증자는 수요예측 안 함).
     """
+    if item.get("issuer_market") == "코넥스":
+        # 기존 상장 이력/상장규정 인용만 있는 일반 증자는 IPO로 노출하지 않는다.
+        return bool(item.get("transfer_market") in {"코스닥", "코스피"} and _core_fields_filled(item))
     if item.get("is_listing_ipo"):
         return True
     if item.get("market"):
@@ -791,7 +798,9 @@ def detect_listings_from_krx(
 
         # 상장일: KRX가 진실. 다르면 자동수정 + 이력 기록.
         current_listing = item.get("listing_date") or ""
-        if list_dd and current_listing != list_dd:
+        transfer = item.get("transfer_market")
+        transfer_date_valid = not transfer or _listing_date_is_plausible(item, list_dd)
+        if list_dd and current_listing != list_dd and transfer_date_valid:
             history.append({
                 "date": trading_date, "name": item.get("name", ""),
                 "type": "KRX 자동수정" if current_listing else "상장확인(KRX)",
@@ -846,6 +855,11 @@ def _listing_date_is_plausible(item: dict[str, Any], listing_date: str) -> bool:
     if not listing:
         return False
     sub_end = _date_or_none(item.get("sub_end") or "")
+    if item.get("transfer_market"):
+        # 기존 코넥스 상장일을 이전상장 공모 완료일로 연결하지 않는다.
+        offering_start = sub_end or _filing_date_or_none(item.get("first_filing_date") or "")
+        if offering_start and listing <= offering_start:
+            return False
     if sub_end:
         # IPO 상장일은 보통 청약 종료 뒤 며칠~수주 안에 온다. 몇 달 이상 벌어지면
         # KRX 시세 기준일이나 잘못된 수기값이 순환 저장된 것으로 본다.
@@ -928,12 +942,14 @@ def refresh_ipo_schedule(
     krx_trading_date: str | None = None,
     krx_base_info: dict[str, dict[str, Any]] | None = None,
     backfill_all: bool = False,
+    corp_codes: set[str] | None = None,
 ) -> dict[str, Any]:
     def log(msg: str) -> None:
         if verbose:
             print(f"[IPO일정] {msg}", file=sys.stderr)
 
     state = load_state()
+    original_state = copy.deepcopy(state) if corp_codes else None
     # reset_sheet 실행은 시트 pull을 건너뛴다. 그래도 커밋된 관리 명령(특히 제외고정과
     # 이름만 수동편입)은 빌드 전에 적용해 불필요한 재파싱/자동부활을 막는다.
     if MANAGEMENT_PATH.exists():
@@ -944,6 +960,9 @@ def refresh_ipo_schedule(
             _, state, _ = apply_stock_management(management_rows, targets, state)
         except Exception as exc:
             log(f"종목관리 사전 적용 실패(기존 상태로 계속): {redact_sensitive_text(exc)}")
+    if corp_codes:
+        state["items"] = [i for i in state.get("items", []) if i.get("corp_code") in corp_codes]
+        state["past_items"] = [i for i in state.get("past_items", []) if i.get("corp_code") in corp_codes]
     items_by_corp: dict[str, dict[str, Any]] = {i["corp_code"]: i for i in state.get("items", [])}
     archived_by_corp: dict[str, dict[str, Any]] = {
         i["corp_code"]: i for i in state.get("past_items", []) if i.get("corp_code")
@@ -957,9 +976,10 @@ def refresh_ipo_schedule(
     # state에 보존해 재승인 시 전체 문서를 다시 받지 않고 즉시 복구한다.
     fixed_exclusions: dict[str, dict[str, Any]] = dict(state.get("fixed_exclusions") or {})
 
-    filings = fetch_equity_filings(days_back)
+    filings = ([f for code in sorted(corp_codes) for f in _fetch_corp_filings(code, days_back)]
+               if corp_codes else fetch_equity_filings(days_back))
     grouped = group_upcoming_ipos(filings)
-    log(f"C001 신고서 {len(filings)}건 → 미상장 법인 {len(grouped)}곳")
+    log(f"신고서 {len(filings)}건 → IPO 후보(기타·코넥스) {len(grouped)}곳")
 
     now_kst = datetime.now(ZoneInfo("Asia/Seoul"))
     today = now_kst.strftime("%Y-%m-%d")
@@ -1046,6 +1066,7 @@ def refresh_ipo_schedule(
         if (
             old
             and old.get("last_rcept_no") == newest.get("rcept_no")
+            and (newest.get("corp_cls") != "N" or old.get("issuer_market") == "코넥스")
             and int(old.get("ipo_parse_version") or 0) >= IPO_PARSE_VERSION
             and not needs_temporary_commit_check
             and not _needs_offering_backfill(old)
@@ -1072,6 +1093,10 @@ def refresh_ipo_schedule(
             "last_rcept_no": newest.get("rcept_no") or "",
             "offering_attempt": offering_attempt,
         })
+        if newest.get("corp_cls") == "N":
+            item["issuer_market"] = "코넥스"
+            if newest.get("stock_code"):
+                item["stock_code"] = newest["stock_code"]
         if not withdrawn:
             merged: dict[str, Any] = {}
             selected_filings = list(corp_filings[:MAX_DOCS_PER_CORP])
@@ -1208,7 +1233,7 @@ def refresh_ipo_schedule(
         if linked.get("code"):
             stock_hints.setdefault(key, str(linked["code"]))
 
-    seed_pending = seed_new_items(
+    seed_pending = original_state.get("seed_pending", []) if original_state is not None else seed_new_items(
         items_by_corp, process_corp, history, today, log, prev_pending_names,
         deleted_corps, fixed_exclusions, heavy_budget, stock_hints,
     )
@@ -1534,9 +1559,13 @@ def refresh_ipo_schedule(
         "deleted_corps": deleted_corps,
         "fixed_exclusions": fixed_exclusions,
     }
+    if original_state is not None:
+        # 단일 종목 복구가 다른 기업의 일정/보정/보류 상태를 변경하지 않게 보존한다.
+        for field in ("items", "past_items"):
+            result[field] = [i for i in original_state.get(field, []) if i.get("corp_code") not in corp_codes] + result[field]
     SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
     SCHEDULE_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    log(f"저장: 진행 {len(kept)}종목 / 이전 이력 {len(past_items)}종목 → {SCHEDULE_PATH.name}")
+    log(f"저장: 진행 {len(result['items'])}종목 / 이전 이력 {len(result['past_items'])}종목 → {SCHEDULE_PATH.name}")
     return result
 
 
@@ -1546,9 +1575,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="IPO 일정 데이터 갱신 (DART C001 스트림)")
     parser.add_argument("--days", type=int, default=LOOKBACK_DAYS, help="발굴 창(일)")
     parser.add_argument("--backfill-all", action="store_true", help="배치당 상한 없이 미채움 백필 전량 처리")
+    parser.add_argument("--corp-code", action="append", help="해당 DART 기업코드만 복구 (반복 지정 가능)")
     args = parser.parse_args()
-    result = refresh_ipo_schedule(days_back=args.days, backfill_all=args.backfill_all)
+    if args.corp_code and any(not re.fullmatch(r"\d{8}", code) for code in args.corp_code):
+        parser.error("--corp-code는 8자리 DART 기업코드여야 합니다")
+    result = refresh_ipo_schedule(days_back=args.days, backfill_all=args.backfill_all, corp_codes=set(args.corp_code) if args.corp_code else None)
     for item in result["items"]:
+        if args.corp_code and item.get("corp_code") not in args.corp_code:
+            continue
         print(
             f"{item.get('name','?'):<12} {item.get('market','?'):<4} "
             f"밴드 {item.get('band_low',0):,}~{item.get('band_high',0):,} 확정 {item.get('final_price',0):,} "
