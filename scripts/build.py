@@ -2610,8 +2610,9 @@ def apply_api_updates(
 
     같은 반환일의 여러 사유(벤처금융/기관투자가/기타 등)는 하나의 해제 건이므로
     합산해서 처리한다 — 예: 리센스메디컬 05-04는 3건 합계 2,251,518주가
-    구주 1개월 예정물량과 정확히 일치. 과거에 만들어진 'API 단독' 행은 매 실행
-    새로 생성하므로 먼저 걷어내고, 그 event_id 목록을 호출부에 돌려줘 정리시킨다.
+    구주 1개월 예정물량과 정확히 일치. 정상 응답이 있을 때만 과거 'API 단독'
+    행을 새 결과로 교체한다. 일시적인 빈 응답이나 종목코드 불일치 응답은 이미
+    확인한 보호예수 이력을 삭제할 근거가 아니므로 기존 행을 보존한다.
     """
     raw_items = fetch_public_lockup_returns(target["name"])
     normalized_items = [normalize_public_return_item(x) for x in raw_items]
@@ -2629,6 +2630,15 @@ def apply_api_updates(
         print(f"  [API] 종목코드 불일치 응답 {dropped}건 제외", file=sys.stderr)
     print(f"  [API] 금융위 반환정보 {len(api_items)}건", file=sys.stderr)
 
+    existing_api_only_rows = [
+        row for row in rows if row.get("dart_source") == "공공데이터 API 단독"
+    ]
+    if not api_items and existing_api_only_rows:
+        print(
+            f"  [API] 유효 응답 없음 — 기존 API 확정 이벤트 {len(existing_api_only_rows)}건 보존",
+            file=sys.stderr,
+        )
+        return rows, reviews, logs, []
 
 
 
@@ -2660,7 +2670,8 @@ def apply_api_updates(
 
 
 
-    removed_ids = [r["event_id"] for r in rows if r.get("dart_source") == "공공데이터 API 단독"]
+
+    removed_ids = [r["event_id"] for r in existing_api_only_rows]
     rows = [r for r in rows if r.get("dart_source") != "공공데이터 API 단독"]
 
     for row in rows:

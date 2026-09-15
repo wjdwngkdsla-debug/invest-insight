@@ -127,6 +127,64 @@ class DartApiFallbackTest(unittest.TestCase):
         self.assertEqual(len(logs), 1)
         self.assertEqual(removed_ids, [])
 
+    def test_empty_api_response_preserves_existing_api_only_rows(self) -> None:
+        existing = [{
+            "event_id": "424870-구주보호예수-3M-2025-08-19",
+            "code": "424870",
+            "name": "이뮨온시아",
+            "category": "구주·보호예수",
+            "dart_source": "공공데이터 API 단독",
+            "api_return_date": "2025-08-19",
+            "api_return_qty": 274_215,
+        }]
+
+        with patch("scripts.build.fetch_public_lockup_returns", return_value=[]):
+            rows, reviews, logs, removed_ids = apply_api_updates(
+                {"name": "이뮨온시아"},
+                "424870",
+                {"market": "코스닥", "close_price": 2_700},
+                "2025-05-19",
+                91_402_269,
+                existing,
+            )
+
+        self.assertEqual(rows, existing)
+        self.assertEqual(reviews, [])
+        self.assertEqual(logs, [])
+        self.assertEqual(removed_ids, [])
+
+    def test_mismatched_api_response_preserves_existing_api_only_rows(self) -> None:
+        existing = [{
+            "event_id": "464580-구주보호예수-1M-2024-12-13",
+            "code": "464580",
+            "name": "닷밀",
+            "category": "구주·보호예수",
+            "dart_source": "공공데이터 API 단독",
+            "api_return_date": "2024-12-13",
+            "api_return_qty": 2_154_196,
+        }]
+        response = [{
+            "stckIssuCmpyNm": "닷밀",
+            "itmsShrtnCd": "999999",
+            "rsrnDt": "20241213",
+            "rsrnStckCnt": "2154196",
+        }]
+
+        with patch("scripts.build.fetch_public_lockup_returns", return_value=response):
+            rows, reviews, logs, removed_ids = apply_api_updates(
+                {"name": "닷밀"},
+                "464580",
+                {"market": "코스닥", "close_price": 1_500},
+                "2024-11-13",
+                18_406_089,
+                existing,
+            )
+
+        self.assertEqual(rows, existing)
+        self.assertEqual(reviews, [])
+        self.assertEqual(logs, [])
+        self.assertEqual(removed_ids, [])
+
 
 if __name__ == "__main__":
     unittest.main()
