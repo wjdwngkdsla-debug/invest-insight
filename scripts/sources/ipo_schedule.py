@@ -262,6 +262,9 @@ def _parse_underwriter(plain: str) -> str:
 def _parse_market(plain: str) -> str:
     kosdaq = len(re.findall(r"코스닥\s*시장\s*상장", plain))
     kospi = len(re.findall(r"유가증권\s*시장\s*상장", plain))
+    konex = len(re.findall(r"코넥스\s*시장\s*(?:에\s*)?(?:신규\s*)?상장", plain))
+    if konex and konex >= max(kosdaq, kospi):
+        return "코넥스"
     if kosdaq or kospi:
         return "코스닥" if kosdaq >= kospi else "코스피"
     return ""
@@ -411,6 +414,8 @@ def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
 
     강한 IPO 신호: 상장 의도 문구 / 상장 시장 확정 / 수요예측 실시(증자는 수요예측 안 함).
     """
+    if item.get("market") == "코넥스":
+        return False
     if item.get("issuer_market") == "코넥스":
         # 기존 상장 이력/상장규정 인용만 있는 일반 증자는 IPO로 노출하지 않는다.
         return bool(item.get("transfer_market") in {"코스닥", "코스피"} and _core_fields_filled(item))
@@ -1490,6 +1495,9 @@ def refresh_ipo_schedule(
         # 검토대기 판정: 사용자가 승인한 종목은 항상 노출, 아니면 IPO 신호 부족 시 비공개 대기
         if item.get("management_hidden"):
             item["review_pending"] = True
+        elif item.get("market") == "코넥스":
+            item["review_pending"] = True
+            item["review_reason"] = "코넥스 신규상장 제외"
         elif item.get("manual_entry") or item.get("review_approved"):
             item["review_pending"] = False
         else:

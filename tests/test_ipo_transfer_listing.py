@@ -8,6 +8,22 @@ from scripts.sources import ipo_schedule as ipo
 
 
 class TransferListingTests(unittest.TestCase):
+    def test_konex_new_listing_is_excluded_despite_ipo_signals(self):
+        parsed = ipo.parse_offering_doc("당사는 금번 코넥스시장 신규상장을 추진합니다.")
+        parsed.update(is_listing_ipo=True, band_low=10000, forecast_start="2026-09-16",
+                      sub_start="2026-10-02", underwriter="하나증권")
+        self.assertEqual(parsed["market"], "코넥스")
+        self.assertFalse(ipo._is_confirmed_ipo(parsed))
+
+    def test_transfer_overrides_historical_konex_listing_mentions(self):
+        for target in ["코스닥", "코스피"]:
+            doc = "과거 코넥스시장 상장. " * 5 + f"금번 {target}시장 이전상장을 추진합니다."
+            parsed = ipo.parse_offering_doc(doc)
+            parsed.update(issuer_market="코넥스", band_low=19500, forecast_start="2026-09-16",
+                          sub_start="2026-10-02", underwriter="하나증권")
+            self.assertEqual(parsed["market"], target)
+            self.assertTrue(ipo._is_confirmed_ipo(parsed))
+
     def test_discovery_includes_konex_but_not_listed_capital_raises(self):
         filings = [{"corp_code": cls, "corp_cls": cls} for cls in ["E", "N", "Y", "K"]]
         self.assertEqual(set(ipo.group_upcoming_ipos(filings)), {"E", "N"})
