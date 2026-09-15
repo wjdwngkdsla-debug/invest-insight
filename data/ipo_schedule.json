@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14 23:19",
+  "updated": "2026-09-15 09:11",
   "items": [
     {
       "corp_code": "00104069",
@@ -179,9 +179,9 @@
       "corp_code": "01722066",
       "name": "빅웨이브로보틱스",
       "first_filing_date": "20260504",
-      "last_rcept_no": "20260903000077",
-      "band_low": 15000,
-      "band_high": 18000,
+      "last_rcept_no": "20260914000385",
+      "band_low": 8458,
+      "band_high": 10149,
       "forecast_start": "2026-09-07",
       "forecast_end": "2026-09-11",
       "sub_start": "2026-09-15",
@@ -198,8 +198,38 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "schedule_hidden": false,
-      "commit_apply_missing": 4,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "final_price": 18000,
+      "transfer_market": "코스닥",
+      "demand_ratio": 1109.37,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 14817000,
+          "pct": 1.28
+        },
+        {
+          "period": "3개월",
+          "qty": 29859000,
+          "pct": 2.58
+        },
+        {
+          "period": "1개월",
+          "qty": 30686000,
+          "pct": 2.65
+        },
+        {
+          "period": "15일",
+          "qty": 134410000,
+          "pct": 11.62
+        },
+        {
+          "period": "미확약",
+          "qty": 946952000,
+          "pct": 81.86
+        }
+      ],
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01564514",
@@ -225,7 +255,8 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "00960623",
@@ -284,7 +315,7 @@
       "corp_code": "01028933",
       "name": "멜콘",
       "first_filing_date": "20260821",
-      "last_rcept_no": "20260909000381",
+      "last_rcept_no": "20260914000034",
       "offering_attempt": 1,
       "band_low": 10700,
       "band_high": 12300,
@@ -302,6 +333,35 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥"
+    },
+    {
+      "corp_code": "01158632",
+      "name": "진코스텍",
+      "first_filing_date": "20260827",
+      "last_rcept_no": "20260911000530",
+      "offering_attempt": 1,
+      "issuer_market": "코넥스",
+      "stock_code": "250030",
+      "band_low": 19500,
+      "band_high": 23500,
+      "forecast_start": "2026-09-16",
+      "forecast_end": "2026-09-22",
+      "sub_start": "2026-10-02",
+      "sub_end": "2026-10-06",
+      "payment_date": "2026-10-08",
+      "underwriter": "하나증권",
+      "market": "코스닥",
+      "transfer_market": "코스닥",
+      "offer_shares": 852000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
@@ -330,7 +390,8 @@
       "underwriter": "하나증권",
       "payment_date": "2026-10-12",
       "market": "코스닥",
-      "is_listing_ipo": true
+      "is_listing_ipo": true,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01754737",
@@ -345,7 +406,7 @@
       "sub_start": "2026-10-07",
       "sub_end": "2026-10-08",
       "underwriter": "미래에셋증권·삼성증권",
-      "market": "코스닥",
+      "market": "코스피",
       "offer_shares": 2222000,
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
@@ -356,7 +417,8 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
-      "payment_date": "2026-09-23"
+      "payment_date": "2026-09-23",
+      "transfer_market": "코스피"
     },
     {
       "corp_code": "01956751",
@@ -408,7 +470,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "00534729",
@@ -460,7 +523,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01540903",
@@ -486,7 +550,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01543043",
@@ -512,7 +577,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01835829",
@@ -528,7 +594,7 @@
       "sub_end": "2026-11-03",
       "payment_date": "2026-11-02",
       "underwriter": "미래에셋증권",
-      "market": "코스닥",
+      "market": "코스피",
       "offer_shares": 1780000,
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
@@ -538,7 +604,8 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "schedule_hidden": false
+      "schedule_hidden": false,
+      "transfer_market": "코스피"
     },
     {
       "corp_code": "00683283",
@@ -614,32 +681,6 @@
       "withdrawn": false,
       "review_pending": false,
       "management_status": "자동"
-    },
-    {
-      "corp_code": "01158632",
-      "name": "진코스텍",
-      "first_filing_date": "20260827",
-      "last_rcept_no": "20260911000530",
-      "offering_attempt": 1,
-      "issuer_market": "코넥스",
-      "stock_code": "250030",
-      "band_low": 19500,
-      "band_high": 23500,
-      "forecast_start": "2026-09-16",
-      "forecast_end": "2026-09-22",
-      "sub_start": "2026-10-02",
-      "sub_end": "2026-10-06",
-      "payment_date": "2026-10-08",
-      "underwriter": "하나증권",
-      "market": "코스닥",
-      "transfer_market": "코스닥",
-      "offer_shares": 852000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "review_pending": false
     }
   ],
   "past_items": [
@@ -1049,7 +1090,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -1114,7 +1155,8 @@
       "provisional_fields": [
         "content_url"
       ],
-      "archived_at": "2026-08-19"
+      "archived_at": "2026-08-19",
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "00920731",
@@ -1249,7 +1291,7 @@
         {
           "period": "1개월",
           "qty": 10000,
-          "pct": 0
+          "pct": 0.0
         },
         {
           "period": "3개월",
@@ -1259,7 +1301,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -1298,7 +1340,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -1530,7 +1572,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -1596,7 +1638,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -4787,7 +4829,7 @@
         {
           "period": "3개월",
           "qty": 112506,
-          "pct": 3,
+          "pct": 3.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -5423,7 +5465,7 @@
         {
           "period": "1개월",
           "qty": 224958,
-          "pct": 15
+          "pct": 15.0
         },
         {
           "period": "3개월",
@@ -6261,35 +6303,35 @@
         {
           "period": "미확약",
           "qty": 1365000,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -6326,32 +6368,32 @@
         {
           "period": "미확약",
           "qty": 248635000,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -7250,7 +7292,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -7283,7 +7325,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -7854,7 +7896,7 @@
         {
           "period": "1개월",
           "qty": 82856000,
-          "pct": 5,
+          "pct": 5.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -8026,7 +8068,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -8063,7 +8105,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -8768,7 +8810,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -8784,7 +8826,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -8821,7 +8863,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -8840,7 +8882,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -9101,7 +9143,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -9205,7 +9247,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -9250,7 +9292,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -9274,7 +9316,8 @@
         }
       },
       "initial_shares": "8725535",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01803927",
@@ -9399,13 +9442,13 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -9450,14 +9493,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -9554,21 +9597,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -9591,21 +9634,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10007,13 +10050,13 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -10025,7 +10068,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -10345,7 +10388,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10380,7 +10423,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10765,21 +10808,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10802,21 +10845,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10850,7 +10893,8 @@
         }
       },
       "initial_shares": "15992070",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01658831",
@@ -10887,7 +10931,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -10904,7 +10948,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -10929,7 +10973,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -10945,7 +10989,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -11106,14 +11150,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11155,14 +11199,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11349,7 +11393,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11388,32 +11432,32 @@
         {
           "period": "미확약",
           "qty": 2554565004,
-          "pct": 100,
+          "pct": 100.0,
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         }
       ],
@@ -11425,7 +11469,8 @@
         }
       },
       "initial_shares": "35826000",
-      "offering_attempt": 2
+      "offering_attempt": 2,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01728167",
@@ -11452,7 +11497,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -11463,7 +11508,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -11503,7 +11548,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11515,14 +11560,14 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 44940,
-          "pct": 3
+          "pct": 3.0
         }
       ],
       "report_rcp": "20250123000268",
@@ -11692,21 +11737,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11729,21 +11774,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11777,7 +11822,8 @@
         }
       },
       "initial_shares": "13065612",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01590528",
@@ -11804,7 +11850,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_temporary",
           "visible": true
         },
@@ -11821,7 +11867,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_temporary",
           "visible": true
         }
@@ -11859,7 +11905,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -11880,7 +11926,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -11947,35 +11993,35 @@
         {
           "period": "미확약",
           "qty": 1020750,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12013,35 +12059,35 @@
         {
           "period": "미확약",
           "qty": 117361700,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12107,35 +12153,35 @@
         {
           "period": "미확약",
           "qty": 750000,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12173,35 +12219,35 @@
         {
           "period": "미확약",
           "qty": 637463600,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12385,7 +12431,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -12398,14 +12444,14 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12416,35 +12462,35 @@
         {
           "period": "미확약",
           "qty": 171746400,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 1400,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12505,7 +12551,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -12550,7 +12596,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -12634,21 +12680,21 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12686,7 +12732,7 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -12700,7 +12746,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12760,35 +12806,35 @@
         {
           "period": "미확약",
           "qty": 1552100,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -12826,35 +12872,35 @@
         {
           "period": "미확약",
           "qty": 10803000,
-          "pct": 100,
+          "pct": 100.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -13039,21 +13085,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13076,21 +13122,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13124,7 +13170,8 @@
         }
       },
       "initial_shares": "12416000",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01207901",
@@ -13191,21 +13238,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13228,21 +13275,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13314,14 +13361,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13334,7 +13381,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -13380,14 +13427,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13400,7 +13447,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -13467,21 +13514,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13534,21 +13581,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13682,19 +13729,19 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -13772,21 +13819,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13810,21 +13857,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13926,14 +13973,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -13963,14 +14010,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14167,14 +14214,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14219,14 +14266,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14240,7 +14287,7 @@
         {
           "period": "6개월",
           "qty": 61000,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -14369,13 +14416,13 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -14402,14 +14449,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14667,21 +14714,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14704,19 +14751,19 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -14905,7 +14952,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -14962,7 +15009,7 @@
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -15042,21 +15089,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -15102,21 +15149,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -15169,12 +15216,12 @@
         {
           "period": "미확약",
           "qty": 1115063935,
-          "pct": 99
+          "pct": 99.0
         },
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -15390,21 +15437,21 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -15451,21 +15498,21 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -15498,7 +15545,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -15601,7 +15648,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -16008,7 +16055,7 @@
         {
           "period": "15일",
           "qty": 100000,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16119,14 +16166,14 @@
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16166,21 +16213,21 @@
         {
           "period": "15일",
           "qty": 1000,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16305,7 +16352,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "visible": true
         },
         {
@@ -16531,21 +16578,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16591,21 +16638,21 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16683,7 +16730,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16729,7 +16776,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16956,7 +17003,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -16973,7 +17020,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -17009,7 +17056,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -17030,7 +17077,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -17102,14 +17149,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -17139,14 +17186,14 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -17381,7 +17428,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -17393,12 +17440,12 @@
         {
           "period": "3개월",
           "qty": 313883,
-          "pct": 31
+          "pct": 31.0
         },
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -17434,7 +17481,7 @@
         {
           "period": "15일",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         },
@@ -17455,7 +17502,7 @@
         {
           "period": "6개월",
           "qty": 0,
-          "pct": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
           "visible": true
         }
@@ -17887,118 +17934,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-08-04",
-      "name": "인제니아테라퓨틱스",
-      "type": "수기변경",
-      "field": "기관신청물량(1개월)",
-      "old": 0,
-      "new": 3750000
-    },
-    {
-      "date": "2026-08-04",
-      "name": "인제니아테라퓨틱스",
-      "type": "수기변경",
-      "field": "기관신청물량(3개월)",
-      "old": 0,
-      "new": 45000
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-03-17",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-03-30",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-03-17",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-03-30",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "브릴스",
-      "type": "정정공시",
-      "field": "수요예측 시작",
-      "old": "2026-08-14",
-      "new": "2026-08-31"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "브릴스",
-      "type": "정정공시",
-      "field": "수요예측 종료",
-      "old": "2026-08-21",
-      "new": "2026-09-04"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "브릴스",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-25",
-      "new": "2026-09-08"
-    },
-    {
-      "date": "2026-08-04",
-      "name": "브릴스",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-08-26",
-      "new": "2026-09-09"
-    },
     {
       "date": "2026-08-04",
       "name": "스탁키퍼",
@@ -21886,6 +21821,118 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "희망가액(하단)",
+      "old": "15000",
+      "new": "8458"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "빅웨이브로보틱스",
+      "type": "정정공시",
+      "field": "희망가액(상단)",
+      "old": "18000",
+      "new": "10149"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
     }
   ],
   "seed_pending": [
@@ -21910,37 +21957,37 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-14",
+      "excluded_at": "2026-09-15",
       "memo": "자동 제외(스팩)"
     }
   }

@@ -63,7 +63,7 @@
     "manual_ipo_price_locked": "N"
   },
   {
-    "market": "코스닥",
+    "market": "코스피",
     "name": "바로팜",
     "listing_date": "",
     "code": "",
@@ -85,7 +85,7 @@
     "name": "빅웨이브로보틱스",
     "listing_date": "",
     "code": "",
-    "manual_ipo_price": "",
+    "manual_ipo_price": "18000",
     "manual_ipo_price_locked": "N",
     "shares": ""
   },
@@ -99,7 +99,7 @@
     "shares": ""
   },
   {
-    "market": "코스닥",
+    "market": "코스피",
     "name": "엘리스그룹",
     "listing_date": "",
     "code": "",
@@ -148,6 +148,15 @@
     "name": "유캐스트",
     "listing_date": "",
     "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "진코스텍",
+    "listing_date": "",
+    "code": "250030",
     "shares": "",
     "manual_ipo_price": "",
     "manual_ipo_price_locked": "N"
