@@ -774,7 +774,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01760118",
@@ -784,7 +785,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01645448",
@@ -794,7 +796,8 @@
       "last_rcept_no": "",
       "withdrawn": false,
       "review_pending": false,
-      "management_status": "자동"
+      "management_status": "자동",
+      "schedule_hidden": false
     }
   ],
   "past_items": [
@@ -22071,37 +22074,37 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-15",
+      "excluded_at": "2026-09-16",
       "memo": "자동 제외(스팩)"
     }
   }
