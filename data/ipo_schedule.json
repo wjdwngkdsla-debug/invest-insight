@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -294,7 +294,8 @@
           "qty": 368568000,
           "pct": 99.73
         }
-      ]
+      ],
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "00960623",
@@ -348,7 +349,8 @@
           "qty": 1875278000,
           "pct": 95.95
         }
-      ]
+      ],
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01801026",
@@ -607,7 +609,9 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01705573",
@@ -736,7 +740,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -747,7 +751,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -758,9 +762,39 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
+    },
+    {
+      "corp_code": "01936340",
+      "name": "데이터젠",
+      "management_name": "데이터젠",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "01760118",
+      "name": "스탁키퍼",
+      "management_name": "스탁키퍼",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "01645448",
+      "name": "열매컴퍼니",
+      "management_name": "열매컴퍼니",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
     }
   ],
   "past_items": [
@@ -18017,30 +18051,6 @@
     {
       "date": "2026-08-05",
       "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-03-17",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-03-30",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
       "type": "수동편입",
       "field": "상태",
       "old": "미등록",
@@ -22013,6 +22023,30 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
     }
   ],
   "seed_pending": [
