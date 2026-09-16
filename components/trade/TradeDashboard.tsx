@@ -64,12 +64,6 @@ function TradeContent({ data, product, companies }: { data: TradeDataset; produc
         <button className="trade-download" aria-label="CSV 다운로드" title="CSV 다운로드" onClick={exportCsv}><ArrowDownToLine size={16} /></button>
       </div>
     </div>
-    <div className="trade-kpis">
-      <div><span>{startMonth === month ? "월 수출금액" : "기간 수출금액"}</span><strong>{summary.now === null ? "자료 없음" : usdText(summary.now)}</strong><p>{periodLabel} · {countryName}</p></div>
-      <div><span>전년 동기 대비</span><strong className={signClass(summary.yoy)}>{signed(summary.yoy)}</strong><p>{startMonth === month ? "전월 대비" : "직전 동일 길이 기간 대비"} <b className={signClass(summary.mom)}>{signed(summary.mom)}</b></p></div>
-      <div><span>종료월 기준 최근 3개월</span><strong>{summary.recent === null ? "자료 없음" : usdText(summary.recent)}</strong><p>전년 동기 대비 <b className={signClass(summary.recentGrowth)}>{signed(summary.recentGrowth)}</b></p></div>
-    </div>
-    <div className="trade-weight-summary"><div><span>기간 수출 순중량</span><strong>{kgText(summary.kg)}</strong></div><div><span>kg당 수출액</span><strong>{summary.usdPerKg === null ? "자료 없음" : `${Math.round(summary.usdPerKg).toLocaleString("ko-KR")} 달러/kg`}</strong><p>수출금액 ÷ 순중량 · 제품 판매단가와 다릅니다.</p></div></div>
     <section className="trade-geography" aria-label="국가별 수출 지도">
       <div className="globe-filterbar"><select aria-label="대륙 필터" value={region} onChange={e => { setRegion(e.target.value); setCountry("all"); }}><option value="all">모든 대륙</option>{Object.entries(tradeRegions).filter(([key]) => mapCountries.some(c => c.region === key)).map(([key,name]) => <option key={key} value={key}>{name}</option>)}</select><span>{region === "all" ? mapCountries.length : mapCountries.filter(c => c.region === region).length}개 국가·지역</span>{country !== "all" && <button onClick={() => setCountry("all")}>전체 흐름</button>}</div>
       <TradeMap countries={mapCountries} selected={country} onSelect={onSelect} region={region} />
@@ -87,6 +81,15 @@ function TradeContent({ data, product, companies }: { data: TradeDataset; produc
           </tr>)}</tbody></table>{!tableCountries.length && <p className="trade-no-results">검색 결과가 없습니다.</p>}</div>
       </section>
     </div>
+    <section className="trade-summary" aria-label="수출 요약">
+      <h2>수출 요약</h2>
+      <div className="trade-kpis">
+        <div><span>{startMonth === month ? "월 수출금액" : "기간 수출금액"}</span><strong>{summary.now === null ? "자료 없음" : usdText(summary.now)}</strong><p>{periodLabel} · {countryName}</p></div>
+        <div><span>전년 동기 대비</span><strong className={signClass(summary.yoy)}>{signed(summary.yoy)}</strong><p>{startMonth === month ? "전월 대비" : "직전 동일 길이 기간 대비"} <b className={signClass(summary.mom)}>{signed(summary.mom)}</b></p></div>
+        <div><span>종료월 기준 최근 3개월</span><strong>{summary.recent === null ? "자료 없음" : usdText(summary.recent)}</strong><p>전년 동기 대비 <b className={signClass(summary.recentGrowth)}>{signed(summary.recentGrowth)}</b></p></div>
+      </div>
+      <div className="trade-weight-summary"><div><span>기간 수출 순중량</span><strong>{kgText(summary.kg)}</strong></div><div><span>kg당 수출액</span><strong>{summary.usdPerKg === null ? "자료 없음" : `${Math.round(summary.usdPerKg).toLocaleString("ko-KR")} 달러/kg`}</strong><p>수출금액 ÷ 순중량 · 제품 판매단가와 다릅니다.</p></div></div>
+    </section>
     <div className="trade-related"><span>관련 기업</span>{product.companies.map(c => c.id ? <Link key={c.name} href={`/value-chain?company=${c.id}`}>{c.name}<ArrowUpRight size={12} /></Link> : <span key={c.name} className="trade-related-name">{c.name}</span>)}</div>
     <details className="trade-method"><summary>출처·집계 기준</summary>
       <p>관세청 월별 수출신고 미화금액(FOB). 시작월부터 종료월까지 합산하며, 전년 동기는 같은 월 범위를 1년 전과 비교합니다. 비중은 선택 기간 전체 품목 수출액 기준입니다. 모든 대상국 합계와 공식 총계가 일치한 월만 사용합니다. 기간 중 일부 월에 국가 행이 없으면 확인된 수출 신고액만 합산하며, 기간 전체에 응답이 없는 국가나 비교 기간이 누락된 경우는 자료 없음으로 처리합니다. 통계는 사후 정정될 수 있습니다.</p>

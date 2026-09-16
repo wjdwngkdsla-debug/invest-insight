@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ValueChainDemo } from "@/components/ValueChainDemo";
+import { TradeDashboard } from "@/components/trade/TradeDashboard";
+import { loadTradeCompanies, loadTradeDatasets } from "@/lib/trade-server";
+import "@/components/theme-map/theme-map.css";
 
 export const metadata: Metadata = {
   title: "시장 테마맵 | 테마주·관련주 지도 - Vericap",
@@ -31,8 +34,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ValueChainPage({ searchParams }: { searchParams: Promise<{ company?: string }> }) {
-  const { company } = await searchParams;
+export default async function ValueChainPage({ searchParams }: { searchParams: Promise<{ company?: string; view?: string }> }) {
+  const { company, view } = await searchParams;
+  const [datasets, companies] = await Promise.all([loadTradeDatasets(), loadTradeCompanies()]);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -59,12 +63,12 @@ export default async function ValueChainPage({ searchParams }: { searchParams: P
   };
 
   return (
-    <main className="w-full px-0 py-3 sm:px-5 sm:py-6">
+    <main className="theme-workspace">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <ValueChainDemo key={company ?? "default"} initialCompanyId={company} />
+      <ValueChainDemo key={`${company ?? "default"}-${view ?? "map"}`} initialCompanyId={company} initialView={view === "trade" ? "trade" : "map"} tradeContent={<TradeDashboard datasets={datasets} companies={companies} />} />
     </main>
   );
 }

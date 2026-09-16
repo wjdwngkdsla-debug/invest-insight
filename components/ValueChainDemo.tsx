@@ -2,6 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent } from "react";
+import type { ReactNode } from "react";
+import { ArrowLeft, Globe2, Search, Layers, ChartNoAxesCombined } from "lucide-react";
+import ThemeCarousel from "@/components/theme-map/ThemeCarousel";
+import { CompanyIdentity, CompanyLogo } from "@/components/theme-map/CompanyLogo";
 import { Button, FluentProvider, Input, webDarkTheme } from "@fluentui/react-components";
 import {
   getCompanyFinancial,
@@ -19,7 +23,7 @@ import {
 
 type Metric = "search" | "volume" | "return";
 type Period = "day" | "week" | "month" | "quarter" | "half";
-type ViewMode = "map" | "returns";
+type ViewMode = "map" | "returns" | "trade";
 type OrbitCategory = "산업" | "섹터" | "관련주" | "이슈";
 
 interface Company {
@@ -238,19 +242,6 @@ function averageMetricValues(points?: { value: number }[]) {
 
 function sumMetricValues(points?: { value: number }[]) {
   return (points ?? []).map((point) => point.value).filter(Number.isFinite).reduce((sum, value) => sum + value, 0);
-}
-
-function circleFontSize(name: string, radius: number) {
-  if (name.length <= 4) return Math.min(15, Math.max(12, radius * 0.42));
-  if (name.length <= 6) return Math.min(13, Math.max(10, radius * 0.34));
-  return Math.min(11, Math.max(9, radius * 0.28));
-}
-
-function circleNameLines(name: string) {
-  if (name.length <= 5) return [name];
-  if (/^[A-Za-z0-9]+$/.test(name)) return [name];
-  if (name.length <= 8) return [name.slice(0, 4), name.slice(4)];
-  return [name.slice(0, 4), name.slice(4, 8), name.slice(8)];
 }
 
 function formatTradingValue(value: number) {
@@ -504,7 +495,6 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
           search,
           tradingValue,
           returnPct,
-          radius: 24 + Math.min(Math.max(returnPct, 0), 220) * 0.11,
           offsetX: ((index % 3) - 1) * 18,
           offsetY: ((Math.floor(index / 3) % 3) - 1) * 16,
           color: CHART_COLORS[index % CHART_COLORS.length],
@@ -545,7 +535,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
           const dx = second.x - first.x || 0.01;
           const dy = second.y - first.y || 0.01;
           const distance = Math.hypot(dx, dy);
-          const minDistance = Math.min(first.radius + second.radius + 20, 112);
+          const minDistance = 94;
           if (distance < minDistance) {
             const push = (minDistance - distance) / 2;
             const nx = dx / distance;
@@ -576,12 +566,13 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
         <div>
           <h3 className="text-lg font-black tracking-tight text-white sm:text-xl">테마 종목 분포</h3>
           <p className="mt-1 break-keep text-[11px] font-bold text-white/35 sm:text-xs">
-            {periodText} · x축 거래대금 합산 · y축 검색지수 평균 · 원 크기 수익률
+            {periodText} · x축 거래대금 합산 · y축 검색지수 평균
           </p>
         </div>
         <span className="w-fit rounded-full bg-blue-500/15 px-3 py-1 text-[11px] font-black text-blue-300 sm:text-xs">수익률 1위 {leader?.company.name}</span>
       </div>
-      <div className="relative overflow-hidden rounded-[24px] bg-black/35">
+      <div className="overflow-x-auto rounded-[24px] bg-black/35">
+       <div className="relative min-w-[640px]">
         <svg viewBox={`0 0 ${width} ${height}`} className="h-[300px] w-full sm:h-[420px]" preserveAspectRatio="none">
           <defs>
             <linearGradient id="scatter-grid" x1="0" y1="0" x2="1" y2="1">
@@ -614,48 +605,30 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
           <text x={padding.left + plotWidth} y={padding.top + plotHeight + 34} textAnchor="end" fill="rgba(255,255,255,0.28)" fontSize="11" fontWeight="800">
             오른쪽일수록 거래대금 합산 큼
           </text>
-          {placedPoints.map((point) => {
-            const x = point.x;
-            const y = point.y;
-            const active = hoveredId === point.company.id;
-            const nameLines = circleNameLines(point.company.name);
-            const fontSize = circleFontSize(point.company.name, point.radius);
-            return (
-              <g
-                key={point.company.id}
-                onMouseEnter={() => setHoveredId(point.company.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                className="cursor-pointer"
-              >
-                <circle cx={x} cy={y} r={point.radius + 7} fill={point.color} opacity={active ? 0.24 : 0.1} />
-                <circle cx={x} cy={y} r={point.radius} fill={point.color} opacity={active ? 0.95 : 0.74} stroke="rgba(255,255,255,0.45)" strokeWidth={active ? 2 : 1} />
-                <text
-                  x={x}
-                  y={y}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fill="white"
-                  fontSize={fontSize}
-                  fontWeight="900"
-                  style={{ paintOrder: "stroke", stroke: "rgba(0,0,0,0.38)", strokeWidth: 3 }}
-                >
-                  {nameLines.map((line, lineIndex) => (
-                    <tspan key={line} x={x} dy={lineIndex === 0 ? `${-(nameLines.length - 1) * fontSize * 0.34}px` : `${fontSize * 1.05}px`}>
-                      {line}
-                    </tspan>
-                  ))}
-                </text>
-              </g>
-            );
-          })}
         </svg>
+        {placedPoints.map(point => <button
+          key={point.company.id}
+          type="button"
+          className="theme-scatter-marker"
+          aria-label={`${point.company.name} 수익률 ${fmtPct(point.returnPct)}`}
+          style={{ left: `${point.x / width * 100}%`, top: `${point.y / height * 100}%` }}
+          onMouseEnter={() => setHoveredId(point.company.id)}
+          onMouseLeave={() => setHoveredId(null)}
+          onFocus={() => setHoveredId(point.company.id)}
+          onBlur={() => setHoveredId(null)}
+          onClick={() => setHoveredId(point.company.id)}
+          onKeyDown={event => { if (event.key === "Escape") setHoveredId(null); }}
+        >
+          <CompanyLogo id={point.company.id} name={point.company.name} size={42} />
+          <span>{point.company.name}</span>
+        </button>)}
         {hovered ? (
           <div
             className="pointer-events-none absolute z-20 w-[210px] rounded-2xl border border-white/10 bg-[#11131a]/95 p-3 text-white shadow-2xl backdrop-blur-xl sm:w-[240px] sm:p-4"
             style={tooltipPlacement}
           >
             <div className="flex items-start justify-between gap-3">
-              <p className="text-sm font-black text-blue-300">{hovered.company.name}</p>
+              <p className="text-sm font-black text-blue-300"><CompanyIdentity id={hovered.company.id} name={hovered.company.name} size={28} /></p>
               <span className="shrink-0 rounded-full bg-white/8 px-2 py-0.5 text-[10px] font-black text-white/55">{periodText}</span>
             </div>
             <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] font-bold text-white/45">
@@ -673,12 +646,13 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
             </p>
           </div>
         ) : null}
+       </div>
       </div>
     </section>
   );
 }
 
-function OrbitStage({
+export function LegacyOrbitStage({
   center,
   items,
   onOpenPanel,
@@ -881,7 +855,7 @@ function StockReturnTable({
                   <td className="w-14 px-4 py-3 text-center font-black text-white/38">{index + 1}</td>
                   <td className="px-4 py-3">
                     <button type="button" onClick={() => onSelectCompany(row.company.id)} className="font-black text-blue-300 hover:text-blue-100">
-                      {row.company.name}
+                      <CompanyIdentity id={row.company.id} name={row.company.name} />
                     </button>
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-right font-black tabular-nums text-white">
@@ -893,7 +867,7 @@ function StockReturnTable({
                   <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{fmtWon(row.company.marketCap)}</td>
                   <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{formatTradingValue(row.tradingValue)}</td>
                   <td className="px-4 py-3">
-                    <button type="button" onClick={() => onSelectIssue(row.issue.id)} className="rounded-full bg-blue-500/14 px-3 py-1 text-xs font-black text-blue-200 hover:bg-blue-500/24">
+                    <button type="button" onClick={() => onSelectIssue(row.issue.id)} className="whitespace-nowrap rounded-full bg-blue-500/14 px-3 py-1 text-xs font-black text-blue-200 hover:bg-blue-500/24">
                       {row.issue.title}
                     </button>
                   </td>
@@ -1049,8 +1023,8 @@ function ComparePanel({
                 <tr key={`rel-${company.id}`} className="border-t border-white/5 align-top hover:bg-white/[0.03]">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <span className="whitespace-nowrap font-black text-blue-300">{company.name}</span>
-                      {company.critical ? <span className="rounded-full bg-amber-400/15 px-2 py-0.5 text-[9px] font-black text-amber-300">{company.critical}</span> : null}
+                      <span className="whitespace-nowrap font-black text-blue-300"><CompanyIdentity id={company.id} name={company.name} /></span>
+                      {company.critical ? <span className="shrink-0 whitespace-nowrap rounded-full bg-amber-400/15 px-2 py-0.5 text-[9px] font-black text-amber-300">{company.critical}</span> : null}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-xs font-semibold leading-5 text-white/45">{company.detail}</td>
@@ -1084,7 +1058,7 @@ function ComparePanel({
                   value ? fmtWon(value) : <span className="text-amber-300/70">{needsReview ?? "확인중"}</span>;
                 return (
                   <tr key={`fin-${company.id}`} className="border-t border-white/5 transition-colors hover:bg-white/[0.03]" style={{ backgroundColor: index === 0 ? "rgba(37,99,235,0.1)" : undefined }}>
-                    <td className="px-4 py-3 font-black text-blue-300">{company.name}</td>
+                    <td className="px-4 py-3 font-black text-blue-300"><CompanyIdentity id={company.id} name={company.name} /></td>
                     <td className="px-4 py-3 text-right font-black tabular-nums text-white">{score}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.marketCap)}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.sales)}</td>
@@ -1107,11 +1081,11 @@ function ComparePanel({
   );
 }
 
-export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string } = {}) {
-  const [menuOpen, setMenuOpen] = useState(true);
+export function ValueChainDemo({ initialCompanyId, initialView = "map", tradeContent }: { initialCompanyId?: string; initialView?: ViewMode; tradeContent?: ReactNode } = {}) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<ViewMode>("map");
+  const [viewMode, setViewMode] = useState<ViewMode>(initialView);
   const [detailPanelWidth, setDetailPanelWidth] = useState(DEFAULT_DETAIL_PANEL_WIDTH);
   const [focusCompanyId, setFocusCompanyId] = useState<string | null>(initialCompanyId && VALUE_CHAIN_COMPANIES[initialCompanyId] ? initialCompanyId : null);
   const [period, setPeriod] = useState<Period>("week");
@@ -1126,6 +1100,7 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
     setFocusCompanyId(nextState.focusCompanyId);
     setPanelOpen(false);
     setSearchOpen(false);
+    if (window.matchMedia("(max-width: 900px)").matches) setMenuOpen(false);
   };
   const goBack = () => {
     setNavHistory((history) => {
@@ -1251,16 +1226,14 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
 
   return (
     <FluentProvider theme={webDarkTheme} className="contents">
-    <div className="relative h-[calc(100vh-72px)] min-h-[720px] overflow-hidden rounded-none border border-white/10 bg-[#07080b] shadow-[0_40px_120px_rgba(0,0,0,0.8)] sm:h-[calc(100vh-120px)] sm:min-h-[860px] sm:rounded-[32px]">
+    <div className="theme-shell" data-view={viewMode} data-menu={menuOpen && viewMode === "map"}>
       <style>{`
         @keyframes vc-pulse {
           0% { opacity: 1; transform: scale(1); }
           100% { opacity: 0; transform: scale(1.45); }
         }
       `}</style>
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.024)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(37,99,235,0.16),transparent_38%),radial-gradient(circle_at_14%_22%,rgba(139,92,246,0.1),transparent_28%)]" />
-      <header className="absolute left-3 right-3 top-3 z-[75] flex items-start justify-between gap-3 sm:left-8 sm:right-8 sm:top-6 sm:items-center">
+      <header className="theme-toolbar absolute left-3 right-3 top-3 z-[75] flex items-start justify-between gap-3 sm:left-8 sm:right-8 sm:top-6 sm:items-center">
         <div className="flex max-w-[calc(100vw-24px)] gap-2 overflow-x-auto pb-1 sm:max-w-none sm:items-center sm:overflow-visible sm:pb-0">
           <Button
             type="button"
@@ -1271,7 +1244,7 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
             className="!h-9 !min-w-9 !shrink-0 !rounded-full !border !border-white/10 !bg-white/10 !text-base !font-black !text-white backdrop-blur-lg hover:!bg-white/15 disabled:!cursor-not-allowed disabled:!opacity-35 sm:!h-10 sm:!min-w-10 sm:!text-lg"
             aria-label="이전 탐색으로 돌아가기"
           >
-            &lt;
+            <ArrowLeft size={17} />
           </Button>
           <Button
             type="button"
@@ -1280,13 +1253,14 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
             onClick={() => {
               setViewMode("map");
               setPeriod("week");
-              setMenuOpen((value) => !value);
+              setMenuOpen(viewMode === "map" ? !menuOpen : true);
+              setPanelOpen(false);
+              setSearchOpen(false);
             }}
-            className={`!h-9 !shrink-0 !rounded-full !border !px-4 !text-xs !font-black backdrop-blur-lg sm:!h-10 sm:!px-5 sm:!text-sm ${
-              menuOpen && viewMode === "map" ? "!border-blue-400/35 !bg-blue-600 !text-white" : "!border-white/10 !bg-white/10 !text-white hover:!bg-white/15"
-            }`}
+            className={`theme-view-tab ${viewMode === "map" ? "is-active" : ""}`}
+            aria-pressed={viewMode === "map"}
           >
-            {menuOpen ? "테마 닫기" : "테마 선택"}
+            <Layers size={15} />테마 선택
           </Button>
           <Button
             type="button"
@@ -1298,19 +1272,19 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
               setMenuOpen(false);
               setSearchOpen(false);
             }}
-            className={`!h-9 !shrink-0 !rounded-full !border !px-4 !text-xs !font-black backdrop-blur-lg sm:!h-10 sm:!px-5 sm:!text-sm ${
-              viewMode === "returns" ? "!border-blue-400/35 !bg-blue-600 !text-white" : "!border-white/10 !bg-white/10 !text-white hover:!bg-white/15"
-            }`}
+            className={`theme-view-tab ${viewMode === "returns" ? "is-active" : ""}`}
+            aria-pressed={viewMode === "returns"}
           >
-            종목 상승률
+            <ChartNoAxesCombined size={15} />종목 상승률
           </Button>
+          <Button appearance="subtle" className={`theme-view-tab ${viewMode === "trade" ? "is-active" : ""}`} aria-pressed={viewMode === "trade"} onClick={() => { setViewMode("trade"); setPanelOpen(false); setSearchOpen(false); setMenuOpen(false); }}><Globe2 size={15} />수출 동향</Button>
         </div>
         <div className={`text-right transition-opacity duration-200 ${panelOpen ? "pointer-events-none opacity-0" : "opacity-100"}`}>
           <p className="text-[13px] font-black lowercase tracking-[0.18em] text-white/[0.28]">vericap</p>
         </div>
       </header>
-      {menuOpen ? (
-        <aside className="absolute bottom-4 left-3 right-3 z-[70] flex max-h-[46vh] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.08] p-4 text-white shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl sm:bottom-8 sm:left-8 sm:right-auto sm:top-20 sm:max-h-none sm:w-[280px] sm:rounded-[28px] sm:p-5">
+      {menuOpen && viewMode === "map" ? (
+        <aside className="theme-sidebar absolute bottom-4 left-3 right-3 z-[70] flex max-h-[46vh] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.08] p-4 text-white shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl sm:bottom-8 sm:left-8 sm:right-auto sm:top-20 sm:max-h-none sm:w-[280px] sm:rounded-[28px] sm:p-5">
           <div className="mb-4">
             <p className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">시장 이슈</p>
             <div className="flex items-end justify-between gap-3">
@@ -1344,7 +1318,7 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
             }`}
           >
             <span>검색</span>
-            <span className="text-[11px] font-black text-white/35">{searchOpen ? "닫기" : "ㄱㄴㄷ 목록"}</span>
+            <Search size={15} />
           </button>
           <div className="flex-1 space-y-1.5 overflow-auto pr-0.5">
             {visibleIssues.map((issue, index) => {
@@ -1432,7 +1406,7 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
                   className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left transition hover:bg-white/[0.08]"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="truncate text-sm font-black text-white">{item.title}</span>
+                    <span className="min-w-0 text-sm font-black text-white">{item.type === "company" ? <CompanyIdentity id={item.id} name={item.title} /> : item.title}</span>
                     <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-black ${style.badge}`}>{item.category}</span>
                   </div>
                   <p className="mt-1 truncate text-[10px] font-bold text-white/35">{item.countText}</p>
@@ -1444,13 +1418,13 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
         </aside>
       ) : null}
       <main
-        className="absolute inset-0 z-10 transition-all duration-500"
+        className="theme-main absolute inset-0 z-10 transition-all duration-500"
         style={{
           left: 0,
           right: panelOpen ? `min(${detailPanelWidth}px, 100vw)` : 0,
         }}
       >
-        {viewMode === "returns" ? (
+        {viewMode === "trade" ? <div className="theme-trade-content">{tradeContent}</div> : viewMode === "returns" ? (
           <StockReturnTable
             period={period}
             setPeriod={setPeriod}
@@ -1464,10 +1438,14 @@ export function ValueChainDemo({ initialCompanyId }: { initialCompanyId?: string
             }}
           />
         ) : (
-          <OrbitStage
+          <ThemeCarousel
+            key={focusCompanyId ?? selectedId}
             center={center}
+            companyId={focusCompanyId}
             items={orbitItems}
             onOpenPanel={() => {
+              setMenuOpen(false);
+              setSearchOpen(false);
               setPanelOpen(true);
             }}
             onOpenItem={(item) => {

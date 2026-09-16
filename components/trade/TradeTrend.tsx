@@ -3,10 +3,11 @@
 import { useMemo, useState } from "react";
 import { kgText, usdText, chartMonthChanges, chartChangeText, type summarizeTrade } from "@/lib/trade";
 import { overlayMetricNames, overlayPoints, type CompanyHistory, type OverlayMetric } from "@/lib/trade-overlay";
+import { percentageAxis, percentageLine, percentageY } from "@/lib/trade-chart";
 
 type Metric = "value" | "kg" | "usdPerKg";
 type Point = ReturnType<typeof summarizeTrade>["chart"][number];
-const colors = ["#208b80", "#bf6a31"];
+const colors = ["var(--trade-series-a, #208b80)", "var(--trade-series-b, #bf6a31)"];
 export default function TradeTrend({ chart: history, countryName, companies, start, end }: {
   chart: Point[]; countryName: string; companies: CompanyHistory[]; start: string; end: string;
 }) {
@@ -18,7 +19,9 @@ export default function TradeTrend({ chart: history, countryName, companies, sta
   const [showChanges, setShowChanges] = useState(true);
   const chart = history.slice(-range);
   const changes = useMemo(() => chartMonthChanges(history, metric), [history, metric]);
-  const months = useMemo(() => chart.map(p => p.month), [chart]);
+  const changeValues = chart.map(p => changes.get(p.month) ?? null);
+  const changeAxis = percentageAxis(changeValues);
+  const months = chart.map(p => p.month);
   const peak = Math.max(1, ...chart.map(p => p[metric] ?? 0));
   const divisor = metric === "value" ? peak >= 1e8 ? 1e8 : peak >= 1e4 ? 1e4 : 1 : metric === "kg" && peak >= 1e4 ? 1e4 : 1;
   const unit = metric === "value" ? `${divisor === 1e8 ? "억 " : divisor === 1e4 ? "만 " : ""}달러` : metric === "kg" ? `${divisor === 1e4 ? "만 " : ""}kg` : "달러/kg";
@@ -52,17 +55,22 @@ export default function TradeTrend({ chart: history, countryName, companies, sta
       <label className="trend-change-toggle"><input type="checkbox" checked={showChanges} onChange={e => setShowChanges(e.target.checked)} />전월 대비 (%)</label>
     </div>
     {overlay !== "none" && <div className="trend-company-options" role="group" aria-label="비교 기업">{companies.map((c, index) => <label key={c.id} style={{ color: colors[index % colors.length] }}><input type="checkbox" checked={companyIds.includes(c.id)} disabled={!available(c, overlay)} onChange={() => setCompanyIds(ids => ids.includes(c.id) ? ids.filter(id => id !== c.id) : [...ids, c.id])} />{c.name}{!available(c, overlay) && " (자료 없음)"}</label>)}</div>}
-    <div className="trend-axis-head"><span>{metricName} · {unit}</span>{overlay !== "none" && <span>{overlayMetricNames[overlay]} · {rightUnit}</span>}</div>
-    <div className="trade-overlay-chart" data-country={countryName}>
-      {[0, 1, 2, 3].map(n => <div key={n} className="trend-grid" style={{ bottom: `${n / 3 * 210 + 10}px` }}><span className="trend-left-tick">{Math.round(peak / divisor * n / 3).toLocaleString("ko-KR")}</span>{overlay !== "none" && <span className="trend-right-tick">{Math.round(rightMin + (rightMax - rightMin) * n / 3).toLocaleString("ko-KR")}</span>}</div>)}
+    <div className="trend-axis-head"><span>{metricName} · {unit}</span><div className="trend-axis-legends">{showChanges && <span className="trend-mom-legend"><i />전월 대비 · %</span>}{overlay !== "none" && <span>{overlayMetricNames[overlay]} · {rightUnit}</span>}</div></div>
+    <div className="trade-overlay-chart" data-country={countryName} data-extra-axis={showChanges && overlay !== "none"}>
+      {[0, 1, 2, 3].map(n => <div key={n} className="trend-grid" style={{ bottom: `${n / 3 * 210 + 10}px` }}><span className="trend-left-tick">{Math.round(peak / divisor * n / 3).toLocaleString("ko-KR")}</span>{overlay !== "none" && <span className={`trend-right-tick${showChanges ? " trend-company-tick" : ""}`}>{Math.round(rightMin + (rightMax - rightMin) * n / 3).toLocaleString("ko-KR")}</span>}</div>)}
+      {showChanges && changeAxis.ticks.map(tick => <span key={tick} className="trend-percent-tick" style={{ top: percentageY(tick, changeAxis) }}>{tick.toLocaleString("ko-KR", { maximumFractionDigits: 2 })}%</span>)}
       <svg viewBox="0 0 1000 230" preserveAspectRatio="none" aria-hidden="true">
-        {chart.map((p, i) => p[metric] !== null && <rect key={p.month} x={x(i) - 340 / chart.length} y={220 - p[metric]! / peak * 210} width={680 / chart.length} height={p[metric]! / peak * 210} fill={p.month >= start && p.month <= end ? "#637fe0" : "#b7c6ec"} />)}
+        {chart.map((p, i) => p[metric] !== null && <rect className="trend-bar" data-selected={p.month >= start && p.month <= end} key={p.month} x={x(i) - 340 / chart.length} y={220 - p[metric]! / peak * 210} width={680 / chart.length} height={p[metric]! / peak * 210} fill={p.month >= start && p.month <= end ? "#637fe0" : "#b7c6ec"} />)}
         {series.map(s => <g key={s.company.id} data-overlay-series={s.company.id}><path d={path(s.points)} stroke={s.color} strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke" />{s.points.map((p, i) => p.value !== null && <circle key={p.month} cx={x(i)} cy={y(p.value)} r="4" fill={s.color} data-overlay-value={p.value} />)}</g>)}
+        {showChanges && <g data-mom-series="true">
+          <line x1="0" x2="1000" y1={percentageY(0, changeAxis)} y2={percentageY(0, changeAxis)} className="trend-mom-zero" vectorEffect="non-scaling-stroke" />
+          <path d={percentageLine(changeValues, changeAxis)} className="trend-mom-line" fill="none" strokeWidth="2.2" vectorEffect="non-scaling-stroke" />
+        </g>}
       </svg>
       {showChanges && <div className="trend-mom-layer" data-range={range} aria-hidden="true">{chart.map((p, i) => {
         const change = changes.get(p.month) ?? null;
         if (p[metric] === null || change === null) return null;
-        return <span key={p.month} className={`trend-mom-point${p.month === activePoint?.month ? " is-active" : ""}`} data-month={p.month} data-change={change} style={{ left: `${(i + .5) / chart.length * 100}%`, top: `${220 - p[metric]! / peak * 210}px`, color: change > 0 ? "#b54d48" : change < 0 ? "#326db4" : "#687687" }}><i /><span className="trend-mom-label">{chartChangeText(change)}</span></span>;
+        return <span key={p.month} className={`trend-mom-point${p.month === activePoint?.month ? " is-active" : ""}`} data-month={p.month} data-change={change} style={{ left: `${(i + .5) / chart.length * 100}%`, top: percentageY(change, changeAxis), color: change > 0 ? "var(--trade-chart-up, #b54d48)" : change < 0 ? "var(--trade-chart-down, #326db4)" : "#87919d" }}><i /><span className="trend-mom-label">{chartChangeText(change)}</span></span>;
       })}</div>}
       <div className="trend-hit-targets">{chart.map(p => <button key={p.month} data-export-value={p[metric] ?? ""} aria-label={`${p.month}, ${countryName}, ${metricName} ${format(p[metric])}, 전월 대비 ${chartChangeText(changes.get(p.month) ?? null)}`} onMouseEnter={() => setActive(p.month)} onFocus={() => setActive(p.month)} onClick={() => setActive(p.month)} />)}</div>
       <div className="trend-months">{chart.map((p, i) => <span key={p.month}>{(i % (range === 24 ? 4 : 2) === 0 && i < chart.length - 2) || i === chart.length - 1 ? p.month.slice(2).replace("-", ".") : ""}</span>)}</div>

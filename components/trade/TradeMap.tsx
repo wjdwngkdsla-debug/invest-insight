@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Globe, { type GlobeInstance } from "globe.gl";
 import { AmbientLight, DirectionalLight, MeshPhongMaterial, Color, TextureLoader, SRGBColorSpace } from "three";
 import borderData from "@/data/trade/borders.json";
-import { Minus, Plus, RotateCcw, Pause, Play, Maximize, Minimize, Map, Globe2, Sun, Moon, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Minus, Plus, RotateCcw, Pause, Play, Maximize, Minimize, Map, Globe2, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { countryInfo, signed, usdText, kgText, type summarizeTrade } from "@/lib/trade";
 import { exportHeightRatio, exportBarColor } from "./map-style";
 
@@ -32,9 +32,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
   const [failed, setFailed] = useState(false);
   const [flat, setFlat] = useState(false);
   const [flatLoaded, setFlatLoaded] = useState(false);
-  const [themes, setThemes] = useState({ globe: true, flat: false });
-  const dark = flat ? themes.flat : themes.globe;
-  const toggleTheme = () => setThemes(t => ({ ...t, [flat ? "flat" : "globe"]: !dark }));
+  const dark = true;
   const [showList, setShowList] = useState(false);
   const [focusRequest, setFocusRequest] = useState(0);
   useEffect(() => { callbacks.current = { countries, onSelect, selected }; }, [countries, onSelect, selected]);
@@ -164,7 +162,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
   useEffect(() => {
     const g = globeRef.current;
     if (!g) return;
-    const isDark = themes.globe;
+    const isDark = true;
     applyAppearance.current?.(isDark);
     const visibleCodes = new Set(countries.filter(c => c.usd > 0 && (region === "all" || c.region === region)).map(c => c.code));
     g.pointColor(p => exportBarColor((p as Located).change, isDark));
@@ -173,7 +171,7 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
       if (isDark) return id === selected ? "rgba(167,199,215,0.26)" : "rgba(0,0,0,0)";
       return id === selected ? "#a7bdc8" : visibleCodes.has(id) ? "#c3d4d9" : "#e3e9eb";
     }).polygonStrokeColor(() => isDark ? "rgba(150,179,206,0.24)" : "rgba(255,255,255,0.85)");
-  }, [themes.globe, countries, selected, region]);
+  }, [countries, selected, region]);
 
   useEffect(() => {
     const g = globeRef.current;
@@ -224,7 +222,6 @@ export default function TradeMap({ countries, selected, onSelect, region = "all"
     {flatLoaded && <div className="flat-layer" aria-hidden={!flat}><FlatTradeMap countries={countries} selected={selected} region={region} active={flat} dark={dark} focusRequest={focusRequest} onSelect={onSelect} onHover={setHovered} apiRef={flatApi} /></div>}
     <div className="map-controls">
       <button aria-label={flat ? "지구본으로 보기" : "평면 지도로 보기"} aria-pressed={flat} title={flat ? "지구본으로 보기" : "평면 지도로 보기"} onClick={() => { setFlatLoaded(true); setHovered(null); setFlat(v => !v); }}>{flat ? <Globe2 size={16} /> : <Map size={16} />}</button>
-      <button aria-label={dark ? "밝은 지도" : "어두운 지도"} title={dark ? "밝은 지도" : "어두운 지도"} onClick={toggleTheme}>{dark ? <Sun size={16} /> : <Moon size={16} />}</button>
       <button aria-label={showList ? "국가 목록 닫기" : "국가 목록 열기"} aria-expanded={showList} title={showList ? "국가 목록 닫기" : "국가 목록 열기"} onClick={() => setShowList(v => !v)}>{showList ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}</button>
       <button disabled={flat} aria-label={rotating ? "자동 회전 정지" : "자동 회전 시작"} title={flat ? "지구본에서 자동 회전" : rotating ? "자동 회전 정지" : "자동 회전 시작"} onClick={() => setRotating(v => !v)}>{rotating ? <Pause size={16} /> : <Play size={16} />}</button>
       <button aria-label="지도 확대" title="확대" onClick={() => zoom(1.33)}><Plus size={16} /></button>

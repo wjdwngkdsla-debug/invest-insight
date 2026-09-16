@@ -12,8 +12,7 @@ export default function NavTabs() {
   const pathname = usePathname();
   const ipoActive = pathname.startsWith("/ipo");
   const rankingActive = pathname.startsWith("/ranking") || pathname.startsWith("/lockup-ranking");
-  const valueChainActive = pathname.startsWith("/value-chain");
-  const tradeActive = pathname.startsWith("/trade");
+  const valueChainActive = pathname.startsWith("/value-chain") || pathname.startsWith("/trade");
   return (
     <nav aria-label="주요 메뉴" className="flex flex-wrap items-center gap-1">
       <Link href="/ipo" className={`${TAB_BASE} ${ipoActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
@@ -24,9 +23,6 @@ export default function NavTabs() {
       </Link>
       <Link href="/value-chain" className={`${TAB_BASE} ${valueChainActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
         테마맵
-      </Link>
-      <Link href="/trade" aria-current={tradeActive ? "page" : undefined} className={`${TAB_BASE} ${tradeActive ? "bg-blue-100 text-blue-600" : TAB_IDLE}`}>
-        수출 동향
       </Link>
       <Link
         href="https://blog.naver.com/vericap"

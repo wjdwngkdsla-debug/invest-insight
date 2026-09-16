@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { TradeDashboard } from "@/components/trade/TradeDashboard";
 import { loadTradeCompanies, loadTradeDatasets } from "@/lib/trade-server";
+import { ValueChainDemo } from "@/components/ValueChainDemo";
+import "@/components/theme-map/theme-map.css";
 
 export const metadata: Metadata = {
   title: "수출 동향 | D램·화장품·변압기 국가별 수출금액과 중량",
@@ -12,5 +14,5 @@ export const dynamic = "force-static";
 export default async function TradePage() {
   const datasets = await loadTradeDatasets();
   const companies = await loadTradeCompanies();
-  return <TradeDashboard datasets={datasets} companies={companies} />;
+  return <main className="theme-workspace"><ValueChainDemo initialView="trade" tradeContent={<TradeDashboard datasets={datasets} companies={companies} />} /></main>;
 }

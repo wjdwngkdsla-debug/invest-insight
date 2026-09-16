@@ -1,0 +1,149 @@
+body:has(.theme-workspace) { background:#070809; color:#eef0f3; }
+body:has(.theme-workspace)>header { max-width:none; height:72px; padding:0 32px; gap:38px; flex-wrap:nowrap; border-bottom:1px solid #ffffff12; background:#070809; }
+body:has(.theme-workspace)>header>a { color:#f4f5f7; font-size:19px; letter-spacing:0; white-space:nowrap; }
+body:has(.theme-workspace)>header nav { flex-wrap:nowrap; overflow:auto; scrollbar-width:none; }
+body:has(.theme-workspace)>header nav a { color:#8d939c; font-size:12px; border-radius:5px; font-weight:500; }
+body:has(.theme-workspace)>header nav a[href="/value-chain"] { color:#fff; background:#ffffff10; }
+body:has(.theme-workspace)>header nav a:hover { background:#ffffff12; color:white; }
+body:has(.theme-workspace)>footer { display:none; }
+.theme-workspace { width:100%; background:#070809; }
+.theme-shell { position:relative; height:calc(100dvh - 72px); min-height:570px; overflow:hidden; background:#070809; color:#eff1f4; font-family:inherit; letter-spacing:0; }
+.theme-shell * { letter-spacing:0; }
+.theme-toolbar { height:40px; align-items:center; }
+.theme-sidebar { background:#101214; border-color:#ffffff0e; border-radius:8px; box-shadow:none; width:244px; padding:18px 14px; top:84px; bottom:24px; left:32px; }
+.theme-sidebar h2 { font-size:20px; font-weight:600; }
+.theme-sidebar button { border-radius:6px; font-weight:500; }
+.theme-sidebar button>div>span:first-child { font-size:12px; font-weight:600; }
+.theme-sidebar button>p { font-weight:400; color:#848991; }
+.theme-sidebar>div:last-child { scrollbar-width:thin; scrollbar-color:#373b40 transparent; }
+.theme-sidebar button[class*="bg-blue-600"] { background:#24313d; border-color:#7997ac55; }
+.theme-sidebar button[class*="bg-blue-600"] span { color:#e8f3fb; }
+.theme-shell[data-menu="true"] .theme-main { margin-left:280px; }
+.theme-carousel { position:absolute; inset:84px 30px 20px; min-width:0; display:flex; flex-direction:column; }
+.theme-carousel-heading { display:flex; justify-content:space-between; align-items:center; gap:24px; padding:18px 26px 0; z-index:2; }
+.theme-eyebrow { color:#939aa4; font-size:11px; font-weight:500; }
+.theme-carousel-heading h1 { font-size:38px; font-weight:600; line-height:1.25; margin-top:8px; overflow-wrap:anywhere; }
+.theme-compare { display:flex; gap:9px; align-items:center; padding:10px 13px; border:1px solid #ffffff24; border-radius:6px; font-size:12px; color:#d9dde3; white-space:nowrap; cursor:pointer; }
+.theme-compare:hover { background:#ffffff10; }
+.theme-carousel-scene { position:relative; flex:1; min-height:240px; width:100%; }
+.theme-product-card { position:absolute; inset:0; width:100%; height:100%; color:white; cursor:pointer; text-align:left; border:1px solid #ffffff18; border-radius:18px; background:linear-gradient(180deg,#0002,transparent 30%,#0001 45%,#050607ee 100%); }
+.theme-product-card:focus-visible { outline:2px solid #fff; outline-offset:-4px; }
+.company-logo { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; border-radius:7px; background:#fff; border:1px solid #e9edf1; color:#263849; vertical-align:middle; }
+.company-logo img { width:100%; height:100%; object-fit:contain; padding:5px; }
+.company-logo[data-tone="dark"] { background:#23313d; border-color:#50616f; }
+.company-logo[data-fallback="true"] { background:#253848; color:#dceaf4; border-color:#4c6376; font-weight:600; }
+.company-identity { display:inline-flex; align-items:center; gap:9px; text-align:left; vertical-align:middle; }
+.company-identity>span:last-child { overflow-wrap:anywhere; }
+.theme-card-logo { position:absolute; top:53px; left:16px; box-shadow:0 3px 12px #0002; border-radius:10px; }
+.theme-card-logo img { padding:7px; }
+.theme-company-index .company-identity { gap:7px; }
+.theme-company-index .company-logo img { padding:3px; }
+.theme-product-category { position:absolute; top:16px; left:16px; padding:4px 7px; border:1px solid #ffffff24; border-radius:4px; font-size:10px; color:#d8dee5; background:#0005; }
+.theme-product-caption { position:absolute; bottom:22px; left:22px; right:20px; display:flex; flex-direction:column; gap:7px; padding-right:20px; }
+.theme-product-caption strong { font-size:20px; font-weight:600; overflow-wrap:anywhere; line-height:1.3; }
+.theme-product-caption>span { color:#c4c9cf; font-size:11px; line-height:1.5; overflow-wrap:anywhere; }
+.theme-product-caption>svg { position:absolute; right:0; bottom:2px; color:#aab4bc; }
+.theme-carousel-bottom { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 26px 16px; }
+.theme-company-index { display:flex; flex-wrap:wrap; gap:8px 20px; max-height:96px; overflow:auto; scrollbar-width:thin; scrollbar-color:#3c4650 transparent; }
+.theme-company-index button { font-size:11px; color:#989ea7; padding:4px 0; border-bottom:1px solid transparent; cursor:pointer; }
+.theme-company-index button:hover { color:white; border-color:#becad4; }
+.theme-carousel-controls { display:flex; gap:6px; flex-shrink:0; }
+.theme-carousel-controls button { width:34px; height:34px; display:grid; place-items:center; border:1px solid #ffffff20; border-radius:50%; cursor:pointer; color:#c3c9d0; }
+.theme-carousel-controls button:hover { color:white; background:#ffffff13; }
+.theme-image-note { display:block; text-align:right; padding-right:26px; color:#616872; font-size:9px; }
+.theme-no-companies { padding:80px 0; text-align:center; color:#9aa0a9; }
+.theme-trade-content { position:absolute; inset:84px 0 0; overflow:auto; color:#e6e8ed; scrollbar-color:#3c4148 #090b0e; }
+.theme-trade-content .trade-page { color:#e1e5e9; padding:12px 40px 40px; max-width:1600px; font-family:inherit; }
+.theme-trade-content .trade-page select,.theme-trade-content input,.theme-trade-content .trade-download { background:#14171b; color:#d5dae2; border-color:#32373e; }
+.theme-trade-content .trade-kpis,.theme-trade-content .trade-kpis>div,.theme-trade-content .trade-weight-summary,.theme-trade-content .trade-related { border-color:#ffffff17; }
+.theme-trade-content .trade-kpis span,.theme-trade-content .trade-weight-summary span,.theme-trade-content .globe-filterbar { color:#969fab; }
+.theme-trade-content .trade-kpis strong { font-size:25px; }
+.theme-trade-content .trade-table-scroll { border-color:#ffffff1b; }
+.theme-trade-content .trade-country-table table { background:#0e1115; color:#d0d7de; }
+.theme-trade-content .trade-country-table th { background:#1a1e23; color:#adb5bf; border-color:#ffffff1c; }
+.theme-trade-content .trade-country-table td { border-color:#ffffff0c; }
+.theme-trade-content .trade-country-table tbody tr:hover,.theme-trade-content .trade-country-table tr.selected { background:#202932; }
+.theme-trade-content .trade-country-table td:first-child button,.theme-trade-content .trade-related a { color:#9bbbd9; }
+.theme-trade-content .segmented { background:#ffffff0d; border:1px solid #ffffff15; border-radius:999px; padding:4px; }
+.theme-trade-content .segmented button { border-radius:999px; font-weight:700; padding:7px 12px; }
+.theme-trade-content .segmented .active { background:#3859ed; color:#fff; }
+.theme-trade-content .chart-grid-line { background:#ffffff10; }
+.theme-trade-content .chart-tooltip { background:#161b22; border-color:#39404a; color:#eff2f6; }
+.theme-trade-content .trade-down { color:#88aff0!important; }.theme-trade-content .trade-up { color:#eb9993!important; }
+.theme-shell [class*="font-black"] { font-weight:600; }
+.theme-shell [class*="tracking-"] { letter-spacing:0; }
+.theme-shell .theme-view-tab,.theme-shell .theme-compare { display:inline-flex; align-items:center; justify-content:center; gap:7px; height:40px; min-width:0; padding:0 20px; border:1px solid #ffffff1a; border-radius:999px; background:#ffffff1a; color:#fff; font-size:13px; font-weight:800; white-space:nowrap; box-shadow:none; flex-shrink:0; backdrop-filter:blur(16px); }
+.theme-shell .theme-view-tab:hover,.theme-shell .theme-compare:hover { background:#ffffff26; color:#fff; border-color:#ffffff30; }
+.theme-shell .theme-view-tab.is-active { background:#3859ed; border-color:#60a5fa59; color:#fff; }
+.theme-shell .theme-view-tab:focus-visible,.theme-shell .theme-compare:focus-visible { outline:2px solid #9eb4c7; outline-offset:3px; }
+.theme-product-card[data-visual="logo"] { background:transparent; }
+.theme-brand-media { position:absolute; inset:0 0 30%; display:flex; align-items:center; justify-content:center; padding:34px 18px 10px; }
+.theme-brand-media .theme-brand-logo { border:0; border-radius:0; box-shadow:none; flex-shrink:0; }
+.theme-brand-media .theme-brand-logo img { padding:0; }
+.theme-product-card[data-visual="logo"] .theme-product-category { background:#10151dd9; color:#f2f4f7; border-color:#ffffff24; }
+.theme-product-card[data-visual="logo"] .theme-product-caption { inset:auto 0 0; min-height:30%; padding:16px 38px 16px 20px; justify-content:center; background:#14181e; border-top:1px solid #ffffff14; text-shadow:none; }
+.theme-product-card[data-visual="logo"] .theme-product-caption>svg { right:16px; bottom:22px; }
+.theme-scatter-marker { position:absolute; transform:translate(-50%,-50%); display:flex; width:88px; flex-direction:column; align-items:center; gap:6px; padding:3px; border:0; background:transparent; cursor:default; color:#e6e9ed; }
+.theme-scatter-marker>span:last-child { max-width:100%; font-size:11px; font-weight:600; line-height:1.3; white-space:nowrap; }
+.theme-scatter-marker:hover .company-logo, .theme-scatter-marker:focus-visible .company-logo { outline:2px solid #adc6e8; outline-offset:3px; }
+.theme-scatter-marker:focus-visible { outline:none; }
+.company-logo[data-fallback="true"] { background:#090b0e; border-color:#3c454c; }
+.company-logo[data-fallback="true"] img { padding:0; object-fit:cover; }
+.theme-trade-content { color-scheme:dark; --trade-series-a:#64c6b7; --trade-series-b:#b69ee8; --trade-chart-up:#e28c83; --trade-chart-down:#83b5e7; --trade-mom-line:#e9bd7a; }
+.theme-trade-content .trade-toolbar { margin-bottom:22px; }
+.theme-trade-content .trade-analysis-grid { grid-template-columns:minmax(0,1fr); gap:32px; margin-top:32px; }
+.theme-trade-content .trade-summary { margin-top:36px; }
+.theme-trade-content .trade-summary>h2 { font-size:16px; font-weight:600; }
+.theme-trade-content .trend-grid { background:#ffffff12; }
+.theme-trade-content .trend-axis-head,.theme-trade-content .trend-change-toggle,.theme-trade-content .trend-readout { color:#9ca5af; }
+.theme-trade-content .trend-readout { border-color:#ffffff17; }
+.theme-trade-content .trend-readout strong { color:#e2e7ed; }
+.theme-trade-content .trend-mom-label { background:#171b20f2; }
+.theme-trade-content .trend-mom-point>i { border-color:#181c22; }
+.theme-trade-content .trend-bar { fill:#6072ad; opacity:.65; }
+.theme-trade-content .trend-bar[data-selected="true"] { fill:#7893f0; opacity:1; }
+.theme-trade-content .trade-country-table th:first-child { background:#171a24; }
+.theme-trade-content .trade-country-table th { background:#171a24; }
+.theme-trade-content .trade-country-table table,.theme-trade-content .trade-country-table td:first-child { background:#0b0d13; }
+.theme-trade-content .trade-country-table td:first-child { background:#0b0d13; }
+.theme-trade-content .trade-country-table tr.selected td:first-child { background:#202932; }
+.theme-trade-content .trade-notification-button { background:#1a1d20; border-color:#ffffff20; color:#cbd0d5; }
+.theme-trade-content .trade-notification-panel { background:#15191e; border-color:#3b434c; color:#e1e5eb; }
+.theme-trade-content .trade-notification-panel li { border-color:#ffffff16; }
+.theme-trade-content .trade-notification-setting,.theme-trade-content .trade-notification-panel li button>span:nth-child(2) { color:#aab3bd; }
+.theme-trade-content .trade-notification-count { border-color:#15191e; }
+.theme-trade-content .globe-wrap.map-dark,.theme-trade-content .globe-wrap.is-flat.map-dark { background:#090c10; }
+.theme-trade-content .map-controls button { background:#1a1d20; border-color:#ffffff20; border-radius:6px; color:#cbd0d5; }
+.theme-trade-content .map-country-list,.theme-trade-content .map-legend,.theme-trade-content .globe-tooltip { background:#15191ef0; border-color:#ffffff20; color:#bac2cb; }
+.theme-trade-content .map-country-list button { color:#cbd2da; }
+.theme-trade-content .map-country-list>strong,.theme-trade-content .globe-tooltip strong { color:#f2f4f6; }
+.theme-trade-content .map-country-list button:hover,.theme-trade-content .map-country-list button[aria-pressed="true"] { background:#ffffff10; }
+.theme-trade-content .map-loading { background:#090c10; color:#b0bac4; }
+.theme-shell { scrollbar-color:#3c434a #101316; scrollbar-width:thin; }
+@media(min-width:1600px) { .theme-carousel { left:50px; right:50px; }.theme-carousel-heading h1 { font-size:44px; } }
+@media(max-width:900px) {
+ body:has(.theme-workspace)>header { height:92px; padding:12px 16px; flex-direction:column; align-items:flex-start; justify-content:center; gap:8px; }
+ body:has(.theme-workspace)>header>a { font-size:16px; }
+ body:has(.theme-workspace)>header nav a { font-size:11px; padding:4px 10px; }
+ .theme-shell { height:calc(100dvh - 92px); min-height:550px; }
+ .theme-toolbar { left:16px; right:16px; top:16px; }
+ .theme-toolbar>div:last-child { display:none; }
+ .theme-toolbar button { padding-left:10px!important; padding-right:10px!important; font-size:11px!important; height:35px!important; }
+ .theme-toolbar .theme-trade-tab { gap:5px; }
+ .theme-shell[data-menu="true"] .theme-main { margin-left:0; }
+ .theme-sidebar { top:64px; bottom:12px; left:16px; right:auto; width:260px; max-height:none; box-shadow:10px 0 50px #000b; z-index:80; background:#111416f5; }
+ .theme-carousel { inset:70px 0 16px; }
+ .theme-carousel-heading { padding:12px 24px 0; gap:12px; }
+ .theme-carousel-heading h1 { font-size:28px; }
+ .theme-compare { font-size:11px; padding:9px; gap:6px; }
+ .theme-compare>svg:first-child { display:none; }
+ .theme-carousel-bottom { padding:0 24px 10px; gap:12px; flex-wrap:wrap; }
+ .theme-company-index { width:100%; max-height:96px; gap:4px 16px; justify-content:center; }
+ .theme-carousel-controls { margin:auto; }
+ .theme-image-note { text-align:center; padding:0; }
+ .theme-product-caption { left:15px; right:14px; bottom:16px; }
+ .theme-product-caption strong { font-size:17px; }
+ .theme-product-caption>span { font-size:10px; }
+ .theme-trade-content { top:70px; }
+ .theme-trade-content .trade-page { padding:12px 16px 40px; }
+}

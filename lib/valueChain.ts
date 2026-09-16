@@ -23,6 +23,7 @@ export interface ValueChainSource {
 
 export interface ValueChainCompany {
   id: string;
+  domain?: string;
   name: string;
   layer: ChainLayer;
   role: string;

@@ -20,6 +20,7 @@ jobs:
     env:
       KRX_API_KEY: ${{ secrets.KRX_API_KEY }}
       DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      BRANDFETCH_API_KEY: ${{ secrets.BRANDFETCH_API_KEY }}
       NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
       NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
       NAVER: ${{ secrets.NAVER }}
@@ -82,6 +83,11 @@ jobs:
         continue-on-error: true
         run: pnpm run value-chain:update-financials
 
+      - name: Update company logo cache
+        continue-on-error: true
+        timeout-minutes: 5
+        run: pnpm run value-chain:update-logos --limit 20
+
       - name: Validate value-chain data
         run: pnpm run value-chain:validate
 
@@ -93,7 +99,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/value-chain
+          git add data/value-chain public/company-logos
           if git diff --cached --quiet; then
             echo "No value-chain data changes."
             exit 0

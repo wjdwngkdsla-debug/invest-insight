@@ -106,6 +106,7 @@
 .trend-mom-point>i { position:absolute; width:8px; height:8px; border-radius:50%; background:currentColor; border:1.5px solid #fff; transform:translate(-50%,-50%); box-shadow:0 0 0 1px currentColor; }
 .trend-mom-label { display:none; position:absolute; left:0; bottom:8px; transform:translateX(-50%); font-size:10px; line-height:15px; white-space:nowrap; background:#ffffffed; padding:0 3px; border-radius:2px; }
 .trend-mom-point.is-active { z-index:1; }.trend-mom-point.is-active .trend-mom-label { display:block; font-weight:600; }
+.trend-mom-point:last-child .trend-mom-label { transform:translateX(-100%); margin-left:-6px; }
 .trade-overlay-chart:has(.trend-mom-layer) { margin-top:26px; }
 @container(min-width:600px) { .trend-mom-layer[data-range="12"] .trend-mom-label { display:block; } }
 .trend-company-options { display:flex; flex-wrap:wrap; gap:12px; margin:12px 0; font-size:12px; }
@@ -113,6 +114,14 @@
 .trend-company-options input { accent-color:currentColor; }
 .trend-axis-head { display:flex; justify-content:space-between; gap:10px; font-size:10px; color:#64748b; margin:16px 0 8px; }
 .trade-overlay-chart { height:230px; position:relative; margin:0 58px 32px 54px; }
+.trade-overlay-chart[data-extra-axis="true"] { margin-right:116px; }
+.trend-axis-legends { display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-end; }
+.trend-mom-legend { display:inline-flex; align-items:center; gap:5px; color:var(--trade-mom-line,#a66b16); }
+.trend-mom-legend i { width:16px; height:2px; background:currentColor; }
+.trend-mom-line { stroke:var(--trade-mom-line,#a66b16); stroke-linecap:round; stroke-linejoin:round; }
+.trend-mom-zero { stroke:var(--trade-mom-line,#a66b16); stroke-opacity:.4; stroke-dasharray:4 5; }
+.trend-percent-tick { position:absolute; left:calc(100% + 8px); transform:translateY(-50%); color:var(--trade-mom-line,#a66b16); font-size:10px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.trend-right-tick.trend-company-tick { left:calc(100% + 64px); }
 .trade-overlay-chart svg { width:100%; height:100%; overflow:visible; position:absolute; inset:0; }
 .trend-grid { position:absolute; left:0; right:0; height:1px; background:#edf1f6; }
 .trend-left-tick,.trend-right-tick { position:absolute; top:-7px; font-size:10px; color:#8190a4; white-space:nowrap; font-variant-numeric:tabular-nums; }

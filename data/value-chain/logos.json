@@ -1,0 +1,687 @@
+{
+  "provider": "Brandfetch",
+  "companies": {
+    "samsung": {
+      "domain": "samsung.com",
+      "src": "/company-logos/samsung.png",
+      "source": "https://cdn.brandfetch.io/iduaw_nOnR/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Samsung",
+      "fetchedAt": "2026-09-15T23:51:35.532398+00:00",
+      "background": "light",
+      "canvasColor": "#000000",
+      "width": 384,
+      "height": 384
+    },
+    "skhynix": {
+      "domain": "skhynix.com",
+      "src": "/company-logos/skhynix.png",
+      "source": "https://cdn.brandfetch.io/idLUn4iA8q/w/100/h/100/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "SK hynix",
+      "fetchedAt": "2026-09-15T23:51:36.506904+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 100,
+      "height": 100
+    },
+    "telechips": {
+      "domain": "telechips.com",
+      "src": "/company-logos/telechips.png",
+      "source": "https://cdn.brandfetch.io/idbNG0JY5Z/w/300/h/56/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Telechips",
+      "fetchedAt": "2026-09-15T23:52:06.998699+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 300,
+      "height": 56
+    },
+    "jusung": {
+      "domain": "jusung.com",
+      "src": "/company-logos/jusung.png",
+      "source": "https://cdn.brandfetch.io/iducWsxPua/w/820/h/169/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "JUSUNG",
+      "fetchedAt": "2026-09-15T23:52:09.137471+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 384,
+      "height": 79
+    },
+    "hpsp": {
+      "domain": "thehpsp.com",
+      "src": "/company-logos/hpsp.png",
+      "source": "https://cdn.brandfetch.io/idDbsWuTTn/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "HPSP Co.",
+      "fetchedAt": "2026-09-15T23:52:10.143626+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "yujintech": {
+      "domain": "eugenetech.co.kr",
+      "src": "/company-logos/yujintech.png",
+      "source": "https://cdn.brandfetch.io/iduTaYcbIT/w/256/h/41/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "fetchedAt": "2026-09-15T23:52:10.763031+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 256,
+      "height": 41
+    },
+    "psk": {
+      "domain": "pskinc.com",
+      "src": "/company-logos/psk.png",
+      "source": "https://cdn.brandfetch.io/idN2uRfqwk/w/103/h/27/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "PSK Inc",
+      "fetchedAt": "2026-09-15T23:52:11.749185+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 103,
+      "height": 27
+    },
+    "kcTech": {
+      "domain": "kctech.co.kr",
+      "src": "/company-logos/kcTech.png",
+      "source": "https://cdn.brandfetch.io/idY-7MSBsk/w/164/h/33/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "KCTech",
+      "fetchedAt": "2026-09-15T23:52:12.447711+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 164,
+      "height": 33
+    },
+    "nextin": {
+      "domain": "nextinsol.com",
+      "src": "/company-logos/nextin.png",
+      "source": "https://cdn.brandfetch.io/id1lckTOZ9/w/151/h/54/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Nextin",
+      "fetchedAt": "2026-09-15T23:52:13.229976+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 151,
+      "height": 54
+    },
+    "hanmi": {
+      "domain": "hanmisemi.com",
+      "src": "/company-logos/hanmi.png",
+      "source": "https://cdn.brandfetch.io/idQc8mirTe/w/57/h/57/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "HANMI Semiconductor",
+      "fetchedAt": "2026-09-15T23:52:13.946505+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 57,
+      "height": 57
+    },
+    "isc": {
+      "domain": "isc21.kr",
+      "src": "/company-logos/isc.png",
+      "source": "https://cdn.brandfetch.io/idOvdmQEkZ/w/288/h/171/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "ISC",
+      "fetchedAt": "2026-09-15T23:52:14.934592+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 288,
+      "height": 171
+    },
+    "leeno": {
+      "domain": "leeno.com",
+      "src": "/company-logos/leeno.png",
+      "source": "https://cdn.brandfetch.io/id_LnMnIUJ/w/820/h/179/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "LEENO",
+      "fetchedAt": "2026-09-15T23:52:15.955549+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 384,
+      "height": 84
+    },
+    "wits": {
+      "domain": "ycchem.co.kr",
+      "src": "/company-logos/wits.png",
+      "source": "https://cdn.brandfetch.io/idscZub7PG/w/25/h/25/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "YCCHEM",
+      "fetchedAt": "2026-09-15T23:52:16.591704+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 25,
+      "height": 25
+    },
+    "wonikmaterials": {
+      "domain": "wimco.co.kr",
+      "src": "/company-logos/wonikmaterials.png",
+      "source": "https://cdn.brandfetch.io/idWCxWWp3O/w/473/h/57/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Wonik Materials Co Ltd (104830)",
+      "fetchedAt": "2026-09-15T23:52:17.269649+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 46
+    },
+    "tes": {
+      "domain": "hites.co.kr",
+      "src": "/company-logos/tes.png",
+      "source": "https://cdn.brandfetch.io/idER38z607/w/114/h/65/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "fetchedAt": "2026-09-15T23:52:19.978713+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 114,
+      "height": 65
+    },
+    "zeus": {
+      "domain": "globalzeus.com",
+      "src": "/company-logos/zeus.png",
+      "source": "https://cdn.brandfetch.io/idnzlOB6RJ/w/820/h/201/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Global ZEUS",
+      "fetchedAt": "2026-09-15T23:52:21.239290+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 94
+    },
+    "exicon": {
+      "domain": "exicon.co.kr",
+      "src": "/company-logos/exicon.png",
+      "source": "https://cdn.brandfetch.io/idEYKc1xcV/w/161/h/58/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Exicon",
+      "fetchedAt": "2026-09-15T23:52:23.001967+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 161,
+      "height": 58
+    },
+    "unitest": {
+      "domain": "uni-test.com",
+      "src": "/company-logos/unitest.png",
+      "source": "https://cdn.brandfetch.io/idXPFZmi-N/w/142/h/38/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "UniTest",
+      "fetchedAt": "2026-09-15T23:52:23.884720+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 142,
+      "height": 38
+    },
+    "nepes": {
+      "domain": "nepes.co.kr",
+      "src": "/company-logos/nepes.png",
+      "source": "https://cdn.brandfetch.io/idNlxGQn90/w/300/h/300/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "네패스 nepes Corp",
+      "fetchedAt": "2026-09-15T23:52:25.271687+00:00",
+      "background": "light",
+      "canvasColor": "#e6a000",
+      "width": 300,
+      "height": 300
+    },
+    "koreaCircuit": {
+      "domain": "kcg.co.kr",
+      "src": "/company-logos/koreaCircuit.png",
+      "source": "https://cdn.brandfetch.io/idAn-Q37U_/w/417/h/81/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "fetchedAt": "2026-09-15T23:53:06.981603+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 384,
+      "height": 75
+    },
+    "mico": {
+      "domain": "mico.kr",
+      "src": "/company-logos/mico.png",
+      "source": "https://cdn.brandfetch.io/idbuYL51mq/w/95/h/28/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "MiCo",
+      "fetchedAt": "2026-09-15T23:53:08.947273+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 95,
+      "height": 28
+    },
+    "fst": {
+      "domain": "fstc.co.kr",
+      "src": "/company-logos/fst.png",
+      "source": "https://cdn.brandfetch.io/id2elgBw_t/w/74/h/37/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Fine Semitech",
+      "fetchedAt": "2026-09-15T23:53:10.317414+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 74,
+      "height": 37
+    },
+    "enf": {
+      "domain": "enftech.com",
+      "src": "/company-logos/enf.png",
+      "source": "https://cdn.brandfetch.io/idwOmXaIcF/w/820/h/234/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "fetchedAt": "2026-09-15T23:53:36.401249+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 110
+    },
+    "asml": {
+      "domain": "asml.com",
+      "src": "/company-logos/asml.png",
+      "source": "https://cdn.brandfetch.io/idrx8or1aI/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "ASML",
+      "fetchedAt": "2026-09-15T23:53:37.036466+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "tel": {
+      "domain": "tel.com",
+      "src": "/company-logos/tel.png",
+      "source": "https://cdn.brandfetch.io/idRMTNLPBM/w/820/h/332/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "東京エレクトロン",
+      "fetchedAt": "2026-09-15T23:53:37.661644+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 155
+    },
+    "lam": {
+      "domain": "lamresearch.com",
+      "src": "/company-logos/lam.png",
+      "source": "https://cdn.brandfetch.io/id-1f9Vd7w/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Lam Research",
+      "fetchedAt": "2026-09-15T23:53:38.362382+00:00",
+      "background": "light",
+      "canvasColor": "#6a7885",
+      "width": 384,
+      "height": 384
+    },
+    "amat": {
+      "domain": "appliedmaterials.com",
+      "src": "/company-logos/amat.png",
+      "source": "https://cdn.brandfetch.io/id6uaI790v/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Applied Materials",
+      "fetchedAt": "2026-09-15T23:53:38.905677+00:00",
+      "background": "light",
+      "canvasColor": "#337da2",
+      "width": 384,
+      "height": 384
+    },
+    "axcelis": {
+      "domain": "axcelis.com",
+      "src": "/company-logos/axcelis.png",
+      "source": "https://cdn.brandfetch.io/idLNAadtnx/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Axcelis Technologies",
+      "fetchedAt": "2026-09-15T23:53:39.465291+00:00",
+      "background": "light",
+      "canvasColor": "#023c6a",
+      "width": 384,
+      "height": 384
+    },
+    "tsmc": {
+      "domain": "tsmc.com",
+      "src": "/company-logos/tsmc.png",
+      "source": "https://cdn.brandfetch.io/idpuqG_7nu/w/200/h/200/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Taiwan Semiconductor Manufacturing Company",
+      "fetchedAt": "2026-09-15T23:53:40.211975+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 200,
+      "height": 200
+    },
+    "kla": {
+      "domain": "kla.com",
+      "src": "/company-logos/kla.png",
+      "source": "https://cdn.brandfetch.io/idPPx2NdGf/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "KLA",
+      "fetchedAt": "2026-09-15T23:53:40.757815+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "airliquide": {
+      "domain": "airliquide.com",
+      "src": "/company-logos/airliquide.png",
+      "source": "https://cdn.brandfetch.io/idoudGrLrr/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Air Liquide",
+      "fetchedAt": "2026-09-15T23:53:41.289996+00:00",
+      "background": "light",
+      "canvasColor": "#fefefe",
+      "width": 384,
+      "height": 384
+    },
+    "jsr": {
+      "domain": "jsr.co.jp",
+      "src": "/company-logos/jsr.png",
+      "source": "https://cdn.brandfetch.io/id78svBmcY/w/192/h/40/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "JSR",
+      "fetchedAt": "2026-09-15T23:53:41.812462+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 192,
+      "height": 40
+    },
+    "shinetsu": {
+      "domain": "shinetsu.co.jp",
+      "src": "/company-logos/shinetsu.png",
+      "source": "https://cdn.brandfetch.io/idPeGU5RxT/w/820/h/182/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Shin-Etsu",
+      "fetchedAt": "2026-09-15T23:53:42.501312+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 85
+    },
+    "sumco": {
+      "domain": "sumcosi.com",
+      "src": "/company-logos/sumco.png",
+      "source": "https://cdn.brandfetch.io/idxTQuKLTX/w/820/h/309/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "fetchedAt": "2026-09-15T23:53:43.196032+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 145
+    },
+    "disco": {
+      "domain": "disco.co.jp",
+      "src": "/company-logos/disco.png",
+      "source": "https://cdn.brandfetch.io/id-owQSHSf/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "株式会社ディスコ",
+      "fetchedAt": "2026-09-15T23:53:43.903797+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "dupont": {
+      "domain": "dupont.com",
+      "src": "/company-logos/dupont.png",
+      "source": "https://cdn.brandfetch.io/id4njsbmiu/w/200/h/200/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "DuPont",
+      "fetchedAt": "2026-09-15T23:53:45.130496+00:00",
+      "background": "light",
+      "canvasColor": "#eb0824",
+      "width": 200,
+      "height": 200
+    },
+    "onsemi": {
+      "domain": "onsemi.com",
+      "src": "/company-logos/onsemi.png",
+      "source": "https://cdn.brandfetch.io/idXZGBhJRv/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Onsemi",
+      "fetchedAt": "2026-09-15T23:53:46.090787+00:00",
+      "background": "light",
+      "canvasColor": "#ccd4de",
+      "width": 384,
+      "height": 384
+    },
+    "gncenergy": {
+      "domain": "gncenergy.co.kr",
+      "src": "/company-logos/gncenergy.png",
+      "source": "https://cdn.brandfetch.io/idWuhoGXh-/w/195/h/49/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "GNC energy",
+      "fetchedAt": "2026-09-15T23:53:46.801732+00:00",
+      "background": "dark",
+      "canvasColor": "#23313d",
+      "width": 195,
+      "height": 49
+    },
+    "hanwhaaero": {
+      "domain": "hanwhaaerospace.com",
+      "src": "/company-logos/hanwhaaero.png",
+      "source": "https://cdn.brandfetch.io/idUtZWQmlM/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Hanwha Aerospace",
+      "fetchedAt": "2026-09-15T23:53:47.872334+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "poongsan": {
+      "domain": "poongsan.co.kr",
+      "src": "/company-logos/poongsan.png",
+      "source": "https://cdn.brandfetch.io/idR6REJ1CX/w/820/h/122/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Poongsan",
+      "fetchedAt": "2026-09-15T23:54:43.673446+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 57
+    },
+    "soil": {
+      "domain": "s-oil.com",
+      "src": "/company-logos/soil.png",
+      "source": "https://cdn.brandfetch.io/idnr20FQy-/w/820/h/279/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "S-OIL",
+      "fetchedAt": "2026-09-15T23:54:51.946431+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 131
+    },
+    "skinnovation": {
+      "domain": "skinnovation.com",
+      "src": "/company-logos/skinnovation.png",
+      "source": "https://cdn.brandfetch.io/idQzABqJaD/w/180/h/180/theme/dark/icon.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "SK innovation",
+      "fetchedAt": "2026-09-15T23:54:53.029144+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 180,
+      "height": 180
+    },
+    "koreaPetroleum": {
+      "domain": "koreapetroleum.com",
+      "src": "/company-logos/koreaPetroleum.png",
+      "source": "https://cdn.brandfetch.io/idxikPLBCn/w/57/h/57/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Korea Petroleum",
+      "fetchedAt": "2026-09-15T23:54:54.175948+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 57,
+      "height": 57
+    },
+    "daesungEnergy": {
+      "domain": "daesungenergy.com",
+      "src": "/company-logos/daesungEnergy.png",
+      "source": "https://cdn.brandfetch.io/idoAc83DUW/w/180/h/29/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Daesung Energy",
+      "fetchedAt": "2026-09-15T23:54:55.242972+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 180,
+      "height": 29
+    },
+    "poscointl": {
+      "domain": "poscointl.com",
+      "src": "/company-logos/poscointl.png",
+      "source": "https://cdn.brandfetch.io/id14nl29F7/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "POSCO International Corp",
+      "fetchedAt": "2026-09-15T23:54:56.276060+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "lxintl": {
+      "domain": "lxinternational.com",
+      "src": "/company-logos/lxintl.png",
+      "source": "https://cdn.brandfetch.io/idWmIv2MPU/w/820/h/122/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "LX INTERNATIONAL",
+      "fetchedAt": "2026-09-15T23:54:56.923034+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 57
+    },
+    "koreazinc": {
+      "domain": "koreazinc.co.kr",
+      "src": "/company-logos/koreazinc.png",
+      "source": "https://cdn.brandfetch.io/idUmymy1q5/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Korea Zinc Company",
+      "fetchedAt": "2026-09-15T23:54:57.568254+00:00",
+      "background": "light",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "hyundaiEngineering": {
+      "domain": "hdec.kr",
+      "src": "/company-logos/hyundaiEngineering.png",
+      "source": "https://cdn.brandfetch.io/idfLDwFjlW/w/800/h/800/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "현대건설",
+      "fetchedAt": "2026-09-15T23:54:58.542139+00:00",
+      "background": "light",
+      "canvasColor": "#000000",
+      "width": 384,
+      "height": 384
+    },
+    "foosung": {
+      "domain": "foosungchem.com",
+      "src": "/company-logos/foosung.png",
+      "source": "https://cdn.brandfetch.io/idAkNY-gNH/w/157/h/33/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Foosung Co Ltd",
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:08.014263+00:00",
+      "canvasColor": "#ffffff",
+      "width": 157,
+      "height": 33
+    },
+    "gs": {
+      "domain": "gs.co.kr",
+      "src": "/company-logos/gs.png",
+      "source": "https://cdn.brandfetch.io/idGPr4lnGS/w/820/h/422/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "GS",
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:09.041661+00:00",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 198
+    },
+    "heungguOil": {
+      "domain": "hunggu.kr",
+      "src": "/company-logos/heungguOil.png",
+      "source": "https://cdn.brandfetch.io/idCTFZHS1i/w/362/h/159/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": null,
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:09.786335+00:00",
+      "canvasColor": "#ffffff",
+      "width": 362,
+      "height": 159
+    },
+    "spg": {
+      "domain": "spg.co.kr",
+      "src": "/company-logos/spg.png",
+      "source": "https://cdn.brandfetch.io/idatViugRl/w/328/h/160/theme/dark/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "SPG",
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:10.932898+00:00",
+      "canvasColor": "#ffffff",
+      "width": 328,
+      "height": 160
+    },
+    "rainbowrobotics": {
+      "domain": "rainbow-robotics.com",
+      "src": "/company-logos/rainbowrobotics.png",
+      "source": "https://cdn.brandfetch.io/idaVQ_WMxu/w/640/h/640/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Rainbow Robotics",
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:11.622929+00:00",
+      "canvasColor": "#e7331c",
+      "width": 384,
+      "height": 384
+    },
+    "robotis": {
+      "domain": "robotis.com",
+      "src": "/company-logos/robotis.png",
+      "source": "https://cdn.brandfetch.io/idhZ0z044u/w/400/h/400/theme/dark/icon.jpeg?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "ROBOTIS",
+      "background": "light",
+      "fetchedAt": "2026-09-15T23:56:12.346187+00:00",
+      "canvasColor": "#ffffff",
+      "width": 384,
+      "height": 384
+    },
+    "clobot": {
+      "domain": "clobot.co.kr",
+      "src": "/company-logos/clobot.png",
+      "source": "https://cdn.brandfetch.io/idFUqkk04i/w/468/h/105/theme/light/logo.png?c=1bxfolqt0oc072f6pnycjzbvnduuPQGNWmZ",
+      "brandName": "Clobot",
+      "background": "dark",
+      "fetchedAt": "2026-09-15T23:56:25.393936+00:00",
+      "canvasColor": "#23313d",
+      "width": 384,
+      "height": 86
+    }
+  },
+  "unavailable": {
+    "dbhitek": {
+      "domain": "dbhitek.co.kr",
+      "reason": "not_found",
+      "checkedAt": "2026-09-15T23:57:37.215614+00:00"
+    },
+    "lxsemicon": {
+      "domain": "lxsemicon.com",
+      "reason": "not_found",
+      "checkedAt": "2026-09-15T23:57:41.114784+00:00"
+    },
+    "sksiltron": {
+      "domain": "sksiltron.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:41.408725+00:00"
+    },
+    "wonikips": {
+      "domain": "ips.co.kr",
+      "reason": "not_found",
+      "checkedAt": "2026-09-15T23:57:45.297461+00:00"
+    },
+    "sfa": {
+      "domain": "sfasemicon.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:45.946789+00:00"
+    },
+    "skmaterials": {
+      "domain": "skspecialty.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:46.248811+00:00"
+    },
+    "dongjin": {
+      "domain": "dongjin.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:46.551125+00:00"
+    },
+    "semes": {
+      "domain": "semes.co.kr",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:46.833430+00:00"
+    },
+    "auros": {
+      "domain": "aurostech.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:47.225768+00:00"
+    },
+    "parksystems": {
+      "domain": "parkafm.co.kr",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:47.565195+00:00"
+    },
+    "eotechnics": {
+      "domain": "eotechnics.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:57:47.892383+00:00"
+    },
+    "simmtech": {
+      "domain": "simmtech.co.kr",
+      "reason": "not_found",
+      "checkedAt": "2026-09-15T23:57:53.313555+00:00"
+    },
+    "mecaro": {
+      "domain": "mecaro.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:58:06.046221+00:00"
+    },
+    "wonikqnc": {
+      "domain": "wonikqnc.com",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:58:06.735423+00:00"
+    },
+    "snstech": {
+      "domain": "snstech.co.kr",
+      "reason": "no_valid_raster",
+      "checkedAt": "2026-09-15T23:58:07.005793+00:00"
+    }
+  }
+}
