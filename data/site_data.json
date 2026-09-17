@@ -24258,12 +24258,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 3384453
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 165000,
           "release_fluc_rt": 5.16
         },
@@ -24311,16 +24306,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 2604922
-            },
-            {
-              "reason": "상장주선인(국내기업)",
-              "qty": 44444
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 195600,
           "release_fluc_rt": 5.27
         },
