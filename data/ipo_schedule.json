@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18 08:51",
+  "updated": "2026-09-18 23:42",
   "items": [
     {
       "corp_code": "00104069",
@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -219,14 +219,14 @@
       "corp_code": "01722066",
       "name": "빅웨이브로보틱스",
       "first_filing_date": "20260504",
-      "last_rcept_no": "20260914000385",
+      "last_rcept_no": "20260918000412",
       "band_low": 8458,
       "band_high": 10149,
       "forecast_start": "2026-09-07",
       "forecast_end": "2026-09-11",
       "sub_start": "2026-09-15",
       "sub_end": "2026-09-16",
-      "payment_date": "2026-09-18",
+      "payment_date": "2026-09-15",
       "underwriter": "유진투자증권·미래에셋증권",
       "market": "코스닥",
       "offer_shares": 1600000,
@@ -269,7 +269,37 @@
           "pct": 81.86
         }
       ],
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "sub_ratio": 1307.78,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 159800,
+          "pct": 14.49
+        },
+        {
+          "period": "3개월",
+          "qty": 218700,
+          "pct": 19.83
+        },
+        {
+          "period": "1개월",
+          "qty": 174440,
+          "pct": 15.82
+        },
+        {
+          "period": "15일",
+          "qty": 311650,
+          "pct": 28.26
+        },
+        {
+          "period": "미확약",
+          "qty": 238336,
+          "pct": 21.61
+        }
+      ],
+      "report_rcp": "20260918000412",
+      "result_parse_version": 2
     },
     {
       "corp_code": "01564514",
@@ -465,33 +495,6 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false
-    },
-    {
-      "corp_code": "01705740",
-      "name": "엠비디",
-      "first_filing_date": "20260828",
-      "last_rcept_no": "20260828001853",
-      "offering_attempt": 1,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "band_low": 9400,
-      "band_high": 11500,
-      "offer_shares": 2000000,
-      "forecast_start": "2026-09-21",
-      "forecast_end": "2026-09-29",
-      "sub_start": "2026-10-06",
-      "sub_end": "2026-10-07",
-      "underwriter": "하나증권",
-      "payment_date": "2026-10-12",
-      "market": "코스닥",
-      "is_listing_ipo": true,
-      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01754737",
@@ -753,6 +756,33 @@
       "schedule_hidden": false
     },
     {
+      "corp_code": "01705740",
+      "name": "엠비디",
+      "first_filing_date": "20260828",
+      "last_rcept_no": "20260918000439",
+      "offering_attempt": 1,
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "band_low": 9600,
+      "band_high": 11700,
+      "offer_shares": 2000000,
+      "forecast_start": "2026-10-16",
+      "forecast_end": "2026-10-22",
+      "sub_start": "2026-10-28",
+      "sub_end": "2026-10-29",
+      "underwriter": "하나증권",
+      "payment_date": "2026-11-02",
+      "market": "코스닥",
+      "is_listing_ipo": true,
+      "transfer_market": "코스닥"
+    },
+    {
       "corp_code": "01835829",
       "name": "바로팜",
       "first_filing_date": "20260908",
@@ -798,7 +828,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -809,7 +839,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -820,7 +850,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -831,7 +861,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -842,39 +872,9 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01936340",
-      "name": "데이터젠",
-      "management_name": "데이터젠",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01760118",
-      "name": "스탁키퍼",
-      "management_name": "스탁키퍼",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
-    },
-    {
-      "corp_code": "01645448",
-      "name": "열매컴퍼니",
-      "management_name": "열매컴퍼니",
-      "first_filing_date": "",
-      "last_rcept_no": "",
-      "withdrawn": false,
-      "review_pending": false,
-      "management_status": "자동"
     }
   ],
   "past_items": [
@@ -18129,78 +18129,6 @@
   ],
   "history": [
     {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-08",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-08",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-08",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
       "date": "2026-08-08",
       "name": "스탁키퍼",
       "type": "정정공시",
@@ -22127,6 +22055,78 @@
       "field": "상태",
       "old": "미등록",
       "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "희망가액(하단)",
+      "old": "9400",
+      "new": "9600"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "희망가액(상단)",
+      "old": "11500",
+      "new": "11700"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-09-21",
+      "new": "2026-10-16"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-09-29",
+      "new": "2026-10-22"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-10-06",
+      "new": "2026-10-28"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "엠비디",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-10-07",
+      "new": "2026-10-29"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [
