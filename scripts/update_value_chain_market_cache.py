@@ -34,28 +34,30 @@ def write_json(name: str, data) -> None:
 
 
 def latest_cached_date(metrics: dict) -> date | None:
-    dates: list[str] = []
+    dates: list[date] = []
     for issue in metrics.get("issues", []):
         for company in issue.get("companies", []):
             for period in ("day", "week", "month", "quarter", "half"):
                 for point in company.get(period, {}).get("tradingValueIndex", []):
-                    if point.get("date"):
-                        dates.append(point["date"])
-    if not dates:
-        return None
-    try:
-        return date.fromisoformat(max(dates))
-    except ValueError:
-        return None
+                    try:
+                        dates.append(date.fromisoformat(point.get("date", "")))
+                    except (ValueError, TypeError):
+                        continue
+    return max(dates) if dates else None
 
 
-def find_anchor_date(krx_snapshot, metrics: dict, lookback_days: int = 12) -> date:
-    today = datetime.now(ZoneInfo("Asia/Seoul")).date()
+def find_anchor_date(krx_snapshot, metrics: dict, lookback_days: int = 12, *, today: date | None = None) -> date:
+    today = today or datetime.now(ZoneInfo("Asia/Seoul")).date()
     cached = latest_cached_date(metrics)
-    if cached and 0 <= (today - cached).days <= lookback_days:
-        return cached
+    if cached and cached > today:
+        cached = None
     for back in range(lookback_days + 1):
         target = today - timedelta(days=back)
+        # Reuse the cache only after checking every newer business day.
+        if cached and target <= cached:
+            return cached
+        if target.weekday() >= 5:
+            continue
         snap = krx_snapshot(target.strftime("%Y%m%d"))
         if snap:
             return target
@@ -238,7 +240,7 @@ def main() -> None:
                     updated_metric_rows += 1
                 if market["marketCap"] and company["id"] in financials_by_id:
                     financials_by_id[company["id"]]["marketCap"] = round(market["marketCap"] / KRW_EOK)
-                    financials_by_id[company["id"]]["asOf"] = f"KRX {as_of}"
+                    financials_by_id[company["id"]]["marketCapAsOf"] = as_of
                     updated_market_caps += 1
 
     metrics["generatedAt"] = datetime.now(ZoneInfo("Asia/Seoul")).isoformat()

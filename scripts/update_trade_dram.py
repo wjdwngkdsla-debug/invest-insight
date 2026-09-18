@@ -21,6 +21,11 @@ def shift(month: str, offset: int) -> str:
     n = year * 12 + m - 1 + offset
     return f"{n // 12:04d}-{n % 12 + 1:02d}"
 
+def default_end_month(today: date | None = None) -> str:
+    today = today or date.today()
+    # Customs normally publishes the previous month around the 15th.
+    return shift(today.strftime("%Y-%m"), -1 if today.day >= 16 else -2)
+
 def parse_all(raw: bytes, month: str, hs: str) -> tuple[list[dict], int, float]:
     root = ET.fromstring(raw)
     code = root.findtext(".//resultCode") or root.findtext(".//returnReasonCode")
@@ -78,7 +83,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--probe", action="store_true")
     parser.add_argument("--product", choices=[*PRODUCTS, "all"], default="all")
-    parser.add_argument("--end", default=shift(date.today().strftime("%Y-%m"), -2))
+    parser.add_argument("--end", default=default_end_month())
     args = parser.parse_args()
     if not DATA_GO_KR_API_KEY:
         raise ValueError("DATA_GO_KR_API_KEY is missing.")
