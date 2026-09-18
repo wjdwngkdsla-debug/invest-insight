@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Pause, Play, ChartNoAxesCombined } from "lucide-react";
 import RoundCarousel from "@/components/originkit/RoundCarousel";
-import { productImage } from "./product-images";
+import { productImage, sectorImage } from "./product-images";
 import { CompanyIdentity, CompanyLogo } from "./CompanyLogo";
 import { companyLogos } from "@/lib/company-logos";
 
@@ -48,6 +48,7 @@ export default function ThemeCarousel<T extends Item>({ center, companyId, items
     <div className="theme-carousel-scene">
       {count ? <RoundCarousel
         images={cardItems.map(item => {
+          if (item.type === "issue") return sectorImage(item.id);
           const logo = item.type === "company" ? companyLogos[item.id] : undefined;
           return logo ? { src: logo.src, size: `${Math.min(width * .66, logo.width ?? 96)}px auto`, position: "center 35%", background: logo.canvasColor ?? (logo.background === "dark" ? "#23313d" : "#ffffff") } : productImage(item.id, `${item.name} ${item.role}`);
         })}

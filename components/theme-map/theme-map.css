@@ -120,6 +120,84 @@ body:has(.theme-workspace)>footer { display:none; }
 .theme-trade-content .map-country-list button:hover,.theme-trade-content .map-country-list button[aria-pressed="true"] { background:#ffffff10; }
 .theme-trade-content .map-loading { background:#090c10; color:#b0bac4; }
 .theme-shell { scrollbar-color:#3c434a #101316; scrollbar-width:thin; }
+.trade-explore-toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:0; padding:18px 24px 8px; background:#090c10; }
+.trade-explore-toolbar .globe-filterbar { margin:0; padding:0; flex-wrap:wrap; gap:10px; }
+.trade-explore-tools { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.trade-panel-icon { display:grid; place-items:center; width:32px; height:32px; border:1px solid #ffffff12; border-radius:6px; color:#aeb9c9; background:#ffffff05; cursor:pointer; }
+.trade-panel-icon:hover { background:#ffffff12; color:#fff; }
+.trade-panel-icon:focus-visible,.trade-reset-country:focus-visible { outline:2px solid #8ca6ff; outline-offset:3px; }
+.trade-reset-country { display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border:1px solid #ffffff20; border-radius:999px; background:#ffffff08; color:#b4bfce; font-size:11px; font-weight:600; white-space:nowrap; cursor:pointer; }
+.trade-reset-country[aria-pressed="true"] { background:#3656e522; color:#b7c8ff; border-color:#7089f84d; }
+.trade-explorer { display:grid; grid-template-columns:minmax(0,1fr) minmax(420px,37%); align-items:stretch; background:#090c10; padding-bottom:12px; }
+.trade-explorer .trade-geography { position:relative; min-width:0; min-height:620px; }
+.trade-explorer .trade-geography .globe-wrap:not(.globe-expanded) { position:absolute; inset:0; height:100%; }
+.trade-explorer .trade-geography .globe-wrap:not(.globe-expanded) .trade-map { height:100%; }
+.trade-explorer .globe-wrap:not(.globe-expanded) .map-controls { top:18px; left:24px; right:auto; flex-direction:row; gap:5px; }
+.theme-trade-content .trade-explorer .map-controls button { background:#ffffff05; border-color:#ffffff12; color:#aeb9c9; }
+.theme-trade-content .trade-explorer .map-controls button:hover { background:#ffffff12; color:#fff; }
+.trade-explorer .globe-wrap:not(.globe-expanded) .map-detail-column { top:66px; left:24px; }
+.theme-trade-content .trade-explorer .globe-wrap:not(.globe-expanded) .map-legend { background:transparent; left:24px; right:auto; bottom:16px; padding:0; gap:8px 12px; color:#85929e; }
+.trade-country-analysis { min-width:0; padding:20px 24px 12px 16px; background:transparent; }
+.trade-country-analysis[hidden] { display:none; }
+.trade-analysis-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:0; }
+.trade-analysis-heading>div:first-child { flex:1; min-width:0; }
+.trade-analysis-heading h2 { font-size:21px; line-height:1.4; font-weight:700; color:#f1f4f9; margin-top:3px; }
+.trade-analysis-period { color:#7f8b9e; font-size:11px; font-variant-numeric:tabular-nums; }
+.trade-analysis-country { display:block; width:100%; margin-top:6px; }
+.theme-trade-content .trade-country-analysis .trade-analysis-country { background:transparent; border-color:transparent; padding:2px 24px 2px 0; color:#eef2f5; font-size:20px; font-weight:600; line-height:1.4; }
+.theme-trade-content .trade-country-analysis .trade-analysis-country:hover { color:#b9d2e4; }
+.theme-trade-content .trade-country-analysis .trade-analysis-country option { background:#14191f; color:#e2e7ed; font-size:13px; }
+.trade-analysis-heading .trade-explore-tools { padding-top:12px; }
+.trade-analysis-stats { display:grid; grid-template-columns:minmax(0,2.5fr) minmax(0,1fr); gap:16px; padding:20px 0 24px; }
+.trade-analysis-stats>div { display:flex; flex-direction:column; gap:7px; min-width:0; }
+.trade-analysis-stats span { color:#85929e; font-size:11px; }
+.trade-analysis-stats strong { font-size:22px; line-height:1.4; color:#e9edf5; font-weight:600; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.trade-analysis-stats>div:last-child strong { font-size:19px; }
+.trade-analysis-stats>div:last-child { text-align:right; }
+.trade-country-analysis .section-heading { padding:12px 0 10px; }
+.theme-trade-content .trade-country-analysis .segmented button { padding:5px 9px; }
+.trade-country-analysis .section-heading h2 { font-size:14px; }
+.trade-country-analysis .section-heading p { display:none; }
+.trade-country-analysis .trend-options { flex-wrap:wrap; gap:8px; }
+.trade-country-analysis .trend-options select { flex:1; min-width:0; font-size:11px; }
+.theme-trade-content .trade-country-analysis .trend-options select { background:#ffffff04; border-color:#ffffff14; color:#b7c3cd; }
+.theme-trade-content .trade-country-analysis .segmented { background:#ffffff04; border-color:#ffffff10; }
+.theme-trade-content .trade-country-analysis .segmented button:not(.active) { color:#85929e; }
+.theme-trade-content .trade-country-analysis .trend-bar { fill:#7795ac; opacity:.55; }
+.theme-trade-content .trade-country-analysis .trend-bar[data-selected="true"] { fill:#b0cee0; opacity:1; }
+.theme-trade-content .trade-country-analysis .trend-grid { background:#ffffff09; }
+.theme-trade-content .trade-country-analysis .trend-axis-head,.theme-trade-content .trade-country-analysis .trend-change-toggle { color:#85929e; }
+.trade-country-analysis .trend-change-toggle { font-size:10px; }
+.trade-country-analysis .trade-overlay-chart { margin:14px 48px 32px 42px; }
+.trade-country-analysis .trend-axis-head { margin:10px 0 6px; }
+.trade-country-analysis .trade-overlay-chart[data-extra-axis="true"] { margin-right:110px; }
+.trade-country-analysis .trend-months span { font-size:8px; }
+.trade-country-analysis .trend-readout { min-height:64px; padding-bottom:0; font-size:10px; }
+.theme-trade-content .trade-country-analysis .trend-readout { border-color:#ffffff09; color:#85929e; }
+.trade-explorer[data-panel-open="false"],.trade-explorer[data-chart-expanded="true"] { grid-template-columns:minmax(0,1fr); }
+.trade-explorer[data-chart-expanded="true"] .trade-geography { display:none; }
+.trade-explorer[data-chart-expanded="true"] .trade-country-analysis { border-left:0; }
+.trade-explorer[data-chart-expanded="true"] .trade-analysis-country { max-width:300px; }
+.trade-explorer[data-chart-expanded="true"] .trade-analysis-stats { max-width:600px; }
+@media(max-width:1100px) {
+ .trade-explorer { grid-template-columns:minmax(0,1fr) 400px; }
+ .trade-country-analysis { padding:20px 24px 12px 12px; }
+}
+@media(max-width:850px) {
+ .trade-explorer { grid-template-columns:minmax(0,1fr); }
+ .trade-explorer .trade-geography { min-height:420px; }
+ .trade-country-analysis { padding:20px 16px 12px; }
+ .trade-explore-toolbar { flex-wrap:wrap; padding:14px 16px 4px; }
+ .trade-explorer .globe-wrap:not(.globe-expanded) .map-controls { left:16px; top:14px; gap:4px; }
+ .trade-explorer .globe-wrap:not(.globe-expanded) .map-detail-column { left:16px; top:58px; }
+ .theme-trade-content .trade-explorer .globe-wrap:not(.globe-expanded) .map-legend { left:16px; bottom:10px; }
+ .trade-analysis-stats { padding:16px 0; }
+ .trade-analysis-stats strong { font-size:19px; }
+ .trade-explore-toolbar .globe-filterbar { font-size:10px; }
+ .trade-explore-toolbar .globe-filterbar select { min-width:0; width:100px; padding:7px; font-size:11px; }
+ .trade-explore-tools { gap:6px; }
+ .trade-reset-country { padding:0 9px; font-size:10px; }
+}
 @media(min-width:1600px) { .theme-carousel { left:50px; right:50px; }.theme-carousel-heading h1 { font-size:44px; } }
 @media(max-width:900px) {
  body:has(.theme-workspace)>header { height:92px; padding:12px 16px; flex-direction:column; align-items:flex-start; justify-content:center; gap:8px; }

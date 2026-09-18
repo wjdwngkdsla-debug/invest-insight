@@ -14,7 +14,8 @@ Successful images are reused for 30 days; unavailable brands are retried after
 `--domains-only` discovers DART homepage domains without Brandfetch requests.
 
 Image responses must pass content-type, byte-size, dimensions and Pillow decoding
-checks. Unsupported assets and missing brands use initials in the interface.
+checks. Unsupported assets and missing brands use the shared company image in badges;
+carousel cards prefer a matching industrial product image before that fallback.
 Existing successful files remain intact if API requests fail or are rate limited.
 
 Domestic domains come from DART company profiles, with four official-site

@@ -1,4 +1,21 @@
 import { companyPlaceholder } from "@/lib/company-logos";
+import sectorImages from "@/data/value-chain/sector-images.json";
+import issues from "@/data/value-chain/issues.json";
+
+type SectorImage = { src: string; tile?: number };
+const sectorVisuals: Record<string, SectorImage> = sectorImages;
+const sectorTopicIds = Object.fromEntries(issues.map(issue => [issue.id, issue.topicId]));
+
+// Sector artwork is independent of company logos and company placeholders.
+export function sectorImage(id: string) {
+  const topicId = sectorTopicIds[id] ?? id.replace(/^topic-/, "");
+  const visual = sectorVisuals[topicId] ?? sectorVisuals.wafer;
+  return visual.tile === undefined ? { src: visual.src } : {
+    src: visual.src,
+    position: `${(visual.tile % 3) * 50}% ${Math.floor(visual.tile / 3) * 100}%`,
+    size: "300% 200%",
+  };
+}
 
 // Add a company ID and a local image path here to replace its product-group visual.
 export const companyProductImages: Record<string, string> = {};

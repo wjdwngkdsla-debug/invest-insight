@@ -3,8 +3,8 @@
 import { useCallback, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowDownToLine, ArrowUpRight, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
-import { signed, summarizeTrade, countryInfo, tradeRegions, tradeProducts, usdText, kgText, sortTradeCountries, percentagePoints, type TradeCountrySort, type TradeDataset, type TradeProduct } from "@/lib/trade";
+import { ArrowDownToLine, ArrowUpRight, ArrowUp, ArrowDown, ArrowUpDown, Globe2, PanelRightClose, PanelRightOpen, Maximize2, Minimize2, X } from "lucide-react";
+import { signed, summarizeTrade, countryInfo, tradeRegions, tradeProducts, usdText, sortTradeCountries, percentagePoints, type TradeCountrySort, type TradeDataset, type TradeProduct } from "@/lib/trade";
 import type { CompanyHistory } from "@/lib/trade-overlay";
 import TradeTrend from "./TradeTrend";
 import TradeUpdates from "./TradeUpdates";
@@ -35,8 +35,14 @@ function TradeContent({ data, product, companies }: { data: TradeDataset; produc
   const [country, setCountry] = useState("all");
   const [region, setRegion] = useState("all");
   const [countryQuery, setCountryQuery] = useState("");
+  const [analysisOpen, setAnalysisOpen] = useState(true);
+  const [chartExpanded, setChartExpanded] = useState(false);
   const [sort, setSort] = useState<{ key: TradeCountrySort; direction: "asc" | "desc" }>({ key: "usd", direction: "desc" });
-  const onSelect = useCallback((code: string) => setCountry(code), []);
+  const onSelect = useCallback((code: string) => {
+    setCountry(code);
+    setAnalysisOpen(true);
+  }, []);
+  const resetCountry = () => { setCountry("all"); setRegion("all"); };
   const summary = useMemo(() => summarizeTrade(data, month, country, startMonth), [data, month, country, startMonth]);
   const mapCountries = useMemo(() => summarizeTrade(data, month, "all", startMonth).countries.filter(c => c.usd > 0), [data, month, startMonth]);
   const tableCountries = sortTradeCountries(mapCountries.filter(c => (region === "all" || c.region === region) && (c.name.toLowerCase().includes(countryQuery.toLowerCase()) || c.code.toLowerCase().includes(countryQuery.toLowerCase()))), sort.key, sort.direction);
@@ -60,36 +66,44 @@ function TradeContent({ data, product, companies }: { data: TradeDataset; produc
           <span aria-hidden="true">~</span>
           <select aria-label="종료월" value={month} onChange={e => { const next = e.target.value; setMonth(next); if (next < startMonth) setStartMonth(next); setCountry("all"); setRegion("all"); }}>{months.slice().reverse().map(m => <option key={m} value={m}>{m.replace("-", ".")}</option>)}</select>
         </div>
-        <select aria-label="수출 대상국" value={country} onChange={e => { setCountry(e.target.value); setRegion("all"); }}><option value="all">전체 국가·지역</option>{codes.map(countryInfo).sort((a,b) => a.name.localeCompare(b.name, "ko")).map(c => <option value={c.code} key={c.code}>{c.name}</option>)}</select>
         <button className="trade-download" aria-label="CSV 다운로드" title="CSV 다운로드" onClick={exportCsv}><ArrowDownToLine size={16} /></button>
       </div>
     </div>
-    <section className="trade-geography" aria-label="국가별 수출 지도">
-      <div className="globe-filterbar"><select aria-label="대륙 필터" value={region} onChange={e => { setRegion(e.target.value); setCountry("all"); }}><option value="all">모든 대륙</option>{Object.entries(tradeRegions).filter(([key]) => mapCountries.some(c => c.region === key)).map(([key,name]) => <option key={key} value={key}>{name}</option>)}</select><span>{region === "all" ? mapCountries.length : mapCountries.filter(c => c.region === region).length}개 국가·지역</span>{country !== "all" && <button onClick={() => setCountry("all")}>전체 흐름</button>}</div>
-      <TradeMap countries={mapCountries} selected={country} onSelect={onSelect} region={region} />
-    </section>
+    <div className="trade-explore-toolbar">
+      <div className="globe-filterbar"><select aria-label="대륙 필터" value={region} onChange={e => { setRegion(e.target.value); setCountry("all"); }}><option value="all">모든 대륙</option>{Object.entries(tradeRegions).filter(([key]) => mapCountries.some(c => c.region === key)).map(([key,name]) => <option key={key} value={key}>{name}</option>)}</select><span>{region === "all" ? mapCountries.length : mapCountries.filter(c => c.region === region).length}개 국가·지역</span></div>
+      <div className="trade-explore-tools">
+        <button className="trade-reset-country" aria-pressed={country === "all" && region === "all"} onClick={resetCountry}><Globe2 size={14} />전체 국가</button>
+        <button className="trade-panel-icon" aria-label={analysisOpen ? "분석 패널 접기" : "분석 패널 열기"} title={analysisOpen ? "분석 패널 접기" : "분석 패널 열기"} aria-expanded={analysisOpen} aria-controls="trade-country-analysis" onClick={() => { setAnalysisOpen(v => !v); setChartExpanded(false); }}>{analysisOpen ? <PanelRightClose size={17} /> : <PanelRightOpen size={17} />}</button>
+      </div>
+    </div>
+    <div className="trade-explorer" data-panel-open={analysisOpen} data-chart-expanded={chartExpanded}>
+      <section className="trade-geography" aria-label="국가별 수출 지도">
+        <TradeMap countries={mapCountries} selected={country} onSelect={onSelect} region={region} />
+      </section>
+      <aside id="trade-country-analysis" className="trade-country-analysis" aria-label="선택 국가 수출 분석" hidden={!analysisOpen} onKeyDown={e => { if (e.key === "Escape") setChartExpanded(false); }}>
+        <div className="trade-analysis-heading">
+          <div><span className="trade-analysis-period">{periodLabel}</span><select className="trade-analysis-country" aria-label="수출 대상국" value={country} onChange={e => { setCountry(e.target.value); setRegion("all"); }}><option value="all">전체 국가·지역</option>{codes.map(countryInfo).sort((a,b) => a.name.localeCompare(b.name, "ko")).map(c => <option value={c.code} key={c.code}>{c.name}</option>)}</select></div>
+          <div className="trade-explore-tools">
+            {country !== "all" && <button className="trade-panel-icon" aria-label="국가 선택 해제" title="국가 선택 해제" onClick={resetCountry}><X size={16} /></button>}
+            <button className="trade-panel-icon" aria-label={chartExpanded ? "지도와 함께 보기" : "차트 확대"} title={chartExpanded ? "지도와 함께 보기" : "차트 확대"} aria-pressed={chartExpanded} onClick={() => setChartExpanded(v => !v)}>{chartExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}</button>
+          </div>
+        </div>
+        <div className="trade-analysis-stats"><div><span>수출금액</span><strong>{summary.now === null ? "자료 없음" : usdText(summary.now)}</strong></div><div><span>{startMonth === month ? "전월 대비" : "직전 기간 대비"}</span><strong className={signClass(summary.mom)}>{signed(summary.mom)}</strong></div></div>
+        <TradeTrend chart={summary.chart} countryName={countryName} companies={companies} start={startMonth} end={month} />
+      </aside>
+    </div>
     <div className="trade-analysis-grid">
-      <TradeTrend chart={summary.chart} countryName={countryName} companies={companies} start={startMonth} end={month} />
       <section className="trade-country-table"><div className="section-heading"><h2>국가별 수출</h2><span className="unit-label">{periodLabel} · 달러</span></div>
         <input className="trade-country-search" aria-label="국가 검색" placeholder="국가명 또는 국가코드 검색" value={countryQuery} onChange={e => setCountryQuery(e.target.value)} />
         <div className="trade-table-scroll"><table><thead><tr><th>국가</th>{sortHeader("수출금액", "usd")}{sortHeader("순중량(kg)", "kg")}{sortHeader("달러/kg", "usdPerKg")}{sortHeader("YoY", "change", "선택 기간")}{sortHeader("MoM", "mom", month.replace("-", "."))}{sortHeader("비중", "share", "선택 기간")}{sortHeader("비중 변화", "shareChange", `${month.replace("-", ".")} 전월 대비`)}</tr></thead>
           <tbody>{tableCountries.map(c => <tr key={c.code} className={country === c.code ? "selected" : ""}>
-            <td><button aria-pressed={country === c.code} onClick={() => setCountry(country === c.code ? "all" : c.code)}>{c.name}</button></td>
+            <td><button aria-pressed={country === c.code} onClick={() => onSelect(country === c.code ? "all" : c.code)}>{c.name}</button></td>
             <td>{usdText(c.usd).replace(" 달러", "")}</td><td>{c.kg === null ? "—" : Math.round(c.kg).toLocaleString("ko-KR")}</td><td>{c.usdPerKg === null ? "—" : Math.round(c.usdPerKg).toLocaleString("ko-KR")}</td><td className={signClass(c.change)}>{signed(c.change)}</td><td className={signClass(c.mom)}>{signed(c.mom)}</td>
             <td>{c.share === null ? "—" : c.share > 0 && c.share < 1 ? "1% 미만" : Math.round(c.share) + "%"}</td>
             <td className={signClass(c.shareChange)}>{percentagePoints(c.shareChange)}</td>
           </tr>)}</tbody></table>{!tableCountries.length && <p className="trade-no-results">검색 결과가 없습니다.</p>}</div>
       </section>
     </div>
-    <section className="trade-summary" aria-label="수출 요약">
-      <h2>수출 요약</h2>
-      <div className="trade-kpis">
-        <div><span>{startMonth === month ? "월 수출금액" : "기간 수출금액"}</span><strong>{summary.now === null ? "자료 없음" : usdText(summary.now)}</strong><p>{periodLabel} · {countryName}</p></div>
-        <div><span>전년 동기 대비</span><strong className={signClass(summary.yoy)}>{signed(summary.yoy)}</strong><p>{startMonth === month ? "전월 대비" : "직전 동일 길이 기간 대비"} <b className={signClass(summary.mom)}>{signed(summary.mom)}</b></p></div>
-        <div><span>종료월 기준 최근 3개월</span><strong>{summary.recent === null ? "자료 없음" : usdText(summary.recent)}</strong><p>전년 동기 대비 <b className={signClass(summary.recentGrowth)}>{signed(summary.recentGrowth)}</b></p></div>
-      </div>
-      <div className="trade-weight-summary"><div><span>기간 수출 순중량</span><strong>{kgText(summary.kg)}</strong></div><div><span>kg당 수출액</span><strong>{summary.usdPerKg === null ? "자료 없음" : `${Math.round(summary.usdPerKg).toLocaleString("ko-KR")} 달러/kg`}</strong><p>수출금액 ÷ 순중량 · 제품 판매단가와 다릅니다.</p></div></div>
-    </section>
     <div className="trade-related"><span>관련 기업</span>{product.companies.map(c => c.id ? <Link key={c.name} href={`/value-chain?company=${c.id}`}>{c.name}<ArrowUpRight size={12} /></Link> : <span key={c.name} className="trade-related-name">{c.name}</span>)}</div>
     <details className="trade-method"><summary>출처·집계 기준</summary>
       <p>관세청 월별 수출신고 미화금액(FOB). 시작월부터 종료월까지 합산하며, 전년 동기는 같은 월 범위를 1년 전과 비교합니다. 비중은 선택 기간 전체 품목 수출액 기준입니다. 모든 대상국 합계와 공식 총계가 일치한 월만 사용합니다. 기간 중 일부 월에 국가 행이 없으면 확인된 수출 신고액만 합산하며, 기간 전체에 응답이 없는 국가나 비교 기간이 누락된 경우는 자료 없음으로 처리합니다. 통계는 사후 정정될 수 있습니다.</p>

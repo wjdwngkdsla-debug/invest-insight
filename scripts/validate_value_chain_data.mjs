@@ -17,6 +17,7 @@ const companies = readJson("companies.json");
 const financials = readJson("financials.json");
 const issues = readJson("issues.json");
 const marketMetrics = readJson("market-metrics.json");
+const sectorImages = readJson("sector-images.json");
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const topicIds = new Set(topics.map((topic) => topic.id));
@@ -32,6 +33,20 @@ function requireRef(condition, message) {
 
 function warn(condition, message) {
   if (!condition) warnings.push(message);
+}
+
+for (const [topicId, image] of Object.entries(sectorImages)) {
+  requireRef(topicIds.has(topicId), `sector image references missing topic ${topicId}`);
+  requireRef(typeof image.src === "string" && image.src.startsWith("/theme-products/") && !image.src.includes(".."), `sector ${topicId} requires a local industry image`);
+  requireRef(image.src !== "/theme-products/company-placeholder.png", `sector ${topicId} must not use the company placeholder`);
+  if (typeof image.src === "string") requireRef(fs.existsSync(path.join(rootDir, "public", image.src)), `sector ${topicId} image file missing: ${image.src}`);
+  requireRef(image.tile === undefined || (Number.isInteger(image.tile) && image.tile >= 0 && image.tile < 6), `sector ${topicId} atlas tile must be 0..5`);
+}
+for (const topic of topics.filter(topic => topic.kind !== "hub" && topic.companyIds.length)) {
+  requireRef(sectorImages[topic.id], `topic ${topic.id} requires a sector-images.json entry`);
+}
+for (const issue of issues) {
+  requireRef(sectorImages[issue.topicId], `issue ${issue.id} requires a sector-images.json entry for ${issue.topicId}`);
 }
 
 for (const topic of topics) {
