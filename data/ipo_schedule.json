@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17 00:13",
+  "updated": "2026-09-18 08:51",
   "items": [
     {
       "corp_code": "00104069",
@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -133,14 +133,14 @@
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
-      "last_rcept_no": "20260911000214",
+      "last_rcept_no": "20260917000071",
       "band_low": 10000,
       "band_high": 12000,
       "forecast_start": "2026-09-04",
       "forecast_end": "2026-09-10",
       "sub_start": "2026-09-14",
       "sub_end": "2026-09-15",
-      "payment_date": "2026-09-17",
+      "payment_date": "2026-09-14",
       "underwriter": "대신증권",
       "market": "코스닥",
       "offer_shares": 1600000,
@@ -183,7 +183,37 @@
           "pct": 96.35
         }
       ],
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "sub_ratio": 1477.65,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 104252,
+          "pct": 8.69
+        },
+        {
+          "period": "3개월",
+          "qty": 12413,
+          "pct": 1.03
+        },
+        {
+          "period": "1개월",
+          "qty": 7223,
+          "pct": 0.6
+        },
+        {
+          "period": "15일",
+          "qty": 543406,
+          "pct": 45.28
+        },
+        {
+          "period": "미확약",
+          "qty": 532706,
+          "pct": 44.39
+        }
+      ],
+      "report_rcp": "20260917000071",
+      "result_parse_version": 2
     },
     {
       "corp_code": "01722066",
@@ -646,7 +676,7 @@
       "corp_code": "01540903",
       "name": "크리에이츠",
       "first_filing_date": "20260904",
-      "last_rcept_no": "20260904000286",
+      "last_rcept_no": "20260917000141",
       "offering_attempt": 1,
       "band_low": 15000,
       "band_high": 18000,
@@ -718,7 +748,9 @@
       "commit_apply_missing": 4,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false
     },
     {
       "corp_code": "01835829",
@@ -760,13 +792,24 @@
       "management_status": "제외고정"
     },
     {
+      "corp_code": "02036869",
+      "name": "아이엠기업인수목적1호",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": true,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 4
+    },
+    {
       "corp_code": "02032951",
       "name": "에스케이증권제14호기업인수목적",
       "fixed_excluded": true,
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -777,7 +820,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -788,9 +831,50 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
+    },
+    {
+      "corp_code": "01965157",
+      "name": "한화플러스제6호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": true,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 4
+    },
+    {
+      "corp_code": "01936340",
+      "name": "데이터젠",
+      "management_name": "데이터젠",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "01760118",
+      "name": "스탁키퍼",
+      "management_name": "스탁키퍼",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
+    },
+    {
+      "corp_code": "01645448",
+      "name": "열매컴퍼니",
+      "management_name": "열매컴퍼니",
+      "first_filing_date": "",
+      "last_rcept_no": "",
+      "withdrawn": false,
+      "review_pending": false,
+      "management_status": "자동"
     }
   ],
   "past_items": [
@@ -18045,190 +18129,6 @@
   ],
   "history": [
     {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-03-17",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-03-30",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-05",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-03-17",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-03-30",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "데이터젠",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "데이터젠",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-06",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-07",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
       "date": "2026-08-07",
       "name": "스탁키퍼",
       "type": "수동편입",
@@ -22043,6 +21943,190 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "한화플러스제6호기업인수목적",
+      "type": "자동제외",
+      "field": "대상구분",
+      "old": "일반 IPO",
+      "new": "스팩(비노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "아이엠기업인수목적1호",
+      "type": "자동제외",
+      "field": "대상구분",
+      "old": "일반 IPO",
+      "new": "스팩(비노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-17",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "데이터젠",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "스탁키퍼",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "열매컴퍼니",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "데이터젠",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "스탁키퍼",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "열매컴퍼니",
+      "type": "수동편입",
+      "field": "상태",
+      "old": "미등록",
+      "new": "공모 준비(미정 선노출)"
     }
   ],
   "seed_pending": [
@@ -22067,37 +22151,49 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-16",
+      "excluded_at": "2026-09-18",
+      "memo": "자동 제외(스팩)"
+    },
+    "corp:02036869": {
+      "name": "아이엠기업인수목적1호",
+      "corp_code": "02036869",
+      "excluded_at": "2026-09-18",
+      "memo": "자동 제외(스팩)"
+    },
+    "corp:01965157": {
+      "name": "한화플러스제6호기업인수목적",
+      "corp_code": "01965157",
+      "excluded_at": "2026-09-18",
       "memo": "자동 제외(스팩)"
     }
   }
