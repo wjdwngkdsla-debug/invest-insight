@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -61,7 +61,7 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-09-21",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -147,7 +147,7 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-09-23",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -231,7 +231,7 @@
       "market": "코스닥",
       "offer_shares": 1600000,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-09-29",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -319,7 +319,7 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-09-29",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -375,7 +375,7 @@
       "is_listing_ipo": true,
       "ipo_parse_version": 4,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-09-30",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -429,7 +429,7 @@
       "offer_shares": 1200000,
       "is_listing_ipo": true,
       "withdrawn": false,
-      "listing_date": "",
+      "listing_date": "2026-10-01",
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
@@ -616,11 +616,12 @@
       "listing_date": "",
       "stock_code": "",
       "review_pending": true,
-      "management_status": "자동",
-      "schedule_hidden": false,
+      "management_status": "제외고정",
+      "schedule_hidden": true,
       "review_reason": "일반 IPO 아님",
       "offering_attempt": 1,
-      "result_parse_version": 2
+      "result_parse_version": 2,
+      "fixed_excluded": true
     },
     {
       "corp_code": "01706509",
@@ -828,7 +829,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -839,7 +840,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -850,7 +851,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -861,7 +862,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -872,7 +873,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     }
@@ -18130,38 +18131,6 @@
   "history": [
     {
       "date": "2026-08-09",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-09",
       "name": "열매컴퍼니",
       "type": "수동편입",
       "field": "상태",
@@ -22127,6 +22096,38 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "투게더아트",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "자동",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [
@@ -22195,6 +22196,30 @@
       "corp_code": "01965157",
       "excluded_at": "2026-09-19",
       "memo": "자동 제외(스팩)"
+    },
+    "corp:01936340": {
+      "name": "데이터젠",
+      "corp_code": "01936340",
+      "excluded_at": "2026-09-19",
+      "memo": ""
+    },
+    "corp:01760118": {
+      "name": "스탁키퍼",
+      "corp_code": "01760118",
+      "excluded_at": "2026-09-19",
+      "memo": ""
+    },
+    "corp:01645448": {
+      "name": "열매컴퍼니",
+      "corp_code": "01645448",
+      "excluded_at": "2026-09-19",
+      "memo": ""
+    },
+    "corp:01721933": {
+      "name": "투게더아트",
+      "corp_code": "01721933",
+      "excluded_at": "2026-09-19",
+      "memo": ""
     }
   }
 }
