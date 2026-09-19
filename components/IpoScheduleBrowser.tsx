@@ -1,42 +1,61 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { Search, X } from "lucide-react";
 import type { IpoItem } from "@/lib/ipo";
-import { matchesIpo, type IpoFilter } from "@/lib/ipo-filter";
+import { IPO_STAGE_STYLE, compareIpoStages, ipoToday, matchesIpoStage, type IpoStageFilter } from "@/lib/ipo-stage";
 
-const filters: { value: IpoFilter; label: string }[] = [
-  { value: "active", label: "진행 일정" }, { value: "all", label: "전체 이력" },
-  { value: "upcoming", label: "청약·수요예측 예정" }, { value: "forecast", label: "수요예측 중" },
-  { value: "subscription", label: "청약 중" }, { value: "waiting", label: "상장 대기" },
-  { value: "listed", label: "상장 완료" }, { value: "withdrawn", label: "공모 철회" },
-  { value: "unscheduled", label: "일정 미정" },
+const filters: { value: IpoStageFilter; label: string }[] = [
+  { value: "all", label: "전체" },
+  { value: "listing", label: "상장" },
+  { value: "subscription", label: "청약" },
+  { value: "forecast", label: "수요예측" },
+  { value: "upcoming", label: "공모예정" },
 ];
 
-export function IpoScheduleBrowser({ entries, initialToday }: { entries: { id: string; item: IpoItem; card: ReactNode }[]; initialToday: string }) {
+export function IpoScheduleBrowser({ entries, initialToday }: {
+  entries: { id: string; item: IpoItem; card: ReactNode; archived: boolean }[];
+  initialToday: string;
+}) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<IpoFilter>("active");
+  const [filter, setFilter] = useState<IpoStageFilter>("all");
+  const [showHistory, setShowHistory] = useState(false);
   const [today, setToday] = useState(initialToday);
   useEffect(() => {
-    const update = () => setToday(new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul" }).format(new Date()));
+    const update = () => setToday(ipoToday());
     update();
     const timer = setInterval(update, 60000);
     return () => clearInterval(timer);
   }, []);
-  const visible = entries.filter(entry => matchesIpo(entry.item, query, filter, today));
-  return <div>
-    <div className="mb-4 flex flex-wrap items-center gap-2">
-      <div className="relative min-w-0 flex-1 basis-52">
-        <Search size={16} aria-hidden className="absolute left-3 top-3 text-gray-400" />
-        <input type="search" aria-label="IPO 기업명 또는 종목코드 검색" placeholder="기업명 · 종목코드" value={query} onChange={e => setQuery(e.target.value)} className="h-10 w-full rounded-md border border-gray-300 bg-white pl-9 pr-9 text-sm text-gray-900 focus:outline-blue-500 [&::-webkit-search-cancel-button]:appearance-none" />
-        {query && <button type="button" title="검색 지우기" aria-label="검색 지우기" onClick={() => setQuery("")} className="absolute right-1 top-1 flex h-8 w-8 items-center justify-center text-gray-500"><X size={16} /></button>}
+  const visible = entries
+    .filter(entry => matchesIpoStage(entry.item, query, filter, today, showHistory, entry.archived))
+    .sort((a, b) => compareIpoStages(a.item, b.item, today, showHistory));
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <input
+          type="search" aria-label="IPO 종목명 검색" placeholder="종목명 검색"
+          value={query} onChange={event => setQuery(event.target.value)}
+          className="h-9 min-w-0 flex-1 basis-[180px] rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:border-blue-500 sm:max-w-[220px]"
+        />
+        <button type="button" onClick={() => { setShowHistory(value => !value); setQuery(""); setFilter("all"); }}
+          className="shrink-0 whitespace-nowrap rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 sm:order-3 sm:ml-auto">
+          {showHistory ? "진행 일정 보기" : "이전 이력 보기"}
+        </button>
+        {!showHistory && (
+          <div role="group" aria-label="IPO 단계 필터" className="flex w-full flex-wrap items-center gap-1.5 sm:w-auto">
+            {filters.map(option => {
+              const selected = filter === option.value;
+              const style = option.value === "all" ? null : IPO_STAGE_STYLE[option.value];
+              return <button key={option.value} type="button" aria-pressed={selected} onClick={() => setFilter(option.value)}
+                className={`inline-flex h-7 shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 text-[11px] font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${style ? `${style.color} ${selected ? "ring-1 ring-current" : "hover:brightness-95"}` : selected ? "bg-slate-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                {option.label}
+              </button>;
+            })}
+          </div>
+        )}
       </div>
-      <select aria-label="IPO 진행 상태" value={filter} onChange={e => setFilter(e.target.value as IpoFilter)} className="h-10 max-w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-700">
-        {filters.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
-      </select>
-      <span aria-live="polite" className="text-xs tabular-nums text-gray-500">{visible.length}개 기업</span>
+      <div className="space-y-3">{visible.map(entry => <div key={entry.id}>{entry.card}</div>)}</div>
+      {visible.length === 0 && <p role="status" className="border-y border-gray-200 py-12 text-center text-sm text-gray-500">{query || filter !== "all" ? "조건에 맞는 종목이 없습니다." : showHistory ? "이전 IPO 이력이 없습니다." : "진행 중인 공모가 없습니다."}</p>}
     </div>
-    <div className="space-y-3">{visible.map(entry => <div key={entry.id}>{entry.card}</div>)}</div>
-    {!visible.length && <p className="border-y border-gray-200 py-12 text-center text-sm text-gray-500">조건에 맞는 IPO가 없습니다.</p>}
-  </div>;
+  );
 }

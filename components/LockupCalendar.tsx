@@ -59,12 +59,6 @@ const BAR_STYLE: Record<"forecast" | "sub", string> = {
 
 
 
-const DOT_COLOR: Record<CalendarEventKind, string> = {
-  lockup: "bg-blue-400",
-  forecast: "bg-violet-300",
-  sub: "bg-amber-400",
-  listing: "bg-emerald-500",
-};
 
 
 
@@ -195,7 +189,6 @@ function DayDetailContent({
                   onClick={onNavigate}
                   className="flex min-h-9 min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-white/70 sm:min-h-0 sm:gap-1.5 sm:rounded sm:px-1 sm:py-0.5 sm:text-[11px]"
                 >
-                  <span className={`h-2 w-2 shrink-0 rounded-full sm:h-1.5 sm:w-1.5 ${DOT_COLOR[item.kind]}`} />
                   <span className="truncate">{item.name}</span>
                 </Link>
               ))}
@@ -387,7 +380,6 @@ export function LockupCalendar({
                     on ? FILTER_ACTIVE[kind] : "border border-gray-100 bg-white text-gray-300 hover:bg-gray-50"
                   }`}
                 >
-                  <span className={`inline-block h-1.5 w-1.5 rounded-full ${on ? DOT_COLOR[kind] : "bg-gray-200"}`} />
                   {KIND_LABEL[kind]}
                 </button>
               );
@@ -530,7 +522,6 @@ export function LockupCalendar({
                             : "text-gray-700 hover:bg-blue-50"
                         }`}
                       >
-                        {kind !== "listing" && <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${DOT_COLOR[kind]}`} />}
                         <span className="truncate">{ev.name}</span>
                       </Link>
                     );

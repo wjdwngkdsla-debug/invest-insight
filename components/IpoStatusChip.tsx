@@ -1,24 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ipoStatus, type IpoItem, type IpoStatus, type IpoTone } from "@/lib/ipo";
+import type { IpoItem } from "@/lib/ipo";
+import { IPO_STAGE_STYLE, ipoStageStatus, ipoToday, type IpoStageStatus } from "@/lib/ipo-stage";
 
 // IPO 상태칩을 접속 시점 기준으로 계산 — 상장 D-11 같은 표기가 자정 넘어가면 즉시 갱신된다.
-const TONE_CLASS: Record<IpoTone, string> = {
-  active: "bg-red-100 text-red-600",
-  waiting: "bg-blue-100 text-blue-600",
-  done: "bg-gray-100 text-gray-500",
-};
-
 export function IpoStatusChip({ item }: { item: IpoItem }) {
-  const [status, setStatus] = useState<IpoStatus | null>(null);
+  const [status, setStatus] = useState<IpoStageStatus | null>(null);
   useEffect(() => {
-    const timer = window.setTimeout(() => setStatus(ipoStatus(item)), 0);
-    return () => window.clearTimeout(timer);
+    const update = () => setStatus(ipoStageStatus(item, ipoToday()));
+    const initial = window.setTimeout(update, 0);
+    const timer = window.setInterval(update, 60000);
+    return () => { window.clearTimeout(initial); window.clearInterval(timer); };
   }, [item]);
 
-  const s = status ?? { label: "…", tone: "waiting" as IpoTone };
+  const s = status ?? { label: "…", stage: "upcoming" as const };
   return (
-    <span className={`inline-flex shrink-0 rounded px-2 py-1 text-xs font-bold ${TONE_CLASS[s.tone]}`}>{s.label}</span>
+    <span className={`inline-flex shrink-0 whitespace-nowrap rounded px-2 py-1 text-xs font-bold ${IPO_STAGE_STYLE[s.stage].color}`}>{s.label}</span>
   );
 }

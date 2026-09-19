@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPastIpoItems, getSortedIpoItems, dateRange, yymmdd, bandPosition, type IpoItem } from "@/lib/ipo";
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { IpoScheduleBrowser } from "@/components/IpoScheduleBrowser";
+import { ipoToday } from "@/lib/ipo-stage";
 import { formatKrwEok } from "@/lib/format";
 import { getSiteData } from "@/lib/data";
 import Link from "next/link";
@@ -425,9 +426,11 @@ export default function IpoSchedulePage() {
   const hrefFor = (item: IpoItem) =>
     item.stock_code && lockupCodes.has(item.stock_code) ? `/stock/${item.stock_code}` : undefined;
 
-  const entries = [...new Map([...items, ...pastItems].map(item => [`${item.corp_code}:${item.last_rcept_no || item.first_filing_date || ""}`, item])).entries()]
-    .map(([id, item]) => ({ id, item, card: <IpoCard item={item} lockupHref={hrefFor(item)} /> }));
-  const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul" }).format(new Date());
+  const entries = [...new Map([
+    ...items.map(item => ({ item, archived: false })),
+    ...pastItems.map(item => ({ item, archived: true })),
+  ].map(entry => [`${entry.item.corp_code}:${entry.item.last_rcept_no || entry.item.first_filing_date || ""}`, entry])).entries()]
+    .map(([id, { item, archived }]) => ({ id, item, archived, card: <IpoCard item={item} lockupHref={hrefFor(item)} /> }));
 
 
 
@@ -446,7 +449,7 @@ export default function IpoSchedulePage() {
 
   return (
     <main className="mx-auto w-full max-w-[900px] px-5 py-6">
-      <IpoScheduleBrowser entries={entries} initialToday={today} />
+      <IpoScheduleBrowser entries={entries} initialToday={ipoToday()} />
     </main>
   );
 }
