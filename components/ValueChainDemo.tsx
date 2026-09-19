@@ -791,7 +791,7 @@ function StockReturnTable({
                 {["순위", "종목", "최근 종가", `${periodLabel(period)} 등락률`, "시가총액", "거래대금", "테마", "테마 연관성"].map((head, index) => (
                   <th
                     key={head}
-                    className={`px-4 py-3 text-[11px] font-black text-white/42 ${
+                    className={`whitespace-nowrap px-4 py-3 text-[11px] font-black text-white/42 ${
                       index >= 2 && index <= 5 ? "text-right" : index === 7 ? "text-left" : ""
                     }`}
                   >
