@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { getPastIpoItems, getSortedIpoItems, dateRange, yymmdd, bandPosition, type IpoItem } from "@/lib/ipo";
 import { IpoStatusChip } from "@/components/IpoStatusChip";
-import { PastDateGate } from "@/components/PastDateGate";
-import { IpoHistoryToggle } from "@/components/IpoHistoryToggle";
+import { IpoScheduleBrowser } from "@/components/IpoScheduleBrowser";
 import { formatKrwEok } from "@/lib/format";
 import { getSiteData } from "@/lib/data";
 import Link from "next/link";
@@ -426,38 +425,9 @@ export default function IpoSchedulePage() {
   const hrefFor = (item: IpoItem) =>
     item.stock_code && lockupCodes.has(item.stock_code) ? `/stock/${item.stock_code}` : undefined;
 
-  const currentCards = (
-    <div className="space-y-3">
-      {items.map((item) => (
-        <PastDateGate key={item.corp_code} date={item.listing_date}>
-          <IpoCard item={item} lockupHref={hrefFor(item)} />
-        </PastDateGate>
-      ))}
-      {items.length === 0 && (
-        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">진행 중인 공모가 없습니다.</p>
-      )}
-    </div>
-  );
-
-  const historyCards = (
-    <div className="space-y-3">
-      {pastItems.map((item) => (
-        <div key={item.corp_code} data-ipo-history-card data-ipo-name={item.name}>
-          <IpoCard item={item} lockupHref={hrefFor(item)} />
-        </div>
-      ))}
-      {items.map((item) => (
-        <PastDateGate key={`live-${item.corp_code}`} date={item.listing_date} showWhen="past">
-          <div data-ipo-history-card data-ipo-name={item.name}>
-            <IpoCard item={item} lockupHref={hrefFor(item)} />
-          </div>
-        </PastDateGate>
-      ))}
-      {pastItems.length === 0 && items.length === 0 && (
-        <p className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-400">이전 IPO 이력이 없습니다.</p>
-      )}
-    </div>
-  );
+  const entries = [...new Map([...items, ...pastItems].map(item => [`${item.corp_code}:${item.last_rcept_no || item.first_filing_date || ""}`, item])).entries()]
+    .map(([id, item]) => ({ id, item, card: <IpoCard item={item} lockupHref={hrefFor(item)} /> }));
+  const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul" }).format(new Date());
 
 
 
@@ -476,7 +446,7 @@ export default function IpoSchedulePage() {
 
   return (
     <main className="mx-auto w-full max-w-[900px] px-5 py-6">
-      <IpoHistoryToggle current={currentCards} history={historyCards} />
+      <IpoScheduleBrowser entries={entries} initialToday={today} />
     </main>
   );
 }

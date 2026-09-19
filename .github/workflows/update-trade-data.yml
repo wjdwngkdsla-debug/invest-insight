@@ -1,0 +1,43 @@
+name: Update Customs export data
+
+on:
+  schedule:
+    # 10:00 KST, after the monthly publication window, with later retries.
+    - cron: "0 1 16,20,25 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-customs-exports
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATA_GO_KR_API_KEY: ${{ secrets.DATA_GO_KR_API_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Refresh and reconcile all export products
+        run: python -m scripts.update_trade_dram
+      - name: Commit validated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/trade/dram.json data/trade/beauty.json data/trade/transformer.json
+          if git diff --cached --quiet; then
+            echo "No export data changes."
+            exit 0
+          fi
+          git commit -m "chore: update verified Customs export data"
+          for attempt in 1 2 3; do
+            git push && exit 0
+            git pull --rebase origin main || exit 1
+          done
+          exit 1

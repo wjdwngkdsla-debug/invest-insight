@@ -2,7 +2,7 @@ import unittest
 from datetime import date
 from unittest.mock import Mock
 
-from scripts.update_value_chain_market_cache import find_anchor_date, latest_cached_date
+from scripts.update_value_chain_market_cache import find_anchor_date, latest_cached_date, period_start, build_company_market_series
 from scripts.update_trade_dram import default_end_month
 
 
@@ -38,6 +38,28 @@ class RefreshDateTests(unittest.TestCase):
         self.assertEqual(default_end_month(date(2026, 9, 16)), "2026-08")
         self.assertEqual(default_end_month(date(2026, 1, 16)), "2025-12")
         self.assertEqual(default_end_month(date(2026, 1, 1)), "2025-11")
+
+    def test_calendar_month_boundaries(self):
+        self.assertEqual(period_start(date(2026, 3, 31), "month"), date(2026, 2, 28))
+        self.assertEqual(period_start(date(2026, 9, 18), "half"), date(2026, 3, 18))
+
+    def test_short_history_is_not_a_six_month_return(self):
+        days = [("2026-09-17", {"A": {"close_price": 100, "trading_value": 0}}), ("2026-09-18", {"A": {"close_price": 110, "trading_value": 0}})]
+        self.assertIsNone(build_company_market_series("A", days, "half")["returnPct"])
+        daily = build_company_market_series("A", days, "day")
+        self.assertEqual(daily["returnPct"], 10)
+        self.assertEqual(daily["tradingValueIndex"][0]["value"], 0)
+
+    def test_new_listing_or_missing_close_does_not_invent_return(self):
+        days = [("2026-03-18", {}), ("2026-09-18", {"A": {"close_price": 100}})]
+        result = build_company_market_series("A", days, "half")
+        self.assertIsNone(result["returnPct"])
+        self.assertFalse(result["coverage"]["complete"])
+        self.assertEqual(result["tradingValueIndex"], [])
+
+    def test_full_calendar_period_uses_baseline_close(self):
+        days = [("2026-03-18", {"A": {"close_price": 100}}), ("2026-09-18", {"A": {"close_price": 120}})]
+        self.assertEqual(build_company_market_series("A", days, "half")["returnPct"], 20)
 
 
 if __name__ == "__main__":

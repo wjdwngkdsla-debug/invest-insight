@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { ArrowLeft, Globe2, Search, Layers, ChartNoAxesCombined } from "lucide-react";
 import ThemeCarousel from "@/components/theme-map/ThemeCarousel";
 import { CompanyIdentity, CompanyLogo } from "@/components/theme-map/CompanyLogo";
+import { observedPoints, observedSum, observedAverage, observedReturn, observedPrice } from "@/lib/value-chain-metrics";
 import { Button, FluentProvider, Input, webDarkTheme } from "@fluentui/react-components";
 import {
   getCompanyFinancial,
@@ -21,7 +22,6 @@ import {
   type ValueChainIssueScore,
 } from "@/lib/valueChain";
 
-type Metric = "search" | "volume" | "return";
 type Period = "day" | "week" | "month" | "quarter" | "half";
 type ViewMode = "map" | "returns" | "trade";
 type OrbitCategory = "산업" | "섹터" | "관련주" | "이슈";
@@ -33,12 +33,11 @@ interface Company {
   detail: string;
   critical?: string;
   score: number;
-  returnPct: number;
-  marketCap: number;
-  sales: number;
-  op: number;
-  quarterSales: number;
-  quarterOp: number;
+  marketCap: number | null;
+  sales: number | null;
+  op: number | null;
+  quarterSales: number | null;
+  quarterOp: number | null;
   metric?: ValueChainCompanyMetricCache;
   financialStatus?: ValueChainDataStatus;
   financialAsOf?: string;
@@ -117,12 +116,11 @@ function toDemoCompany(company: ValueChainCompany): Company {
     detail: company.roleDetail || company.verificationNote || `${company.name}은 ${company.role} 영역과 연결된 기업입니다.`,
     critical: company.critical,
     score: scoreCompany(company),
-    returnPct: company.oneYearReturn ?? 0,
-    marketCap: financial?.marketCap ?? company.marketCap ?? 0,
-    sales: financial?.annual.sales.at(-1) ?? company.sales.at(-1) ?? 0,
-    op: financial?.annual.operatingProfit.at(-1) ?? company.operatingProfit.at(-1) ?? 0,
-    quarterSales: financial?.recentQuarter.sales ?? 0,
-    quarterOp: financial?.recentQuarter.operatingProfit ?? 0,
+    marketCap: financial?.marketCap ?? null,
+    sales: financial?.annual.sales.at(-1) ?? null,
+    op: financial?.annual.operatingProfit.at(-1) ?? null,
+    quarterSales: financial?.recentQuarter.sales ?? null,
+    quarterOp: financial?.recentQuarter.operatingProfit ?? null,
     financialStatus: financial?.status,
     financialAsOf: financial?.asOf,
     region: company.region,
@@ -167,15 +165,9 @@ function issuePeriodReturns(issue: Issue, period: Period) {
   const metric = getIssueMetricCache(issue.id);
   const values = (metric?.companies || [])
     .filter((company) => VALUE_CHAIN_COMPANIES[company.companyId]?.region === "domestic")
-    .map((company) => company[period]?.returnPct)
-    .filter((value): value is number => Number.isFinite(value));
-  if (values.length) return values;
-  return issue.companyIds
-    .map((id) => VALUE_CHAIN_COMPANIES[id])
-    .filter((company): company is Company => Boolean(company) && company.region === "domestic")
-    .map((company) => company.returnPct)
-    .filter((value): value is number => Number.isFinite(value))
-    .map((value) => periodReturn(value, period));
+    .map((company) => observedReturn(company[period]))
+    .filter((value): value is number => value !== null);
+  return values;
 }
 
 function domesticIssueCompanies(issue: Issue) {
@@ -192,60 +184,21 @@ function issueReturnCount(issue: Issue, period: Period) {
   return issuePeriodReturns(issue, period).length;
 }
 
-function generateSeries(issue: Issue, company: Company, metric: Metric, period: Period, index: number) {
-  const length = period === "day" ? 2 : period === "week" ? 7 : period === "month" ? 5 : period === "quarter" ? 13 : 6;
-  const periodScale =
-    period === "half" ? 2.4 : period === "quarter" ? 2 : period === "month" ? (metric === "volume" ? 2.15 : metric === "search" ? 1.85 : 1.45) : period === "day" ? 0.28 : 1;
-  const base =
-    metric === "return"
-      ? company.returnPct * 0.42
-      : metric === "search"
-        ? issue.searchChg * (1 - index * 0.09)
-        : issue.volumeChg * (1 - index * 0.08);
-  return Array.from({ length }, (_, pointIndex) => {
-    const progress = length > 1 ? pointIndex / (length - 1) : 1;
-    const wave = Math.sin((pointIndex + 1) * (index + 1) * 0.72) * (period === "week" ? 4 : 9);
-    const curve = period === "month" ? progress ** 1.15 : progress;
-    return Math.round((base * 0.22 + base * 0.78 * curve + wave) * periodScale * 10) / 10;
-  });
-}
-
-function fmtWon(value: number) {
-  if (!value) return "-";
+function fmtWon(value: number | null) {
+  if (value === null || !Number.isFinite(value)) return "자료 없음";
   if (value < 10000) return `${value.toLocaleString()}억`;
   const jo = Math.floor(value / 10000);
   const eok = Math.round(value % 10000);
   return eok ? `${jo.toLocaleString()}조 ${eok.toLocaleString()}억` : `${jo.toLocaleString()}조`;
 }
 
-function fmtPct(value: number) {
+function fmtPct(value: number | null) {
+  if (value === null) return "자료 없음";
   return `${value > 0 ? "+" : ""}${value.toFixed(1)}%`;
 }
 
-function periodReturn(value: number, period: Period) {
-  if (period === "day") return Math.round(value * 0.18 * 10) / 10;
-  if (period === "month") return Math.round(value * 1.45 * 10) / 10;
-  if (period === "quarter") return Math.round(value * 2.15 * 10) / 10;
-  if (period === "half") return Math.round(value * 2.8 * 10) / 10;
-  return value;
-}
-
-function averageValues(values: number[]) {
-  const valid = values.filter((value) => Number.isFinite(value));
-  if (!valid.length) return 0;
-  return valid.reduce((sum, value) => sum + value, 0) / valid.length;
-}
-
-function averageMetricValues(points?: { value: number }[]) {
-  return averageValues((points ?? []).map((point) => point.value));
-}
-
-function sumMetricValues(points?: { value: number }[]) {
-  return (points ?? []).map((point) => point.value).filter(Number.isFinite).reduce((sum, value) => sum + value, 0);
-}
-
-function formatTradingValue(value: number) {
-  if (!value) return "-";
+function formatTradingValue(value: number | null) {
+  if (value === null) return "자료 없음";
   return fmtWon(Math.round(value));
 }
 
@@ -266,12 +219,12 @@ function metricPeriodText(issue: Issue, companies: Company[], period: Period) {
   const dates = companies
     .flatMap((company) => {
       const metric = company.metric?.[period];
-      return [...(metric?.tradingValueIndex ?? []), ...(metric?.searchIndex ?? [])].map((point) => point.date);
+      return observedPoints(metric?.tradingValueIndex).map((point) => point.date);
     })
     .filter(Boolean)
     .sort();
 
-  if (!dates.length) return period === "week" ? "7거래일" : "22거래일";
+  if (!dates.length) return "자료 없음";
   const start = formatPeriodDate(dates[0]);
   const end = formatPeriodDate(dates[dates.length - 1]);
   return start === end ? `${end} 기준` : `${start}~${end}`;
@@ -281,7 +234,7 @@ function metricPeriodTextFromMetrics(metrics: Array<ValueChainCompanyMetricCache
   const dates = metrics
     .flatMap((metric) => {
       const periodMetric = metric?.[period];
-      return [...(periodMetric?.tradingValueIndex ?? []), ...(periodMetric?.searchIndex ?? [])].map((point) => point.date);
+      return observedPoints(periodMetric?.tradingValueIndex).map((point) => point.date);
     })
     .filter(Boolean)
     .sort();
@@ -312,15 +265,15 @@ const FINANCIAL_TABLE_COLUMNS = [
 ] as const;
 
 function metricTradingValue(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
-  return sumMetricValues(metric?.[period]?.tradingValueIndex);
+  return observedSum(metric?.[period]?.tradingValueIndex);
 }
 
 function metricSearchAverage(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
-  return averageMetricValues(metric?.[period]?.searchIndex);
+  return observedAverage(metric?.[period]?.searchIndex);
 }
 
 function metricCurrentPrice(metric: ValueChainCompanyMetricCache | undefined, period: Period) {
-  return metric?.[period]?.currentPrice ?? metric?.week?.currentPrice ?? metric?.month?.currentPrice ?? 0;
+  return observedPrice(metric?.[period]);
 }
 
 function uniqueIssuesByTitle(issues: Issue[]) {
@@ -340,10 +293,10 @@ function buildCompanyReturnRows(period: Period) {
       company: Company;
       issue: Issue;
       metric?: ValueChainCompanyMetricCache;
-      returnPct: number;
-      tradingValue: number;
-      search: number;
-      currentPrice: number;
+      returnPct: number | null;
+      tradingValue: number | null;
+      search: number | null;
+      currentPrice: number | null;
       reason: string;
     }
   >();
@@ -353,12 +306,12 @@ function buildCompanyReturnRows(period: Period) {
       const company = VALUE_CHAIN_COMPANIES[companyId];
       if (!company || company.region !== "domestic") continue;
       const metric = companyMetricForIssue(issue, companyId);
-      const returnPct = metric?.[period]?.returnPct ?? periodReturn(company.returnPct, period);
+      const returnPct = observedReturn(metric?.[period]);
       const tradingValue = metricTradingValue(metric, period);
       const search = metricSearchAverage(metric, period);
       const currentPrice = metricCurrentPrice(metric, period);
       const previous = rows.get(companyId);
-      if (previous && previous.returnPct >= returnPct) continue;
+      if (previous && (previous.returnPct ?? -Infinity) >= (returnPct ?? -Infinity)) continue;
       rows.set(companyId, {
         company,
         issue,
@@ -372,7 +325,7 @@ function buildCompanyReturnRows(period: Period) {
     }
   }
 
-  return [...rows.values()].sort((a, b) => b.returnPct - a.returnPct);
+  return [...rows.values()].sort((a, b) => (b.returnPct ?? -Infinity) - (a.returnPct ?? -Infinity));
 }
 
 function reviewText(status?: ValueChainDataStatus) {
@@ -483,13 +436,10 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
     () =>
       companies.map((company, index) => {
         const metric = company.metric?.[period];
-        const fallbackSearch = generateSeries(issue, company, "search", period, index);
-        const fallbackTrading = generateSeries(issue, company, "volume", period, index);
-        const search = averageMetricValues(metric?.searchIndex) || averageValues(fallbackSearch);
-        const tradingValue =
-          sumMetricValues(metric?.tradingValueIndex) ||
-          fallbackTrading.reduce((sum, value) => sum + value, 0) * (0.65 + company.marketCap / 4800000);
-        const returnPct = metric?.returnPct ?? periodReturn(company.returnPct, period);
+        const search = observedAverage(metric?.searchIndex);
+        const tradingValue = observedSum(metric?.tradingValueIndex);
+        const returnPct = observedReturn(metric);
+        if (search === null || tradingValue === null) return null;
         return {
           company,
           search,
@@ -499,7 +449,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
           offsetY: ((Math.floor(index / 3) % 3) - 1) * 16,
           color: CHART_COLORS[index % CHART_COLORS.length],
         };
-      }),
+      }).filter((point): point is NonNullable<typeof point> => point !== null),
     [companies, issue, period],
   );
   const maxSearch = Math.max(...points.map((point) => point.search), 1);
@@ -508,7 +458,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
   const minTrading = Math.min(...points.map((point) => point.tradingValue), 0);
   const searchRange = maxSearch - minSearch || 1;
   const tradingRange = maxTrading - minTrading || 1;
-  const leader = [...points].sort((a, b) => b.returnPct - a.returnPct)[0];
+  const leader = [...points].filter(p => p.returnPct !== null).sort((a, b) => (b.returnPct ?? 0) - (a.returnPct ?? 0))[0];
   const periodText = metricPeriodText(issue, companies, period);
   const toX = (value: number) => padding.left + ((value - minTrading) / tradingRange) * plotWidth;
   const toY = (value: number) => padding.top + plotHeight - ((value - minSearch) / searchRange) * plotHeight;
@@ -569,7 +519,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
             {periodText} · x축 거래대금 합산 · y축 검색지수 평균
           </p>
         </div>
-        <span className="w-fit rounded-full bg-blue-500/15 px-3 py-1 text-[11px] font-black text-blue-300 sm:text-xs">수익률 1위 {leader?.company.name}</span>
+        {leader && <span className="w-fit rounded-full bg-blue-500/15 px-3 py-1 text-[11px] font-black text-blue-300 sm:text-xs">수익률 1위 {leader.company.name}</span>}
       </div>
       <div className="overflow-x-auto rounded-[24px] bg-black/35">
        <div className="relative min-w-[640px]">
@@ -606,6 +556,7 @@ function ThemeScatter({ issue, companies, period }: { issue: Issue; companies: C
             오른쪽일수록 거래대금 합산 큼
           </text>
         </svg>
+        {points.length < companies.length && <p className="absolute bottom-2 left-3 text-xs text-white/50">비교자료 없음 {companies.length - points.length}개 기업</p>}
         {placedPoints.map(point => <button
           key={point.company.id}
           type="button"
@@ -837,7 +788,7 @@ function StockReturnTable({
           <table className="w-full min-w-[1080px] border-collapse text-sm">
             <thead className="bg-white/[0.05]">
               <tr className="border-b border-white/10 text-left">
-                {["순위", "종목", "현재가", `${periodLabel(period)} 등락률`, "시가총액", "거래대금", "테마", "상승 이유"].map((head, index) => (
+                {["순위", "종목", "최근 종가", `${periodLabel(period)} 등락률`, "시가총액", "거래대금", "테마", "테마 연관성"].map((head, index) => (
                   <th
                     key={head}
                     className={`px-4 py-3 text-[11px] font-black text-white/42 ${
@@ -852,7 +803,7 @@ function StockReturnTable({
             <tbody>
               {rows.map((row, index) => (
                 <tr key={`return-${row.company.id}`} className="border-t border-white/6 transition hover:bg-white/[0.04]">
-                  <td className="w-14 px-4 py-3 text-center font-black text-white/38">{index + 1}</td>
+                  <td className="w-14 px-4 py-3 text-center font-black text-white/38">{row.returnPct === null ? "-" : index + 1}</td>
                   <td className="px-4 py-3">
                     <button type="button" onClick={() => onSelectCompany(row.company.id)} className="font-black text-blue-300 hover:text-blue-100">
                       <CompanyIdentity id={row.company.id} name={row.company.name} />
@@ -861,8 +812,9 @@ function StockReturnTable({
                   <td className="whitespace-nowrap px-4 py-3 text-right font-black tabular-nums text-white">
                     {row.currentPrice ? `${row.currentPrice.toLocaleString()}원` : "-"}
                   </td>
-                  <td className={`whitespace-nowrap px-4 py-3 text-right font-black tabular-nums ${row.returnPct >= 0 ? "text-rose-300" : "text-blue-300"}`}>
+                  <td className={`whitespace-nowrap px-4 py-3 text-right font-black tabular-nums ${row.returnPct === null ? "text-white/40" : row.returnPct >= 0 ? "text-rose-300" : "text-blue-300"}`}>
                     {fmtPct(row.returnPct)}
+                    {row.returnPct === null && row.metric?.[period]?.coverage && <span className="block text-[10px] font-normal">기간 부족 · {row.metric[period]?.coverage?.observations}거래일</span>}
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{fmtWon(row.company.marketCap)}</td>
                   <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/58">{formatTradingValue(row.tradingValue)}</td>
@@ -1052,10 +1004,10 @@ function ComparePanel({
             </thead>
             <tbody>
               {rows.map(({ company, score }, index) => {
-                const shownReturn = periodReturn(company.returnPct, period);
+                const shownReturn = observedReturn(company.metric?.[period]);
                 const needsReview = reviewText(company.financialStatus);
-                const financialValue = (value: number) =>
-                  value ? fmtWon(value) : <span className="text-amber-300/70">{needsReview ?? "확인중"}</span>;
+                const financialValue = (value: number | null) =>
+                  value !== null ? fmtWon(value) : <span className="text-amber-300/70">{needsReview ?? "자료 없음"}</span>;
                 return (
                   <tr key={`fin-${company.id}`} className="border-t border-white/5 transition-colors hover:bg-white/[0.03]" style={{ backgroundColor: index === 0 ? "rgba(37,99,235,0.1)" : undefined }}>
                     <td className="px-4 py-3 font-black text-blue-300"><CompanyIdentity id={company.id} name={company.name} /></td>
@@ -1065,7 +1017,7 @@ function ComparePanel({
                     <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-white/50">{financialValue(company.op)}</td>
                     <td className="whitespace-nowrap bg-cyan-400/[0.025] px-4 py-3 text-right font-bold tabular-nums text-white/55">{financialValue(company.quarterSales)}</td>
                     <td className="whitespace-nowrap bg-cyan-400/[0.025] px-4 py-3 text-right font-bold tabular-nums text-white/55">{financialValue(company.quarterOp)}</td>
-                    <td className="whitespace-nowrap bg-blue-500/[0.045] px-4 py-3 text-right font-black tabular-nums" style={{ color: shownReturn > 0 ? "#4ade80" : "#f87171" }}>
+                    <td className="whitespace-nowrap bg-blue-500/[0.045] px-4 py-3 text-right font-black tabular-nums" style={{ color: shownReturn === null ? "#9ca3af" : shownReturn >= 0 ? "#fda4af" : "#93c5fd" }}>
                       {fmtPct(shownReturn)}
                     </td>
                   </tr>
@@ -1124,7 +1076,6 @@ export function ValueChainDemo({ initialCompanyId, initialView = "map", tradeCon
           ...company,
           metric: metric ?? undefined,
           score: metric?.score ?? company.score,
-          returnPct: metric?.[period]?.returnPct ?? company.returnPct,
         };
         return enrichedCompany;
       })

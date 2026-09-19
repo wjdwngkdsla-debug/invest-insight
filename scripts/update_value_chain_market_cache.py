@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import os
+import calendar
+import time
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -28,9 +30,12 @@ def read_json(name: str):
 
 
 def write_json(name: str, data) -> None:
-    with (DATA_DIR / name).open("w", encoding="utf-8") as f:
+    target = DATA_DIR / name
+    temp = target.with_suffix(".tmp")
+    with temp.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
+    temp.replace(target)
 
 
 def latest_cached_date(metrics: dict) -> date | None:
@@ -66,31 +71,57 @@ def find_anchor_date(krx_snapshot, metrics: dict, lookback_days: int = 12, *, to
     raise RuntimeError("KRX snapshots not available")
 
 
-def trading_days(krx_snapshot, metrics: dict, days: int | None = None) -> list[tuple[str, dict]]:
+def trading_days(krx_snapshot, metrics: dict, days: int | None = None, *, history: dict | None = None, tickers: set[str] | None = None, checkpoint=None) -> list[tuple[str, dict]]:
     if days is None:
-        days = int(os.getenv("VALUE_CHAIN_KRX_LOOKBACK_DAYS", "70"))
+        days = int(os.getenv("VALUE_CHAIN_KRX_LOOKBACK_DAYS", "220"))
     anchor = find_anchor_date(krx_snapshot, metrics)
+    history = history if history is not None else {}
+    started = time.monotonic()
     out: list[tuple[str, dict]] = []
     for back in range(days):
-        bas_dd = (anchor - timedelta(days=back)).strftime("%Y%m%d")
-        snap = krx_snapshot(bas_dd)
+        target = anchor - timedelta(days=back)
+        if target.weekday() >= 5:
+            continue
+        if time.monotonic() - started > 720:
+            raise RuntimeError("KRX history refresh exceeded 12 minutes; existing cache retained")
+        bas_dd = target.strftime("%Y%m%d")
+        cached = history.get(bas_dd)
+        snap = cached if cached and back >= 7 and (not tickers or tickers <= set(cached)) else krx_snapshot(bas_dd)
+        if not snap:
+            snap = cached
         if snap:
+            if tickers:
+                snap = {key: {field: snap[key].get(field) for field in ("close_price", "trading_value", "market_cap")} if snap.get(key) else None for key in sorted(tickers)}
+            history[bas_dd] = snap
             out.append((f"{bas_dd[:4]}-{bas_dd[4:6]}-{bas_dd[6:8]}", snap))
+        if back % 20 == 0:
+            if checkpoint:
+                checkpoint(history)
+            print(f"[value-chain-market] history {bas_dd}: {len(out)} trading dates", flush=True)
+    cutoff = (anchor - timedelta(days=days)).strftime("%Y%m%d")
+    for key in list(history):
+        if key < cutoff:
+            del history[key]
     return list(reversed(out))
 
 
+def period_start(anchor: date, period: str) -> date:
+    if period == "week":
+        return anchor - timedelta(days=7)
+    months = {"month": 1, "quarter": 3, "half": 6}[period]
+    total = anchor.year * 12 + anchor.month - 1 - months
+    year, month = total // 12, total % 12 + 1
+    return date(year, month, min(anchor.day, calendar.monthrange(year, month)[1]))
+
+
 def period_points(days: list[tuple[str, dict]], period: str) -> list[tuple[str, dict]]:
+    if not days:
+        return []
     if period == "day":
         return days[-2:]
-    if period == "week":
-        return days[-7:]
-    if period == "month":
-        return days[-22:]
-    if period == "quarter":
-        return days[-66:]
-    if period == "half":
-        return days[-132:]
-    return days[-22:]
+    cutoff = period_start(date.fromisoformat(days[-1][0]), period).isoformat()
+    baseline = next((i for i in range(len(days) - 1, -1, -1) if days[i][0] <= cutoff), None)
+    return days[baseline:] if baseline is not None else days
 
 
 def pct_change(first: int, last: int) -> float:
@@ -104,28 +135,31 @@ def build_company_market_series(ticker: str, days: list[tuple[str, dict]], perio
     values = []
     closes = []
     market_caps = []
-    for date, snap in points:
+    for point_date, snap in points:
         row = snap.get(ticker)
         if not row:
             continue
         close = int(row.get("close_price") or 0)
-        trading_value = int(row.get("trading_value") or 0)
+        trading_value = row.get("trading_value")
         market_cap = int(row.get("market_cap") or 0)
         if close:
             closes.append(close)
         if market_cap:
             market_caps.append(market_cap)
-        values.append(
-            {
-                "date": date,
-                "value": round(trading_value / KRW_EOK, 1),
-            }
-        )
+        if trading_value is not None:
+            values.append({
+                "date": point_date,
+                "value": round(int(trading_value) / KRW_EOK, 1),
+            })
+    enough_history = len(points) >= 2 and (period == "day" or points[0][0] <= period_start(date.fromisoformat(days[-1][0]), period).isoformat())
+    complete = enough_history and len(closes) == len(points)
     return {
         "tradingValueIndex": values,
-        "returnPct": pct_change(closes[0], closes[-1]) if len(closes) >= 2 else 0.0,
-        "currentPrice": closes[-1] if closes else None,
-        "marketCap": market_caps[-1] if market_caps else None,
+        "returnPct": pct_change(closes[0], closes[-1]) if complete else None,
+        "marketSource": "KRX",
+        "coverage": {"complete": complete, "from": points[0][0] if points else None, "to": points[-1][0] if points else None, "observations": len(closes)},
+        "currentPrice": (points[-1][1].get(ticker) or {}).get("close_price") if points else None,
+        "marketCap": (points[-1][1].get(ticker) or {}).get("market_cap") if points else None,
     }
 
 
@@ -215,7 +249,10 @@ def main() -> None:
     companies_by_id = {item["id"]: item for item in companies}
     financials_by_id = {item["companyId"]: item for item in financials}
     ensure_metric_groups(metrics, issues, companies_by_id)
-    days = trading_days(krx_snapshot, metrics)
+    history_path = DATA_DIR / "price-history.json"
+    history = read_json("price-history.json") if history_path.exists() else {}
+    tickers = {c["ticker"] for c in companies if c.get("ticker") and c.get("region") == "domestic"}
+    days = trading_days(krx_snapshot, metrics, history=history, tickers=tickers, checkpoint=lambda data: write_json("price-history.json", data))
     if not days:
         raise RuntimeError("KRX snapshots not available")
 
@@ -232,11 +269,8 @@ def main() -> None:
             for period in ("day", "week", "month", "quarter", "half"):
                 metric.setdefault(period, {"searchIndex": [], "tradingValueIndex": [], "returnPct": 0})
                 market = build_company_market_series(ticker, days, period)
+                metric[period].update({key: market[key] for key in ("tradingValueIndex", "returnPct", "currentPrice", "marketSource", "coverage")})
                 if market["tradingValueIndex"]:
-                    metric[period]["tradingValueIndex"] = market["tradingValueIndex"]
-                    metric[period]["returnPct"] = market["returnPct"]
-                    if market["currentPrice"]:
-                        metric[period]["currentPrice"] = market["currentPrice"]
                     updated_metric_rows += 1
                 if market["marketCap"] and company["id"] in financials_by_id:
                     financials_by_id[company["id"]]["marketCap"] = round(market["marketCap"] / KRW_EOK)
@@ -248,6 +282,7 @@ def main() -> None:
     metrics["note"] = "검색량은 네이버 검색어트렌드 상대지수, 거래대금은 KRX 일별 거래대금(억원), 수익률은 기간 첫 종가 대비 마지막 종가 등락률입니다."
 
     write_json("market-metrics.json", metrics)
+    write_json("price-history.json", history)
     write_json("financials.json", financials)
     print(f"[value-chain-market] updated {updated_metric_rows} metric rows, {updated_market_caps} market caps, as of {as_of}")
 

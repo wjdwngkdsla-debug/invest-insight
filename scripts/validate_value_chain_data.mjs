@@ -99,6 +99,12 @@ for (const issueMetric of marketMetrics.issues || []) {
   requireRef(issueIds.has(issueMetric.issueId), `metric cache references missing issue ${issueMetric.issueId}`);
   for (const metric of issueMetric.companies || []) {
     requireRef(companyIds.has(metric.companyId), `metric cache ${issueMetric.issueId} references missing company ${metric.companyId}`);
+    for (const period of ["day", "week", "month", "quarter", "half"]) {
+      const item = metric[period];
+      if (item?.marketSource !== "KRX") continue;
+      requireRef(item.coverage?.complete ? Number.isFinite(item.returnPct) : item.returnPct === null, `metric ${metric.companyId}/${period} return must match coverage`);
+      requireRef(item.tradingValueIndex.every(point => /^\d{4}-\d{2}-\d{2}$/.test(point.date) && Number.isFinite(point.value) && point.value >= 0), `metric ${metric.companyId}/${period} requires observed trading data`);
+    }
     for (const period of ["week", "month"]) {
       const item = metric[period];
       warn(item?.searchIndex?.length, `metric ${issueMetric.issueId}/${metric.companyId}/${period} has no searchIndex`);
