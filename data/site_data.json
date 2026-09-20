@@ -14609,7 +14609,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
           "reason": "벤처금융 + 기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 2879902
+            },
+            {
+              "reason": "벤처금융",
+              "qty": 409989
+            }
+          ],
           "release_close": 39050,
           "release_fluc_rt": 3.17
         },
@@ -14657,7 +14666,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 1615660
+            },
+            {
+              "reason": "상장주선인(국내기업)",
+              "qty": 45000
+            }
+          ],
           "release_close": 28650,
           "release_fluc_rt": 1.78
         },
@@ -14729,7 +14747,20 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "모집(전매제한) + 최대주주(코스닥) + 최대주주(제3자배정)",
           "reason": "모집(전매제한) + 최대주주(코스닥) + 최대주주(제3자배정)",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "모집(전매제한)",
+              "qty": 234114
+            },
+            {
+              "reason": "최대주주(코스닥)",
+              "qty": 43600
+            },
+            {
+              "reason": "최대주주(제3자배정)",
+              "qty": 34040
+            }
+          ]
         },
         {
           "period": "3년",
@@ -25731,12 +25762,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 35759040
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 5570,
           "release_fluc_rt": -0.36
         },
@@ -25784,16 +25810,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(상장) + 기타 보호예수 필요 주주",
           "reason": "최대주주(상장) + 기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 81735914
-            },
-            {
-              "reason": "최대주주(상장)",
-              "qty": 39652
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 5740,
           "release_fluc_rt": 2.5
         },
@@ -28130,7 +28147,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 3486536
+            }
+          ],
           "release_close": 19990,
           "release_fluc_rt": -8.93
         },
@@ -28154,7 +28176,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기관투자가",
           "reason": "기관투자가",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "기관투자가",
+              "qty": 3210890
+            }
+          ]
         },
         {
           "period": "3개월",
@@ -28200,7 +28227,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 299731
+            }
+          ],
           "release_close": 16940,
           "release_fluc_rt": -6.72
         },
