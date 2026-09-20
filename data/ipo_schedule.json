@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -829,7 +829,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -840,7 +840,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -851,7 +851,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -862,7 +862,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     },
@@ -873,7 +873,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 4
     }
@@ -18132,30 +18132,6 @@
   "history": [
     {
       "date": "2026-08-10",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-10",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-10",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-10",
       "name": "스탁키퍼",
       "type": "검토대기",
       "field": "노출",
@@ -22129,6 +22105,30 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -22137,73 +22137,73 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-09-19",
+      "excluded_at": "2026-09-20",
       "memo": ""
     }
   }
