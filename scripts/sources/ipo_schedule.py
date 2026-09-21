@@ -13,7 +13,7 @@ from typing import Any
 import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
-from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports, holder_snapshot
+from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports, holder_snapshot, select_latest_investment_report
 from scripts.ipo_quality import security_type, quantity
 from scripts.utils.table_grid import table_grid
 from scripts.management import apply_stock_management, is_fixed_excluded, is_spac_name, merge_stock_management
@@ -42,7 +42,7 @@ MAX_DOCS_PER_CORP = 4
 
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
-IPO_PARSE_VERSION = 5
+IPO_PARSE_VERSION = 6
 # 실적보고서(개인청약·기관 배정) 파서는 신고서 파서와 별도 버전으로 관리한다.
 # report_rcp만 저장된 채 배정표가 비었던 과거 결과도 파서 개선 후 한 번 재처리한다.
 RESULT_PARSE_VERSION = 3
@@ -979,6 +979,25 @@ def _clear_suspicious_listing_date(
     return True
 
 
+def _holder_from_offering_filings(
+    filings: list[dict[str, Any]], documents: dict[str, str],
+) -> dict[str, Any] | None:
+    # Result reports contain allocations, not the pre-IPO shareholder schedule.
+    eligible = [f for f in filings if "철회" not in (f.get("report_nm") or "")
+                and security_type(f.get("report_nm") or "") != "non_equity"]
+    source = select_latest_investment_report(eligible)
+    if source is None:
+        return None
+    receipt = source["rcept_no"]
+    doc = documents.get(receipt)
+    if doc is None:
+        doc = download_document_text(receipt)
+        documents[receipt] = doc
+    snapshot = holder_snapshot(doc, receipt)
+    snapshot["quantity_unit"] = "DR" if security_type(source.get("report_nm") or "", doc) == "depositary_receipt" else "주"
+    return snapshot
+
+
 def refresh_ipo_schedule(
     days_back: int = LOOKBACK_DAYS,
     verbose: bool = True,
@@ -1115,6 +1134,7 @@ def refresh_ipo_schedule(
             and not needs_temporary_commit_check
             and not _needs_offering_backfill(old)
             and not _commit_apply_below_alloc_all_tiers(old)
+            and not old.get("holder_source_error")
         ):
             cached = dict(old)
             cached["withdrawn"] = withdrawn
@@ -1143,6 +1163,7 @@ def refresh_ipo_schedule(
                 item["stock_code"] = newest["stock_code"]
         if not withdrawn:
             merged: dict[str, Any] = {}
+            documents: dict[str, str] = {}
             selected_filings = list(corp_filings[:MAX_DOCS_PER_CORP])
             # 최신 정정/투자설명서 몇 건 뒤로 밀린 [발행조건확정] 신고서에도
             # 기관 신청표가 있으므로 최소 한 건은 반드시 파싱 후보에 포함한다.
@@ -1162,6 +1183,7 @@ def refresh_ipo_schedule(
                     continue
                 try:
                     doc = download_document_text(f["rcept_no"])
+                    documents[f["rcept_no"]] = doc
                 except Exception as exc:
                     log(f"  문서 실패 {f['rcept_no']}: {redact_sensitive_text(exc)}")
                     continue
@@ -1170,9 +1192,6 @@ def refresh_ipo_schedule(
                     if not merged:
                         merged = parsed
                     break
-                if "holder_lockup" not in merged:
-                    merged["holder_lockup"] = holder_snapshot(doc, f["rcept_no"])
-                    merged["holder_lockup"]["quantity_unit"] = "DR" if parsed.get("security_type") == "depositary_receipt" else "주"
                 for key, val in parsed.items():
                     # 최신 문서 우선 — 이미 값이 있으면 옛 문서 값으로 덮지 않는다
                     if key not in merged or not merged[key]:
@@ -1186,6 +1205,15 @@ def refresh_ipo_schedule(
                     break
                 if _core_fields_filled(merged) and not has_condition_filing:
                     break
+            if merged.get("security_type") != "non_equity":
+                try:
+                    snapshot = _holder_from_offering_filings(corp_filings, documents)
+                    if snapshot is not None:
+                        merged["holder_lockup"] = snapshot
+                        item.pop("holder_source_error", None)
+                except Exception as exc:
+                    item["holder_source_error"] = redact_sensitive_text(exc)
+                    log(f"  기존주주 출처 확인 실패: {item['holder_source_error']}")
             locked = set(item.get("manual_fields") or [])  # 고정 보정은 공시가 덮지 않는다
             provisional = set(item.get("provisional_fields") or [])
             for key, val in merged.items():

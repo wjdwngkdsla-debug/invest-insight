@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22 01:43",
+  "updated": "2026-09-22 08:45",
   "items": [
     {
       "corp_code": "00104069",
@@ -47,19 +47,19 @@
       "corp_code": "01867688",
       "name": "와이즈플래닛컴퍼니",
       "first_filing_date": "20260729",
-      "last_rcept_no": "20260917000071",
+      "last_rcept_no": "20260911000214",
       "band_low": 10000,
       "band_high": 12000,
       "forecast_start": "2026-09-04",
       "forecast_end": "2026-09-10",
       "sub_start": "2026-09-14",
       "sub_end": "2026-09-15",
-      "payment_date": "2026-09-14",
+      "payment_date": "2026-09-17",
       "underwriter": "대신증권",
       "market": "코스닥",
       "offer_shares": 1600000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 5,
+      "ipo_parse_version": 6,
       "withdrawn": false,
       "listing_date": "2026-09-23",
       "stock_code": "",
@@ -145,9 +145,24 @@
       "result_parse_version": 2,
       "security_type": "equity",
       "holder_lockup": {
-        "status": "review",
-        "rcept_no": "20260917000071",
-        "reason": "기존주주 표 미발견",
+        "status": "verified",
+        "rcept_no": "20260911000214",
+        "total": 7907380,
+        "table_index": 684,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 6141600
+          },
+          {
+            "period": "6개월",
+            "qty": 1532630
+          },
+          {
+            "period": "3개월",
+            "qty": 233150
+          }
+        ],
         "quantity_unit": "주"
       },
       "listing_date_check": {
@@ -168,14 +183,14 @@
       "corp_code": "01722066",
       "name": "빅웨이브로보틱스",
       "first_filing_date": "20260504",
-      "last_rcept_no": "20260918000412",
+      "last_rcept_no": "20260914000385",
       "band_low": 8458,
       "band_high": 10149,
       "forecast_start": "2026-09-07",
       "forecast_end": "2026-09-11",
       "sub_start": "2026-09-15",
       "sub_end": "2026-09-16",
-      "payment_date": "2026-09-15",
+      "payment_date": "2026-09-18",
       "underwriter": "유진투자증권·미래에셋증권",
       "market": "코스닥",
       "offer_shares": 1600000,
@@ -185,7 +200,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 5,
+      "ipo_parse_version": 6,
       "schedule_hidden": false,
       "offering_attempt": 1,
       "final_price": 18000,
@@ -266,9 +281,28 @@
       "result_parse_version": 2,
       "security_type": "equity",
       "holder_lockup": {
-        "status": "review",
-        "rcept_no": "20260918000412",
-        "reason": "기존주주 표 미발견",
+        "status": "verified",
+        "rcept_no": "20260914000385",
+        "total": 7521618,
+        "table_index": 979,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 5311391
+          },
+          {
+            "period": "1년",
+            "qty": 679071
+          },
+          {
+            "period": "3개월",
+            "qty": 739480
+          },
+          {
+            "period": "1개월",
+            "qty": 791676
+          }
+        ],
         "quantity_unit": "주"
       },
       "listing_date_check": {
@@ -289,7 +323,7 @@
       "corp_code": "01564514",
       "name": "글로벌테크놀로지",
       "first_filing_date": "20260728",
-      "last_rcept_no": "20260921000349",
+      "last_rcept_no": "20260915000241",
       "band_low": 13000,
       "band_high": 15000,
       "forecast_start": "2026-09-07",
@@ -301,7 +335,7 @@
       "market": "코스닥",
       "offer_shares": 4000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 5,
+      "ipo_parse_version": 6,
       "withdrawn": false,
       "listing_date": "2026-09-29",
       "stock_code": "",
@@ -347,9 +381,40 @@
       "manual_commit_apply": {},
       "security_type": "equity",
       "holder_lockup": {
-        "status": "review",
-        "rcept_no": "20260921000349",
-        "reason": "기존주주 표 미발견",
+        "status": "verified",
+        "rcept_no": "20260915000241",
+        "total": 15286573,
+        "table_index": 648,
+        "rows": [
+          {
+            "period": "4년",
+            "qty": 6095250
+          },
+          {
+            "period": "3년",
+            "qty": 5525151
+          },
+          {
+            "period": "1년",
+            "qty": 36120
+          },
+          {
+            "period": "2년",
+            "qty": 1576896
+          },
+          {
+            "period": "1개월",
+            "qty": 1913156
+          },
+          {
+            "period": "3개월",
+            "qty": 100000
+          },
+          {
+            "period": "6개월",
+            "qty": 40000
+          }
+        ],
         "quantity_unit": "주"
       },
       "listing_date_check": {
@@ -409,7 +474,7 @@
       "corp_code": "00960623",
       "name": "덕산넵코어스",
       "first_filing_date": "20260724",
-      "last_rcept_no": "20260921000143",
+      "last_rcept_no": "20260915000085",
       "band_low": 12400,
       "band_high": 14600,
       "forecast_start": "2026-09-08",
@@ -421,7 +486,7 @@
       "market": "코스닥",
       "offer_shares": 3000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 5,
+      "ipo_parse_version": 6,
       "withdrawn": false,
       "listing_date": "2026-09-30",
       "stock_code": "",
@@ -466,9 +531,36 @@
       "manual_commit_apply": {},
       "security_type": "equity",
       "holder_lockup": {
-        "status": "review",
-        "rcept_no": "20260921000143",
-        "reason": "기존주주 표 미발견",
+        "status": "verified",
+        "rcept_no": "20260915000084",
+        "total": 11315985,
+        "table_index": 1388,
+        "rows": [
+          {
+            "period": "1년",
+            "qty": 355000
+          },
+          {
+            "period": "3년",
+            "qty": 9648204
+          },
+          {
+            "period": "2개월",
+            "qty": 902078
+          },
+          {
+            "period": "3개월",
+            "qty": 324903
+          },
+          {
+            "period": "1개월",
+            "qty": 55800
+          },
+          {
+            "period": "6개월",
+            "qty": 30000
+          }
+        ],
         "quantity_unit": "주"
       },
       "listing_date_check": {
@@ -545,7 +637,7 @@
       "stock_code": "",
       "review_pending": false,
       "management_status": "자동",
-      "ipo_parse_version": 5,
+      "ipo_parse_version": 6,
       "schedule_hidden": false,
       "offering_attempt": 1,
       "content_url": "https://blog.naver.com/vericap/224409591674",
@@ -1577,7 +1669,7 @@
       "market": "코스닥",
       "offer_shares": 2000000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 6,
       "withdrawn": false,
       "listing_date": "2026-09-21",
       "stock_code": "",

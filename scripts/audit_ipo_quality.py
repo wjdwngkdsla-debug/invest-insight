@@ -65,7 +65,7 @@ def retry_targets(items, today, selected=()):
         return [i for i in items if i.get("corp_code") in selected]
     cutoff = (datetime.fromisoformat(today) - timedelta(days=90)).date().isoformat()
     targets = [i for i in items if (i.get("listing_date") or today) >= cutoff
-               or i.get("quality_refresh_error") or (i.get("holder_lockup") or {}).get("status") == "review"
+               or i.get("quality_refresh_error") or i.get("holder_source_error") or (i.get("holder_lockup") or {}).get("status") == "review"
                or (i.get("result_source_check") or {}).get("status") == "parse_incomplete"
                or any(tier_quantity(t) is None for f in ("commit_apply", "commit_alloc") for t in i.get(f) or [])]
     targets = [i for i in targets if i.get("quality_attempted_at") != today]
@@ -90,6 +90,7 @@ def repair_item(item, today):
         item["security_type"] = kind
     item["holder_lockup"] = holder_snapshot(doc, receipt)
     item["holder_lockup"]["quantity_unit"] = "DR" if kind == "depositary_receipt" else "주"
+    item.pop("holder_source_error", None)
     _, applications = _parse_demand_tables(doc)
     if applications:
         merge_tiers(item, "commit_apply", applications, receipt)

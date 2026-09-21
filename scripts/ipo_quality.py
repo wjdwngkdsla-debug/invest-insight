@@ -86,6 +86,8 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     if subscription_done and not item.get("sub_ratio"):
         gaps.append(("공시 대기: " if result_waiting(item, today) else "") + "개인청약경쟁률")
     snapshot = item.get("holder_lockup") or {}
+    if item.get("holder_source_error"):
+        gaps.append("구주물량 원문 조회 실패")
     holder_rows = snapshot.get("rows") or []
     if snapshot.get("status") == "verified" and (not holder_rows or any(tier_quantity(r) is None for r in holder_rows)
             or sum(tier_quantity(r) or 0 for r in holder_rows) != quantity(snapshot.get("total"))):

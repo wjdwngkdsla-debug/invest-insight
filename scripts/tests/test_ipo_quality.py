@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from contextlib import ExitStack
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -12,6 +13,7 @@ from scripts.sheets_sync import push_simple_event_tabs
 from scripts.audit_ipo_quality import retry_targets, refresh_result, merge_tiers
 from scripts.ipo_quality import result_waiting
 from scripts.sources.dart_api import get_reports
+from scripts.sources import ipo_schedule
 
 
 def application_table(total="100", total_subheaders=True):
@@ -33,6 +35,52 @@ HOLDER = '''<TABLE>
 
 
 class IpoQualityTests(unittest.TestCase):
+    def test_full_refresh_keeps_holder_source_across_result_reports(self):
+        offering = {"corp_code": "12345678", "corp_name": "Fixture", "corp_cls": "E",
+                    "rcept_no": "20260901000100", "rcept_dt": "20260901", "report_nm": "투자설명서"}
+        result = dict(offering, rcept_no="20260921000100", rcept_dt="20260921", report_nm="증권발행실적보고서")
+        state = {"items": [], "past_items": []}
+        fields = {"market": "코스닥", "band_low": 1000, "band_high": 2000, "offer_shares": 100,
+                  "underwriter": "Fixture", "forecast_start": "2030-01-01", "forecast_end": "2030-01-02",
+                  "sub_start": "2030-01-03", "sub_end": "2030-01-04", "final_price": 1500}
+        with tempfile.TemporaryDirectory() as temp, ExitStack() as stack:
+            stack.enter_context(patch.object(ipo_schedule, "SCHEDULE_PATH", Path(temp) / "schedule.json"))
+            stack.enter_context(patch.object(ipo_schedule, "MANAGEMENT_PATH", Path(temp) / "absent.json"))
+            stack.enter_context(patch.object(ipo_schedule, "load_state", side_effect=lambda: state))
+            filings = stack.enter_context(patch.object(ipo_schedule, "fetch_equity_filings", return_value=[result, offering]))
+            stack.enter_context(patch.object(ipo_schedule, "load_listing_map", return_value={}))
+            stack.enter_context(patch.object(ipo_schedule, "seed_new_items", return_value=[]))
+            stack.enter_context(patch.object(ipo_schedule, "_should_fetch_result_report", return_value=False))
+            stack.enter_context(patch.object(ipo_schedule, "parse_offering_doc", return_value=fields))
+            download = stack.enter_context(patch.object(ipo_schedule, "download_document_text",
+                side_effect=lambda receipt: HOLDER if receipt == offering["rcept_no"] else "result report"))
+            state = ipo_schedule.refresh_ipo_schedule(verbose=False)
+            snap = state["items"][0]["holder_lockup"]
+            self.assertEqual((snap["status"], snap["total"], snap["rcept_no"]), ("verified", 300, offering["rcept_no"]))
+            # A subsequent batch with a new result receipt must not erase the holder table.
+            filings.return_value = [dict(result, rcept_no="20260922000100", rcept_dt="20260922"), offering]
+            state = ipo_schedule.refresh_ipo_schedule(verbose=False)
+            self.assertEqual(state["items"][0]["holder_lockup"], snap)
+            self.assertIn(unittest.mock.call(offering["rcept_no"]), download.call_args_list)
+
+    def test_holder_source_never_falls_back_from_invalid_correction(self):
+        filings = [{"rcept_no": "2", "report_nm": "[기재정정]투자설명서"},
+                   {"rcept_no": "1", "report_nm": "투자설명서"}]
+        snapshot = ipo_schedule._holder_from_offering_filings(filings, {"2": HOLDER.replace("300", "301"), "1": HOLDER})
+        self.assertEqual(snapshot["status"], "review")
+        self.assertEqual(snapshot["rcept_no"], "2")
+
+    def test_result_only_list_does_not_supply_a_holder_snapshot(self):
+        with patch.object(ipo_schedule, "download_document_text") as download:
+            self.assertIsNone(ipo_schedule._holder_from_offering_filings(
+                [{"rcept_no": "2", "report_nm": "증권발행실적보고서"}], {}))
+            download.assert_not_called()
+
+    def test_holder_source_failure_is_visible_even_with_verified_values(self):
+        gaps = quality_gaps({"holder_source_error": "timeout", "holder_lockup": {
+            "status": "verified", "total": 100, "rows": [{"period": "1개월", "qty": 100}]}}, today="2026-09-22")
+        self.assertIn("구주물량 원문 조회 실패", gaps)
+
     def test_allocation_without_suffix_and_absent_period(self):
         table = '<TABLE><TR><TH ROWSPAN="2">확약기간</TH><TH COLSPAN="2">합계</TH></TR><TR><TH>수량</TH><TH>비중</TH></TR>'
         for period, qty in (("6개월", 19030), ("3개월", 153735), ("1개월", 20717), ("미확약", 1081518), ("계", 1275000)):
