@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-21 08:48",
+  "updated": "2026-09-22 01:43",
   "items": [
     {
       "corp_code": "00104069",
@@ -30,12 +30,12 @@
       "market": "코스닥",
       "offer_shares": 8500000,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -43,6 +43,1524 @@
       "fixed_excluded": true,
       "offering_attempt": 1
     },
+    {
+      "corp_code": "01867688",
+      "name": "와이즈플래닛컴퍼니",
+      "first_filing_date": "20260729",
+      "last_rcept_no": "20260917000071",
+      "band_low": 10000,
+      "band_high": 12000,
+      "forecast_start": "2026-09-04",
+      "forecast_end": "2026-09-10",
+      "sub_start": "2026-09-14",
+      "sub_end": "2026-09-15",
+      "payment_date": "2026-09-14",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 1600000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "listing_date": "2026-09-23",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "offering_attempt": 1,
+      "content_url": "https://blog.naver.com/vericap/224404527576",
+      "final_price": 12000,
+      "demand_ratio": 1248.47,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 7003000,
+          "pct": 0.47,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 1621000,
+          "pct": 0.11,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 4378000,
+          "pct": 0.29,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 41709000,
+          "pct": 2.78,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 1443451000,
+          "pct": 96.35,
+          "source": "dart_table"
+        }
+      ],
+      "manual_commit_apply": {},
+      "sub_ratio": 1477.65,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 104252,
+          "pct": 8.69,
+          "source": "dart_table",
+          "rcept_no": "20260917000071"
+        },
+        {
+          "period": "3개월",
+          "qty": 12413,
+          "pct": 1.03,
+          "source": "dart_table",
+          "rcept_no": "20260917000071"
+        },
+        {
+          "period": "1개월",
+          "qty": 7223,
+          "pct": 0.6,
+          "source": "dart_table",
+          "rcept_no": "20260917000071"
+        },
+        {
+          "period": "15일",
+          "qty": 543406,
+          "pct": 45.28,
+          "source": "dart_table",
+          "rcept_no": "20260917000071"
+        },
+        {
+          "period": "미확약",
+          "qty": 532706,
+          "pct": 44.39,
+          "source": "dart_table",
+          "rcept_no": "20260917000071"
+        }
+      ],
+      "report_rcp": "20260917000071",
+      "result_parse_version": 2,
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260917000071",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2026-09-23",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20260917000071"
+      },
+      "holder_overrides": {}
+    },
+    {
+      "corp_code": "01722066",
+      "name": "빅웨이브로보틱스",
+      "first_filing_date": "20260504",
+      "last_rcept_no": "20260918000412",
+      "band_low": 8458,
+      "band_high": 10149,
+      "forecast_start": "2026-09-07",
+      "forecast_end": "2026-09-11",
+      "sub_start": "2026-09-15",
+      "sub_end": "2026-09-16",
+      "payment_date": "2026-09-15",
+      "underwriter": "유진투자증권·미래에셋증권",
+      "market": "코스닥",
+      "offer_shares": 1600000,
+      "withdrawn": false,
+      "listing_date": "2026-09-29",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "schedule_hidden": false,
+      "offering_attempt": 1,
+      "final_price": 18000,
+      "transfer_market": "코스닥",
+      "demand_ratio": 1109.37,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 14817000,
+          "pct": 1.28,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 29859000,
+          "pct": 2.58,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 30686000,
+          "pct": 2.65,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 134410000,
+          "pct": 11.62,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 946952000,
+          "pct": 81.86,
+          "source": "dart_table"
+        }
+      ],
+      "manual_commit_apply": {},
+      "sub_ratio": 1307.78,
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 159800,
+          "pct": 14.49,
+          "source": "dart_table",
+          "rcept_no": "20260918000412"
+        },
+        {
+          "period": "3개월",
+          "qty": 218700,
+          "pct": 19.83,
+          "source": "dart_table",
+          "rcept_no": "20260918000412"
+        },
+        {
+          "period": "1개월",
+          "qty": 174440,
+          "pct": 15.82,
+          "source": "dart_table",
+          "rcept_no": "20260918000412"
+        },
+        {
+          "period": "15일",
+          "qty": 311650,
+          "pct": 28.26,
+          "source": "dart_table",
+          "rcept_no": "20260918000412"
+        },
+        {
+          "period": "미확약",
+          "qty": 238336,
+          "pct": 21.61,
+          "source": "dart_table",
+          "rcept_no": "20260918000412"
+        }
+      ],
+      "report_rcp": "20260918000412",
+      "result_parse_version": 2,
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260918000412",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2026-09-29",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20260918000412"
+      },
+      "holder_overrides": {}
+    },
+    {
+      "corp_code": "01564514",
+      "name": "글로벌테크놀로지",
+      "first_filing_date": "20260728",
+      "last_rcept_no": "20260921000349",
+      "band_low": 13000,
+      "band_high": 15000,
+      "forecast_start": "2026-09-07",
+      "forecast_end": "2026-09-11",
+      "sub_start": "2026-09-16",
+      "sub_end": "2026-09-17",
+      "payment_date": "2026-09-21",
+      "underwriter": "한국투자증권",
+      "market": "코스닥",
+      "offer_shares": 4000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "listing_date": "2026-09-29",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "offering_attempt": 1,
+      "transfer_market": "코스닥",
+      "final_price": 10000,
+      "demand_ratio": 123.19,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 990000,
+          "pct": 0.27,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 368568000,
+          "pct": 99.73,
+          "source": "dart_table"
+        }
+      ],
+      "manual_commit_apply": {},
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260921000349",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2026-09-29",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22",
+      "quality_attempted_at": "2026-09-22",
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table",
+          "rcept_no": "20260921000349"
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table",
+          "rcept_no": "20260921000349"
+        },
+        {
+          "period": "1개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table",
+          "rcept_no": "20260921000349"
+        },
+        {
+          "period": "15일",
+          "qty": 990000,
+          "pct": 33.0,
+          "source": "dart_table",
+          "rcept_no": "20260921000349"
+        },
+        {
+          "period": "미확약",
+          "qty": 2010000,
+          "pct": 67.0,
+          "source": "dart_table",
+          "rcept_no": "20260921000349"
+        }
+      ],
+      "sub_ratio": 57.15,
+      "report_rcp": "20260921000349",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20260921000349"
+      },
+      "holder_overrides": {}
+    },
+    {
+      "corp_code": "00960623",
+      "name": "덕산넵코어스",
+      "first_filing_date": "20260724",
+      "last_rcept_no": "20260921000143",
+      "band_low": 12400,
+      "band_high": 14600,
+      "forecast_start": "2026-09-08",
+      "forecast_end": "2026-09-14",
+      "sub_start": "2026-09-16",
+      "sub_end": "2026-09-17",
+      "payment_date": "2026-09-21",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 3000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "listing_date": "2026-09-30",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "offering_attempt": 1,
+      "final_price": 14600,
+      "demand_ratio": 868.64,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 25481000,
+          "pct": 1.3,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 12226000,
+          "pct": 0.63,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 10945000,
+          "pct": 0.56,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 30504000,
+          "pct": 1.56,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 1875278000,
+          "pct": 95.95,
+          "source": "dart_table"
+        }
+      ],
+      "manual_commit_apply": {},
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260921000143",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2026-09-30",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22",
+      "quality_attempted_at": "2026-09-22",
+      "commit_alloc": [
+        {
+          "period": "6개월",
+          "qty": 261647,
+          "pct": 11.63,
+          "source": "dart_table",
+          "rcept_no": "20260921000143"
+        },
+        {
+          "period": "3개월",
+          "qty": 272781,
+          "pct": 12.12,
+          "source": "dart_table",
+          "rcept_no": "20260921000143"
+        },
+        {
+          "period": "1개월",
+          "qty": 115708,
+          "pct": 5.14,
+          "source": "dart_table",
+          "rcept_no": "20260921000143"
+        },
+        {
+          "period": "15일",
+          "qty": 638253,
+          "pct": 28.37,
+          "source": "dart_table",
+          "rcept_no": "20260921000143"
+        },
+        {
+          "period": "미확약",
+          "qty": 961611,
+          "pct": 42.74,
+          "source": "dart_table",
+          "rcept_no": "20260921000143"
+        }
+      ],
+      "sub_ratio": 332.82,
+      "report_rcp": "20260921000143",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20260921000143"
+      },
+      "holder_overrides": {}
+    },
+    {
+      "corp_code": "01801026",
+      "name": "브릴스",
+      "first_filing_date": "20260713",
+      "last_rcept_no": "20260916000240",
+      "band_low": 16500,
+      "band_high": 19500,
+      "forecast_start": "2026-09-09",
+      "forecast_end": "2026-09-15",
+      "sub_start": "2026-09-17",
+      "sub_end": "2026-09-18",
+      "payment_date": "2026-09-22",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "offer_shares": 1200000,
+      "is_listing_ipo": true,
+      "withdrawn": false,
+      "listing_date": "2026-10-01",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "ipo_parse_version": 5,
+      "schedule_hidden": false,
+      "offering_attempt": 1,
+      "content_url": "https://blog.naver.com/vericap/224409591674",
+      "final_price": 19500,
+      "demand_ratio": 1187.74,
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260916000240",
+        "total": 8361586,
+        "table_index": 768,
+        "rows": [
+          {
+            "period": "6개월",
+            "qty": 396241
+          },
+          {
+            "period": "30개월",
+            "qty": 4813346
+          },
+          {
+            "period": "1개월",
+            "qty": 695698
+          },
+          {
+            "period": "2개월",
+            "qty": 777017
+          },
+          {
+            "period": "3개월",
+            "qty": 1499284
+          },
+          {
+            "period": "1년",
+            "qty": 180000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 9029000,
+          "pct": 1.06,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 5471000,
+          "pct": 0.64,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 36284000,
+          "pct": 4.24,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 135191000,
+          "pct": 15.81,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 669196000,
+          "pct": 78.25,
+          "source": "dart_table"
+        }
+      ],
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2026-10-01",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "waiting",
+        "checked_at": "2026-09-22"
+      },
+      "manual_commit_apply": {},
+      "holder_overrides": {}
+    },
+    {
+      "corp_code": "01028933",
+      "name": "멜콘",
+      "first_filing_date": "20260821",
+      "last_rcept_no": "20260914000034",
+      "offering_attempt": 1,
+      "band_low": 10700,
+      "band_high": 12300,
+      "forecast_start": "2026-09-16",
+      "forecast_end": "2026-09-22",
+      "sub_start": "2026-10-01",
+      "sub_end": "2026-10-02",
+      "payment_date": "2026-10-07",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2500000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260914000034",
+        "total": 8228320,
+        "table_index": 459,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 7979440
+          },
+          {
+            "period": "12개월",
+            "qty": 123880
+          },
+          {
+            "period": "1년",
+            "qty": 50000
+          },
+          {
+            "period": "3개월",
+            "qty": 75000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01158632",
+      "name": "진코스텍",
+      "first_filing_date": "20260827",
+      "last_rcept_no": "20260911000530",
+      "offering_attempt": 1,
+      "issuer_market": "코넥스",
+      "stock_code": "250030",
+      "band_low": 19500,
+      "band_high": 23500,
+      "forecast_start": "2026-09-16",
+      "forecast_end": "2026-09-22",
+      "sub_start": "2026-10-02",
+      "sub_end": "2026-10-06",
+      "payment_date": "2026-10-08",
+      "underwriter": "하나증권",
+      "market": "코스닥",
+      "transfer_market": "코스닥",
+      "offer_shares": 852000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260911000530",
+        "total": 1573682,
+        "table_index": 365,
+        "rows": [
+          {
+            "period": "1년",
+            "qty": 1488225
+          },
+          {
+            "period": "6개월",
+            "qty": 85457
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01754737",
+      "name": "엘리스그룹",
+      "first_filing_date": "20260821",
+      "last_rcept_no": "20260921000386",
+      "offering_attempt": 1,
+      "band_low": 70400,
+      "band_high": 90500,
+      "forecast_start": "2026-09-23",
+      "forecast_end": "2026-10-01",
+      "sub_start": "2026-10-07",
+      "sub_end": "2026-10-08",
+      "underwriter": "미래에셋증권·삼성증권",
+      "market": "코스피",
+      "offer_shares": 2222000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "payment_date": "2026-09-23",
+      "transfer_market": "코스피",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260921000386",
+        "total": 8797919,
+        "table_index": 650,
+        "rows": [
+          {
+            "period": "24개월",
+            "qty": 4127252
+          },
+          {
+            "period": "6개월",
+            "qty": 1974467
+          },
+          {
+            "period": "1개월",
+            "qty": 1328151
+          },
+          {
+            "period": "12개월",
+            "qty": 1263964
+          },
+          {
+            "period": "3개월",
+            "qty": 104085
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01749559",
+      "name": "엠에스바이오",
+      "first_filing_date": "20260907",
+      "last_rcept_no": "20260907000305",
+      "offering_attempt": 1,
+      "band_low": 6800,
+      "band_high": 7800,
+      "forecast_start": "2026-09-28",
+      "forecast_end": "2026-10-02",
+      "sub_start": "2026-10-12",
+      "sub_end": "2026-10-13",
+      "payment_date": "2026-10-15",
+      "underwriter": "KB증권",
+      "market": "코스닥",
+      "offer_shares": 4000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260907000305",
+        "total": 20855340,
+        "table_index": 319,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 7240955
+          },
+          {
+            "period": "1년",
+            "qty": 5879885
+          },
+          {
+            "period": "3개월",
+            "qty": 6071865
+          },
+          {
+            "period": "6개월",
+            "qty": 1662635
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "00534729",
+      "name": "디티에스",
+      "first_filing_date": "20260911",
+      "last_rcept_no": "20260911000314",
+      "offering_attempt": 1,
+      "band_low": 17000,
+      "band_high": 18500,
+      "forecast_start": "2026-10-01",
+      "forecast_end": "2026-10-08",
+      "sub_start": "2026-10-13",
+      "sub_end": "2026-10-14",
+      "payment_date": "2026-10-16",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2228917,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260911000314",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01721933",
+      "name": "투게더아트",
+      "first_filing_date": "20260327",
+      "last_rcept_no": "20260915000399",
+      "sub_start": "2026-10-14",
+      "sub_end": "2026-10-26",
+      "payment_date": "2026-10-27",
+      "ipo_parse_version": 4,
+      "withdrawn": false,
+      "commit_apply_missing": 4,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true,
+      "management_status": "제외고정",
+      "schedule_hidden": true,
+      "review_reason": "일반 IPO 아님",
+      "offering_attempt": 1,
+      "result_parse_version": 2,
+      "fixed_excluded": true
+    },
+    {
+      "corp_code": "01706509",
+      "name": "다비오",
+      "first_filing_date": "20260915",
+      "last_rcept_no": "20260915000390",
+      "offering_attempt": 1,
+      "band_low": 12300,
+      "band_high": 16600,
+      "forecast_start": "2026-10-07",
+      "forecast_end": "2026-10-14",
+      "sub_start": "2026-10-19",
+      "sub_end": "2026-10-20",
+      "payment_date": "2026-10-22",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 1000000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260915000390",
+        "total": 5224361,
+        "table_index": 371,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 1739940
+          },
+          {
+            "period": "1년",
+            "qty": 276297
+          },
+          {
+            "period": "1개월",
+            "qty": 928794
+          },
+          {
+            "period": "2개월",
+            "qty": 1048451
+          },
+          {
+            "period": "3개월",
+            "qty": 975879
+          },
+          {
+            "period": "2년",
+            "qty": 255000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01705573",
+      "name": "유캐스트",
+      "first_filing_date": "20260909",
+      "last_rcept_no": "20260909000378",
+      "offering_attempt": 1,
+      "band_low": 21000,
+      "band_high": 26000,
+      "forecast_start": "2026-10-07",
+      "forecast_end": "2026-10-14",
+      "sub_start": "2026-10-19",
+      "sub_end": "2026-10-20",
+      "payment_date": "2026-10-22",
+      "underwriter": "유진투자증권",
+      "market": "코스닥",
+      "offer_shares": 800000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260909000378",
+        "total": 3721041,
+        "table_index": 416,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 1186472
+          },
+          {
+            "period": "3개월",
+            "qty": 454094
+          },
+          {
+            "period": "4개월",
+            "qty": 342730
+          },
+          {
+            "period": "15일",
+            "qty": 234738
+          },
+          {
+            "period": "1개월",
+            "qty": 469481
+          },
+          {
+            "period": "2개월",
+            "qty": 580845
+          },
+          {
+            "period": "2년",
+            "qty": 351758
+          },
+          {
+            "period": "6개월",
+            "qty": 100923
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01540903",
+      "name": "크리에이츠",
+      "first_filing_date": "20260904",
+      "last_rcept_no": "20260917000141",
+      "offering_attempt": 1,
+      "band_low": 15000,
+      "band_high": 18000,
+      "forecast_start": "2026-10-12",
+      "forecast_end": "2026-10-16",
+      "sub_start": "2026-10-20",
+      "sub_end": "2026-10-21",
+      "payment_date": "2026-10-23",
+      "underwriter": "삼성증권",
+      "market": "코스닥",
+      "offer_shares": 1400000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260917000141",
+        "total": 7939548,
+        "table_index": 391,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 4805000
+          },
+          {
+            "period": "2년",
+            "qty": 1369000
+          },
+          {
+            "period": "6개월",
+            "qty": 411910
+          },
+          {
+            "period": "3개월",
+            "qty": 631077
+          },
+          {
+            "period": "2개월",
+            "qty": 722561
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01543043",
+      "name": "티앤이코리아",
+      "first_filing_date": "20260903",
+      "last_rcept_no": "20260903000275",
+      "offering_attempt": 1,
+      "band_low": 12600,
+      "band_high": 15300,
+      "forecast_start": "2026-10-07",
+      "forecast_end": "2026-10-14",
+      "sub_start": "2026-10-20",
+      "sub_end": "2026-10-21",
+      "payment_date": "2026-10-23",
+      "underwriter": "신한투자증권",
+      "market": "코스닥",
+      "offer_shares": 2400000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260903000275",
+        "total": 3530940,
+        "table_index": 737,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 3530940
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01649408",
+      "name": "인텔리빅스",
+      "first_filing_date": "20260916",
+      "last_rcept_no": "20260916000544",
+      "offering_attempt": 1,
+      "band_low": 7600,
+      "band_high": 9000,
+      "forecast_start": "2026-10-12",
+      "forecast_end": "2026-10-16",
+      "sub_start": "2026-10-21",
+      "sub_end": "2026-10-22",
+      "underwriter": "미래에셋증권",
+      "market": "코스피",
+      "transfer_market": "코스피",
+      "offer_shares": 2500000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260916000544",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01956751",
+      "name": "래블업",
+      "first_filing_date": "20260825",
+      "last_rcept_no": "20260921000390",
+      "offering_attempt": 1,
+      "band_low": 19000,
+      "band_high": 22000,
+      "forecast_start": "2026-10-13",
+      "forecast_end": "2026-10-19",
+      "sub_start": "2026-10-22",
+      "sub_end": "2026-10-23",
+      "payment_date": "2026-10-27",
+      "underwriter": "NH투자증권",
+      "market": "코스닥",
+      "offer_shares": 2180000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260921000390",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "00579342",
+      "name": "영광",
+      "first_filing_date": "20260921",
+      "last_rcept_no": "20260921000332",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260921000332",
+        "total": 6172040,
+        "table_index": 435,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 5604240
+          },
+          {
+            "period": "6개월",
+            "qty": 500000
+          },
+          {
+            "period": "3개월",
+            "qty": 67800
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "band_low": 14000,
+      "band_high": 17000,
+      "forecast_start": "2026-10-13",
+      "forecast_end": "2026-10-19",
+      "sub_start": "2026-10-22",
+      "sub_end": "2026-10-23",
+      "payment_date": "2026-10-27",
+      "underwriter": "한국투자증권",
+      "market": "코스피",
+      "transfer_market": "코스피",
+      "offer_shares": 2260000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "01378005",
+      "name": "이에스티",
+      "first_filing_date": "20260921",
+      "last_rcept_no": "20260921000211",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260921000211",
+        "total": 8670800,
+        "table_index": 430,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 6823646
+          },
+          {
+            "period": "1개월",
+            "qty": 1056600
+          },
+          {
+            "period": "2개월",
+            "qty": 544448
+          },
+          {
+            "period": "3개월",
+            "qty": 229906
+          },
+          {
+            "period": "1년",
+            "qty": 16200
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "band_low": 10600,
+      "band_high": 12400,
+      "forecast_start": "2026-10-14",
+      "forecast_end": "2026-10-20",
+      "sub_start": "2026-10-22",
+      "sub_end": "2026-10-23",
+      "payment_date": "2026-10-27",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2200000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "01797635",
+      "name": "에이엘로봇",
+      "first_filing_date": "20260921",
+      "last_rcept_no": "20260921000209",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260921000209",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "band_low": 15700,
+      "band_high": 17600,
+      "forecast_start": "2026-10-15",
+      "forecast_end": "2026-10-21",
+      "sub_start": "2026-10-26",
+      "sub_end": "2026-10-27",
+      "payment_date": "2026-10-29",
+      "underwriter": "대신증권",
+      "market": "코스닥",
+      "offer_shares": 2400000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "01705740",
+      "name": "엠비디",
+      "first_filing_date": "20260828",
+      "last_rcept_no": "20260918000439",
+      "offering_attempt": 1,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "band_low": 9600,
+      "band_high": 11700,
+      "offer_shares": 2000000,
+      "forecast_start": "2026-10-16",
+      "forecast_end": "2026-10-22",
+      "sub_start": "2026-10-28",
+      "sub_end": "2026-10-29",
+      "underwriter": "하나증권",
+      "payment_date": "2026-11-02",
+      "market": "코스닥",
+      "is_listing_ipo": true,
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260918000439",
+        "total": 9443975,
+        "table_index": 1230,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 3120500
+          },
+          {
+            "period": "1개월",
+            "qty": 4537926
+          },
+          {
+            "period": "3개월",
+            "qty": 476689
+          },
+          {
+            "period": "2개월",
+            "qty": 1248860
+          },
+          {
+            "period": "1년",
+            "qty": 60000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01835829",
+      "name": "바로팜",
+      "first_filing_date": "20260908",
+      "last_rcept_no": "20260908000417",
+      "offering_attempt": 1,
+      "band_low": 16400,
+      "band_high": 20200,
+      "forecast_start": "2026-10-22",
+      "forecast_end": "2026-10-28",
+      "sub_start": "2026-11-02",
+      "sub_end": "2026-11-03",
+      "payment_date": "2026-11-02",
+      "underwriter": "미래에셋증권",
+      "market": "코스피",
+      "offer_shares": 1780000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "transfer_market": "코스피",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260908000417",
+        "total": 8318101,
+        "table_index": 423,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 4739700
+          },
+          {
+            "period": "18개월",
+            "qty": 115855
+          },
+          {
+            "period": "1개월",
+            "qty": 3244703
+          },
+          {
+            "period": "2개월",
+            "qty": 46948
+          },
+          {
+            "period": "6개월",
+            "qty": 117495
+          },
+          {
+            "period": "3개월",
+            "qty": 53400
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
+    },
+    {
+      "corp_code": "01025617",
+      "name": "하나에어로다이내믹스",
+      "first_filing_date": "20260921",
+      "last_rcept_no": "20260921000405",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260921000405",
+        "total": 12264583,
+        "table_index": 387,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 8203900
+          },
+          {
+            "period": "2년",
+            "qty": 700000
+          },
+          {
+            "period": "2개월",
+            "qty": 1772997
+          },
+          {
+            "period": "6개월",
+            "qty": 1344378
+          },
+          {
+            "period": "3개월",
+            "qty": 243308
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "band_low": 4700,
+      "band_high": 5700,
+      "forecast_start": "2026-11-02",
+      "forecast_end": "2026-11-06",
+      "sub_start": "2026-11-10",
+      "sub_end": "2026-11-11",
+      "payment_date": "2026-11-13",
+      "underwriter": "아이비케이투자증권",
+      "market": "코스닥",
+      "transfer_market": "코스닥",
+      "offer_shares": 4400000,
+      "is_listing_ipo": true,
+      "ipo_parse_version": 5,
+      "withdrawn": false,
+      "commit_apply_missing": 5,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": false
+    },
+    {
+      "corp_code": "00683283",
+      "name": "LS전선",
+      "first_filing_date": "20251219",
+      "last_rcept_no": "20251219000079",
+      "withdrawn": false,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true,
+      "fixed_excluded": true,
+      "management_status": "제외고정"
+    },
+    {
+      "corp_code": "02036869",
+      "name": "아이엠기업인수목적1호",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 5
+    },
+    {
+      "corp_code": "02032951",
+      "name": "에스케이증권제14호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 5
+    },
+    {
+      "corp_code": "02032155",
+      "name": "케이비제34호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 5
+    },
+    {
+      "corp_code": "02029258",
+      "name": "한국제17호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 5
+    },
+    {
+      "corp_code": "01965157",
+      "name": "한화플러스제6호기업인수목적",
+      "fixed_excluded": true,
+      "management_status": "제외고정",
+      "management_hidden": true,
+      "schedule_hidden": true,
+      "review_pending": false,
+      "review_reason": "스팩 자동 제외",
+      "ipo_parse_version": 5
+    }
+  ],
+  "past_items": [
     {
       "corp_code": "01876251",
       "name": "네오사피엔스",
@@ -189,1145 +1707,10 @@
         "status": "verified",
         "checked_at": "2026-09-22",
         "rcept_no": "20260915000379"
-      }
-    },
-    {
-      "corp_code": "01867688",
-      "name": "와이즈플래닛컴퍼니",
-      "first_filing_date": "20260729",
-      "last_rcept_no": "20260917000071",
-      "band_low": 10000,
-      "band_high": 12000,
-      "forecast_start": "2026-09-04",
-      "forecast_end": "2026-09-10",
-      "sub_start": "2026-09-14",
-      "sub_end": "2026-09-15",
-      "payment_date": "2026-09-14",
-      "underwriter": "대신증권",
-      "market": "코스닥",
-      "offer_shares": 1600000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "listing_date": "2026-09-23",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "offering_attempt": 1,
-      "content_url": "https://blog.naver.com/vericap/224404527576",
-      "final_price": 12000,
-      "demand_ratio": 1248.47,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 7003000,
-          "pct": 0.47,
-          "source": "dart_table",
-          "rcept_no": "20260911000214"
-        },
-        {
-          "period": "3개월",
-          "qty": 1621000,
-          "pct": 0.11,
-          "source": "dart_table",
-          "rcept_no": "20260911000214"
-        },
-        {
-          "period": "1개월",
-          "qty": 4378000,
-          "pct": 0.29,
-          "source": "dart_table",
-          "rcept_no": "20260911000214"
-        },
-        {
-          "period": "15일",
-          "qty": 41709000,
-          "pct": 2.78,
-          "source": "dart_table",
-          "rcept_no": "20260911000214"
-        },
-        {
-          "period": "미확약",
-          "qty": 1443451000,
-          "pct": 96.35,
-          "source": "dart_table",
-          "rcept_no": "20260911000214"
-        }
-      ],
-      "manual_commit_apply": {},
-      "sub_ratio": 1477.65,
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 104252,
-          "pct": 8.69,
-          "source": "dart_table",
-          "rcept_no": "20260917000071"
-        },
-        {
-          "period": "3개월",
-          "qty": 12413,
-          "pct": 1.03,
-          "source": "dart_table",
-          "rcept_no": "20260917000071"
-        },
-        {
-          "period": "1개월",
-          "qty": 7223,
-          "pct": 0.6,
-          "source": "dart_table",
-          "rcept_no": "20260917000071"
-        },
-        {
-          "period": "15일",
-          "qty": 543406,
-          "pct": 45.28,
-          "source": "dart_table",
-          "rcept_no": "20260917000071"
-        },
-        {
-          "period": "미확약",
-          "qty": 532706,
-          "pct": 44.39,
-          "source": "dart_table",
-          "rcept_no": "20260917000071"
-        }
-      ],
-      "report_rcp": "20260917000071",
-      "result_parse_version": 2,
-      "security_type": "equity",
-      "holder_lockup": {
-        "status": "verified",
-        "rcept_no": "20260911000214",
-        "total": 7907380,
-        "table_index": 684,
-        "rows": [
-          {
-            "period": "30개월",
-            "qty": 6141600
-          },
-          {
-            "period": "6개월",
-            "qty": 1532630
-          },
-          {
-            "period": "3개월",
-            "qty": 233150
-          }
-        ],
-        "quantity_unit": "주"
       },
-      "listing_date_check": {
-        "status": "missing",
-        "current": "2026-09-23",
-        "candidates": []
-      },
-      "quality_checked_at": "2026-09-22",
-      "quality_attempted_at": "2026-09-22",
-      "result_source_check": {
-        "status": "verified",
-        "checked_at": "2026-09-22",
-        "rcept_no": "20260917000071"
-      }
+      "holder_overrides": {},
+      "archived_at": "2026-09-22"
     },
-    {
-      "corp_code": "01722066",
-      "name": "빅웨이브로보틱스",
-      "first_filing_date": "20260504",
-      "last_rcept_no": "20260918000412",
-      "band_low": 8458,
-      "band_high": 10149,
-      "forecast_start": "2026-09-07",
-      "forecast_end": "2026-09-11",
-      "sub_start": "2026-09-15",
-      "sub_end": "2026-09-16",
-      "payment_date": "2026-09-15",
-      "underwriter": "유진투자증권·미래에셋증권",
-      "market": "코스닥",
-      "offer_shares": 1600000,
-      "withdrawn": false,
-      "listing_date": "2026-09-29",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "schedule_hidden": false,
-      "offering_attempt": 1,
-      "final_price": 18000,
-      "transfer_market": "코스닥",
-      "demand_ratio": 1109.37,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 14817000,
-          "pct": 1.28,
-          "source": "dart_table",
-          "rcept_no": "20260914000385"
-        },
-        {
-          "period": "3개월",
-          "qty": 29859000,
-          "pct": 2.58,
-          "source": "dart_table",
-          "rcept_no": "20260914000385"
-        },
-        {
-          "period": "1개월",
-          "qty": 30686000,
-          "pct": 2.65,
-          "source": "dart_table",
-          "rcept_no": "20260914000385"
-        },
-        {
-          "period": "15일",
-          "qty": 134410000,
-          "pct": 11.62,
-          "source": "dart_table",
-          "rcept_no": "20260914000385"
-        },
-        {
-          "period": "미확약",
-          "qty": 946952000,
-          "pct": 81.86,
-          "source": "dart_table",
-          "rcept_no": "20260914000385"
-        }
-      ],
-      "manual_commit_apply": {},
-      "sub_ratio": 1307.78,
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 159800,
-          "pct": 14.49,
-          "source": "dart_table",
-          "rcept_no": "20260918000412"
-        },
-        {
-          "period": "3개월",
-          "qty": 218700,
-          "pct": 19.83,
-          "source": "dart_table",
-          "rcept_no": "20260918000412"
-        },
-        {
-          "period": "1개월",
-          "qty": 174440,
-          "pct": 15.82,
-          "source": "dart_table",
-          "rcept_no": "20260918000412"
-        },
-        {
-          "period": "15일",
-          "qty": 311650,
-          "pct": 28.26,
-          "source": "dart_table",
-          "rcept_no": "20260918000412"
-        },
-        {
-          "period": "미확약",
-          "qty": 238336,
-          "pct": 21.61,
-          "source": "dart_table",
-          "rcept_no": "20260918000412"
-        }
-      ],
-      "report_rcp": "20260918000412",
-      "result_parse_version": 2,
-      "security_type": "equity",
-      "holder_lockup": {
-        "status": "verified",
-        "rcept_no": "20260914000385",
-        "total": 7521618,
-        "table_index": 979,
-        "rows": [
-          {
-            "period": "3년",
-            "qty": 5311391
-          },
-          {
-            "period": "1년",
-            "qty": 679071
-          },
-          {
-            "period": "3개월",
-            "qty": 739480
-          },
-          {
-            "period": "1개월",
-            "qty": 791676
-          }
-        ],
-        "quantity_unit": "주"
-      },
-      "listing_date_check": {
-        "status": "missing",
-        "current": "2026-09-29",
-        "candidates": []
-      },
-      "quality_checked_at": "2026-09-22",
-      "quality_attempted_at": "2026-09-22",
-      "result_source_check": {
-        "status": "verified",
-        "checked_at": "2026-09-22",
-        "rcept_no": "20260918000412"
-      }
-    },
-    {
-      "corp_code": "01564514",
-      "name": "글로벌테크놀로지",
-      "first_filing_date": "20260728",
-      "last_rcept_no": "20260915000241",
-      "band_low": 13000,
-      "band_high": 15000,
-      "forecast_start": "2026-09-07",
-      "forecast_end": "2026-09-11",
-      "sub_start": "2026-09-16",
-      "sub_end": "2026-09-17",
-      "payment_date": "2026-09-21",
-      "underwriter": "한국투자증권",
-      "market": "코스닥",
-      "offer_shares": 4000000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "listing_date": "2026-09-29",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "offering_attempt": 1,
-      "transfer_market": "코스닥",
-      "final_price": 10000,
-      "demand_ratio": 123.19,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260915000241"
-        },
-        {
-          "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260915000241"
-        },
-        {
-          "period": "1개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260915000241"
-        },
-        {
-          "period": "15일",
-          "qty": 990000,
-          "pct": 0.27,
-          "source": "dart_table",
-          "rcept_no": "20260915000241"
-        },
-        {
-          "period": "미확약",
-          "qty": 368568000,
-          "pct": 99.73,
-          "source": "dart_table",
-          "rcept_no": "20260915000241"
-        }
-      ],
-      "manual_commit_apply": {},
-      "security_type": "equity",
-      "holder_lockup": {
-        "status": "verified",
-        "rcept_no": "20260915000241",
-        "total": 15286573,
-        "table_index": 648,
-        "rows": [
-          {
-            "period": "4년",
-            "qty": 6095250
-          },
-          {
-            "period": "3년",
-            "qty": 5525151
-          },
-          {
-            "period": "1년",
-            "qty": 36120
-          },
-          {
-            "period": "2년",
-            "qty": 1576896
-          },
-          {
-            "period": "1개월",
-            "qty": 1913156
-          },
-          {
-            "period": "3개월",
-            "qty": 100000
-          },
-          {
-            "period": "6개월",
-            "qty": 40000
-          }
-        ],
-        "quantity_unit": "주"
-      },
-      "listing_date_check": {
-        "status": "missing",
-        "current": "2026-09-29",
-        "candidates": []
-      },
-      "quality_checked_at": "2026-09-22",
-      "quality_attempted_at": "2026-09-22",
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260921000349"
-        },
-        {
-          "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260921000349"
-        },
-        {
-          "period": "1개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20260921000349"
-        },
-        {
-          "period": "15일",
-          "qty": 990000,
-          "pct": 33.0,
-          "source": "dart_table",
-          "rcept_no": "20260921000349"
-        },
-        {
-          "period": "미확약",
-          "qty": 2010000,
-          "pct": 67.0,
-          "source": "dart_table",
-          "rcept_no": "20260921000349"
-        }
-      ],
-      "sub_ratio": 57.15,
-      "report_rcp": "20260921000349",
-      "result_source_check": {
-        "status": "verified",
-        "checked_at": "2026-09-22",
-        "rcept_no": "20260921000349"
-      }
-    },
-    {
-      "corp_code": "00960623",
-      "name": "덕산넵코어스",
-      "first_filing_date": "20260724",
-      "last_rcept_no": "20260915000085",
-      "band_low": 12400,
-      "band_high": 14600,
-      "forecast_start": "2026-09-08",
-      "forecast_end": "2026-09-14",
-      "sub_start": "2026-09-16",
-      "sub_end": "2026-09-17",
-      "payment_date": "2026-09-21",
-      "underwriter": "대신증권",
-      "market": "코스닥",
-      "offer_shares": 3000000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "listing_date": "2026-09-30",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "offering_attempt": 1,
-      "final_price": 14600,
-      "demand_ratio": 868.64,
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 25481000,
-          "pct": 1.3,
-          "source": "dart_table",
-          "rcept_no": "20260915000084"
-        },
-        {
-          "period": "3개월",
-          "qty": 12226000,
-          "pct": 0.63,
-          "source": "dart_table",
-          "rcept_no": "20260915000084"
-        },
-        {
-          "period": "1개월",
-          "qty": 10945000,
-          "pct": 0.56,
-          "source": "dart_table",
-          "rcept_no": "20260915000084"
-        },
-        {
-          "period": "15일",
-          "qty": 30504000,
-          "pct": 1.56,
-          "source": "dart_table",
-          "rcept_no": "20260915000084"
-        },
-        {
-          "period": "미확약",
-          "qty": 1875278000,
-          "pct": 95.95,
-          "source": "dart_table",
-          "rcept_no": "20260915000084"
-        }
-      ],
-      "manual_commit_apply": {},
-      "security_type": "equity",
-      "holder_lockup": {
-        "status": "verified",
-        "rcept_no": "20260915000084",
-        "total": 11315985,
-        "table_index": 1388,
-        "rows": [
-          {
-            "period": "1년",
-            "qty": 355000
-          },
-          {
-            "period": "3년",
-            "qty": 9648204
-          },
-          {
-            "period": "2개월",
-            "qty": 902078
-          },
-          {
-            "period": "3개월",
-            "qty": 324903
-          },
-          {
-            "period": "1개월",
-            "qty": 55800
-          },
-          {
-            "period": "6개월",
-            "qty": 30000
-          }
-        ],
-        "quantity_unit": "주"
-      },
-      "listing_date_check": {
-        "status": "missing",
-        "current": "2026-09-30",
-        "candidates": []
-      },
-      "quality_checked_at": "2026-09-22",
-      "quality_attempted_at": "2026-09-22",
-      "commit_alloc": [
-        {
-          "period": "6개월",
-          "qty": 261647,
-          "pct": 11.63,
-          "source": "dart_table",
-          "rcept_no": "20260921000143"
-        },
-        {
-          "period": "3개월",
-          "qty": 272781,
-          "pct": 12.12,
-          "source": "dart_table",
-          "rcept_no": "20260921000143"
-        },
-        {
-          "period": "1개월",
-          "qty": 115708,
-          "pct": 5.14,
-          "source": "dart_table",
-          "rcept_no": "20260921000143"
-        },
-        {
-          "period": "15일",
-          "qty": 638253,
-          "pct": 28.37,
-          "source": "dart_table",
-          "rcept_no": "20260921000143"
-        },
-        {
-          "period": "미확약",
-          "qty": 961611,
-          "pct": 42.74,
-          "source": "dart_table",
-          "rcept_no": "20260921000143"
-        }
-      ],
-      "sub_ratio": 332.82,
-      "report_rcp": "20260921000143",
-      "result_source_check": {
-        "status": "verified",
-        "checked_at": "2026-09-22",
-        "rcept_no": "20260921000143"
-      }
-    },
-    {
-      "corp_code": "01801026",
-      "name": "브릴스",
-      "first_filing_date": "20260713",
-      "last_rcept_no": "20260916000240",
-      "band_low": 16500,
-      "band_high": 19500,
-      "forecast_start": "2026-09-09",
-      "forecast_end": "2026-09-15",
-      "sub_start": "2026-09-17",
-      "sub_end": "2026-09-18",
-      "payment_date": "2026-09-22",
-      "underwriter": "아이비케이투자증권",
-      "market": "코스닥",
-      "offer_shares": 1200000,
-      "is_listing_ipo": true,
-      "withdrawn": false,
-      "listing_date": "2026-10-01",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "ipo_parse_version": 4,
-      "schedule_hidden": false,
-      "offering_attempt": 1,
-      "content_url": "https://blog.naver.com/vericap/224409591674",
-      "final_price": 19500,
-      "demand_ratio": 1187.74,
-      "security_type": "equity",
-      "holder_lockup": {
-        "status": "verified",
-        "rcept_no": "20260916000240",
-        "total": 8361586,
-        "table_index": 768,
-        "rows": [
-          {
-            "period": "6개월",
-            "qty": 396241
-          },
-          {
-            "period": "30개월",
-            "qty": 4813346
-          },
-          {
-            "period": "1개월",
-            "qty": 695698
-          },
-          {
-            "period": "2개월",
-            "qty": 777017
-          },
-          {
-            "period": "3개월",
-            "qty": 1499284
-          },
-          {
-            "period": "1년",
-            "qty": 180000
-          }
-        ],
-        "quantity_unit": "주"
-      },
-      "commit_apply": [
-        {
-          "period": "6개월",
-          "qty": 9029000,
-          "pct": 1.06,
-          "source": "dart_table",
-          "rcept_no": "20260916000240"
-        },
-        {
-          "period": "3개월",
-          "qty": 5471000,
-          "pct": 0.64,
-          "source": "dart_table",
-          "rcept_no": "20260916000240"
-        },
-        {
-          "period": "1개월",
-          "qty": 36284000,
-          "pct": 4.24,
-          "source": "dart_table",
-          "rcept_no": "20260916000240"
-        },
-        {
-          "period": "15일",
-          "qty": 135191000,
-          "pct": 15.81,
-          "source": "dart_table",
-          "rcept_no": "20260916000240"
-        },
-        {
-          "period": "미확약",
-          "qty": 669196000,
-          "pct": 78.25,
-          "source": "dart_table",
-          "rcept_no": "20260916000240"
-        }
-      ],
-      "listing_date_check": {
-        "status": "missing",
-        "current": "2026-10-01",
-        "candidates": []
-      },
-      "quality_checked_at": "2026-09-22",
-      "quality_attempted_at": "2026-09-22",
-      "result_source_check": {
-        "status": "waiting",
-        "checked_at": "2026-09-22"
-      }
-    },
-    {
-      "corp_code": "01028933",
-      "name": "멜콘",
-      "first_filing_date": "20260821",
-      "last_rcept_no": "20260914000034",
-      "offering_attempt": 1,
-      "band_low": 10700,
-      "band_high": 12300,
-      "forecast_start": "2026-09-16",
-      "forecast_end": "2026-09-22",
-      "sub_start": "2026-10-01",
-      "sub_end": "2026-10-02",
-      "payment_date": "2026-10-07",
-      "underwriter": "대신증권",
-      "market": "코스닥",
-      "offer_shares": 2500000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "01158632",
-      "name": "진코스텍",
-      "first_filing_date": "20260827",
-      "last_rcept_no": "20260911000530",
-      "offering_attempt": 1,
-      "issuer_market": "코넥스",
-      "stock_code": "250030",
-      "band_low": 19500,
-      "band_high": 23500,
-      "forecast_start": "2026-09-16",
-      "forecast_end": "2026-09-22",
-      "sub_start": "2026-10-02",
-      "sub_end": "2026-10-06",
-      "payment_date": "2026-10-08",
-      "underwriter": "하나증권",
-      "market": "코스닥",
-      "transfer_market": "코스닥",
-      "offer_shares": 852000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01754737",
-      "name": "엘리스그룹",
-      "first_filing_date": "20260821",
-      "last_rcept_no": "20260904000517",
-      "offering_attempt": 1,
-      "band_low": 70400,
-      "band_high": 90500,
-      "forecast_start": "2026-09-23",
-      "forecast_end": "2026-10-01",
-      "sub_start": "2026-10-07",
-      "sub_end": "2026-10-08",
-      "underwriter": "미래에셋증권·삼성증권",
-      "market": "코스피",
-      "offer_shares": 2222000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "payment_date": "2026-09-23",
-      "transfer_market": "코스피"
-    },
-    {
-      "corp_code": "01956751",
-      "name": "래블업",
-      "first_filing_date": "20260825",
-      "last_rcept_no": "20260825000318",
-      "offering_attempt": 1,
-      "band_low": 20000,
-      "band_high": 23000,
-      "forecast_start": "2026-09-28",
-      "forecast_end": "2026-10-02",
-      "sub_start": "2026-10-12",
-      "sub_end": "2026-10-13",
-      "payment_date": "2026-10-15",
-      "underwriter": "NH투자증권",
-      "market": "코스닥",
-      "offer_shares": 2180000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01749559",
-      "name": "엠에스바이오",
-      "first_filing_date": "20260907",
-      "last_rcept_no": "20260907000305",
-      "offering_attempt": 1,
-      "band_low": 6800,
-      "band_high": 7800,
-      "forecast_start": "2026-09-28",
-      "forecast_end": "2026-10-02",
-      "sub_start": "2026-10-12",
-      "sub_end": "2026-10-13",
-      "payment_date": "2026-10-15",
-      "underwriter": "KB증권",
-      "market": "코스닥",
-      "offer_shares": 4000000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "00534729",
-      "name": "디티에스",
-      "first_filing_date": "20260911",
-      "last_rcept_no": "20260911000314",
-      "offering_attempt": 1,
-      "band_low": 17000,
-      "band_high": 18500,
-      "forecast_start": "2026-10-01",
-      "forecast_end": "2026-10-08",
-      "sub_start": "2026-10-13",
-      "sub_end": "2026-10-14",
-      "payment_date": "2026-10-16",
-      "underwriter": "대신증권",
-      "market": "코스닥",
-      "offer_shares": 2228917,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01721933",
-      "name": "투게더아트",
-      "first_filing_date": "20260327",
-      "last_rcept_no": "20260915000399",
-      "sub_start": "2026-10-14",
-      "sub_end": "2026-10-26",
-      "payment_date": "2026-10-27",
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": true,
-      "management_status": "제외고정",
-      "schedule_hidden": true,
-      "review_reason": "일반 IPO 아님",
-      "offering_attempt": 1,
-      "result_parse_version": 2,
-      "fixed_excluded": true
-    },
-    {
-      "corp_code": "01706509",
-      "name": "다비오",
-      "first_filing_date": "20260915",
-      "last_rcept_no": "20260915000390",
-      "offering_attempt": 1,
-      "band_low": 12300,
-      "band_high": 16600,
-      "forecast_start": "2026-10-07",
-      "forecast_end": "2026-10-14",
-      "sub_start": "2026-10-19",
-      "sub_end": "2026-10-20",
-      "payment_date": "2026-10-22",
-      "underwriter": "대신증권",
-      "market": "코스닥",
-      "offer_shares": 1000000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01705573",
-      "name": "유캐스트",
-      "first_filing_date": "20260909",
-      "last_rcept_no": "20260909000378",
-      "offering_attempt": 1,
-      "band_low": 21000,
-      "band_high": 26000,
-      "forecast_start": "2026-10-07",
-      "forecast_end": "2026-10-14",
-      "sub_start": "2026-10-19",
-      "sub_end": "2026-10-20",
-      "payment_date": "2026-10-22",
-      "underwriter": "유진투자증권",
-      "market": "코스닥",
-      "offer_shares": 800000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "01540903",
-      "name": "크리에이츠",
-      "first_filing_date": "20260904",
-      "last_rcept_no": "20260917000141",
-      "offering_attempt": 1,
-      "band_low": 15000,
-      "band_high": 18000,
-      "forecast_start": "2026-10-12",
-      "forecast_end": "2026-10-16",
-      "sub_start": "2026-10-20",
-      "sub_end": "2026-10-21",
-      "payment_date": "2026-10-23",
-      "underwriter": "삼성증권",
-      "market": "코스닥",
-      "offer_shares": 1400000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "01543043",
-      "name": "티앤이코리아",
-      "first_filing_date": "20260903",
-      "last_rcept_no": "20260903000275",
-      "offering_attempt": 1,
-      "band_low": 12600,
-      "band_high": 15300,
-      "forecast_start": "2026-10-07",
-      "forecast_end": "2026-10-14",
-      "sub_start": "2026-10-20",
-      "sub_end": "2026-10-21",
-      "payment_date": "2026-10-23",
-      "underwriter": "신한투자증권",
-      "market": "코스닥",
-      "offer_shares": 2400000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "01649408",
-      "name": "인텔리빅스",
-      "first_filing_date": "20260916",
-      "last_rcept_no": "20260916000544",
-      "offering_attempt": 1,
-      "band_low": 7600,
-      "band_high": 9000,
-      "forecast_start": "2026-10-12",
-      "forecast_end": "2026-10-16",
-      "sub_start": "2026-10-21",
-      "sub_end": "2026-10-22",
-      "underwriter": "미래에셋증권",
-      "market": "코스피",
-      "transfer_market": "코스피",
-      "offer_shares": 2500000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false
-    },
-    {
-      "corp_code": "01705740",
-      "name": "엠비디",
-      "first_filing_date": "20260828",
-      "last_rcept_no": "20260918000439",
-      "offering_attempt": 1,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "band_low": 9600,
-      "band_high": 11700,
-      "offer_shares": 2000000,
-      "forecast_start": "2026-10-16",
-      "forecast_end": "2026-10-22",
-      "sub_start": "2026-10-28",
-      "sub_end": "2026-10-29",
-      "underwriter": "하나증권",
-      "payment_date": "2026-11-02",
-      "market": "코스닥",
-      "is_listing_ipo": true,
-      "transfer_market": "코스닥"
-    },
-    {
-      "corp_code": "01835829",
-      "name": "바로팜",
-      "first_filing_date": "20260908",
-      "last_rcept_no": "20260908000417",
-      "offering_attempt": 1,
-      "band_low": 16400,
-      "band_high": 20200,
-      "forecast_start": "2026-10-22",
-      "forecast_end": "2026-10-28",
-      "sub_start": "2026-11-02",
-      "sub_end": "2026-11-03",
-      "payment_date": "2026-11-02",
-      "underwriter": "미래에셋증권",
-      "market": "코스피",
-      "offer_shares": 1780000,
-      "is_listing_ipo": true,
-      "ipo_parse_version": 4,
-      "withdrawn": false,
-      "commit_apply_missing": 4,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": false,
-      "management_status": "자동",
-      "schedule_hidden": false,
-      "transfer_market": "코스피"
-    },
-    {
-      "corp_code": "00683283",
-      "name": "LS전선",
-      "first_filing_date": "20251219",
-      "last_rcept_no": "20251219000079",
-      "withdrawn": false,
-      "listing_date": "",
-      "stock_code": "",
-      "review_pending": true,
-      "fixed_excluded": true,
-      "management_status": "제외고정"
-    },
-    {
-      "corp_code": "02036869",
-      "name": "아이엠기업인수목적1호",
-      "fixed_excluded": true,
-      "management_status": "제외고정",
-      "management_hidden": true,
-      "schedule_hidden": true,
-      "review_pending": true,
-      "review_reason": "스팩 자동 제외",
-      "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "02032951",
-      "name": "에스케이증권제14호기업인수목적",
-      "fixed_excluded": true,
-      "management_status": "제외고정",
-      "management_hidden": true,
-      "schedule_hidden": true,
-      "review_pending": true,
-      "review_reason": "스팩 자동 제외",
-      "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "02032155",
-      "name": "케이비제34호기업인수목적",
-      "fixed_excluded": true,
-      "management_status": "제외고정",
-      "management_hidden": true,
-      "schedule_hidden": true,
-      "review_pending": true,
-      "review_reason": "스팩 자동 제외",
-      "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "02029258",
-      "name": "한국제17호기업인수목적",
-      "fixed_excluded": true,
-      "management_status": "제외고정",
-      "management_hidden": true,
-      "schedule_hidden": true,
-      "review_pending": true,
-      "review_reason": "스팩 자동 제외",
-      "ipo_parse_version": 4
-    },
-    {
-      "corp_code": "01965157",
-      "name": "한화플러스제6호기업인수목적",
-      "fixed_excluded": true,
-      "management_status": "제외고정",
-      "management_hidden": true,
-      "schedule_hidden": true,
-      "review_pending": true,
-      "review_reason": "스팩 자동 제외",
-      "ipo_parse_version": 4
-    }
-  ],
-  "past_items": [
     {
       "corp_code": "01586923",
       "name": "스카이랩스",
@@ -1349,7 +1732,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "offering_attempt": 1,
       "final_price": 10000,
@@ -1435,7 +1818,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "payment_date": "2026-08-12",
       "offering_attempt": 1,
@@ -1524,7 +1907,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "offering_attempt": 1,
       "final_price": 41200,
@@ -1612,7 +1995,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "offering_attempt": 1,
       "final_price": 28400,
@@ -1683,7 +2066,7 @@
       "corp_code": "02031369",
       "name": "인제니아테라퓨틱스",
       "management_name": "인제니아테라퓨틱스",
-      "first_filing_date": "20260724",
+      "first_filing_date": "20260610",
       "last_rcept_no": "20260728000402",
       "withdrawn": false,
       "review_pending": false,
@@ -1700,7 +2083,7 @@
       "offer_shares": 5000000,
       "demand_ratio": 50.4,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "listing_date": "2026-08-18",
       "stock_code": "950260",
       "schedule_hidden": false,
@@ -1711,30 +2094,35 @@
           "period": "미확약",
           "qty": 184900059,
           "pct": 97.77,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
+          "source": "dart_table",
           "visible": true
         }
       ],
@@ -1800,7 +2188,14 @@
         "content_url"
       ],
       "archived_at": "2026-08-19",
-      "transfer_market": "코스닥"
+      "transfer_market": "코스닥",
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260728000402",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "DR"
+      },
+      "security_type": "depositary_receipt"
     },
     {
       "corp_code": "00920731",
@@ -1824,7 +2219,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "final_price": 11000,
       "demand_ratio": 938.24,
@@ -1913,7 +2308,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "content_url": "https://blog.naver.com/vericap/224363555723",
       "provisional_fields": [
@@ -2050,7 +2445,7 @@
       "review_pending": false,
       "management_status": "자동",
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "sub_ratio": 667.18,
@@ -2165,7 +2560,7 @@
       "review_pending": false,
       "archived_at": "2026-07-14",
       "management_status": "자동",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "initial_shares": "7625791"
@@ -2192,7 +2587,7 @@
       "payment_date": "2026-06-29",
       "underwriter": "KB증권",
       "offer_shares": 2000000,
-      "demand_ratio": 1238,
+      "demand_ratio": 1238.0,
       "is_listing_ipo": true,
       "sub_ratio": 1510.57,
       "commit_alloc": [
@@ -2228,7 +2623,7 @@
       ],
       "report_rcp": "20260629000505",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -2307,7 +2702,38 @@
         }
       },
       "initial_shares": "13351559",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260623000244",
+        "total": 8920139,
+        "table_index": 585,
+        "rows": [
+          {
+            "period": "36개월",
+            "qty": 3738120
+          },
+          {
+            "period": "24개월",
+            "qty": 457495
+          },
+          {
+            "period": "12개월",
+            "qty": 90500
+          },
+          {
+            "period": "1개월",
+            "qty": 2287012
+          },
+          {
+            "period": "3개월",
+            "qty": 2347012
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01379129",
@@ -2319,7 +2745,7 @@
       "review_pending": false,
       "management_status": "자동",
       "stock_code": "0039P0",
-      "market": "코스닥",
+      "market": "코스피",
       "listing_date": "2026-07-01",
       "band_low": 7000,
       "band_high": 8000,
@@ -2365,7 +2791,7 @@
       ],
       "report_rcp": "20260626000469",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -2439,7 +2865,38 @@
         }
       },
       "initial_shares": "18746800",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260622000384",
+        "total": 12960300,
+        "table_index": 678,
+        "rows": [
+          {
+            "period": "2년",
+            "qty": 7236000
+          },
+          {
+            "period": "1년",
+            "qty": 421900
+          },
+          {
+            "period": "1개월",
+            "qty": 2563800
+          },
+          {
+            "period": "3개월",
+            "qty": 1898200
+          },
+          {
+            "period": "6개월",
+            "qty": 840400
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "transfer_market": "코스피"
     },
     {
       "corp_code": "01370517",
@@ -2522,7 +2979,7 @@
           "pct": 100
         }
       ],
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {},
       "initial_shares": "53255138"
@@ -2583,7 +3040,7 @@
       ],
       "report_rcp": "20260623000136",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -2657,7 +3114,34 @@
         }
       },
       "initial_shares": "12050305",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260616000250",
+        "total": 8509210,
+        "table_index": 739,
+        "rows": [
+          {
+            "period": "2년",
+            "qty": 6177128
+          },
+          {
+            "period": "1년",
+            "qty": 770102
+          },
+          {
+            "period": "1개월",
+            "qty": 1513980
+          },
+          {
+            "period": "3개월",
+            "qty": 48000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01755259",
@@ -2714,7 +3198,7 @@
       ],
       "report_rcp": "20260529001298",
       "archived_at": "2026-07-14",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "schedule_hidden": false,
       "manual_commit_apply": {
         "미확약": {
@@ -2743,7 +3227,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 4,
+      "commit_apply_missing": 5,
       "commit_apply": [
         {
           "period": "미확약",
@@ -2789,7 +3273,14 @@
         }
       },
       "initial_shares": "14168911",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260522000577",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01709065",
@@ -2841,7 +3332,7 @@
       "offer_shares": 2635000,
       "demand_ratio": 1196.08,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 2807.79,
       "commit_alloc": [
         {
@@ -2920,7 +3411,41 @@
         }
       },
       "initial_shares": "17541640",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20260508000924",
+        "total": 10786433,
+        "table_index": 807,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 5477016
+          },
+          {
+            "period": "1년",
+            "qty": 636104
+          },
+          {
+            "period": "2개월",
+            "qty": 1995141
+          },
+          {
+            "period": "1개월",
+            "qty": 786557
+          },
+          {
+            "period": "6개월",
+            "qty": 1824949
+          },
+          {
+            "period": "3개월",
+            "qty": 66666
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01565364",
@@ -2974,7 +3499,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 3169.86,
       "commit_alloc": [
         {
@@ -3060,7 +3585,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 2013.8,
       "commit_alloc": [
         {
@@ -3141,11 +3666,11 @@
       "sub_start": "2026-04-20",
       "sub_end": "2026-04-21",
       "payment_date": "2026-04-23",
-      "underwriter": "KB증권·대신증권",
+      "underwriter": "대신증권·KB증권",
       "offer_shares": 10000000,
       "demand_ratio": 55.23,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 302.11,
       "commit_alloc": [
         {
@@ -3179,7 +3704,6 @@
       "report_rcp": "20260424000220",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3225,7 +3749,14 @@
         }
       },
       "initial_shares": "46785280",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260417000590",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01869710",
@@ -3272,7 +3803,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2026-04-02",
       "stock_code": "0007J0",
@@ -3364,7 +3895,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 2094.09,
       "commit_alloc": [
         {
@@ -3450,7 +3981,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 2428.25,
       "commit_alloc": [
         {
@@ -3536,7 +4067,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 1671.46,
       "commit_alloc": [
         {
@@ -3622,7 +4153,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 1805.8,
       "commit_alloc": [
         {
@@ -3708,7 +4239,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 1899.29,
       "commit_alloc": [
         {
@@ -3793,7 +4324,7 @@
       "offer_shares": 2300000,
       "demand_ratio": 1124.21,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 2711.06,
       "commit_alloc": [
         {
@@ -3827,7 +4358,6 @@
       "report_rcp": "20260226002277",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -3873,7 +4403,14 @@
         }
       },
       "initial_shares": "9333740",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260219002071",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01379563",
@@ -3963,7 +4500,7 @@
       "is_listing_ipo": true,
       "forecast_start": "2026-02-06",
       "forecast_end": "2026-02-12",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 1960.87,
       "commit_alloc": [
         {
@@ -4005,7 +4542,14 @@
         }
       },
       "initial_shares": "8683200",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20260220002549",
+        "reason": "기존주주 표 미발견",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01203312",
@@ -4058,7 +4602,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 157.92,
       "commit_alloc": [
         {
@@ -4137,7 +4681,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2026-01-30",
       "stock_code": "0001A0",
@@ -4228,7 +4772,7 @@
       "offer_shares": 5400000,
       "demand_ratio": 436.89,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "sub_ratio": 967.6,
       "commit_alloc": [
         {
@@ -4262,7 +4806,6 @@
       "report_rcp": "20251222000160",
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4308,7 +4851,45 @@
         }
       },
       "initial_shares": "33710466",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251217000148",
+        "total": 21251610,
+        "table_index": 745,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 6913600
+          },
+          {
+            "period": "2년",
+            "qty": 456750
+          },
+          {
+            "period": "1개월",
+            "qty": 1996206
+          },
+          {
+            "period": "3개월",
+            "qty": 2780705
+          },
+          {
+            "period": "6개월",
+            "qty": 3234980
+          },
+          {
+            "period": "9개월",
+            "qty": 2739039
+          },
+          {
+            "period": "1년",
+            "qty": 3130330
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01385005",
@@ -4328,7 +4909,7 @@
       "offer_shares": 2470000,
       "demand_ratio": 231.87,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-12-24",
       "stock_code": "491000",
@@ -4394,7 +4975,6 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4440,7 +5020,41 @@
         }
       },
       "initial_shares": "24681691",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251212000519",
+        "total": 16685802,
+        "table_index": 752,
+        "rows": [
+          {
+            "period": "36개월",
+            "qty": 9708000
+          },
+          {
+            "period": "12개월",
+            "qty": 687780
+          },
+          {
+            "period": "1개월",
+            "qty": 2541629
+          },
+          {
+            "period": "2개월",
+            "qty": 2424252
+          },
+          {
+            "period": "3개월",
+            "qty": 1299441
+          },
+          {
+            "period": "6개월",
+            "qty": 24700
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01370322",
@@ -4460,7 +5074,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 1303.874,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-12-22",
       "stock_code": "0013V0",
@@ -4530,7 +5144,7 @@
           "visible": true
         }
       },
-      "commit_apply_missing": 4,
+      "commit_apply_missing": 5,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4576,7 +5190,29 @@
         }
       },
       "initial_shares": "9918656",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251210000481",
+        "total": 6192276,
+        "table_index": 528,
+        "rows": [
+          {
+            "period": "12개월",
+            "qty": 5200000
+          },
+          {
+            "period": "1개월",
+            "qty": 932276
+          },
+          {
+            "period": "3개월",
+            "qty": 60000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01596920",
@@ -4629,7 +5265,7 @@
       "offer_shares": 2060000,
       "demand_ratio": 848.91,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1865.96,
@@ -4663,7 +5299,6 @@
         }
       ],
       "report_rcp": "20251212000302",
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4709,7 +5344,14 @@
         }
       },
       "initial_shares": "13756000",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20251205000237",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01787355",
@@ -4729,7 +5371,7 @@
       "is_listing_ipo": true,
       "forecast_start": "2025-11-26",
       "forecast_end": "2025-12-02",
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-12-17",
       "stock_code": "478340",
@@ -4795,7 +5437,7 @@
         }
       ],
       "report_rcp": "20251211000109",
-      "commit_apply_missing": 4,
+      "commit_apply_missing": 5,
       "commit_apply": [
         {
           "period": "미확약",
@@ -4841,7 +5483,14 @@
         }
       },
       "initial_shares": "11533591",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20251205000544",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01829819",
@@ -4894,60 +5543,56 @@
       "offer_shares": 1800000,
       "demand_ratio": 790.49,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1130.33,
       "commit_alloc": [
         {
-          "period": "미확약",
-          "qty": 142568,
-          "pct": 8.8,
-          "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 559007,
-          "pct": 34.51
-        },
-        {
-          "period": "1개월",
-          "qty": 302327,
-          "pct": 18.66
+          "period": "6개월",
+          "qty": 322127,
+          "pct": 19.88,
+          "source": "dart_table",
+          "rcept_no": "20251209000239"
         },
         {
           "period": "3개월",
           "qty": 293971,
-          "pct": 18.15
+          "pct": 18.15,
+          "source": "dart_table",
+          "rcept_no": "20251209000239"
         },
         {
-          "period": "6개월",
-          "qty": 322127,
-          "pct": 19.88
+          "period": "1개월",
+          "qty": 302327,
+          "pct": 18.66,
+          "source": "dart_table",
+          "rcept_no": "20251209000239"
+        },
+        {
+          "period": "15일",
+          "qty": 559007,
+          "pct": 34.51,
+          "source": "dart_table",
+          "rcept_no": "20251209000239"
+        },
+        {
+          "period": "미확약",
+          "qty": 142568,
+          "pct": 8.8,
+          "source": "manual_fixed",
+          "locked": true,
+          "visible": true
         }
       ],
       "report_rcp": "20251209000239",
       "commit_apply": [
         {
-          "period": "미확약",
-          "qty": 605068000,
-          "pct": 47.25,
+          "period": "6개월",
+          "qty": 66700000,
+          "pct": 5.21,
           "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 372994000,
-          "pct": 29.13,
-          "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "1개월",
-          "qty": 132972000,
-          "pct": 10.38,
-          "source": "manual_fixed",
+          "locked": true,
           "visible": true
         },
         {
@@ -4955,13 +5600,31 @@
           "qty": 102867000,
           "pct": 8.03,
           "source": "manual_fixed",
+          "locked": true,
           "visible": true
         },
         {
-          "period": "6개월",
-          "qty": 66700000,
-          "pct": 5.21,
+          "period": "1개월",
+          "qty": 132972000,
+          "pct": 10.38,
           "source": "manual_fixed",
+          "locked": true,
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 372994000,
+          "pct": 29.13,
+          "source": "manual_fixed",
+          "locked": true,
+          "visible": true
+        },
+        {
+          "period": "미확약",
+          "qty": 605068000,
+          "pct": 47.25,
+          "source": "manual_fixed",
+          "locked": true,
           "visible": true
         }
       ],
@@ -4973,7 +5636,27 @@
         }
       },
       "initial_shares": "7980324",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20251203000196",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "transfer_market": "코스닥",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20251209000239"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2025-12-16",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22"
     },
     {
       "corp_code": "00949161",
@@ -4992,7 +5675,7 @@
       "offer_shares": 6100000,
       "demand_ratio": 959.96,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-12-15",
       "stock_code": "217590",
@@ -5066,7 +5749,6 @@
         }
       ],
       "report_rcp": "20251208000371",
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -5136,7 +5818,25 @@
       "manual_fields": [
         "final_price",
         "market"
-      ]
+      ],
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251202000352",
+        "total": 18902060,
+        "table_index": 549,
+        "rows": [
+          {
+            "period": "6개월",
+            "qty": 17682060
+          },
+          {
+            "period": "1년",
+            "qty": 1220000
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01671285",
@@ -5190,7 +5890,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 607.39,
@@ -5269,7 +5969,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-12-11",
       "stock_code": "261520",
@@ -5361,7 +6061,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1429.63,
@@ -5399,7 +6099,7 @@
       "corp_code": "01957282",
       "name": "테라뷰",
       "management_name": "테라뷰",
-      "first_filing_date": "20251119",
+      "first_filing_date": "20251014",
       "last_rcept_no": "20251120000415",
       "withdrawn": false,
       "review_pending": false,
@@ -5442,9 +6142,9 @@
       "sub_start": "2025-11-21",
       "sub_end": "2025-11-24",
       "underwriter": "삼성증권",
-      "demand_ratio": 646,
+      "demand_ratio": 646.0,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 42.75,
@@ -5486,7 +6186,6 @@
         }
       ],
       "report_rcp": "20251126000196",
-      "commit_apply_missing": 4,
       "offer_shares": 5000000,
       "commit_apply": [
         {
@@ -5557,7 +6256,38 @@
       "manual_fields": [
         "final_price",
         "market"
-      ]
+      ],
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251120000415",
+        "total": 23404757,
+        "table_index": 838,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 6189342
+          },
+          {
+            "period": "2개월",
+            "qty": 4603293
+          },
+          {
+            "period": "1년",
+            "qty": 4631769
+          },
+          {
+            "period": "1개월",
+            "qty": 6530298
+          },
+          {
+            "period": "6개월",
+            "qty": 1450055
+          }
+        ],
+        "quantity_unit": "DR"
+      },
+      "security_type": "depositary_receipt",
+      "transfer_market": "코스닥"
     },
     {
       "corp_code": "01781999",
@@ -5609,7 +6339,7 @@
       "offer_shares": 6430000,
       "demand_ratio": 671.98,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1736.77,
@@ -5688,7 +6418,37 @@
         }
       },
       "initial_shares": "64156161",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251120000448",
+        "total": 48671060,
+        "table_index": 645,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 22164757
+          },
+          {
+            "period": "2개월",
+            "qty": 10595547
+          },
+          {
+            "period": "1년",
+            "qty": 11799426
+          },
+          {
+            "period": "2년",
+            "qty": 3225919
+          },
+          {
+            "period": "6개월",
+            "qty": 885411
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01381805",
@@ -5741,60 +6501,56 @@
       "offer_shares": 3000000,
       "demand_ratio": 1152.98,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 2865.18,
       "commit_alloc": [
         {
-          "period": "미확약",
-          "qty": 190117,
-          "pct": 9.1,
-          "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 846365,
-          "pct": 40.5
-        },
-        {
-          "period": "1개월",
-          "qty": 452284,
-          "pct": 21.64
+          "period": "6개월",
+          "qty": 130963,
+          "pct": 6.27,
+          "source": "dart_table",
+          "rcept_no": "20251121000203"
         },
         {
           "period": "3개월",
           "qty": 470271,
-          "pct": 22.5
+          "pct": 22.5,
+          "source": "dart_table",
+          "rcept_no": "20251121000203"
         },
         {
-          "period": "6개월",
-          "qty": 130963,
-          "pct": 6.27
+          "period": "1개월",
+          "qty": 452284,
+          "pct": 21.64,
+          "source": "dart_table",
+          "rcept_no": "20251121000203"
+        },
+        {
+          "period": "15일",
+          "qty": 846365,
+          "pct": 40.5,
+          "source": "dart_table",
+          "rcept_no": "20251121000203"
+        },
+        {
+          "period": "미확약",
+          "qty": 190117,
+          "pct": 9.1,
+          "source": "manual_fixed",
+          "locked": true,
+          "visible": true
         }
       ],
       "report_rcp": "20251121000203",
       "commit_apply": [
         {
-          "period": "미확약",
-          "qty": 1011819000,
-          "pct": 41.99,
+          "period": "6개월",
+          "qty": 41835000,
+          "pct": 1.74,
           "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 832828000,
-          "pct": 34.56,
-          "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "1개월",
-          "qty": 344206000,
-          "pct": 14.28,
-          "source": "manual_fixed",
+          "locked": true,
           "visible": true
         },
         {
@@ -5802,13 +6558,31 @@
           "qty": 179031000,
           "pct": 7.43,
           "source": "manual_fixed",
+          "locked": true,
           "visible": true
         },
         {
-          "period": "6개월",
-          "qty": 41835000,
-          "pct": 1.74,
+          "period": "1개월",
+          "qty": 344206000,
+          "pct": 14.28,
           "source": "manual_fixed",
+          "locked": true,
+          "visible": true
+        },
+        {
+          "period": "15일",
+          "qty": 832828000,
+          "pct": 34.56,
+          "source": "manual_fixed",
+          "locked": true,
+          "visible": true
+        },
+        {
+          "period": "미확약",
+          "qty": 1011819000,
+          "pct": 41.99,
+          "source": "manual_fixed",
+          "locked": true,
           "visible": true
         }
       ],
@@ -5820,7 +6594,27 @@
         }
       },
       "initial_shares": "12715050",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20251117000058",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "transfer_market": "코스닥",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20251121000203"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2025-11-27",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22"
     },
     {
       "corp_code": "01194607",
@@ -5874,7 +6668,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 762,
@@ -5958,7 +6752,7 @@
       "offer_shares": 1000000,
       "demand_ratio": 756.19,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1833.02,
@@ -6037,7 +6831,33 @@
         }
       },
       "initial_shares": "9272688",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251107000443",
+        "total": 6306775,
+        "table_index": 605,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 2834640
+          },
+          {
+            "period": "3개월",
+            "qty": 743161
+          },
+          {
+            "period": "2개월",
+            "qty": 726631
+          },
+          {
+            "period": "1개월",
+            "qty": 2002343
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01138364",
@@ -6057,7 +6877,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 615.89,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-11-18",
       "stock_code": "403850",
@@ -6123,7 +6943,6 @@
         }
       ],
       "report_rcp": "20251111000120",
-      "commit_apply_missing": 4,
       "commit_apply": [
         {
           "period": "미확약",
@@ -6169,7 +6988,33 @@
         }
       },
       "initial_shares": "14351010",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251105000308",
+        "total": 9495195,
+        "table_index": 533,
+        "rows": [
+          {
+            "period": "2년",
+            "qty": 4541115
+          },
+          {
+            "period": "6개월",
+            "qty": 2294019
+          },
+          {
+            "period": "3개월",
+            "qty": 1264019
+          },
+          {
+            "period": "1개월",
+            "qty": 1396042
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "00677486",
@@ -6215,7 +7060,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-11-17",
       "stock_code": "0015G0",
@@ -6307,7 +7152,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 884.88,
@@ -6393,7 +7238,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 2203.97,
@@ -6445,7 +7290,7 @@
       "offer_shares": 1760000,
       "demand_ratio": 1072.41,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-11-07",
       "stock_code": "469610",
@@ -6560,7 +7405,37 @@
         }
       },
       "initial_shares": "8876900",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251024000272",
+        "total": 5994087,
+        "table_index": 635,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 3144000
+          },
+          {
+            "period": "6개월",
+            "qty": 342000
+          },
+          {
+            "period": "1개월",
+            "qty": 1635699
+          },
+          {
+            "period": "3개월",
+            "qty": 257796
+          },
+          {
+            "period": "2개월",
+            "qty": 614592
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "01810477",
@@ -6579,7 +7454,7 @@
       "offer_shares": 2916000,
       "demand_ratio": 1058.2,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-11-03",
       "stock_code": "486990",
@@ -6690,7 +7565,37 @@
         }
       },
       "initial_shares": "21161880",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20251022000316",
+        "total": 14998680,
+        "table_index": 730,
+        "rows": [
+          {
+            "period": "3년",
+            "qty": 4232400
+          },
+          {
+            "period": "1개월",
+            "qty": 3653200
+          },
+          {
+            "period": "3개월",
+            "qty": 3465980
+          },
+          {
+            "period": "6개월",
+            "qty": 2148600
+          },
+          {
+            "period": "1년",
+            "qty": 1498500
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "00179489",
@@ -6744,7 +7649,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 704.4,
@@ -6822,40 +7727,45 @@
       "sub_ratio": 1972.62,
       "commit_alloc": [
         {
-          "period": "미확약",
-          "qty": 315224,
-          "pct": 27.36,
-          "source": "manual_fixed",
-          "visible": true
-        },
-        {
-          "period": "15일",
-          "qty": 354302,
-          "pct": 30.76,
-          "source": "IPO기관 락업"
-        },
-        {
-          "period": "1개월",
-          "qty": 201001,
-          "pct": 17.45,
-          "source": "IPO기관 락업"
+          "period": "6개월",
+          "qty": 78216,
+          "pct": 6.79,
+          "source": "dart_table",
+          "rcept_no": "20250915000298"
         },
         {
           "period": "3개월",
           "qty": 203257,
           "pct": 17.64,
-          "source": "IPO기관 락업"
+          "source": "dart_table",
+          "rcept_no": "20250915000298"
         },
         {
-          "period": "6개월",
-          "qty": 78216,
-          "pct": 6.79,
-          "source": "IPO기관 락업"
+          "period": "1개월",
+          "qty": 201001,
+          "pct": 17.45,
+          "source": "dart_table",
+          "rcept_no": "20250915000298"
+        },
+        {
+          "period": "15일",
+          "qty": 354302,
+          "pct": 30.76,
+          "source": "dart_table",
+          "rcept_no": "20250915000298"
+        },
+        {
+          "period": "미확약",
+          "qty": 315224,
+          "pct": 27.36,
+          "source": "manual_fixed",
+          "locked": true,
+          "visible": true
         }
       ],
       "report_rcp": "20250915000298",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 11400,
       "band_high": 13200,
       "final_price": 13200,
@@ -6868,7 +7778,7 @@
       "offer_shares": 1580000,
       "demand_ratio": 1145.4,
       "is_listing_ipo": true,
-      "commit_apply_missing": 4,
+      "commit_apply_missing": 5,
       "commit_apply": [
         {
           "period": "미확약",
@@ -6914,7 +7824,26 @@
         }
       },
       "initial_shares": "10587956",
-      "offering_attempt": 2
+      "offering_attempt": 2,
+      "holder_lockup": {
+        "status": "review",
+        "rcept_no": "20250909000314",
+        "reason": "매각제한 합계 검산 실패",
+        "quantity_unit": "주"
+      },
+      "security_type": "equity",
+      "quality_attempted_at": "2026-09-22",
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20250915000298"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2025-09-19",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22"
     },
     {
       "corp_code": "01565054",
@@ -6934,7 +7863,7 @@
       "offer_shares": 1950000,
       "demand_ratio": 182.15,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-08-25",
       "stock_code": "318060",
@@ -7020,24 +7949,28 @@
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
+          "source": "dart_table",
           "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
+          "source": "dart_table",
           "visible": true
         }
       ],
@@ -7069,7 +8002,37 @@
         }
       },
       "initial_shares": "11038777",
-      "offering_attempt": 1
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20250808000193",
+        "total": 6872343,
+        "table_index": 757,
+        "rows": [
+          {
+            "period": "24개월",
+            "qty": 3196264
+          },
+          {
+            "period": "12개월",
+            "qty": 219815
+          },
+          {
+            "period": "1개월",
+            "qty": 2233635
+          },
+          {
+            "period": "3개월",
+            "qty": 1212260
+          },
+          {
+            "period": "6개월",
+            "qty": 10369
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "security_type": "equity"
     },
     {
       "corp_code": "00185301",
@@ -7123,7 +8086,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1154.54,
@@ -7352,7 +8315,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1472.48,
@@ -7451,7 +8414,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 927.51,
@@ -7537,7 +8500,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 470.11,
@@ -7636,7 +8599,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 1880.77,
@@ -7715,7 +8678,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-08-01",
       "stock_code": "439260",
@@ -7946,7 +8909,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 577.03,
@@ -8034,7 +8997,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-07-25",
       "stock_code": "380550",
@@ -8827,7 +9790,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
       "sub_ratio": 999.59,
@@ -8906,7 +9869,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-06-02",
       "stock_code": "475430",
@@ -8990,7 +9953,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-05-23",
       "stock_code": "287840",
@@ -9089,7 +10052,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-05-22",
       "stock_code": "483650",
@@ -9475,7 +10438,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-05-12",
       "stock_code": "376900",
@@ -9597,7 +10560,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-05-09",
       "stock_code": "136150",
@@ -9681,7 +10644,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-05-09",
       "stock_code": "476040",
@@ -9906,7 +10869,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-04-28",
       "stock_code": "081180",
@@ -10007,7 +10970,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-04-03",
       "stock_code": "481070",
@@ -10107,7 +11070,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-03-24",
       "stock_code": "462860",
@@ -10194,7 +11157,7 @@
       "offer_shares": 920000,
       "demand_ratio": 1213.84,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-03-21",
       "stock_code": "444530",
@@ -10642,7 +11605,7 @@
         }
       },
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 13500,
       "band_high": 15000,
       "final_price": 15000,
@@ -10760,7 +11723,7 @@
         }
       },
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 26000,
       "band_high": 31800,
       "final_price": 26000,
@@ -10923,7 +11886,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-03-07",
       "stock_code": "226590",
@@ -11145,7 +12108,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-02-25",
       "stock_code": "489500",
@@ -11198,7 +12161,7 @@
       "management_status": "자동",
       "market": "코스닥",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "last_rcept_no": "20250213000090",
       "band_low": 7500,
       "band_high": 8500,
@@ -11476,7 +12439,7 @@
       "offer_shares": 2000000,
       "demand_ratio": 117.83,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-02-17",
       "stock_code": "303810",
@@ -11670,7 +12633,7 @@
       ],
       "report_rcp": "20250207000188",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 24000,
       "band_high": 30000,
       "final_price": 20000,
@@ -11771,7 +12734,7 @@
       ],
       "report_rcp": "20250206000508",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 9000,
       "band_high": 10500,
       "final_price": 10500,
@@ -12005,7 +12968,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-02-05",
       "stock_code": "064400",
@@ -12130,7 +13093,7 @@
       ],
       "report_rcp": "20250123000207",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "band_low": 4000,
       "band_high": 5000,
       "final_price": 5000,
@@ -12233,7 +13196,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-02-04",
       "stock_code": "462980",
@@ -12347,7 +13310,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-02-03",
       "stock_code": "482630",
@@ -12405,7 +13368,7 @@
       "offer_shares": 900000,
       "demand_ratio": 64.85,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-01-24",
       "stock_code": "096250",
@@ -12588,7 +13551,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2025-01-24",
       "stock_code": "450950",
@@ -13041,7 +14004,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-12-26",
       "stock_code": "387570",
@@ -13281,7 +14244,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-12-19",
       "stock_code": "476060",
@@ -13695,7 +14658,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-12-16",
       "stock_code": "457600",
@@ -13753,7 +14716,7 @@
       "offer_shares": 3000000,
       "demand_ratio": 997.37,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-20",
       "stock_code": "459100",
@@ -13906,7 +14869,7 @@
       "offer_shares": 1010000,
       "demand_ratio": 1163.2,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-19",
       "stock_code": "466410",
@@ -14057,7 +15020,7 @@
       "market": "코스닥",
       "demand_ratio": 343.66,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-18",
       "stock_code": "413390",
@@ -14369,7 +15332,7 @@
       "market": "코스닥",
       "demand_ratio": 254.59,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-14",
       "stock_code": "394800",
@@ -14815,7 +15778,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-08",
       "stock_code": "163280",
@@ -15055,7 +16018,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-06",
       "stock_code": "475560",
@@ -15109,7 +16072,7 @@
       "final_price": 23000,
       "archived_at": "2026-07-15",
       "schedule_hidden": false,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "corp_verified": true,
       "last_rcept_no": "20241022000107",
       "band_low": 16400,
@@ -15382,7 +16345,7 @@
       "market": "코스닥",
       "demand_ratio": 973.12,
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-11-01",
       "stock_code": "475580",
@@ -15557,7 +16520,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-10-31",
       "stock_code": "458650",
@@ -15913,7 +16876,7 @@
       },
       "archived_at": "2026-07-18",
       "schedule_hidden": false,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "corp_verified": true,
       "last_rcept_no": "20241014000124",
       "band_low": 20000,
@@ -16042,7 +17005,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-10-22",
       "stock_code": "457370",
@@ -16281,7 +17244,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-10-18",
       "stock_code": "465480",
@@ -16384,7 +17347,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-10-18",
       "stock_code": "209640",
@@ -16595,7 +17558,7 @@
       "management_status": "자동",
       "market": "코스닥",
       "corp_verified": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "last_rcept_no": "20240913000394",
       "band_low": 28000,
       "band_high": 34000,
@@ -16609,66 +17572,122 @@
       "demand_ratio": 1051.52,
       "commit_apply": [
         {
-          "period": "미확약",
-          "qty": 491117000,
-          "pct": 22466468.44
-        },
-        {
-          "period": "15일",
-          "qty": 0,
-          "pct": 0,
-          "source": "zero_missing"
-        },
-        {
-          "period": "1개월",
-          "qty": 2962000,
-          "pct": 135498.63
+          "period": "6개월",
+          "qty": 1255000,
+          "pct": 0.25,
+          "source": "dart_table",
+          "rcept_no": "20240913000394"
         },
         {
           "period": "3개월",
           "qty": 4350000,
-          "pct": 198993.6
+          "pct": 0.87,
+          "source": "dart_table",
+          "rcept_no": "20240913000394"
         },
         {
-          "period": "6개월",
-          "qty": 1255000,
-          "pct": 57410.8
+          "period": "1개월",
+          "qty": 2962000,
+          "pct": 0.59,
+          "source": "dart_table",
+          "rcept_no": "20240913000394"
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table",
+          "rcept_no": "20240913000394"
+        },
+        {
+          "period": "미확약",
+          "qty": 491117000,
+          "pct": 98.29,
+          "source": "dart_table",
+          "rcept_no": "20240913000394"
         }
       ],
       "is_listing_ipo": true,
       "sub_ratio": 895.75,
       "commit_alloc": [
         {
-          "period": "미확약",
-          "qty": 434202,
-          "pct": 91.37
-        },
-        {
-          "period": "15일",
-          "qty": 0,
-          "pct": 0,
-          "source": "zero_missing"
-        },
-        {
-          "period": "1개월",
-          "qty": 7153,
-          "pct": 1.51
+          "period": "6개월",
+          "qty": 5672,
+          "pct": 1.19,
+          "source": "dart_table",
+          "rcept_no": "20240924000019"
         },
         {
           "period": "3개월",
           "qty": 28173,
-          "pct": 5.93
+          "pct": 5.93,
+          "source": "dart_table",
+          "rcept_no": "20240924000019"
         },
         {
-          "period": "6개월",
-          "qty": 5672,
-          "pct": 1.19
+          "period": "1개월",
+          "qty": 7153,
+          "pct": 1.51,
+          "source": "dart_table",
+          "rcept_no": "20240924000019"
+        },
+        {
+          "period": "15일",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "dart_table",
+          "rcept_no": "20240924000019"
+        },
+        {
+          "period": "미확약",
+          "qty": 434202,
+          "pct": 91.37,
+          "source": "dart_table",
+          "rcept_no": "20240924000019"
         }
       ],
       "report_rcp": "20240924000019",
       "schedule_hidden": false,
       "manual_commit_apply": {},
-      "initial_shares": "4372640"
+      "initial_shares": "4372640",
+      "quality_attempted_at": "2026-09-22",
+      "security_type": "equity",
+      "holder_lockup": {
+        "status": "verified",
+        "rcept_no": "20240913000394",
+        "total": 3082368,
+        "table_index": 552,
+        "rows": [
+          {
+            "period": "30개월",
+            "qty": 1600000
+          },
+          {
+            "period": "1년",
+            "qty": 534327
+          },
+          {
+            "period": "6개월",
+            "qty": 928241
+          },
+          {
+            "period": "3개월",
+            "qty": 19800
+          }
+        ],
+        "quantity_unit": "주"
+      },
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-22",
+        "rcept_no": "20240924000019"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2024-09-30",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-09-22"
     },
     {
       "corp_code": "01706794",
@@ -17003,7 +18022,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-08-23",
       "stock_code": "456070",
@@ -17088,7 +18107,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-08-22",
       "stock_code": "476080",
@@ -17188,7 +18207,7 @@
         }
       ],
       "is_listing_ipo": true,
-      "ipo_parse_version": 4,
+      "ipo_parse_version": 5,
       "withdrawn": false,
       "listing_date": "2024-08-21",
       "stock_code": "464280",
@@ -18650,102 +19669,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-08-11",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "792720"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "1003854"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "티엠씨",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "615860"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "1610257"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "754204"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "112506"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "테라뷰",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "385972"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "서울보증보험",
-      "type": "수기변경(검토필요)",
-      "field": "신청_미확약",
-      "old": "",
-      "new": "773859460"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "서울보증보험",
-      "type": "수기변경(검토필요)",
-      "field": "신청_15일",
-      "old": "",
-      "new": "29551000"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "서울보증보험",
-      "type": "수기변경(검토필요)",
-      "field": "신청_1개월",
-      "old": "",
-      "new": "39896000"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "서울보증보험",
-      "type": "수기변경(검토필요)",
-      "field": "신청_3개월",
-      "old": "",
-      "new": "52803000"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "서울보증보험",
-      "type": "수기변경(검토필요)",
-      "field": "신청_6개월",
-      "old": "",
-      "new": "28547000"
-    },
     {
       "date": "2026-08-11",
       "name": "서울보증보험",
@@ -22649,6 +23572,102 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "희망가액(하단)",
+      "old": "20000",
+      "new": "19000"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "희망가액(상단)",
+      "old": "23000",
+      "new": "22000"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "수요예측 시작",
+      "old": "2026-09-28",
+      "new": "2026-10-13"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "수요예측 종료",
+      "old": "2026-10-02",
+      "new": "2026-10-19"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "청약 시작",
+      "old": "2026-10-12",
+      "new": "2026-10-22"
+    },
+    {
+      "date": "2026-09-22",
+      "name": "래블업",
+      "type": "정정공시",
+      "field": "청약 종료",
+      "old": "2026-10-13",
+      "new": "2026-10-23"
     }
   ],
   "seed_pending": [],
