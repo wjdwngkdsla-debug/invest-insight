@@ -13,7 +13,9 @@ from typing import Any
 import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
-from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports
+from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports, holder_snapshot
+from scripts.ipo_quality import security_type, quantity
+from scripts.utils.table_grid import table_grid
 from scripts.management import apply_stock_management, is_fixed_excluded, is_spac_name, merge_stock_management
 from scripts.utils.redaction import redact_sensitive_text
 
@@ -40,10 +42,10 @@ MAX_DOCS_PER_CORP = 4
 
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
-IPO_PARSE_VERSION = 4
+IPO_PARSE_VERSION = 5
 # 실적보고서(개인청약·기관 배정) 파서는 신고서 파서와 별도 버전으로 관리한다.
 # report_rcp만 저장된 채 배정표가 비었던 과거 결과도 파서 개선 후 한 번 재처리한다.
-RESULT_PARSE_VERSION = 2
+RESULT_PARSE_VERSION = 3
 
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
@@ -145,6 +147,8 @@ def group_upcoming_ipos(filings: list[dict[str, Any]]) -> dict[str, list[dict[st
     """기타법인(E)과 코넥스(N)를 후보로 수집하고, 이전상장 공모 여부는 본문에서 검증한다."""
     grouped: dict[str, list[dict[str, Any]]] = {}
     for f in filings:
+        if security_type(f.get("report_nm") or "") == "non_equity":
+            continue
         if (f.get("corp_cls") or "") not in {"E", "N"}:
             continue
         grouped.setdefault(f["corp_code"], []).append(f)
@@ -284,24 +288,41 @@ def _parse_offer_shares(plain: str) -> int:
     return 0
 
 
+def _application_tiers(table: str) -> list[dict[str, Any]]:
+    rows, _ = table_grid(table)
+    first = next((i for i, r in enumerate(rows) if r and re.sub(r"\s+", "", r[0]) in {"미확약", "15일확약", "1개월확약", "3개월확약", "6개월확약"}), None)
+    if first is None or first == 0:
+        return []
+    headers = [re.sub(r"\s+", "", " ".join(r[c] for r in rows[:first])) for c in range(len(rows[0]))]
+    cols = [i for i, h in enumerate(headers) if "합계" in h and "수량" in h and "가격" not in h and "건수" not in h]
+    if not cols:
+        total_cols = [i for i, h in enumerate(headers) if "합계" in h]
+        # Some split tables span the total header over all three rows, omitting its
+        # subheaders. Accept only the same count/quantity/price triplet at the end.
+        if total_cols == list(range(len(headers) - 3, len(headers))) and all(any(word in h for h in headers[:total_cols[0]]) for word in ("건수", "수량", "신청가격")):
+            cols = [total_cols[1]]
+    if len(cols) != 1:
+        return []
+    tiers, total = {}, None
+    for row in rows[first:]:
+        label = re.sub(r"\s+", "", row[0])
+        raw = row[cols[0]].strip()
+        qty = 0 if raw in {"-", "–", "—"} else quantity(raw)
+        if label in {"합계", "계"}:
+            total = qty
+        period = label.replace("확약", "") if label != "미확약" else label
+        if period in TIER_LABELS + ["미확약"] and qty is not None:
+            tiers[period] = qty
+    if not total or len(tiers) < 3 or sum(tiers.values()) != total:
+        return []
+    return [{"period": p, "qty": tiers.get(p, 0), "pct": round(tiers.get(p, 0) / total * 100, 2),
+             "source": "dart_table" if p in tiers else "zero_missing"} for p in TIER_LABELS + ["미확약"]]
+
+
 def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
     """수요예측 경쟁률 + 기간별 확약 '신청' 내역 — [발행조건확정] 신고서의 결과 표."""
     demand_ratio = 0.0
     commit_apply: list[dict[str, Any]] = []
-
-    def total_quantity(row: list[str]) -> int:
-        """확약 행의 합계 수량을 찾는다.
-
-        일부 DART 표는 마지막 합계 신청가격을 "-"로 비워 둔다. 기존 로직은 숫자
-        셀만 모은 뒤 끝에서 두 번째 값을 골라 이 경우 합계 건수를 수량으로 오인했다.
-        마지막 셀이 숫자면 [건수, 수량, 가격]의 수량, 비어 있으면 [건수, 수량]의
-        마지막 값을 사용한다.
-        """
-        nums = [cell for cell in row if re.fullmatch(r"[\d,]{2,}", cell)]
-        if len(nums) < 2:
-            return 0
-        last_cell_is_number = bool(row and re.fullmatch(r"[\d,]{2,}", row[-1]))
-        return _to_int(nums[-2] if last_cell_is_number else nums[-1])
 
     for table in _tables(doc):
         txt = _clean_text(table)
@@ -321,34 +342,11 @@ def _parse_demand_tables(doc: str) -> tuple[float, list[dict[str, Any]]]:
                     except ValueError:
                         pass
         # 확약 신청 표: 행 라벨 'N개월/15일 확약'+'미확약', 헤더에 합계 열이 있는 표만 (마지막 3열 = 합계 건수/수량/신청가격)
-        if "미확약" in txt and "신청가격" in txt and "합계" in txt:
-            tiers: dict[str, int] = {}
-            total = 0
-            for r in rows:
-                label = "".join(r[:3]).replace(" ", "") if r else ""
-                nums = [c for c in r if re.fullmatch(r"[\d,]{2,}", c)]
-                tier = next((t for t in TIER_LABELS if f"{t}확약" in label), "")
-                if not tier and "미확약" in label:
-                    tier = "미확약"
-                if tier:
-                    # 구간 행이 표에 있는데 값이 전부 "-" = 확정된 0. 기록해서
-                    # 사이트의 '미정'(미수집)과 구분한다 (토모큐브 1개월·15일 케이스)
-                    tiers[tier] = total_quantity(r)
-                # 일부 발행조건확정 신고서는 최종 행을 "합계"가 아닌 "계"로
-                # 표기한다(인제니아테라퓨틱스). 구간을 모두 읽고도 total=0으로
-                # 폐기하던 누락을 막는다.
-                elif r and r[0].replace(" ", "") in {"계", "합계"} and len(nums) >= 2:
-                    total = total_quantity(r)
-            if total and len(tiers) >= 3:
-                # 모든 종목은 5구간(미확약·15일·1개월·3개월·6개월)을 갖는다.
-                # 표에 행 자체가 없는 구간은 0으로 간주하되 zero_missing 표식을 남겨
-                # 검토필요에서 확인을 요청한다 (기입 생략 관행 대응).
-                commit_apply = []
-                for t in TIER_LABELS + ["미확약"]:
-                    if t in tiers:
-                        commit_apply.append({"period": t, "qty": tiers[t], "pct": round(tiers[t] / total * 100, 2)})
-                    else:
-                        commit_apply.append({"period": t, "qty": 0, "pct": 0.0, "source": "zero_missing"})
+        compact = re.sub(r"\s+", "", txt)
+        if "미확약" in compact and "신청가격" in compact and "합계" in compact:
+            mapped = _application_tiers(table)
+            if mapped or any(r and re.sub(r"\s+", "", r[0]) in {"미확약", "15일확약", "1개월확약", "3개월확약", "6개월확약"} for r in rows):
+                commit_apply = mapped
     return demand_ratio, commit_apply
 
 
@@ -382,8 +380,11 @@ def _parse_ipo_intent(plain: str) -> bool:
     ))
 
 
-def parse_offering_doc(doc: str) -> dict[str, Any]:
+def parse_offering_doc(doc: str, report_name: str = "") -> dict[str, Any]:
     plain = _clean_text(doc)
+    kind = security_type(report_name, plain)
+    if kind == "non_equity":
+        return {"security_type": kind, "is_listing_ipo": False}
     band = _parse_band(plain)
     forecast = _parse_forecast(plain)
     sub = _parse_subscription(plain)
@@ -391,6 +392,7 @@ def parse_offering_doc(doc: str) -> dict[str, Any]:
     transfer = re.search(r"(코스닥|유가증권|코스피)\s*(?:시장)?\s*이전\s*상장", plain)
     transfer_market = ("코스닥" if transfer.group(1) == "코스닥" else "코스피") if transfer else ""
     return {
+        "security_type": kind,
         "band_low": band[0] if band else 0,
         "band_high": band[1] if band else 0,
         "final_price": _parse_final_price(plain),
@@ -414,7 +416,7 @@ def _is_confirmed_ipo(item: dict[str, Any]) -> bool:
 
     강한 IPO 신호: 상장 의도 문구 / 상장 시장 확정 / 수요예측 실시(증자는 수요예측 안 함).
     """
-    if item.get("market") == "코넥스":
+    if item.get("security_type") == "non_equity" or item.get("market") == "코넥스":
         return False
     if item.get("issuer_market") == "코넥스":
         # 기존 상장 이력/상장규정 인용만 있는 일반 증자는 IPO로 노출하지 않는다.
@@ -504,6 +506,39 @@ def _parse_tail_qty_pct(tokens: list[str]) -> tuple[int, float, bool]:
         return 0, 0.0, False
 
 
+def _allocation_tiers(table):
+    rows, _ = table_grid(table)
+    compact = lambda s: re.sub(r"\s+", "", s)
+    periods = TIER_LABELS + ["미확약"]
+    def period_of(row):
+        return next((p for p in periods if row and compact(row[0]) in (p, p + "확약")), None)
+    start = next((n for n, row in enumerate(rows) if period_of(row)), None)
+    if start is None or not start:
+        return None
+    headers = [compact(" ".join(r[c] for r in rows[:start])) for c in range(len(rows[0]))]
+    if not any("확약" in h for h in headers) or any("신청가격" in h for h in headers):
+        return None
+    columns = [c for c, h in enumerate(headers) if "합계" in h and "수량" in h and "비중" not in h]
+    if len(columns) != 1:
+        return None
+    col = columns[0]
+    parsed, total = {}, None
+    for row in rows[start:]:
+        label = compact(row[0])
+        value = 0 if row[col].strip() == "-" else quantity(row[col])
+        if label in ("합계", "계", "총계"):
+            total = value
+        period = period_of(row)
+        if period:
+            if value is None or period in parsed:
+                return []
+            parsed[period] = value
+    if total is None or total <= 0 or sum(parsed.values()) != total:
+        return []
+    return [{"period": p, "qty": parsed.get(p, 0), "pct": round(parsed.get(p, 0) * 100 / total, 2),
+             "source": "dart_table" if p in parsed else "zero_missing"} for p in periods]
+
+
 def parse_result_report(doc: str) -> dict[str, Any]:
     plain = _clean_text(doc)
     out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": []}
@@ -551,6 +586,10 @@ def parse_result_report(doc: str) -> dict[str, Any]:
                 if tier not in present:
                     alloc_rows.append({"period": tier, "qty": 0, "pct": 0.0, "source": "zero_missing"})
             out["commit_alloc"] = alloc_rows
+    for table in re.findall(r"<TABLE[\s\S]*?</TABLE>", doc, re.I):
+        rows = _allocation_tiers(table)
+        if rows is not None:
+            out["commit_alloc"] = rows
     return out
 
 
@@ -628,7 +667,7 @@ def _fetch_corp_filings(corp_code: str, days_back: int) -> list[dict[str, Any]]:
     end = datetime.now(ZoneInfo("Asia/Seoul"))
     begin = end - timedelta(days=days_back)
     reports = get_reports(corp_code, start_date=begin.strftime("%Y%m%d"), end_date=end.strftime("%Y%m%d"))
-    relevant = [r for r in reports if any(k in (r.get("report_nm") or "") for k in ("지분증권", "투자설명서", "철회신고서"))]
+    relevant = [r for r in reports if any(k in (r.get("report_nm") or "") for k in ("지분증권", "증권예탁증권", "투자설명서", "철회신고서")) and security_type(r.get("report_nm") or "") != "non_equity"]
     relevant.sort(key=lambda r: (r.get("rcept_dt") or "", r.get("rcept_no") or ""), reverse=True)
     return relevant
 
@@ -1126,7 +1165,14 @@ def refresh_ipo_schedule(
                 except Exception as exc:
                     log(f"  문서 실패 {f['rcept_no']}: {redact_sensitive_text(exc)}")
                     continue
-                parsed = parse_offering_doc(doc)
+                parsed = parse_offering_doc(doc, rname)
+                if parsed.get("security_type") == "non_equity":
+                    if not merged:
+                        merged = parsed
+                    break
+                if "holder_lockup" not in merged:
+                    merged["holder_lockup"] = holder_snapshot(doc, f["rcept_no"])
+                    merged["holder_lockup"]["quantity_unit"] = "DR" if parsed.get("security_type") == "depositary_receipt" else "주"
                 for key, val in parsed.items():
                     # 최신 문서 우선 — 이미 값이 있으면 옛 문서 값으로 덮지 않는다
                     if key not in merged or not merged[key]:
@@ -1495,6 +1541,9 @@ def refresh_ipo_schedule(
         # 검토대기 판정: 사용자가 승인한 종목은 항상 노출, 아니면 IPO 신호 부족 시 비공개 대기
         if item.get("management_hidden"):
             item["review_pending"] = True
+        elif item.get("security_type") == "non_equity":
+            item["review_pending"] = True
+            item["review_reason"] = "주식 IPO가 아닌 발행증권 제외"
         elif item.get("market") == "코넥스":
             item["review_pending"] = True
             item["review_reason"] = "코넥스 신규상장 제외"

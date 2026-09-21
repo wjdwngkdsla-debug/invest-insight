@@ -14,7 +14,7 @@ import glob
 import json
 import os
 import sys
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 
@@ -38,6 +38,7 @@ from scripts.management import (
     release_schedule_correction,
 )
 from scripts.utils.dates import calc_release_date, parse_date, release_display
+from scripts.ipo_quality import quality_gaps, tier_quantity, quantity, result_waiting
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -984,6 +985,16 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             locked = yn(raw.get("고정"), "N") == "Y"
             visible = yn(raw.get("노출"), "Y")
             event = by_id.get(event_id)
+            if kind == "holder" and event_id.startswith("dart-holder:"):
+                item = by_corp.get(corp_code.zfill(8)) or by_name.get(norm_name(raw.get("종목명")))
+                if item:
+                    overrides = item.setdefault("holder_overrides", {})
+                    changed = any(str(raw.get(f) or "") != str(previous.get(f) or "") for f in ("물량", "해제일"))
+                    if locked or (previous and changed) or visible == "N" or period in overrides:
+                        overrides[period] = {"qty": number(raw.get("물량")), "date": raw.get("해제일") or "",
+                                             "locked": locked, "visible": visible == "Y",
+                                             "rcept_no": (item.get("holder_lockup") or {}).get("rcept_no")}
+                continue
             if event:
                 old_visible, old_lock = event.get("sheet_visible") or "Y", event.get("manual_lock") or "N"
                 event["sheet_visible"] = visible
@@ -1072,6 +1083,10 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                     manual[period] = {"qty": qty, "locked": False, "visible": False}
                     item["manual_commit_apply"] = manual
                     history.append({"date": today, "name": item.get("name") or "", "type": "행삭제", "field": f"ipo:{period}", "old": "노출", "new": "비노출"})
+            elif kind == "holder" and missing.startswith("dart-holder:"):
+                item = by_corp.get(str(previous.get("DART기업코드") or "").zfill(8)) or by_name.get(norm_name(previous.get("종목명")))
+                if item:
+                    item.setdefault("holder_overrides", {}).setdefault(previous.get("락업기간"), {})["visible"] = False
 
     pull_tab("IPO기관", "ipo")
     pull_tab("기존주주", "holder")
@@ -1134,52 +1149,9 @@ def _load_review_fill_written() -> dict[str, dict[str, str]]:
 
 
 def _review_fill_gaps(item: dict, has_float_rows: bool, float_pct_known: bool | None = None) -> list[str]:
-    gaps: list[str] = []
-    if not item.get("market"):
-        gaps.append("시장")
-    if not number(item.get("final_price")):
-        gaps.append("확정공모가")
-    if not (number(item.get("band_low")) and number(item.get("band_high"))):
-        gaps.append("희망가")
-    if not number(item.get("offer_shares")):
-        gaps.append("공모주식수")
-    if not item.get("underwriter"):
-        gaps.append("주관사")
-    if not (item.get("forecast_start") and item.get("forecast_end")):
-        gaps.append("수요예측일")
-    if not (item.get("sub_start") and item.get("sub_end")):
-        gaps.append("청약일")
-    if not decimal(item.get("demand_ratio")):
-        gaps.append("수요예측경쟁률")
-    if not decimal(item.get("sub_ratio")):
-        gaps.append("개인청약경쟁률")
-    apply_tiers = [tier for tier in item.get("commit_apply") or [] if isinstance(tier, dict)]
-    apply_confirmed = bool(apply_tiers) and all(
-        number(tier.get("qty")) > 0 or str(tier.get("source") or "") != "zero_missing"
-        for tier in apply_tiers
-    )
-    if not any(number(tier.get("qty")) for tier in apply_tiers) and not apply_confirmed:
-        gaps.append("확약신청")
-    elif any(str(tier.get("source")) == "zero_missing" for tier in apply_tiers):
-        gaps.append("확약신청 0확인")
-    alloc_tiers = [tier for tier in item.get("commit_alloc") or [] if isinstance(tier, dict)]
-    manual_alloc = item.get("manual_commit_alloc") or {}
-    alloc_confirmed = bool(alloc_tiers) and all(
-        number(tier.get("qty")) > 0
-        or str(tier.get("source") or "") != "zero_missing"
-        or str((manual_alloc.get(str(tier.get("period") or "")) or {}).get("qty", "")).strip() == "0"
-        for tier in alloc_tiers
-    )
-    if not any(number(tier.get("qty")) for tier in alloc_tiers) and not alloc_confirmed:
-        gaps.append("확약배정")
-    elif not alloc_confirmed:
-        gaps.append("확약배정 0확인")
+    gaps = quality_gaps(item, has_float_rows, float_pct_known)
     if _apply_below_alloc_all_tiers(item):
         gaps.append("확약신청 오류(신청건수 오인 의심)")
-    if not has_float_rows:
-        gaps.append("구주물량")
-    if float_pct_known is False:
-        gaps.append("상장일유통가능")
     return gaps
 
 
@@ -1396,9 +1368,9 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
 
 
 def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
-    """배치가 못 채운 값이 있는 상장 완료 종목만 검토필요 탭에 다시 나열한다.
+    """공시 단계상 필요한 값이 누락된 IPO를 검토필요 탭에 나열한다.
 
-    - 미상장 종목은 제외 (DART 공시가 자연히 채우므로 수기 대상 아님)
+    - 상장일/종목코드 미정도 DART 기업코드로 검토 가능
     - 아는 값은 미리 채워 두고, 빈 칸 = 채워야 할 값. '부족한값' 열이 목록을 요약
     - 이전 탭에서 아직 반영 안 된 사용자 입력(형식 오류·메모)은 보존
     - 스냅샷(review_fill_written.json)과 달라진 셀만 다음 pull 때 수거된다
@@ -1445,8 +1417,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     except gspread.WorksheetNotFound:
         pass
 
-    # 빨간 셀 = 배치가 다시 찾지 않는 값(DART에 없음 판정) → 수기 입력이 유일한 통로.
-    # 신청_*: commit_apply_missing 마커, 배정_*·개인청약경쟁률: result_report_missing.
+    # Missing values remain retryable. A confirmed pending filing is not a parse error.
     try:
         from scripts.sources.ipo_schedule import IPO_PARSE_VERSION as parse_version
     except Exception:
@@ -1462,12 +1433,12 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             continue
         code = _pad_code(str(item.get("stock_code") or ""))
         listing = str(item.get("listing_date") or "")
-        if not listing:
+        if not listing and not (item.get("band_low") or item.get("forecast_start")):
             continue
         # 상장 전 종목도 올린다. 투자설명서는 이미 나와 있어 수기로 미리 채울 수 있고,
         # 상장 후에도 공공데이터 API가 바로 오지 않아 기다리면 늦는다. 종목코드가 아직
         # 없으므로 DART기업코드를 대체 키로 쓴다.
-        upcoming = listing > today
+        upcoming = not listing or listing > today
         # 신고서도 안 나온 초기 종목까지 올리면 탭이 빈칸으로 넘친다. 희망가나
         # 수요예측 일정이 잡힌 뒤부터 대상으로 본다.
         if upcoming and not (item.get("band_low") or item.get("forecast_start")):
@@ -1478,7 +1449,8 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 continue
             code = f"corp:{corp}"
         listing_day_issue = "" if upcoming else _listing_day_snapshot_issue(code, listing, listing_day)
-        if item.get("review_pending") and not listing_day_issue:
+        from scripts.sources.ipo_schedule import _is_confirmed_ipo
+        if item.get("review_pending") and not _is_confirmed_ipo(item) and not listing_day_issue:
             continue
         gaps = _review_fill_gaps(
             item,
@@ -1491,7 +1463,9 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             continue
         row = {
             "종목코드": code, "기업명": item.get("name") or "", "상장일": listing,
-            "부족한값": ", ".join(gaps), "메모": listing_day_issue,
+            "부족한값": ", ".join(gaps), "메모": "; ".join(filter(None, [listing_day_issue,
+                (f"실적보고서 미공시 확인 {item['result_source_check']['checked_at']}; 정기 재조회" if result_waiting(item) else ""),
+                (f"최근 원문 확인 {item['quality_checked_at']}" if item.get("quality_checked_at") else "")])),
             "시장": item.get("market") or "",
             "확정공모가": str(number(item.get("final_price")) or ""),
             "희망가하단": str(number(item.get("band_low")) or ""),
@@ -1503,8 +1477,10 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             "수요예측경쟁률": str(item.get("demand_ratio") or ""), "개인청약경쟁률": str(item.get("sub_ratio") or ""),
         }
         for period in COMMIT_TIER_ORDER:
-            row[f"신청_{period}"] = str(_commit_qty(item, "commit_apply", period) or "")
-            row[f"배정_{period}"] = str(_commit_qty(item, "commit_alloc", period) or "")
+            for label, field in (("신청", "commit_apply"), ("배정", "commit_alloc")):
+                tier = next((t for t in item.get(field) or [] if t.get("period") == period), {})
+                value = tier_quantity(tier)
+                row[f"{label}_{period}"] = "" if value is None else str(value)
         for index in (1, 2, 3):
             row[f"구주_기간{index}"] = ""
             row[f"구주_물량{index}"] = ""
@@ -1515,14 +1491,13 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             if not row.get(header):
                 row[header] = value
 
-        # 셀 단위 빨간 표시 — IPO기관 탭과 동일 기준. 영역이 일부 채워져 갭 판정을
-        # 통과해도, 마커가 있는 종목의 남은 빈 칸은 수기 전용이므로 계속 표시한다.
+        # Missing fields stay highlighted even when some periods have been recovered.
         red_cols: set[int] = set()
         if int(item.get("commit_apply_missing") or 0) >= parse_version:
             red_cols.update(
                 column_no[f"신청_{period}"] for period in COMMIT_TIER_ORDER if not row.get(f"신청_{period}")
             )
-        if item.get("result_report_missing") and not item.get("report_rcp"):
+        if item.get("result_report_missing") and not item.get("report_rcp") and not result_waiting(item):
             red_cols.update(
                 column_no[f"배정_{period}"] for period in COMMIT_TIER_ORDER if not row.get(f"배정_{period}")
             )
@@ -1549,7 +1524,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     worksheet.freeze(rows=1, cols=4)
     worksheet.format("1:1", {"textFormat": {"bold": True}})
 
-    # 빨강 = 수기 전용(배치가 다시 안 찾음), 노랑 = 0 추정(확인 요청). 행별 연속 열 압축.
+    # Red marks unresolved parsing; yellow marks unknown quantities, never confirmed zero.
     red_format = {
         "backgroundColor": {"red": 1.0, "green": 0.87, "blue": 0.87},
         "textFormat": {"foregroundColor": {"red": 0.72, "green": 0.05, "blue": 0.05}, "bold": True},
@@ -2336,6 +2311,10 @@ def _push_simple_table(
     except Exception as exc:
         print(f"[SHEET] {title} 서식 초기화 실패(무시): {exc}", file=sys.stderr)
     worksheet.update(values, "A1", value_input_option="USER_ENTERED")
+    if title == "IPO기관":
+        verify_institution_sheet(worksheet, headers, rows)
+    elif title == "기존주주":
+        verify_quantity_sheet(worksheet, headers, rows, title, ("물량",))
     worksheet.freeze(rows=1, cols=min(2, len(headers)))
     worksheet.set_basic_filter(f"A1:{rowcol_to_a1(max(len(values), 1), len(headers))}")
     worksheet.format("1:1", {
@@ -2373,6 +2352,44 @@ def _push_simple_table(
         spreadsheet.batch_update({"requests": requests})
     print(f"[SHEET] {title}: {len(rows)}개 행 업로드", file=sys.stderr)
     return worksheet
+
+
+def verify_institution_sheet(worksheet, headers, expected_rows):
+    return verify_quantity_sheet(worksheet, headers, expected_rows, "IPO기관", ("신청물량", "배정물량"))
+
+
+def verify_quantity_sheet(worksheet, headers, expected_rows, title, fields):
+    """Read back quantities before acknowledging a successful sheet projection."""
+    actual = worksheet.get_all_values()
+    by_id = {r[headers.index("이벤트ID")]: r for r in actual[1:] if len(r) > headers.index("이벤트ID")}
+    mismatches = []
+    for row in expected_rows:
+        event_id = str(row[headers.index("이벤트ID")])
+        found = by_id.get(event_id, [])
+        for field in fields:
+            col = headers.index(field)
+            want = str(row[col]).replace(",", "").strip()
+            got = str(found[col]).replace(",", "").strip() if len(found) > col else ""
+            if want != got or not found:
+                mismatches.append({"event_id": event_id, "field": field, "expected": want, "actual": got})
+    path = ROOT_DIR / "data" / "sheet_sync_health.json"
+    health = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    tabs = health.get("tabs", {})
+    tabs[title] = {"checked_at": datetime.now().isoformat(), "status": "error" if mismatches else "verified",
+                   "rows": len(expected_rows), "mismatches": mismatches}
+    path.write_text(json.dumps({"tabs": tabs}, ensure_ascii=False, indent=2), encoding="utf-8")
+    if mismatches:
+        failed = {m["event_id"] for m in mismatches}
+        changes = []
+        for n, row in enumerate(actual[1:], 2):
+            id_col = headers.index("이벤트ID")
+            if len(row) > id_col and row[id_col] in failed:
+                for field, value in (("검증상태", "확인필요"), ("검증사유", "시트 동기화 불일치: 배치 로그 확인")):
+                    if field in headers:
+                        changes.append({"range": rowcol_to_a1(n, headers.index(field) + 1), "values": [[value]]})
+        if changes:
+            worksheet.batch_update(changes, value_input_option="RAW")
+        raise RuntimeError(f"{title} 시트 읽기 검증 실패: {len(mismatches)}개 셀; 상태 스냅샷 갱신 중단")
 
 
 def _event_validation(row: dict) -> tuple[str, str]:
@@ -2620,9 +2637,8 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         def _qty_display(qty: int, tier: dict) -> object:
             if qty:
                 return qty
-            if tier and str(tier.get("source") or "") != "zero_missing":
-                return 0
-            return ""
+            value = tier_quantity(tier)
+            return "" if value is None else value
         event_id = str(event.get("event_id") or f"ipo:{item_key(item) if item else norm_name(name)}:{period}")
         release_date = str(event.get("final_date") or event.get("planned_date") or "")
         tradable_date = str(event.get("final_tradable_date") or event.get("planned_tradable_date") or "")
@@ -2636,14 +2652,23 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
                 pass
         # 확정된 0(파싱·수기로 값이 들어온 0)은 "그 구간 확약이 없었다"는 사실이지
         # 미수집이 아니다. zero_missing(0 추정)만 확인필요로 남긴다.
-        apply_confirmed = bool(apply_tier) and str(apply_tier.get("source") or "") != "zero_missing"
-        alloc_confirmed = bool(event) or (bool(alloc_tier) and str(alloc_tier.get("source") or "") != "zero_missing")
+        apply_confirmed = tier_quantity(apply_tier) is not None
+        event_qty = event.get("final_qty") if event.get("final_qty") not in (None, "") else event.get("planned_qty")
+        alloc_confirmed = quantity(event_qty) is not None or tier_quantity(alloc_tier) is not None
         if event:
             status, reason = _event_validation(event)
         elif apply_qty or alloc_qty or (apply_confirmed and alloc_confirmed):
             status, reason = "정상", ""
         else:
             status, reason = "확인필요", "기관 수량 미수집"
+        if not apply_confirmed and (alloc_qty or item.get("demand_ratio") or item.get("report_rcp")):
+            status, reason = "확인필요", "신청물량 미수집/검증 실패 (배정물량과 별도 확인)"
+        if not alloc_confirmed and (item.get("report_rcp") or (item.get("sub_end") and item["sub_end"] < date.today().isoformat())):
+            status, reason = "확인필요", (reason + "; " if reason else "") + "배정물량 미수집/검증 실패"
+            if result_waiting(item) and apply_confirmed:
+                status, reason = "공시대기", "실적보고서 미공시: 정기 배치에서 재조회"
+        if apply_confirmed and alloc_qty > apply_qty:
+            status, reason = "확인필요", "해당 구간 신청물량보다 배정물량이 큼: 공시 간 확약 변경 여부 확인"
         if alloc_qty and period != "미확약" and (not release_date or not tradable_date):
             status, reason = "확인필요", "배정물량은 있으나 상장일 또는 해제일을 계산할 수 없음"
         if period == "미확약":
@@ -2672,7 +2697,7 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         # 확정된 0(구간 값이 파싱·수기로 존재)은 빨간 대상이 아니다 — 미수집만 칠한다
         if not apply_qty and not apply_confirmed and int(item.get("commit_apply_missing") or 0) >= _parse_version:
             ipo_red_cells.append((row_no, apply_col))
-        if not alloc_qty and not alloc_confirmed and item.get("result_report_missing") and not item.get("report_rcp"):
+        if not alloc_qty and not alloc_confirmed and item.get("result_report_missing") and not item.get("report_rcp") and not result_waiting(item):
             ipo_red_cells.append((row_no, alloc_col))
 
     holder_rows: list[list[object]] = []
@@ -2703,6 +2728,42 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         (norm_name(row.get("name")), str(row.get("period") or ""))
         for row in admin if row.get("category") == "구주·보호예수"
     }
+    for item in items:
+        snapshot = item.get("holder_lockup") or {}
+        if snapshot.get("status") != "verified":
+            continue
+        for tier in snapshot.get("rows") or []:
+            key = (norm_name(item.get("name")), tier["period"])
+            if key in official_holder_keys:
+                continue
+            qty = tier_quantity(tier)
+            if qty is None:
+                continue
+            override = (item.get("holder_overrides") or {}).get(tier["period"]) or {}
+            use_override = override.get("locked") or override.get("rcept_no") == snapshot.get("rcept_no")
+            if use_override and override.get("qty") is not None:
+                qty = number(override["qty"])
+            release_date, tradable_date = "", ""
+            if item.get("listing_date"):
+                try:
+                    release_date, _, tradable_date = calc_release_date(item["listing_date"], tier["period"])
+                except ValueError:
+                    pass
+            if use_override and override.get("date"):
+                release_date = override["date"]
+                try:
+                    _, tradable = release_display(parse_date(release_date))
+                    tradable_date = tradable.strftime("%Y-%m-%d")
+                except (TypeError, ValueError):
+                    tradable_date = ""
+            event_id = f"dart-holder:{item.get('corp_code')}:{tier['period']}"
+            values = [bool(override.get("locked")), override.get("visible", True), item.get("name", ""), item.get("stock_code", ""), tier["period"],
+                      release_date, tradable_date, qty, snapshot.get("quantity_unit", "주"), "", "정상" if release_date else "확인필요",
+                      f"DART {snapshot.get('rcept_no')}; 합계 검산 완료" + ("; 상장일 미정" if not release_date else ""),
+                      event_id, item.get("corp_code", "")]
+            holder_rows.append(values)
+            holder_state[event_id] = dict(zip(HOLDER_HEADERS, [str(v) for v in values]))
+            official_holder_keys.add(key)
     for pending in read_json_list(MANUAL_EVENTS_PATH):
         if str(pending.get("category") or "") not in {"기존주주", "구주·보호예수"}:
             continue
@@ -2738,7 +2799,6 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         holder_state[event_id] = dict(zip(HOLDER_HEADERS, [str(value) for value in values]))
 
     state["ipo_institution"], state["holders"] = ipo_state, holder_state
-    SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
     ipo_ws = _push_simple_table(
         spreadsheet, "IPO기관", IPO_INSTITUTION_HEADERS, ipo_rows,
         ["고정", "노출"], ["이벤트ID", "DART기업코드"], ["해제일", "거래가능일"],
@@ -2760,6 +2820,7 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         spreadsheet, "기존주주", HOLDER_HEADERS, holder_rows,
         ["고정", "노출"], ["이벤트ID", "DART기업코드"], ["해제일", "거래가능일"],
     )
+    SIMPLE_SHEET_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def push_correction_tab(spreadsheet: gspread.Spreadsheet) -> None:

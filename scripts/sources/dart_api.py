@@ -12,6 +12,8 @@ import requests
 
 from scripts.config import DART_API_KEY
 from scripts.utils.parser import clean_int
+from scripts.utils.table_grid import table_grid
+from scripts.ipo_quality import quantity
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 DART_VIEWER_BASE = "https://dart.fss.or.kr"
@@ -153,7 +155,7 @@ def get_corp_code(company_name: str, stock_code: str = "") -> dict[str, str] | N
 
 def get_reports(corp_code: str, start_date: str = "20250101", end_date: str = "20261231") -> list[dict[str, Any]]:
     if not DART_API_KEY:
-        return []
+        raise RuntimeError("DART API key is not configured")
     res = requests.get(
         f"{DART_BASE}/list.json",
         params={
@@ -170,8 +172,12 @@ def get_reports(corp_code: str, start_date: str = "20250101", end_date: str = "2
     )
     res.raise_for_status()
     data = res.json()
-    if data.get("status") != "000":
+    if data.get("status") == "013":
         return []
+    if data.get("status") != "000":
+        raise RuntimeError(f"DART disclosure list error: {data.get('status', 'unknown')}")
+    if int(data.get("total_page") or 1) > 1:
+        raise RuntimeError("DART disclosure list exceeds one page; narrow the filing window")
     return data.get("list", []) or []
 
 
@@ -330,6 +336,10 @@ def _holder_period(cell: str) -> str | None:
     # 날짜(2025.05.19)나 각주(주1)가 잘못 걸리지 않게 기간 표기만 인정한다
     if re.search(r"\d{4}[.\-/]\d{1,2}", text):
         return None
+    compound = re.search(r"(\d+)\s*년\s*(\d+)\s*개월", text)
+    if compound:
+        months = int(compound.group(1)) * 12 + int(compound.group(2))
+        return f"{months}개월" if 0 < months <= 60 else None
     m = _HOLDER_PERIOD.search(text)
     if not m:
         return None
@@ -342,6 +352,48 @@ def _holder_period(cell: str) -> str | None:
     if unit == "개월" and n > 60:
         return None
     return f"{n}{unit}"
+
+
+def _mapped_holder_table(table_xml: str, table_idx: int, expected_shares: int | None):
+    rows, origins = table_grid(table_xml)
+    if len(rows) < 4:
+        return None
+    # A merged header can have three levels. Keep their column identities intact.
+    header_count = next((i for i, row in enumerate(rows) if any(_holder_period(c) for c in row)), 3)
+    header_count = min(header_count, 4)
+    headers = [re.sub(r"\s+", "", " ".join(r[c] for r in rows[:header_count])) for c in range(len(rows[0]))]
+    if not any("주주명" in h or "성명" in h for h in headers):
+        return None
+    qty_cols = [i for i, h in enumerate(headers) if any(k in h for k in ("매각제한물량", "유통제한물량", "의무보유주식수")) and not any(k in h for k in ("지분율", "비율", "%"))]
+    period_cols = [i for i, h in enumerate(headers) if any(k in h for k in ("매각제한기간", "의무보유기간", "보호예수기간"))]
+    if len(qty_cols) != 1 or len(period_cols) != 1:
+        return None
+    q, p = qty_cols[0], period_cols[0]
+    parsed, totals, used, ambiguous = [], [], set(), False
+    for r, row in enumerate(rows[header_count:], start=header_count):
+        value = quantity(row[q])
+        label = re.sub(r"\s+", "", " ".join(row[:q]))
+        if "합계" in label:
+            if value is not None:
+                totals.append(value)
+            continue
+        if "소계" in label:
+            continue
+        period = _holder_period(row[p])
+        if not period or value in (None, 0):
+            continue
+        origin = origins.get((r, q))
+        if origin in used:
+            # A single quantity spanning multiple periods is not an allocation breakdown.
+            ambiguous = True
+            continue
+        used.add(origin)
+        parsed.append({"period": period, "qty": value})
+    total = sum(r["qty"] for r in parsed)
+    if not parsed:
+        return None
+    verified = bool(totals and total == totals[-1] and not ambiguous and (not expected_shares or total <= expected_shares))
+    return {"table_index": table_idx, "rows": parsed, "total": total, "verified": verified, "subtotals": totals, "method": "header_grid"}
 
 
 def extract_holder_lockup_tables(document_text: str, expected_shares: int | None = None) -> list[dict[str, Any]]:
@@ -358,14 +410,26 @@ def extract_holder_lockup_tables(document_text: str, expected_shares: int | None
     tables = re.findall(r"<TABLE[\s\S]*?</TABLE>", document_text, flags=re.I)
     candidates: list[dict[str, Any]] = []
     for table_idx, table_xml in enumerate(tables, start=1):
+        if any(k in table_xml for k in ("매각제한", "의무보유", "유통제한")):
+            mapped = _mapped_holder_table(table_xml, table_idx, expected_shares)
+            if mapped:
+                candidates.append(mapped)
+                continue
         rows = _parse_table_rows(table_xml)
         if len(rows) < 4:
             continue
         header = " ".join(cell for row in rows[:3] for cell in row)
+        header_cells = [re.sub(r"\s+", "", cell) for row in rows[:3] for cell in row]
+        if not any(re.fullmatch(r"(?:주주명|성명|주주|주주구분)(?:\([^)]*\))?", cell) for cell in header_cells):
+            continue
         if not (
             ("주주명" in header or "성명" in header or "주주" in header)
             and ("의무보유" in header or "매각제한" in header or "유통제한" in header)
         ):
+            continue
+
+        if "유통가능물량" in re.sub(r"\s+", "", header) and "매각제한물량" in re.sub(r"\s+", "", header):
+            # Ambiguous parallel columns must not fall back to the last numeric cell.
             continue
 
         parsed: list[dict[str, Any]] = []
@@ -416,12 +480,23 @@ def extract_holder_lockup_tables(document_text: str, expected_shares: int | None
 
 
 def choose_holder_lockup_table(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
-    """소계와 맞아떨어지는 표를 우선하고, 없으면 물량이 가장 많은 표를 고른다."""
+    """뒤쪽 최종 표가 검산 실패하면 과거 표로 숨기지 않고 검토 대상으로 남긴다."""
     if not candidates:
         return None
-    verified = [c for c in candidates if c.get("verified")]
-    pool = verified or candidates
-    return max(pool, key=lambda c: (c["total"], len(c["rows"])))
+    return max(candidates, key=lambda c: c["table_index"])
+
+
+def holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
+    chosen = choose_holder_lockup_table(extract_holder_lockup_tables(doc))
+    if not chosen:
+        return {"status": "review", "rcept_no": rcept_no, "reason": "기존주주 표 미발견"}
+    if not chosen.get("verified"):
+        return {"status": "review", "rcept_no": rcept_no, "reason": "매각제한 합계 검산 실패"}
+    by_period = {}
+    for row in chosen["rows"]:
+        by_period[row["period"]] = by_period.get(row["period"], 0) + row["qty"]
+    return {"status": "verified", "rcept_no": rcept_no, "total": chosen["total"],
+            "table_index": chosen["table_index"], "rows": [{"period": p, "qty": q} for p, q in by_period.items()]}
 
 
 def parse_holder_lockups(

@@ -104,6 +104,17 @@ jobs:
           fi
           python -m scripts.build "${ARGS[@]}"
 
+      - name: Audit IPO completeness and repair bounded upcoming filings
+        timeout-minutes: 8
+        shell: bash
+        run: |
+          python -m unittest scripts.tests.test_ipo_quality
+          if [ "${{ github.event.inputs.quick_only }}" = "true" ]; then
+            python -m scripts.audit_ipo_quality --write
+          else
+            python -m scripts.audit_ipo_quality --refresh --limit 4 --write
+          fi
+
       - name: Update Google Sheet
         shell: bash
         run: |
