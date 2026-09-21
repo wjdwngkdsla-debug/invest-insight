@@ -45,6 +45,15 @@
     "manual_ipo_price_locked": "N"
   },
   {
+    "market": "코스닥",
+    "name": "에이엘로봇",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
     "market": "코스피",
     "name": "엘리스그룹",
     "listing_date": "",
@@ -72,8 +81,26 @@
     "manual_ipo_price_locked": "N"
   },
   {
+    "market": "코스피",
+    "name": "영광",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
     "market": "코스닥",
     "name": "유캐스트",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "이에스티",
     "listing_date": "",
     "code": "",
     "shares": "",
@@ -110,6 +137,15 @@
   {
     "market": "코스닥",
     "name": "티앤이코리아",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "하나에어로다이내믹스",
     "listing_date": "",
     "code": "",
     "shares": "",
@@ -1340,7 +1376,7 @@
     "shares": "53255138"
   },
   {
-    "market": "코스닥",
+    "market": "코스피",
     "name": "매드업",
     "listing_date": "2026-07-01",
     "code": "0039P0",
