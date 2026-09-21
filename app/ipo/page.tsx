@@ -3,6 +3,7 @@ import { getPastIpoItems, getSortedIpoItems, dateRange, yymmdd, bandPosition, ty
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { IpoScheduleBrowser } from "@/components/IpoScheduleBrowser";
 import { ipoToday } from "@/lib/ipo-stage";
+import { ipoQuantity } from "@/lib/ipo-quantity";
 import { formatKrwEok } from "@/lib/format";
 import { getSiteData } from "@/lib/data";
 import Link from "next/link";
@@ -137,16 +138,20 @@ function CommitTable({ item }: { item: IpoItem }) {
 
 
   const periods = [...new Set([...apply.map((t) => t.period), ...alloc.map((t) => t.period)])];
-  const totalAlloc = alloc.reduce((sum, t) => sum + (t.qty || 0), 0);
-  const totalApply = apply.reduce((sum, t) => sum + (t.qty || 0), 0);
+  const totalAlloc = alloc.reduce((sum, t) => sum + (ipoQuantity(t) ?? 0), 0);
+  const totalApply = apply.reduce((sum, t) => sum + (ipoQuantity(t) ?? 0), 0);
+  const allocComplete = periods.every((period) => ipoQuantity(alloc.find((t) => t.period === period)) !== null);
+  const applyComplete = periods.every((period) => ipoQuantity(apply.find((t) => t.period === period)) !== null);
   const rows = periods.map((period) => {
     const a = apply.find((t) => t.period === period);
     const b = alloc.find((t) => t.period === period);
     // 배정률 = 신청 물량 중 실제로 배정받은 비율
-    const allocRate = a?.qty && b?.qty !== undefined ? (b.qty / a.qty) * 100 : null;
+    const applyQty = ipoQuantity(a);
+    const allocQty = ipoQuantity(b);
+    const allocRate = applyQty && allocQty !== null ? (allocQty / applyQty) * 100 : null;
     // 배정 비중 = 전체 기관 배정 중 이 구간의 몫 (합 100%)
-    const allocShare = b?.qty !== undefined && totalAlloc ? (b.qty / totalAlloc) * 100 : null;
-    return { period, applyQty: a?.qty ?? null, allocQty: b?.qty ?? null, allocRate, allocShare };
+    const allocShare = allocComplete && allocQty !== null && totalAlloc ? (allocQty / totalAlloc) * 100 : null;
+    return { period, applyQty, allocQty, allocRate, allocShare };
   });
   const commitShare = rows.filter((r) => r.period !== "미확약").reduce((s, r) => s + (r.allocShare ?? 0), 0);
   const uncommitShare = rows.find((r) => r.period === "미확약")?.allocShare ?? 0;
@@ -212,12 +217,12 @@ function CommitTable({ item }: { item: IpoItem }) {
           })}
           {totalAlloc > 0 && (
             <tr className="border-t border-gray-100">
-              <td className="py-1.5 font-semibold">합계</td>
-              <td className="py-1.5 text-right tabular-nums text-gray-500">{totalApply.toLocaleString()}</td>
+              <td className="py-1.5 font-semibold">{allocComplete && applyComplete ? "합계" : "확인 수량"}</td>
+              <td className="py-1.5 text-right tabular-nums text-gray-500">{apply.length ? totalApply.toLocaleString() : "미정"}</td>
               <td className="py-1.5 text-right text-gray-300">-</td>
               <td className="py-1.5 text-right font-semibold tabular-nums">{totalAlloc.toLocaleString()}</td>
               <td className="py-1.5 pl-4 font-semibold text-gray-700">
-                확약 {commitShare.toFixed(1)}% · 미확약 {uncommitShare.toFixed(1)}%
+                {allocComplete ? <>확약 {commitShare.toFixed(1)}% · 미확약 {uncommitShare.toFixed(1)}%</> : "일부 구간 미확인"}
               </td>
             </tr>
           )}
