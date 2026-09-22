@@ -13,6 +13,8 @@ from scripts.sheets_sync import push_simple_event_tabs
 from scripts.audit_ipo_quality import retry_targets, refresh_result, merge_tiers
 from scripts.ipo_quality import result_waiting
 from scripts.sources.dart_api import get_reports
+from scripts.sources.dart_api import select_latest_investment_report, merge_holder_snapshot
+from scripts.ipo_quality import holder_review_note
 from scripts.sources import ipo_schedule
 
 
@@ -35,6 +37,44 @@ HOLDER = '''<TABLE>
 
 
 class IpoQualityTests(unittest.TestCase):
+    def test_review_explains_partial_correction_and_exact_difference(self):
+        partial = holder_snapshot("위 정정사항외에 모든 사항은 2026년 02월 04일자로 당사가 제출한 신고서와 동일하오니 이를 참고하시기 바랍니다.", "123")
+        self.assertEqual(partial["referenced_filing_date"], "2026-02-04")
+        self.assertIn("2026-02-04", holder_review_note({"holder_lockup": partial}))
+        bad = holder_snapshot(HOLDER.replace('300', '301'), "2")
+        self.assertIn("차이 +1주", holder_review_note({"holder_lockup": bad}))
+
+    def test_latest_registration_correction_beats_older_prospectus(self):
+        older = {"rcept_no": "20260901000001", "rcept_dt": "20260901", "report_nm": "투자설명서"}
+        newer = {"rcept_no": "20260920000001", "rcept_dt": "20260920", "report_nm": "[기재정정]증권신고서(지분증권)"}
+        self.assertEqual(select_latest_investment_report([older, newer]), newer)
+        excluded = [dict(newer, rcept_no="20260922000001", rcept_dt="20260922", report_nm=title)
+                    for title in ("[첨부정정]증권신고서(지분증권)", "증권발행실적보고서", "증권신고서(채무증권)", "간이투자설명서")]
+        self.assertEqual(select_latest_investment_report(excluded + [newer, older]), newer)
+
+    def test_full_distribution_not_replaced_by_later_shareholder_subset(self):
+        full = HOLDER.replace('매각제한물량', '공모 후 매각제한물량')
+        subset = HOLDER.replace('300', '301')
+        self.assertEqual(holder_snapshot(full + subset, "1")["total"], 300)
+        self.assertEqual(holder_snapshot(full + full.replace('300', '301'), "1")["status"], "review")
+
+    def test_total_label_and_unknown_period_are_validated(self):
+        self.assertEqual(holder_snapshot(HOLDER.replace('합계', '총 계'), "1")["total"], 300)
+        unknown = holder_snapshot(HOLDER.replace('2개월', '주7)'), "1")
+        self.assertEqual(unknown["status"], "review")
+        self.assertEqual(unknown["unresolved"][0]["qty"], 200)
+        deposited = holder_snapshot(HOLDER.replace('2개월', '예탁일로부터 2개월'), "1")
+        self.assertEqual(deposited["status"], "review")
+
+    def test_failed_correction_retains_last_verified_without_hiding_review(self):
+        old = holder_snapshot(HOLDER, "1")
+        bad = holder_snapshot(HOLDER.replace('300', '301'), "2")
+        merged = merge_holder_snapshot(old, bad)
+        self.assertEqual(merged["status"], "review")
+        self.assertEqual(merged["last_verified"]["total"], 300)
+        self.assertEqual(merge_holder_snapshot(merged, bad)["last_verified"], old)
+        self.assertNotIn("last_verified", merge_holder_snapshot(merged, old))
+
     def test_full_refresh_keeps_holder_source_across_result_reports(self):
         offering = {"corp_code": "12345678", "corp_name": "Fixture", "corp_cls": "E",
                     "rcept_no": "20260901000100", "rcept_dt": "20260901", "report_nm": "투자설명서"}

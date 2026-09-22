@@ -13,7 +13,7 @@ import requests
 from scripts.config import DART_API_KEY
 from scripts.utils.parser import clean_int
 from scripts.utils.table_grid import table_grid
-from scripts.ipo_quality import quantity
+from scripts.ipo_quality import quantity, security_type
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 DART_VIEWER_BASE = "https://dart.fss.or.kr"
@@ -182,10 +182,15 @@ def get_reports(corp_code: str, start_date: str = "20250101", end_date: str = "2
 
 
 def select_latest_investment_report(reports: list[dict[str, Any]]) -> dict[str, Any] | None:
-    """투자설명서 우선, 없으면 증권신고서. DART list는 최신순에 가깝지만 날짜/접수번호로 한 번 더 정렬."""
-    targets = [r for r in reports if "투자설명서" in (r.get("report_nm") or "")]
-    if not targets:
-        targets = [r for r in reports if "증권신고서" in (r.get("report_nm") or "") and "지분증권" in (r.get("report_nm") or "")]
+    """동일 IPO 기간 내 신고서와 투자설명서를 접수 순서로 비교한다."""
+    targets = []
+    for report in reports:
+        title = report.get("report_nm") or ""
+        # Attachment corrections may contain only an underwriting contract.
+        if any(k in title for k in ("철회", "간이투자설명서", "첨부정정")) or security_type(title) == "non_equity":
+            continue
+        if "투자설명서" in title or ("증권신고서" in title and any(k in title for k in ("지분증권", "증권예탁증권"))):
+            targets.append(report)
     if not targets:
         return None
     targets.sort(key=lambda r: (r.get("rcept_dt") or "", r.get("rcept_no") or ""), reverse=True)
@@ -369,18 +374,24 @@ def _mapped_holder_table(table_xml: str, table_idx: int, expected_shares: int | 
     if len(qty_cols) != 1 or len(period_cols) != 1:
         return None
     q, p = qty_cols[0], period_cols[0]
-    parsed, totals, used, ambiguous = [], [], set(), False
+    parsed, totals, used, ambiguous, unresolved = [], [], set(), False, []
     for r, row in enumerate(rows[header_count:], start=header_count):
         value = quantity(row[q])
         label = re.sub(r"\s+", "", " ".join(row[:q]))
-        if "합계" in label:
+        if "합계" in label or "총계" in label:
             if value is not None:
                 totals.append(value)
             continue
         if "소계" in label:
             continue
         period = _holder_period(row[p])
-        if not period or value in (None, 0):
+        if value in (None, 0):
+            continue
+        if not period:
+            unresolved.append({"label": label, "qty": value, "period_text": row[p]})
+            continue
+        if "예탁일" in row[p]:
+            unresolved.append({"label": label, "qty": value, "period_text": row[p]})
             continue
         origin = origins.get((r, q))
         if origin in used:
@@ -390,10 +401,12 @@ def _mapped_holder_table(table_xml: str, table_idx: int, expected_shares: int | 
         used.add(origin)
         parsed.append({"period": period, "qty": value})
     total = sum(r["qty"] for r in parsed)
-    if not parsed:
+    if not parsed and not unresolved:
         return None
-    verified = bool(totals and total == totals[-1] and not ambiguous and (not expected_shares or total <= expected_shares))
-    return {"table_index": table_idx, "rows": parsed, "total": total, "verified": verified, "subtotals": totals, "method": "header_grid"}
+    verified = bool(totals and total == totals[-1] and not ambiguous and not unresolved and (not expected_shares or total <= expected_shares))
+    scope = "ipo_distribution" if any("공모후" in h for h in headers) and any("유통가능" in h for h in headers) else "shareholder_subset"
+    return {"table_index": table_idx, "rows": parsed, "total": total, "verified": verified,
+            "subtotals": totals, "method": "header_grid", "scope": scope, "unresolved": unresolved}
 
 
 def extract_holder_lockup_tables(document_text: str, expected_shares: int | None = None) -> list[dict[str, Any]]:
@@ -483,20 +496,41 @@ def choose_holder_lockup_table(candidates: list[dict[str, Any]]) -> dict[str, An
     """뒤쪽 최종 표가 검산 실패하면 과거 표로 숨기지 않고 검토 대상으로 남긴다."""
     if not candidates:
         return None
-    return max(candidates, key=lambda c: c["table_index"])
+    # Later director/major-shareholder tables are subsets, not newer IPO totals.
+    full = [c for c in candidates if c.get("scope") == "ipo_distribution"]
+    return max(full or candidates, key=lambda c: c["table_index"])
 
 
 def holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
     chosen = choose_holder_lockup_table(extract_holder_lockup_tables(doc))
     if not chosen:
+        plain = _clean_text(doc)
+        reference = re.search(r"위\s*정정사항\s*외에?[\s\S]{0,100}?(20\d{2})년\s*(\d{1,2})월\s*(\d{1,2})일[\s\S]{0,100}?동일", plain)
+        if reference:
+            original_date = f"{int(reference[1]):04d}-{int(reference[2]):02d}-{int(reference[3]):02d}"
+            return {"status": "review", "rcept_no": rcept_no, "reason": "정정사항만 수록: 원본문 대조 필요", "referenced_filing_date": original_date}
         return {"status": "review", "rcept_no": rcept_no, "reason": "기존주주 표 미발견"}
     if not chosen.get("verified"):
-        return {"status": "review", "rcept_no": rcept_no, "reason": "매각제한 합계 검산 실패"}
+        reason = "보유기간·기산일 확인 필요" if chosen.get("unresolved") else "매각제한 합계 검산 실패"
+        return {"status": "review", "rcept_no": rcept_no, "reason": reason,
+                "table_index": chosen["table_index"], "parsed_total": chosen["total"],
+                "reported_totals": chosen.get("subtotals", []), "unresolved": chosen.get("unresolved", [])}
     by_period = {}
     for row in chosen["rows"]:
         by_period[row["period"]] = by_period.get(row["period"], 0) + row["qty"]
     return {"status": "verified", "rcept_no": rcept_no, "total": chosen["total"],
             "table_index": chosen["table_index"], "rows": [{"period": p, "qty": q} for p, q in by_period.items()]}
+
+
+def merge_holder_snapshot(previous: dict[str, Any] | None, current: dict[str, Any]) -> dict[str, Any]:
+    """Keep last verified quantities for inspection without marking a failed correction verified."""
+    result = dict(current)
+    previous = previous or {}
+    if current.get("status") != "verified":
+        verified = previous if previous.get("status") == "verified" else previous.get("last_verified")
+        if verified:
+            result["last_verified"] = {k: v for k, v in verified.items() if k != "last_verified"}
+    return result
 
 
 def parse_holder_lockups(

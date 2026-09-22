@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 from scripts.config import ROOT_DIR
 from scripts.ipo_quality import PERIODS, quality_gaps, tier_quantity
-from scripts.sources.dart_api import get_reports, select_latest_investment_report, download_document_text, holder_snapshot, _clean_text
+from scripts.sources.dart_api import get_reports, select_latest_investment_report, download_document_text, holder_snapshot, merge_holder_snapshot, _clean_text
 from scripts.sources.ipo_schedule import _parse_demand_tables, _is_confirmed_ipo, parse_offering_doc, parse_result_report
 from scripts.sources.listing_dates import dart_listing_candidates, reconcile_listing_date
 from scripts.utils.redaction import redact_sensitive_text
@@ -88,7 +88,7 @@ def repair_item(item, today):
         return
     if kind:
         item["security_type"] = kind
-    item["holder_lockup"] = holder_snapshot(doc, receipt)
+    item["holder_lockup"] = merge_holder_snapshot(item.get("holder_lockup"), holder_snapshot(doc, receipt))
     item["holder_lockup"]["quantity_unit"] = "DR" if kind == "depositary_receipt" else "주"
     item.pop("holder_source_error", None)
     _, applications = _parse_demand_tables(doc)

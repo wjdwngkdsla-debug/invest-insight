@@ -13,7 +13,7 @@ from typing import Any
 import requests
 
 from scripts.config import DART_API_KEY, ROOT_DIR
-from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports, holder_snapshot, select_latest_investment_report
+from scripts.sources.dart_api import download_document_text, _clean_text, get_corp_code, get_reports, holder_snapshot, select_latest_investment_report, merge_holder_snapshot
 from scripts.ipo_quality import security_type, quantity
 from scripts.utils.table_grid import table_grid
 from scripts.management import apply_stock_management, is_fixed_excluded, is_spac_name, merge_stock_management
@@ -42,7 +42,7 @@ MAX_DOCS_PER_CORP = 4
 
 # 파서가 개선되면 기존 공시번호가 같아도 한 번만 다시 읽어 누락 필드를 보강한다.
 # 완료 후 item에 버전을 저장하므로 일일 배치마다 같은 문서를 반복 다운로드하지 않는다.
-IPO_PARSE_VERSION = 6
+IPO_PARSE_VERSION = 7
 # 실적보고서(개인청약·기관 배정) 파서는 신고서 파서와 별도 버전으로 관리한다.
 # report_rcp만 저장된 채 배정표가 비었던 과거 결과도 파서 개선 후 한 번 재처리한다.
 RESULT_PARSE_VERSION = 3
@@ -994,7 +994,7 @@ def _holder_from_offering_filings(
         doc = download_document_text(receipt)
         documents[receipt] = doc
     snapshot = holder_snapshot(doc, receipt)
-    snapshot["quantity_unit"] = "DR" if security_type(source.get("report_nm") or "", doc) == "depositary_receipt" else "주"
+    snapshot["quantity_unit"] = "DR" if security_type(source.get("report_nm") or "", _clean_text(doc)) == "depositary_receipt" else "주"
     return snapshot
 
 
@@ -1209,7 +1209,7 @@ def refresh_ipo_schedule(
                 try:
                     snapshot = _holder_from_offering_filings(corp_filings, documents)
                     if snapshot is not None:
-                        merged["holder_lockup"] = snapshot
+                        merged["holder_lockup"] = merge_holder_snapshot(item.get("holder_lockup"), snapshot)
                         item.pop("holder_source_error", None)
                 except Exception as exc:
                     item["holder_source_error"] = redact_sensitive_text(exc)

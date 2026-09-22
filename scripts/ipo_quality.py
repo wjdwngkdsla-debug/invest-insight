@@ -19,6 +19,26 @@ def tier_quantity(tier):
     return quantity(tier.get("qty"))
 
 
+def holder_review_note(item):
+    snapshot = item.get("holder_lockup") or {}
+    if snapshot.get("status") not in {"review", "error"}:
+        return ""
+    parts = [f"DART {snapshot.get('rcept_no', '')}"]
+    if snapshot.get("referenced_filing_date"):
+        parts.append(f"참조 본문 {snapshot['referenced_filing_date']}")
+    unresolved = snapshot.get("unresolved") or []
+    unit = snapshot.get("quantity_unit", "주")
+    if unresolved:
+        parts.extend(f"{r['qty']:,}{unit}: {r.get('period_text') or '기간 미기재'}" for r in unresolved)
+    elif snapshot.get("reported_totals") and quantity(snapshot.get("parsed_total")) is not None:
+        expected = snapshot["reported_totals"][-1]
+        actual = snapshot["parsed_total"]
+        parts.append(f"원문 합계 {expected:,}{unit} / 행 합계 {actual:,}{unit} / 차이 {expected - actual:+,}{unit}")
+    if snapshot.get("last_verified"):
+        parts.append(f"이전 검산값 보존: {snapshot['last_verified'].get('rcept_no', '')}")
+    return "; ".join(parts)
+
+
 def security_type(title="", text=""):
     # Issuance title/identity only: risk-factor references are not classification evidence.
     compact = re.sub(r"\s+", "", title)
@@ -98,7 +118,7 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     if not has_holders and snapshot.get("status") != "verified":
         gaps.append("구주물량" + (f"({snapshot['reason']})" if snapshot.get("reason") else ""))
     elif snapshot.get("status") in {"review", "error"}:
-        gaps.append("구주물량 최신 공시 확인")
+        gaps.append("구주물량 최신 공시 확인" + (f"({snapshot['reason']})" if snapshot.get("reason") else ""))
     if float_pct_known is False:
         gaps.append("상장일유통가능")
     return gaps
