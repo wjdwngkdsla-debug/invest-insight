@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -1993,7 +1993,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -2004,7 +2004,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -2015,7 +2015,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -2029,7 +2029,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -2043,7 +2043,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     }
@@ -10717,16 +10717,16 @@
       "sub_ratio": 664.21,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 50173,
-          "pct": 4.87,
-          "source": "dart_table",
-          "rcept_no": "20250717000250"
+          "period": "미확약",
+          "qty": 889388,
+          "pct": 86.35,
+          "source": "manual_fixed",
+          "visible": true
         },
         {
-          "period": "3개월",
-          "qty": 61294,
-          "pct": 5.95,
+          "period": "15일",
+          "qty": 6280,
+          "pct": 0.61,
           "source": "dart_table",
           "rcept_no": "20250717000250"
         },
@@ -10738,19 +10738,18 @@
           "rcept_no": "20250717000250"
         },
         {
-          "period": "15일",
-          "qty": 6280,
-          "pct": 0.61,
+          "period": "3개월",
+          "qty": 61294,
+          "pct": 5.95,
           "source": "dart_table",
           "rcept_no": "20250717000250"
         },
         {
-          "period": "미확약",
-          "qty": 889388,
-          "pct": 86.35,
-          "source": "manual_fixed",
-          "locked": true,
-          "visible": true
+          "period": "6개월",
+          "qty": 50173,
+          "pct": 4.87,
+          "source": "dart_table",
+          "rcept_no": "20250717000250"
         }
       ],
       "report_rcp": "20250717000250",
@@ -12295,23 +12294,9 @@
       "demand_ratio": 368.45,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "dart_table",
-          "rcept_no": "20250422000104"
-        },
-        {
-          "period": "3개월",
-          "qty": 30861000,
-          "pct": 7.16,
-          "source": "dart_table",
-          "rcept_no": "20250422000104"
-        },
-        {
-          "period": "1개월",
-          "qty": 5806000,
-          "pct": 1.35,
+          "period": "미확약",
+          "qty": 394421000,
+          "pct": 91.49,
           "source": "dart_table",
           "rcept_no": "20250422000104"
         },
@@ -12323,9 +12308,23 @@
           "rcept_no": "20250422000104"
         },
         {
-          "period": "미확약",
-          "qty": 394421000,
-          "pct": 91.49,
+          "period": "1개월",
+          "qty": 5806000,
+          "pct": 1.35,
+          "source": "dart_table",
+          "rcept_no": "20250422000104"
+        },
+        {
+          "period": "3개월",
+          "qty": 30861000,
+          "pct": 7.16,
+          "source": "dart_table",
+          "rcept_no": "20250422000104"
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
           "source": "dart_table",
           "rcept_no": "20250422000104"
         }
@@ -20073,26 +20072,11 @@
       "sub_ratio": 1037.41,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 34050,
-          "pct": 1.53,
-          "source": "dart_table",
-          "rcept_no": "20241021000307"
-        },
-        {
-          "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
+          "period": "미확약",
+          "qty": 2182330,
+          "pct": 98.3,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
-        },
-        {
-          "period": "1개월",
-          "qty": 1470,
-          "pct": 0.07,
-          "source": "dart_table",
-          "rcept_no": "20241021000307"
         },
         {
           "period": "15일",
@@ -20102,12 +20086,25 @@
           "rcept_no": "20241021000307"
         },
         {
-          "period": "미확약",
-          "qty": 2182330,
-          "pct": 98.3,
+          "period": "1개월",
+          "qty": 1470,
+          "pct": 0.07,
+          "source": "dart_table",
+          "rcept_no": "20241021000307"
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 34050,
+          "pct": 1.53,
+          "source": "dart_table",
+          "rcept_no": "20241021000307"
         }
       ],
       "report_rcp": "20241021000307",
@@ -20133,27 +20130,10 @@
       },
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 27335900,
-          "pct": 1.37,
+          "period": "미확약",
+          "qty": 1967200700,
+          "pct": 98.56,
           "source": "manual_fixed",
-          "locked": true,
-          "visible": true
-        },
-        {
-          "period": "3개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "manual_fixed",
-          "locked": true,
-          "visible": true
-        },
-        {
-          "period": "1개월",
-          "qty": 283000,
-          "pct": 0.01,
-          "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -20161,15 +20141,27 @@
           "qty": 1190000,
           "pct": 0.06,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
-          "period": "미확약",
-          "qty": 1967200700,
-          "pct": 98.56,
+          "period": "1개월",
+          "qty": 283000,
+          "pct": 0.01,
           "source": "manual_fixed",
-          "locked": true,
+          "visible": true
+        },
+        {
+          "period": "3개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
+        },
+        {
+          "period": "6개월",
+          "qty": 27335900,
+          "pct": 1.37,
+          "source": "manual_fixed",
           "visible": true
         }
       ],
@@ -20463,7 +20455,8 @@
           }
         ],
         "quantity_unit": "주"
-      }
+      },
+      "holder_overrides": {}
     },
     {
       "corp_code": "01588189",
@@ -23278,30 +23271,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-08-13",
-      "name": "이뮨온시아",
-      "type": "고정변경",
-      "field": "ipo:15일",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-08-13",
-      "name": "이뮨온시아",
-      "type": "고정변경",
-      "field": "ipo:1개월",
-      "old": "N",
-      "new": "Y"
-    },
-    {
-      "date": "2026-08-13",
-      "name": "이뮨온시아",
-      "type": "고정변경",
-      "field": "ipo:3개월",
-      "old": "N",
-      "new": "Y"
-    },
     {
       "date": "2026-08-13",
       "name": "이뮨온시아",
@@ -27152,6 +27121,30 @@
     },
     {
       "date": "2026-09-23",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-24",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-24",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-24",
       "name": "열매컴퍼니",
       "type": "고정제외",
       "field": "노출",
