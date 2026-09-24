@@ -24,6 +24,11 @@ def holder_review_note(item):
     if snapshot.get("status") not in {"review", "error"}:
         return ""
     parts = [f"DART {snapshot.get('rcept_no', '')}"]
+    if snapshot.get("basis") == "float_summary":
+        cumulative = snapshot.get("cumulative_rows") or []
+        if cumulative:
+            last = cumulative[-1]
+            parts.append(f"요약표 마지막 {last['period']}: {last['cumulative_float']:,}주 / {last.get('float_pct')}%")
     if snapshot.get("referenced_filing_date"):
         parts.append(f"참조 본문 {snapshot['referenced_filing_date']}")
     unresolved = snapshot.get("unresolved") or []
@@ -75,7 +80,7 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     gaps = []
     if item.get("quality_refresh_error"):
         gaps.append("원천 재수집 실패(기존 값 유지)")
-    if (item.get("result_source_check") or {}).get("status") == "parse_incomplete":
+    if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and not allocation_resolved(item):
         gaps.append("실적보고서 파싱 확인")
     def ended(field):
         value = str(item.get(field) or "")
@@ -109,7 +114,8 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     if item.get("holder_source_error"):
         gaps.append("구주물량 원문 조회 실패")
     holder_rows = snapshot.get("rows") or []
-    if snapshot.get("status") == "verified" and (not holder_rows or any(tier_quantity(r) is None for r in holder_rows)
+    empty_summary = snapshot.get("basis") == "float_summary" and snapshot.get("total") == 0
+    if snapshot.get("status") == "verified" and ((not holder_rows and not empty_summary) or any(tier_quantity(r) is None for r in holder_rows)
             or sum(tier_quantity(r) or 0 for r in holder_rows) != quantity(snapshot.get("total"))):
         gaps.append("구주물량 저장값 검산 실패")
     initial = quantity(item.get("initial_shares"))
@@ -122,3 +128,18 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     if float_pct_known is False:
         gaps.append("상장일유통가능")
     return gaps
+
+
+def allocation_resolved(item):
+    tiers = {r.get("period"): r for r in item.get("commit_alloc") or []}
+    return bool(item.get("sub_ratio")) and all(tier_quantity(tiers.get(p)) is not None for p in PERIODS)
+
+
+def quality_advisories(item):
+    notes = []
+    snapshot = item.get("holder_lockup") or {}
+    if snapshot.get("status") == "verified" and snapshot.get("detail_advisory"):
+        notes.append("요약표 예정 일정 정상; 상세표 참고: " + snapshot["detail_advisory"].get("reason", ""))
+    if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and allocation_resolved(item):
+        notes.append("배정 저장값 보완 완료; 자동 파서 재검증 미완료")
+    return notes

@@ -2760,7 +2760,7 @@ def push_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
             event_id = f"dart-holder:{item.get('corp_code')}:{tier['period']}"
             values = [bool(override.get("locked")), override.get("visible", True), item.get("name", ""), item.get("stock_code", ""), tier["period"],
                       release_date, tradable_date, qty, snapshot.get("quantity_unit", "주"), "", "정상" if release_date else "확인필요",
-                      f"DART {snapshot.get('rcept_no')}; 합계 검산 완료" + ("; 상장일 미정" if not release_date else ""),
+                      f"DART {snapshot.get('rcept_no')}; " + ("유통가능 요약표 예정 물량 검산 완료" if snapshot.get("basis") == "float_summary" else "합계 검산 완료") + ("; 상장일 미정" if not release_date else ""),
                       event_id, item.get("corp_code", "")]
             holder_rows.append(values)
             holder_state[event_id] = dict(zip(HOLDER_HEADERS, [str(v) for v in values]))

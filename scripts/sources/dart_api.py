@@ -5,6 +5,7 @@ import re
 import sys
 import zipfile
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from io import BytesIO
 from typing import Any
 
@@ -250,6 +251,12 @@ def _parse_table_rows(table_xml: str) -> list[list[str]]:
 
 
 def _period_from_label(label: str) -> str | None:
+    fixed = re.match(r"\s*(20\d{2})[년.\-/]\s*(\d{1,2})[월.\-/]\s*(\d{1,2})일?", label)
+    if fixed:
+        try:
+            return datetime(int(fixed[1]), int(fixed[2]), int(fixed[3])).strftime("%Y-%m-%d")
+        except ValueError:
+            return None
     if "상장일" in label:
         return "상장일"
     # "상장 후 2년 6개월"을 2년으로 잘라 읽으면 실제 30개월 물량이
@@ -258,13 +265,15 @@ def _period_from_label(label: str) -> str | None:
     if compound:
         months = int(compound.group(1)) * 12 + int(compound.group(2))
         return f"{months}개월"
-    m = re.search(r"상장\s*후\s*(\d+)\s*(개월|년)", label)
+    m = re.search(r"상장\s*후\s*(\d+)\s*(개월|년|일)", label)
     if not m:
         return None
     n = int(m.group(1))
     unit = m.group(2)
     if unit == "년":
         return f"{n}년"
+    if unit == "일":
+        return f"{n}일"
     return f"{n}개월"
 
 
@@ -292,12 +301,15 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
             continue
 
         parsed_rows: list[dict[str, Any]] = []
+        unparsed_rows: list[str] = []
         for row in rows[1:]:
             line = " ".join(row)
-            if "유통가능" not in line:
+            if "유통가능" not in re.sub(r"\s+", "", line):
                 continue
             period = _period_from_label(line)
             if not period:
+                if any(clean_int(c) is not None for c in row[1:] if "%" not in c):
+                    unparsed_rows.append(line)
                 continue
             # 첫 번째 비율이 속한 "공모 후 기준" 수량을 사용한다. max()를
             # 쓰면 딜리셔스처럼 오른쪽의 스톡옵션 행사 시 수량을 고르게 된다.
@@ -320,12 +332,27 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
         periods = {r["period"] for r in parsed_rows}
         if "상장일" not in periods or len(parsed_rows) < 3:
             continue
+        # Some schedules show each period's increment, not cumulative quantities.
+        percentages = [r.get("float_pct") for r in parsed_rows]
+        incremental = False
+        if all(p is not None for p in percentages) and abs(sum(percentages) - 100) <= 0.05 and percentages[-1] < 99:
+            total = sum(r["cumulative_float"] for r in parsed_rows)
+            incremental = total > 0 and all(abs(r["cumulative_float"] / total * 100 - r["float_pct"]) <= 0.015 for r in parsed_rows)
+            if incremental:
+                running = 0
+                for r in parsed_rows:
+                    r["period_float"] = r["cumulative_float"]
+                    running += r["period_float"]
+                    r["cumulative_float"] = running
+                    r["float_pct"] = running / total * 100
         last_qty = parsed_rows[-1]["cumulative_float"] if parsed_rows else None
         candidates.append({
             "table_index": table_idx,
             "rows": parsed_rows,
             "last_cumulative_float": last_qty,
             "matches_expected_shares": bool(expected_shares and last_qty == expected_shares),
+            "summary_kind": "incremental" if incremental else "cumulative",
+            "unparsed_rows": unparsed_rows,
         })
     return candidates
 
@@ -501,7 +528,55 @@ def choose_holder_lockup_table(candidates: list[dict[str, Any]]) -> dict[str, An
     return max(full or candidates, key=lambda c: c["table_index"])
 
 
+def float_summary_snapshot(doc: str, rcept_no: str) -> dict[str, Any] | None:
+    """Validate the same cumulative schedule used by build_float_summary_events."""
+    from scripts.utils.dates import calc_release_date
+
+    chosen = choose_float_summary_table(extract_float_summary_tables(doc))
+    if not chosen:
+        return None
+    rows = chosen["rows"]
+    base = {"rcept_no": rcept_no, "basis": "float_summary", "table_index": chosen["table_index"],
+            "cumulative_rows": rows, "date_basis": "listing_relative_or_explicit_date"}
+    if chosen.get("unparsed_rows"):
+        return {**base, "status": "review", "reason": "유통가능 요약표 미해석 행 확인 필요", "unparsed_rows": chosen["unparsed_rows"]}
+    previous, previous_relative_date, previous_date = None, -1, ""
+    releases = []
+    for index, row in enumerate(rows):
+        period, qty = row["period"], row["cumulative_float"]
+        match = re.fullmatch(r"(\d+)(개월|년|일)", period)
+        absolute = bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", period))
+        relative_date = 0 if period == "상장일" else (int(calc_release_date("2000-01-01", period)[0].replace("-", "")) if match else -1)
+        invalid_order = (period <= previous_date if previous_date else False) if absolute else (bool(previous_date) or relative_date <= previous_relative_date)
+        if (index == 0 and period != "상장일") or invalid_order or qty < 0 or (previous is not None and qty < previous):
+            return {**base, "status": "review", "reason": "유통가능 요약표 기간·누적물량 검산 실패"}
+        if previous is not None and qty > previous:
+            releases.append({"period": period, "qty": qty - previous})
+        previous = qty
+        if absolute:
+            previous_date = period
+        else:
+            previous_relative_date = relative_date
+    last_pct = rows[-1].get("float_pct")
+    if last_pct is None or abs(last_pct - 100) > 0.01:
+        return {**base, "status": "review", "reason": "유통가능 요약표 최종 누적 100% 확인 필요"}
+    return {**base, "status": "verified", "total": rows[-1]["cumulative_float"] - rows[0]["cumulative_float"],
+            "rows": releases, "summary_kind": chosen.get("summary_kind", "cumulative"),
+            "quantity_unit": rows[0].get("quantity_unit", "주")}
+
+
 def holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
+    summary = float_summary_snapshot(doc, rcept_no)
+    if summary is not None:
+        # Detailed deposit anchors do not block a verified listing-relative schedule.
+        detail = _detail_holder_snapshot(doc, rcept_no)
+        if detail.get("status") != "verified":
+            summary["detail_advisory"] = detail
+        return summary
+    return _detail_holder_snapshot(doc, rcept_no)
+
+
+def _detail_holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
     chosen = choose_holder_lockup_table(extract_holder_lockup_tables(doc))
     if not chosen:
         plain = _clean_text(doc)

@@ -11,7 +11,7 @@ from scripts.sources.listing_dates import dart_listing_candidates, reconcile_lis
 from scripts.sheets_sync import verify_institution_sheet, IPO_INSTITUTION_HEADERS
 from scripts.sheets_sync import push_simple_event_tabs
 from scripts.audit_ipo_quality import retry_targets, refresh_result, merge_tiers
-from scripts.ipo_quality import result_waiting
+from scripts.ipo_quality import result_waiting, quality_advisories
 from scripts.sources.dart_api import get_reports
 from scripts.sources.dart_api import select_latest_investment_report, merge_holder_snapshot
 from scripts.ipo_quality import holder_review_note
@@ -264,6 +264,59 @@ class IpoQualityTests(unittest.TestCase):
         self.assertEqual(captured["IPO기관"][0]["신청물량"], "")
         self.assertEqual(captured["기존주주"][0]["물량"], 300)
         self.assertEqual(captured["기존주주"][0]["DART기업코드"], "00123456")
+
+
+class SummaryPriorityTests(unittest.TestCase):
+    @staticmethod
+    def summary(values=(100, 200, 400), periods=("상장일", "상장 후 1개월", "상장 후 1년"), final="100%"):
+        rows = ''.join(f'<TR><TD>{p} 유통가능</TD><TD>{v}</TD><TD>{final if n == 2 else "25%"}</TD></TR>'
+                       for n, (p, v) in enumerate(zip(periods, values)))
+        return '<TABLE><TR><TH>구분</TH><TH>주식수</TH><TH>유통가능 비율</TH></TR>' + rows + '</TABLE>'
+
+    def test_summary_overrides_deposit_anchor_warning(self):
+        snap = holder_snapshot(self.summary() + HOLDER.replace('1개월', '예탁일로부터 1년'), 'receipt')
+        self.assertEqual(snap['status'], 'verified')
+        self.assertEqual(snap['basis'], 'float_summary')
+        self.assertEqual(snap['rows'], [{'period': '1개월', 'qty': 100}, {'period': '1년', 'qty': 200}])
+        item = {'holder_lockup': snap}
+        self.assertFalse(any('구주' in g for g in quality_gaps(item)))
+        self.assertTrue(quality_advisories(item))
+
+    def test_invalid_summary_not_hidden_by_valid_detail(self):
+        for summary in (self.summary((100, 50, 400)), self.summary(final='90%'),
+                        self.summary(periods=('상장일', '상장 후 1년', '상장 후 6개월'))):
+            self.assertEqual(holder_snapshot(summary + HOLDER, 'receipt')['status'], 'review')
+
+    def test_flat_period_is_not_missing(self):
+        snap = holder_snapshot(self.summary((100, 100, 400)), 'receipt')
+        self.assertEqual(snap['rows'], [{'period': '1년', 'qty': 300}])
+        daily = holder_snapshot(self.summary(periods=('상장일', '상장 후 15일', '상장 후 1개월')), 'receipt')
+        self.assertEqual(daily['status'], 'verified')
+        self.assertEqual(daily['rows'][0]['period'], '15일')
+
+    def test_explicit_calendar_date_in_summary(self):
+        from scripts.utils.dates import calc_release_date
+        summary = self.summary(periods=('상장일', '상장 후 1개월', '2029년 09월 16일 이후')).replace('유통가능</TD>', '유통 가능</TD>')
+        snap = holder_snapshot(summary, 'receipt')
+        self.assertEqual(snap['status'], 'verified')
+        self.assertEqual(snap['rows'][-1], {'period': '2029-09-16', 'qty': 200})
+        self.assertEqual(calc_release_date('', '2029-09-16')[0], '2029-09-16')
+
+    def test_incremental_summary_requires_quantity_and_percentage_agreement(self):
+        summary = self.summary((100, 100, 200), final='50%')
+        snap = holder_snapshot(summary, 'receipt')
+        self.assertEqual(snap['status'], 'verified')
+        self.assertEqual(snap['summary_kind'], 'incremental')
+        self.assertEqual(snap['total'], 300)
+        self.assertEqual(holder_snapshot(self.summary((100, 110, 200), final='50%'), 'receipt')['status'], 'review')
+
+    def test_manual_allocation_completion_is_advisory_only(self):
+        item = {'sub_ratio': 10, 'result_source_check': {'status': 'parse_incomplete'},
+                'commit_alloc': [{'period': p, 'qty': 0, 'source': 'manual_fixed'} for p in PERIODS]}
+        self.assertNotIn('실적보고서 파싱 확인', quality_gaps(item))
+        self.assertTrue(quality_advisories(item))
+        item['commit_alloc'][0]['source'] = 'zero_missing'
+        self.assertIn('실적보고서 파싱 확인', quality_gaps(item))
 
 
 if __name__ == "__main__":

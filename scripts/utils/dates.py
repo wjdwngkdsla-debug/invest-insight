@@ -75,16 +75,23 @@ def calc_release_date(listing_date: str, period: str) -> tuple[str, str, str]:
     투자설명서의 유통가능 요약표에는 5년 등 예상하지 못한 기간이 나올 수 있어
     CALC에 없는 "N개월"/"N년"도 일반식으로 처리한다.
     """
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(period).strip()):
+        raw_date = parse_date(str(period).strip())
+        display, tradable = release_display(raw_date)
+        return raw_date.strftime("%Y-%m-%d"), display, tradable.strftime("%Y-%m-%d")
     base = parse_date(listing_date)
     if period in CALC:
         raw_date = CALC[period](base)
     else:
         m_month = re.fullmatch(r"(\d+)개월", str(period).strip())
         m_year = re.fullmatch(r"(\d+)년", str(period).strip())
+        m_day = re.fullmatch(r"(\d+)일", str(period).strip())
         if m_month:
             raw_date = base + relativedelta(months=int(m_month.group(1)))
         elif m_year:
             raw_date = base + relativedelta(years=int(m_year.group(1)))
+        elif m_day:
+            raw_date = base + timedelta(days=int(m_day.group(1)))
         else:
             raise ValueError(f"지원하지 않는 기간입니다: {period}")
     display, tradable = release_display(raw_date)

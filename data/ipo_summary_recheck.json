@@ -1,0 +1,195 @@
+{
+  "checked_at": "2026-09-25T01:46:35.599464+09:00",
+  "results": [
+    {
+      "name": "빅웨이브로보틱스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260914000385"
+    },
+    {
+      "name": "디티에스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260911000314"
+    },
+    {
+      "name": "인텔리빅스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260916000544"
+    },
+    {
+      "name": "래블업",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260921000390"
+    },
+    {
+      "name": "케이앤에스아이앤씨",
+      "status": "review",
+      "basis": "float_summary",
+      "reason": "유통가능 요약표 최종 누적 100% 확인 필요",
+      "rcept_no": "20260803000167"
+    },
+    {
+      "name": "에스팀",
+      "status": "review",
+      "basis": null,
+      "reason": "정정사항만 수록: 원본문 대조 필요",
+      "rcept_no": "20260220001649"
+    },
+    {
+      "name": "리브스메드",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20251212000519"
+    },
+    {
+      "name": "나라스페이스테크놀로지",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20251205000544"
+    },
+    {
+      "name": "노타",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20251022000316"
+    },
+    {
+      "name": "그래피",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250808000193"
+    },
+    {
+      "name": "엔알비",
+      "status": "review",
+      "basis": "float_summary",
+      "reason": "유통가능 요약표 최종 누적 100% 확인 필요",
+      "rcept_no": "20250716000294"
+    },
+    {
+      "name": "도우인시스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250711000123"
+    },
+    {
+      "name": "로킷헬스케어",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250422000104"
+    },
+    {
+      "name": "나우로보틱스",
+      "status": "review",
+      "basis": null,
+      "reason": "보유기간·기산일 확인 필요",
+      "rcept_no": "20250422000541"
+    },
+    {
+      "name": "쎄크",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250416000425"
+    },
+    {
+      "name": "서울보증보험",
+      "status": "review",
+      "basis": null,
+      "reason": "정정사항만 수록: 원본문 대조 필요",
+      "rcept_no": "20250304000156"
+    },
+    {
+      "name": "동국생명과학",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250131000485"
+    },
+    {
+      "name": "오름테라퓨틱",
+      "status": "review",
+      "basis": null,
+      "reason": "정정사항만 수록: 원본문 대조 필요",
+      "rcept_no": "20250203000294"
+    },
+    {
+      "name": "와이즈넛",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250114000178"
+    },
+    {
+      "name": "데이원컴퍼니",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250114000477"
+    },
+    {
+      "name": "위츠",
+      "status": "review",
+      "basis": null,
+      "reason": "기존주주 표 미발견",
+      "rcept_no": "20241105000121"
+    },
+    {
+      "name": "사이냅소프트",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241106000153"
+    },
+    {
+      "name": "엠오티",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241106000088"
+    },
+    {
+      "name": "닷밀",
+      "status": "review",
+      "basis": null,
+      "reason": "기존주주 표 미발견",
+      "rcept_no": "20241101000293"
+    },
+    {
+      "name": "노머스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241101000250"
+    },
+    {
+      "name": "에이치이엠파마",
+      "status": "review",
+      "basis": null,
+      "reason": "기존주주 표 미발견",
+      "rcept_no": "20241022000107"
+    },
+    {
+      "name": "클로봇",
+      "status": "review",
+      "basis": "float_summary",
+      "reason": "유통가능 요약표 기간·누적물량 검산 실패",
+      "rcept_no": "20241015000376"
+    }
+  ],
+  "failures": []
+}

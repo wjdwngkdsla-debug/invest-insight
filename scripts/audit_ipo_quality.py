@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from scripts.config import ROOT_DIR
-from scripts.ipo_quality import PERIODS, quality_gaps, tier_quantity
+from scripts.ipo_quality import PERIODS, quality_gaps, quality_advisories, tier_quantity
 from scripts.sources.dart_api import get_reports, select_latest_investment_report, download_document_text, holder_snapshot, merge_holder_snapshot, _clean_text
 from scripts.sources.ipo_schedule import _parse_demand_tables, _is_confirmed_ipo, parse_offering_doc, parse_result_report
 from scripts.sources.listing_dates import dart_listing_candidates, reconcile_listing_date
@@ -139,7 +139,9 @@ def main():
         gaps = quality_gaps(item, item.get("stock_code") in holder_codes, today=today)
         if gaps:
             issues.append({"corp_code": item.get("corp_code"), "code": item.get("stock_code"), "name": item["name"], "gaps": gaps})
-    report = {"checked_at": now.isoformat(), "refreshed": refreshed, "failures": failures, "issues": issues}
+    advisories = [{"corp_code": i.get("corp_code"), "name": i["name"], "notes": quality_advisories(i)}
+                  for i in eligible if quality_advisories(i)]
+    report = {"checked_at": now.isoformat(), "refreshed": refreshed, "failures": failures, "issues": issues, "advisories": advisories}
     if args.write:
         if refreshed or failures:
             path.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
