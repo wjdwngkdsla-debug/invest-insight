@@ -93,7 +93,7 @@ def repair_short_corp_duplicates(schedule):
 def demand_waiting(item, today):
     evidence = review_evidence()
     entry = evidence.get('disclosure_waiting', {}).get(item.get('corp_code'), {})
-    return bool(entry and evidence['checked_at'] <= today < entry['until']
+    return bool(entry and entry.get('checked_at', evidence['checked_at']) <= today < entry['until']
                 and item.get('last_rcept_no') == entry['receipt']
                 and not item.get('demand_ratio') and not item.get('report_rcp'))
 

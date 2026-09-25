@@ -139,6 +139,11 @@ class ReviewedDartTests(unittest.TestCase):
         self.assertFalse(demand_waiting(item, '2026-10-01'))
         self.assertFalse(demand_waiting({**item, 'last_rcept_no': '20260926000001'}, '2026-09-26'))
         self.assertFalse(demand_waiting({**item, 'demand_ratio': 100}, '2026-09-25'))
+        evidence = copy.deepcopy(review_evidence())
+        evidence['checked_at'] = '2026-09-30'
+        with patch('scripts.ipo_evidence.review_evidence', return_value=evidence):
+            self.assertTrue(demand_waiting(item, '2026-09-25'))
+            self.assertFalse(demand_waiting(item, '2026-09-24'))
 
     def test_rename_uses_identity_not_similar_name(self):
         self.assertEqual(canonical_name('위너스', '479960'), '위너스일렉')
