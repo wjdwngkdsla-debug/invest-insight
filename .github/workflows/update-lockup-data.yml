@@ -108,12 +108,13 @@ jobs:
         timeout-minutes: 8
         shell: bash
         run: |
-          python -m unittest scripts.tests.test_ipo_quality
+          python -m unittest scripts.tests.test_ipo_quality scripts.tests.test_ipo_review_evidence
           if [ "${{ github.event.inputs.quick_only }}" = "true" ]; then
             python -m scripts.audit_ipo_quality --write
           else
             python -m scripts.audit_ipo_quality --refresh --limit 4 --write
           fi
+          python -m scripts.quick_refresh --no-pull
 
       - name: Update Google Sheet
         shell: bash

@@ -45,7 +45,7 @@ MAX_DOCS_PER_CORP = 4
 IPO_PARSE_VERSION = 7
 # 실적보고서(개인청약·기관 배정) 파서는 신고서 파서와 별도 버전으로 관리한다.
 # report_rcp만 저장된 채 배정표가 비었던 과거 결과도 파서 개선 후 한 번 재처리한다.
-RESULT_PARSE_VERSION = 3
+RESULT_PARSE_VERSION = 4
 
 TIER_LABELS = ["6개월", "3개월", "1개월", "15일"]
 
@@ -522,7 +522,7 @@ def _allocation_tiers(table):
     if len(columns) != 1:
         return None
     col = columns[0]
-    parsed, total = {}, None
+    parsed, total, unknown = {}, None, False
     for row in rows[start:]:
         label = compact(row[0])
         value = 0 if row[col].strip() == "-" else quantity(row[col])
@@ -533,10 +533,13 @@ def _allocation_tiers(table):
             if value is None or period in parsed:
                 return []
             parsed[period] = value
-    if total is None or total <= 0 or sum(parsed.values()) != total:
+        elif label not in ("합계", "계", "총계") and value not in (None, 0):
+            unknown = True
+    if total is None or total <= 0 or unknown or sum(parsed.values()) != total:
         return []
     return [{"period": p, "qty": parsed.get(p, 0), "pct": round(parsed.get(p, 0) * 100 / total, 2),
-             "source": "dart_table" if p in parsed else "zero_missing"} for p in periods]
+             "source": "dart_table" if p in parsed else "dart_total_reconciled",
+             "reported_total": total} for p in periods]
 
 
 def parse_result_report(doc: str) -> dict[str, Any]:

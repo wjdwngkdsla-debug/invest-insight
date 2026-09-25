@@ -15,6 +15,7 @@ from scripts.config import DART_API_KEY
 from scripts.utils.parser import clean_int
 from scripts.utils.table_grid import table_grid
 from scripts.ipo_quality import quantity, security_type
+from scripts.ipo_evidence import reviewed_document
 
 DART_BASE = "https://opendart.fss.or.kr/api"
 DART_VIEWER_BASE = "https://dart.fss.or.kr"
@@ -257,17 +258,16 @@ def _period_from_label(label: str) -> str | None:
             return datetime(int(fixed[1]), int(fixed[2]), int(fixed[3])).strftime("%Y-%m-%d")
         except ValueError:
             return None
-    if "상장일" in label:
-        return "상장일"
+    label = re.sub(r"\s+", "", label).replace("상장일로부터", "상장후")
     # "상장 후 2년 6개월"을 2년으로 잘라 읽으면 실제 30개월 물량이
     # 24개월로 당겨진다. 복합 기간은 월 단위로 정규화한다.
     compound = re.search(r"상장\s*후\s*(\d+)\s*년\s*(\d+)\s*개월", label)
     if compound:
         months = int(compound.group(1)) * 12 + int(compound.group(2))
         return f"{months}개월"
-    m = re.search(r"상장\s*후\s*(\d+)\s*(개월|년|일)", label)
+    m = re.search(r"상장(?:후)?(\d+)(개월|년|일)", label)
     if not m:
-        return None
+        return "상장일" if any(k in label for k in ("상장일", "상장당일", "상장직후")) else None
     n = int(m.group(1))
     unit = m.group(2)
     if unit == "년":
@@ -286,39 +286,53 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
     tables = re.findall(r"<TABLE[\s\S]*?</TABLE>", document_text, flags=re.I)
     candidates: list[dict[str, Any]] = []
     for table_idx, table_xml in enumerate(tables, start=1):
-        rows = _parse_table_rows(table_xml)
+        rows, _ = table_grid(table_xml)
         if len(rows) < 3:
             continue
         # DART 표는 공모 후 기준/스톡옵션 행사 시나리오 때문에 헤더가
         # 2~3행으로 합쳐지는 경우가 많다. 첫 행만 보면 정상 표도 누락된다.
-        header_text = " ".join(cell for row in rows[:3] for cell in row)
+        start = next((i for i, row in enumerate(rows) if any(_period_from_label(c) for c in row)), None)
+        if start is None or start == 0:
+            continue
+        headers = [re.sub(r"\s+", "", " ".join(row[c] for row in rows[:start])) for c in range(len(rows[0]))]
+        header_text = " ".join(headers)
         if not (
             "구분" in header_text
             and ("주식수" in header_text or "물량" in header_text)
-            and "유통가능" in header_text
-            and "비율" in header_text
+            and ("유통가능" in header_text or "유통주식수" in header_text)
+            and any(k in header_text for k in ("비율", "지분율", "비중"))
         ):
             continue
+        qty_cols = [c for c, h in enumerate(headers) if any(k in h for k in ("주식수", "물량"))
+                    and not any(k in h for k in ("비율", "지분율", "비중", "추가", "해제", "희석가능주식반영", "행사시"))]
+        preferred = [c for c in qty_cols if "누적" in headers[c] or "유통" in headers[c]]
+        if not (preferred or qty_cols):
+            continue
+        q = (preferred or qty_cols)[0]
+        pct_cols = [c for c in range(q + 1, len(headers)) if any(k in headers[c] for k in ("비율", "지분율", "비중"))]
+        if not pct_cols:
+            continue
+        pct_col = pct_cols[0]
 
         parsed_rows: list[dict[str, Any]] = []
         unparsed_rows: list[str] = []
-        for row in rows[1:]:
+        for row in rows[start:]:
             line = " ".join(row)
-            if "유통가능" not in re.sub(r"\s+", "", line):
+            compact_line = re.sub(r"\s+", "", line)
+            if "희석가능주식반영" in compact_line and "희석가능주식미반영" not in compact_line:
                 continue
-            period = _period_from_label(line)
+            period = next((p for c in row[:q] if (p := _period_from_label(c))), None)
             if not period:
-                if any(clean_int(c) is not None for c in row[1:] if "%" not in c):
+                if quantity(row[q]) is not None and not any(k in line for k in ("합계", "총계")):
                     unparsed_rows.append(line)
                 continue
             # 첫 번째 비율이 속한 "공모 후 기준" 수량을 사용한다. max()를
             # 쓰면 딜리셔스처럼 오른쪽의 스톡옵션 행사 시 수량을 고르게 된다.
-            nums = [clean_int(c) for c in row[1:] if "%" not in c]
-            nums = [n for n in nums if n is not None]
-            if not nums:
+            cumulative = quantity(re.sub(r"\s*(?:주|DR)\s*$", "", row[q], flags=re.I))
+            if cumulative is None:
+                unparsed_rows.append(line)
                 continue
-            cumulative = nums[0]
-            pct_match = re.search(r"(\d+(?:\.\d+)?)\s*%", line)
+            pct_match = re.fullmatch(r"\s*(\d+(?:\.\d+)?)\s*%?\s*", row[pct_col])
             parsed_rows.append({
                 "period": period,
                 "row_text": line,
@@ -397,19 +411,49 @@ def _mapped_holder_table(table_xml: str, table_idx: int, expected_shares: int | 
     if not any("주주명" in h or "성명" in h for h in headers):
         return None
     qty_cols = [i for i, h in enumerate(headers) if any(k in h for k in ("매각제한물량", "유통제한물량", "의무보유주식수")) and not any(k in h for k in ("지분율", "비율", "%"))]
+    explicit_qty = [i for i in qty_cols if headers[i].endswith("주식수")]
+    if explicit_qty:
+        qty_cols = explicit_qty
     period_cols = [i for i, h in enumerate(headers) if any(k in h for k in ("매각제한기간", "의무보유기간", "보호예수기간"))]
     if len(qty_cols) != 1 or len(period_cols) != 1:
         return None
     q, p = qty_cols[0], period_cols[0]
+    components = [i for i, h in enumerate(headers) if "매각제한물량" in h and any(k in h for k in ("의무보유물량", "자발적보유물량"))]
     parsed, totals, used, ambiguous, unresolved = [], [], set(), False, []
     for r, row in enumerate(rows[header_count:], start=header_count):
         value = quantity(row[q])
+        # Some source rows leave the restricted subtotal blank but fill its components.
+        if value is None and row[q].strip() in ("", "-") and len(components) == 2:
+            parts = [0 if row[c].strip() == "-" else quantity(row[c]) for c in components]
+            if all(part is not None for part in parts):
+                value = sum(parts)
+            elif (q + 1 < len(row) and any(re.fullmatch(r"0(?:\.0+)?%", row[c]) for c in components)
+                  and quantity(row[q + 1]) is not None):
+                # Malformed DART rows sometimes shift subtotal into the ratio cell.
+                # Accept only an exact duplicate of the one numeric component;
+                # the whole table must still reconcile to the reported total.
+                numeric = [part for part in parts if part is not None and part > 0]
+                if len(numeric) == 1 and numeric[0] == quantity(row[q + 1]):
+                    value = numeric[0]
         label = re.sub(r"\s+", "", " ".join(row[:q]))
         if "합계" in label or "총계" in label:
             if value is not None:
                 totals.append(value)
             continue
         if "소계" in label:
+            continue
+        splits = re.findall(r"(\d+)\s*(년|개월|일)\s*\(\s*([\d,]+)\s*주\s*\)", row[p])
+        if value and len(splits) > 1:
+            split_rows = [{"period": _holder_period(n + unit), "qty": int(qty.replace(",", ""))} for n, unit, qty in splits]
+            if all(s["period"] for s in split_rows) and sum(s["qty"] for s in split_rows) == value:
+                origin = origins.get((r, q))
+                if origin in used:
+                    ambiguous = True
+                else:
+                    parsed.extend(split_rows)
+                    used.add(origin)
+            else:
+                unresolved.append({"label": label, "qty": value, "period_text": row[p]})
             continue
         period = _holder_period(row[p])
         if value in (None, 0):
@@ -431,7 +475,7 @@ def _mapped_holder_table(table_xml: str, table_idx: int, expected_shares: int | 
     if not parsed and not unresolved:
         return None
     verified = bool(totals and total == totals[-1] and not ambiguous and not unresolved and (not expected_shares or total <= expected_shares))
-    scope = "ipo_distribution" if any("공모후" in h for h in headers) and any("유통가능" in h for h in headers) else "shareholder_subset"
+    scope = "ipo_distribution" if any("공모후" in h or "총주식수" in h for h in headers) and any("유통가능" in h for h in headers) else "shareholder_subset"
     return {"table_index": table_idx, "rows": parsed, "total": total, "verified": verified,
             "subtotals": totals, "method": "header_grid", "scope": scope, "unresolved": unresolved}
 
@@ -547,7 +591,7 @@ def float_summary_snapshot(doc: str, rcept_no: str) -> dict[str, Any] | None:
         match = re.fullmatch(r"(\d+)(개월|년|일)", period)
         absolute = bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", period))
         relative_date = 0 if period == "상장일" else (int(calc_release_date("2000-01-01", period)[0].replace("-", "")) if match else -1)
-        invalid_order = (period <= previous_date if previous_date else False) if absolute else (bool(previous_date) or relative_date <= previous_relative_date)
+        invalid_order = (period <= previous_date if previous_date else False) if absolute else relative_date <= previous_relative_date
         if (index == 0 and period != "상장일") or invalid_order or qty < 0 or (previous is not None and qty < previous):
             return {**base, "status": "review", "reason": "유통가능 요약표 기간·누적물량 검산 실패"}
         if previous is not None and qty > previous:
@@ -558,14 +602,28 @@ def float_summary_snapshot(doc: str, rcept_no: str) -> dict[str, Any] | None:
         else:
             previous_relative_date = relative_date
     last_pct = rows[-1].get("float_pct")
-    if last_pct is None or abs(last_pct - 100) > 0.01:
-        return {**base, "status": "review", "reason": "유통가능 요약표 최종 누적 100% 확인 필요"}
+    if last_pct is not None and not 0 < last_pct <= 100.01:
+        return {**base, "status": "review", "reason": "유통가능 요약표 비율 범위 확인 필요"}
+    if last_pct:
+        denominator = rows[-1]["cumulative_float"] * 100 / last_pct
+        mismatches = [{"period": r['period'], "qty": r['cumulative_float'], "reported_pct": r['float_pct'],
+                       "calculated_pct": round(r['cumulative_float'] / denominator * 100, 2)}
+                      for r in rows if denominator > 0 and r.get('float_pct') is not None
+                      and abs(r['cumulative_float'] / denominator * 100 - r['float_pct']) > 0.12]
+        if denominator <= 0 or mismatches:
+            return {**base, "status": "review", "reason": "유통가능 요약표 수량·비율 불일치", "ratio_mismatches": mismatches}
     return {**base, "status": "verified", "total": rows[-1]["cumulative_float"] - rows[0]["cumulative_float"],
+            "coverage": "full" if last_pct is not None and abs(last_pct - 100) <= 0.01 else "disclosed_periods_only",
             "rows": releases, "summary_kind": chosen.get("summary_kind", "cumulative"),
             "quantity_unit": rows[0].get("quantity_unit", "주")}
 
 
 def holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
+    complete = reviewed_document(rcept_no)
+    if complete != rcept_no:
+        snapshot = holder_snapshot(download_document_text(complete), complete)
+        snapshot['reviewed_correction_receipt'] = rcept_no
+        return snapshot
     summary = float_summary_snapshot(doc, rcept_no)
     if summary is not None:
         # Detailed deposit anchors do not block a verified listing-relative schedule.
@@ -693,11 +751,12 @@ def parse_float_summary_lockups(company_name: str, expected_shares: int | None =
     selected_report = select_latest_investment_report(reports)
     if not selected_report:
         return None, [], "투자설명서/증권신고서 미발견"
-    doc = download_document_text(selected_report["rcept_no"])
+    source_receipt = reviewed_document(selected_report["rcept_no"])
+    doc = download_document_text(source_receipt)
     candidates = extract_float_summary_tables(doc, expected_shares=expected_shares)
     chosen = choose_float_summary_table(candidates, expected_shares=expected_shares)
     if not chosen:
         return None, candidates, "상장 후 유통가능 주식수 현황 표 미발견"
-    chosen = {**chosen, "rcept_no": selected_report.get("rcept_no"), "report_nm": selected_report.get("report_nm"), "rcept_dt": selected_report.get("rcept_dt")}
+    chosen = {**chosen, "rcept_no": source_receipt, "report_nm": selected_report.get("report_nm"), "rcept_dt": selected_report.get("rcept_dt")}
     note = "" if chosen.get("matches_expected_shares") else "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치"
     return chosen, candidates, note

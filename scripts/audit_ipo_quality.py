@@ -135,7 +135,10 @@ def main():
     with (ROOT_DIR / "data" / "lockup_admin.csv").open(encoding="utf-8-sig", newline="") as f:
         holder_codes = {r["code"] for r in csv.DictReader(f) if r.get("category") == "구주·보호예수"}
     issues = []
+    from scripts.ipo_evidence import apply_approved_allocations, reconcile_reported_capital
+    apply_approved_allocations(schedule)
     for item in eligible:
+        reconcile_reported_capital(item)
         gaps = quality_gaps(item, item.get("stock_code") in holder_codes, today=today)
         if gaps:
             issues.append({"corp_code": item.get("corp_code"), "code": item.get("stock_code"), "name": item["name"], "gaps": gaps})
@@ -143,8 +146,7 @@ def main():
                   for i in eligible if quality_advisories(i)]
     report = {"checked_at": now.isoformat(), "refreshed": refreshed, "failures": failures, "issues": issues, "advisories": advisories}
     if args.write:
-        if refreshed or failures:
-            path.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
+        path.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding="utf-8")
         (ROOT_DIR / "data" / "ipo_quality_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[IPO QA] {len(eligible)} checked; {len(issues)} need review; {len(failures)} source failures")
     if failures:

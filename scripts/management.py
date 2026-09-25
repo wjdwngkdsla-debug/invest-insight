@@ -10,6 +10,7 @@ import hashlib
 import re
 from datetime import date, timedelta
 from typing import Any, Iterable
+from scripts.ipo_evidence import canonical_name
 
 
 MANAGEMENT_COLUMNS = [
@@ -213,6 +214,8 @@ def merge_stock_management(
             elif row["management_status"] == "수동편입":
                 row["visibility"] = "노출"
         rows.append({column: str(row.get(column) or "") for column in MANAGEMENT_COLUMNS})
+    for row in rows:
+        row['name'] = canonical_name(row.get('name'), row.get('stock_code'), row.get('corp_code'))
     return sorted(rows, key=lambda row: (row.get("scope", ""), row.get("listing_date", "9999") or "9999", row.get("name", "")))
 
 
@@ -247,6 +250,9 @@ def apply_stock_management(
     today = today or date.today().isoformat()
     all_items = list(schedule.get("items") or [])
     past_items = list(schedule.get("past_items") or [])
+    targets = [{**t, 'name': canonical_name(t.get('name'), t.get('code'), t.get('corp_code'))} for t in targets]
+    for item in all_items + past_items:
+        item['name'] = canonical_name(item.get('name'), item.get('stock_code'), item.get('corp_code'))
     fixed_exclusions: dict[str, Any] = dict(schedule.get("fixed_exclusions") or {})
     history = list(schedule.get("history") or [])
 
@@ -255,6 +261,7 @@ def apply_stock_management(
 
     for raw in rows:
         row = {column: str(raw.get(column) or "").strip() for column in MANAGEMENT_COLUMNS}
+        row['name'] = canonical_name(row.get('name'), row.get('stock_code'), row.get('corp_code'))
         name = row.get("name", "")
         if not name:
             continue

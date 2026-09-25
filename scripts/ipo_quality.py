@@ -2,6 +2,7 @@
 import re
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
+from scripts.ipo_evidence import demand_waiting
 
 PERIODS = ("미확약", "15일", "1개월", "3개월", "6개월")
 
@@ -41,6 +42,8 @@ def holder_review_note(item):
         parts.append(f"원문 합계 {expected:,}{unit} / 행 합계 {actual:,}{unit} / 차이 {expected - actual:+,}{unit}")
     if snapshot.get("last_verified"):
         parts.append(f"이전 검산값 보존: {snapshot['last_verified'].get('rcept_no', '')}")
+    for row in snapshot.get('ratio_mismatches') or []:
+        parts.append(f"{row['period']} {row['qty']:,}주: 원문 {row['reported_pct']}% / 계산 {row['calculated_pct']}%")
     return "; ".join(parts)
 
 
@@ -88,7 +91,7 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
             return date.fromisoformat(value).isoformat() < today
         except ValueError:
             return False
-    forecast_done = ended("forecast_end") or bool(item.get("demand_ratio") or item.get("report_rcp"))
+    forecast_done = (ended("forecast_end") or bool(item.get("demand_ratio") or item.get("report_rcp"))) and not demand_waiting(item, today)
     subscription_done = ended("sub_end") or bool(item.get("report_rcp"))
     for field, label in (("market", "시장"), ("band_low", "희망가하단"), ("band_high", "희망가상단"), ("offer_shares", "공모주식수"), ("underwriter", "주관사")):
         if not item.get(field):
@@ -127,6 +130,32 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
         gaps.append("구주물량 최신 공시 확인" + (f"({snapshot['reason']})" if snapshot.get("reason") else ""))
     if float_pct_known is False:
         gaps.append("상장일유통가능")
+    gaps.extend(capital_gaps(item))
+    return gaps
+
+
+def capital_gaps(item):
+    gaps = []
+    snapshot = item.get('holder_lockup') or {}
+    initial = quantity(item.get('initial_shares'))
+    cumulative = snapshot.get('cumulative_rows') or []
+    if initial and snapshot.get('status') == 'verified' and cumulative:
+        last = cumulative[-1]['cumulative_float']
+        if last > initial or (snapshot.get('coverage') == 'full' and last != initial):
+            gaps.append(f'요약표·최초상장주식수 불일치({last:,}/{initial:,})')
+    tiers = {r.get('period'): r for r in item.get('commit_alloc') or []}
+    if all(tier_quantity(tiers.get(p)) is not None for p in PERIODS):
+        allocated = sum(tier_quantity(tiers[p]) for p in PERIODS)
+        locked = allocated - tier_quantity(tiers['미확약'])
+        offer = quantity(item.get('offer_shares'))
+        if offer and allocated > offer:
+            gaps.append('기관 총배정이 공모주식수 초과')
+        # The summary baseline already includes offered shares: subtract institution
+        # locks from baseline, never add total allocation to total listed shares.
+        if cumulative and locked > cumulative[0]['cumulative_float']:
+            gaps.append('기관 확약배정이 상장일 유통가능물량 초과')
+        if initial and snapshot.get('status') == 'verified' and (quantity(snapshot.get('total')) or 0) + locked > initial:
+            gaps.append('기존주주·기관 확약물량이 최초상장주식수 초과')
     return gaps
 
 
@@ -137,9 +166,15 @@ def allocation_resolved(item):
 
 def quality_advisories(item):
     notes = []
+    if demand_waiting(item, datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()):
+        notes.append('수요예측 결과 공시 대기: 운영자 확인, 다음 공시 또는 청약 시작일에 재검증')
     snapshot = item.get("holder_lockup") or {}
     if snapshot.get("status") == "verified" and snapshot.get("detail_advisory"):
         notes.append("요약표 예정 일정 정상; 상세표 참고: " + snapshot["detail_advisory"].get("reason", ""))
+    if snapshot.get('coverage') == 'disclosed_periods_only':
+        notes.append('공시된 기간까지 집계: 잔여 물량·해제일은 미추정')
+    if snapshot.get('capital_adjustment'):
+        notes.append(snapshot['capital_adjustment']['reason'])
     if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and allocation_resolved(item):
         notes.append("배정 저장값 보완 완료; 자동 파서 재검증 미완료")
     return notes

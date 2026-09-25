@@ -128,7 +128,8 @@ class IpoQualityTests(unittest.TestCase):
         table += '</TABLE>'
         tiers = {r['period']: r for r in _allocation_tiers(table)}
         self.assertEqual(tiers['미확약']['qty'], 1081518)
-        self.assertIsNone(tier_quantity(tiers['15일']))
+        self.assertEqual(tier_quantity(tiers['15일']), 0)
+        self.assertEqual(tiers['15일']['source'], 'dart_total_reconciled')
         self.assertEqual(_allocation_tiers(table.replace('1275000', '1275001')), [])
 
     def test_disclosure_api_error_is_not_no_filing(self):
@@ -269,7 +270,7 @@ class IpoQualityTests(unittest.TestCase):
 class SummaryPriorityTests(unittest.TestCase):
     @staticmethod
     def summary(values=(100, 200, 400), periods=("상장일", "상장 후 1개월", "상장 후 1년"), final="100%"):
-        rows = ''.join(f'<TR><TD>{p} 유통가능</TD><TD>{v}</TD><TD>{final if n == 2 else "25%"}</TD></TR>'
+        rows = ''.join(f'<TR><TD>{p} 유통가능</TD><TD>{v}</TD><TD>{float(final.rstrip("%")) * v / values[-1]}%</TD></TR>'
                        for n, (p, v) in enumerate(zip(periods, values)))
         return '<TABLE><TR><TH>구분</TH><TH>주식수</TH><TH>유통가능 비율</TH></TR>' + rows + '</TABLE>'
 
@@ -283,7 +284,7 @@ class SummaryPriorityTests(unittest.TestCase):
         self.assertTrue(quality_advisories(item))
 
     def test_invalid_summary_not_hidden_by_valid_detail(self):
-        for summary in (self.summary((100, 50, 400)), self.summary(final='90%'),
+        for summary in (self.summary((100, 50, 400)), self.summary(final='110%'),
                         self.summary(periods=('상장일', '상장 후 1년', '상장 후 6개월'))):
             self.assertEqual(holder_snapshot(summary + HOLDER, 'receipt')['status'], 'review')
 
@@ -308,7 +309,11 @@ class SummaryPriorityTests(unittest.TestCase):
         self.assertEqual(snap['status'], 'verified')
         self.assertEqual(snap['summary_kind'], 'incremental')
         self.assertEqual(snap['total'], 300)
-        self.assertEqual(holder_snapshot(self.summary((100, 110, 200), final='50%'), 'receipt')['status'], 'review')
+        inconsistent = summary.replace('<TD>100</TD>', '<TD>110</TD>', 1)
+        self.assertEqual(holder_snapshot(inconsistent, 'receipt')['status'], 'review')
+        partial = holder_snapshot(self.summary(final='90%'), 'receipt')
+        self.assertEqual(partial['status'], 'verified')
+        self.assertEqual(partial['coverage'], 'disclosed_periods_only')
 
     def test_manual_allocation_completion_is_advisory_only(self):
         item = {'sub_ratio': 10, 'result_source_check': {'status': 'parse_incomplete'},

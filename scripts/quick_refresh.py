@@ -42,6 +42,8 @@ from scripts.build import (
 )
 from scripts.utils.redaction import redact_sensitive_text
 from scripts.utils.dates import market_holidays
+from scripts.ipo_evidence import canonical_name, apply_approved_allocations, reconcile_reported_capital
+from scripts.ipo_holder_events import sync_reviewed_holder_events
 
 
 def parse_args() -> argparse.Namespace:
@@ -97,6 +99,16 @@ def main() -> None:
 
     step = time.perf_counter()
     rows = _read_csv(admin_path, ADMIN_COLUMNS)
+    for row in rows:
+        row['name'] = canonical_name(row.get('name'), row.get('code'))
+    schedule_path = data_dir / 'ipo_schedule.json'
+    if schedule_path.exists():
+        schedule = json.loads(schedule_path.read_text(encoding='utf-8'))
+        apply_approved_allocations(schedule)
+        for item in schedule.get('items', []) + schedule.get('past_items', []):
+            reconcile_reported_capital(item)
+        rows = sync_reviewed_holder_events(rows, schedule)
+        schedule_path.write_text(json.dumps(schedule, ensure_ascii=False, indent=2), encoding='utf-8')
     if not rows:
         raise SystemExit(f"[QUICK] {admin_path} 가 비어 있습니다 — 전체 배치를 먼저 실행하세요")
 
