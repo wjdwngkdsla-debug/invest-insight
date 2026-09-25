@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-25T14:34:35.821490+09:00",
+  "checked_at": "2026-09-25T14:44:17.907642+09:00",
   "results": [
     {
       "name": "빅웨이브로보틱스",
@@ -9,11 +9,60 @@
       "rcept_no": "20260914000385"
     },
     {
+      "name": "멜콘",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260914000034"
+    },
+    {
+      "name": "진코스텍",
+      "status": "verified",
+      "basis": null,
+      "reason": "",
+      "rcept_no": "20260911000530"
+    },
+    {
+      "name": "엘리스그룹",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260921000386"
+    },
+    {
+      "name": "엠에스바이오",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260907000305"
+    },
+    {
       "name": "디티에스",
       "status": "verified",
       "basis": "float_summary",
       "reason": "",
       "rcept_no": "20260911000314"
+    },
+    {
+      "name": "다비오",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260915000390"
+    },
+    {
+      "name": "유캐스트",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260909000378"
+    },
+    {
+      "name": "티앤이코리아",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260923000255"
     },
     {
       "name": "인텔리빅스",
@@ -30,11 +79,53 @@
       "rcept_no": "20260921000390"
     },
     {
+      "name": "엠비디",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260918000439"
+    },
+    {
+      "name": "바로팜",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260908000417"
+    },
+    {
+      "name": "하나에어로다이내믹스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260921000405"
+    },
+    {
+      "name": "인제니아테라퓨틱스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260728000402"
+    },
+    {
       "name": "케이앤에스아이앤씨",
       "status": "verified",
       "basis": "float_summary",
       "reason": "",
       "rcept_no": "20260803000167"
+    },
+    {
+      "name": "매드업",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260622000384"
+    },
+    {
+      "name": "스트라드비젼",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20260617000171"
     },
     {
       "name": "에스팀",
@@ -107,6 +198,27 @@
       "rcept_no": "20250416000425"
     },
     {
+      "name": "더즌",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250311000718"
+    },
+    {
+      "name": "심플랫폼",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250310000117"
+    },
+    {
+      "name": "씨케이솔루션",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250228005640"
+    },
+    {
       "name": "동국생명과학",
       "status": "verified",
       "basis": "float_summary",
@@ -121,6 +233,13 @@
       "rcept_no": "20250203000196"
     },
     {
+      "name": "아이지넷",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20250117000296"
+    },
+    {
       "name": "와이즈넛",
       "status": "verified",
       "basis": "float_summary",
@@ -133,6 +252,13 @@
       "basis": "float_summary",
       "reason": "",
       "rcept_no": "20250114000477"
+    },
+    {
+      "name": "온코닉테라퓨틱스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241205000263"
     },
     {
       "name": "위츠",
@@ -156,11 +282,11 @@
       "rcept_no": "20241106000088"
     },
     {
-      "name": "닷밀",
+      "name": "쓰리빌리언",
       "status": "verified",
-      "basis": null,
+      "basis": "float_summary",
       "reason": "",
-      "rcept_no": "20241101000293"
+      "rcept_no": "20241101000142"
     },
     {
       "name": "노머스",
@@ -177,11 +303,39 @@
       "rcept_no": "20241022000107"
     },
     {
+      "name": "에이럭스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241021000241"
+    },
+    {
       "name": "클로봇",
       "status": "verified",
       "basis": "float_summary",
       "reason": "",
       "rcept_no": "20241015000376"
+    },
+    {
+      "name": "씨메스로보틱스",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241014000124"
+    },
+    {
+      "name": "루미르",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241008000450"
+    },
+    {
+      "name": "인스피언",
+      "status": "verified",
+      "basis": "float_summary",
+      "reason": "",
+      "rcept_no": "20241002000239"
     }
   ],
   "failures": []
