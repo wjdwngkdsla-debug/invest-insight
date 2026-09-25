@@ -42,7 +42,7 @@ from scripts.build import (
 )
 from scripts.utils.redaction import redact_sensitive_text
 from scripts.utils.dates import market_holidays
-from scripts.ipo_evidence import canonical_name, apply_approved_allocations, reconcile_reported_capital
+from scripts.ipo_evidence import canonical_name, apply_approved_allocations, reconcile_reported_capital, repair_short_corp_duplicates
 from scripts.ipo_holder_events import sync_reviewed_holder_events
 
 
@@ -104,6 +104,7 @@ def main() -> None:
     schedule_path = data_dir / 'ipo_schedule.json'
     if schedule_path.exists():
         schedule = json.loads(schedule_path.read_text(encoding='utf-8'))
+        repair_short_corp_duplicates(schedule)
         apply_approved_allocations(schedule)
         for item in schedule.get('items', []) + schedule.get('past_items', []):
             reconcile_reported_capital(item)

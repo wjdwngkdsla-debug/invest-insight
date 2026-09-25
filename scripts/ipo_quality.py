@@ -179,6 +179,8 @@ def quality_advisories(item):
         notes.append('공시된 기간까지 집계: 잔여 물량·해제일은 미추정')
     if snapshot.get('capital_adjustment'):
         notes.append(snapshot['capital_adjustment']['reason'])
+    if snapshot.get('summary_reconciliation'):
+        notes.append(snapshot['summary_reconciliation']['reason'])
     if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and allocation_resolved(item):
         notes.append("배정 저장값 보완 완료; 자동 파서 재검증 미완료")
     return notes

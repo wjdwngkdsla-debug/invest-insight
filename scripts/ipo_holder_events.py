@@ -45,6 +45,7 @@ def sync_reviewed_holder_events(rows, schedule):
                        planned_qty=qty, planned_pct=pct(qty, shares), planned_date=date,
                        planned_date_display=display, planned_tradable_date=tradable,
                        dart_rcp=snapshot['rcept_no'],
-                       dart_source='투자설명서 유통가능 요약표' if snapshot.get('basis') == 'float_summary' else '투자설명서 주주별 매각제한 내역',
-                       parse_note='', quantity_unit=snapshot.get('quantity_unit', '주'))
+                       dart_source='투자설명서 유통가능 요약표' if snapshot.get('basis') == 'float_summary' and not snapshot.get('summary_reconciliation') else '투자설명서 주주별 매각제한 내역',
+                       parse_note=(snapshot.get('summary_reconciliation') or {}).get('reason', ''),
+                       quantity_unit=snapshot.get('quantity_unit', '주'))
     return rows

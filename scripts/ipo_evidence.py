@@ -15,11 +15,79 @@ def reviewed_document(receipt):
     return review_evidence().get('complete_documents', {}).get(receipt, receipt)
 
 
+def reconcile_reviewed_detail(summary, detail):
+    """Resolve a known source-table conflict only against a fully reconciled detail table."""
+    from scripts.utils.dates import calc_release_date
+    receipt = summary.get('rcept_no')
+    evidence = review_evidence().get('holder_detail_resolutions', {}).get(receipt)
+    cumulative = summary.get('cumulative_rows') or []
+    if (not evidence or summary.get('reason') != '유통가능 요약표 수량·비율 불일치'
+            or detail.get('status') != 'verified' or detail.get('rcept_no') != receipt
+            or len(cumulative) < 2 or cumulative[0]['cumulative_float'] != evidence['listing_float']
+            or cumulative[-1]['cumulative_float'] != evidence['initial_shares']
+            or detail.get('total') != evidence['restricted_total']
+            or evidence['listing_float'] + evidence['restricted_total'] != evidence['initial_shares']):
+        return None
+    rows = detail.get('rows') or []
+    quantities = {r['period']: r['qty'] for r in rows}
+    if (len(quantities) != len(rows) or quantities != evidence['period_quantities']
+            or sum(quantities.values()) != evidence['restricted_total']):
+        return None
+    rows = sorted(copy.deepcopy(rows), key=lambda r: calc_release_date('2000-01-01', r['period'])[0])
+    running = evidence['listing_float']
+    adjusted = [{'period': '상장일', 'cumulative_float': running,
+                 'float_pct': round(running * 100 / evidence['initial_shares'], 2)}]
+    for row in rows:
+        running += row['qty']
+        adjusted.append({'period': row['period'], 'cumulative_float': running,
+                         'float_pct': round(running * 100 / evidence['initial_shares'], 2)})
+    return {**summary, 'status': 'verified', 'reason': '', 'rows': rows,
+            'total': evidence['restricted_total'], 'coverage': 'full', 'quantity_unit': '주',
+            'cumulative_rows': adjusted, 'reported_cumulative_rows': copy.deepcopy(cumulative),
+            'summary_kind': 'detail_reconciled', 'summary_reconciliation': {
+                **evidence, 'receipt': receipt, 'detail_table_index': detail.get('table_index')}}
+
+
 def canonical_name(name, code='', corp_code=''):
     for stock_code, entry in review_evidence().get('company_names', {}).items():
-        if str(code).zfill(6) == stock_code or (corp_code and corp_code == entry.get('corp_code')):
+        if str(code).zfill(6) == stock_code or (corp_code and normalize_corp_code(corp_code) == entry.get('corp_code')):
             return entry['name']
     return name
+
+
+def normalize_corp_code(value):
+    text = str(value or '').strip()
+    return text.zfill(8) if text.isascii() and text.isdigit() and len(text) <= 8 else text
+
+
+def repair_short_corp_duplicates(schedule):
+    items = schedule.get('items', []) + schedule.get('past_items', [])
+    canonical = {(i.get('corp_code'), i.get('offering_attempt', 1)): i for i in items
+                 if len(str(i.get('corp_code', ''))) == 8}
+    removed = set()
+    for item in items:
+        raw = item.get('corp_code')
+        corp = normalize_corp_code(raw)
+        target = canonical.get((corp, item.get('offering_attempt', 1)))
+        if raw != corp and target is not None and target is not item:
+            # Preserve explicit operator disagreements for review, not silent merging.
+            fields = set(item.get('manual_fields') or [])
+            fields.update(k for k in ('manual_commit_apply', 'manual_commit_alloc', 'holder_overrides') if item.get(k))
+            if any(target.get(k) not in (None, '', item.get(k)) for k in fields):
+                continue
+            schedule.setdefault('identity_repairs', []).append({'old_corp_code': raw, 'corp_code': corp,
+                'reason': 'DART 고유번호 선행 0 복원 및 기존 종목 연결', 'previous_record': copy.deepcopy(item)})
+            for field in fields | set(item.get('provisional_fields') or []):
+                if target.get(field) in (None, ''):
+                    target[field] = copy.deepcopy(item.get(field))
+            target['manual_fields'] = sorted(set(target.get('manual_fields') or []) | set(item.get('manual_fields') or []))
+            removed.add(id(item))
+        elif raw != corp:
+            item['corp_code'] = corp
+        item['name'] = canonical_name(item.get('name'), item.get('stock_code'), corp)
+    for collection in ('items', 'past_items'):
+        schedule[collection] = [i for i in schedule.get(collection, []) if id(i) not in removed]
+    return schedule
 
 
 def demand_waiting(item, today):

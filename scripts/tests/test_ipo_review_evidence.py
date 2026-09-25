@@ -63,6 +63,59 @@ class ReviewedDartTests(unittest.TestCase):
         self.assertEqual(snap['status'], 'review')
         self.assertIn('수량·비율', snap['reason'])
 
+    def test_esteem_detail_resolves_summary_only_with_exact_verified_evidence(self):
+        receipt = '20260220001638'
+        doc = self.tables[receipt + ':detail'] + self.tables[receipt]
+        snap = holder_snapshot(doc, receipt)
+        self.assertEqual(snap['status'], 'verified')
+        self.assertEqual(snap['total'], 5670800)
+        self.assertEqual(snap['rows'], [{'period': '3개월', 'qty': 54000},
+            {'period': '6개월', 'qty': 835894}, {'period': '1년', 'qty': 1059456}, {'period': '30개월', 'qty': 3721450}])
+        self.assertEqual(snap['cumulative_rows'][2]['cumulative_float'], 3902294)
+        self.assertEqual(snap['cumulative_rows'][2]['float_pct'], 44.94)
+        self.assertEqual(snap['reported_cumulative_rows'][2]['cumulative_float'], 3929494)
+        self.assertEqual(holder_snapshot(doc, '20260221000001')['status'], 'review')
+        self.assertEqual(holder_snapshot(doc.replace('27,200', '27,201'), receipt)['status'], 'review')
+
+    def test_sheet_short_corp_id_matches_existing_renamed_company(self):
+        from scripts.sheets_sync import _find_schedule_item, item_key
+        from scripts.ipo_evidence import repair_short_corp_duplicates
+        official = {'corp_code': '01137860', 'name': '위너스일렉', 'stock_code': '479960', 'final_price': 8500}
+        duplicate = {'corp_code': '1137860', 'name': '위너스', 'provisional_fields': ['final_price'], 'final_price': 8500}
+        schedule = {'items': [duplicate], 'past_items': [official]}
+        repair_short_corp_duplicates(schedule)
+        self.assertEqual(schedule['items'], [])
+        self.assertIs(_find_schedule_item(schedule, '1137860', '위너스'), official)
+        self.assertEqual(item_key(duplicate), '01137860')
+        self.assertEqual(schedule['identity_repairs'][0]['previous_record']['corp_code'], '1137860')
+        repair_short_corp_duplicates(schedule)
+        self.assertEqual(len(schedule['identity_repairs']), 1)
+
+    def test_short_id_repair_does_not_merge_different_offering_or_manual_conflict(self):
+        from scripts.ipo_evidence import repair_short_corp_duplicates
+        official = {'corp_code': '01137860', 'name': '위너스일렉', 'final_price': 8500}
+        duplicate = {'corp_code': '1137860', 'name': '위너스', 'final_price': 9999, 'manual_fields': ['final_price']}
+        schedule = {'items': [duplicate], 'past_items': [official]}
+        repair_short_corp_duplicates(schedule)
+        self.assertEqual(len(schedule['items']), 1)
+        self.assertEqual(official['final_price'], 8500)
+        duplicate['offering_attempt'] = 2
+        repair_short_corp_duplicates(schedule)
+        self.assertEqual(len(schedule['items']), 1)
+
+    def test_stale_sheet_alias_does_not_recreate_repaired_placeholder(self):
+        from scripts.management import merge_stock_management, apply_stock_management
+        official = {'corp_code': '01137860', 'name': '위너스일렉', 'stock_code': '479960', 'listing_date': '2025-02-24'}
+        schedule = {'items': [{'corp_code': '1137860', 'name': '위너스'}], 'past_items': [official]}
+        saved = [{**official, 'scope': 'IPO일정+락업'}, {'corp_code': '1137860', 'name': '위너스', 'scope': 'IPO일정+락업'}]
+        targets = [{'name': '위너스', 'code': '', 'listing_date': ''}, {'name': '위너스일렉', 'code': '479960'}]
+        management = merge_stock_management(saved, targets, schedule)
+        self.assertEqual(len(management), 1)
+        targets, schedule, _ = apply_stock_management(management, targets, schedule)
+        self.assertEqual(len(targets), 1)
+        self.assertEqual(targets[0]['code'], '479960')
+        self.assertEqual(schedule['items'], [])
+
     def test_reviewed_document_does_not_override_later_correction(self):
         self.assertEqual(reviewed_document('20260220001649'), '20260220001638')
         self.assertEqual(reviewed_document('20260221000100'), '20260221000100')

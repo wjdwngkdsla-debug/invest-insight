@@ -2537,37 +2537,6 @@
       "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
-    },
-    {
-      "corp_code": "1137860",
-      "name": "위너스",
-      "review_pending": false,
-      "schedule_hidden": false,
-      "manual_commit_apply": {},
-      "management_status": "자동",
-      "band_low": 7500,
-      "band_high": 8500,
-      "offer_shares": 1700000,
-      "forecast_start": "2025-02-04",
-      "forecast_end": "2025-02-10",
-      "sub_start": "2025-02-13",
-      "sub_end": "2025-02-14",
-      "demand_ratio": 1155.04,
-      "sub_ratio": 1747.74,
-      "underwriter": "미래에셋증권",
-      "review_approved": true,
-      "provisional_fields": [
-        "band_high",
-        "band_low",
-        "demand_ratio",
-        "forecast_end",
-        "forecast_start",
-        "offer_shares",
-        "sub_end",
-        "sub_ratio",
-        "sub_start",
-        "underwriter"
-      ]
     }
   ],
   "past_items": [
@@ -6423,6 +6392,65 @@
         "cumulative_rows": [
           {
             "period": "상장일",
+            "cumulative_float": 3012400,
+            "float_pct": 34.69
+          },
+          {
+            "period": "3개월",
+            "cumulative_float": 3066400,
+            "float_pct": 35.31
+          },
+          {
+            "period": "6개월",
+            "cumulative_float": 3902294,
+            "float_pct": 44.94
+          },
+          {
+            "period": "1년",
+            "cumulative_float": 4961750,
+            "float_pct": 57.14
+          },
+          {
+            "period": "30개월",
+            "cumulative_float": 8683200,
+            "float_pct": 100.0
+          }
+        ],
+        "date_basis": "listing_relative_or_explicit_date",
+        "status": "verified",
+        "reason": "",
+        "ratio_mismatches": [
+          {
+            "period": "6개월",
+            "qty": 3929494,
+            "reported_pct": 46.25,
+            "calculated_pct": 45.25
+          }
+        ],
+        "rows": [
+          {
+            "period": "3개월",
+            "qty": 54000
+          },
+          {
+            "period": "6개월",
+            "qty": 835894
+          },
+          {
+            "period": "1년",
+            "qty": 1059456
+          },
+          {
+            "period": "30개월",
+            "qty": 3721450
+          }
+        ],
+        "total": 5670800,
+        "coverage": "full",
+        "quantity_unit": "주",
+        "reported_cumulative_rows": [
+          {
+            "period": "상장일",
             "row_text": "상장당일 유통가능 주식수 3,012,400 34.69%",
             "cumulative_float": 3012400,
             "float_pct": 34.69,
@@ -6457,18 +6485,22 @@
             "quantity_unit": "주"
           }
         ],
-        "date_basis": "listing_relative_or_explicit_date",
-        "status": "review",
-        "reason": "유통가능 요약표 수량·비율 불일치",
-        "ratio_mismatches": [
-          {
-            "period": "6개월",
-            "qty": 3929494,
-            "reported_pct": 46.25,
-            "calculated_pct": 45.25
-          }
-        ],
-        "quantity_unit": "주"
+        "summary_kind": "detail_reconciled",
+        "summary_reconciliation": {
+          "checked_at": "2026-09-25",
+          "initial_shares": 8683200,
+          "listing_float": 3012400,
+          "restricted_total": 5670800,
+          "period_quantities": {
+            "3개월": 54000,
+            "6개월": 835894,
+            "1년": 1059456,
+            "30개월": 3721450
+          },
+          "reason": "운영자 제공 상세표와 주석 대조: 직원 27,200주는 주2에 따라 1년 의무보유. 요약표의 6개월 누적수량 및 비율 대신 합계 검산된 상세표 사용",
+          "receipt": "20260220001638",
+          "detail_table_index": 523
+        }
       },
       "security_type": "equity",
       "holder_overrides": {},
@@ -15921,7 +15953,8 @@
       "provisional_fields": [
         "final_price",
         "listing_date"
-      ]
+      ],
+      "manual_fields": []
     },
     {
       "corp_code": "00367400",
@@ -29320,5 +29353,43 @@
       "excluded_at": "2026-09-25",
       "memo": ""
     }
-  }
+  },
+  "identity_repairs": [
+    {
+      "old_corp_code": "1137860",
+      "corp_code": "01137860",
+      "reason": "DART 고유번호 선행 0 복원 및 기존 종목 연결",
+      "previous_record": {
+        "corp_code": "1137860",
+        "name": "위너스",
+        "review_pending": false,
+        "schedule_hidden": false,
+        "manual_commit_apply": {},
+        "management_status": "자동",
+        "band_low": 7500,
+        "band_high": 8500,
+        "offer_shares": 1700000,
+        "forecast_start": "2025-02-04",
+        "forecast_end": "2025-02-10",
+        "sub_start": "2025-02-13",
+        "sub_end": "2025-02-14",
+        "demand_ratio": 1155.04,
+        "sub_ratio": 1747.74,
+        "underwriter": "미래에셋증권",
+        "review_approved": true,
+        "provisional_fields": [
+          "band_high",
+          "band_low",
+          "demand_ratio",
+          "forecast_end",
+          "forecast_start",
+          "offer_shares",
+          "sub_end",
+          "sub_ratio",
+          "sub_start",
+          "underwriter"
+        ]
+      }
+    }
+  ]
 }

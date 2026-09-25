@@ -412,7 +412,8 @@ def read_schedule_data() -> dict:
         value = json.loads(IPO_SCHEDULE_PATH.read_text(encoding="utf-8"))
     except Exception:
         return {"updated": "", "items": [], "past_items": [], "history": []}
-    return value if isinstance(value, dict) else {"updated": "", "items": [], "past_items": [], "history": []}
+    from scripts.ipo_evidence import repair_short_corp_duplicates
+    return repair_short_corp_duplicates(value) if isinstance(value, dict) else {"updated": "", "items": [], "past_items": [], "history": []}
 
 
 def load_simple_sheet_state() -> dict:
@@ -476,7 +477,7 @@ def all_schedule_items(schedule: dict) -> list[dict]:
 
 
 def item_key(item: dict) -> str:
-    return str(item.get("corp_code") or f"name:{norm_name(item.get('name'))}")
+    return _norm_corp_code(item.get("corp_code")) or f"name:{norm_name(item.get('name'))}"
 
 
 def table_records(values: list[list[str]], key_map: dict[str, str]) -> list[dict[str, str]]:
@@ -649,7 +650,7 @@ def pull_stock_management(spreadsheet: gspread.Spreadsheet) -> None:
 def _find_schedule_item(schedule: dict, code: str, name: str) -> dict | None:
     all_items = list(schedule.get("items") or []) + list(schedule.get("past_items") or [])
     if code:
-        found = next((item for item in all_items if str(item.get("corp_code") or "") == code), None)
+        found = next((item for item in all_items if _norm_corp_code(item.get("corp_code")) == _norm_corp_code(code)), None)
         if found:
             return found
     key = norm_name(name)
@@ -859,7 +860,7 @@ def pull_simple_schedule_tab(spreadsheet: gspread.Spreadsheet) -> None:
     changed = 0
     for row in rows:
         row_name = str(row.get("name") or "").strip()
-        row_corp_code = str(row.get("corp_code") or "").strip()
+        row_corp_code = _norm_corp_code(row.get("corp_code"))
         # 표 서식이 미리 내려간 빈 행은 노출/고정 기본값만 있어도 record로 잡힌다.
         # 이름과 기업코드가 모두 없는 행을 수기 IPO로 만들면 manual- 빈 종목이 누적된다.
         if not row_name and not row_corp_code:
@@ -933,7 +934,7 @@ def _schedule_by_corp_or_name(schedule: dict) -> tuple[dict[str, dict], dict[str
     by_corp, by_name = {}, {}
     for item in all_schedule_items(schedule):
         if item.get("corp_code"):
-            by_corp[str(item["corp_code"])] = item
+            by_corp[_norm_corp_code(item["corp_code"])] = item
         if norm_name(item.get("name")):
             by_name[norm_name(item.get("name"))] = item
     return by_corp, by_name
@@ -977,7 +978,7 @@ def pull_simple_event_tabs(spreadsheet: gspread.Spreadsheet) -> None:
         seen: set[str] = set()
         for index, raw in enumerate(rows, start=2):
             event_id = str(raw.get("이벤트ID") or "").strip()
-            corp_code = str(raw.get("DART기업코드") or "").strip()
+            corp_code = _norm_corp_code(raw.get("DART기업코드"))
             period = str(raw.get("기간") or raw.get("락업기간") or "").strip()
             key = event_id or f"{corp_code or norm_name(raw.get('종목명'))}:{period}:{index}"
             seen.add(key)

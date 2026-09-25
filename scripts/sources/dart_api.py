@@ -628,6 +628,10 @@ def holder_snapshot(doc: str, rcept_no: str) -> dict[str, Any]:
     if summary is not None:
         # Detailed deposit anchors do not block a verified listing-relative schedule.
         detail = _detail_holder_snapshot(doc, rcept_no)
+        from scripts.ipo_evidence import reconcile_reviewed_detail
+        reconciled = reconcile_reviewed_detail(summary, detail)
+        if reconciled:
+            return reconciled
         if detail.get("status") != "verified":
             summary["detail_advisory"] = detail
         return summary

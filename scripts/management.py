@@ -10,7 +10,7 @@ import hashlib
 import re
 from datetime import date, timedelta
 from typing import Any, Iterable
-from scripts.ipo_evidence import canonical_name
+from scripts.ipo_evidence import canonical_name, normalize_corp_code, repair_short_corp_duplicates
 
 
 MANAGEMENT_COLUMNS = [
@@ -102,15 +102,25 @@ def _fill_missing(target: dict[str, Any], source: dict[str, Any]) -> None:
             target[key] = source[key]
 
 
+def _without_repaired_placeholders(targets, schedule):
+    aliases = {norm_name(r.get('previous_record', {}).get('name')) for r in schedule.get('identity_repairs', [])}
+    return [t for t in targets if not (norm_name(t.get('name')) in aliases
+            and not any(t.get(k) for k in ('code', 'listing_date', 'shares', 'manual_ipo_price', 'content_url', 'memo')))]
+
+
 def merge_stock_management(
     saved: list[dict[str, Any]],
     targets: list[dict[str, Any]],
     schedule: dict[str, Any],
 ) -> list[dict[str, str]]:
     """Merge new commands with all legacy/current data without dropping rows."""
+    repair_short_corp_duplicates(schedule)
+    targets = _without_repaired_placeholders(targets, schedule)
     merged: dict[str, dict[str, Any]] = {}
 
     def upsert(source: dict[str, Any], scope: str) -> dict[str, Any]:
+        source = {**source, 'corp_code': normalize_corp_code(source.get('corp_code'))}
+        source['name'] = canonical_name(source.get('name'), source.get('stock_code'), source.get('corp_code'))
         key = _row_key(source)
         current = merged.setdefault(key, {column: "" for column in MANAGEMENT_COLUMNS})
         scopes = _scope_parts(current.get("scope")) | _scope_parts(scope)
@@ -121,9 +131,15 @@ def merge_stock_management(
     # Saved operator decisions always win.  Later sources only fill blanks.
     for row in saved:
         cleaned = {column: str(row.get(column) or "").strip() for column in MANAGEMENT_COLUMNS}
+        cleaned['corp_code'] = normalize_corp_code(cleaned.get('corp_code'))
+        cleaned['name'] = canonical_name(cleaned.get('name'), cleaned.get('stock_code'), cleaned.get('corp_code'))
         _apply_spac_exclusion(cleaned)
         if cleaned.get("name") or cleaned.get("corp_code") or cleaned.get("stock_code"):
-            merged[_row_key(cleaned)] = cleaned
+            key = _row_key(cleaned)
+            if key in merged:
+                _fill_missing(merged[key], cleaned)
+            else:
+                merged[key] = cleaned
 
     for target in targets:
         upsert({
@@ -248,6 +264,8 @@ def apply_stock_management(
 ) -> tuple[list[dict[str, str]], dict[str, Any], list[str]]:
     """Apply Sheet commands to the existing canonical files in-place safely."""
     today = today or date.today().isoformat()
+    repair_short_corp_duplicates(schedule)
+    targets = _without_repaired_placeholders(targets, schedule)
     all_items = list(schedule.get("items") or [])
     past_items = list(schedule.get("past_items") or [])
     targets = [{**t, 'name': canonical_name(t.get('name'), t.get('code'), t.get('corp_code'))} for t in targets]
