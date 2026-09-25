@@ -2541,11 +2541,33 @@
     {
       "corp_code": "1137860",
       "name": "위너스",
-      "manual_entry": true,
-      "review_approved": true,
       "review_pending": false,
       "schedule_hidden": false,
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "management_status": "자동",
+      "band_low": 7500,
+      "band_high": 8500,
+      "offer_shares": 1700000,
+      "forecast_start": "2025-02-04",
+      "forecast_end": "2025-02-10",
+      "sub_start": "2025-02-13",
+      "sub_end": "2025-02-14",
+      "demand_ratio": 1155.04,
+      "sub_ratio": 1747.74,
+      "underwriter": "미래에셋증권",
+      "review_approved": true,
+      "provisional_fields": [
+        "band_high",
+        "band_low",
+        "demand_ratio",
+        "forecast_end",
+        "forecast_start",
+        "offer_shares",
+        "sub_end",
+        "sub_ratio",
+        "sub_start",
+        "underwriter"
+      ]
     }
   ],
   "past_items": [
@@ -15895,7 +15917,11 @@
         "rcept_no": "20250218000018",
         "checked_at": "2026-09-25"
       },
-      "result_parse_version": 4
+      "result_parse_version": 4,
+      "provisional_fields": [
+        "final_price",
+        "listing_date"
+      ]
     },
     {
       "corp_code": "00367400",
@@ -20386,7 +20412,8 @@
         "current": "2024-11-13",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-24"
+      "quality_checked_at": "2026-09-24",
+      "holder_overrides": {}
     },
     {
       "corp_code": "01703849",
@@ -21234,7 +21261,8 @@
         "current": "2024-11-05",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-24"
+      "quality_checked_at": "2026-09-24",
+      "holder_overrides": {}
     },
     {
       "corp_code": "00814582",
@@ -21981,7 +22009,8 @@
         "current": "2024-10-28",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-25"
+      "quality_checked_at": "2026-09-25",
+      "holder_overrides": {}
     },
     {
       "corp_code": "01270749",
@@ -25215,86 +25244,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-08-13",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-08-27",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-10",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "한국제17호기업인수목적",
-      "type": "자동제외",
-      "field": "대상구분",
-      "old": "일반 IPO",
-      "new": "스팩(비노출)"
-    },
     {
       "date": "2026-08-14",
       "name": "스탁키퍼",
@@ -29214,6 +29163,86 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "band",
+      "old": "",
+      "new": "7,500 ~ 8,500"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "offer_shares",
+      "old": "",
+      "new": "1700000"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "forecast",
+      "old": "",
+      "new": "2025-02-04 ~ 2025-02-10"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "subscription",
+      "old": "",
+      "new": "2025-02-13 ~ 2025-02-14"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "demand_ratio",
+      "old": "",
+      "new": "1155.04"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "sub_ratio",
+      "old": "",
+      "new": "1747.74"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "위너스",
+      "type": "수기변경",
+      "field": "underwriter",
+      "old": "",
+      "new": "미래에셋증권"
     }
   ],
   "seed_pending": [],
