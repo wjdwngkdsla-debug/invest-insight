@@ -137,6 +137,10 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
 def capital_gaps(item):
     gaps = []
     snapshot = item.get('holder_lockup') or {}
+    adjustment = snapshot.get('capital_adjustment') or {}
+    if adjustment and (adjustment.get('result_receipt') != item.get('report_rcp')
+                       or adjustment.get('summary_receipt') != snapshot.get('rcept_no')):
+        gaps.append('공시 변경: 의무인수 조정 재검증 필요')
     initial = quantity(item.get('initial_shares'))
     cumulative = snapshot.get('cumulative_rows') or []
     if initial and snapshot.get('status') == 'verified' and cumulative:

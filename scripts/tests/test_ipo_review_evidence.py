@@ -128,6 +128,8 @@ class ReviewedDartTests(unittest.TestCase):
         reconcile_reported_capital(item)
         self.assertEqual(item['holder_lockup'], before)
         self.assertEqual(capital_gaps(item), [])
+        changed_report = {**item, 'report_rcp': '20250501000001'}
+        self.assertIn('공시 변경: 의무인수 조정 재검증 필요', capital_gaps(changed_report))
         later = {**item, 'report_rcp': '20250501000001', 'holder_lockup': snap}
         reconcile_reported_capital(later)
         self.assertNotIn('capital_adjustment', later['holder_lockup'])
