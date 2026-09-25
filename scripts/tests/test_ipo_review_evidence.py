@@ -49,6 +49,19 @@ class ReviewedDartTests(unittest.TestCase):
         for receipt in ('20250114000178', '20241106000088'):
             self.assertEqual(self.snapshot(receipt)['status'], 'verified')
 
+    def test_listing_day_followed_by_duration_is_not_listing_day(self):
+        from scripts.sources.dart_api import _period_from_label
+        self.assertEqual(_period_from_label('상장일 유통가능'), '상장일')
+        self.assertEqual(_period_from_label('상장일 1개월뒤 유통가능'), '1개월')
+        self.assertEqual(_period_from_label('상장일 1년 6개월뒤'), '18개월')
+        self.assertEqual(_period_from_label('상장일로부터 2년 6개월'), '30개월')
+        snap = self.snapshot('20241007000470')
+        self.assertEqual(snap['status'], 'verified')
+        self.assertEqual(snap['rows'], [{'period': '1개월', 'qty': 1207620},
+            {'period': '3개월', 'qty': 780653}, {'period': '6개월', 'qty': 2577060},
+            {'period': '18개월', 'qty': 6096240}])
+        self.assertEqual(snap['cumulative_rows'][-1]['cumulative_float'], 14221573)
+
     def test_dotmil_split_and_shifted_cells_reconcile_exactly(self):
         snap = self.snapshot('20241101000293')
         self.assertEqual(snap['status'], 'verified')

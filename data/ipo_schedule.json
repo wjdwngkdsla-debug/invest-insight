@@ -23536,28 +23536,28 @@
             "quantity_unit": "주"
           },
           {
-            "period": "상장일",
+            "period": "1개월",
             "row_text": "상장일 1개월뒤 유통가능 4,767,620주 4,767,620주 33.52% 33.36%",
             "cumulative_float": 4767620,
             "float_pct": 33.52,
             "quantity_unit": "주"
           },
           {
-            "period": "상장일",
+            "period": "3개월",
             "row_text": "상장일 3개월뒤 유통가능 5,548,273주 5,548,273주 39.01% 38.82%",
             "cumulative_float": 5548273,
             "float_pct": 39.01,
             "quantity_unit": "주"
           },
           {
-            "period": "상장일",
+            "period": "6개월",
             "row_text": "상장일 6개월뒤 유통가능 8,125,333주 8,125,333주 57.13% 56.85%",
             "cumulative_float": 8125333,
             "float_pct": 57.13,
             "quantity_unit": "주"
           },
           {
-            "period": "상장일",
+            "period": "18개월",
             "row_text": "상장일 18개월뒤 유통가능 14,221,573주 14,292,773주 100.00% 100.00%",
             "cumulative_float": 14221573,
             "float_pct": 100.0,
@@ -23565,8 +23565,28 @@
           }
         ],
         "date_basis": "listing_relative_or_explicit_date",
-        "status": "review",
-        "reason": "유통가능 요약표 기간·누적물량 검산 실패",
+        "status": "verified",
+        "total": 10661573,
+        "coverage": "full",
+        "rows": [
+          {
+            "period": "1개월",
+            "qty": 1207620
+          },
+          {
+            "period": "3개월",
+            "qty": 780653
+          },
+          {
+            "period": "6개월",
+            "qty": 2577060
+          },
+          {
+            "period": "18개월",
+            "qty": 6096240
+          }
+        ],
+        "summary_kind": "cumulative",
         "quantity_unit": "주"
       },
       "quality_attempted_at": "2026-09-26",

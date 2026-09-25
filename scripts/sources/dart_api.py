@@ -261,11 +261,11 @@ def _period_from_label(label: str) -> str | None:
     label = re.sub(r"\s+", "", label).replace("상장일로부터", "상장후")
     # "상장 후 2년 6개월"을 2년으로 잘라 읽으면 실제 30개월 물량이
     # 24개월로 당겨진다. 복합 기간은 월 단위로 정규화한다.
-    compound = re.search(r"상장\s*후\s*(\d+)\s*년\s*(\d+)\s*개월", label)
+    compound = re.search(r"상장(?:일)?(?:후)?(\d+)년(\d+)개월", label)
     if compound:
         months = int(compound.group(1)) * 12 + int(compound.group(2))
         return f"{months}개월"
-    m = re.search(r"상장(?:후)?(\d+)(개월|년|일)", label)
+    m = re.search(r"상장(?:일)?(?:후)?(\d+)(개월|년|일)", label)
     if not m:
         return "상장일" if any(k in label for k in ("상장일", "상장당일", "상장직후")) else None
     n = int(m.group(1))
