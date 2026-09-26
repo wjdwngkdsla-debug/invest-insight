@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -2690,7 +2690,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -2701,7 +2701,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -2712,7 +2712,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -2726,7 +2726,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -2740,7 +2740,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     }
@@ -3580,7 +3580,8 @@
         "current": "2026-08-24",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-26"
+      "quality_checked_at": "2026-09-26",
+      "holder_overrides": {}
     },
     {
       "corp_code": "00229085",
@@ -4394,24 +4395,9 @@
       "demand_ratio": 184.06,
       "commit_apply": [
         {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "manual_fixed",
-          "locked": true,
-          "visible": true
-        },
-        {
-          "period": "3개월",
-          "qty": 32000,
-          "pct": 0.01,
-          "source": "dart_table",
-          "rcept_no": "20260731000443"
-        },
-        {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.0,
+          "period": "미확약",
+          "qty": 303391500,
+          "pct": 99.9,
           "source": "dart_table",
           "rcept_no": "20260731000443"
         },
@@ -4423,11 +4409,25 @@
           "rcept_no": "20260731000443"
         },
         {
-          "period": "미확약",
-          "qty": 303391500,
-          "pct": 99.9,
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.0,
           "source": "dart_table",
           "rcept_no": "20260731000443"
+        },
+        {
+          "period": "3개월",
+          "qty": 32000,
+          "pct": 0.01,
+          "source": "dart_table",
+          "rcept_no": "20260731000443"
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "manual_commit_apply": {
@@ -4442,26 +4442,9 @@
       "sub_ratio": 10.29,
       "commit_alloc": [
         {
-          "period": "6개월",
-          "qty": 0,
-          "pct": 0.0,
-          "source": "manual_fixed",
-          "reported_total": 1650000,
-          "locked": true,
-          "visible": true
-        },
-        {
-          "period": "3개월",
-          "qty": 4000,
-          "pct": 0.24,
-          "source": "dart_table",
-          "reported_total": 1650000,
-          "rcept_no": "20260806000333"
-        },
-        {
-          "period": "1개월",
-          "qty": 10000,
-          "pct": 0.61,
+          "period": "미확약",
+          "qty": 1547000,
+          "pct": 93.76,
           "source": "dart_table",
           "reported_total": 1650000,
           "rcept_no": "20260806000333"
@@ -4475,12 +4458,27 @@
           "rcept_no": "20260806000333"
         },
         {
-          "period": "미확약",
-          "qty": 1547000,
-          "pct": 93.76,
+          "period": "1개월",
+          "qty": 10000,
+          "pct": 0.61,
           "source": "dart_table",
           "reported_total": 1650000,
           "rcept_no": "20260806000333"
+        },
+        {
+          "period": "3개월",
+          "qty": 4000,
+          "pct": 0.24,
+          "source": "dart_table",
+          "reported_total": 1650000,
+          "rcept_no": "20260806000333"
+        },
+        {
+          "period": "6개월",
+          "qty": 0,
+          "pct": 0.0,
+          "source": "manual_fixed",
+          "visible": true
         }
       ],
       "report_rcp": "20260806000333",
@@ -26418,30 +26416,6 @@
   "history": [
     {
       "date": "2026-08-15",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-15",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-08-15",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-08-15",
       "name": "열매컴퍼니",
       "type": "수동편입",
       "field": "상태",
@@ -30362,6 +30336,30 @@
     },
     {
       "date": "2026-09-25",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-09-26",
       "name": "열매컴퍼니",
       "type": "고정제외",
       "field": "노출",
