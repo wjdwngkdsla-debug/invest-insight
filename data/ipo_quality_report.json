@@ -1,6 +1,10 @@
 {
-  "checked_at": "2026-09-26T13:30:29.851837+09:00",
-  "refreshed": [],
+  "checked_at": "2026-09-27T00:00:03.221088+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스",
+    "스카이랩스",
+    "영광"
+  ],
   "failures": [],
   "issues": [
     {
@@ -51,6 +55,13 @@
     {
       "corp_code": "01956751",
       "name": "래블업",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "01586923",
+      "name": "스카이랩스",
       "notes": [
         "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
       ]
@@ -252,15 +263,51 @@
     "recheck_candidates": 2,
     "retries": [
       {
+        "corp_code": "00579342",
+        "name": "영광",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "05ea638698c19595aa65",
+        "signature": "f3b11df3d79df36192ba",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01586923",
+        "name": "스카이랩스",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "a19ac9fefbc7dfb7aaaf",
+        "signature": "247f501c6282a41e4809",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01947443",
         "name": "해치텍",
         "parser_revision": "9437d0f4a3a84a724c6f",
         "source_revision": "6a776db740493a42c181",
         "signature": "22f35f30e38d34faad19",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-09-26",
-        "next_retry": "2026-09-27",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-29",
         "history": [
           {
             "at": "2026-09-26",
@@ -268,6 +315,31 @@
             "reasons": [
               "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
             ]
+          },
+          {
+            "at": "2026-09-27",
+            "outcome": "unresolved",
+            "reasons": [
+              "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "02031369",
+        "name": "인제니아테라퓨틱스",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "5f1c95c669c7eff0aca5",
+        "signature": "e0c99422b6ee4914083c",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
