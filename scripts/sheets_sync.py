@@ -13,6 +13,7 @@ import csv
 import glob
 import json
 import os
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -1203,6 +1204,16 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
     for rec in table_records(values, {header: header for header in REVIEW_FILL_HEADERS}):
         code = _pad_code(rec.get("종목코드") or "")
         if not code:
+            continue
+        # Recover only a unique, previously published identity after Sheets' exponent coercion.
+        if code not in by_code and re.fullmatch(r"\d+(?:\.\d+)?[Ee][+-]\d+", code):
+            matches = [key for key, saved in written.items() if key in by_code
+                       and saved.get('기업명') == rec.get('기업명')
+                       and saved.get('상장일') == rec.get('상장일')]
+            if len(matches) == 1:
+                code = matches[0]
+        if code not in by_code:
+            print(f"[SHEET] 검토필요 식별 불가: {code} — 수기 이벤트 생성 보류", file=sys.stderr)
             continue
         prev = written.get(code) or {}
 

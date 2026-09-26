@@ -27,6 +27,23 @@ def valid_item():
 
 
 class RepairMemoryTests(unittest.TestCase):
+    def test_coerced_review_code_does_not_create_phantom_manual_events(self):
+        from scripts.sheets_sync import collect_review_fill_tab
+        item = {**valid_item(), 'stock_code': '0155E0'}
+        record = {'종목코드': '0155E0', '기업명': item['name'], '상장일': item['listing_date'], '배정_3개월': '10'}
+        spreadsheet = Mock()
+        spreadsheet.worksheet.return_value.get_all_values.return_value = [list(record), ['1.55E+02', item['name'], item['listing_date'], '10']]
+        for written in ({'0155E0': record}, {}):
+            with self.subTest(known_identity=bool(written)), ExitStack() as stack:
+                for name, value in [('read_schedule_data', {'items': [item]}), ('read_csv_dicts', []),
+                                    ('read_json_list', []), ('_load_review_fill_written', written)]:
+                    stack.enter_context(patch('scripts.sheets_sync.' + name, return_value=value))
+                schedule_path = stack.enter_context(patch('scripts.sheets_sync.IPO_SCHEDULE_PATH'))
+                events_path = stack.enter_context(patch('scripts.sheets_sync.MANUAL_EVENTS_PATH'))
+                collect_review_fill_tab(spreadsheet)
+                schedule_path.write_text.assert_not_called()
+                events_path.write_text.assert_not_called()
+
     def test_review_sheet_preserves_alphanumeric_and_zero_prefixed_codes(self):
         from scripts.sheets_sync import regenerate_review_fill_tab
         from gspread import WorksheetNotFound
