@@ -82,7 +82,11 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
     today = today or datetime.now(ZoneInfo("Asia/Seoul")).date().isoformat()
     gaps = []
     if item.get("quality_refresh_error"):
-        gaps.append("원천 재수집 실패(기존 값 유지)")
+        message = str(item['quality_refresh_error'].get('message', ''))
+        gaps.append('자동 재검증 결과 보류(기존 값 유지)' if message.startswith('자동 반영 보류:')
+                    else "원천 재수집 실패(기존 값 유지)")
+    if (item.get('application_source_check') or {}).get('status') == 'parse_incomplete':
+        gaps.append('수요예측 신청표 최신 공시 파싱 확인')
     if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and not allocation_resolved(item):
         gaps.append("실적보고서 파싱 확인")
     def ended(field):
@@ -184,3 +188,13 @@ def quality_advisories(item):
     if (item.get("result_source_check") or {}).get("status") == "parse_incomplete" and allocation_resolved(item):
         notes.append("배정 저장값 보완 완료; 자동 파서 재검증 미완료")
     return notes
+
+
+def repair_review_note(item):
+    state = item.get('quality_repair_state') or {}
+    if not state or state.get('outcome') == 'verified':
+        return ''
+    history = state.get('history') or []
+    reasons = '; '.join(history[-1].get('reasons', [])[:3]) if history else ''
+    return (f"자동 재검증 {state.get('consecutive_attempts', 1)}회; "
+            f"다음 재시도 {state.get('next_retry', '')}; {reasons}")

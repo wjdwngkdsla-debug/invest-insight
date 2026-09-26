@@ -24102,7 +24102,29 @@
         "current": "2024-10-18",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-26"
+      "quality_checked_at": "2026-09-26",
+      "quality_offering_receipt": "20241007000470",
+      "application_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-26",
+        "rcept_no": "20241007000470"
+      },
+      "quality_repair_state": {
+        "parser_revision": "10274a61b9a097f28012",
+        "source_revision": "524e52235504a8041610",
+        "signature": "d5fed44993fea5aa657b",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-26",
+        "next_retry": "2026-09-27",
+        "history": [
+          {
+            "at": "2026-09-26",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      }
     },
     {
       "corp_code": "01275489",

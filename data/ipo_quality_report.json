@@ -1,11 +1,6 @@
 {
-  "checked_at": "2026-09-26T10:27:00.109490+09:00",
-  "refreshed": [
-    "딜리셔스",
-    "기도산업",
-    "니어스랩",
-    "해치텍"
-  ],
+  "checked_at": "2026-09-26T13:15:33.404342+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -250,5 +245,30 @@
         "요약표 예정 일정 정상; 상세표 참고: 기존주주 표 미발견"
       ]
     }
-  ]
+  ],
+  "repair_memory": {
+    "cases": 0,
+    "evicted_cases": 0,
+    "recheck_candidates": 0,
+    "retries": [
+      {
+        "corp_code": "01023211",
+        "name": "와이제이링크",
+        "parser_revision": "10274a61b9a097f28012",
+        "source_revision": "524e52235504a8041610",
+        "signature": "d5fed44993fea5aa657b",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-26",
+        "next_retry": "2026-09-27",
+        "history": [
+          {
+            "at": "2026-09-26",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      }
+    ]
+  }
 }

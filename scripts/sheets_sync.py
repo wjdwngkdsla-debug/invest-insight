@@ -38,7 +38,7 @@ from scripts.management import (
     release_schedule_correction,
 )
 from scripts.utils.dates import calc_release_date, parse_date, release_display
-from scripts.ipo_quality import quality_gaps, tier_quantity, quantity, result_waiting, holder_review_note
+from scripts.ipo_quality import quality_gaps, tier_quantity, quantity, result_waiting, holder_review_note, repair_review_note
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -1466,6 +1466,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             "종목코드": code, "기업명": item.get("name") or "", "상장일": listing,
             "부족한값": ", ".join(gaps), "메모": "; ".join(filter(None, [listing_day_issue,
                 holder_review_note(item),
+                repair_review_note(item),
                 (f"실적보고서 미공시 확인 {item['result_source_check']['checked_at']}; 정기 재조회" if result_waiting(item) else ""),
                 (f"최근 원문 확인 {item['quality_checked_at']}" if item.get("quality_checked_at") else "")])),
             "시장": item.get("market") or "",
