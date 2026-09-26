@@ -1,6 +1,9 @@
 import copy
+import tempfile
 import unittest
-from unittest.mock import patch
+from contextlib import ExitStack
+from pathlib import Path
+from unittest.mock import Mock, patch
 
 from scripts.audit_ipo_quality import attempt_repair, merge_tiers, retry_targets
 from scripts.ipo_repair_memory import (MAX_CASES, MAX_EXCERPT, capture_case,
@@ -24,6 +27,25 @@ def valid_item():
 
 
 class RepairMemoryTests(unittest.TestCase):
+    def test_review_sheet_preserves_alphanumeric_and_zero_prefixed_codes(self):
+        from scripts.sheets_sync import regenerate_review_fill_tab
+        from gspread import WorksheetNotFound
+        items = [{**valid_item(), 'stock_code': code, 'initial_shares': 999} for code in ('0155E0', '001234')]
+        spreadsheet, worksheet = Mock(), Mock()
+        spreadsheet.worksheet.side_effect = WorksheetNotFound('missing')
+        spreadsheet.add_worksheet.return_value = worksheet
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            for name, value in [('read_schedule_data', {'items': items}), ('read_csv_dicts', []),
+                                ('read_json_list', []), ('_load_listing_day_snapshot', {}),
+                                ('_load_review_fill_written', {}), ('_listing_day_snapshot_issue', '')]:
+                stack.enter_context(patch('scripts.sheets_sync.' + name, return_value=value))
+            stack.enter_context(patch('scripts.sheets_sync.ROOT_DIR', root))
+            stack.enter_context(patch('scripts.sheets_sync.REVIEW_FILL_WRITTEN_PATH', root / 'written.json'))
+            regenerate_review_fill_tab(spreadsheet)
+        self.assertEqual(worksheet.update.call_args.kwargs['value_input_option'], 'RAW')
+        self.assertEqual([row[0] for row in worksheet.update.call_args.args[0][1:]], ['0155E0', '001234'])
+
     def test_partial_merge_preserves_absent_known_and_fixed_tiers(self):
         item = valid_item()
         item['manual_commit_alloc'] = {'6개월': {'qty': 12, 'locked': True}}

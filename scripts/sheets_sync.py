@@ -1523,7 +1523,8 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         title=REVIEW_FILL_TAB, rows=len(rows) + 20, cols=len(REVIEW_FILL_HEADERS) + 1
     )
     payload = [REVIEW_FILL_HEADERS] + [[row.get(header, "") for header in REVIEW_FILL_HEADERS] for row in rows]
-    worksheet.update(payload, "A1", value_input_option="USER_ENTERED")
+    # Codes such as 0155E0 are identifiers, not exponent-form numbers.
+    worksheet.update(payload, "A1", value_input_option="RAW")
     worksheet.freeze(rows=1, cols=4)
     worksheet.format("1:1", {"textFormat": {"bold": True}})
 
