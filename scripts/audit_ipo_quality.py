@@ -153,8 +153,8 @@ def attempt_repair(item, today, revision, memory, has_holders=False):
             if not reasons:
                 resolve_cases(memory, item, today)
         for artifact in artifacts:
-            if artifact['reason'] or rejected:
-                artifact = {**artifact, 'reason': artifact['reason'] or '; '.join(rejected)}
+            if artifact['reason'] or outcome in ('rejected', 'unresolved'):
+                artifact = {**artifact, 'reason': artifact['reason'] or '; '.join(reasons)}
                 capture_case(memory, item, today=today, revision=revision, **artifact)
     except Exception as exc:
         error = redact_sensitive_text(exc)

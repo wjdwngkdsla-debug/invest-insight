@@ -3323,7 +3323,31 @@
         "current": "2026-08-25",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-26"
+      "quality_checked_at": "2026-09-26",
+      "quality_offering_receipt": "20260810000669",
+      "application_source_check": {
+        "status": "verified",
+        "checked_at": "2026-09-26",
+        "rcept_no": "20260810000669"
+      },
+      "quality_repair_state": {
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "6a776db740493a42c181",
+        "signature": "22f35f30e38d34faad19",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-09-26",
+        "next_retry": "2026-09-27",
+        "history": [
+          {
+            "at": "2026-09-26",
+            "outcome": "unresolved",
+            "reasons": [
+              "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01588897",

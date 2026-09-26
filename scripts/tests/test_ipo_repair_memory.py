@@ -89,6 +89,19 @@ class RepairMemoryTests(unittest.TestCase):
         self.assertEqual(outcome, 'source_error')
         self.assertEqual(item['final_price'], 1500)
 
+    def test_existing_cross_source_mismatch_keeps_evidence_even_if_table_parses(self):
+        item = valid_item()
+        item['initial_shares'] = 999
+        memory = {'cases': {}}
+        def repair(candidate, today, artifacts):
+            artifacts.append({'receipt': 'offering', 'kind': 'holders', 'reason': '',
+                              'document': '<TABLE><TR><TD>유통가능</TD></TR></TABLE>', 'table_index': 1})
+        with patch('scripts.audit_ipo_quality.repair_item', side_effect=repair):
+            outcome, _ = attempt_repair(item, '2026-09-26', 'v1', memory)
+        self.assertEqual(outcome, 'unresolved')
+        self.assertEqual(len(memory['cases']), 1)
+        self.assertIn('최초상장주식수 불일치', next(iter(memory['cases'].values()))['reason'])
+
     def test_success_is_not_an_exception_free_but_invalid_parse(self):
         item = valid_item()
         item['commit_apply'] = []

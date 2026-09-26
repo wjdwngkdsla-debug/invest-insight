@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-26T13:15:33.404342+09:00",
+  "checked_at": "2026-09-26T13:16:56.009792+09:00",
   "refreshed": [],
   "failures": [],
   "issues": [
@@ -247,10 +247,30 @@
     }
   ],
   "repair_memory": {
-    "cases": 0,
+    "cases": 2,
     "evicted_cases": 0,
     "recheck_candidates": 0,
     "retries": [
+      {
+        "corp_code": "01947443",
+        "name": "해치텍",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "6a776db740493a42c181",
+        "signature": "22f35f30e38d34faad19",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-09-26",
+        "next_retry": "2026-09-27",
+        "history": [
+          {
+            "at": "2026-09-26",
+            "outcome": "unresolved",
+            "reasons": [
+              "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
+            ]
+          }
+        ]
+      },
       {
         "corp_code": "01023211",
         "name": "와이제이링크",
