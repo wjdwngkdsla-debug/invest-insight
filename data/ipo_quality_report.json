@@ -1,6 +1,11 @@
 {
-  "checked_at": "2026-09-27T22:08:05.395925+09:00",
-  "refreshed": [],
+  "checked_at": "2026-09-28T01:11:28.799991+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스",
+    "크리에이츠",
+    "티앤이코리아",
+    "유캐스트"
+  ],
   "failures": [],
   "issues": [],
   "advisories": [
@@ -293,6 +298,60 @@
         ]
       },
       {
+        "corp_code": "01705573",
+        "name": "유캐스트",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "0d9b0e015525b683daa8",
+        "signature": "c6277264822084db3de4",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-28",
+        "next_retry": "2026-09-29",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01540903",
+        "name": "크리에이츠",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "134b697e2c6a75678622",
+        "signature": "9c95121c3907f590e7df",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-28",
+        "next_retry": "2026-09-29",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01543043",
+        "name": "티앤이코리아",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "3538b1882841778cd0d5",
+        "signature": "5eacfbf604738e2a6d3b",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-28",
+        "next_retry": "2026-09-29",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -399,16 +458,21 @@
       {
         "corp_code": "02031369",
         "name": "인제니아테라퓨틱스",
-        "parser_revision": "9437d0f4a3a84a724c6f",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
-        "signature": "e0c99422b6ee4914083c",
+        "signature": "33055270ad92bf13f5a1",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "last_attempt": "2026-09-28",
+        "next_retry": "2026-09-29",
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-09-28",
             "outcome": "verified",
             "reasons": []
           }
