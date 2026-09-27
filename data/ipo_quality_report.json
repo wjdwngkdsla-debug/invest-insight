@@ -1,9 +1,10 @@
 {
-  "checked_at": "2026-09-27T00:00:03.221088+09:00",
+  "checked_at": "2026-09-27T11:28:31.912558+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "스카이랩스",
-    "영광"
+    "하나에어로다이내믹스",
+    "멜콘",
+    "진코스텍",
+    "이에스티"
   ],
   "failures": [],
   "issues": [
@@ -263,11 +264,83 @@
     "recheck_candidates": 2,
     "retries": [
       {
+        "corp_code": "01028933",
+        "name": "멜콘",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "730da5cd1b468a64bdeb",
+        "signature": "23f51dc67aaa28e2f5a9",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01158632",
+        "name": "진코스텍",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "c7a1ee5e8d6077e92eef",
+        "signature": "f8821db1640a0e00cac6",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "9437d0f4a3a84a724c6f",
         "source_revision": "05ea638698c19595aa65",
         "signature": "f3b11df3d79df36192ba",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01378005",
+        "name": "이에스티",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "e6d0ba248b892d5ac173",
+        "signature": "aff4c57c7e31f5eba483",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-27",
+        "next_retry": "2026-09-28",
+        "history": [
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01025617",
+        "name": "하나에어로다이내믹스",
+        "parser_revision": "9437d0f4a3a84a724c6f",
+        "source_revision": "0143d1192082ca26ac74",
+        "signature": "e47962a0a67c759baa14",
         "consecutive_attempts": 1,
         "outcome": "verified",
         "last_attempt": "2026-09-27",
