@@ -2,7 +2,7 @@
 import re
 
 from scripts.ipo_evidence import review_evidence
-from scripts.ipo_quality import quantity
+from scripts.ipo_quality import quantity, capital_gaps
 from scripts.utils.dates import calc_release_date
 
 
@@ -18,7 +18,8 @@ def sync_reviewed_holder_events(rows, schedule):
     for item in schedule.get('items', []) + schedule.get('past_items', []):
         snapshot = item.get('holder_lockup') or {}
         if (snapshot.get('status') != 'verified' or not snapshot.get('rcept_no')
-                or snapshot.get('rcept_no') != evidence.get(item.get('corp_code'))):
+                or snapshot.get('rcept_no') != evidence.get(item.get('corp_code'))
+                or capital_gaps(item)):
             continue
         code, listing = item.get('stock_code'), item.get('listing_date')
         shares = quantity(item.get('initial_shares'))
@@ -46,6 +47,7 @@ def sync_reviewed_holder_events(rows, schedule):
                        planned_date_display=display, planned_tradable_date=tradable,
                        dart_rcp=snapshot['rcept_no'],
                        dart_source='투자설명서 유통가능 요약표' if snapshot.get('basis') == 'float_summary' and not snapshot.get('summary_reconciliation') else '투자설명서 주주별 매각제한 내역',
-                       parse_note=(snapshot.get('summary_reconciliation') or {}).get('reason', ''),
+                       parse_note='; '.join(value['reason'] for key in ('summary_reconciliation', 'capital_adjustment')
+                                           if (value := snapshot.get(key))),
                        quantity_unit=snapshot.get('quantity_unit', '주'))
     return rows

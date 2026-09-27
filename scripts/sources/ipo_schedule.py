@@ -542,9 +542,29 @@ def _allocation_tiers(table):
              "reported_total": total} for p in periods]
 
 
-def parse_result_report(doc: str) -> dict[str, Any]:
+def parse_result_capital(doc: str, receipt: str = '') -> dict[str, Any]:
+    """Read explicit replacement issuance evidence, never infer it from a share gap."""
     plain = _clean_text(doc)
-    out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": []}
+    section = re.search(r'실권주\s*처리내역', plain)
+    if not section:
+        return {}
+    text = plain[section.start():]
+    if not re.search(r'의무인수에\s*의한\s*신주\s*\(사모\)\s*는\s*발행하지\s*않', text):
+        return {}
+    totals = {_to_int(n) for n in re.findall(r'공모\s*후\s*총\s*발행\s*주식수\s*([\d,]+)\s*주', text)}
+    replacements = {_to_int(n) for n in re.findall(
+        r'상장주선인은\s*([\d,]+)\s*주를\s*자기의\s*계산으로\s*취득', text)}
+    valid = len(totals) == len(replacements) == 1 and min(totals) > max(replacements) > 0
+    return {'status': 'verified' if valid else 'review', 'rcept_no': receipt,
+            'no_additional_private_issue': True,
+            'issued_total': next(iter(totals)) if len(totals) == 1 else None,
+            'replacement_qty': next(iter(replacements)) if len(replacements) == 1 else None}
+
+
+def parse_result_report(doc: str, receipt: str = '') -> dict[str, Any]:
+    plain = _clean_text(doc)
+    out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": [],
+                           "result_capital": parse_result_capital(doc, receipt)}
 
     # 일부 실적보고서는 표 구조가 흔들려도 본문에 개인/일반 청약 경쟁률을 직접 적는다.
     for m in re.finditer(r"(?:개인|일반)\s*청약\s*경쟁률[^\d]{0,30}([\d,]+(?:\.\d+)?)\s*(?::|대)?\s*1", plain):
@@ -1464,7 +1484,7 @@ def refresh_ipo_schedule(
                 )
                 if reparse_saved_result and report:
                     heavy_budget["left"] -= 1
-                    parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                    parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
                         log(f"저장 실적보고서 재파싱: {archived.get('name')} ({report['rcept_no']})")
@@ -1473,7 +1493,7 @@ def refresh_ipo_schedule(
                     # 접수번호가 저장값보다 새것일 때만 문서를 내려받는다(상한 차감도 그때만)
                     if report and str(report["rcept_no"]) > str(archived.get("report_rcp") or ""):
                         heavy_budget["left"] -= 1
-                        parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                        parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
                         if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                             archived.update(parsed)
                             archived["report_rcp"] = report["rcept_no"]
@@ -1481,7 +1501,7 @@ def refresh_ipo_schedule(
                             log(f"정정 실적보고서 반영: {archived.get('name')} ({report['rcept_no']})")
                 elif report:
                     heavy_budget["left"] -= 1
-                    parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                    parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
                         archived["report_rcp"] = report["rcept_no"]
@@ -1548,7 +1568,7 @@ def refresh_ipo_schedule(
                     )
                 )
                 if report:
-                    parsed = parse_result_report(download_document_text(report["rcept_no"]))
+                    parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         item.update(parsed)
                         item["report_rcp"] = report["rcept_no"]

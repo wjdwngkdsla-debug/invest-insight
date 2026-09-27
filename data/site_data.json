@@ -13400,7 +13400,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 1,218주 인수에 따라 주관사 의무인수분 75,000주에서 73,782주로 차감",
           "reason_breakdown": []
         }
       ],
@@ -22139,7 +22139,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "신고서의 상장일 기준 6개월 의무취득분 17,200주가 실적보고서에서 확정; 요약표 합계에 추가",
           "reason_breakdown": [],
           "release_close": 21200,
           "release_fluc_rt": 1.44
@@ -22163,7 +22163,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "신고서의 상장일 기준 6개월 의무취득분 17,200주가 실적보고서에서 확정; 요약표 합계에 추가",
           "reason_breakdown": []
         },
         {
@@ -22185,7 +22185,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "신고서의 상장일 기준 6개월 의무취득분 17,200주가 실적보고서에서 확정; 요약표 합계에 추가",
           "reason_breakdown": []
         }
       ],
@@ -26617,7 +26617,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 63,408주 인수에 따라 6개월 의무취득분 70,000주에서 6,592주로 차감",
           "reason_breakdown": []
         },
         {
@@ -26661,7 +26661,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 63,408주 인수에 따라 6개월 의무취득분 70,000주에서 6,592주로 차감",
           "reason_breakdown": []
         },
         {
@@ -26683,7 +26683,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 63,408주 인수에 따라 6개월 의무취득분 70,000주에서 6,592주로 차감",
           "reason_breakdown": []
         },
         {
@@ -26705,7 +26705,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 63,408주 인수에 따라 6개월 의무취득분 70,000주에서 6,592주로 차감",
           "reason_breakdown": []
         }
       ],
@@ -28209,8 +28209,8 @@
       "current_shares": 5487150,
       "initial_shares": 5487150,
       "listing_close": 13930,
-      "listing_float_shares": 2119460,
-      "listing_float_pct": 38.35,
+      "listing_float_shares": 2079460,
+      "listing_float_pct": 37.9,
       "listing_float_excludes_ipo_commitment": false,
       "close_price": 12840,
       "trading_suspended": false,
@@ -28265,7 +28265,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
           "reason_breakdown": []
         },
         {
@@ -28309,7 +28309,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
           "reason_breakdown": []
         },
         {
@@ -28331,7 +28331,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
           "reason_breakdown": []
         },
         {
@@ -28353,7 +28353,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
           "reason_breakdown": []
         },
         {
@@ -28375,7 +28375,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": "마지막 누적 유통가능 주식수가 KRX 상장주식수와 불일치",
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
           "reason_breakdown": []
         }
       ],
@@ -28492,7 +28492,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 44,504DR 인수에 따라 6개월 의무취득분 50,000DR에서 5,496DR로 차감",
           "reason_breakdown": []
         },
         {
@@ -28514,7 +28514,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 44,504DR 인수에 따라 6개월 의무취득분 50,000DR에서 5,496DR로 차감",
           "reason_breakdown": []
         },
         {
@@ -28536,7 +28536,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 44,504DR 인수에 따라 6개월 의무취득분 50,000DR에서 5,496DR로 차감",
           "reason_breakdown": []
         },
         {
@@ -28558,7 +28558,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 44,504DR 인수에 따라 6개월 의무취득분 50,000DR에서 5,496DR로 차감",
           "reason_breakdown": []
         },
         {
@@ -28580,7 +28580,7 @@
           "api_return_qty": null,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
-          "reason": null,
+          "reason": "실적보고서: 실권주 44,504DR 인수에 따라 6개월 의무취득분 50,000DR에서 5,496DR로 차감",
           "reason_breakdown": []
         }
       ],

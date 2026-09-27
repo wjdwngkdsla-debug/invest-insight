@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-26",
+  "checked_at": "2026-09-27",
   "source": "Operator-provided DART screenshots and verified public DART documents",
   "complete_documents": {
     "20260220001649": "20260220001638",
@@ -7,6 +7,7 @@
     "20250203000294": "20250203000196"
   },
   "holders": {
+    "01947443": "20260810000669",
     "00920731": "20260803000167",
     "01708163": "20250716000294",
     "01379563": "20260220001638",
@@ -40,6 +41,13 @@
     "479960": {"name": "위너스일렉", "aliases": ["위너스"], "corp_code": "01137860"}
   },
   "capital_adjustments": {
+    "01947443": {
+      "summary_receipt": "20260810000669", "result_receipt": "20260818000023",
+      "reported_total": 5527150, "initial_shares": 5487150, "period": "상장일", "delta": -40000,
+      "replacement_lockups": {"3개월": 30000, "6개월": 10000},
+      "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
+      "sources": ["https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260818000023", "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260810000669", "https://law.kofia.or.kr/service/law/lawFullScreenContent.do?historySeq=1782&seq=140"]
+    },
     "02031369": {
       "summary_receipt": "20260728000402", "result_receipt": "20260804000371",
       "reported_total": 49489111, "initial_shares": 49444607, "period": "6개월", "delta": -44504,

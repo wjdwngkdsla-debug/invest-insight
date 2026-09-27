@@ -141,6 +141,22 @@ def reconcile_reported_capital(item):
             or adjustment['reported_total'] + adjustment['delta'] != adjustment['initial_shares']):
         return
     dates = lambda p: '2000-01-01' if p == '상장일' else calc_release_date('2000-01-01', p)[0]
+    replacements = adjustment.get('replacement_lockups')
+    if adjustment['period'] == '상장일':
+        # A cancelled private issue can instead lock shares already in the offering.
+        # Only move the baseline when the reviewed replacement tranches reconcile.
+        result = item.get('result_capital') or {}
+        planned = {dates(after['period']): after['cumulative_float'] - before['cumulative_float']
+                   for before, after in zip(cumulative, cumulative[1:])}
+        if (not replacements or result.get('status') != 'verified'
+                or result.get('rcept_no') != adjustment['result_receipt']
+                or result.get('issued_total') != adjustment['initial_shares']
+                or not result.get('no_additional_private_issue')
+                or result.get('replacement_qty') != -adjustment['delta']
+                or sum(replacements.values()) != result['replacement_qty']
+                or any(qty <= 0 or qty > planned.get(dates(period), 0)
+                       for period, qty in replacements.items())):
+            return
     affected = [r for r in cumulative if dates(r['period']) >= dates(adjustment['period'])]
     if not affected:
         return
@@ -158,6 +174,9 @@ def reconcile_reported_capital(item):
         if dates(row['period']) >= dates(adjustment['period']):
             row['cumulative_float'] += adjustment['delta']
         row['float_pct'] = round(row['cumulative_float'] * 100 / adjustment['initial_shares'], 2)
+    if any(not 0 <= row['cumulative_float'] <= adjustment['initial_shares']
+           for row in updated['cumulative_rows']):
+        return
     releases = []
     for before, after in zip(updated['cumulative_rows'], updated['cumulative_rows'][1:]):
         delta = after['cumulative_float'] - before['cumulative_float']

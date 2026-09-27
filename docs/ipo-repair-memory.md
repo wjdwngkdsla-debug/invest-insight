@@ -49,3 +49,29 @@ or rebuilding data. A test failure therefore stops those mutation steps.
 Run `python -m unittest discover -s scripts/tests` and
 `python -m scripts.audit_ipo_quality --write` for an offline audit.
 Use `--refresh --corp-code <DART-ID> --limit 1 --write` for a bounded source recheck.
+
+## Replacement Underwriting
+
+An underwriter can buy unsubscribed shares inside the public offering instead of
+issuing the additional private shares planned in the prospectus. Do not delete the
+lockup just because the listing-day KRX total is lower than the prospectus total.
+
+The result-report parser captures explicit non-issuance, the actual issued total,
+replacement quantity, and receipt ID. Ambiguous quantities or a disagreement with
+the KRX listing-day snapshot remain review issues. It never edits the KRX value.
+Applying a baseline correction additionally requires receipt-scoped evidence in
+`ipo_review_evidence.json` and reviewed replacement lockup quantities that sum to
+the exact share gap and fit the existing period totals. Unknown cases are not
+automatically approved merely because their arithmetic matches.
+
+Haechitech (0155E0): result 20260818000023 confirms 5,487,150 issued shares and
+40,000 unsubscribed shares acquired by DB Securities, with no additional private
+issue. Prospectus 20260810000669 notes 7/8 supply the planned 30,000-share three-month
+and 10,000-share six-month obligations. Keep those planned tranches and move 40,000
+shares out of the listing-day float baseline: 2,119,460 -> 2,079,460. Institutional
+commitments are separate and still deducted by the site's existing float calculation.
+These are disclosure-based planned dates, not verified depository-return dates.
+
+Original cumulative rows remain stored. A changed receipt reopens review; actual
+API returns and manual overrides are not overwritten. Site generation uses the
+reconciled baseline unless the operator explicitly supplied a manual float value.

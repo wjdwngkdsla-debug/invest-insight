@@ -5078,6 +5078,22 @@ def rows_to_site_data(
         except (OSError, json.JSONDecodeError):
             listing_float = {}
 
+    # Keep the original disclosure cache, but publish verified issuance corrections.
+    from scripts.ipo_quality import capital_gaps
+    for item in _load_schedule_items(ROOT_DIR / 'data' / 'ipo_schedule.json'):
+        snapshot = item.get('holder_lockup') or {}
+        if not (snapshot.get('capital_adjustment') or {}).get('replacement_lockups'):
+            continue
+        code = item.get('stock_code')
+        entry = listing_float.get(code) or listing_float.get(f"name:{managed_name(item.get('name'))}") or {}
+        if not code or entry.get('source') == '수기입력' or capital_gaps(item):
+            continue
+        cumulative = snapshot.get('cumulative_rows') or []
+        if snapshot.get('status') == 'verified' and cumulative and cumulative[0]['period'] == '상장일':
+            free = cumulative[0]['cumulative_float']
+            listing_float[code] = {'float_shares': free, 'float_pct': pct(free, _to_int(item['initial_shares'])),
+                                   'excludes_ipo_commitment': False}
+
     # KRX 등락률로 역산한 권리락 조정계수. 토스 수정주가와 18종목 전부 일치했고
     # 허용 IP 등록이 필요 없어 Actions에서도 돈다.
     price_adjust: dict[str, dict] = {}

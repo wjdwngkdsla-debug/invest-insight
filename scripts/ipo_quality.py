@@ -146,6 +146,14 @@ def capital_gaps(item):
                        or adjustment.get('summary_receipt') != snapshot.get('rcept_no')):
         gaps.append('공시 변경: 의무인수 조정 재검증 필요')
     initial = quantity(item.get('initial_shares'))
+    result = item.get('result_capital') or {}
+    if result:
+        if result.get('rcept_no') != item.get('report_rcp'):
+            gaps.append('공시 변경: 실제 발행수량 재검증 필요')
+        elif result.get('status') != 'verified':
+            gaps.append('실권주 대체인수 발행수량 파싱 검토 필요')
+        elif initial and result.get('issued_total') != initial:
+            gaps.append(f"실적보고서·최초상장주식수 불일치({result.get('issued_total')}/{initial:,})")
     cumulative = snapshot.get('cumulative_rows') or []
     if initial and snapshot.get('status') == 'verified' and cumulative:
         last = cumulative[-1]['cumulative_float']

@@ -31,7 +31,8 @@ def main():
             from scripts.sources.ipo_schedule import parse_result_report, RESULT_PARSE_VERSION
             from scripts.audit_ipo_quality import merge_tiers
             try:
-                result = parse_result_report(download_document_text(item['report_rcp']))
+                result = parse_result_report(download_document_text(item['report_rcp']), item['report_rcp'])
+                item['result_capital'] = result['result_capital']
                 if result.get('commit_alloc'):
                     for tier in result['commit_alloc']:
                         tier['rcept_no'] = item['report_rcp']

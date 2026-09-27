@@ -3546,6 +3546,78 @@
           {
             "period": "상장일",
             "row_text": "상장일 유통가능 2,119,460 38.35%",
+            "cumulative_float": 2079460,
+            "float_pct": 37.9,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "1개월",
+            "row_text": "상장후 1개월 뒤 유통가능 2,666,477 48.24%",
+            "cumulative_float": 2626477,
+            "float_pct": 47.87,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "3개월",
+            "row_text": "상장후 3개월 뒤 유통가능 2,696,477 48.79%",
+            "cumulative_float": 2656477,
+            "float_pct": 48.41,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "6개월",
+            "row_text": "상장후 6개월 뒤 유통가능 2,785,150 50.39%",
+            "cumulative_float": 2745150,
+            "float_pct": 50.03,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "1년",
+            "row_text": "상장후 1년 뒤 유통가능 3,068,150 55.51%",
+            "cumulative_float": 3028150,
+            "float_pct": 55.19,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "3년",
+            "row_text": "상장후 3년 뒤 유통가능 5,527,150 100.00%",
+            "cumulative_float": 5487150,
+            "float_pct": 100.0,
+            "quantity_unit": "주"
+          }
+        ],
+        "date_basis": "listing_relative_or_explicit_date",
+        "status": "verified",
+        "total": 3407690,
+        "coverage": "full",
+        "rows": [
+          {
+            "period": "1개월",
+            "qty": 547017
+          },
+          {
+            "period": "3개월",
+            "qty": 30000
+          },
+          {
+            "period": "6개월",
+            "qty": 88673
+          },
+          {
+            "period": "1년",
+            "qty": 283000
+          },
+          {
+            "period": "3년",
+            "qty": 2459000
+          }
+        ],
+        "summary_kind": "cumulative",
+        "quantity_unit": "주",
+        "reported_cumulative_rows": [
+          {
+            "period": "상장일",
+            "row_text": "상장일 유통가능 2,119,460 38.35%",
             "cumulative_float": 2119460,
             "float_pct": 38.35,
             "quantity_unit": "주"
@@ -3586,34 +3658,24 @@
             "quantity_unit": "주"
           }
         ],
-        "date_basis": "listing_relative_or_explicit_date",
-        "status": "verified",
-        "total": 3407690,
-        "coverage": "full",
-        "rows": [
-          {
-            "period": "1개월",
-            "qty": 547017
+        "capital_adjustment": {
+          "summary_receipt": "20260810000669",
+          "result_receipt": "20260818000023",
+          "reported_total": 5527150,
+          "initial_shares": 5487150,
+          "period": "상장일",
+          "delta": -40000,
+          "replacement_lockups": {
+            "3개월": 30000,
+            "6개월": 10000
           },
-          {
-            "period": "3개월",
-            "qty": 30000
-          },
-          {
-            "period": "6개월",
-            "qty": 88673
-          },
-          {
-            "period": "1년",
-            "qty": 283000
-          },
-          {
-            "period": "3년",
-            "qty": 2459000
-          }
-        ],
-        "summary_kind": "cumulative",
-        "quantity_unit": "주"
+          "reason": "실적보고서 VIII 주2: 공모 실권주 40,000주 대체인수로 추가 사모신주 미발행. 신고서 주7·8의 3개월 30,000주·6개월 10,000주 예정 락업 유지, 상장일 유통가능물량에서 40,000주 차감. 실제 예탁·반환일은 별도 검증",
+          "sources": [
+            "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260818000023",
+            "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260810000669",
+            "https://law.kofia.or.kr/service/law/lawFullScreenContent.do?historySeq=1782&seq=140"
+          ]
+        }
       },
       "result_source_check": {
         "status": "verified",
@@ -3633,13 +3695,13 @@
         "rcept_no": "20260810000669"
       },
       "quality_repair_state": {
-        "parser_revision": "9437d0f4a3a84a724c6f",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "6a776db740493a42c181",
-        "signature": "22f35f30e38d34faad19",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
+        "signature": "13575e84a1647428230e",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
         "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-29",
+        "next_retry": "2026-09-28",
         "history": [
           {
             "at": "2026-09-26",
@@ -3654,8 +3716,20 @@
             "reasons": [
               "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
             ]
+          },
+          {
+            "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
+      },
+      "result_capital": {
+        "status": "verified",
+        "rcept_no": "20260818000023",
+        "no_additional_private_issue": true,
+        "issued_total": 5487150,
+        "replacement_qty": 40000
       }
     },
     {

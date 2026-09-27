@@ -54,7 +54,8 @@ def refresh_result(item, reports, today, artifacts=None):
         return
     receipt = results[0]["rcept_no"]
     doc = download_document_text(receipt)
-    parsed = parse_result_report(doc)
+    parsed = parse_result_report(doc, receipt)
+    item['result_capital'] = parsed['result_capital']
     rows = parsed.get("commit_alloc") or []
     if rows:
         merge_tiers(item, "commit_alloc", rows, receipt)
