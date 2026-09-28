@@ -35,6 +35,20 @@
       "probe": "full_document_recheck",
       "resolved_at": "2026-09-27",
       "resolution": "full_document_verified"
+    },
+    "e885f7be35fc27c92a07": {
+      "corp_code": "01158632",
+      "name": "진코스텍",
+      "receipt": "20260928000402",
+      "kind": "holders",
+      "reason": "기존주주 표 미발견",
+      "first_seen": "2026-09-29",
+      "last_seen": "2026-09-29",
+      "observations": 1,
+      "status": "unresolved",
+      "captured_parser": "ba777e3d84cec182a159",
+      "excerpt": "",
+      "truncated": false
     }
   }
 }

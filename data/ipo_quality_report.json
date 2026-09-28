@@ -1,13 +1,21 @@
 {
-  "checked_at": "2026-09-28T09:27:13.274502+09:00",
+  "checked_at": "2026-09-29T04:27:44.440721+09:00",
   "refreshed": [
-    "엠비디",
-    "다비오",
-    "엠에스바이오",
-    "엘리스그룹"
+    "인제니아테라퓨틱스",
+    "바로팜",
+    "넥스아이"
   ],
   "failures": [],
-  "issues": [],
+  "issues": [
+    {
+      "corp_code": "01158632",
+      "code": "250030",
+      "name": "진코스텍",
+      "gaps": [
+        "구주물량(기존주주 표 미발견)"
+      ]
+    }
+  ],
   "advisories": [
     {
       "corp_code": "01722066",
@@ -19,13 +27,6 @@
     {
       "corp_code": "01028933",
       "name": "멜콘",
-      "notes": [
-        "수요예측 결과 공시 대기: 운영자 확인, 다음 공시 또는 청약 시작일에 재검증"
-      ]
-    },
-    {
-      "corp_code": "01158632",
-      "name": "진코스텍",
       "notes": [
         "수요예측 결과 공시 대기: 운영자 확인, 다음 공시 또는 청약 시작일에 재검증"
       ]
@@ -257,7 +258,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 2,
+    "cases": 3,
     "evicted_cases": 0,
     "recheck_candidates": 0,
     "retries": [
@@ -282,18 +283,25 @@
       {
         "corp_code": "01158632",
         "name": "진코스텍",
-        "parser_revision": "9437d0f4a3a84a724c6f",
-        "source_revision": "c7a1ee5e8d6077e92eef",
-        "signature": "f8821db1640a0e00cac6",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "7cc9c9f056f1fb49c54c",
+        "signature": "63e479e21e9f5ee53aaa",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "outcome": "unresolved",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
         "history": [
           {
             "at": "2026-09-27",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-09-29",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(기존주주 표 미발견)"
+            ]
           }
         ]
       },
@@ -460,6 +468,42 @@
         ]
       },
       {
+        "corp_code": "01835829",
+        "name": "바로팜",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "e3a3593615544bfee44b",
+        "signature": "25df2e8ecc1a2b8f8f60",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01863318",
+        "name": "넥스아이",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "4c9de1de4183b2b5b8cf",
+        "signature": "525abe3a52c53da5e45d",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -533,10 +577,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-09-28",
-        "next_retry": "2026-09-29",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
         "history": [
           {
             "at": "2026-09-27",
@@ -545,6 +589,11 @@
           },
           {
             "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
           }

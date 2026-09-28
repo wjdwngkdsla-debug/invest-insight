@@ -2965,6 +2965,33 @@
               "qty": 60000
             }
           ]
+        },
+        {
+          "period": "24개월",
+          "date": "2026-09-23",
+          "date_display": "2026-09-23",
+          "tradable_date": "2026-09-23",
+          "qty": 2500000,
+          "unit": "주",
+          "pct": 18.31,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "반환확인",
+          "source": "투자설명서",
+          "source_label": "공공데이터 API 단독",
+          "rcp": "",
+          "api_checked": true,
+          "api_return_date": "2026-09-23",
+          "api_return_qty": 2500000,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": "기타 보호예수 필요 주주",
+          "reason": "기타 보호예수 필요 주주",
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 2500000
+            }
+          ]
         }
       ],
       "holders": []
@@ -12078,7 +12105,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(상장)",
           "reason": "최대주주(상장)",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "최대주주(상장)",
+              "qty": 58546746
+            }
+          ]
         }
       ],
       "holders": []
@@ -15233,12 +15265,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 2293824
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 183200,
           "release_fluc_rt": 6.2
         },
@@ -15286,12 +15313,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1955709
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 186500,
           "release_fluc_rt": 4.13
         },
@@ -15339,16 +15361,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(제3자배정) + 기타 보호예수 필요 주주",
           "reason": "최대주주(제3자배정) + 기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 1094443
-            },
-            {
-              "reason": "최대주주(제3자배정)",
-              "qty": 198693
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 130100,
           "release_fluc_rt": -1.29
         },
@@ -15372,20 +15385,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(상장) + 기타 보호예수 필요 주주 + 주식매수선택권",
           "reason": "최대주주(상장) + 기타 보호예수 필요 주주 + 주식매수선택권",
-          "reason_breakdown": [
-            {
-              "reason": "최대주주(상장)",
-              "qty": 266307
-            },
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 235200
-            },
-            {
-              "reason": "주식매수선택권",
-              "qty": 136250
-            }
-          ]
+          "reason_breakdown": []
         }
       ],
       "holders": []
@@ -25369,7 +25369,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 1996206
+            }
+          ],
           "release_close": 30100,
           "release_fluc_rt": 3.44
         },
@@ -25417,7 +25422,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 2739039
+            },
+            {
+              "reason": "상장주선인(국내기업)",
+              "qty": 41666
+            }
+          ],
           "release_close": 24600,
           "release_fluc_rt": -10.05
         },
@@ -25465,7 +25479,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(제3자배정) + 기타 보호예수 필요 주주",
           "reason": "최대주주(제3자배정) + 기타 보호예수 필요 주주",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 3177030
+            },
+            {
+              "reason": "최대주주(제3자배정)",
+              "qty": 57950
+            }
+          ],
           "release_close": 21600,
           "release_fluc_rt": 4.1
         },
@@ -27145,9 +27168,9 @@
           "date": "2026-06-25",
           "date_display": "2026-06-25",
           "tradable_date": "2026-06-25",
-          "qty": 395237,
+          "qty": 375437,
           "unit": "주",
-          "pct": 3.74,
+          "pct": 3.55,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -27156,7 +27179,7 @@
           "rcp": "20260313000893",
           "api_checked": true,
           "api_return_date": "2026-06-25",
-          "api_return_qty": 395237,
+          "api_return_qty": 375437,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기관투자가 + 상장주선인(국내기업)",
           "reason": "기관투자가 + 상장주선인(국내기업)",
@@ -27167,7 +27190,7 @@
             },
             {
               "reason": "상장주선인(국내기업)",
-              "qty": 26400
+              "qty": 6600
             }
           ],
           "release_close": 5650,
