@@ -1,28 +1,14 @@
 {
-  "checked_at": "2026-09-29T11:49:39.448291+09:00",
+  "checked_at": "2026-09-30T02:52:40.966138+09:00",
   "refreshed": [
-    "케이앤에스아이앤씨",
-    "네오사피엔스",
-    "와이즈플래닛컴퍼니",
-    "디티에스"
+    "인제니아테라퓨틱스",
+    "옵토닉스",
+    "글로벌테크놀로지",
+    "빅웨이브로보틱스"
   ],
   "failures": [],
   "issues": [],
   "advisories": [
-    {
-      "corp_code": "01722066",
-      "name": "빅웨이브로보틱스",
-      "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
-      ]
-    },
-    {
-      "corp_code": "01028933",
-      "name": "멜콘",
-      "notes": [
-        "수요예측 결과 공시 대기: 운영자 확인, 다음 공시 또는 청약 시작일에 재검증"
-      ]
-    },
     {
       "corp_code": "00534729",
       "name": "디티에스",
@@ -40,6 +26,20 @@
     {
       "corp_code": "01956751",
       "name": "래블업",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "01658035",
+      "name": "옵토닉스",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "01722066",
+      "name": "빅웨이브로보틱스",
       "notes": [
         "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
       ]
@@ -514,6 +514,24 @@
         ]
       },
       {
+        "corp_code": "01658035",
+        "name": "옵토닉스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "056dab9679aa15f5bcd3",
+        "signature": "aac0f1101d9836f1dca3",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -526,6 +544,42 @@
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01722066",
+        "name": "빅웨이브로보틱스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "a0bbcfa3c1fef522385a",
+        "signature": "73b3495056b800e5a27d",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01564514",
+        "name": "글로벌테크놀로지",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "52d777041c5f599588d2",
+        "signature": "0b273ba5fbc8e82d8e8c",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
           }
@@ -623,10 +677,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "verified",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
         "history": [
           {
             "at": "2026-09-27",
@@ -640,6 +694,11 @@
           },
           {
             "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
           }
