@@ -48,7 +48,9 @@
       "status": "unresolved",
       "captured_parser": "ba777e3d84cec182a159",
       "excerpt": "",
-      "truncated": false
+      "truncated": false,
+      "replayed_parser": "ba777e3d84cec182a159",
+      "probe": "full_document_required"
     }
   }
 }

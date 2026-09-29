@@ -1,21 +1,13 @@
 {
-  "checked_at": "2026-09-29T04:27:44.440721+09:00",
+  "checked_at": "2026-09-29T11:49:39.448291+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "바로팜",
-    "넥스아이"
+    "케이앤에스아이앤씨",
+    "네오사피엔스",
+    "와이즈플래닛컴퍼니",
+    "디티에스"
   ],
   "failures": [],
-  "issues": [
-    {
-      "corp_code": "01158632",
-      "code": "250030",
-      "name": "진코스텍",
-      "gaps": [
-        "구주물량(기존주주 표 미발견)"
-      ]
-    }
-  ],
+  "issues": [],
   "advisories": [
     {
       "corp_code": "01722066",
@@ -342,6 +334,24 @@
         ]
       },
       {
+        "corp_code": "00534729",
+        "name": "디티에스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "ca32af0b1abb4963c3b1",
+        "signature": "c28aceb2c6089ff1c5ca",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01706509",
         "name": "다비오",
         "parser_revision": "ba777e3d84cec182a159",
@@ -522,6 +532,42 @@
         ]
       },
       {
+        "corp_code": "01867688",
+        "name": "와이즈플래닛컴퍼니",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "bc81095b73bc8034482d",
+        "signature": "eb510f21ccc19b70f078",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01876251",
+        "name": "네오사피엔스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "4cb8ec470f1cc533c3d3",
+        "signature": "6947de905cc838d3230b",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01586923",
         "name": "스카이랩스",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -592,6 +638,24 @@
             "outcome": "verified",
             "reasons": []
           },
+          {
+            "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "00920731",
+        "name": "케이앤에스아이앤씨",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "13186dccf803fa48d98f",
+        "signature": "0bee1efa86f2547d9373",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-29",
+        "next_retry": "2026-09-30",
+        "history": [
           {
             "at": "2026-09-29",
             "outcome": "verified",
