@@ -1,13 +1,21 @@
 {
-  "checked_at": "2026-09-30T11:12:47.272852+09:00",
+  "checked_at": "2026-10-01T02:42:18.893681+09:00",
   "refreshed": [
-    "덕산넵코어스",
-    "인텔리빅스",
-    "에이엘로봇",
-    "래블업"
+    "인제니아테라퓨틱스",
+    "브릴스",
+    "닷밀"
   ],
   "failures": [],
-  "issues": [],
+  "issues": [
+    {
+      "corp_code": "01703849",
+      "code": "473980",
+      "name": "노머스",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    }
+  ],
   "advisories": [
     {
       "corp_code": "00534729",
@@ -213,13 +221,6 @@
       ]
     },
     {
-      "corp_code": "01605282",
-      "name": "닷밀",
-      "notes": [
-        "배정 저장값 보완 완료; 자동 파서 재검증 미완료"
-      ]
-    },
-    {
       "corp_code": "01703849",
       "name": "노머스",
       "notes": [
@@ -250,23 +251,23 @@
     }
   ],
   "repair_memory": {
-    "cases": 3,
+    "cases": 6,
     "evicted_cases": 0,
     "recheck_candidates": 0,
     "retries": [
       {
-        "corp_code": "00960623",
-        "name": "덕산넵코어스",
+        "corp_code": "01801026",
+        "name": "브릴스",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "1dd8bcd340d9c674a4c3",
-        "signature": "e8d8a3cd7506e24634c4",
+        "source_revision": "e16784b28eadaceea46d",
+        "signature": "58b61a0ad6d7711f5cf4",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "last_attempt": "2026-10-01",
+        "next_retry": "2026-10-02",
         "history": [
           {
-            "at": "2026-09-30",
+            "at": "2026-10-01",
             "outcome": "verified",
             "reasons": []
           }
@@ -622,6 +623,24 @@
         ]
       },
       {
+        "corp_code": "00960623",
+        "name": "덕산넵코어스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "1dd8bcd340d9c674a4c3",
+        "signature": "e8d8a3cd7506e24634c4",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01722066",
         "name": "빅웨이브로보틱스",
         "parser_revision": "ba777e3d84cec182a159",
@@ -749,10 +768,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "last_attempt": "2026-10-01",
+        "next_retry": "2026-10-02",
         "history": [
           {
             "at": "2026-09-27",
@@ -773,6 +792,11 @@
             "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-01",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -791,6 +815,45 @@
             "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01605282",
+        "name": "닷밀",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "1a6c7c2aa659a384f2fa",
+        "signature": "fc96c3b4d9e443fdf97b",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-01",
+        "next_retry": "2026-10-02",
+        "history": [
+          {
+            "at": "2026-10-01",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01703849",
+        "name": "노머스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "abc52df2227e8728d36f",
+        "signature": "d83200684ffc2131e542",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-01",
+        "next_retry": "2026-10-02",
+        "history": [
+          {
+            "at": "2026-10-01",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
