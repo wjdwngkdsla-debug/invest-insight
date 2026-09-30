@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-09-30T02:52:40.966138+09:00",
+  "checked_at": "2026-09-30T11:12:47.272852+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "옵토닉스",
-    "글로벌테크놀로지",
-    "빅웨이브로보틱스"
+    "덕산넵코어스",
+    "인텔리빅스",
+    "에이엘로봇",
+    "래블업"
   ],
   "failures": [],
   "issues": [],
@@ -255,6 +255,24 @@
     "recheck_candidates": 0,
     "retries": [
       {
+        "corp_code": "00960623",
+        "name": "덕산넵코어스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "1dd8bcd340d9c674a4c3",
+        "signature": "e8d8a3cd7506e24634c4",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01028933",
         "name": "멜콘",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -424,6 +442,42 @@
         ]
       },
       {
+        "corp_code": "01649408",
+        "name": "인텔리빅스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "0ba8386fb429ae47a3c4",
+        "signature": "a73ef4e4d26ac8076d50",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01956751",
+        "name": "래블업",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "065913119eb64fe18d85",
+        "signature": "a01e2424fe4634c9f665",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "9437d0f4a3a84a724c6f",
@@ -454,6 +508,24 @@
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01797635",
+        "name": "에이엘로봇",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "88ec927612b0bedec147",
+        "signature": "035319f2afc8069d8f05",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-09-30",
+        "next_retry": "2026-10-01",
+        "history": [
+          {
+            "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
           }
