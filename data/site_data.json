@@ -3669,9 +3669,9 @@
           "date": "2025-10-28",
           "date_display": "2025-10-28",
           "tradable_date": "2025-10-28",
-          "qty": 1823443,
+          "qty": 1685143,
           "unit": "주",
-          "pct": 7.62,
+          "pct": 7.04,
           "type": "보호예수",
           "category": "구주·보호예수",
           "status": "반환확인_API수정",
@@ -3680,7 +3680,7 @@
           "rcp": "20241015000376",
           "api_checked": true,
           "api_return_date": "2025-10-28",
-          "api_return_qty": 1823443,
+          "api_return_qty": 1685143,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
           "reason": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
@@ -3695,7 +3695,7 @@
             },
             {
               "reason": "주식매수선택권",
-              "qty": 268400
+              "qty": 130100
             }
           ]
         },
@@ -5613,7 +5613,16 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
           "reason": "벤처금융 + 기타 보호예수 필요 주주",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "기타 보호예수 필요 주주",
+              "qty": 1140349
+            },
+            {
+              "reason": "벤처금융",
+              "qty": 931205
+            }
+          ]
         },
         {
           "period": "3개월",
@@ -5635,7 +5644,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "상장주선인(국내기업)",
           "reason": "상장주선인(국내기업)",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "상장주선인(국내기업)",
+              "qty": 45000
+            }
+          ]
         },
         {
           "period": "6개월",
@@ -5681,7 +5695,20 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
           "reason": "최대주주(코스닥) + 최대주주(제3자배정) + 주식매수선택권",
-          "reason_breakdown": [],
+          "reason_breakdown": [
+            {
+              "reason": "최대주주(제3자배정)",
+              "qty": 277860
+            },
+            {
+              "reason": "주식매수선택권",
+              "qty": 198720
+            },
+            {
+              "reason": "최대주주(코스닥)",
+              "qty": 106350
+            }
+          ],
           "release_close": 11160,
           "release_fluc_rt": -0.18
         },
@@ -5705,7 +5732,12 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(코스닥)",
           "reason": "최대주주(코스닥)",
-          "reason_breakdown": []
+          "reason_breakdown": [
+            {
+              "reason": "최대주주(코스닥)",
+              "qty": 6107965
+            }
+          ]
         }
       ],
       "holders": []
@@ -24165,16 +24197,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "벤처금융 + 기타 보호예수 필요 주주",
           "reason": "벤처금융 + 기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "벤처금융",
-              "qty": 548235
-            },
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 214683
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 25450,
           "release_fluc_rt": -7.79
         },
@@ -24222,16 +24245,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
           "reason": "기타 보호예수 필요 주주 + 상장주선인(국내기업)",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 636985
-            },
-            {
-              "reason": "상장주선인(국내기업)",
-              "qty": 51282
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 45650,
           "release_fluc_rt": 6.53
         },
@@ -24279,12 +24293,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "기타 보호예수 필요 주주",
           "reason": "기타 보호예수 필요 주주",
-          "reason_breakdown": [
-            {
-              "reason": "기타 보호예수 필요 주주",
-              "qty": 589577
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 22400,
           "release_fluc_rt": -6.08
         },
@@ -27786,7 +27795,9 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null,
-          "reason_breakdown": []
+          "reason_breakdown": [],
+          "release_close": 8800,
+          "release_fluc_rt": -7.76
         },
         {
           "period": "6개월",
@@ -27808,7 +27819,9 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null,
-          "reason_breakdown": []
+          "reason_breakdown": [],
+          "release_close": 8800,
+          "release_fluc_rt": -7.76
         },
         {
           "period": "1년",
@@ -29637,7 +29650,9 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": null,
           "reason": null,
-          "reason_breakdown": []
+          "reason_breakdown": [],
+          "release_close": 2950,
+          "release_fluc_rt": -1.83
         },
         {
           "period": "3개월",
@@ -29649,17 +29664,24 @@
           "pct": 0.16,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "확정(경과)",
+          "status": "반환확인",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260617000171",
-          "api_checked": false,
-          "api_return_date": null,
-          "api_return_qty": null,
+          "api_checked": true,
+          "api_return_date": "2026-09-30",
+          "api_return_qty": 83333,
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
-          "holder_name": null,
-          "reason": "실적보고서: 실권주 63,408주 인수에 따라 6개월 의무취득분 70,000주에서 6,592주로 차감",
-          "reason_breakdown": []
+          "holder_name": "상장주선인(국내기업)",
+          "reason": "상장주선인(국내기업)",
+          "reason_breakdown": [
+            {
+              "reason": "상장주선인(국내기업)",
+              "qty": 83333
+            }
+          ],
+          "release_close": 2950,
+          "release_fluc_rt": -1.83
         },
         {
           "period": "6개월",
@@ -32638,6 +32660,251 @@
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20260915000241",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        }
+      ],
+      "holders": []
+    },
+    {
+      "code": "266690",
+      "name": "덕산넵코어스",
+      "market": "코스닥",
+      "listing_date": "2026-09-30",
+      "shares": 18893889,
+      "current_shares": 18893889,
+      "initial_shares": 18893889,
+      "listing_close": 17980,
+      "listing_float_shares": 0,
+      "listing_float_pct": 0.0,
+      "listing_float_excludes_ipo_commitment": false,
+      "close_price": 17980,
+      "trading_suspended": false,
+      "trading_suspended_since": "",
+      "market_cap": 339712124220,
+      "ipo_price": 14600,
+      "adjusted_ipo_price": 0,
+      "ipo_adjustment_factor": 0,
+      "ipo_adjustment_checked_at": "",
+      "content_url": "",
+      "events": [
+        {
+          "period": "15일",
+          "date": "2026-10-15",
+          "date_display": "2026-10-15",
+          "tradable_date": "2026-10-15",
+          "qty": 638253,
+          "unit": "주",
+          "pct": 3.38,
+          "type": "IPO확약",
+          "category": "IPO기관",
+          "status": "예정",
+          "source": "DART",
+          "source_label": "증권발행실적보고서",
+          "rcp": "20260921000143",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "1개월",
+          "date": "2026-10-30",
+          "date_display": "2026-10-30",
+          "tradable_date": "2026-10-30",
+          "qty": 115708,
+          "unit": "주",
+          "pct": 0.61,
+          "type": "IPO확약",
+          "category": "IPO기관",
+          "status": "예정",
+          "source": "DART",
+          "source_label": "증권발행실적보고서",
+          "rcp": "20260921000143",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "1개월",
+          "date": "2026-10-30",
+          "date_display": "2026-10-30",
+          "tradable_date": "2026-10-30",
+          "qty": 55800,
+          "unit": "주",
+          "pct": 0.3,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "2개월",
+          "date": "2026-11-30",
+          "date_display": "2026-11-30",
+          "tradable_date": "2026-11-30",
+          "qty": 902078,
+          "unit": "주",
+          "pct": 4.77,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "3개월",
+          "date": "2026-12-30",
+          "date_display": "2026-12-30",
+          "tradable_date": "2026-12-30",
+          "qty": 272781,
+          "unit": "주",
+          "pct": 1.44,
+          "type": "IPO확약",
+          "category": "IPO기관",
+          "status": "예정",
+          "source": "DART",
+          "source_label": "증권발행실적보고서",
+          "rcp": "20260921000143",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "3개월",
+          "date": "2026-12-30",
+          "date_display": "2026-12-30",
+          "tradable_date": "2026-12-30",
+          "qty": 324903,
+          "unit": "주",
+          "pct": 1.72,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "6개월",
+          "date": "2027-03-30",
+          "date_display": "2027-03-30",
+          "tradable_date": "2027-03-30",
+          "qty": 261647,
+          "unit": "주",
+          "pct": 1.38,
+          "type": "IPO확약",
+          "category": "IPO기관",
+          "status": "예정",
+          "source": "DART",
+          "source_label": "증권발행실적보고서",
+          "rcp": "20260921000143",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "6개월",
+          "date": "2027-03-30",
+          "date_display": "2027-03-30",
+          "tradable_date": "2027-03-30",
+          "qty": 30000,
+          "unit": "주",
+          "pct": 0.16,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "1년",
+          "date": "2027-09-30",
+          "date_display": "2027-09-30",
+          "tradable_date": "2027-09-30",
+          "qty": 355000,
+          "unit": "주",
+          "pct": 1.88,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
+          "api_checked": false,
+          "api_return_date": null,
+          "api_return_qty": null,
+          "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
+          "holder_name": null,
+          "reason": null,
+          "reason_breakdown": []
+        },
+        {
+          "period": "3년",
+          "date": "2029-09-30",
+          "date_display": "2029-10-01",
+          "tradable_date": "2029-10-01",
+          "qty": 9648204,
+          "unit": "주",
+          "pct": 51.07,
+          "type": "보호예수",
+          "category": "구주·보호예수",
+          "status": "예정",
+          "source": "투자설명서",
+          "source_label": "투자설명서 유통가능 요약표",
+          "rcp": "20260915000085",
           "api_checked": false,
           "api_return_date": null,
           "api_return_qty": null,
