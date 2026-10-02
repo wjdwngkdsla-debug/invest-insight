@@ -1,15 +1,36 @@
 {
-  "checked_at": "2026-10-02T03:22:13.323231+09:00",
+  "checked_at": "2026-10-03T02:36:03.428830+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "동원파츠"
+    "인제니아테라퓨틱스"
   ],
   "failures": [],
   "issues": [
     {
+      "corp_code": "01028933",
+      "code": "",
+      "name": "멜콘",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "개인청약경쟁률"
+      ]
+    },
+    {
       "corp_code": "01754737",
       "code": "",
       "name": "엘리스그룹",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01749559",
+      "code": "",
+      "name": "엠에스바이오",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
@@ -268,25 +289,33 @@
     }
   ],
   "repair_memory": {
-    "cases": 8,
+    "cases": 11,
     "evicted_cases": 0,
-    "recheck_candidates": 2,
+    "recheck_candidates": 3,
     "retries": [
       {
         "corp_code": "01028933",
         "name": "멜콘",
-        "parser_revision": "9437d0f4a3a84a724c6f",
-        "source_revision": "730da5cd1b468a64bdeb",
-        "signature": "23f51dc67aaa28e2f5a9",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "ec3d701c7b62fcf21eed",
+        "signature": "60b37450c66789ba76b2",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
         "history": [
           {
             "at": "2026-09-27",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -321,10 +350,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "a9e24e7703e2da7f98a1",
         "signature": "28f44bba33cf942c9129",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-02",
-        "next_retry": "2026-10-03",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-05",
         "history": [
           {
             "at": "2026-09-28",
@@ -338,6 +367,14 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -345,17 +382,25 @@
         "corp_code": "01749559",
         "name": "엠에스바이오",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "810a9af4abc3426cac28",
-        "signature": "86b81ab06ac68bc73c44",
+        "source_revision": "95dc4f165137a3134bf6",
+        "signature": "bdc581a0285b04624010",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-28",
-        "next_retry": "2026-09-29",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
         "history": [
           {
             "at": "2026-09-28",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -811,16 +856,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 5,
+        "consecutive_attempts": 6,
         "outcome": "verified",
-        "last_attempt": "2026-10-02",
-        "next_retry": "2026-10-03",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-09-29",
             "outcome": "verified",
@@ -838,6 +878,11 @@
           },
           {
             "at": "2026-10-02",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-03",
             "outcome": "verified",
             "reasons": []
           }
