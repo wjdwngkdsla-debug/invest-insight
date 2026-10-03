@@ -1,7 +1,9 @@
 {
-  "checked_at": "2026-10-03T02:36:03.428830+09:00",
+  "checked_at": "2026-10-03T11:02:51.772095+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "케이엠에프",
+    "데이원컴퍼니",
+    "로킷헬스케어"
   ],
   "failures": [],
   "issues": [
@@ -36,6 +38,14 @@
         "확정공모가",
         "수요예측경쟁률",
         "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01594791",
+      "code": "459510",
+      "name": "나우로보틱스",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -181,8 +191,7 @@
       "corp_code": "01335143",
       "name": "로킷헬스케어",
       "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 매각제한 합계 검산 실패",
-        "배정 저장값 보완 완료; 자동 파서 재검증 미완료"
+        "요약표 예정 일정 정상; 상세표 참고: 매각제한 합계 검산 실패"
       ]
     },
     {
@@ -233,8 +242,7 @@
       "corp_code": "01455492",
       "name": "데이원컴퍼니",
       "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 매각제한 합계 검산 실패",
-        "배정 저장값 보완 완료; 자동 파서 재검증 미완료"
+        "요약표 예정 일정 정상; 상세표 참고: 매각제한 합계 검산 실패"
       ]
     },
     {
@@ -289,9 +297,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 11,
+    "cases": 14,
     "evicted_cases": 0,
-    "recheck_candidates": 3,
+    "recheck_candidates": 5,
     "retries": [
       {
         "corp_code": "01028933",
@@ -693,6 +701,24 @@
         ]
       },
       {
+        "corp_code": "01880139",
+        "name": "케이엠에프",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "797f12d209a020e544ce",
+        "signature": "77312b6c947cfd38de64",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
+        "history": [
+          {
+            "at": "2026-10-03",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01801026",
         "name": "브릴스",
         "parser_revision": "ba777e3d84cec182a159",
@@ -901,6 +927,63 @@
         "history": [
           {
             "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01335143",
+        "name": "로킷헬스케어",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "898439aa86e09866c7d8",
+        "signature": "8e87d4d2df79edf38ca3",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
+        "history": [
+          {
+            "at": "2026-10-03",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01594791",
+        "name": "나우로보틱스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "4aa5edf55d2f86c530f2",
+        "signature": "a2499541ef2b0bc2116c",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
+        "history": [
+          {
+            "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01455492",
+        "name": "데이원컴퍼니",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "15e5820ec8b763a02c1d",
+        "signature": "36ab2b7049b34792c68e",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-03",
+        "next_retry": "2026-10-04",
+        "history": [
+          {
+            "at": "2026-10-03",
             "outcome": "verified",
             "reasons": []
           }

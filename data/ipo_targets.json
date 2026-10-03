@@ -154,6 +154,15 @@
   },
   {
     "market": "코스닥",
+    "name": "케이엠에프",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
     "name": "크리에이츠",
     "listing_date": "",
     "code": "",
@@ -1550,9 +1559,9 @@
     "market": "코스닥",
     "name": "브릴스",
     "listing_date": "2026-10-01",
-    "code": "",
+    "code": "468670",
     "manual_ipo_price": "19500",
     "manual_ipo_price_locked": "N",
-    "shares": ""
+    "shares": "11363649"
   }
 ]
