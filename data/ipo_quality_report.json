@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-10-04T10:22:30.117723+09:00",
+  "checked_at": "2026-10-05T00:44:05.276602+09:00",
   "refreshed": [
-    "레몬헬스케어",
-    "레메디",
-    "에이치엘지노믹스"
+    "인제니아테라퓨틱스",
+    "딜리셔스",
+    "기도산업"
   ],
   "failures": [],
   "issues": [
@@ -366,10 +366,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "a9e24e7703e2da7f98a1",
         "signature": "28f44bba33cf942c9129",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-10-03",
-        "next_retry": "2026-10-05",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-09",
         "history": [
           {
             "at": "2026-09-28",
@@ -386,6 +386,14 @@
           },
           {
             "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-05",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -893,21 +901,34 @@
         ]
       },
       {
+        "corp_code": "00229085",
+        "name": "기도산업",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "35811878c54440d1cf65",
+        "signature": "55a7e88b0fd52ac30912",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
+        "history": [
+          {
+            "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "02031369",
         "name": "인제니아테라퓨틱스",
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 7,
+        "consecutive_attempts": 8,
         "outcome": "verified",
-        "last_attempt": "2026-10-04",
-        "next_retry": "2026-10-05",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
         "history": [
-          {
-            "at": "2026-09-30",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-01",
             "outcome": "verified",
@@ -927,6 +948,11 @@
             "at": "2026-10-04",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -943,6 +969,24 @@
         "history": [
           {
             "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01461730",
+        "name": "딜리셔스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "dffc34feda1a13692908",
+        "signature": "51769bcf62826bf60fb0",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
+        "history": [
+          {
+            "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
           }
