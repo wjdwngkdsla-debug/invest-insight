@@ -1,7 +1,9 @@
 {
-  "checked_at": "2026-10-04T01:02:18.108014+09:00",
+  "checked_at": "2026-10-04T10:22:30.117723+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "레몬헬스케어",
+    "레메디",
+    "에이치엘지노믹스"
   ],
   "failures": [],
   "issues": [
@@ -398,10 +400,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "95dc4f165137a3134bf6",
         "signature": "bdc581a0285b04624010",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-03",
-        "next_retry": "2026-10-04",
+        "last_attempt": "2026-10-04",
+        "next_retry": "2026-10-06",
         "history": [
           {
             "at": "2026-09-28",
@@ -410,6 +412,14 @@
           },
           {
             "at": "2026-10-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-04",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -933,6 +943,60 @@
         "history": [
           {
             "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "00624244",
+        "name": "에이치엘지노믹스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "0419af25cf900223f1a0",
+        "signature": "0f230367b8b2328a2eed",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-04",
+        "next_retry": "2026-10-05",
+        "history": [
+          {
+            "at": "2026-10-04",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01501764",
+        "name": "레메디",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "58f3c28d5c79f9375b23",
+        "signature": "a3831f0a1f83ecc7fa37",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-04",
+        "next_retry": "2026-10-05",
+        "history": [
+          {
+            "at": "2026-10-04",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01424261",
+        "name": "레몬헬스케어",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "7bf2b050ff33e2661d72",
+        "signature": "63ac76694bc71aba33cd",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-04",
+        "next_retry": "2026-10-05",
+        "history": [
+          {
+            "at": "2026-10-04",
             "outcome": "verified",
             "reasons": []
           }

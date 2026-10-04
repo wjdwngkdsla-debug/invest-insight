@@ -12987,7 +12987,7 @@
           "pct": 27.91,
           "type": "보호예수",
           "category": "구주·보호예수",
-          "status": "예정",
+          "status": "확정(경과)",
           "source": "투자설명서",
           "source_label": "투자설명서 유통가능 요약표",
           "rcp": "20250321000215",
@@ -24018,12 +24018,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(상장)",
           "reason": "최대주주(상장)",
-          "reason_breakdown": [
-            {
-              "reason": "최대주주(상장)",
-              "qty": 417044
-            }
-          ]
+          "reason_breakdown": []
         },
         {
           "period": "6개월",
@@ -24069,16 +24064,7 @@
           "api_source": "공공데이터포털 getLockUpRetuInfo_V3",
           "holder_name": "최대주주(상장) + 최대주주(제3자배정)",
           "reason": "최대주주(상장) + 최대주주(제3자배정)",
-          "reason_breakdown": [
-            {
-              "reason": "최대주주(상장)",
-              "qty": 13440216
-            },
-            {
-              "reason": "최대주주(제3자배정)",
-              "qty": 3824800
-            }
-          ],
+          "reason_breakdown": [],
           "release_close": 18980,
           "release_fluc_rt": -12.53
         },
