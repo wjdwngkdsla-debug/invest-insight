@@ -1,9 +1,10 @@
 {
-  "checked_at": "2026-10-05T00:44:05.276602+09:00",
+  "checked_at": "2026-10-05T10:17:10.796026+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "딜리셔스",
-    "기도산업"
+    "니어스랩",
+    "해치텍",
+    "스카이랩스",
+    "영광"
   ],
   "failures": [],
   "issues": [
@@ -565,16 +566,21 @@
       {
         "corp_code": "00579342",
         "name": "영광",
-        "parser_revision": "9437d0f4a3a84a724c6f",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "05ea638698c19595aa65",
-        "signature": "f3b11df3d79df36192ba",
+        "signature": "6c6e273d8d68bd8ddd77",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
           }
@@ -853,16 +859,21 @@
       {
         "corp_code": "01586923",
         "name": "스카이랩스",
-        "parser_revision": "9437d0f4a3a84a724c6f",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "a19ac9fefbc7dfb7aaaf",
-        "signature": "247f501c6282a41e4809",
+        "signature": "5beeb49a07e113d28575",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
           }
@@ -874,10 +885,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "6a776db740493a42c181",
         "signature": "13575e84a1647428230e",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
         "history": [
           {
             "at": "2026-09-26",
@@ -895,6 +906,29 @@
           },
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01588897",
+        "name": "니어스랩",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "f599918c851b8b6a9f4c",
+        "signature": "400e4763919b88353c3e",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-05",
+        "next_retry": "2026-10-06",
+        "history": [
+          {
+            "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
           }
