@@ -1,7 +1,9 @@
 {
-  "checked_at": "2026-10-06T12:26:57.875659+09:00",
+  "checked_at": "2026-10-07T03:24:40.088626+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "엘리스그룹",
+    "인제니아테라퓨틱스",
+    "하나에어로다이내믹스"
   ],
   "failures": [],
   "issues": [
@@ -17,14 +19,14 @@
       ]
     },
     {
-      "corp_code": "01754737",
-      "code": "",
-      "name": "엘리스그룹",
+      "corp_code": "01158632",
+      "code": "250030",
+      "name": "진코스텍",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "개인청약경쟁률"
       ]
     },
     {
@@ -295,7 +297,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 14,
+    "cases": 15,
     "evicted_cases": 0,
     "recheck_candidates": 6,
     "retries": [
@@ -345,12 +347,12 @@
         "corp_code": "01158632",
         "name": "진코스텍",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "7cc9c9f056f1fb49c54c",
-        "signature": "63e479e21e9f5ee53aaa",
+        "source_revision": "ac2c2a1730e7d936ae4d",
+        "signature": "c527ea7641109083ef91",
         "consecutive_attempts": 1,
-        "outcome": "unresolved",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-07",
+        "next_retry": "2026-10-08",
         "history": [
           {
             "at": "2026-09-27",
@@ -363,6 +365,14 @@
             "reasons": [
               "구주물량(기존주주 표 미발견)"
             ]
+          },
+          {
+            "at": "2026-10-07",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -370,12 +380,12 @@
         "corp_code": "01754737",
         "name": "엘리스그룹",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "a9e24e7703e2da7f98a1",
-        "signature": "28f44bba33cf942c9129",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-09",
+        "source_revision": "827a6e04d1e6ac3d5956",
+        "signature": "8d6354e9b19bcb68c880",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-07",
+        "next_retry": "2026-10-08",
         "history": [
           {
             "at": "2026-09-28",
@@ -405,6 +415,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -728,16 +743,21 @@
       {
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
-        "parser_revision": "9437d0f4a3a84a724c6f",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "0143d1192082ca26ac74",
-        "signature": "e47962a0a67c759baa14",
+        "signature": "9a8326476a7e7fc1a721",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-27",
-        "next_retry": "2026-09-28",
+        "last_attempt": "2026-10-07",
+        "next_retry": "2026-10-08",
         "history": [
           {
             "at": "2026-09-27",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-07",
             "outcome": "verified",
             "reasons": []
           }
@@ -971,16 +991,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 9,
+        "consecutive_attempts": 10,
         "outcome": "verified",
-        "last_attempt": "2026-10-06",
-        "next_retry": "2026-10-07",
+        "last_attempt": "2026-10-07",
+        "next_retry": "2026-10-08",
         "history": [
-          {
-            "at": "2026-10-02",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-03",
             "outcome": "verified",
@@ -998,6 +1013,11 @@
           },
           {
             "at": "2026-10-06",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-07",
             "outcome": "verified",
             "reasons": []
           }
