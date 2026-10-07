@@ -1,10 +1,8 @@
 {
-  "checked_at": "2026-10-07T11:08:02.969637+09:00",
+  "checked_at": "2026-10-08T02:45:54.698185+09:00",
   "refreshed": [
-    "이에스티",
-    "크리에이츠",
-    "티앤이코리아",
-    "유캐스트"
+    "엠에스바이오",
+    "인제니아테라퓨틱스"
   ],
   "failures": [],
   "issues": [
@@ -13,10 +11,7 @@
       "code": "",
       "name": "멜콘",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "상장일 미정"
       ]
     },
     {
@@ -28,17 +23,6 @@
         "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
         "개인청약경쟁률"
-      ]
-    },
-    {
-      "corp_code": "01749559",
-      "code": "",
-      "name": "엠에스바이오",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
@@ -298,7 +282,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 15,
+    "cases": 16,
     "evicted_cases": 0,
     "recheck_candidates": 7,
     "retries": [
@@ -306,12 +290,12 @@
         "corp_code": "01028933",
         "name": "멜콘",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "ec3d701c7b62fcf21eed",
-        "signature": "60b37450c66789ba76b2",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-06",
-        "next_retry": "2026-10-10",
+        "source_revision": "9aa3add343dfb8c43d27",
+        "signature": "43180574278103cf40da",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
         "history": [
           {
             "at": "2026-09-27",
@@ -340,6 +324,13 @@
             "reasons": [
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "unresolved",
+            "reasons": [
+              "상장일 미정"
             ]
           }
         ]
@@ -428,12 +419,12 @@
         "corp_code": "01749559",
         "name": "엠에스바이오",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "95dc4f165137a3134bf6",
-        "signature": "bdc581a0285b04624010",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-06",
-        "next_retry": "2026-10-10",
+        "source_revision": "3b7d0a5b4323aa012199",
+        "signature": "73ae4860a72dcdd2cf53",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
         "history": [
           {
             "at": "2026-09-28",
@@ -463,6 +454,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1012,16 +1008,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 10,
+        "consecutive_attempts": 11,
         "outcome": "verified",
-        "last_attempt": "2026-10-07",
-        "next_retry": "2026-10-08",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
         "history": [
-          {
-            "at": "2026-10-03",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-04",
             "outcome": "verified",
@@ -1039,6 +1030,11 @@
           },
           {
             "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -1231,10 +1227,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "abc52df2227e8728d36f",
         "signature": "d83200684ffc2131e542",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "rejected",
-        "last_attempt": "2026-10-04",
-        "next_retry": "2026-10-08",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-01",
@@ -1254,6 +1250,14 @@
           },
           {
             "at": "2026-10-04",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
