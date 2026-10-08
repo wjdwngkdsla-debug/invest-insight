@@ -1,8 +1,9 @@
 {
-  "checked_at": "2026-10-08T02:45:54.698185+09:00",
+  "checked_at": "2026-10-08T10:41:10.524926+09:00",
   "refreshed": [
-    "엠에스바이오",
-    "인제니아테라퓨틱스"
+    "제논",
+    "엠비디",
+    "다비오"
   ],
   "failures": [],
   "issues": [
@@ -284,7 +285,7 @@
   "repair_memory": {
     "cases": 16,
     "evicted_cases": 0,
-    "recheck_candidates": 7,
+    "recheck_candidates": 8,
     "retries": [
       {
         "corp_code": "01028933",
@@ -341,10 +342,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "ac2c2a1730e7d936ae4d",
         "signature": "c527ea7641109083ef91",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-07",
-        "next_retry": "2026-10-08",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-10",
         "history": [
           {
             "at": "2026-09-27",
@@ -360,6 +361,14 @@
           },
           {
             "at": "2026-10-07",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "rejected",
             "reasons": [
               "공시 대기: 개인청약경쟁률",
@@ -486,13 +495,18 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "55f6a7287b418f0cf052",
         "signature": "aa1da366c517fece17eb",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-09-28",
-        "next_retry": "2026-09-29",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
         "history": [
           {
             "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -673,13 +687,18 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "8cbd054b34519dc1976d",
         "signature": "c6196ebcf88c9e4a65cc",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-09-28",
-        "next_retry": "2026-09-29",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
         "history": [
           {
             "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -734,6 +753,24 @@
         "history": [
           {
             "at": "2026-09-29",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01950720",
+        "name": "제논",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "b42cd74166cbed7cade0",
+        "signature": "10b2897201ee85e49639",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
+        "history": [
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
