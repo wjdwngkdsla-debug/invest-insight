@@ -1,11 +1,28 @@
 {
-  "checked_at": "2026-10-08T10:41:10.524926+09:00",
-  "refreshed": [
-    "제논",
-    "엠비디",
-    "다비오"
+  "checked_at": "2026-10-09T03:49:15.914662+09:00",
+  "refreshed": [],
+  "failures": [
+    {
+      "corp_code": "01284876",
+      "name": "인스피언",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241002000239 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+    },
+    {
+      "corp_code": "01588189",
+      "name": "씨메스로보틱스",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241014000124 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+    },
+    {
+      "corp_code": "01506617",
+      "name": "쓰리빌리언",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241108000515 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+    },
+    {
+      "corp_code": "01429220",
+      "name": "피아이이",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250116000123&dcmNo=10266689&eleId=1&offset=677&length=368244&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+    }
   ],
-  "failures": [],
   "issues": [
     {
       "corp_code": "01028933",
@@ -23,7 +40,132 @@
         "자동 재검증 결과 보류(기존 값 유지)",
         "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
+        "개인청약경쟁률",
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01754737",
+      "code": "",
+      "name": "엘리스그룹",
+      "gaps": [
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
         "개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "00534729",
+      "code": "",
+      "name": "디티에스",
+      "gaps": [
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01706509",
+      "code": "",
+      "name": "다비오",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01543043",
+      "code": "",
+      "name": "티앤이코리아",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01649408",
+      "code": "",
+      "name": "인텔리빅스",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "00579342",
+      "code": "",
+      "name": "영광",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01378005",
+      "code": "",
+      "name": "이에스티",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01797635",
+      "code": "",
+      "name": "에이엘로봇",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01705740",
+      "code": "",
+      "name": "엠비디",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01835829",
+      "code": "",
+      "name": "바로팜",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01950720",
+      "code": "",
+      "name": "제논",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01025617",
+      "code": "",
+      "name": "하나에어로다이내믹스",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01880139",
+      "code": "",
+      "name": "케이엠에프",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01565054",
+      "code": "318060",
+      "name": "그래피",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01335143",
+      "code": "376900",
+      "name": "로킷헬스케어",
+      "gaps": [
+        "구주물량 원문 조회 실패"
       ]
     },
     {
@@ -35,11 +177,87 @@
       ]
     },
     {
+      "corp_code": "01429220",
+      "code": "452450",
+      "name": "피아이이",
+      "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "00351427",
+      "code": "096250",
+      "name": "와이즈넛",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01445440",
+      "code": "459100",
+      "name": "위츠",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01207901",
+      "code": "466410",
+      "name": "사이냅소프트",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01506617",
+      "code": "394800",
+      "name": "쓰리빌리언",
+      "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
       "corp_code": "01703849",
       "code": "473980",
       "name": "노머스",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    },
+    {
+      "corp_code": "01480708",
+      "code": "376270",
+      "name": "에이치이엠파마",
+      "gaps": [
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01588189",
+      "code": "475400",
+      "name": "씨메스로보틱스",
+      "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01284876",
+      "code": "465480",
+      "name": "인스피언",
+      "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
+        "구주물량 원문 조회 실패"
+      ]
+    },
+    {
+      "corp_code": "01023211",
+      "code": "209640",
+      "name": "와이제이링크",
+      "gaps": [
+        "구주물량 원문 조회 실패"
       ]
     }
   ],
@@ -1223,6 +1441,26 @@
         ]
       },
       {
+        "corp_code": "01429220",
+        "name": "피아이이",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "3e70e99704bd5020f937",
+        "signature": "194b814ca19c9aaaf1a1",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250116000123&dcmNo=10266689&eleId=1&offset=677&length=368244&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      },
+      {
         "corp_code": "01455492",
         "name": "데이원컴퍼니",
         "parser_revision": "ba777e3d84cec182a159",
@@ -1237,6 +1475,26 @@
             "at": "2026-10-03",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01506617",
+        "name": "쓰리빌리언",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "f55d2e5fa6ba6a3e2a14",
+        "signature": "a2b974d8d2f42ea97db4",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241108000515 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
           }
         ]
       },
@@ -1299,6 +1557,46 @@
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01588189",
+        "name": "씨메스로보틱스",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "fe0c19f8a82ace3e3667",
+        "signature": "17c24d05fe34236fa7ea",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241014000124 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01284876",
+        "name": "인스피언",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "4b9ccfc50b90ee2714b1",
+        "signature": "a67181b7405f373391b1",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241002000239 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
           }
         ]

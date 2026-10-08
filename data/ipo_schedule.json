@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08 10:31",
+  "updated": "2026-10-09 02:40",
   "items": [
     {
       "corp_code": "00104069",
@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -292,7 +292,7 @@
       "corp_code": "01158632",
       "name": "진코스텍",
       "first_filing_date": "20260827",
-      "last_rcept_no": "20261001000594",
+      "last_rcept_no": "20261008000730",
       "offering_attempt": 1,
       "issuer_market": "코넥스",
       "stock_code": "250030",
@@ -302,7 +302,7 @@
       "forecast_end": "2026-09-22",
       "sub_start": "2026-10-02",
       "sub_end": "2026-10-06",
-      "payment_date": "2026-10-08",
+      "payment_date": "2026-10-02",
       "underwriter": "하나증권",
       "market": "코스닥",
       "transfer_market": "코스닥",
@@ -423,7 +423,8 @@
       "quality_refresh_error": {
         "checked_at": "2026-10-08",
         "message": "자동 반영 보류: 공시 대기: 개인청약경쟁률; 공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20261001000594 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01754737",
@@ -848,7 +849,7 @@
       "holder_lockup": {
         "rcept_no": "20261008000030",
         "basis": "float_summary",
-        "table_index": 477,
+        "table_index": 499,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -947,7 +948,7 @@
           "status": "review",
           "rcept_no": "20261008000030",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 474,
+          "table_index": 496,
           "parsed_total": 12586928,
           "reported_totals": [
             12608658
@@ -1013,7 +1014,7 @@
       "corp_code": "01706509",
       "name": "다비오",
       "first_filing_date": "20260915",
-      "last_rcept_no": "20260915000390",
+      "last_rcept_no": "20261008000705",
       "offering_attempt": 1,
       "band_low": 12300,
       "band_high": 16600,
@@ -1159,7 +1160,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20261008000705 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01705573",
@@ -1190,7 +1192,7 @@
       "holder_lockup": {
         "rcept_no": "20260909000378",
         "basis": "float_summary",
-        "table_index": 419,
+        "table_index": 423,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -1365,7 +1367,7 @@
       "holder_lockup": {
         "rcept_no": "20260930000017",
         "basis": "float_summary",
-        "table_index": 367,
+        "table_index": 374,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -1632,13 +1634,14 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20260929000002&dcmNo=11593057&eleId=2&offset=4925&length=463&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01649408",
       "name": "인텔리빅스",
       "first_filing_date": "20260916",
-      "last_rcept_no": "20260916000544",
+      "last_rcept_no": "20261008000310",
       "offering_attempt": 1,
       "band_low": 7600,
       "band_high": 9000,
@@ -1824,7 +1827,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261008000310&dcmNo=11607526&eleId=3&offset=271443&length=24721&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01956751",
@@ -1854,7 +1858,7 @@
       "holder_lockup": {
         "rcept_no": "20261006000421",
         "basis": "float_summary",
-        "table_index": 452,
+        "table_index": 458,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -1931,7 +1935,7 @@
           "status": "review",
           "rcept_no": "20261006000421",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 449,
+          "table_index": 455,
           "parsed_total": 9305993,
           "reported_totals": [
             9371393
@@ -1976,7 +1980,7 @@
       "corp_code": "00579342",
       "name": "영광",
       "first_filing_date": "20260921",
-      "last_rcept_no": "20260921000332",
+      "last_rcept_no": "20261008000623",
       "offering_attempt": 1,
       "holder_lockup": {
         "rcept_no": "20260921000332",
@@ -2097,7 +2101,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20261008000623 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01378005",
@@ -2231,7 +2236,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20260921000211 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01797635",
@@ -2382,7 +2388,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20260921000209 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01705740",
@@ -2531,7 +2538,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Read timed out. (read timeout=60)"
     },
     {
       "corp_code": "00784184",
@@ -2555,7 +2563,7 @@
       "holder_lockup": {
         "rcept_no": "20261001000579",
         "basis": "float_summary",
-        "table_index": 391,
+        "table_index": 392,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -2654,7 +2662,7 @@
           "status": "review",
           "rcept_no": "20261001000579",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 388,
+          "table_index": 389,
           "parsed_total": 6301794,
           "reported_totals": [
             6542557
@@ -2890,7 +2898,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=23&offset=4472809&length=1152726&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01863318",
@@ -2913,7 +2922,7 @@
       "holder_lockup": {
         "rcept_no": "20260928000260",
         "basis": "float_summary",
-        "table_index": 355,
+        "table_index": 356,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -3160,7 +3169,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261007000505&dcmNo=11606333&eleId=2&offset=16703&length=479&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01658035",
@@ -3183,7 +3193,7 @@
       "holder_lockup": {
         "rcept_no": "20260929000347",
         "basis": "float_summary",
-        "table_index": 431,
+        "table_index": 434,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -3271,7 +3281,7 @@
           "status": "review",
           "rcept_no": "20260929000347",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 425,
+          "table_index": 428,
           "parsed_total": 7315600,
           "reported_totals": [
             7393110
@@ -3459,7 +3469,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20260921000405&dcmNo=11587487&eleId=6&offset=78712&length=1274985&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01880139",
@@ -3588,7 +3599,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20261002000390 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "00683283",
@@ -3609,7 +3621,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -3620,9 +3632,245 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
+    },
+    {
+      "corp_code": "01795859",
+      "name": "엔키화이트햇",
+      "first_filing_date": "20261008",
+      "last_rcept_no": "20261008000660",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "rcept_no": "20261008000660",
+        "basis": "float_summary",
+        "table_index": 321,
+        "cumulative_rows": [
+          {
+            "period": "상장일",
+            "row_text": "상장일 유통가능 4,021,887 37.95%",
+            "cumulative_float": 4021887,
+            "float_pct": 37.95,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "1개월",
+            "row_text": "상장 후 1개월 뒤 유통가능 5,049,154 47.64%",
+            "cumulative_float": 5049154,
+            "float_pct": 47.64,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "3개월",
+            "row_text": "상장 후 3개월 뒤 유통가능 5,713,404 53.91%",
+            "cumulative_float": 5713404,
+            "float_pct": 53.91,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "1년",
+            "row_text": "상장 후 1년 뒤 유통가능 6,457,404 60.93%",
+            "cumulative_float": 6457404,
+            "float_pct": 60.93,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "2년",
+            "row_text": "상장 후 2년 뒤 유통가능 6,474,404 61.09%",
+            "cumulative_float": 6474404,
+            "float_pct": 61.09,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "3년",
+            "row_text": "상장 후 3년 뒤 유통가능 10,598,414 100.00%",
+            "cumulative_float": 10598414,
+            "float_pct": 100.0,
+            "quantity_unit": "주"
+          }
+        ],
+        "date_basis": "listing_relative_or_explicit_date",
+        "status": "verified",
+        "total": 6576527,
+        "coverage": "full",
+        "rows": [
+          {
+            "period": "1개월",
+            "qty": 1027267
+          },
+          {
+            "period": "3개월",
+            "qty": 664250
+          },
+          {
+            "period": "1년",
+            "qty": 744000
+          },
+          {
+            "period": "2년",
+            "qty": 17000
+          },
+          {
+            "period": "3년",
+            "qty": 4124010
+          }
+        ],
+        "summary_kind": "cumulative",
+        "quantity_unit": "주",
+        "detail_advisory": {
+          "status": "review",
+          "rcept_no": "20261008000660",
+          "reason": "보유기간·기산일 확인 필요",
+          "table_index": 319,
+          "parsed_total": 6559527,
+          "reported_totals": [
+            6576527
+          ],
+          "unresolved": [
+            {
+              "label": "공모주식우리사주조합(공모)---17,0000.16%",
+              "qty": 17000,
+              "period_text": "예탁일로부터 1년"
+            }
+          ]
+        }
+      },
+      "ipo_parse_version": 7,
+      "withdrawn": false,
+      "commit_apply_missing": 7,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
+    },
+    {
+      "corp_code": "00960234",
+      "name": "영광와이케이엠씨",
+      "first_filing_date": "20261008",
+      "last_rcept_no": "20261008000649",
+      "offering_attempt": 1,
+      "holder_lockup": {
+        "rcept_no": "20261008000649",
+        "basis": "float_summary",
+        "table_index": 333,
+        "cumulative_rows": [
+          {
+            "period": "상장일",
+            "row_text": "상장일 유통가능 주식수 5,041,041 34.86%",
+            "cumulative_float": 5041041,
+            "float_pct": 34.86,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "1개월",
+            "row_text": "상장 후 1개월 뒤 유통가능 주식수 6,823,894 47.19%",
+            "cumulative_float": 6823894,
+            "float_pct": 47.19,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "2개월",
+            "row_text": "상장 후 2개월 뒤 유통가능 주식수 7,510,755 51.94%",
+            "cumulative_float": 7510755,
+            "float_pct": 51.94,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "3개월",
+            "row_text": "상장 후 3개월 뒤 유통가능 주식수 7,650,395 52.91%",
+            "cumulative_float": 7650395,
+            "float_pct": 52.91,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "6개월",
+            "row_text": "상장 후 6개월 뒤 유통가능 주식수 7,813,434 54.04%",
+            "cumulative_float": 7813434,
+            "float_pct": 54.04,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "12개월",
+            "row_text": "상장 후 12개월 뒤 유통가능 주식수 7,843,594 54.25%",
+            "cumulative_float": 7843594,
+            "float_pct": 54.25,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "18개월",
+            "row_text": "상장 후 18개월 뒤 유통가능 주식수 7,983,594 55.21%",
+            "cumulative_float": 7983594,
+            "float_pct": 55.21,
+            "quantity_unit": "주"
+          },
+          {
+            "period": "30개월",
+            "row_text": "상장 후 30개월 뒤 유통가능 주식수 14,381,645 99.46%",
+            "cumulative_float": 14381645,
+            "float_pct": 99.46,
+            "quantity_unit": "주"
+          }
+        ],
+        "date_basis": "listing_relative_or_explicit_date",
+        "status": "verified",
+        "total": 9340604,
+        "coverage": "disclosed_periods_only",
+        "rows": [
+          {
+            "period": "1개월",
+            "qty": 1782853
+          },
+          {
+            "period": "2개월",
+            "qty": 686861
+          },
+          {
+            "period": "3개월",
+            "qty": 139640
+          },
+          {
+            "period": "6개월",
+            "qty": 163039
+          },
+          {
+            "period": "12개월",
+            "qty": 30160
+          },
+          {
+            "period": "18개월",
+            "qty": 140000
+          },
+          {
+            "period": "30개월",
+            "qty": 6398051
+          }
+        ],
+        "summary_kind": "cumulative",
+        "quantity_unit": "주",
+        "detail_advisory": {
+          "status": "review",
+          "rcept_no": "20261008000649",
+          "reason": "보유기간·기산일 확인 필요",
+          "table_index": 330,
+          "parsed_total": 9340604,
+          "reported_totals": [
+            9418490
+          ],
+          "unresolved": [
+            {
+              "label": "우리사주조합우리사주조합우리사주조합240,9251.91%240,9251.67%",
+              "qty": 77886,
+              "period_text": "-"
+            }
+          ]
+        }
+      },
+      "ipo_parse_version": 7,
+      "withdrawn": false,
+      "commit_apply_missing": 7,
+      "listing_date": "",
+      "stock_code": "",
+      "review_pending": true
     },
     {
       "corp_code": "02032155",
@@ -3631,7 +3879,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3645,7 +3893,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3659,7 +3907,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     }
@@ -6295,7 +6543,7 @@
       "holder_lockup": {
         "rcept_no": "20260728000402",
         "basis": "float_summary",
-        "table_index": 680,
+        "table_index": 689,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -14079,7 +14327,9 @@
         "current": "2025-08-25",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-23"
+      "quality_checked_at": "2026-09-23",
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250808000193&dcmNo=10753475&eleId=2&offset=725325&length=44435&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "commit_apply_missing": 7
     },
     {
       "corp_code": "00185301",
@@ -15077,7 +15327,7 @@
       "holder_lockup": {
         "rcept_no": "20250716000294",
         "basis": "float_summary",
-        "table_index": 644,
+        "table_index": 656,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -17156,7 +17406,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250422000104 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "00488244",
@@ -17766,7 +18017,7 @@
       "holder_lockup": {
         "rcept_no": "20250416000425",
         "basis": "float_summary",
-        "table_index": 583,
+        "table_index": 610,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -17843,7 +18094,7 @@
           "status": "review",
           "rcept_no": "20250416000425",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 580,
+          "table_index": 607,
           "parsed_total": 5426599,
           "reported_totals": [
             5516599
@@ -18091,7 +18342,7 @@
       "holder_lockup": {
         "rcept_no": "20250311000718",
         "basis": "float_summary",
-        "table_index": 464,
+        "table_index": 467,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -18323,7 +18574,7 @@
       "holder_lockup": {
         "rcept_no": "20250310000117",
         "basis": "float_summary",
-        "table_index": 561,
+        "table_index": 572,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -18839,7 +19090,7 @@
       "holder_lockup": {
         "rcept_no": "20250228005640",
         "basis": "float_summary",
-        "table_index": 562,
+        "table_index": 572,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -19061,7 +19312,7 @@
         "status": "verified",
         "rcept_no": "20250304000154",
         "total": 59943178,
-        "table_index": 643,
+        "table_index": 647,
         "rows": [
           {
             "period": "1년",
@@ -19879,7 +20130,7 @@
       "holder_lockup": {
         "rcept_no": "20250131000485",
         "basis": "float_summary",
-        "table_index": 643,
+        "table_index": 657,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -20094,7 +20345,7 @@
       "holder_lockup": {
         "rcept_no": "20250203000196",
         "basis": "float_summary",
-        "table_index": 575,
+        "table_index": 598,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -20709,7 +20960,31 @@
         ],
         "quantity_unit": "주"
       },
-      "holder_overrides": {}
+      "holder_overrides": {},
+      "holder_source_error": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "quality_attempted_at": "2026-10-09",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-09",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250116000123&dcmNo=10266689&eleId=1&offset=677&length=368244&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "3e70e99704bd5020f937",
+        "signature": "194b814ca19c9aaaf1a1",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250116000123&dcmNo=10266689&eleId=1&offset=677&length=368244&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01728167",
@@ -20840,7 +21115,7 @@
       "holder_lockup": {
         "rcept_no": "20250117000296",
         "basis": "float_summary",
-        "table_index": 792,
+        "table_index": 810,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -21253,7 +21528,8 @@
         "current": "2025-01-24",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-24"
+      "quality_checked_at": "2026-09-24",
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250114000178&dcmNo=10263780&eleId=2&offset=64787&length=443&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01590528",
@@ -21397,7 +21673,7 @@
         "status": "verified",
         "rcept_no": "20250113000367",
         "total": 23145535,
-        "table_index": 315,
+        "table_index": 330,
         "rows": [
           {
             "period": "6개월",
@@ -22266,7 +22542,7 @@
       "holder_lockup": {
         "rcept_no": "20241205000263",
         "basis": "float_summary",
-        "table_index": 523,
+        "table_index": 534,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -22990,7 +23266,8 @@
         "current": "2024-11-20",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-24"
+      "quality_checked_at": "2026-09-24",
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241105000121&dcmNo=10169251&eleId=2&offset=405673&length=27589&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01207901",
@@ -23247,7 +23524,8 @@
         "current": "2024-11-19",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-24"
+      "quality_checked_at": "2026-09-24",
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01563922",
@@ -23406,7 +23684,7 @@
       "holder_lockup": {
         "rcept_no": "20241106000088",
         "basis": "float_summary",
-        "table_index": 592,
+        "table_index": 594,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -23876,7 +24154,31 @@
         "summary_kind": "cumulative",
         "quantity_unit": "주"
       },
-      "holder_overrides": {}
+      "holder_overrides": {},
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241101000142 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_attempted_at": "2026-10-09",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-09",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241108000515 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "f55d2e5fa6ba6a3e2a14",
+        "signature": "a2b974d8d2f42ea97db4",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241108000515 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01605282",
@@ -24994,7 +25296,8 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-24",
-      "holder_overrides": {}
+      "holder_overrides": {},
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241022000107&dcmNo=10152149&eleId=2&offset=358389&length=3801&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "00814582",
@@ -25302,7 +25605,7 @@
       "holder_lockup": {
         "rcept_no": "20241021000241",
         "basis": "float_summary",
-        "table_index": 578,
+        "table_index": 656,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -26105,6 +26408,30 @@
         ],
         "summary_kind": "cumulative",
         "quantity_unit": "주"
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241014000124&dcmNo=10143408&eleId=4&offset=62160&length=465&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_attempted_at": "2026-10-09",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-09",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241014000124 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "fe0c19f8a82ace3e3667",
+        "signature": "17c24d05fe34236fa7ea",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241014000124 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
       }
     },
     {
@@ -26606,6 +26933,30 @@
         ],
         "summary_kind": "cumulative",
         "quantity_unit": "주"
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241002000239&dcmNo=10132597&eleId=4&offset=490592&length=2229098&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_attempted_at": "2026-10-09",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-09",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241002000239 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "4b9ccfc50b90ee2714b1",
+        "signature": "a67181b7405f373391b1",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-09",
+        "next_retry": "2026-10-10",
+        "history": [
+          {
+            "at": "2026-10-09",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241002000239 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
       }
     },
     {
@@ -26826,7 +27177,8 @@
             "reasons": []
           }
         ]
-      }
+      },
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241007000470 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
       "corp_code": "01275489",
@@ -29094,70 +29446,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-09-02",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-03",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-03",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-09-08",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-09-03",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-22",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-09-03",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-09-08",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-22",
-      "new": "2026-06-10"
-    },
     {
       "date": "2026-09-04",
       "name": "스탁키퍼",
@@ -33093,6 +33381,70 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "엔키화이트햇",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "영광와이케이엠씨",
+      "type": "검토대기",
+      "field": "노출",
+      "old": "-",
+      "new": "IPO 신호 부족(비공개)"
     }
   ],
   "seed_pending": [],
