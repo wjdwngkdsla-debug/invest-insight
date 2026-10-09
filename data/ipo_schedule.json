@@ -14322,7 +14322,7 @@
       },
       "security_type": "equity",
       "holder_overrides": {},
-      "quality_attempted_at": "2026-09-23",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-23",
@@ -14335,7 +14335,29 @@
       },
       "quality_checked_at": "2026-09-23",
       "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250808000193&dcmNo=10753475&eleId=2&offset=725325&length=44435&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
-      "commit_apply_missing": 7
+      "commit_apply_missing": 7,
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250808000193 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "e6737e97c592037cfe75",
+        "signature": "bf9c1e14f26db7cf2036",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250808000193 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "00185301",
@@ -23263,7 +23285,7 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-09-24",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-24",
@@ -23275,7 +23297,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-24",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241105000121&dcmNo=10169251&eleId=2&offset=405673&length=27589&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241105000121&dcmNo=10169251&eleId=2&offset=405673&length=27589&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241105000121 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "07500e4dfb47e4ef598c",
+        "signature": "06ae2b8432c96d9f8c83",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241105000121 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01207901",
@@ -23521,7 +23565,7 @@
           "referenced_filing_date": "2024-10-28"
         }
       },
-      "quality_attempted_at": "2026-09-24",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-24",
@@ -23533,7 +23577,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-24",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "779fffa429360a216ab6",
+        "signature": "dd76c955cb3359febb26",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01563922",
@@ -25292,7 +25358,7 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-09-24",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-24",
@@ -25305,7 +25371,29 @@
       },
       "quality_checked_at": "2026-09-24",
       "holder_overrides": {},
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241022000107&dcmNo=10152149&eleId=2&offset=358389&length=3801&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241022000107&dcmNo=10152149&eleId=2&offset=358389&length=3801&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241029000394&dcmNo=10161506&eleId=1&offset=579&length=2401&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "d937a7db53c3d65ca37c",
+        "signature": "df79586211347732a4d7",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241029000394&dcmNo=10161506&eleId=1&offset=579&length=2401&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "00814582",
@@ -29456,30 +29544,6 @@
   "history": [
     {
       "date": "2026-09-04",
-      "name": "엘리스그룹",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-21",
-      "new": "2026-10-08"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-09-08",
-      "new": "2026-05-21"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-22",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-09-04",
       "name": "스탁키퍼",
       "type": "검토대기",
       "field": "노출",
@@ -33405,6 +33469,30 @@
       "field": "노출",
       "old": "-",
       "new": "IPO 신호 부족(비공개)"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     },
     {
       "date": "2026-10-09",
