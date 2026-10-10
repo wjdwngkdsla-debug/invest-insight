@@ -1,26 +1,21 @@
 {
-  "checked_at": "2026-10-10T02:18:52.522511+09:00",
+  "checked_at": "2026-10-10T10:30:17.907222+09:00",
   "refreshed": [],
   "failures": [
     {
-      "corp_code": "01565054",
-      "name": "그래피",
-      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250808000193 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "corp_code": "00351427",
+      "name": "와이즈넛",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250114000178 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
-      "corp_code": "01480708",
-      "name": "에이치이엠파마",
-      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241029000394&dcmNo=10161506&eleId=1&offset=579&length=2401&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "corp_code": "01023211",
+      "name": "와이제이링크",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241007000470&dcmNo=10136820&eleId=2&offset=754444&length=23305&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     },
     {
-      "corp_code": "01207901",
-      "name": "사이냅소프트",
-      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000153 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
-    },
-    {
-      "corp_code": "01445440",
-      "name": "위츠",
-      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241105000121 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "corp_code": "01835829",
+      "name": "바로팜",
+      "error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=1&offset=844&length=2109634&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
     }
   ],
   "issues": [
@@ -59,6 +54,7 @@
       "code": "",
       "name": "디티에스",
       "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
         "수요예측경쟁률",
         "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
@@ -125,6 +121,7 @@
       "code": "",
       "name": "바로팜",
       "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
         "구주물량 원문 조회 실패"
       ]
     },
@@ -191,6 +188,7 @@
       "code": "096250",
       "name": "와이즈넛",
       "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
         "구주물량 원문 조회 실패"
       ]
     },
@@ -261,6 +259,7 @@
       "code": "209640",
       "name": "와이제이링크",
       "gaps": [
+        "원천 재수집 실패(기존 값 유지)",
         "구주물량 원문 조회 실패"
       ]
     }
@@ -505,7 +504,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 16,
+    "cases": 18,
     "evicted_cases": 0,
     "recheck_candidates": 8,
     "retries": [
@@ -697,17 +696,25 @@
         "corp_code": "00534729",
         "name": "디티에스",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "ca32af0b1abb4963c3b1",
-        "signature": "c28aceb2c6089ff1c5ca",
+        "source_revision": "2e693338de9b68cb071b",
+        "signature": "56a3bad8ffcefba1c96a",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -948,17 +955,24 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e3a3593615544bfee44b",
-        "signature": "25df2e8ecc1a2b8f8f60",
+        "source_revision": "612bcff9787869233d22",
+        "signature": "f173038ae6849d440e82",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=1&offset=844&length=2109634&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
           }
         ]
       },
@@ -1485,6 +1499,26 @@
         ]
       },
       {
+        "corp_code": "00351427",
+        "name": "와이즈넛",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "e6391b82e26d7de2853b",
+        "signature": "cca9db0bd004612a24f0",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250114000178 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      },
+      {
         "corp_code": "01455492",
         "name": "데이원컴퍼니",
         "parser_revision": "ba777e3d84cec182a159",
@@ -1688,18 +1722,25 @@
       {
         "corp_code": "01023211",
         "name": "와이제이링크",
-        "parser_revision": "10274a61b9a097f28012",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "524e52235504a8041610",
-        "signature": "d5fed44993fea5aa657b",
+        "signature": "bb78836383075c2005fe",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-26",
-        "next_retry": "2026-09-27",
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-26",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241007000470&dcmNo=10136820&eleId=2&offset=754444&length=23305&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
           }
         ]
       }

@@ -963,7 +963,7 @@
         }
       },
       "security_type": "equity",
-      "quality_attempted_at": "2026-09-29",
+      "quality_attempted_at": "2026-10-10",
       "listing_date_check": {
         "status": "missing",
         "current": "",
@@ -974,19 +974,31 @@
       "quality_offering_receipt": "20260911000314",
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "ca32af0b1abb4963c3b1",
-        "signature": "c28aceb2c6089ff1c5ca",
+        "source_revision": "2e693338de9b68cb071b",
+        "signature": "56a3bad8ffcefba1c96a",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
+      },
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       }
     },
     {
@@ -2882,24 +2894,35 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-29",
-      "quality_attempted_at": "2026-09-29",
+      "quality_attempted_at": "2026-10-10",
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e3a3593615544bfee44b",
-        "signature": "25df2e8ecc1a2b8f8f60",
+        "source_revision": "612bcff9787869233d22",
+        "signature": "f173038ae6849d440e82",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-29",
-        "next_retry": "2026-09-30",
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-29",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=1&offset=844&length=2109634&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
           }
         ]
       },
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=23&offset=4472809&length=1152726&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=23&offset=4472809&length=1152726&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=1&offset=844&length=2109634&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      }
     },
     {
       "corp_code": "01863318",
@@ -21545,7 +21568,7 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-09-24",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-24",
@@ -21557,7 +21580,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-24",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250114000178&dcmNo=10263780&eleId=2&offset=64787&length=443&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250114000178&dcmNo=10263780&eleId=2&offset=64787&length=443&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250114000178 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "e6391b82e26d7de2853b",
+        "signature": "cca9db0bd004612a24f0",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
+        "history": [
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250114000178 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01590528",
@@ -27240,7 +27285,7 @@
         "summary_kind": "cumulative",
         "quantity_unit": "주"
       },
-      "quality_attempted_at": "2026-09-26",
+      "quality_attempted_at": "2026-10-10",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-26",
@@ -27259,22 +27304,33 @@
         "rcept_no": "20241007000470"
       },
       "quality_repair_state": {
-        "parser_revision": "10274a61b9a097f28012",
+        "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "524e52235504a8041610",
-        "signature": "d5fed44993fea5aa657b",
+        "signature": "bb78836383075c2005fe",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-26",
-        "next_retry": "2026-09-27",
+        "outcome": "source_error",
+        "last_attempt": "2026-10-10",
+        "next_retry": "2026-10-11",
         "history": [
           {
             "at": "2026-09-26",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-10",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241007000470&dcmNo=10136820&eleId=2&offset=754444&length=23305&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
           }
         ]
       },
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241007000470 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241007000470 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-10",
+        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20241007000470&dcmNo=10136820&eleId=2&offset=754444&length=23305&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      }
     },
     {
       "corp_code": "01275489",
@@ -29542,30 +29598,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-09-04",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-04",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-05",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
     {
       "date": "2026-09-05",
       "name": "열매컴퍼니",
@@ -33541,6 +33573,30 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -33549,73 +33605,73 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-10-09",
+      "excluded_at": "2026-10-10",
       "memo": ""
     }
   }
