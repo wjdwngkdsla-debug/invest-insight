@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -3789,7 +3789,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -3800,7 +3800,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -3922,7 +3922,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3936,7 +3936,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3950,7 +3950,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     }
@@ -15468,7 +15468,7 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-09-25",
+      "quality_attempted_at": "2026-10-11",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-25",
@@ -15480,7 +15480,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-25",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250716000294&dcmNo=10725171&eleId=4&offset=724782&length=490&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250716000294&dcmNo=10725171&eleId=4&offset=724782&length=490&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-11",
+        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "6a3472237c40635bb7c0",
+        "signature": "ed34830e3040acfefa09",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-11",
+        "next_retry": "2026-10-12",
+        "history": [
+          {
+            "at": "2026-10-11",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01782004",
@@ -19413,7 +19435,7 @@
         "reviewed_correction_receipt": "20250304000156",
         "quantity_unit": "주"
       },
-      "quality_attempted_at": "2026-09-23",
+      "quality_attempted_at": "2026-10-11",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-23",
@@ -19425,7 +19447,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-23",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250304000156&dcmNo=10373745&eleId=1&offset=655&length=390427&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250304000156&dcmNo=10373745&eleId=1&offset=655&length=390427&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-11",
+        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "e870d0a69a5cd011ec4b",
+        "signature": "5dd90f2697dcfd15b55b",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-11",
+        "next_retry": "2026-10-12",
+        "history": [
+          {
+            "at": "2026-10-11",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01022142",
@@ -21320,7 +21364,7 @@
         "quantity_unit": "주"
       },
       "holder_overrides": {},
-      "quality_attempted_at": "2026-09-25",
+      "quality_attempted_at": "2026-10-11",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-25",
@@ -21332,7 +21376,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-25",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250117000296 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250117000296 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-11",
+        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01728167&bgn_de=20240609&end_de=20250306&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c2d50>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "07ff653dc1ddebfe1112",
+        "signature": "b66bd59f518a3b77cdb2",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-11",
+        "next_retry": "2026-10-12",
+        "history": [
+          {
+            "at": "2026-10-11",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01728167&bgn_de=20240609&end_de=20250306&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c2d50>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "00863533",
@@ -23994,7 +24060,7 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-09-24",
+      "quality_attempted_at": "2026-10-11",
       "result_source_check": {
         "status": "verified",
         "checked_at": "2026-09-24",
@@ -24006,7 +24072,29 @@
         "candidates": []
       },
       "quality_checked_at": "2026-09-24",
-      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000088 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+      "holder_source_error": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241106000088 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-11",
+        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01563922&bgn_de=20240323&end_de=20241218&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89345c83b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+      },
+      "quality_repair_state": {
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "9ae697460f4c5c86ed63",
+        "signature": "ce533d27ee54a6d105a7",
+        "consecutive_attempts": 1,
+        "outcome": "source_error",
+        "last_attempt": "2026-10-11",
+        "next_retry": "2026-10-12",
+        "history": [
+          {
+            "at": "2026-10-11",
+            "outcome": "source_error",
+            "reasons": [
+              "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01563922&bgn_de=20240323&end_de=20241218&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89345c83b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
+            ]
+          }
+        ]
+      }
     },
     {
       "corp_code": "01383779",
@@ -29710,30 +29798,6 @@
     {
       "date": "2026-09-06",
       "name": "스탁키퍼",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-09-22",
-      "new": "2026-06-10"
-    },
-    {
-      "date": "2026-09-06",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-06",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-06",
-      "name": "스탁키퍼",
       "type": "수동편입",
       "field": "상태",
       "old": "미등록",
@@ -33706,6 +33770,30 @@
       "field": "청약 종료",
       "old": "2026-10-29",
       "new": "2026-10-07"
+    },
+    {
+      "date": "2026-10-11",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-11",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-11",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -33714,73 +33802,73 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-10-10",
+      "excluded_at": "2026-10-11",
       "memo": ""
     }
   }
