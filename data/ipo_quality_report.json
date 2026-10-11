@@ -1,28 +1,9 @@
 {
-  "checked_at": "2026-10-11T10:37:24.186389+09:00",
-  "refreshed": [],
-  "failures": [
-    {
-      "corp_code": "00112998",
-      "name": "서울보증보험",
-      "error": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-    },
-    {
-      "corp_code": "01563922",
-      "name": "엠오티",
-      "error": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01563922&bgn_de=20240323&end_de=20241218&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89345c83b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-    },
-    {
-      "corp_code": "01728167",
-      "name": "아이지넷",
-      "error": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01728167&bgn_de=20240609&end_de=20250306&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c2d50>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-    },
-    {
-      "corp_code": "01708163",
-      "name": "엔알비",
-      "error": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-    }
+  "checked_at": "2026-10-12T02:21:52.790576+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스"
   ],
+  "failures": [],
   "issues": [
     {
       "corp_code": "01028933",
@@ -38,24 +19,7 @@
       "name": "진코스텍",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률",
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01705740",
-      "code": "",
-      "name": "엠비디",
-      "gaps": [
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률",
-        "구주물량 원문 조회 실패"
+        "상장일 미정"
       ]
     },
     {
@@ -63,6 +27,7 @@
       "code": "",
       "name": "엘리스그룹",
       "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
         "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
         "개인청약경쟁률"
@@ -80,100 +45,11 @@
       ]
     },
     {
-      "corp_code": "01706509",
-      "code": "",
-      "name": "다비오",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01705573",
-      "code": "",
-      "name": "유캐스트",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01649408",
-      "code": "",
-      "name": "인텔리빅스",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01956751",
-      "code": "",
-      "name": "래블업",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "00579342",
-      "code": "",
-      "name": "영광",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01378005",
-      "code": "",
-      "name": "이에스티",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01797635",
-      "code": "",
-      "name": "에이엘로봇",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
       "corp_code": "01835829",
       "code": "",
       "name": "바로팜",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01950720",
-      "code": "",
-      "name": "제논",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01025617",
-      "code": "",
-      "name": "하나에어로다이내믹스",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01880139",
-      "code": "",
-      "name": "케이엠에프",
-      "gaps": [
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "02031369",
-      "code": "950260",
-      "name": "인제니아테라퓨틱스",
-      "gaps": [
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -181,8 +57,7 @@
       "code": "318060",
       "name": "그래피",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -190,16 +65,7 @@
       "code": "475230",
       "name": "엔알비",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
-      ]
-    },
-    {
-      "corp_code": "01335143",
-      "code": "376900",
-      "name": "로킷헬스케어",
-      "gaps": [
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -215,8 +81,7 @@
       "code": "462860",
       "name": "더즌",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -224,8 +89,7 @@
       "code": "031210",
       "name": "서울보증보험",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -233,8 +97,7 @@
       "code": "303810",
       "name": "동국생명과학",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -242,8 +105,7 @@
       "code": "475830",
       "name": "오름테라퓨틱",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -251,8 +113,7 @@
       "code": "452450",
       "name": "피아이이",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -260,8 +121,7 @@
       "code": "462980",
       "name": "아이지넷",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -269,8 +129,7 @@
       "code": "096250",
       "name": "와이즈넛",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -278,8 +137,7 @@
       "code": "450950",
       "name": "아스테라시스",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -287,8 +145,7 @@
       "code": "459100",
       "name": "위츠",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -296,8 +153,7 @@
       "code": "466410",
       "name": "사이냅소프트",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -305,8 +161,7 @@
       "code": "413390",
       "name": "엠오티",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -346,8 +201,7 @@
       "code": "465480",
       "name": "인스피언",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)",
-        "구주물량 원문 조회 실패"
+        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -399,6 +253,13 @@
     {
       "corp_code": "01658035",
       "name": "옵토닉스",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "01795859",
+      "name": "엔키화이트햇",
       "notes": [
         "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
       ]
@@ -607,7 +468,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 19,
+    "cases": 20,
     "evicted_cases": 0,
     "recheck_candidates": 9,
     "retries": [
@@ -617,16 +478,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "9aa3add343dfb8c43d27",
         "signature": "43180574278103cf40da",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-14",
         "history": [
-          {
-            "at": "2026-09-27",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-03",
             "outcome": "rejected",
@@ -653,6 +509,13 @@
           },
           {
             "at": "2026-10-08",
+            "outcome": "unresolved",
+            "reasons": [
+              "상장일 미정"
+            ]
+          },
+          {
+            "at": "2026-10-12",
             "outcome": "unresolved",
             "reasons": [
               "상장일 미정"
@@ -702,44 +565,16 @@
         ]
       },
       {
-        "corp_code": "01705740",
-        "name": "엠비디",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "8cbd054b34519dc1976d",
-        "signature": "c6196ebcf88c9e4a65cc",
-        "consecutive_attempts": 2,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          }
-        ]
-      },
-      {
         "corp_code": "01754737",
         "name": "엘리스그룹",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "827a6e04d1e6ac3d5956",
-        "signature": "8d6354e9b19bcb68c880",
+        "source_revision": "4b66f6d59cf82f7761a6",
+        "signature": "5f5a34426226176bff12",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-07",
-        "next_retry": "2026-10-08",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-02",
             "outcome": "rejected",
@@ -768,6 +603,14 @@
             "at": "2026-10-07",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-12",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -841,29 +684,6 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
-          }
-        ]
-      },
-      {
-        "corp_code": "01706509",
-        "name": "다비오",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "55f6a7287b418f0cf052",
-        "signature": "aa1da366c517fece17eb",
-        "consecutive_attempts": 2,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
           }
         ]
       },
@@ -1037,6 +857,29 @@
         ]
       },
       {
+        "corp_code": "01705740",
+        "name": "엠비디",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "8cbd054b34519dc1976d",
+        "signature": "c6196ebcf88c9e4a65cc",
+        "consecutive_attempts": 2,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "00784184",
         "name": "동원파츠",
         "parser_revision": "ba777e3d84cec182a159",
@@ -1128,6 +971,29 @@
         "history": [
           {
             "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01706509",
+        "name": "다비오",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "55f6a7287b418f0cf052",
+        "signature": "aa1da366c517fece17eb",
+        "consecutive_attempts": 2,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -1384,16 +1250,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 11,
+        "consecutive_attempts": 12,
         "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
-          {
-            "at": "2026-10-04",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-05",
             "outcome": "verified",
@@ -1411,6 +1272,11 @@
           },
           {
             "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-12",
             "outcome": "verified",
             "reasons": []
           }
@@ -1570,10 +1436,10 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "4aa5edf55d2f86c530f2",
         "signature": "a2499541ef2b0bc2116c",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "rejected",
-        "last_attempt": "2026-10-06",
-        "next_retry": "2026-10-10",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-19",
         "history": [
           {
             "at": "2026-10-03",
@@ -1593,6 +1459,14 @@
           },
           {
             "at": "2026-10-06",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-12",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
