@@ -1,7 +1,9 @@
 {
-  "checked_at": "2026-10-12T02:21:52.790576+09:00",
+  "checked_at": "2026-10-12T11:20:05.222841+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "인스피언",
+    "씨메스로보틱스",
+    "쓰리빌리언"
   ],
   "failures": [],
   "issues": [
@@ -18,7 +20,6 @@
       "code": "250030",
       "name": "진코스텍",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
         "상장일 미정"
       ]
     },
@@ -165,14 +166,6 @@
       ]
     },
     {
-      "corp_code": "01506617",
-      "code": "394800",
-      "name": "쓰리빌리언",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
       "corp_code": "01703849",
       "code": "473980",
       "name": "노머스",
@@ -184,22 +177,6 @@
       "corp_code": "01480708",
       "code": "376270",
       "name": "에이치이엠파마",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01588189",
-      "code": "475400",
-      "name": "씨메스로보틱스",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01284876",
-      "code": "465480",
-      "name": "인스피언",
       "gaps": [
         "원천 재수집 실패(기존 값 유지)"
       ]
@@ -468,9 +445,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 20,
+    "cases": 21,
     "evicted_cases": 0,
-    "recheck_candidates": 9,
+    "recheck_candidates": 10,
     "retries": [
       {
         "corp_code": "01028933",
@@ -527,12 +504,12 @@
         "corp_code": "01158632",
         "name": "진코스텍",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "ac2c2a1730e7d936ae4d",
-        "signature": "c527ea7641109083ef91",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-10",
+        "source_revision": "9accc7d85eef1d93aa2b",
+        "signature": "6406315a4b2e8c26c3c3",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
           {
             "at": "2026-09-27",
@@ -560,6 +537,13 @@
             "reasons": [
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
+          },
+          {
+            "at": "2026-10-12",
+            "outcome": "unresolved",
+            "reasons": [
+              "상장일 미정"
             ]
           }
         ]
@@ -1717,12 +1701,12 @@
         "corp_code": "01506617",
         "name": "쓰리빌리언",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "f55d2e5fa6ba6a3e2a14",
-        "signature": "a2b974d8d2f42ea97db4",
+        "source_revision": "1929b676adb60b1907d9",
+        "signature": "08af33d35f7dbd5bd141",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-09",
-        "next_retry": "2026-10-10",
+        "outcome": "verified",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
           {
             "at": "2026-10-09",
@@ -1730,6 +1714,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241108000515 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-12",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1820,12 +1809,12 @@
         "corp_code": "01588189",
         "name": "씨메스로보틱스",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "fe0c19f8a82ace3e3667",
-        "signature": "17c24d05fe34236fa7ea",
+        "source_revision": "62ac1c5a3e90d168b0ff",
+        "signature": "1f62c5db593a2e045310",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-09",
-        "next_retry": "2026-10-10",
+        "outcome": "verified",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
           {
             "at": "2026-10-09",
@@ -1833,6 +1822,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241014000124 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-12",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1840,12 +1834,12 @@
         "corp_code": "01284876",
         "name": "인스피언",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "4b9ccfc50b90ee2714b1",
-        "signature": "a67181b7405f373391b1",
+        "source_revision": "a3f0ae5c69b361b99a92",
+        "signature": "b73888f64a783dd4e1e9",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-09",
-        "next_retry": "2026-10-10",
+        "outcome": "verified",
+        "last_attempt": "2026-10-12",
+        "next_retry": "2026-10-13",
         "history": [
           {
             "at": "2026-10-09",
@@ -1853,6 +1847,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20241002000239 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-12",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
