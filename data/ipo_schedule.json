@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -4181,7 +4181,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4192,7 +4192,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4203,7 +4203,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4217,7 +4217,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4231,7 +4231,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     }
@@ -21854,8 +21854,6 @@
           "qty": 600419,
           "pct": 95.3,
           "source": "manual_fixed",
-          "reported_total": 630000,
-          "locked": true,
           "visible": true
         },
         {
@@ -21863,8 +21861,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 630000,
-          "locked": true,
           "visible": true
         },
         {
@@ -21872,8 +21868,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 630000,
-          "locked": true,
           "visible": true
         },
         {
@@ -21881,8 +21875,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 630000,
-          "locked": true,
           "visible": true
         },
         {
@@ -21901,7 +21893,6 @@
           "qty": 40727750,
           "pct": 99.68,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -21909,7 +21900,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -21917,7 +21907,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -21925,7 +21914,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -23692,8 +23680,6 @@
           "qty": 2231577,
           "pct": 99.18,
           "source": "manual_fixed",
-          "reported_total": 2250000,
-          "locked": true,
           "visible": true
         },
         {
@@ -23701,8 +23687,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 2250000,
-          "locked": true,
           "visible": true
         },
         {
@@ -23710,8 +23694,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 2250000,
-          "locked": true,
           "visible": true
         },
         {
@@ -23719,8 +23701,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 2250000,
-          "locked": true,
           "visible": true
         },
         {
@@ -23739,7 +23719,6 @@
           "qty": 2238921000,
           "pct": 99.77,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -23747,7 +23726,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -23755,7 +23733,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -23763,7 +23740,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -23952,8 +23928,6 @@
           "qty": 654305,
           "pct": 97.97,
           "source": "manual_fixed",
-          "reported_total": 667875,
-          "locked": true,
           "visible": true
         },
         {
@@ -23961,8 +23935,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 667875,
-          "locked": true,
           "visible": true
         },
         {
@@ -23970,8 +23942,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 667875,
-          "locked": true,
           "visible": true
         },
         {
@@ -23979,8 +23949,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 667875,
-          "locked": true,
           "visible": true
         },
         {
@@ -23999,7 +23967,6 @@
           "qty": 679004000,
           "pct": 99.65,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -24007,7 +23974,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -24015,7 +23981,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -24023,7 +23988,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -30280,30 +30244,6 @@
   "history": [
     {
       "date": "2026-09-11",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-11",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-11",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-11",
       "name": "스탁키퍼",
       "type": "검토대기",
       "field": "노출",
@@ -34229,6 +34169,30 @@
       "field": "청약 종료",
       "old": "2026-10-27",
       "new": "2026-11-09"
+    },
+    {
+      "date": "2026-10-13",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-13",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-13",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     },
     {
       "date": "2026-10-13",
