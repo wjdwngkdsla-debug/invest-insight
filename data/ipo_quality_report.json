@@ -1,10 +1,9 @@
 {
-  "checked_at": "2026-10-13T12:59:35.891892+09:00",
+  "checked_at": "2026-10-14T04:03:35.471257+09:00",
   "refreshed": [
-    "에이치이엠파마",
-    "사이냅소프트",
-    "위츠",
-    "와이즈넛"
+    "그래피",
+    "디티에스",
+    "바로팜"
   ],
   "failures": [],
   "issues": [
@@ -30,25 +29,18 @@
       "name": "엘리스그룹",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
+        "상장일 미정"
+      ]
+    },
+    {
+      "corp_code": "01749559",
+      "code": "",
+      "name": "엠에스바이오",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
         "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
         "개인청약경쟁률"
-      ]
-    },
-    {
-      "corp_code": "00534729",
-      "code": "",
-      "name": "디티에스",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01835829",
-      "code": "",
-      "name": "바로팜",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -68,14 +60,6 @@
         "희망가상단",
         "주관사",
         "구주물량(기존주주 표 미발견)"
-      ]
-    },
-    {
-      "corp_code": "01565054",
-      "code": "318060",
-      "name": "그래피",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -414,7 +398,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 23,
+    "cases": 24,
     "evicted_cases": 0,
     "recheck_candidates": 11,
     "retries": [
@@ -571,18 +555,13 @@
         "corp_code": "01749559",
         "name": "엠에스바이오",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "3b7d0a5b4323aa012199",
-        "signature": "73ae4860a72dcdd2cf53",
+        "source_revision": "6eb0714b158d084b7f2c",
+        "signature": "ead5923ca9066173ae4a",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-03",
             "outcome": "rejected",
@@ -611,6 +590,14 @@
             "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -618,12 +605,12 @@
         "corp_code": "00534729",
         "name": "디티에스",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "2e693338de9b68cb071b",
-        "signature": "56a3bad8ffcefba1c96a",
+        "source_revision": "fba7f68ac69f79051217",
+        "signature": "54c616f3e6703e96088f",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-10",
-        "next_retry": "2026-10-11",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-09-29",
@@ -637,6 +624,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -836,12 +828,12 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "612bcff9787869233d22",
-        "signature": "f173038ae6849d440e82",
+        "source_revision": "5327b7cf86071dde6363",
+        "signature": "031f17b4265f2dc7a9f6",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-10",
-        "next_retry": "2026-10-11",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-09-29",
@@ -854,6 +846,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20261001000582&dcmNo=11600397&eleId=1&offset=844&length=2109634&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1372,12 +1369,12 @@
         "corp_code": "01565054",
         "name": "그래피",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e6737e97c592037cfe75",
-        "signature": "bf9c1e14f26db7cf2036",
+        "source_revision": "4a57c2abfa9f6552abef",
+        "signature": "9283011efddd040b0a55",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-10",
-        "next_retry": "2026-10-11",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-10",
@@ -1385,6 +1382,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250808000193 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },

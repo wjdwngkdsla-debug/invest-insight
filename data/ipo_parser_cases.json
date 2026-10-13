@@ -371,6 +371,20 @@
       "truncated": false,
       "replayed_parser": "ba777e3d84cec182a159",
       "probe": "full_document_required"
+    },
+    "9b51d56a7cacc178596c": {
+      "corp_code": "01749559",
+      "name": "엠에스바이오",
+      "receipt": "20261007000328",
+      "kind": "holders",
+      "reason": "공시 대기: 개인청약경쟁률; 공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+      "first_seen": "2026-10-14",
+      "last_seen": "2026-10-14",
+      "observations": 1,
+      "status": "unresolved",
+      "captured_parser": "ba777e3d84cec182a159",
+      "excerpt": "<TABLE BORDER=\"1\" WIDTH=\"604\" ACLASS=\"NORMAL\" AFIXTABLE=\"N\">\n\n<COLGROUP WIDTH=\"604\">\n<COL WIDTH=\"224\"></COL>\n<COL WIDTH=\"92\"></COL>\n<COL WIDTH=\"98\"></COL>\n<COL WIDTH=\"92\"></COL>\n<COL WIDTH=\"98\"></COL>\n</COLGROUP>\n\n<THEAD>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"53\">\n<TH WIDTH=\"215\" VALIGN=\"MIDDLE\" ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" ROWSPAN=\"2\" HEIGHT=\"99\">구분</TH>\n<TH WIDTH=\"181\" VALIGN=\"MIDDLE\" ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" COLSPAN=\"2\" HEIGHT=\"46\">공모 후 기준</TH>\n<TH WIDTH=\"181\" ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" COLSPAN=\"2\" HEIGHT=\"46\">주식매수선택권 및신주인수권 행사 시</TH>\n</TR>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"53\">\n<TH VALIGN=\"MIDDLE\" ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" WIDTH=\"83\" HEIGHT=\"46\">유통가능주식수</TH>\n<TH VALIGN=\"MIDDLE\" ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" WIDTH=\"89\" HEIGHT=\"46\">유통가능주식수 비율</TH>\n<TH ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"46\">유통가능주식수</TH>\n<TH ACOPYCOL=\"Y\" ADELETECOL=\"Y\" AMOVECOL=\"N\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"46\">유통가능주식수 비율</TH>\n</TR>\n</THEAD>\n\n<TBODY>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"30\">\n<TD ALIGN=\"CENTER\" WIDTH=\"215\" HEIGHT=\"23\">상장일 유통가능</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"83\" HEIGHT=\"23\">6,347,310</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"89\" HEIGHT=\"23\">23.33%</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"23\">6,371,310</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"23\">22.86%</TD>\n</TR>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"30\">\n<TD ALIGN=\"CENTER\" WIDTH=\"215\" HEIGHT=\"23\">상장 후 3개월 뒤 유통가능</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"83\" HEIGHT=\"23\">12,419,175</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"89\" HEIGHT=\"23\">45.65%</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"23\">12,459,175</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"23\">44.71%</TD>\n</TR>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"30\">\n<TD ALIGN=\"CENTER\" WIDTH=\"215\" HEIGHT=\"23\">상장 후 6개월 뒤 유통가능</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"83\" HEIGHT=\"23\">14,081,810</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"89\" HEIGHT=\"23\">51.77%</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"23\">14,633,210</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"23\">52.51%</TD>\n</TR>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"30\">\n<TD ALIGN=\"CENTER\" WIDTH=\"215\" HEIGHT=\"23\">상장 후 1년 뒤 유통가능</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"83\" HEIGHT=\"23\">19,961,695</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"89\" HEIGHT=\"23\">73.38%</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"23\">20,513,095</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"23\">73.61%</TD>\n</TR>\n\n<TR ACOPY=\"Y\" ADELETE=\"Y\" HEIGHT=\"30\">\n<TD ALIGN=\"CENTER\" WIDTH=\"215\" HEIGHT=\"23\">상장 후 2년 6개월 뒤 유통가능</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"83\" HEIGHT=\"23\">27,202,650</TD>\n<TD ALIGN=\"RIGHT\" WIDTH=\"89\" HEIGHT=\"23\">100.00%</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"83\" HEIGHT=\"23\">27,866,050</TD>\n<TD ALIGN=\"RIGHT\" VALIGN=\"MIDDLE\" WIDTH=\"89\" HEIGHT=\"23\">100.00%</TD>\n</TR>\n</TBODY>\n</TABLE>",
+      "truncated": false
     }
   }
 }
