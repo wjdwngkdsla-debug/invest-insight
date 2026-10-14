@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-10-14T04:03:35.471257+09:00",
+  "checked_at": "2026-10-14T10:51:53.715049+09:00",
   "refreshed": [
-    "그래피",
-    "디티에스",
-    "바로팜"
+    "엠오티",
+    "아이지넷",
+    "오름테라퓨틱"
   ],
   "failures": [],
   "issues": [
@@ -103,35 +103,11 @@
       ]
     },
     {
-      "corp_code": "01658831",
-      "code": "475830",
-      "name": "오름테라퓨틱",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01728167",
-      "code": "462980",
-      "name": "아이지넷",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
       "corp_code": "01590528",
       "code": "450950",
       "name": "아스테라시스",
       "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01563922",
-      "code": "413390",
-      "name": "엠오티",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -398,9 +374,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 24,
+    "cases": 27,
     "evicted_cases": 0,
-    "recheck_candidates": 11,
+    "recheck_candidates": 12,
     "retries": [
       {
         "corp_code": "01028933",
@@ -1537,12 +1513,12 @@
         "corp_code": "01658831",
         "name": "오름테라퓨틱",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "fae14ab5f5b4b809f1e0",
-        "signature": "c9503e72257dd10157df",
+        "source_revision": "9b19b1acd782b608ccce",
+        "signature": "60e5653e0cde113ee04e",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-11",
@@ -1550,6 +1526,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /dsaf001/main.do?rcpNo=20250203000294 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1582,12 +1563,12 @@
         "corp_code": "01728167",
         "name": "아이지넷",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "07ff653dc1ddebfe1112",
-        "signature": "b66bd59f518a3b77cdb2",
+        "source_revision": "81e8f1c828eaa04e7516",
+        "signature": "96ee4ac0d0d2569ee6d9",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-11",
@@ -1595,6 +1576,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01728167&bgn_de=20240609&end_de=20250306&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c2d50>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1628,17 +1614,25 @@
         "name": "아스테라시스",
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "92290b9ad3e7ee2140c6",
-        "signature": "399134ca79d3d4eee6c5",
+        "signature": "d65a3984bce0e1d0443d",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-11",
             "outcome": "source_error",
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250117000237&dcmNo=10267950&eleId=1&offset=578&length=2434&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+            ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
             ]
           }
         ]
@@ -1715,12 +1709,12 @@
         "corp_code": "01563922",
         "name": "엠오티",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "9ae697460f4c5c86ed63",
-        "signature": "ce533d27ee54a6d105a7",
+        "source_revision": "f734e9bceb4742ae2326",
+        "signature": "337e3d04108f50b28c2d",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-14",
+        "next_retry": "2026-10-15",
         "history": [
           {
             "at": "2026-10-11",
@@ -1728,6 +1722,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01563922&bgn_de=20240323&end_de=20241218&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89345c83b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
