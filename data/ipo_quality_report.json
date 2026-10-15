@@ -1,7 +1,10 @@
 {
-  "checked_at": "2026-10-15T01:43:01.205214+09:00",
+  "checked_at": "2026-10-15T10:27:28.581517+09:00",
   "refreshed": [
-    "동국생명과학"
+    "서울보증보험",
+    "더즌",
+    "엔알비",
+    "인제니아테라퓨틱스"
   ],
   "failures": [],
   "issues": [
@@ -82,35 +85,11 @@
       ]
     },
     {
-      "corp_code": "01708163",
-      "code": "475230",
-      "name": "엔알비",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
       "corp_code": "01594791",
       "code": "459510",
       "name": "나우로보틱스",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01563667",
-      "code": "462860",
-      "name": "더즌",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "00112998",
-      "code": "031210",
-      "name": "서울보증보험",
-      "gaps": [
-        "원천 재수집 실패(기존 값 유지)"
       ]
     },
     {
@@ -387,7 +366,7 @@
   "repair_memory": {
     "cases": 31,
     "evicted_cases": 0,
-    "recheck_candidates": 14,
+    "recheck_candidates": 16,
     "retries": [
       {
         "corp_code": "01028933",
@@ -1223,16 +1202,11 @@
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 12,
+        "consecutive_attempts": 13,
         "outcome": "verified",
-        "last_attempt": "2026-10-12",
-        "next_retry": "2026-10-13",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
-          {
-            "at": "2026-10-05",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-06",
             "outcome": "verified",
@@ -1250,6 +1224,11 @@
           },
           {
             "at": "2026-10-12",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-15",
             "outcome": "verified",
             "reasons": []
           }
@@ -1374,12 +1353,12 @@
         "corp_code": "01708163",
         "name": "엔알비",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "6a3472237c40635bb7c0",
-        "signature": "ed34830e3040acfefa09",
+        "source_revision": "23051638ab21a367b462",
+        "signature": "c395649e82264765bf57",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -1387,6 +1366,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1457,12 +1441,12 @@
         "corp_code": "01563667",
         "name": "더즌",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "8cb289350daed33fde16",
-        "signature": "2f92416e45565ee02d94",
+        "source_revision": "83d8a86534d231f85987",
+        "signature": "f835d79bf4c9f42d21b7",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -1470,6 +1454,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250311000718&dcmNo=10391084&eleId=1&offset=677&length=360509&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1477,12 +1466,12 @@
         "corp_code": "00112998",
         "name": "서울보증보험",
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e870d0a69a5cd011ec4b",
-        "signature": "5dd90f2697dcfd15b55b",
+        "source_revision": "cb87a28c9fd476361a76",
+        "signature": "1177597ffc7d3aae6e02",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -1490,6 +1479,11 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },

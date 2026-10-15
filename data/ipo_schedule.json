@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15 00:38",
+  "updated": "2026-10-15 09:16",
   "items": [
     {
       "corp_code": "00104069",
@@ -6839,35 +6839,35 @@
           "qty": 184900059,
           "pct": 97.77,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         }
       ],
       "manual_commit_apply": {
@@ -7097,13 +7097,13 @@
         }
       },
       "security_type": "depositary_receipt",
-      "quality_attempted_at": "2026-10-12",
+      "quality_attempted_at": "2026-10-15",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-12",
+        "checked_at": "2026-10-15",
         "rcept_no": "20260804000371"
       },
-      "quality_checked_at": "2026-10-12",
+      "quality_checked_at": "2026-10-15",
       "listing_date_check": {
         "status": "missing",
         "current": "2026-08-18",
@@ -7113,23 +7113,18 @@
       "quality_offering_receipt": "20260728000402",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-12",
+        "checked_at": "2026-10-15",
         "rcept_no": "20260728000402"
       },
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 12,
+        "consecutive_attempts": 13,
         "outcome": "verified",
-        "last_attempt": "2026-10-12",
-        "next_retry": "2026-10-13",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
-          {
-            "at": "2026-10-05",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-06",
             "outcome": "verified",
@@ -7147,6 +7142,11 @@
           },
           {
             "at": "2026-10-12",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-15",
             "outcome": "verified",
             "reasons": []
           }
@@ -15679,32 +15679,36 @@
           "period": "미확약",
           "qty": 1251633000,
           "pct": 99.23,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250716000294"
         },
         {
           "period": "15일",
           "qty": 3273000,
           "pct": 0.26,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250716000294"
         },
         {
           "period": "1개월",
           "qty": 1860000,
           "pct": 0.15,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250716000294"
         },
         {
           "period": "3개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250716000294"
         },
         {
           "period": "6개월",
           "qty": 4538000,
           "pct": 0.36,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250716000294"
         }
       ],
       "is_listing_ipo": true,
@@ -15718,6 +15722,7 @@
           "qty": 1542220,
           "pct": 97.92,
           "source": "dart_table",
+          "reported_total": 1575000,
           "rcept_no": "20250722000150"
         },
         {
@@ -15725,6 +15730,7 @@
           "qty": 700,
           "pct": 0.04,
           "source": "dart_table",
+          "reported_total": 1575000,
           "rcept_no": "20250722000150"
         },
         {
@@ -15732,6 +15738,7 @@
           "qty": 13970,
           "pct": 0.89,
           "source": "dart_table",
+          "reported_total": 1575000,
           "rcept_no": "20250722000150"
         },
         {
@@ -15739,6 +15746,8 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
+          "reported_total": 1575000,
+          "locked": true,
           "visible": true
         },
         {
@@ -15746,6 +15755,7 @@
           "qty": 18110,
           "pct": 1.15,
           "source": "dart_table",
+          "reported_total": 1575000,
           "rcept_no": "20250722000150"
         }
       ],
@@ -15838,10 +15848,10 @@
           "reason": "기존주주 표 미발견"
         }
       },
-      "quality_attempted_at": "2026-10-11",
+      "quality_attempted_at": "2026-10-15",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-09-25",
+        "checked_at": "2026-10-15",
         "rcept_no": "20250722000150"
       },
       "listing_date_check": {
@@ -15849,19 +15859,15 @@
         "current": "2025-07-28",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-25",
-      "quality_refresh_error": {
-        "checked_at": "2026-10-11",
-        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-      },
+      "quality_checked_at": "2026-10-15",
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "6a3472237c40635bb7c0",
-        "signature": "ed34830e3040acfefa09",
+        "source_revision": "23051638ab21a367b462",
+        "signature": "c395649e82264765bf57",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -15869,9 +15875,21 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=01708163&bgn_de=20241130&end_de=20250827&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c3530>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
-      }
+      },
+      "quality_offering_receipt": "20250716000294",
+      "application_source_check": {
+        "status": "verified",
+        "checked_at": "2026-10-15",
+        "rcept_no": "20250716000294"
+      },
+      "result_capital": {}
     },
     {
       "corp_code": "01782004",
@@ -18705,33 +18723,36 @@
           "period": "미확약",
           "qty": 859955400,
           "pct": 99.28,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250311000718"
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250311000718"
         },
         {
           "period": "1개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250311000718"
         },
         {
           "period": "3개월",
           "qty": 1875000,
           "pct": 0.22,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250311000718"
         },
         {
           "period": "6개월",
           "qty": 4330000,
           "pct": 0.5,
-          "source": "dart_table"
+          "source": "dart_table",
+          "rcept_no": "20250311000718"
         }
       ],
       "is_listing_ipo": true,
@@ -18760,13 +18781,18 @@
         {
           "period": "미확약",
           "qty": 1716115,
-          "pct": 91.53
+          "pct": 91.53,
+          "source": "dart_table",
+          "reported_total": 1875000,
+          "rcept_no": "20250317000685"
         },
         {
           "period": "15일",
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
+          "reported_total": 1875000,
+          "locked": true,
           "visible": true
         },
         {
@@ -18774,17 +18800,25 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
+          "reported_total": 1875000,
+          "locked": true,
           "visible": true
         },
         {
           "period": "3개월",
           "qty": 62614,
-          "pct": 3.34
+          "pct": 3.34,
+          "source": "dart_table",
+          "reported_total": 1875000,
+          "rcept_no": "20250317000685"
         },
         {
           "period": "6개월",
           "qty": 96271,
-          "pct": 5.13
+          "pct": 5.13,
+          "source": "dart_table",
+          "reported_total": 1875000,
+          "rcept_no": "20250317000685"
         }
       ],
       "report_rcp": "20250317000685",
@@ -18882,19 +18916,15 @@
         "quantity_unit": "주"
       },
       "holder_overrides": {},
-      "quality_attempted_at": "2026-10-11",
-      "quality_refresh_error": {
-        "checked_at": "2026-10-11",
-        "message": "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250311000718&dcmNo=10391084&eleId=1&offset=677&length=360509&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
-      },
+      "quality_attempted_at": "2026-10-15",
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "8cb289350daed33fde16",
-        "signature": "2f92416e45565ee02d94",
+        "source_revision": "83d8a86534d231f85987",
+        "signature": "f835d79bf4c9f42d21b7",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -18902,9 +18932,32 @@
             "reasons": [
               "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250311000718&dcmNo=10391084&eleId=1&offset=677&length=360509&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
-      }
+      },
+      "quality_offering_receipt": "20250311000718",
+      "application_source_check": {
+        "status": "verified",
+        "checked_at": "2026-10-15",
+        "rcept_no": "20250311000718"
+      },
+      "result_capital": {},
+      "result_source_check": {
+        "status": "verified",
+        "checked_at": "2026-10-15",
+        "rcept_no": "20250317000685"
+      },
+      "listing_date_check": {
+        "status": "missing",
+        "current": "2025-03-24",
+        "candidates": []
+      },
+      "quality_checked_at": "2026-10-15"
     },
     {
       "corp_code": "01590980",
@@ -19689,35 +19742,35 @@
           "qty": 773859460,
           "pct": 83.69,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250304000156"
         },
         {
           "period": "15일",
           "qty": 29551000,
           "pct": 3.2,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250304000156"
         },
         {
           "period": "1개월",
           "qty": 39896000,
           "pct": 4.31,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250304000156"
         },
         {
           "period": "3개월",
           "qty": 52803000,
           "pct": 5.71,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250304000156"
         },
         {
           "period": "6개월",
           "qty": 28547000,
           "pct": 3.09,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20250304000156"
         }
       ],
       "is_listing_ipo": true,
@@ -19730,6 +19783,8 @@
           "qty": 2000616,
           "pct": 51.35,
           "source": "manual_fixed",
+          "reported_total": 3896045,
+          "locked": true,
           "visible": true
         },
         {
@@ -19737,6 +19792,8 @@
           "qty": 88800,
           "pct": 2.28,
           "source": "manual_fixed",
+          "reported_total": 3896045,
+          "locked": true,
           "visible": true
         },
         {
@@ -19744,6 +19801,8 @@
           "qty": 133610,
           "pct": 3.43,
           "source": "manual_fixed",
+          "reported_total": 3896045,
+          "locked": true,
           "visible": true
         },
         {
@@ -19751,6 +19810,8 @@
           "qty": 343410,
           "pct": 8.81,
           "source": "manual_fixed",
+          "reported_total": 3896045,
+          "locked": true,
           "visible": true
         },
         {
@@ -19758,6 +19819,8 @@
           "qty": 1329609,
           "pct": 34.13,
           "source": "manual_fixed",
+          "reported_total": 3896045,
+          "locked": true,
           "visible": true
         }
       ],
@@ -19810,10 +19873,10 @@
         "reviewed_correction_receipt": "20250304000156",
         "quantity_unit": "주"
       },
-      "quality_attempted_at": "2026-10-11",
+      "quality_attempted_at": "2026-10-15",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-09-23",
+        "checked_at": "2026-10-15",
         "rcept_no": "20250310000183"
       },
       "listing_date_check": {
@@ -19821,19 +19884,15 @@
         "current": "2025-03-14",
         "candidates": []
       },
-      "quality_checked_at": "2026-09-23",
-      "quality_refresh_error": {
-        "checked_at": "2026-10-11",
-        "message": "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
-      },
+      "quality_checked_at": "2026-10-15",
       "quality_repair_state": {
         "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e870d0a69a5cd011ec4b",
-        "signature": "5dd90f2697dcfd15b55b",
+        "source_revision": "cb87a28c9fd476361a76",
+        "signature": "1177597ffc7d3aae6e02",
         "consecutive_attempts": 1,
-        "outcome": "source_error",
-        "last_attempt": "2026-10-11",
-        "next_retry": "2026-10-12",
+        "outcome": "verified",
+        "last_attempt": "2026-10-15",
+        "next_retry": "2026-10-16",
         "history": [
           {
             "at": "2026-10-11",
@@ -19841,9 +19900,21 @@
             "reasons": [
               "HTTPSConnectionPool(host='opendart.fss.or.kr', port=443): Max retries exceeded with url: /api/list.json?crtfc_key=<REDACTED>&corp_code=00112998&bgn_de=20240717&end_de=20250413&page_no=1&page_count=100&pblntf_ty=C (Caused by ConnectTimeoutError(<HTTPSConnection(host='opendart.fss.or.kr', port=443) at 0x7f89338c24b0>, 'Connection to opendart.fss.or.kr timed out. (connect timeout=30)'))"
             ]
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
-      }
+      },
+      "quality_offering_receipt": "20250304000156",
+      "application_source_check": {
+        "status": "verified",
+        "checked_at": "2026-10-15",
+        "rcept_no": "20250304000156"
+      },
+      "result_capital": {}
     },
     {
       "corp_code": "01022142",
@@ -20542,8 +20613,6 @@
           "qty": 1442020,
           "pct": 98.1,
           "source": "manual_fixed",
-          "reported_total": 1470000,
-          "locked": true,
           "visible": true
         },
         {
@@ -20551,8 +20620,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 1470000,
-          "locked": true,
           "visible": true
         },
         {
@@ -20560,8 +20627,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 1470000,
-          "locked": true,
           "visible": true
         },
         {
@@ -20569,8 +20634,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "reported_total": 1470000,
-          "locked": true,
           "visible": true
         },
         {
@@ -20589,7 +20652,6 @@
           "qty": 166418000,
           "pct": 98.08,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -20597,7 +20659,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -20605,7 +20666,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -20613,7 +20673,6 @@
           "qty": 0,
           "pct": 0.0,
           "source": "manual_fixed",
-          "locked": true,
           "visible": true
         },
         {
@@ -20621,7 +20680,7 @@
           "qty": 3252000,
           "pct": 1.92,
           "source": "dart_table",
-          "rcept_no": "20250131000485"
+          "visible": true
         }
       ],
       "manual_commit_alloc": {
@@ -30393,54 +30452,6 @@
   ],
   "history": [
     {
-      "date": "2026-09-14",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-14",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-14",
-      "name": "데이터젠",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-14",
-      "name": "스탁키퍼",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-14",
-      "name": "열매컴퍼니",
-      "type": "수동편입",
-      "field": "상태",
-      "old": "미등록",
-      "new": "공모 준비(미정 선노출)"
-    },
-    {
-      "date": "2026-09-15",
-      "name": "빅웨이브로보틱스",
-      "type": "정정공시",
-      "field": "희망가액(하단)",
-      "old": "15000",
-      "new": "8458"
-    },
-    {
       "date": "2026-09-15",
       "name": "빅웨이브로보틱스",
       "type": "정정공시",
@@ -34391,6 +34402,54 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-15",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -34399,79 +34458,79 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": ""
     },
     "corp:02038432": {
       "name": "SimwonAmericaCorp.",
       "corp_code": "02038432",
-      "excluded_at": "2026-10-14",
+      "excluded_at": "2026-10-15",
       "memo": ""
     }
   }
