@@ -9,6 +9,8 @@ import unittest
 
 from scripts.sources.ipo_schedule import (
     _adopt_expected_listing_date,
+    _should_fetch_result_report,
+    _wants_expected_listing_date,
     parse_expected_listing_date,
 )
 
@@ -65,3 +67,51 @@ class AdoptExpectedListingDate(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WantsExpectedListingDate(unittest.TestCase):
+    """배정표를 이미 읽은 종목도, 상장일이 비어 있으면 예정일은 한 번 더 읽는다.
+
+    멜콘·진코스텍·엘리스그룹은 report_rcp와 commit_alloc이 모두 있어 재조회
+    대상이 아니었고, 그래서 같은 문서에 적힌 상장예정일을 영영 못 가져왔다.
+    """
+
+    def _item(self, **over):
+        item = {
+            "name": "멜콘",
+            "sub_end": "2026-10-02",
+            "report_rcp": "20261007000189",
+            "commit_alloc": [{"period": "1개월", "qty": 100}],
+            "result_parse_version": 99,
+            "listing_date": "",
+        }
+        item.update(over)
+        return item
+
+    def test_상장일이_비면_한_번_더_읽는다(self):
+        self.assertTrue(_wants_expected_listing_date(self._item()))
+        self.assertTrue(_should_fetch_result_report(self._item(), "2026-10-15"))
+
+    def test_상장일이_있으면_읽지_않는다(self):
+        item = self._item(listing_date="2026-10-15")
+        self.assertFalse(_wants_expected_listing_date(item))
+
+    def test_이미_예정일을_읽었으면_다시_읽지_않는다(self):
+        item = self._item(expected_listing_date="2026-10-15")
+        self.assertFalse(_wants_expected_listing_date(item))
+
+    def test_문구가_없다고_확인된_문서는_다시_읽지_않는다(self):
+        item = self._item(expected_listing_missing=True)
+        self.assertFalse(_wants_expected_listing_date(item))
+        self.assertFalse(_should_fetch_result_report(item, "2026-10-15"))
+
+    def test_문구가_없으면_표식을_남긴다(self):
+        item = self._item()
+        _adopt_expected_listing_date(item, {"expected_listing_date": ""}, lambda _m: None)
+        self.assertTrue(item["expected_listing_missing"])
+
+    def test_나중에_찾으면_표식을_지운다(self):
+        item = self._item(expected_listing_missing=True)
+        _adopt_expected_listing_date(item, {"expected_listing_date": "2026-10-15"}, lambda _m: None)
+        self.assertNotIn("expected_listing_missing", item)
+        self.assertEqual(item["listing_date"], "2026-10-15")

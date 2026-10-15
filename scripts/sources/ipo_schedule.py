@@ -597,7 +597,10 @@ def _adopt_expected_listing_date(item: dict[str, Any], parsed: dict[str, Any], l
     """상장일이 비어 있을 때만 예정일을 임시로 세운다. KRX가 오면 거기서 확정된다."""
     expected = str(parsed.get("expected_listing_date") or "")
     if not expected:
+        # 이 문서에는 상장예정일 문구가 없다. 매 배치 다시 읽지 않도록 표시한다.
+        item["expected_listing_missing"] = True
         return
+    item.pop("expected_listing_missing", None)
     item["expected_listing_date"] = expected
     if item.get("listing_date") or "listing_date" in set(item.get("manual_fields") or []):
         return
@@ -664,6 +667,21 @@ def parse_result_report(doc: str, receipt: str = '') -> dict[str, Any]:
     return out
 
 
+def _wants_expected_listing_date(item: dict[str, Any]) -> bool:
+    """상장일이 비어 있는데 실적보고서에서 예정일을 아직 못 읽어 본 종목.
+
+    배정표를 이미 읽어 둔 종목은 재조회 대상이 아니라서, 같은 문서에 적힌
+    상장예정일을 영영 못 가져왔다(멜콘·진코스텍·엘리스그룹). 상장일이 빌 때만,
+    문서에 그 줄이 없다고 확인되기 전까지만 한 번 더 읽는다.
+    """
+    return bool(
+        item.get("report_rcp")
+        and not item.get("listing_date")
+        and not item.get("expected_listing_date")
+        and not item.get("expected_listing_missing")
+    )
+
+
 def _should_fetch_result_report(item: dict[str, Any], today: str) -> bool:
     """청약 종료 당일부터 DART 실적보고서를 조회할 수 있는지 판정한다."""
     sub_end = item.get("sub_end") or ""
@@ -673,6 +691,7 @@ def _should_fetch_result_report(item: dict[str, Any], today: str) -> bool:
         and sub_end <= today
         and (
             not item.get("report_rcp")
+            or _wants_expected_listing_date(item)
             or (
                 not item.get("commit_alloc")
                 and int(item.get("result_parse_version") or 0) < RESULT_PARSE_VERSION
@@ -1647,7 +1666,8 @@ def refresh_ipo_schedule(
             try:
                 report = (
                     {"rcept_no": item["report_rcp"]}
-                    if item.get("report_rcp") and not item.get("commit_alloc")
+                    if item.get("report_rcp")
+                    and (not item.get("commit_alloc") or _wants_expected_listing_date(item))
                     else find_result_report(
                         item["corp_code"],
                         listing_date=_trusted_listing_date(item),
