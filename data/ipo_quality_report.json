@@ -1,11 +1,6 @@
 {
-  "checked_at": "2026-10-15T10:27:28.581517+09:00",
-  "refreshed": [
-    "서울보증보험",
-    "더즌",
-    "엔알비",
-    "인제니아테라퓨틱스"
-  ],
+  "checked_at": "2026-10-16T02:23:53.092074+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -38,10 +33,7 @@
       "code": "",
       "name": "엠에스바이오",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -49,9 +41,9 @@
       "code": "",
       "name": "디티에스",
       "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
-        "공시 대기: 개인청약경쟁률"
+        "개인청약경쟁률"
       ]
     },
     {
@@ -106,6 +98,58 @@
       "name": "노머스",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    },
+    {
+      "corp_code": "01706794",
+      "code": "464500",
+      "name": "아이언디바이스",
+      "gaps": [
+        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+      ]
+    },
+    {
+      "corp_code": "01689266",
+      "code": "431190",
+      "name": "케이쓰리아이",
+      "gaps": [
+        "구주물량 최신 공시 확인(정정사항만 수록: 원본문 대조 필요)"
+      ]
+    },
+    {
+      "corp_code": "01138595",
+      "code": "199480",
+      "name": "뱅크웨어글로벌",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+      ]
+    },
+    {
+      "corp_code": "01419205",
+      "code": "460940",
+      "name": "피앤에스미캐닉스",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "구주물량 최신 공시 확인(보유기간·기산일 확인 필요)"
+      ]
+    },
+    {
+      "corp_code": "00366438",
+      "code": "062040",
+      "name": "산일전기",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "구주물량 최신 공시 확인(매각제한 합계 검산 실패)"
+      ]
+    },
+    {
+      "corp_code": "01384787",
+      "code": "462870",
+      "name": "시프트업",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "구주물량 최신 공시 확인(기존주주 표 미발견)"
       ]
     }
   ],
@@ -364,7 +408,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 31,
+    "cases": 43,
     "evicted_cases": 0,
     "recheck_candidates": 16,
     "retries": [
@@ -766,29 +810,6 @@
         ]
       },
       {
-        "corp_code": "01705740",
-        "name": "엠비디",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "8cbd054b34519dc1976d",
-        "signature": "c6196ebcf88c9e4a65cc",
-        "consecutive_attempts": 2,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          }
-        ]
-      },
-      {
         "corp_code": "00784184",
         "name": "동원파츠",
         "parser_revision": "ba777e3d84cec182a159",
@@ -949,6 +970,29 @@
           },
           {
             "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01705740",
+        "name": "엠비디",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "8cbd054b34519dc1976d",
+        "signature": "c6196ebcf88c9e4a65cc",
+        "consecutive_attempts": 2,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -1931,6 +1975,90 @@
             "at": "2026-10-13",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01138595",
+        "name": "뱅크웨어글로벌",
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "c53f2bdff82eda1d3b28",
+        "signature": "1c5edd488c38360cf3b3",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01419205",
+        "name": "피앤에스미캐닉스",
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "ead2a56c451977e14bf1",
+        "signature": "8947ea588b6856a19adf",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "00366438",
+        "name": "산일전기",
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "ae0ffe4052390ab63b60",
+        "signature": "c5e1b4007ca3f36c0147",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01384787",
+        "name": "시프트업",
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "fe1e2eaccfb72de66221",
+        "signature": "40295a66cefeba9cfb95",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       }

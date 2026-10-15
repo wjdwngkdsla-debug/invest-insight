@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15 23:49",
+  "updated": "2026-10-16 01:19",
   "items": [
     {
       "corp_code": "00104069",
@@ -29909,6 +29909,30 @@
         "rcept_no": "20240731000220",
         "reason": "기존주주 표 미발견",
         "quantity_unit": "주"
+      },
+      "quality_attempted_at": "2026-10-16",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-16",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
+      },
+      "quality_repair_state": {
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "c53f2bdff82eda1d3b28",
+        "signature": "1c5edd488c38360cf3b3",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
       }
     },
     {
@@ -30276,6 +30300,30 @@
           }
         ],
         "quantity_unit": "주"
+      },
+      "quality_attempted_at": "2026-10-16",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-16",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
+      },
+      "quality_repair_state": {
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "ead2a56c451977e14bf1",
+        "signature": "8947ea588b6856a19adf",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
       }
     },
     {
@@ -30423,6 +30471,30 @@
         ],
         "unresolved": [],
         "quantity_unit": "주"
+      },
+      "quality_attempted_at": "2026-10-16",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-16",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
+      },
+      "quality_repair_state": {
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "ae0ffe4052390ab63b60",
+        "signature": "c5e1b4007ca3f36c0147",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
       }
     },
     {
@@ -30739,6 +30811,30 @@
         "rcept_no": "20240701000547",
         "reason": "기존주주 표 미발견",
         "quantity_unit": "주"
+      },
+      "quality_attempted_at": "2026-10-16",
+      "quality_refresh_error": {
+        "checked_at": "2026-10-16",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
+      },
+      "quality_repair_state": {
+        "parser_revision": "05846c7dee32e24013dd",
+        "source_revision": "fe1e2eaccfb72de66221",
+        "signature": "40295a66cefeba9cfb95",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
       }
     }
   ],
@@ -34712,7 +34808,7 @@
       "new": "제외고정"
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "name": "엠비디",
       "type": "정정공시",
       "field": "수요예측 시작",
@@ -34720,7 +34816,7 @@
       "new": "2026-11-02"
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "name": "엠비디",
       "type": "정정공시",
       "field": "수요예측 종료",
@@ -34728,7 +34824,7 @@
       "new": "2026-11-06"
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "name": "엠비디",
       "type": "정정공시",
       "field": "청약 시작",
@@ -34736,7 +34832,7 @@
       "new": "2026-11-12"
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "name": "엠비디",
       "type": "정정공시",
       "field": "청약 종료",
