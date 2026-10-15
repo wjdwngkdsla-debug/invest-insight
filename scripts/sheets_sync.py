@@ -22,6 +22,8 @@ from pathlib import Path
 import gspread
 from gspread.utils import rowcol_to_a1
 
+from scripts.utils.http import mount_retries
+
 # .env 로드용 — GitHub Actions는 시크릿을 환경변수로 넣어주지만 로컬 실행은
 # 이 import가 없으면 GOOGLE_SERVICE_ACCOUNT_JSON을 찾지 못한다.
 import scripts.config  # noqa: F401
@@ -350,15 +352,28 @@ def parse_args() -> argparse.Namespace:
 
 
 
+def _with_retries(client: gspread.Client) -> gspread.Client:
+    """Sheets API의 일시적 5xx·429에 재시도를 붙인다.
+
+    구글이 503 하나를 돌려준 것만으로 배치 전체가 죽은 적이 있다(run 36950005265:
+    "Pull manual edits from Google Sheet"에서 APIError [503]로 종료). gspread는
+    내부적으로 requests 세션을 쓰므로 거기에 어댑터만 갈아 끼우면 전 호출에 적용된다.
+    """
+    session = getattr(getattr(client, "http_client", None), "session", None)
+    if session is not None:
+        mount_retries(session)
+    return client
+
+
 def build_client() -> gspread.Client:
     raw_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
     if raw_json:
-        return gspread.service_account_from_dict(json.loads(raw_json))
+        return _with_retries(gspread.service_account_from_dict(json.loads(raw_json)))
 
 
     configured_file = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "").strip()
     if configured_file:
-        return gspread.service_account(filename=configured_file)
+        return _with_retries(gspread.service_account(filename=configured_file))
 
 
     hits = sorted(glob.glob(str(ROOT_DIR / "project-*.json")))
@@ -368,7 +383,7 @@ def build_client() -> gspread.Client:
             "Google 서비스 계정 인증정보가 없습니다. "
             "GOOGLE_SERVICE_ACCOUNT_JSON 또는 GOOGLE_SERVICE_ACCOUNT_FILE을 설정하세요."
         )
-    return gspread.service_account(filename=hits[0])
+    return _with_retries(gspread.service_account(filename=hits[0]))
 
 
 

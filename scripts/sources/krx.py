@@ -2,16 +2,36 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 import re
+import sys
 import time
 from zoneinfo import ZoneInfo
 import requests
 
 from scripts.config import KRX_HEADERS, KRX_URLS
+from scripts.utils.http import retry_session
+
+_SESSION = retry_session()
 
 KRX_BASE_INFO_URLS = [
     ("https://data-dbg.krx.co.kr/svc/apis/sto/stk_isu_base_info", "코스피"),
     ("https://data-dbg.krx.co.kr/svc/apis/sto/ksq_isu_base_info", "코스닥"),
 ]
+
+
+def _warn_partial_market(bas_dd: str, per_market: dict[str, int], api: str) -> None:
+    """거래일이면 두 시장 모두 데이터가 있다. 한쪽만 비면 조용히 넘기지 않는다.
+
+    한 시장이 일시적으로 빈 응답을 줘도 다른 쪽이 차 있으면 정상으로 처리돼,
+    그날 그 시장 종목이 통째로 없는 채 배치가 끝난다(상장 감지 누락의 원인).
+    """
+    filled = [m for m, n in per_market.items() if n]
+    missing = [m for m, n in per_market.items() if not n]
+    if filled and missing:
+        print(
+            f"[KRX][경고] {api} {bas_dd}: {'·'.join(missing)} 응답이 비었습니다 "
+            f"({'·'.join(filled)}만 수신) — 해당 시장 종목이 이번 실행에서 누락됩니다.",
+            file=sys.stderr,
+        )
 
 
 def _to_int(value: object) -> int:
@@ -38,12 +58,14 @@ def krx_base_info(bas_dd: str) -> dict[str, dict] | None:
     """
     out: dict[str, dict] = {}
     empty = True
+    per_market: dict[str, int] = {}
     for url, market in KRX_BASE_INFO_URLS:
         try:
-            res = requests.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
+            res = _SESSION.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
             items = res.json().get("OutBlock_1", [])
         except Exception:
             items = []
+        per_market[market] = len(items)
         if items:
             empty = False
         for it in items:
@@ -61,6 +83,7 @@ def krx_base_info(bas_dd: str) -> dict[str, dict] | None:
                 "secugrp": (it.get("SECUGRP_NM") or "").strip(),
             }
         time.sleep(0.15)
+    _warn_partial_market(bas_dd, per_market, "종목기본정보")
     return None if empty else out
 
 
@@ -79,9 +102,10 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
     """{code: {name, market, shrs, close_price, market_cap}}. 휴장일이면 None."""
     out: dict[str, dict] = {}
     empty = True
+    per_market: dict[str, int] = {}
     for url, market in KRX_URLS:
         try:
-            res = requests.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
+            res = _SESSION.post(url, headers=KRX_HEADERS, json={"basDd": bas_dd}, timeout=30)
             res.raise_for_status()
             payload = res.json()
             items = payload.get("OutBlock_1", []) if isinstance(payload, dict) else []
@@ -90,6 +114,7 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
             # market as unavailable so a transient response does not abort the
             # entire scheduled build; the lookback caller can try another date.
             items = []
+        per_market[market] = len(items)
         if items:
             empty = False
         for it in items:
@@ -111,6 +136,7 @@ def krx_snapshot(bas_dd: str) -> dict[str, dict] | None:
                 "prev_diff": _to_int(it.get("CMPPREVDD_PRC")),
             }
         time.sleep(0.15)
+    _warn_partial_market(bas_dd, per_market, "일별시세")
     return None if empty else out
 
 

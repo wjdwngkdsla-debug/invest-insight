@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import re
 import sys
+import threading
+import time
 import zipfile
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -20,6 +22,22 @@ from scripts.ipo_evidence import reviewed_document
 DART_BASE = "https://opendart.fss.or.kr/api"
 DART_VIEWER_BASE = "https://dart.fss.or.kr"
 DART_VIEWER_HEADERS = {"User-Agent": "Mozilla/5.0"}
+
+# DART 원문은 연속 호출하면 IP가 막힌다. 특히 공개 뷰어 대체 경로는 문서 한 건이
+# 노드 수만큼 요청으로 갈라져, 아무 간격 없이 때리면 한 종목만으로도 수십 번이 된다.
+# 하필 이 경로는 OpenDART가 한도를 걸었을 때 쓰는 길이라 더 조심해야 한다.
+DART_MIN_INTERVAL = 0.35
+_throttle_lock = threading.Lock()
+_last_request_at = 0.0
+
+
+def _throttle() -> None:
+    global _last_request_at
+    with _throttle_lock:
+        wait = DART_MIN_INTERVAL - (time.monotonic() - _last_request_at)
+        if wait > 0:
+            time.sleep(wait)
+        _last_request_at = time.monotonic()
 
 
 def _clean_text(x: object) -> str:
@@ -72,6 +90,7 @@ def _viewer_root_nodes(index_html: str) -> list[dict[str, str]]:
 
 def _download_viewer_document_text(rcept_no: str) -> str:
     """OpenDART 원문 API 장애·한도 초과 때 공개 DART 뷰어를 대체 경로로 쓴다."""
+    _throttle()
     index = requests.get(
         f"{DART_VIEWER_BASE}/dsaf001/main.do",
         params={"rcpNo": rcept_no},
@@ -82,6 +101,7 @@ def _download_viewer_document_text(rcept_no: str) -> str:
     nodes = _viewer_root_nodes(index.text)
     texts: list[str] = []
     for node in nodes:
+        _throttle()
         response = requests.get(
             f"{DART_VIEWER_BASE}/report/viewer.do",
             params={
@@ -204,6 +224,7 @@ def download_document_text(rcept_no: str) -> str:
     api_failure = ""
     if DART_API_KEY:
         try:
+            _throttle()
             res = requests.get(
                 f"{DART_BASE}/document.xml",
                 params={"crtfc_key": DART_API_KEY, "rcept_no": rcept_no},

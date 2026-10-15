@@ -14,6 +14,8 @@ export interface IpoRankingRow {
   market: string;
   listingDate: string;
   ipoPrice: number;
+  /** 주식수 조정(무상증자·액면분할 등)이 반영된 공모가. 조정이 없으면 0 */
+  adjustedIpoPrice: number;
   closePrice: number;
   returnPct: number | null;
   /** 공모가 대비 상장일 종가 수익률. 상장일 시세를 못 받은 종목은 null */
@@ -53,6 +55,7 @@ export function getIpoRanking(): IpoRankingRow[] {
       market: stock.market || item.market || "",
       listingDate,
       ipoPrice,
+      adjustedIpoPrice,
       closePrice,
       returnPct: currentIpoReturnPct({
         ipo_price: ipoPrice,

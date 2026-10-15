@@ -8,6 +8,11 @@ import requests
 
 from scripts.config import DATA_GO_KR_API_KEY, PUBLIC_LOCKUP_API_URL
 from scripts.utils.dates import calc_release_date, parse_date, release_display
+from scripts.utils.http import retry_session
+
+# 공공데이터포털은 읽기 타임아웃이 잦다. 재시도가 없던 동안 한 번 늦은 응답만으로
+# 그 종목이 통째로 건너뛰어졌다(run 37870912742: 심플랫폼·에스엔시스·덕양에너젠·레메디).
+_SESSION = retry_session()
 
 
 def _to_int(value: object) -> int | None:
@@ -56,7 +61,7 @@ def fetch_public_lockup_returns(corp_name: str) -> list[dict]:
         "resultType": "json",
         "stckIssuCmpyNm": corp_name,
     }
-    res = requests.get(PUBLIC_LOCKUP_API_URL, params=params, timeout=30)
+    res = _SESSION.get(PUBLIC_LOCKUP_API_URL, params=params, timeout=30)
 
     try:
         data = res.json()

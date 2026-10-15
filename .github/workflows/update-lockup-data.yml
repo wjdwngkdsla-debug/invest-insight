@@ -81,6 +81,7 @@ jobs:
 
       - name: Pull manual edits from Google Sheet
         if: ${{ github.event_name == 'schedule' || github.event.inputs.reset_sheet != 'true' }}
+        timeout-minutes: 15
         run: python -m scripts.sheets_sync pull-admin
 
 
@@ -92,6 +93,10 @@ jobs:
 
       - name: Build lockup data
         if: ${{ github.event.inputs.quick_only != 'true' }}
+        # 러너가 응답 없이 멈추면 job 타임아웃(360분)도 안 걸린 적이 있다
+        # (run #237: 1,457분 뒤 취소). 단계 타임아웃이 실질적인 상한이다.
+        # 정상 배치는 10~15분이라 90분이면 재파싱이 몰린 날도 넉넉하다.
+        timeout-minutes: 90
         shell: bash
         run: |
           ARGS=()
@@ -108,6 +113,10 @@ jobs:
 
       - name: Audit IPO completeness and repair bounded upcoming filings
         timeout-minutes: 8
+        # 빈칸 보수는 부가 단계다. 여기서 멈춰도 이미 만들어진 데이터는 살아 있으므로
+        # 시트 갱신·커밋까지 막지 않는다. (run #253: 8분 초과로 job 전체 실패하면서
+        # Update Google Sheet가 통째로 건너뛰어졌다.)
+        continue-on-error: true
         shell: bash
         run: |
           if [ "${{ github.event.inputs.quick_only }}" = "true" ]; then
@@ -118,6 +127,7 @@ jobs:
           python -m scripts.quick_refresh --no-pull
 
       - name: Update Google Sheet
+        timeout-minutes: 15
         shell: bash
         run: |
           if [ "${{ github.event.inputs.reset_sheet }}" = "true" ]; then

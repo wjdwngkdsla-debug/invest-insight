@@ -10,6 +10,7 @@ type MarketKey = "all" | "코스피" | "코스닥";
 type OutcomeKey = "all" | "win" | "loss";
 type SortKey =
   | "marketCap"
+  | "ipoPrice"
   | "returnPct"
   | "listingReturnPct"
   | "listingFloatPct"
@@ -19,6 +20,7 @@ type SortKey =
 
 const COLUMNS: { key: SortKey; label: string }[] = [
   { key: "marketCap", label: "시가총액" },
+  { key: "ipoPrice", label: "공모가" },
   { key: "returnPct", label: "공모가 대비" },
   { key: "listingReturnPct", label: "상장일 수익률" },
   { key: "listingFloatPct", label: "상장일 유통가능" },
@@ -26,6 +28,23 @@ const COLUMNS: { key: SortKey; label: string }[] = [
   { key: "subRatio", label: "개인청약" },
   { key: "listingDate", label: "상장일" },
 ];
+
+// 주식수 조정(무상증자·액면분할)이 있던 종목은 "공모가 대비"를 조정 공모가로 계산한다.
+// 청약 당시 낸 금액과 다른 숫자라 둘 다 보여 주지 않으면 수익률이 안 맞아 보인다.
+function PriceText({ price, adjusted }: { price: number; adjusted: number }) {
+  if (!price) return <span className="text-slate-300">-</span>;
+  const changed = adjusted > 0 && Math.round(adjusted) !== Math.round(price);
+  return (
+    <span className="tabular-nums text-slate-600">
+      {price.toLocaleString("ko-KR")}
+      {changed && (
+        <span className="ml-1 text-[11px] text-slate-400" title="주식수 조정 반영 공모가">
+          →{Math.round(adjusted).toLocaleString("ko-KR")}
+        </span>
+      )}
+    </span>
+  );
+}
 
 function ratioText(value: number): string {
   if (!value) return "-";
@@ -281,6 +300,9 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-slate-600">{formatKrwEok(row.marketCap)}</td>
                     <td className="px-3 py-2.5 text-right">
+                      <PriceText price={row.ipoPrice} adjusted={row.adjustedIpoPrice} />
+                    </td>
+                    <td className="px-3 py-2.5 text-right">
                       <ReturnText pct={row.returnPct} suspended={row.suspended} />
                     </td>
                     <td className="px-3 py-2.5 text-right">
@@ -314,6 +336,12 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
                 <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 text-[11px]">
                   <span className="text-slate-500">
                     시총 <span className="font-semibold tabular-nums text-slate-700">{formatKrwEok(row.marketCap)}</span>
+                  </span>
+                  <span className="text-slate-500">
+                    공모가{" "}
+                    <span className="font-semibold text-slate-700">
+                      <PriceText price={row.ipoPrice} adjusted={row.adjustedIpoPrice} />
+                    </span>
                   </span>
                   <span className="text-slate-500">
                     상장일 수익률 <ReturnText pct={row.listingReturnPct} className="text-[11px]" />
