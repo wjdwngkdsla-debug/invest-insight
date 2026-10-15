@@ -525,7 +525,6 @@ def _now() -> str:
 def _to_int(value: Any) -> int:
     if value in (None, ""):
         return 0
-    schedule_pre_refreshed = False
     try:
         return int(str(value).replace(",", ""))
     except Exception:
@@ -4908,6 +4907,9 @@ def refresh_listing_day_snapshot(rows: list[dict]) -> dict[str, dict]:
 
 PRICE_ADJUST_PATH = ROOT_DIR / "data" / "price_adjustments.json"
 LISTING_FLOAT_PATH = ROOT_DIR / "data" / "listing_float.json"
+# 유통가능 문장 파서 버전. 못 찾은 종목은 이 버전과 함께 캐시에 "없음"으로 남겨
+# 다음 배치가 건너뛴다. 파서를 고쳐 더 찾을 수 있게 되면 이 숫자를 올려 전량 재시도한다.
+LISTING_FLOAT_PARSER_VERSION = 1
 
 
 def refresh_listing_float(rows: list[dict]) -> dict[str, dict]:
@@ -4926,10 +4928,20 @@ def refresh_listing_float(rows: list[dict]) -> dict[str, dict]:
 
     seen: set[str] = set()
     filled = 0
+    missed = 0
+    skipped_known_missing = 0
     for row in rows:
         code = normalize_stock_code(row.get("code"))
         listing = str(row.get("listing_date") or "")
-        if not code or code in seen or code in cache or not listing:
+        if not code or code in seen or not listing:
+            continue
+        entry = cache.get(code) or {}
+        if entry.get("float_shares"):
+            continue
+        # 지난 배치에서 같은 파서로 이미 훑어 문장이 없다고 확인된 종목은 건너뛴다.
+        # 이 표시가 없던 동안 50종목을 매 배치 재조회하며 30분씩 태웠다(run #265).
+        if int(entry.get("missing_version") or 0) >= LISTING_FLOAT_PARSER_VERSION:
+            skipped_known_missing += 1
             continue
         seen.add(code)
         try:
@@ -4937,15 +4949,23 @@ def refresh_listing_float(rows: list[dict]) -> dict[str, dict]:
                 row.get("name") or "", year=int(listing[:4]), stock_code=code,
             )
         except Exception as exc:
+            # 네트워크·타임아웃은 종목 탓이 아니므로 "없음"으로 굳히지 않고 다음 배치에 다시 본다.
             print(f"  [DART] {row.get('name')} 유통가능 문장 조회 실패: {redact_sensitive_text(exc)}", file=sys.stderr)
             continue
         if not (total and free):
+            cache[code] = {**entry, "missing_version": LISTING_FLOAT_PARSER_VERSION}
+            missed += 1
             continue
         cache[code] = {"total_shares": total, "float_shares": free, "float_pct": ratio}
         filled += 1
-    if filled:
+    if filled or missed:
         LISTING_FLOAT_PATH.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
-        print(f"[DART] 상장 직후 유통가능물량 저장: {filled}종목 (누적 {len(cache)})", file=sys.stderr)
+        hits = sum(1 for v in cache.values() if (v or {}).get("float_shares"))
+        print(
+            f"[DART] 상장 직후 유통가능물량 저장: {filled}종목 (누적 {hits}) / "
+            f"문장 없음 {missed}종목 표시 / 기확인 생략 {skipped_known_missing}종목",
+            file=sys.stderr,
+        )
     return cache
 
 
@@ -5479,6 +5499,12 @@ def main() -> None:
     # IPO일정의 실적보고서 배정표를 먼저 갱신해야 같은 실행에서 IPO기관 이벤트와
     # 홈페이지까지 이어진다. 예전 순서는 사이트 저장 뒤 일정 갱신이라 최소 두 번의
     # 배치가 필요했고, 당일 상장 종목은 첫 배치에서 빈 상태로 보였다.
+    # 이 선행 갱신은 배치에서 가장 오래 걸리는 구간 중 하나다. 아래 phase_seconds는
+    # 종목 루프부터 열리므로 여기서 따로 재 두지 않으면 [TIME] 합계에서 통째로 빠진다.
+    # (run #265에서 실제 29.8분이 "IPO일정 0.0s"로 찍혀 원인 추적을 한참 돌아갔다.)
+    schedule_pre_refreshed = False
+    schedule_pre_seconds = 0.0
+    schedule_pre_started = time.perf_counter()
     try:
         from scripts.sources.ipo_schedule import refresh_ipo_schedule
 
@@ -5496,6 +5522,7 @@ def main() -> None:
             f"[IPO일정] 선행 갱신 실패(기존 스냅샷으로 계속): {redact_sensitive_text(exc)}",
             file=sys.stderr,
         )
+    schedule_pre_seconds = time.perf_counter() - schedule_pre_started
 
     existing_rows = _read_csv(admin_path, ADMIN_COLUMNS)
     targets = load_targets(args)
@@ -6393,7 +6420,7 @@ def main() -> None:
             f"[IPO일정] 갱신 실패(락업 데이터에는 영향 없음): {redact_sensitive_text(exc)}",
             file=sys.stderr,
         )
-    phase_seconds["IPO일정"] = time.perf_counter() - schedule_started
+    phase_seconds["IPO일정"] = schedule_pre_seconds + (time.perf_counter() - schedule_started)
 
     total = sum(phase_seconds.values())
     print(f"[TIME] 총 {total/60:.1f}분", file=sys.stderr)

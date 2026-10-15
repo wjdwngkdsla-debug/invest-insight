@@ -5,7 +5,7 @@ import copy
 import re
 import sys
 from collections import Counter
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
@@ -561,6 +561,48 @@ def parse_result_capital(doc: str, receipt: str = '') -> dict[str, Any]:
             'replacement_qty': next(iter(replacements)) if len(replacements) == 1 else None}
 
 
+# 증권발행실적보고서는 "3. 상장일(매매개시일) 2026년 10월 15일 (예정)"처럼 상장
+# 일주일 전쯤 상장예정일을 이미 적어 둔다. KRX 종목기본정보는 실제 상장 당일에야
+# 생기므로, 이 문장을 읽어야 상장일을 미리 띄울 수 있다(멜콘: 10/07 공시 → 10/15 상장).
+_EXPECTED_LISTING_PATTERNS = (
+    r"상장일\s*\(?\s*매매\s*개시\s*일?\s*\)?",
+    r"매매\s*개시\s*\(?\s*예정\s*\)?\s*일",
+    r"상장\s*\(?\s*예정\s*\)?\s*일",
+)
+
+
+def parse_expected_listing_date(plain: str) -> str:
+    """실적보고서 본문이 밝힌 상장(매매개시) 예정일을 YYYY-MM-DD로 돌려준다."""
+    for label in _EXPECTED_LISTING_PATTERNS:
+        m = re.search(
+            label + r"[^0-9]{0,20}(\d{4})\s*[년.\-/]\s*(\d{1,2})\s*[월.\-/]\s*(\d{1,2})",
+            plain,
+        )
+        if not m:
+            continue
+        year, month, day = (int(g) for g in m.groups())
+        try:
+            return date(year, month, day).isoformat()
+        except ValueError:
+            continue
+    return ""
+
+
+def _adopt_expected_listing_date(item: dict[str, Any], parsed: dict[str, Any], log) -> None:
+    """상장일이 비어 있을 때만 예정일을 임시로 세운다. KRX가 오면 거기서 확정된다."""
+    expected = str(parsed.get("expected_listing_date") or "")
+    if not expected:
+        return
+    item["expected_listing_date"] = expected
+    if item.get("listing_date") or "listing_date" in set(item.get("manual_fields") or []):
+        return
+    if not _listing_date_is_plausible(item, expected):
+        return
+    item["listing_date"] = expected
+    item["listing_date_provisional"] = True
+    log(f"상장예정일 선반영: {item.get('name')} → {expected} (실적보고서, KRX 확정 전)")
+
+
 def parse_result_report(doc: str, receipt: str = '') -> dict[str, Any]:
     plain = _clean_text(doc)
     out: dict[str, Any] = {"sub_ratio": 0.0, "commit_alloc": [],
@@ -613,6 +655,7 @@ def parse_result_report(doc: str, receipt: str = '') -> dict[str, Any]:
         rows = _allocation_tiers(table)
         if rows is not None:
             out["commit_alloc"] = rows
+    out["expected_listing_date"] = parse_expected_listing_date(plain)
     return out
 
 
@@ -881,8 +924,13 @@ def detect_listings_from_krx(
                 item["manual_fields"] = manual_fields
             elif "manual_fields" in item:
                 del item["manual_fields"]
+            item.pop("listing_date_provisional", None)
             detected += 1
             log(f"KRX 상장 반영: {item.get('name')} {current_listing or '미정'} → {list_dd} (코드 {code})")
+        elif list_dd and current_listing == list_dd:
+            # 미리 띄워 둔 예정일이 실제와 같았다 — 이제 KRX로 확정됐으니 표시를 뗀다.
+            if item.pop("listing_date_provisional", None):
+                log(f"상장예정일 확정: {item.get('name')} {list_dd}")
 
         # 종목코드: 사용자가 잘못 넣었으면 KRX 값으로 자동수정
         current_code = (item.get("stock_code") or "").strip()
@@ -1357,8 +1405,12 @@ def refresh_ipo_schedule(
             and str(value.get("source") or "") not in {"manual_fixed", "manual_temporary"}
             for value in (archived.get("commit_apply") or [])
         )
+        # 수기로 적다 만 확약 신청값이 있으면 신고서를 다시 읽어 채운다.
+        # 단 qty가 0인 칸은 "아직 안 적은 빈 칸"이지 미확정 수기값이 아니다.
+        # 이 구분이 없던 동안 0만 들어 있는 26종목이 매 배치 백필 예산(25)을 전량
+        # 먹어치워, 정작 비어 있는 종목은 영영 차례가 오지 않았다(run #265: 30분 헛돔).
         has_temporary_commit_apply = any(
-            not bool((value or {}).get("locked"))
+            (value or {}).get("qty") and not bool((value or {}).get("locked"))
             for value in dict(archived.get("manual_commit_apply") or {}).values()
         )
         suspicious_commit_apply = _commit_apply_below_alloc_all_tiers(archived)
@@ -1485,6 +1537,7 @@ def refresh_ipo_schedule(
                 if reparse_saved_result and report:
                     heavy_budget["left"] -= 1
                     parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
+                    _adopt_expected_listing_date(archived, parsed, log)
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
                         log(f"저장 실적보고서 재파싱: {archived.get('name')} ({report['rcept_no']})")
@@ -1494,6 +1547,7 @@ def refresh_ipo_schedule(
                     if report and str(report["rcept_no"]) > str(archived.get("report_rcp") or ""):
                         heavy_budget["left"] -= 1
                         parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
+                        _adopt_expected_listing_date(archived, parsed, log)
                         if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                             archived.update(parsed)
                             archived["report_rcp"] = report["rcept_no"]
@@ -1502,6 +1556,7 @@ def refresh_ipo_schedule(
                 elif report:
                     heavy_budget["left"] -= 1
                     parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
+                    _adopt_expected_listing_date(archived, parsed, log)
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         archived.update(parsed)
                         archived["report_rcp"] = report["rcept_no"]
@@ -1569,6 +1624,7 @@ def refresh_ipo_schedule(
                 )
                 if report:
                     parsed = parse_result_report(download_document_text(report["rcept_no"]), report["rcept_no"])
+                    _adopt_expected_listing_date(item, parsed, log)
                     if parsed.get("sub_ratio") or parsed.get("commit_alloc"):
                         item.update(parsed)
                         item["report_rcp"] = report["rcept_no"]
@@ -1583,6 +1639,10 @@ def refresh_ipo_schedule(
         first = item.get("first_filing_date") or ""
         drop = False
         past_listing = bool(listing and listing < today)
+        # 잠정 상장일(실적보고서 예정일)은 KRX가 확정해 주기 전까지 목록에서 빼지 않는다.
+        # 상장이 하루라도 밀리면 예정일만 믿고 종목을 지워 버리는 사고가 난다.
+        if past_listing and item.get("listing_date_provisional"):
+            past_listing = False
         if past_listing:
             drop = True
         if item.get("withdrawn"):

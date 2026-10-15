@@ -1349,6 +1349,7 @@ def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             cache = {}
         for code, free in manual_float.items():
             entry = dict(cache.get(code) or {})
+            entry.pop("missing_version", None)
             entry["float_shares"] = free
             entry["source"] = "수기입력"
             cache[code] = entry
@@ -1403,7 +1404,15 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
         if row.get("category") == "구주·보호예수" and "투자설명서" in (row.get("dart_source") or "")
     }
     try:
-        float_pct_codes |= set(json.loads((ROOT_DIR / "data" / "listing_float.json").read_text(encoding="utf-8")))
+        # 캐시에는 "문장 없음"으로 표시만 해 둔 항목도 섞여 있다(missing_version).
+        # 실제 물량이 들어온 종목만 센다.
+        float_pct_codes |= {
+            code
+            for code, entry in json.loads(
+                (ROOT_DIR / "data" / "listing_float.json").read_text(encoding="utf-8")
+            ).items()
+            if (entry or {}).get("float_shares")
+        }
     except (FileNotFoundError, json.JSONDecodeError):
         pass
     listing_day = _load_listing_day_snapshot()
