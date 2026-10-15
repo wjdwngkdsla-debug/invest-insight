@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-16T02:23:53.092074+09:00",
+  "checked_at": "2026-10-16T03:26:10.292180+09:00",
   "refreshed": [],
   "failures": [],
   "issues": [
@@ -1981,9 +1981,9 @@
       {
         "corp_code": "01138595",
         "name": "뱅크웨어글로벌",
-        "parser_revision": "05846c7dee32e24013dd",
-        "source_revision": "c53f2bdff82eda1d3b28",
-        "signature": "1c5edd488c38360cf3b3",
+        "parser_revision": "150d5146ca6f2e099cf4",
+        "source_revision": "7e0cfceef9c0c720ec15",
+        "signature": "e154fcb44c655dfdbc31",
         "consecutive_attempts": 1,
         "outcome": "rejected",
         "last_attempt": "2026-10-16",
@@ -2002,9 +2002,9 @@
       {
         "corp_code": "01419205",
         "name": "피앤에스미캐닉스",
-        "parser_revision": "05846c7dee32e24013dd",
-        "source_revision": "ead2a56c451977e14bf1",
-        "signature": "8947ea588b6856a19adf",
+        "parser_revision": "150d5146ca6f2e099cf4",
+        "source_revision": "ef46c99776ffb7b48253",
+        "signature": "839666a8c55e9295a4dd",
         "consecutive_attempts": 1,
         "outcome": "rejected",
         "last_attempt": "2026-10-16",
@@ -2023,9 +2023,9 @@
       {
         "corp_code": "00366438",
         "name": "산일전기",
-        "parser_revision": "05846c7dee32e24013dd",
-        "source_revision": "ae0ffe4052390ab63b60",
-        "signature": "c5e1b4007ca3f36c0147",
+        "parser_revision": "150d5146ca6f2e099cf4",
+        "source_revision": "fd7961809c8a9bfca5ad",
+        "signature": "b7ba07bb95f843faae05",
         "consecutive_attempts": 1,
         "outcome": "rejected",
         "last_attempt": "2026-10-16",
@@ -2044,9 +2044,9 @@
       {
         "corp_code": "01384787",
         "name": "시프트업",
-        "parser_revision": "05846c7dee32e24013dd",
-        "source_revision": "fe1e2eaccfb72de66221",
-        "signature": "40295a66cefeba9cfb95",
+        "parser_revision": "150d5146ca6f2e099cf4",
+        "source_revision": "aa97c1ed51c846be4304",
+        "signature": "bf6cfdf0be563152a96f",
         "consecutive_attempts": 1,
         "outcome": "rejected",
         "last_attempt": "2026-10-16",

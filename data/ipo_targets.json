@@ -108,15 +108,6 @@
     "manual_ipo_price_locked": "N"
   },
   {
-    "market": "코스닥",
-    "name": "엠에스바이오",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "7800",
-    "manual_ipo_price_locked": "N"
-  },
-  {
     "market": "코스피",
     "name": "영광",
     "listing_date": "",
@@ -230,7 +221,7 @@
     "listing_date": "2024-07-11",
     "code": "462870",
     "manual_ipo_price": "60000",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "58025720"
   },
   {
@@ -248,7 +239,7 @@
     "listing_date": "2024-07-29",
     "code": "062040",
     "manual_ipo_price": "35000",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "30445200"
   },
   {
@@ -257,7 +248,7 @@
     "listing_date": "2024-07-31",
     "code": "460940",
     "manual_ipo_price": "22000",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "6471740"
   },
   {
@@ -275,7 +266,7 @@
     "listing_date": "2024-08-12",
     "code": "199480",
     "manual_ipo_price": "16000",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "10000988"
   },
   {
@@ -311,7 +302,7 @@
     "listing_date": "2024-08-20",
     "code": "431190",
     "manual_ipo_price": "15500",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "7486442"
   },
   {
@@ -356,7 +347,7 @@
     "listing_date": "2024-09-23",
     "code": "464500",
     "manual_ipo_price": "7000",
-    "manual_ipo_price_locked": "N",
+    "manual_ipo_price_locked": "Y",
     "shares": "13653263"
   },
   {
@@ -1599,5 +1590,14 @@
     "manual_ipo_price": "19500",
     "manual_ipo_price_locked": "N",
     "shares": "11363649"
+  },
+  {
+    "market": "코스닥",
+    "name": "엠에스바이오",
+    "listing_date": "2026-10-22",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "7800",
+    "manual_ipo_price_locked": "N"
   }
 ]
