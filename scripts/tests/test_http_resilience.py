@@ -7,7 +7,7 @@ from unittest import mock
 import requests
 
 from scripts.sources import krx
-from scripts.utils.http import RETRY_STATUS, mount_retries, retry_session
+from scripts.utils.http import CircuitBreaker, RETRY_STATUS, mount_retries, retry_session
 
 
 class RetrySession(unittest.TestCase):
@@ -33,6 +33,66 @@ class RetrySession(unittest.TestCase):
         session = requests.Session()
         mount_retries(session)
         self.assertIn(503, session.get_adapter("https://sheets.googleapis.com").max_retries.status_forcelist)
+
+
+class Breaker(unittest.TestCase):
+    """재시도는 가끔 한 번 실패에 듣는 약이고, 지속 장애에는 독이다.
+
+    run 38754667197에서 apis.data.go.kr가 49분간 죽자 재시도가 종목당 30초를
+    2.8분으로 늘려 배치가 90분 상한에 걸렸다. 그래서 연속 실패는 끊는다.
+    """
+
+    def test_연속_실패가_쌓이면_차단한다(self):
+        b = CircuitBreaker("테스트", threshold=3)
+        with mock.patch("sys.stderr", io.StringIO()):
+            for _ in range(3):
+                self.assertTrue(b.allow())
+                b.record_failure()
+        self.assertFalse(b.allow())
+
+    def test_중간에_성공하면_계수가_돌아간다(self):
+        b = CircuitBreaker("테스트", threshold=3)
+        b.record_failure()
+        b.record_failure()
+        b.record_success()
+        b.record_failure()
+        b.record_failure()
+        self.assertTrue(b.allow())  # 연속 2회뿐이라 아직 살아 있다
+
+    def test_차단_후_건너뛴_수를_센다(self):
+        b = CircuitBreaker("기존주주 API", threshold=1)
+        with mock.patch("sys.stderr", io.StringIO()):
+            b.record_failure()
+        b.allow()
+        b.allow()
+        self.assertIn("2종목", b.summary())
+
+    def test_정상이면_요약이_비어_있다(self):
+        self.assertEqual(CircuitBreaker("테스트").summary(), "")
+
+
+class PublicLockupBreaker(unittest.TestCase):
+    def setUp(self):
+        from scripts.sources import public_lockup_api
+
+        self.api = public_lockup_api
+        self.addCleanup(setattr, public_lockup_api, "BREAKER", public_lockup_api.BREAKER)
+        public_lockup_api.BREAKER = CircuitBreaker("기존주주 API", threshold=2)
+
+    def test_차단되면_호출하지_않고_빈_목록을_준다(self):
+        # 빈 목록은 호출부가 "기존 확정 이벤트 보존"으로 처리한다(데이터를 지우지 않는다).
+        with mock.patch("sys.stderr", io.StringIO()):
+            self.api.BREAKER.record_failure()
+            self.api.BREAKER.record_failure()
+        with mock.patch.object(self.api._SESSION, "get") as get:
+            self.assertEqual(self.api.fetch_public_lockup_returns("아무종목"), [])
+            get.assert_not_called()
+
+    def test_실패는_브레이커에_기록된다(self):
+        with mock.patch.object(self.api._SESSION, "get", side_effect=requests.ConnectionError("down")):
+            with self.assertRaises(requests.ConnectionError):
+                self.api.fetch_public_lockup_returns("아무종목")
+        self.assertEqual(self.api.BREAKER.consecutive_failures, 1)
 
 
 class SheetsClientRetries(unittest.TestCase):

@@ -117,7 +117,11 @@ from scripts.sources.dart_api import (
     parse_holder_lockups,
     parse_listing_float_sentence,
 )
-from scripts.sources.public_lockup_api import fetch_public_lockup_returns, normalize_public_return_item
+from scripts.sources.public_lockup_api import (
+    BREAKER as PUBLIC_LOCKUP_BREAKER,
+    fetch_public_lockup_returns,
+    normalize_public_return_item,
+)
 from scripts.utils.dates import calc_release_date, next_trading_day, parse_date, release_display
 from scripts.utils.redaction import redact_sensitive_text
 from scripts.management import is_spac_name
@@ -6429,6 +6433,10 @@ def main() -> None:
         print(f"[TIME]   {seconds:7.1f}s ({share:4.1f}%) {label}", file=sys.stderr)
     for seconds, stock in sorted(stock_seconds, reverse=True)[:5]:
         print(f"[TIME]   느린 종목 {seconds:6.1f}s {stock}", file=sys.stderr)
+
+    breaker_note = PUBLIC_LOCKUP_BREAKER.summary()
+    if breaker_note:
+        print(breaker_note, file=sys.stderr)
 
     print("[FINISH] 전체 배치 완료", file=sys.stderr)
 

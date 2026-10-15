@@ -8,11 +8,16 @@ import requests
 
 from scripts.config import DATA_GO_KR_API_KEY, PUBLIC_LOCKUP_API_URL
 from scripts.utils.dates import calc_release_date, parse_date, release_display
-from scripts.utils.http import retry_session
+from scripts.utils.http import CircuitBreaker, retry_session
 
 # 공공데이터포털은 읽기 타임아웃이 잦다. 재시도가 없던 동안 한 번 늦은 응답만으로
 # 그 종목이 통째로 건너뛰어졌다(run 37870912742: 심플랫폼·에스엔시스·덕양에너젠·레메디).
+# 반대로 이 API가 통째로 죽어 있을 때는 재시도가 배치를 잡아먹는다
+# (run 38754667197: 49분간 장애, 종목당 2.8분 × 17종목 → 90분 상한 초과).
+# 재시도는 짧게, 연속 실패는 브레이커로 끊는다.
 _SESSION = retry_session()
+BREAKER = CircuitBreaker("기존주주 API", threshold=5)
+PUBLIC_LOCKUP_TIMEOUT = 20
 
 
 def _to_int(value: object) -> int | None:
@@ -61,7 +66,16 @@ def fetch_public_lockup_returns(corp_name: str) -> list[dict]:
         "resultType": "json",
         "stckIssuCmpyNm": corp_name,
     }
-    res = _SESSION.get(PUBLIC_LOCKUP_API_URL, params=params, timeout=30)
+    if not BREAKER.allow():
+        # 이미 장애로 판정났다. 같은 이유로 실패할 호출을 기다리지 않고 바로 비운다.
+        return []
+
+    try:
+        res = _SESSION.get(PUBLIC_LOCKUP_API_URL, params=params, timeout=PUBLIC_LOCKUP_TIMEOUT)
+    except Exception:
+        BREAKER.record_failure()
+        raise
+    BREAKER.record_success()
 
     try:
         data = res.json()

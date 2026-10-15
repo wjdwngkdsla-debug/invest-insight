@@ -4,6 +4,7 @@ import json
 import copy
 import re
 import sys
+import time
 from collections import Counter
 from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -37,6 +38,10 @@ BACKFILL_LOOKBACK_DAYS = 1825
 # (2026-07-16 0626dd7에서 실수로 10**9로 풀려 상한이 사라졌고, 이로 인해 2026-07-21
 #  배치가 timeout-minutes: 360을 꽉 채우고 강제 취소됨 — backfill_all 외에는 반드시 유한값 유지)
 MAX_BACKFILL_PER_RUN = 25
+# 종목 수만으로 상한을 잡으면 느린 종목(문서 10건 이상)이 몰린 날 배치가 통째로
+# 길어진다. run 38754667197은 백필에만 40분을 쓰고 90분 상한에 걸렸다.
+# 남은 단계가 쓸 시간을 지키려고 시간 상한을 함께 둔다. 둘 중 먼저 닿는 쪽이 이긴다.
+MAX_BACKFILL_SECONDS = 25 * 60
 # 종목당 신고서 다운로드 상한 — 정정이 많아도 최신 몇 건이면 전 필드가 채워진다.
 MAX_DOCS_PER_CORP = 4
 
@@ -747,7 +752,7 @@ def seed_new_items(
     prev_pending_names: set[str],
     deleted_corps: dict[str, dict[str, Any]] | None = None,
     fixed_exclusions: dict[str, dict[str, Any]] | None = None,
-    heavy_budget: dict[str, int] | None = None,
+    heavy_budget: dict[str, Any] | None = None,
     stock_hints: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """시트에 이름만 적어 넣은 회사를 DART corpCode로 찾아 편입한다 (자동발굴이 놓친 회사용).
@@ -817,7 +822,7 @@ def seed_new_items(
 
         link = dart_search_link(corp.get("corp_name") or name)
         # 문서 파싱은 무거우니 배치당 상한을 넘으면 이번엔 건너뛰고 pending 유지
-        if heavy_budget is not None and heavy_budget.get("left", 0) <= 0:
+        if not _budget_left(heavy_budget):
             unresolved.append({"name": name, "status": "pending", "link": link})
             continue
         try:
@@ -998,6 +1003,28 @@ def _listing_date_is_plausible(item: dict[str, Any], listing_date: str) -> bool:
 def _trusted_listing_date(item: dict[str, Any]) -> str:
     listing = item.get("listing_date") or ""
     return listing if _listing_date_is_plausible(item, listing) else ""
+
+
+def _budget_left(heavy_budget: dict[str, Any] | None, log=None) -> bool:
+    """문서를 더 내려받아도 되는지 — 남은 건수와 남은 시간을 함께 본다."""
+    if heavy_budget is None:
+        return True
+    if heavy_budget.get("left", 0) <= 0:
+        return False
+    deadline = heavy_budget.get("deadline")
+    if deadline is not None and time.monotonic() >= deadline:
+        if not heavy_budget.get("timed_out"):
+            heavy_budget["timed_out"] = True
+            message = (
+                f"백필 시간 상한 {MAX_BACKFILL_SECONDS // 60}분 도달 — 남은 종목은 "
+                f"다음 배치에서 이어서 채웁니다 (잔여 예산 {heavy_budget.get('left', 0)}건)."
+            )
+            if log:
+                log(message)
+            else:
+                print(f"[IPO일정] {message}", file=sys.stderr)
+        return False
+    return True
 
 
 def _needs_offering_backfill(item: dict[str, Any]) -> bool:
@@ -1367,7 +1394,12 @@ def refresh_ipo_schedule(
 
     # backfill_all=True면 배치당 상한 없이 남은 백필(신고서·실적보고서)을 한 번에 전부 처리한다.
     # Run workflow의 backfill_all 체크 또는 --backfill-all 인자로 켠다.
-    heavy_budget = {"left": 10**9 if backfill_all else MAX_BACKFILL_PER_RUN}
+    heavy_budget: dict[str, Any] = {
+        "left": 10**9 if backfill_all else MAX_BACKFILL_PER_RUN,
+        # backfill_all은 사용자가 작정하고 전량 채우는 모드라 시간 상한을 두지 않는다.
+        "deadline": None if backfill_all else time.monotonic() + MAX_BACKFILL_SECONDS,
+        "timed_out": False,
+    }
     if backfill_all:
         log("backfill_all — 배치당 상한 해제, 미채움 종목 전량 처리")
 
@@ -1461,7 +1493,7 @@ def refresh_ipo_schedule(
         if has_official_commit_apply:
             archived["ipo_parse_version"] = IPO_PARSE_VERSION
 
-        if needs_filing and heavy_budget["left"] > 0:
+        if needs_filing and _budget_left(heavy_budget, log):
             try:
                 corp_filings = _fetch_corp_filings(corp_code, BACKFILL_LOOKBACK_DAYS)
                 # 상장 후 유상증자 문서가 최신으로 잡히지 않게 IPO 시점 공시만 사용
@@ -1523,7 +1555,7 @@ def refresh_ipo_schedule(
             and bool(recheck_listing)
             and recheck_listing >= (now_kst - timedelta(days=90)).strftime("%Y-%m-%d")
         )
-        if (needs_result or recheck_correction) and heavy_budget["left"] > 0:
+        if (needs_result or recheck_correction) and _budget_left(heavy_budget, log):
             try:
                 report = (
                     {"rcept_no": archived["report_rcp"]}

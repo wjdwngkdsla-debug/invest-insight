@@ -104,3 +104,42 @@ class ListingFloatNegativeCache(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BackfillTimeBudget(unittest.TestCase):
+    """백필 상한 — 건수만으로는 배치 길이를 예측할 수 없다.
+
+    문서 10건짜리 종목이 몰린 날(run 38754667197)에는 25종목 백필이 40분을 썼고,
+    뒤따르는 단계까지 합쳐 90분 상한에 걸렸다. 시간 상한을 함께 둔다.
+    """
+
+    def setUp(self):
+        from scripts.sources import ipo_schedule
+
+        self.mod = ipo_schedule
+
+    def test_건수가_남아도_시간이_지나면_멈춘다(self):
+        now = [1000.0]
+        budget = {"left": 20, "deadline": 1005.0, "timed_out": False}
+        with mock.patch.object(self.mod.time, "monotonic", lambda: now[0]):
+            self.assertTrue(self.mod._budget_left(budget))
+            now[0] = 1006.0
+            self.assertFalse(self.mod._budget_left(budget))
+
+    def test_시간이_남아도_건수가_떨어지면_멈춘다(self):
+        budget = {"left": 0, "deadline": None, "timed_out": False}
+        self.assertFalse(self.mod._budget_left(budget))
+
+    def test_상한_도달은_한_번만_알린다(self):
+        budget = {"left": 20, "deadline": 1000.0, "timed_out": False}
+        said = []
+        with mock.patch.object(self.mod.time, "monotonic", lambda: 2000.0):
+            self.mod._budget_left(budget, said.append)
+            self.mod._budget_left(budget, said.append)
+        self.assertEqual(len(said), 1)
+        self.assertIn("다음 배치", said[0])
+
+    def test_전량_백필_모드에는_시간_상한이_없다(self):
+        budget = {"left": 10**9, "deadline": None, "timed_out": False}
+        with mock.patch.object(self.mod.time, "monotonic", lambda: 10**9):
+            self.assertTrue(self.mod._budget_left(budget))
