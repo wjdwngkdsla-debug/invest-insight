@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-10-16T09:08:23.979936+09:00",
+  "checked_at": "2026-10-17T00:33:52.070878+09:00",
   "refreshed": [
-    "엠에스바이오"
+    "인제니아테라퓨틱스"
   ],
   "failures": [],
   "issues": [
@@ -10,10 +10,7 @@
       "code": "",
       "name": "디티에스",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -28,9 +25,30 @@
       ]
     },
     {
+      "corp_code": "01540903",
+      "code": "",
+      "name": "크리에이츠",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
       "corp_code": "01543043",
       "code": "",
       "name": "티앤이코리아",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01649408",
+      "code": "",
+      "name": "인텔리빅스",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
@@ -380,9 +398,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 50,
+    "cases": 54,
     "evicted_cases": 0,
-    "recheck_candidates": 19,
+    "recheck_candidates": 20,
     "retries": [
       {
         "corp_code": "01754737",
@@ -551,13 +569,13 @@
       {
         "corp_code": "01540903",
         "name": "크리에이츠",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "de0c23323ca7a69e5928",
-        "signature": "30dde6e97a6a1b1bb4b9",
+        "signature": "70cbf76a4847bbc0f489",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-07",
-        "next_retry": "2026-10-08",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-28",
@@ -568,6 +586,14 @@
             "at": "2026-10-07",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -605,18 +631,26 @@
       {
         "corp_code": "01649408",
         "name": "인텔리빅스",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "0ba8386fb429ae47a3c4",
-        "signature": "a73ef4e4d26ac8076d50",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "ab1cbc0ec9146f3b0cce",
+        "signature": "bfb6c2eb7d65525cbd9c",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -1224,19 +1258,14 @@
       {
         "corp_code": "02031369",
         "name": "인제니아테라퓨틱스",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "5f1c95c669c7eff0aca5",
-        "signature": "33055270ad92bf13f5a1",
-        "consecutive_attempts": 13,
+        "signature": "7bc32ec0908881031920",
+        "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-16",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
-          {
-            "at": "2026-10-06",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-07",
             "outcome": "verified",
@@ -1254,6 +1283,11 @@
           },
           {
             "at": "2026-10-15",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "verified",
             "reasons": []
           }
@@ -1820,22 +1854,14 @@
       {
         "corp_code": "01703849",
         "name": "노머스",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "abc52df2227e8728d36f",
-        "signature": "d83200684ffc2131e542",
-        "consecutive_attempts": 5,
+        "signature": "cd41b9e582b68fab1989",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-22",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
-          {
-            "at": "2026-10-01",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-02",
             "outcome": "rejected",
@@ -1862,6 +1888,14 @@
           },
           {
             "at": "2026-10-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
