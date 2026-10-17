@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-17T09:35:29.823199+09:00",
+  "checked_at": "2026-10-17T23:04:54.914026+09:00",
   "refreshed": [],
   "failures": [],
   "issues": [
@@ -398,7 +398,7 @@
   "repair_memory": {
     "cases": 56,
     "evicted_cases": 0,
-    "recheck_candidates": 22,
+    "recheck_candidates": 23,
     "retries": [
       {
         "corp_code": "01754737",
@@ -2029,13 +2029,22 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "9e917a9d1b3d2a6c8d9f",
         "signature": "35a16a557c5f8df619b8",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-19",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "result_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2051,13 +2060,21 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "d70623bef7d410f283ba",
         "signature": "0e337d8c90fcb8e5c451",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-19",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2069,16 +2086,24 @@
       {
         "corp_code": "01138595",
         "name": "뱅크웨어글로벌",
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "7e0cfceef9c0c720ec15",
-        "signature": "e154fcb44c655dfdbc31",
+        "signature": "d185550c9652077e234c",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2090,16 +2115,24 @@
       {
         "corp_code": "01419205",
         "name": "피앤에스미캐닉스",
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "ef46c99776ffb7b48253",
-        "signature": "839666a8c55e9295a4dd",
+        "signature": "db1ae567cc65993c8aa8",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
