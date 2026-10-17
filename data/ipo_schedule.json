@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17 00:05",
+  "updated": "2026-10-17 09:07",
   "items": [
     {
       "corp_code": "00104069",
@@ -1047,15 +1047,15 @@
         "candidates": []
       },
       "quality_checked_at": "2026-10-07",
-      "quality_attempted_at": "2026-10-15",
+      "quality_attempted_at": "2026-10-17",
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "0d9b0e015525b683daa8",
-        "signature": "6d1d80356a42f5f292af",
+        "signature": "e5ee3df86b991c105fb9",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-16",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-28",
@@ -1074,11 +1074,19 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
       "quality_refresh_error": {
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-17",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       }
     },
@@ -1369,15 +1377,15 @@
         "candidates": []
       },
       "quality_checked_at": "2026-10-07",
-      "quality_attempted_at": "2026-10-15",
+      "quality_attempted_at": "2026-10-17",
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "04e287ee1548aba2b707",
-        "signature": "a6dd584592f2d5bc42b4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "cd80599665a819d41c5f",
+        "signature": "de07a557bfd66c7dd614",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-16",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-28",
@@ -1396,11 +1404,19 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
       "quality_refresh_error": {
-        "checked_at": "2026-10-15",
+        "checked_at": "2026-10-17",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "final_price": 15300
@@ -3504,7 +3520,10 @@
       "commit_apply_missing": 7,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_overrides": {}
     },
     {
       "corp_code": "01795859",
@@ -3884,7 +3903,10 @@
       "commit_apply_missing": 7,
       "listing_date": "",
       "stock_code": "",
-      "review_pending": false
+      "review_pending": false,
+      "management_status": "자동",
+      "schedule_hidden": false,
+      "holder_overrides": {}
     },
     {
       "corp_code": "01938746",
@@ -7236,35 +7258,35 @@
           "qty": 184900059,
           "pct": 97.77,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         }
       ],
       "manual_commit_apply": {
@@ -31061,22 +31083,30 @@
         "final_price",
         "market"
       ],
-      "quality_attempted_at": "2026-10-16",
+      "quality_attempted_at": "2026-10-17",
       "quality_refresh_error": {
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-10-17",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "fd7961809c8a9bfca5ad",
-        "signature": "b7ba07bb95f843faae05",
+        "signature": "1c367d88ccf734ed959b",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -31434,22 +31464,30 @@
         "final_price",
         "market"
       ],
-      "quality_attempted_at": "2026-10-16",
+      "quality_attempted_at": "2026-10-17",
       "quality_refresh_error": {
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-10-17",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "aa97c1ed51c846be4304",
-        "signature": "bf6cfdf0be563152a96f",
+        "signature": "aa21c195d6151938aa4b",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -31461,54 +31499,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-09-19",
-      "name": "스탁키퍼",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "열매컴퍼니",
-      "type": "검토대기",
-      "field": "노출",
-      "old": "-",
-      "new": "IPO 신호 부족(비공개)"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "투게더아트",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "자동",
-      "new": "제외고정"
-    },
     {
       "date": "2026-09-19",
       "name": "데이터젠",
@@ -35460,6 +35450,54 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -35468,79 +35506,79 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": ""
     },
     "corp:02038432": {
       "name": "SimwonAmericaCorp.",
       "corp_code": "02038432",
-      "excluded_at": "2026-10-16",
+      "excluded_at": "2026-10-17",
       "memo": ""
     }
   }

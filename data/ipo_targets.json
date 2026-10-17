@@ -28,15 +28,6 @@
   },
   {
     "market": "코스닥",
-    "name": "디티에스",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "18500",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "래블업",
     "listing_date": "",
     "code": "",
@@ -47,6 +38,15 @@
   {
     "market": "코스피",
     "name": "바로팜",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스피",
+    "name": "씨앤엠",
     "listing_date": "",
     "code": "",
     "shares": "",
@@ -154,6 +154,15 @@
   },
   {
     "market": "코스닥",
+    "name": "제이앤티지",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
     "name": "케이엠에프",
     "listing_date": "",
     "code": "",
@@ -176,7 +185,7 @@
     "listing_date": "",
     "code": "",
     "shares": "",
-    "manual_ipo_price": "",
+    "manual_ipo_price": "15300",
     "manual_ipo_price_locked": "N"
   },
   {
@@ -1598,6 +1607,15 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "7800",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "디티에스",
+    "listing_date": "2026-10-23",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "18500",
     "manual_ipo_price_locked": "N"
   }
 ]

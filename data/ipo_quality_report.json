@@ -1,8 +1,6 @@
 {
-  "checked_at": "2026-10-17T00:33:52.070878+09:00",
-  "refreshed": [
-    "인제니아테라퓨틱스"
-  ],
+  "checked_at": "2026-10-17T09:35:29.823199+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -398,9 +396,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 54,
+    "cases": 56,
     "evicted_cases": 0,
-    "recheck_candidates": 20,
+    "recheck_candidates": 22,
     "retries": [
       {
         "corp_code": "01754737",
@@ -538,13 +536,13 @@
       {
         "corp_code": "01705573",
         "name": "유캐스트",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "0d9b0e015525b683daa8",
-        "signature": "6d1d80356a42f5f292af",
+        "signature": "e5ee3df86b991c105fb9",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-16",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-28",
@@ -558,6 +556,14 @@
           },
           {
             "at": "2026-10-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -600,13 +606,13 @@
       {
         "corp_code": "01543043",
         "name": "티앤이코리아",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "04e287ee1548aba2b707",
-        "signature": "a6dd584592f2d5bc42b4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "cd80599665a819d41c5f",
+        "signature": "de07a557bfd66c7dd614",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-15",
-        "next_retry": "2026-10-16",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-09-28",
@@ -620,6 +626,14 @@
           },
           {
             "at": "2026-10-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2097,16 +2111,24 @@
       {
         "corp_code": "00366438",
         "name": "산일전기",
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "fd7961809c8a9bfca5ad",
-        "signature": "b7ba07bb95f843faae05",
+        "signature": "1c367d88ccf734ed959b",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2118,16 +2140,24 @@
       {
         "corp_code": "01384787",
         "name": "시프트업",
-        "parser_revision": "150d5146ca6f2e099cf4",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "aa97c1ed51c846be4304",
-        "signature": "bf6cfdf0be563152a96f",
+        "signature": "aa21c195d6151938aa4b",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-17",
+        "next_retry": "2026-10-18",
         "history": [
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
