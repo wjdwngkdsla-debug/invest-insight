@@ -1,16 +1,10 @@
 {
-  "checked_at": "2026-10-17T23:04:54.914026+09:00",
-  "refreshed": [],
+  "checked_at": "2026-10-18T09:15:25.374622+09:00",
+  "refreshed": [
+    "디티에스"
+  ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "00534729",
-      "code": "",
-      "name": "디티에스",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
     {
       "corp_code": "01705573",
       "code": "",
@@ -398,7 +392,7 @@
   "repair_memory": {
     "cases": 56,
     "evicted_cases": 0,
-    "recheck_candidates": 23,
+    "recheck_candidates": 22,
     "retries": [
       {
         "corp_code": "01754737",
@@ -498,12 +492,12 @@
         "corp_code": "00534729",
         "name": "디티에스",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "fba7f68ac69f79051217",
-        "signature": "a023ab037bc166c0b73d",
+        "source_revision": "9ad6b6680ef1b81ffe28",
+        "signature": "4e3971a8bdfea66d857f",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "outcome": "verified",
+        "last_attempt": "2026-10-18",
+        "next_retry": "2026-10-19",
         "history": [
           {
             "at": "2026-09-29",
@@ -530,6 +524,11 @@
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
             ]
+          },
+          {
+            "at": "2026-10-18",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -927,10 +926,10 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "0b865a6968c712dd647e",
         "signature": "92cf9fab150ed4067e16",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-18",
+        "next_retry": "2026-10-20",
         "history": [
           {
             "at": "2026-10-13",
@@ -941,6 +940,13 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
+            ]
+          },
+          {
+            "at": "2026-10-18",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 미해석 행 확인 필요)"
@@ -1471,19 +1477,11 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "4aa5edf55d2f86c530f2",
         "signature": "15ac9124116b9b2a0c4a",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-18",
+        "next_retry": "2026-10-20",
         "history": [
-          {
-            "at": "2026-10-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-04",
             "outcome": "rejected",
@@ -1510,6 +1508,14 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-18",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1699,10 +1705,10 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "92290b9ad3e7ee2140c6",
         "signature": "458e275984011cfd5830",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-10-18",
+        "next_retry": "2026-10-20",
         "history": [
           {
             "at": "2026-10-11",
@@ -1721,6 +1727,14 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-18",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
