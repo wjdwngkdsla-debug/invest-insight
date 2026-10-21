@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-10-21T09:54:54.723841+09:00",
-  "refreshed": [],
+  "checked_at": "2026-10-22T01:21:25.166646+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스",
+    "영광"
+  ],
   "failures": [],
   "issues": [
     {
-      "corp_code": "01705573",
+      "corp_code": "01540903",
       "code": "",
-      "name": "유캐스트",
+      "name": "크리에이츠",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
         "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
         "개인청약경쟁률"
@@ -24,7 +24,10 @@
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "개인청약경쟁률"
       ]
     },
     {
@@ -40,21 +43,7 @@
       "code": "",
       "name": "래블업",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "00579342",
-      "code": "",
-      "name": "영광",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -62,10 +51,15 @@
       "code": "",
       "name": "이에스티",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    },
+    {
+      "corp_code": "01705573",
+      "code": "",
+      "name": "유캐스트",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -418,7 +412,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 63,
+    "cases": 64,
     "evicted_cases": 0,
     "recheck_candidates": 25,
     "retries": [
@@ -514,62 +508,15 @@
         ]
       },
       {
-        "corp_code": "01705573",
-        "name": "유캐스트",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "0d9b0e015525b683daa8",
-        "signature": "e5ee3df86b991c105fb9",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-22",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-07",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-15",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-20",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          }
-        ]
-      },
-      {
         "corp_code": "01540903",
         "name": "크리에이츠",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "53804d6cc170d0c1384e",
-        "signature": "da36b1dd3d88d292d863",
+        "source_revision": "9717d761bc48fc627c2a",
+        "signature": "15f7d217ca9f62e61a00",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-21",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
           {
             "at": "2026-09-28",
@@ -593,6 +540,14 @@
             "at": "2026-10-20",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -707,12 +662,12 @@
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "5105e387bfcc34cba637",
-        "signature": "b16de199139ebb8ee5ec",
+        "source_revision": "25e94848b6f71453ea85",
+        "signature": "2d4bc184a677b63f56cc",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-21",
+        "outcome": "verified",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
           {
             "at": "2026-09-27",
@@ -731,6 +686,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -955,6 +915,53 @@
         ]
       },
       {
+        "corp_code": "01705573",
+        "name": "유캐스트",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "0d9b0e015525b683daa8",
+        "signature": "e5ee3df86b991c105fb9",
+        "consecutive_attempts": 2,
+        "outcome": "rejected",
+        "last_attempt": "2026-10-20",
+        "next_retry": "2026-10-22",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-20",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
         "corp_code": "01938746",
         "name": "아델",
         "parser_revision": "c793d4eb2e2492a7c7ac",
@@ -1019,13 +1026,20 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "ec369c3760521903526b",
         "signature": "67eb309d3529e478ce25",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-21",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-24",
         "history": [
           {
             "at": "2026-10-20",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-10-22",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -1389,16 +1403,11 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "7bc32ec0908881031920",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "verified",
-        "last_attempt": "2026-10-19",
-        "next_retry": "2026-10-20",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-12",
             "outcome": "verified",
@@ -1416,6 +1425,11 @@
           },
           {
             "at": "2026-10-19",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-22",
             "outcome": "verified",
             "reasons": []
           }
