@@ -1,8 +1,9 @@
 {
-  "checked_at": "2026-10-22T01:21:25.166646+09:00",
+  "checked_at": "2026-10-22T09:33:37.538191+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "영광"
+    "인텔리빅스",
+    "유캐스트",
+    "래블업"
   ],
   "failures": [],
   "issues": [
@@ -31,33 +32,9 @@
       ]
     },
     {
-      "corp_code": "01649408",
-      "code": "",
-      "name": "인텔리빅스",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01956751",
-      "code": "",
-      "name": "래블업",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
       "corp_code": "01378005",
       "code": "",
       "name": "이에스티",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "01705573",
-      "code": "",
-      "name": "유캐스트",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)"
       ]
@@ -414,7 +391,7 @@
   "repair_memory": {
     "cases": 64,
     "evicted_cases": 0,
-    "recheck_candidates": 25,
+    "recheck_candidates": 26,
     "retries": [
       {
         "corp_code": "01749559",
@@ -556,17 +533,12 @@
         "name": "티앤이코리아",
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "cd80599665a819d41c5f",
-        "signature": "de07a557bfd66c7dd614",
-        "consecutive_attempts": 2,
+        "signature": "5f2ee571e2bd0a025c22",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-22",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-07",
             "outcome": "verified",
@@ -595,6 +567,16 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -602,12 +584,12 @@
         "corp_code": "01649408",
         "name": "인텔리빅스",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "ab1cbc0ec9146f3b0cce",
-        "signature": "bfb6c2eb7d65525cbd9c",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-22",
+        "source_revision": "8b9b0e408eaced79ed9f",
+        "signature": "3bb376f514d6fea3f077",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
           {
             "at": "2026-09-30",
@@ -629,6 +611,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -636,12 +623,12 @@
         "corp_code": "01956751",
         "name": "래블업",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "ecb71cff15420cc8e465",
-        "signature": "a6620eb60345a345d031",
+        "source_revision": "ea9f9e11f4c6a9eca9e9",
+        "signature": "de2699c2c9f3533e5f4c",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-21",
+        "outcome": "verified",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
           {
             "at": "2026-09-30",
@@ -655,6 +642,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -918,18 +910,13 @@
         "corp_code": "01705573",
         "name": "유캐스트",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "0d9b0e015525b683daa8",
-        "signature": "e5ee3df86b991c105fb9",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-22",
+        "source_revision": "38acaa194b9212783bda",
+        "signature": "d537fb4cc299c4f54cfc",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-22",
+        "next_retry": "2026-10-23",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-07",
             "outcome": "verified",
@@ -958,6 +945,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-22",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
