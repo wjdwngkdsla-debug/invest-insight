@@ -1,8 +1,6 @@
 {
-  "checked_at": "2026-10-23T09:28:38.843912+09:00",
-  "refreshed": [
-    "에스에프씨"
-  ],
+  "checked_at": "2026-10-24T00:37:52.393134+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -10,10 +8,7 @@
       "code": "",
       "name": "크리에이츠",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -23,16 +18,45 @@
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
       "corp_code": "01649408",
       "code": "",
       "name": "인텔리빅스",
+      "gaps": [
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "공시 대기: 개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "01956751",
+      "code": "",
+      "name": "래블업",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "00579342",
+      "code": "",
+      "name": "영광",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "상장일 미정",
+        "개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "01378005",
+      "code": "",
+      "name": "이에스티",
       "gaps": [
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "상장일 미정",
@@ -389,9 +413,9 @@
     }
   ],
   "repair_memory": {
-    "cases": 65,
+    "cases": 67,
     "evicted_cases": 0,
-    "recheck_candidates": 26,
+    "recheck_candidates": 27,
     "retries": [
       {
         "corp_code": "00534729",
@@ -594,11 +618,11 @@
         "name": "래블업",
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "ea9f9e11f4c6a9eca9e9",
-        "signature": "de2699c2c9f3533e5f4c",
+        "signature": "6c9216345590f97ad40f",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-23",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-25",
         "history": [
           {
             "at": "2026-09-30",
@@ -617,6 +641,14 @@
             "at": "2026-10-22",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-24",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -624,12 +656,12 @@
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "25e94848b6f71453ea85",
-        "signature": "2d4bc184a677b63f56cc",
+        "source_revision": "a5890de02417fadf6ea6",
+        "signature": "9b46160992ee57330973",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-23",
+        "outcome": "rejected",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-25",
         "history": [
           {
             "at": "2026-09-27",
@@ -653,6 +685,14 @@
             "at": "2026-10-22",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-24",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -1011,10 +1051,10 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "ec369c3760521903526b",
         "signature": "67eb309d3529e478ce25",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-24",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-28",
         "history": [
           {
             "at": "2026-10-20",
@@ -1025,6 +1065,13 @@
           },
           {
             "at": "2026-10-22",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-10-24",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -2434,10 +2481,10 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "aa97c1ed51c846be4304",
         "signature": "aa21c195d6151938aa4b",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "rejected",
-        "last_attempt": "2026-10-20",
-        "next_retry": "2026-10-24",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-31",
         "history": [
           {
             "at": "2026-10-16",
@@ -2465,6 +2512,14 @@
           },
           {
             "at": "2026-10-20",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-24",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
