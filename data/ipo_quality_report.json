@@ -1,8 +1,7 @@
 {
-  "checked_at": "2026-10-23T01:18:19.484205+09:00",
+  "checked_at": "2026-10-23T09:28:38.843912+09:00",
   "refreshed": [
-    "이에스티",
-    "인제니아테라퓨틱스"
+    "에스에프씨"
   ],
   "failures": [],
   "issues": [
@@ -390,57 +389,10 @@
     }
   ],
   "repair_memory": {
-    "cases": 64,
+    "cases": 65,
     "evicted_cases": 0,
     "recheck_candidates": 26,
     "retries": [
-      {
-        "corp_code": "01749559",
-        "name": "엠에스바이오",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9280742e62996f5b98b8",
-        "signature": "2ed3ffd7556e56f11dcf",
-        "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
-        "history": [
-          {
-            "at": "2026-10-04",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-06",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-14",
-            "outcome": "rejected",
-            "reasons": [
-              "공시 대기: 개인청약경쟁률",
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
-            ]
-          },
-          {
-            "at": "2026-10-16",
-            "outcome": "verified",
-            "reasons": []
-          }
-        ]
-      },
       {
         "corp_code": "00534729",
         "name": "디티에스",
@@ -491,16 +443,11 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "9717d761bc48fc627c2a",
         "signature": "15f7d217ca9f62e61a00",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-23",
+        "last_attempt": "2026-10-23",
+        "next_retry": "2026-10-25",
         "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-07",
             "outcome": "verified",
@@ -526,6 +473,14 @@
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
             ]
+          },
+          {
+            "at": "2026-10-23",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
           }
         ]
       },
@@ -535,16 +490,11 @@
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "cd80599665a819d41c5f",
         "signature": "5f2ee571e2bd0a025c22",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-23",
+        "last_attempt": "2026-10-23",
+        "next_retry": "2026-10-25",
         "history": [
-          {
-            "at": "2026-10-07",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-15",
             "outcome": "rejected",
@@ -578,6 +528,16 @@
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-23",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -586,11 +546,11 @@
         "name": "인텔리빅스",
         "parser_revision": "c793d4eb2e2492a7c7ac",
         "source_revision": "8b9b0e408eaced79ed9f",
-        "signature": "3bb376f514d6fea3f077",
+        "signature": "7c5b9c2c403ef8482c55",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-22",
-        "next_retry": "2026-10-23",
+        "outcome": "unresolved",
+        "last_attempt": "2026-10-23",
+        "next_retry": "2026-10-24",
         "history": [
           {
             "at": "2026-09-30",
@@ -617,6 +577,15 @@
             "at": "2026-10-22",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-10-23",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -913,6 +882,24 @@
         ]
       },
       {
+        "corp_code": "00299109",
+        "name": "에스에프씨",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "f6f4a7ce58ada99edb54",
+        "signature": "b089b2852ea98b1bfda4",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-23",
+        "next_retry": "2026-10-24",
+        "history": [
+          {
+            "at": "2026-10-23",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01705573",
         "name": "유캐스트",
         "parser_revision": "c793d4eb2e2492a7c7ac",
@@ -1042,6 +1029,53 @@
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
             ]
+          }
+        ]
+      },
+      {
+        "corp_code": "01749559",
+        "name": "엠에스바이오",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "9280742e62996f5b98b8",
+        "signature": "2ed3ffd7556e56f11dcf",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-16",
+        "next_retry": "2026-10-17",
+        "history": [
+          {
+            "at": "2026-10-04",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-06",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-14",
+            "outcome": "rejected",
+            "reasons": [
+              "공시 대기: 개인청약경쟁률",
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
+          },
+          {
+            "at": "2026-10-16",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
