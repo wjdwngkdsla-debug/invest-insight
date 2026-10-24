@@ -74,6 +74,18 @@ def security_type(title="", text=""):
 RESULT_GRACE_DAYS = 21
 
 
+# 같은 문서를 같은 파서로 이 횟수만큼 읽어 실패했고 데이터는 이미 확보돼 있으면,
+# 더 물어봐야 운영자가 할 수 있는 일이 없다. 파서가 바뀌거나 새 공시가 올라오면
+# quality_repair_state의 서명이 달라져 시도 횟수가 1로 돌아가고 다시 묻는다.
+HOLDER_RETRY_SETTLED = 3
+
+
+def holder_review_settled(item) -> bool:
+    """구주 재파싱을 충분히 시도했고 더 나올 게 없는 상태인가."""
+    state = item.get("quality_repair_state") or {}
+    return int(state.get("consecutive_attempts") or 0) >= HOLDER_RETRY_SETTLED
+
+
 def result_waiting(item, today=None):
     """실적보고서가 아직 공시되지 않아 기다리는 것이 맞는 상태인가.
 
@@ -152,7 +164,11 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
         gaps.append("구주물량이 최초상장주식수 초과")
     if not has_holders and snapshot.get("status") != "verified":
         gaps.append("구주물량" + (f"({snapshot['reason']})" if snapshot.get("reason") else ""))
-    elif snapshot.get("status") in {"review", "error"}:
+    elif snapshot.get("status") in {"review", "error"} and not holder_review_settled(item):
+        # 구주 행이 이미 있는데 최신 공시만 못 읽은 경우다. 몇 번 더 시도해 보되,
+        # 같은 문서를 같은 파서로 계속 실패하는 중이면 운영자가 할 일이 없다.
+        # (시프트업·산일전기 등은 구주 데이터가 채워진 뒤에도 몇 달째 요청받고 있었다.
+        #  피앤에스미캐닉스·산일전기는 운영자가 직접 수기로 채운 종목이다.)
         gaps.append("구주물량 최신 공시 확인" + (f"({snapshot['reason']})" if snapshot.get("reason") else ""))
     if float_pct_known is False:
         gaps.append("상장일유통가능")

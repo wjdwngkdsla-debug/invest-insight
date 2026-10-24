@@ -85,3 +85,46 @@ class CorrectionReference(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SettledHolderReview(unittest.TestCase):
+    """구주 데이터가 이미 있는데도 몇 달째 '최신 공시 확인'을 요청하던 문제.
+
+    시프트업·아이언디바이스·케이쓰리아이는 투자설명서/공공데이터로 이미 채워졌고,
+    피앤에스미캐닉스·산일전기는 운영자가 직접 수기로 넣은 종목인데도
+    holder_lockup.status가 review로 남아 매번 검토 목록에 올라왔다.
+    """
+
+    def _item(self, attempts):
+        return {
+            "market": "코스닥", "band_low": 1000, "band_high": 2000, "offer_shares": 100,
+            "underwriter": "증권사", "final_price": 2000, "demand_ratio": 100,
+            "forecast_end": "2024-01-01", "sub_end": "2024-01-05", "sub_ratio": 10,
+            "listing_date": "2024-01-10", "report_rcp": "123",
+            "holder_lockup": {"status": "review", "reason": "기존주주 표 미발견"},
+            "quality_repair_state": {"consecutive_attempts": attempts},
+        }
+
+    def _holder_gaps(self, item, has_holders):
+        from scripts.ipo_quality import quality_gaps
+        return [g for g in quality_gaps(item, has_holders, today="2026-10-24") if "구주물량" in g]
+
+    def test_충분히_시도했고_데이터가_있으면_묻지_않는다(self):
+        self.assertEqual(self._holder_gaps(self._item(3), has_holders=True), [])
+        self.assertEqual(self._holder_gaps(self._item(9), has_holders=True), [])
+
+    def test_아직_덜_시도했으면_묻는다(self):
+        gaps = self._holder_gaps(self._item(1), has_holders=True)
+        self.assertTrue(any("최신 공시 확인" in g for g in gaps))
+
+    def test_데이터가_아예_없으면_계속_묻는다(self):
+        # 아델·씨아이에스케미칼처럼 구주 행이 0개면 시도 횟수와 무관하게 요청한다.
+        gaps = self._holder_gaps(self._item(9), has_holders=False)
+        self.assertTrue(any(g.startswith("구주물량") for g in gaps))
+
+    def test_파서가_바뀌면_다시_묻는다(self):
+        # remember_attempt가 서명이 달라질 때 consecutive_attempts를 1로 되돌린다.
+        from scripts.ipo_quality import holder_review_settled
+        self.assertFalse(holder_review_settled({"quality_repair_state": {"consecutive_attempts": 1}}))
+        self.assertTrue(holder_review_settled({"quality_repair_state": {"consecutive_attempts": 3}}))
+        self.assertFalse(holder_review_settled({}))
