@@ -86,6 +86,37 @@ def retry_targets(items, today, selected=(), revision=None, holder_codes=()):
                   i.get("quality_attempted_at", ""), i.get("listing_date") or today, i.get("corp_code", "")))
 
 
+def _resolve_correction_reference(snapshot, reports):
+    """정정신고서가 "나머지는 OOOO년 O월 O일 신고서와 동일"이라고만 적은 경우,
+    그 원본문을 직접 찾아 다시 읽는다.
+
+    지금까지는 referenced_filing_date를 메모 문자열로만 남기고(참조 본문 2024-07-12)
+    원본은 가져오지 않아, 운영자가 DART를 직접 열어 대조해야 했다.
+    원본 접수번호는 이미 손에 든 reports 목록 안에 있다.
+    """
+    if snapshot.get("status") != "review":
+        return snapshot
+    ref = snapshot.get("referenced_filing_date")
+    if not ref:
+        return snapshot
+    stamp = ref.replace("-", "")
+    earlier = [r for r in reports
+               if (r.get("rcept_dt") or "") <= stamp
+               and (r.get("rcept_no") or "") != snapshot.get("rcept_no")]
+    base = select_latest_investment_report(earlier)
+    if not base:
+        return snapshot
+    try:
+        resolved = holder_snapshot(download_document_text(base["rcept_no"]), base["rcept_no"])
+    except Exception:
+        return snapshot
+    if resolved.get("status") != "verified":
+        return snapshot
+    resolved["resolved_from_correction"] = snapshot.get("rcept_no")
+    resolved["referenced_filing_date"] = ref
+    return resolved
+
+
 def repair_item(item, today, artifacts=None):
     listing = item.get("listing_date") or today
     start = (datetime.fromisoformat(listing) - timedelta(days=240)).strftime("%Y%m%d")
@@ -103,7 +134,9 @@ def repair_item(item, today, artifacts=None):
         return
     if kind:
         item["security_type"] = kind
-    item["holder_lockup"] = merge_holder_snapshot(item.get("holder_lockup"), holder_snapshot(doc, receipt))
+    holders = holder_snapshot(doc, receipt)
+    holders = _resolve_correction_reference(holders, reports)
+    item["holder_lockup"] = merge_holder_snapshot(item.get("holder_lockup"), holders)
     item["holder_lockup"]["quantity_unit"] = "DR" if kind == "depositary_receipt" else "주"
     item.pop("holder_source_error", None)
     _, applications = _parse_demand_tables(doc)

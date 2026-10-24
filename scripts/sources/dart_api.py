@@ -395,6 +395,13 @@ def extract_float_summary_tables(document_text: str, expected_shares: int | None
 _HOLDER_PERIOD = re.compile(r"(\d+)\s*(개월|년|일)")
 
 
+# "상장 후 1월"처럼 '개월'을 '월'로 줄여 쓴 제출사가 있다(피앤에스미캐닉스).
+# '월'만 보고 개월로 읽으면 "2024년 7월" 같은 날짜를 7개월로 오독하므로,
+# 기산 문구가 같이 적힌 칸에서만 인정한다.
+_HOLDER_BASIS = re.compile(r"상장|등록|납입|발행|매매개시|거래개시")
+_SHORT_MONTH = re.compile(r"(\d+)\s*월(?!\s*\d)")
+
+
 def _holder_period(cell: str) -> str | None:
     """'상장일로부터 6개월', '3년', '6개월' → '6개월'/'3년'. 기간이 아니면 None."""
     text = _clean_text(cell)
@@ -409,6 +416,14 @@ def _holder_period(cell: str) -> str | None:
         return f"{months}개월" if 0 < months <= 60 else None
     m = _HOLDER_PERIOD.search(text)
     if not m:
+        # '개월'을 '월'로 줄여 쓴 칸 — 기산 문구가 있을 때만 개월로 본다.
+        if _HOLDER_BASIS.search(text) and "년" not in text:
+            months = _SHORT_MONTH.findall(text)
+            # "상장 후 1월 /3월"처럼 한 칸에 기간이 둘이면 수량을 나눌 수 없다.
+            # 섣불리 앞의 것만 택하면 물량이 한쪽으로 쏠리므로 사람에게 넘긴다.
+            if len(months) == 1:
+                n = int(months[0])
+                return f"{n}개월" if 0 < n <= 60 else None
         return None
     n, unit = int(m.group(1)), m.group(2)
     if unit == "일":

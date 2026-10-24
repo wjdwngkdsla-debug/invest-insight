@@ -1165,11 +1165,33 @@ def _load_review_fill_written() -> dict[str, dict[str, str]]:
         return {}
 
 
+# 운영자가 손댈 수 없는 항목들 — 공시가 아직 안 나왔거나, 시스템이 다시 읽는 중이다.
+# 이것들이 '부족한값'에 섞여 있어서 16행 중 9행이 "뭘 하라는 건지 알 수 없는 행"이 됐고,
+# 정작 수기 입력이 필요한 행이 그 속에 묻혔다.
+_NOT_OPERATOR_WORK = (
+    "자동 재검증 결과 보류", "원천 재수집 실패",
+    "수요예측 신청표 최신 공시 파싱 확인", "실적보고서 파싱 확인",
+    "공시 대기",
+)
+
+
+def _is_operator_work(gap: str) -> bool:
+    """운영자가 시트에 값을 적어 해결할 수 있는 항목인가."""
+    return not any(k in gap for k in _NOT_OPERATOR_WORK)
+
+
 def _review_fill_gaps(item: dict, has_float_rows: bool, float_pct_known: bool | None = None) -> list[str]:
     gaps = quality_gaps(item, has_float_rows, float_pct_known)
     if _apply_below_alloc_all_tiers(item):
         gaps.append("확약신청 오류(신청건수 오인 의심)")
     return gaps
+
+
+def _split_gaps(gaps: list[str]) -> tuple[list[str], list[str]]:
+    """(운영자가 채울 것, 기다리거나 시스템이 처리할 것)."""
+    todo = [g for g in gaps if _is_operator_work(g)]
+    waiting = [g for g in gaps if not _is_operator_work(g)]
+    return todo, waiting
 
 
 def collect_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
@@ -1497,9 +1519,15 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
             gaps.append("최초상장주식수 확인")
         if not gaps:
             continue
+        todo, waiting = _split_gaps(gaps)
+        # 운영자가 할 일이 하나도 없으면 '대기'로 표시해 한눈에 건너뛸 수 있게 한다.
+        # 행을 아예 빼면 재검증이 영영 안 끝나도 아무도 모른다.
+        lack = ", ".join(todo) if todo else "(대기) " + ", ".join(waiting)
         row = {
             "종목코드": code, "기업명": item.get("name") or "", "상장일": listing,
-            "부족한값": ", ".join(gaps), "메모": "; ".join(filter(None, [listing_day_issue,
+            "부족한값": lack, "메모": "; ".join(filter(None, [
+                ("대기 중: " + ", ".join(waiting)) if todo and waiting else "",
+                listing_day_issue,
                 holder_review_note(item),
                 repair_review_note(item),
                 (f"실적보고서 미공시 확인 {item['result_source_check']['checked_at']}; 정기 재조회" if result_waiting(item) else ""),

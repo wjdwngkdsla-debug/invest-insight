@@ -68,14 +68,36 @@ def security_type(title="", text=""):
     return ""
 
 
+# 확약배정·개인청약경쟁률·상장일은 모두 증권발행실적보고서에 실린다.
+# 그 보고서는 청약 종료 뒤 대개 일주일 안에 올라오고, 그 전에는 운영자도 알 수 없다.
+# 3주가 지나도 안 올라오면 그때는 사람이 들여다볼 일이다.
+RESULT_GRACE_DAYS = 21
+
+
 def result_waiting(item, today=None):
+    """실적보고서가 아직 공시되지 않아 기다리는 것이 맞는 상태인가.
+
+    예전에는 result_source_check가 '어제 확인'으로 찍혀 있을 때만 참이라,
+    확인 기록이 하루만 밀려도 '공시 대기'가 '운영자가 채울 빈칸'으로 둔갑했다
+    (래블업·영광이 상장 전인데도 상장일·개인청약경쟁률을 요구받았다).
+    보고서 유무와 청약 종료 경과일로 직접 판단한다.
+    """
     today = today or datetime.now(ZoneInfo("Asia/Seoul")).date().isoformat()
-    check = item.get("result_source_check") or {}
-    try:
-        age = (date.fromisoformat(today) - date.fromisoformat(check.get("checked_at", ""))).days
-    except ValueError:
+    if item.get("report_rcp"):
         return False
-    return check.get("status") == "waiting" and not item.get("report_rcp") and 0 <= age <= 1
+    # 보고서를 찾았는데 못 읽은 것은 '대기'가 아니라 '실패'다.
+    # 이걸 대기로 묶으면 파싱 실패가 공시 지연 뒤에 숨는다.
+    if (item.get("result_source_check") or {}).get("status") == "parse_incomplete":
+        return False
+    sub_end = str(item.get("sub_end") or "")
+    try:
+        elapsed = (date.fromisoformat(today) - date.fromisoformat(sub_end)).days
+    except ValueError:
+        # 청약 종료일조차 모르면 공시 단계 이전이다.
+        return not item.get("sub_end")
+    if elapsed < 0:
+        return True                       # 청약이 아직 안 끝났다
+    return elapsed <= RESULT_GRACE_DAYS
 
 
 def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
@@ -114,7 +136,7 @@ def quality_gaps(item, has_holders=False, float_pct_known=None, today=None):
             state = "공시 대기: " if field == "commit_alloc" and result_waiting(item, today) else ""
             gaps.append(f"{state}{label}({', '.join(missing)})")
     if subscription_done and not item.get("listing_date"):
-        gaps.append("상장일 미정")
+        gaps.append(("공시 대기: " if result_waiting(item, today) else "") + "상장일 미정")
     if subscription_done and not item.get("sub_ratio"):
         gaps.append(("공시 대기: " if result_waiting(item, today) else "") + "개인청약경쟁률")
     snapshot = item.get("holder_lockup") or {}

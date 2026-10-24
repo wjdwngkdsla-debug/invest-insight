@@ -145,7 +145,11 @@ class IpoQualityTests(unittest.TestCase):
         item = {"sub_end": "2026-09-20"}
         refresh_result(item, [], "2026-09-22")
         self.assertTrue(result_waiting(item, "2026-09-22"))
-        self.assertFalse(result_waiting(item, "2026-09-24"))
+        # 실적보고서는 청약 종료 뒤 일주일쯤 걸린다. 며칠 지났다고 운영자가
+        # 채울 수 있는 값이 되지는 않으므로 유예 기간 안에는 계속 '대기'다.
+        self.assertTrue(result_waiting(item, "2026-09-24"))
+        # 3주가 지나도 안 올라오면 그때는 사람이 봐야 한다.
+        self.assertFalse(result_waiting(item, "2026-10-20"))
         self.assertIn("공시 대기: 개인청약경쟁률", quality_gaps(item, today="2026-09-22"))
         with patch("scripts.audit_ipo_quality.download_document_text", return_value="missing table"):
             refresh_result(item, [{"rcept_no": "123", "rcept_dt": "20260921", "report_nm": "증권발행실적보고서"}], "2026-09-22")
@@ -212,7 +216,8 @@ class IpoQualityTests(unittest.TestCase):
     def test_stage_aware_gaps_ignore_listing_date_gate(self):
         item = {"forecast_end": "2026-09-01", "sub_end": "2026-09-10", "review_pending": True}
         gaps = quality_gaps(item, today="2026-09-20")
-        self.assertIn("상장일 미정", gaps)
+        # 상장일은 실적보고서에 실린다. 아직 공시 전이면 '공시 대기'로 구분한다.
+        self.assertIn("공시 대기: 상장일 미정", gaps)
         self.assertTrue(any(g.startswith("확약신청") for g in gaps))
         self.assertIn("구주물량", gaps)
         early = quality_gaps({"forecast_end": "2026-10-01"}, today="2026-09-20")
