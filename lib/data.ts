@@ -320,21 +320,6 @@ export function getUpcomingEvents(daysAhead = 30, today = new Date()): UpcomingG
 
 
 
-export function getGroupedEventsByStock(stock: StockLockup, today = new Date()): { upcoming: UpcomingGroup[]; past: UpcomingGroup[] } {
-  const groups = getEventGroupsByStock(stock).sort((a, b) => a.tradable_date.localeCompare(b.tradable_date));
-  return {
-    upcoming: groups.filter((g) => dDay(g.tradable_date, today) >= 0),
-    past: groups.filter((g) => dDay(g.tradable_date, today) < 0),
-  };
-}
-
-
-
-
-
-
-
-
 export interface FlatRow {
   code: string;
   name: string;

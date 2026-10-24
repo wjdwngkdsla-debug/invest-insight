@@ -161,13 +161,7 @@ export interface ValueChainMarketMetricsCache {
   note: string;
   issues: ValueChainIssueMetricCache[];
 }
-
-export const layerLabels: Record<ChainLayer, string> = {
-  product: "제품/수요처",
-  process: "공정",
-  equipment: "소재·장비",
-  material: "소재·부품",
-};
+;
 
 type CompanyProfile = Omit<
   ValueChainCompany,

@@ -3230,6 +3230,19 @@ def _comparison(row: dict) -> str:
 
 
 
+# 네트워크가 끊겨 생긴 검토필요는 종목 문제가 아니라 그날의 사고다.
+# 이 표시가 없던 동안 2026-07~10월 사이의 일시적 장애 144건이 '미해결'로 쌓여
+# 검토 목록을 덮어 버렸다(전체 207건 중 152건).
+TRANSIENT_MARKERS = (
+    "HTTPSConnectionPool", "Max retries exceeded", "timed out", "Read timed out",
+    "ConnectTimeout", "Connection refused", "Temporary failure",
+)
+
+
+def _is_transient(issue: str) -> bool:
+    return any(m in (issue or "") for m in TRANSIENT_MARKERS)
+
+
 def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[str] | None = None) -> list[dict]:
     """현재 문제와 과거 이력을 합친다. 해결 행도 삭제하지 않고 아래에 보존한다."""
     existing_raw: list[dict] = []
@@ -3365,10 +3378,21 @@ def merge_review_history(path: Path, detections: list[dict], resolved_ids: set[s
 
 
 
+    transient_closed = 0
     for rid, old in history.items():
-        if rid not in active_ids and rid in (resolved_ids or set()) and old.get("status") == "미해결":
+        if rid in active_ids or old.get("status") != "미해결":
+            continue
+        if rid in (resolved_ids or set()):
             old["status"] = "해결"
             old["resolved_at"] = _now()
+        elif _is_transient(old.get("issue", "")):
+            # 이번 실행에서 다시 잡히지 않았다 — 그날의 통신 장애였을 뿐이다.
+            old["status"] = "해결"
+            old["resolved_at"] = _now()
+            old["operator_memo"] = (old.get("operator_memo") or "") or "일시적 통신 오류 — 재발하지 않아 자동 해소"
+            transient_closed += 1
+    if transient_closed:
+        print(f"[REVIEW] 일시적 통신 오류 {transient_closed}건 자동 해소", file=sys.stderr)
 
 
 

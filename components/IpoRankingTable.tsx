@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button, Input } from "@fluentui/react-components";
 import type { IpoRankingRow } from "@/lib/ranking";
 import { formatKrwEok } from "@/lib/format";
+import { CARD, CARD_SM, returnTone, signedPct } from "@/lib/ui";
 
 type MarketKey = "all" | "코스피" | "코스닥";
 type OutcomeKey = "all" | "win" | "loss";
@@ -59,11 +60,9 @@ function yymmdd(date: string): string {
 function ReturnText({ pct, suspended = false, className = "" }: { pct: number | null; suspended?: boolean; className?: string }) {
   if (suspended) return <span className={`font-semibold text-slate-500 ${className}`}>거래정지</span>;
   if (pct === null) return <span className="text-slate-300">-</span>;
-  const up = pct >= 0;
   return (
-    <span className={`font-bold tabular-nums ${up ? "text-rose-600" : "text-blue-600"} ${className}`}>
-      {up ? "+" : ""}
-      {pct.toFixed(1)}%
+    <span className={`font-bold tabular-nums ${returnTone(pct)} ${className}`}>
+      {signedPct(pct)}
     </span>
   );
 }
@@ -165,7 +164,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
   return (
     <div className="space-y-4">
       {/* 필터 한 줄 — 시장 · 성과 · 상장일 기간(캘린더) */}
-      <div className="rounded-[18px] border border-gray-200 bg-white p-3 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] sm:rounded-[20px] sm:p-3.5">
+      <div className={`${CARD_SM} p-3 sm:p-3.5`}>
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
           {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
             <Button key={key} type="button" appearance={market === key ? "primary" : "secondary"} shape="rounded" onClick={() => setMarket(key)} className="!h-8 !min-w-0 !rounded-full !px-3 !text-[12px] !font-semibold">
@@ -264,7 +263,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
       ) : (
         <>
           {/* 데스크톱: 표 */}
-          <div className="hidden overflow-hidden rounded-[20px] border border-gray-200 bg-white shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] md:block">
+          <div className={`hidden overflow-hidden ${CARD} md:block`}>
             <table className="w-full text-[13px]">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/80 text-[11.5px] font-semibold text-slate-500">
@@ -323,7 +322,7 @@ export function IpoRankingTable({ rows, priceDate }: { rows: IpoRankingRow[]; pr
           {/* 모바일: 카드 목록 */}
           <ul className="space-y-2.5 md:hidden">
             {sorted.map((row, index) => (
-              <li key={row.code} className="rounded-[18px] border border-gray-200 bg-white p-3.5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)]">
+              <li key={row.code} className={`${CARD_SM} p-3.5`}>
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex min-w-0 items-center gap-2">
                     <RankBadge rank={index + 1} />

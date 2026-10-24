@@ -1,5 +1,7 @@
 "use client";
 
+import { CARD_HERO, returnTone } from "@/lib/ui";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
@@ -16,13 +18,17 @@ function ReturnGauge({ pct }: { pct: number }) {
   const cx = 100;
   const cy = 91;
   const radius = 66;
+  // 좌표를 소수점 세 자리에서 끊는다. 그냥 두면 삼각함수 결과가 14번째 자리에서
+  // 서버와 브라우저가 갈려(…68 vs …69) 종목 상세를 열 때마다 hydration 경고가 떴다.
+  // 눈으로 구분되지 않는 차이라 반올림이 맞다.
+  const round = (v: number) => Math.round(v * 1000) / 1000;
   const edge = {
-    x: cx + radius * Math.cos(angle),
-    y: cy - radius * Math.sin(angle),
+    x: round(cx + radius * Math.cos(angle)),
+    y: round(cy - radius * Math.sin(angle)),
   };
   const tip = {
-    x: cx + (radius - 12) * Math.cos(angle),
-    y: cy - (radius - 12) * Math.sin(angle),
+    x: round(cx + (radius - 12) * Math.cos(angle)),
+    y: round(cy - (radius - 12) * Math.sin(angle)),
   };
   const up = pct >= 0;
 
@@ -175,7 +181,7 @@ export function StockHero({
   ];
 
   return (
-    <div className="overflow-hidden rounded-[24px] border border-gray-200 bg-white px-4 py-5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] md:rounded-[26px] md:px-6 md:py-5">
+    <div className={`overflow-hidden ${CARD_HERO} px-4 py-5 md:px-6 md:py-5`}>
       <div className="grid gap-5 md:grid-cols-[minmax(0,350px)_1fr] md:gap-5">
         <div className="flex flex-col justify-center gap-4 md:py-2">
           <h1 className="text-[26px] font-bold leading-tight tracking-tight text-slate-900 md:mt-1 md:text-[28px]">{stock.name}</h1>
@@ -192,7 +198,7 @@ export function StockHero({
               ) : hasReturn ? (
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-[18px] font-semibold tracking-tight text-slate-600 md:text-[20px]">공모가 대비</span>
-                  <span className={`text-[30px] font-bold leading-none tracking-tight md:text-[34px] ${up ? "text-rose-600" : "text-blue-600"}`}>
+                  <span className={`text-[30px] font-bold leading-none tracking-tight md:text-[34px] ${returnTone(displayChangePct)}`}>
                     {up ? "+" : ""}
                     {displayChangePct.toFixed(1)}
                     <span className="text-[20px] md:text-[22px]">%</span>

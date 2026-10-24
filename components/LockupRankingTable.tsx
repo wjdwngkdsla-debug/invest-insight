@@ -1,5 +1,7 @@
 "use client";
 
+import { CARD, CARD_SM, returnTone } from "@/lib/ui";
+
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Button, Input } from "@fluentui/react-components";
@@ -25,7 +27,7 @@ function ReturnText({ pct, state }: { pct: number | null; state?: "none" | "upco
     return <span className="text-[11px] text-slate-300" title="이 구간에는 기관 확약이 없었습니다">확약 없음</span>;
   }
   return (
-    <span className={`font-bold tabular-nums ${pct >= 0 ? "text-rose-600" : "text-blue-600"}`}>
+    <span className={`font-bold tabular-nums ${returnTone(pct)}`}>
       {pct >= 0 ? "+" : ""}{pct.toFixed(2)}%
     </span>
   );
@@ -118,7 +120,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
 
   return (
     <div className="space-y-3">
-      <div className="rounded-[20px] border border-gray-200 bg-white p-3.5 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)]">
+      <div className={`${CARD} p-3.5`}>
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <div className="flex flex-wrap items-center gap-2">
             {(["all", "코스피", "코스닥"] as MarketKey[]).map((key) => (
@@ -128,7 +130,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
             ))}
             <div className="flex min-w-[210px] items-baseline gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5">
               <span className="text-[11px] font-semibold text-slate-500">{average.label}</span>
-              <span className={`text-[14px] font-bold tabular-nums ${average.value !== null && average.value >= 0 ? "text-rose-600" : "text-blue-600"}`}>
+              <span className={`text-[14px] font-bold tabular-nums ${returnTone(average.value)}`}>
                 {formatAverage(average.value)}
               </span>
               <span className="text-[10.5px] font-medium text-slate-400">{average.companyCount}개 기업</span>
@@ -168,7 +170,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
       )}
 
       <div
-        className={`overflow-hidden rounded-[20px] border border-gray-200 bg-white shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] ${
+        className={`overflow-hidden ${CARD} ${
           sorted.length === 0 ? "hidden" : "hidden md:block"
         }`}
       >
@@ -208,7 +210,7 @@ export function LockupRankingTable({ rows }: { rows: LockupRankingRow[] }) {
 
       <ul className={`space-y-2.5 ${sorted.length === 0 ? "hidden" : "md:hidden"}`}>
         {sorted.map((row, index) => (
-          <li key={row.code} className="rounded-[18px] border border-gray-200 bg-white p-3.5">
+          <li key={row.code} className={`${CARD_SM} p-3.5`}>
             <div className="flex items-center gap-2"><RankBadge rank={index + 1} /><Link href={`/stock/${row.code}`} className="font-bold text-slate-900">{row.name}</Link><span className="text-[10.5px] tabular-nums text-slate-400">{row.listingDate ? row.listingDate.slice(2).replaceAll("-", ".") : "-"}</span><span className="ml-auto text-[11px] text-slate-400">{formatKrwEok(row.marketCap)}</span></div>
             <div className="mt-3 grid grid-cols-4 gap-1.5 rounded-xl bg-gray-50 p-2">
               {LOCKUP_PERIODS.map((period) => <div key={period} className="text-center"><p className="text-[10px] text-slate-400">{period}</p><p className="mt-0.5 text-[11px]"><ReturnText pct={row.returns[period]} state={row.state?.[period]} /></p></div>)}

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { CARD } from "@/lib/ui";
 import { getPastIpoItems, getSortedIpoItems, dateRange, yymmdd, bandPosition, type IpoItem } from "@/lib/ipo";
 import { IpoStatusChip } from "@/components/IpoStatusChip";
 import { IpoScheduleBrowser } from "@/components/IpoScheduleBrowser";
@@ -270,7 +272,7 @@ function IpoCard({ item, lockupHref }: { item: IpoItem; lockupHref?: string }) {
   return (
     <div
       tabIndex={hasCommit ? 0 : undefined}
-      className="group rounded-[20px] border border-gray-200 bg-white p-5 pb-4 shadow-[0_10px_35px_-26px_rgba(15,23,42,0.35)] outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300"
+      className={`group ${CARD} p-5 pb-4 outline-none transition-colors hover:border-gray-300 focus-within:border-gray-300`}
     >
       <div className="flex flex-wrap items-center gap-2">
         <IpoStatusChip item={item} />

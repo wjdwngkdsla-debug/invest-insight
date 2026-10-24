@@ -64,12 +64,6 @@ export function getIpoSchedule(): IpoScheduleData {
 }
 
 export type IpoTone = "active" | "waiting" | "done";
-
-export interface IpoStatus {
-  label: string;
-  tone: IpoTone;
-}
-
 type IpoEventKind = "listing" | "subscription" | "forecast";
 
 interface IpoFocusEvent {
@@ -112,39 +106,6 @@ function ipoFocusEvent(item: IpoItem, today = new Date()): IpoFocusEvent | null 
     a.day - b.day || EVENT_PRIORITY[a.kind] - EVENT_PRIORITY[b.kind];
   return active.sort(byDateThenType)[0] || upcoming.sort(byDateThenType)[0] || null;
 }
-
-// 오늘 뭔가 진행 중 = 빨강(active), 대기 = 파랑(waiting), 끝난 상태 = 회색(done)
-export function ipoStatus(item: IpoItem, today = new Date()): IpoStatus {
-  if (item.withdrawn) return { label: "공모 철회", tone: "done" };
-  // 상장일이 확정된 종목은 다른 진행 일정과 관계없이 상장 상태를 절대 우선한다.
-  // 청약·수요예측이 끝난 뒤 다시 아래로 내려가는 일을 막는다.
-  if (item.listing_date) {
-    const listingDay = dDay(item.listing_date, today);
-    if (listingDay === 0) return { label: "오늘 상장", tone: "active" };
-    if (listingDay > 0) return { label: `상장 예정 D-${listingDay}`, tone: "waiting" };
-  }
-  const event = ipoFocusEvent(item, today);
-  if (event) {
-    if (event.kind === "listing") {
-      return { label: event.active ? "오늘 상장" : `상장 예정 D-${event.day}`, tone: event.active ? "active" : "waiting" };
-    }
-    if (event.kind === "subscription") {
-      return { label: event.active ? "청약 중" : `청약 D-${event.day}`, tone: event.active ? "active" : "waiting" };
-    }
-    return { label: event.active ? "수요예측 중" : `수요예측 D-${event.day}`, tone: event.active ? "active" : "waiting" };
-  }
-
-  const listing = item.listing_date ? dDay(item.listing_date, today) : null;
-  if (listing !== null && listing < 0) return { label: "상장 완료", tone: "done" };
-  const subEnd = item.sub_end ? dDay(item.sub_end, today) : null;
-  // 확정공모가 없이 청약일만 지난 경우 = 공모가 확정 없이 청약이 진행될 수 없으므로 일정 연기로 본다
-  if (subEnd !== null && subEnd < 0 && !item.final_price) return { label: "일정 미정", tone: "waiting" };
-  if (subEnd !== null && subEnd < 0) return { label: "청약 완료", tone: "done" };
-  const forecastEnd = item.forecast_end ? dDay(item.forecast_end, today) : null;
-  if (forecastEnd !== null && forecastEnd < 0) return { label: "청약 예정", tone: "waiting" };
-  return { label: "공모 준비", tone: "waiting" };
-}
-
 // 절대 우선순위: 상장일 확정 종목 → 오늘 진행 중 → 가장 가까운 다음 일정 → 나머지.
 // 상장 예정끼리는 상장일이 가까운 순서다.
 export function ipoSortKey(item: IpoItem, today = new Date()): [number, number, number, string] {
@@ -200,13 +161,6 @@ export function dateRange(start?: string, end?: string): string {
   if (!end || end === start) return mmdd(start);
   return `${mmdd(start)} ~ ${mmdd(end)}`;
 }
-
-export function dateRangeWithYear(start?: string, end?: string): string {
-  if (!start) return "미정";
-  if (!end || end === start) return yymmdd(start);
-  return `${yymmdd(start)} ~ ${yymmdd(end)}`;
-}
-
 // 확정공모가의 밴드 내 위치 표시
 export function bandPosition(item: IpoItem): string {
   const { final_price: fp, band_low: lo, band_high: hi } = item;
