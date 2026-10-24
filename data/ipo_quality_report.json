@@ -1,18 +1,13 @@
 {
-  "checked_at": "2026-10-24T09:45:28.609659+09:00",
+  "checked_at": "2026-10-24T23:19:41.869300+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "크리에이츠",
+    "씨앤엠",
+    "영광와이케이엠씨",
+    "에이엔에이치스트럭쳐"
   ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "01540903",
-      "code": "",
-      "name": "크리에이츠",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
     {
       "corp_code": "01543043",
       "code": "",
@@ -417,24 +412,19 @@
   "repair_memory": {
     "cases": 69,
     "evicted_cases": 0,
-    "recheck_candidates": 29,
+    "recheck_candidates": 30,
     "retries": [
       {
         "corp_code": "01540903",
         "name": "크리에이츠",
         "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9717d761bc48fc627c2a",
-        "signature": "15f7d217ca9f62e61a00",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-23",
+        "source_revision": "ba60b26b8092aa67ea5c",
+        "signature": "ed8081dd01fb053fe6ba",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-24",
         "next_retry": "2026-10-25",
         "history": [
-          {
-            "at": "2026-10-07",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-17",
             "outcome": "rejected",
@@ -463,6 +453,11 @@
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
             ]
+          },
+          {
+            "at": "2026-10-24",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -770,6 +765,24 @@
         ]
       },
       {
+        "corp_code": "00960234",
+        "name": "영광와이케이엠씨",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "916d5b551d8dcbad9142",
+        "signature": "9c552b8fca02bcdb7405",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-25",
+        "history": [
+          {
+            "at": "2026-10-24",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01950720",
         "name": "제논",
         "parser_revision": "ba777e3d84cec182a159",
@@ -864,6 +877,24 @@
           },
           {
             "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "00618173",
+        "name": "씨앤엠",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "868035bd3d14d2eb7e4c",
+        "signature": "be07ce6c0f8684e86e55",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-25",
+        "history": [
+          {
+            "at": "2026-10-24",
             "outcome": "verified",
             "reasons": []
           }
@@ -1011,6 +1042,24 @@
         "history": [
           {
             "at": "2026-10-03",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01366675",
+        "name": "에이엔에이치스트럭쳐",
+        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "source_revision": "155a347eb9df0b00a021",
+        "signature": "02416720c603b40e8018",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-10-24",
+        "next_retry": "2026-10-25",
+        "history": [
+          {
+            "at": "2026-10-24",
             "outcome": "verified",
             "reasons": []
           }
