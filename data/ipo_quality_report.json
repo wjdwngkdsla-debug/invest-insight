@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-25T09:01:58.980492+09:00",
+  "checked_at": "2026-10-26T00:13:06.945023+09:00",
   "refreshed": [],
   "failures": [],
   "issues": [
@@ -108,7 +108,8 @@
       "code": "431190",
       "name": "케이쓰리아이",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "구주물량 최신 공시 확인(정정사항만 수록: 원본문 대조 필요)"
       ]
     },
     {
@@ -983,13 +984,13 @@
       {
         "corp_code": "01938746",
         "name": "아델",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "0b865a6968c712dd647e",
-        "signature": "92cf9fab150ed4067e16",
-        "consecutive_attempts": 3,
+        "signature": "006f887c42e74eb640a8",
+        "consecutive_attempts": 1,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-26",
+        "next_retry": "2026-10-27",
         "history": [
           {
             "at": "2026-10-13",
@@ -1014,6 +1015,13 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
+            ]
+          },
+          {
+            "at": "2026-10-26",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 미해석 행 확인 필요)"
@@ -1731,22 +1739,14 @@
       {
         "corp_code": "01594791",
         "name": "나우로보틱스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "4aa5edf55d2f86c530f2",
-        "signature": "15ac9124116b9b2a0c4a",
-        "consecutive_attempts": 3,
+        "signature": "a4212787e08ee720381b",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-26",
+        "next_retry": "2026-10-27",
         "history": [
-          {
-            "at": "2026-10-06",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-12",
             "outcome": "rejected",
@@ -1773,6 +1773,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-26",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1959,21 +1967,14 @@
       {
         "corp_code": "01590528",
         "name": "아스테라시스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "92290b9ad3e7ee2140c6",
-        "signature": "458e275984011cfd5830",
-        "consecutive_attempts": 3,
+        "signature": "8e1f66c704bf0559c2dd",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-26",
+        "next_retry": "2026-10-27",
         "history": [
-          {
-            "at": "2026-10-11",
-            "outcome": "source_error",
-            "reasons": [
-              "HTTPSConnectionPool(host='dart.fss.or.kr', port=443): Max retries exceeded with url: /report/viewer.do?rcpNo=20250117000237&dcmNo=10267950&eleId=1&offset=578&length=2434&dtd=dart4.xsd (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
-            ]
-          },
           {
             "at": "2026-10-14",
             "outcome": "rejected",
@@ -2000,6 +2001,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-26",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2354,13 +2363,13 @@
       {
         "corp_code": "01689266",
         "name": "케이쓰리아이",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "d70623bef7d410f283ba",
-        "signature": "0e337d8c90fcb8e5c451",
-        "consecutive_attempts": 4,
+        "signature": "081da0c1195cd2057302",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-23",
-        "next_retry": "2026-10-30",
+        "last_attempt": "2026-10-26",
+        "next_retry": "2026-10-27",
         "history": [
           {
             "at": "2026-10-16",
@@ -2388,6 +2397,14 @@
           },
           {
             "at": "2026-10-23",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-26",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
