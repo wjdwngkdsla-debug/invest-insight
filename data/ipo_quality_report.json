@@ -1,11 +1,6 @@
 {
-  "checked_at": "2026-10-24T23:19:41.869300+09:00",
-  "refreshed": [
-    "크리에이츠",
-    "씨앤엠",
-    "영광와이케이엠씨",
-    "에이엔에이치스트럭쳐"
-  ],
+  "checked_at": "2026-10-25T09:01:58.980492+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -24,7 +19,7 @@
       "name": "인텔리빅스",
       "gaps": [
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
+        "공시 대기: 상장일 미정",
         "공시 대기: 개인청약경쟁률"
       ]
     },
@@ -34,9 +29,9 @@
       "name": "래블업",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
@@ -45,9 +40,9 @@
       "name": "영광",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
-        "개인청약경쟁률"
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
@@ -56,7 +51,7 @@
       "name": "이에스티",
       "gaps": [
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "상장일 미정",
+        "공시 대기: 상장일 미정",
         "공시 대기: 개인청약경쟁률"
       ]
     },
@@ -105,8 +100,7 @@
       "code": "464500",
       "name": "아이언디바이스",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -114,8 +108,7 @@
       "code": "431190",
       "name": "케이쓰리아이",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(정정사항만 수록: 원본문 대조 필요)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -150,8 +143,7 @@
       "code": "462870",
       "name": "시프트업",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     }
   ],
@@ -2155,22 +2147,14 @@
       {
         "corp_code": "01703849",
         "name": "노머스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "abc52df2227e8728d36f",
-        "signature": "cd41b9e582b68fab1989",
-        "consecutive_attempts": 3,
+        "signature": "14625a1272813bd6f7ff",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
-          {
-            "at": "2026-10-08",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-15",
             "outcome": "rejected",
@@ -2197,6 +2181,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2407,13 +2399,13 @@
       {
         "corp_code": "01138595",
         "name": "뱅크웨어글로벌",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "7e0cfceef9c0c720ec15",
-        "signature": "d185550c9652077e234c",
-        "consecutive_attempts": 3,
+        "signature": "d1042c6717cf687db2bb",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -2441,6 +2433,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2452,13 +2452,13 @@
       {
         "corp_code": "01419205",
         "name": "피앤에스미캐닉스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ef46c99776ffb7b48253",
-        "signature": "db1ae567cc65993c8aa8",
-        "consecutive_attempts": 3,
+        "signature": "fcb05521676170b7352a",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -2486,6 +2486,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2497,13 +2505,13 @@
       {
         "corp_code": "00366438",
         "name": "산일전기",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "fd7961809c8a9bfca5ad",
-        "signature": "1c367d88ccf734ed959b",
-        "consecutive_attempts": 3,
+        "signature": "81ba883d443568ba4496",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -2531,6 +2539,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",

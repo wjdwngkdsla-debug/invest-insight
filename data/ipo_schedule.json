@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24 23:10",
+  "updated": "2026-10-25 08:57",
   "items": [
     {
       "corp_code": "00104069",
@@ -27176,7 +27176,7 @@
           ]
         }
       },
-      "quality_attempted_at": "2026-10-21",
+      "quality_attempted_at": "2026-10-25",
       "result_source_check": {
         "status": "parse_incomplete",
         "checked_at": "2026-09-24",
@@ -27189,26 +27189,18 @@
       },
       "quality_checked_at": "2026-09-24",
       "quality_refresh_error": {
-        "checked_at": "2026-10-21",
+        "checked_at": "2026-10-25",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "abc52df2227e8728d36f",
-        "signature": "cd41b9e582b68fab1989",
-        "consecutive_attempts": 3,
+        "signature": "14625a1272813bd6f7ff",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
-          {
-            "at": "2026-10-08",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-15",
             "outcome": "rejected",
@@ -27235,6 +27227,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -31721,19 +31721,19 @@
         "final_price",
         "market"
       ],
-      "quality_attempted_at": "2026-10-21",
+      "quality_attempted_at": "2026-10-25",
       "quality_refresh_error": {
-        "checked_at": "2026-10-21",
+        "checked_at": "2026-10-25",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "7e0cfceef9c0c720ec15",
-        "signature": "d185550c9652077e234c",
-        "consecutive_attempts": 3,
+        "signature": "d1042c6717cf687db2bb",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -31761,6 +31761,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -32154,19 +32162,19 @@
         "final_price",
         "market"
       ],
-      "quality_attempted_at": "2026-10-21",
+      "quality_attempted_at": "2026-10-25",
       "quality_refresh_error": {
-        "checked_at": "2026-10-21",
+        "checked_at": "2026-10-25",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ef46c99776ffb7b48253",
-        "signature": "db1ae567cc65993c8aa8",
-        "consecutive_attempts": 3,
+        "signature": "fcb05521676170b7352a",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -32194,6 +32202,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -32381,19 +32397,19 @@
         "final_price",
         "market"
       ],
-      "quality_attempted_at": "2026-10-21",
+      "quality_attempted_at": "2026-10-25",
       "quality_refresh_error": {
-        "checked_at": "2026-10-21",
+        "checked_at": "2026-10-25",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "fd7961809c8a9bfca5ad",
-        "signature": "1c367d88ccf734ed959b",
-        "consecutive_attempts": 3,
+        "signature": "81ba883d443568ba4496",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-21",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-25",
+        "next_retry": "2026-10-26",
         "history": [
           {
             "at": "2026-10-16",
@@ -32421,6 +32437,14 @@
           },
           {
             "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-25",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -32837,54 +32861,6 @@
     }
   ],
   "history": [
-    {
-      "date": "2026-09-25",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
     {
       "date": "2026-09-26",
       "name": "데이터젠",
@@ -36711,6 +36687,54 @@
     },
     {
       "date": "2026-10-23",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-10-24",
       "name": "열매컴퍼니",
       "type": "고정제외",
       "field": "노출",
