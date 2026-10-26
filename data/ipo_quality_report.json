@@ -1,8 +1,6 @@
 {
-  "checked_at": "2026-10-26T09:11:11.117671+09:00",
-  "refreshed": [
-    "인제니아테라퓨틱스"
-  ],
+  "checked_at": "2026-10-27T02:30:33.454834+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -16,21 +14,10 @@
       ]
     },
     {
-      "corp_code": "01649408",
-      "code": "",
-      "name": "인텔리빅스",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
-    {
       "corp_code": "01956751",
       "code": "",
       "name": "래블업",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "공시 대기: 상장일 미정",
         "공시 대기: 개인청약경쟁률"
@@ -460,22 +447,14 @@
       {
         "corp_code": "01543043",
         "name": "티앤이코리아",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "52e93f7e956ea3304f32",
-        "signature": "df98caaea21ae60361e6",
+        "signature": "5d9a9ca2612385c47143",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-27",
+        "next_retry": "2026-10-28",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-20",
             "outcome": "rejected",
@@ -506,6 +485,14 @@
           },
           {
             "at": "2026-10-24",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-27",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -569,13 +556,13 @@
       {
         "corp_code": "01956751",
         "name": "래블업",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ea9f9e11f4c6a9eca9e9",
-        "signature": "6c9216345590f97ad40f",
+        "signature": "229da9e53c4e5f10d6b9",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "outcome": "unresolved",
+        "last_attempt": "2026-10-27",
+        "next_retry": "2026-10-28",
         "history": [
           {
             "at": "2026-09-30",
@@ -601,6 +588,15 @@
             "reasons": [
               "공시 대기: 개인청약경쟁률",
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)"
+            ]
+          },
+          {
+            "at": "2026-10-27",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
             ]
           }
         ]
@@ -656,19 +652,14 @@
       {
         "corp_code": "01378005",
         "name": "이에스티",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5341faa5c38b65573af3",
-        "signature": "014c0a35910ded4fca89",
+        "signature": "33c4eb6ad10010ea9df0",
         "consecutive_attempts": 1,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-10-27",
+        "next_retry": "2026-10-28",
         "history": [
-          {
-            "at": "2026-09-27",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-07",
             "outcome": "verified",
@@ -693,6 +684,15 @@
             "reasons": [
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
               "상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-10-27",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
           }
@@ -1075,12 +1075,12 @@
       {
         "corp_code": "01077540",
         "name": "씨아이에스케미칼",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ec369c3760521903526b",
-        "signature": "67eb309d3529e478ce25",
-        "consecutive_attempts": 3,
+        "signature": "b08d956faed60d24e0d9",
+        "consecutive_attempts": 1,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-24",
+        "last_attempt": "2026-10-27",
         "next_retry": "2026-10-28",
         "history": [
           {
@@ -1099,6 +1099,13 @@
           },
           {
             "at": "2026-10-24",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-10-27",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
