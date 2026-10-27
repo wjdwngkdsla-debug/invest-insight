@@ -1,0 +1,99 @@
+name: CI
+
+# 코드를 밀어 넣는 즉시 검사한다.
+#
+# 지금까지는 테스트가 밤 배치 안에서만 돌았다. 그래서 2026-10-24에 올린
+# sheets_sync.py의 KeyError가 사흘 동안 살아 있었고, 매일 밤 배치가 죽어
+# 실패 메일만 쌓였다(run 40461535751 외 4건). 푸시 시점에 돌았으면 바로 걸렸다.
+#
+# 배치 봇이 올리는 커밋은 data/ 아래만 건드리므로 검사에서 빼, 매일 두 번씩
+# 의미 없는 실행이 쌓이지 않게 한다.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "research/**"
+      - "**/*.md"
+  pull_request:
+    paths-ignore:
+      - "data/**"
+      - "research/**"
+      - "**/*.md"
+  workflow_dispatch:
+
+# 같은 브랜치에 연달아 푸시하면 앞 실행은 의미가 없다.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: 배치 스크립트 테스트
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      # 테스트는 저장된 data/를 읽어 실제 종목을 흘려 보는 것들이 있다.
+      # API 키 없이 도는 것만 모아 둔 디렉터리라 비밀값이 필요 없다.
+      - name: 단위·스모크 테스트
+        run: python -m unittest discover -s scripts/tests -v
+
+  web:
+    name: 타입 검사와 빌드
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.10.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: 타입 검사
+        run: npx tsc --noEmit
+      - name: 빌드
+        run: pnpm build
+
+  workflows:
+    name: 워크플로우 문법
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      # 워크플로우 파일이 깨지면 배치가 아예 안 돌아 조용히 멈춘다.
+      - name: YAML 파싱 확인
+        run: |
+          python - <<'PY'
+          import pathlib, sys, yaml
+          bad = []
+          for path in sorted(pathlib.Path(".github/workflows").glob("*.yml")):
+              try:
+                  spec = yaml.safe_load(path.read_text(encoding="utf-8"))
+              except yaml.YAMLError as exc:
+                  bad.append(f"{path}: {exc}")
+                  continue
+              # PyYAML은 키 on: 을 불리언 True로 읽는다.
+              if not (spec.get("on") or spec.get(True)):
+                  bad.append(f"{path}: 트리거(on:)가 없다")
+              if not spec.get("jobs"):
+                  bad.append(f"{path}: jobs가 없다")
+          print("\n".join(f"  OK {p.name}" for p in sorted(pathlib.Path('.github/workflows').glob('*.yml'))))
+          if bad:
+              sys.exit("워크플로우 문제:\n" + "\n".join(bad))
+          PY
