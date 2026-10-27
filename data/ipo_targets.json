@@ -163,15 +163,6 @@
   },
   {
     "market": "코스닥",
-    "name": "이에스티",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "12400",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "인터엑스",
     "listing_date": "",
     "code": "",
@@ -1661,6 +1652,15 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "15000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "이에스티",
+    "listing_date": "2026-11-04",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "12400",
     "manual_ipo_price_locked": "N"
   }
 ]
