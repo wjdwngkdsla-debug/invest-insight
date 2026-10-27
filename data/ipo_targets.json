@@ -180,15 +180,6 @@
     "manual_ipo_price_locked": "N"
   },
   {
-    "market": "코스피",
-    "name": "인텔리빅스",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "9000",
-    "manual_ipo_price_locked": "N"
-  },
-  {
     "market": "코스닥",
     "name": "제논",
     "listing_date": "",
@@ -1652,6 +1643,15 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "15300",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스피",
+    "name": "인텔리빅스",
+    "listing_date": "2026-10-30",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "9000",
     "manual_ipo_price_locked": "N"
   },
   {
