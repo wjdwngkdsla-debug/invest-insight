@@ -76,6 +76,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      # PyYAML은 배치 런타임에는 필요 없어 requirements.txt에 넣지 않는다.
+      # 이 검사 전용으로만 깐다.
+      - run: python -m pip install pyyaml
       # 워크플로우 파일이 깨지면 배치가 아예 안 돌아 조용히 멈춘다.
       - name: YAML 파싱 확인
         run: |
