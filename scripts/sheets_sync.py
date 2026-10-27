@@ -1187,6 +1187,19 @@ def _review_fill_gaps(item: dict, has_float_rows: bool, float_pct_known: bool | 
     return gaps
 
 
+def _result_waiting_note(item: dict) -> str:
+    """실적보고서 공시 대기 메모.
+
+    result_waiting()은 result_source_check 기록이 없어도 참을 돌려준다
+    (보고서 유무와 청약 종료 경과일로 판단하도록 바꿨다). 확인 날짜를
+    그 기록에서 직접 꺼내면 기록이 없는 종목에서 KeyError가 난다.
+    """
+    if not result_waiting(item):
+        return ""
+    checked = (item.get("result_source_check") or {}).get("checked_at")
+    return f"실적보고서 미공시 확인 {checked}; 정기 재조회" if checked else "실적보고서 공시 대기; 정기 재조회"
+
+
 def _split_gaps(gaps: list[str]) -> tuple[list[str], list[str]]:
     """(운영자가 채울 것, 기다리거나 시스템이 처리할 것)."""
     todo = [g for g in gaps if _is_operator_work(g)]
@@ -1530,7 +1543,7 @@ def regenerate_review_fill_tab(spreadsheet: gspread.Spreadsheet) -> None:
                 listing_day_issue,
                 holder_review_note(item),
                 repair_review_note(item),
-                (f"실적보고서 미공시 확인 {item['result_source_check']['checked_at']}; 정기 재조회" if result_waiting(item) else ""),
+                _result_waiting_note(item),
                 (f"최근 원문 확인 {item['quality_checked_at']}" if item.get("quality_checked_at") else "")])),
             "시장": item.get("market") or "",
             "확정공모가": str(number(item.get("final_price")) or ""),
