@@ -27,15 +27,6 @@
     "manual_ipo_price_locked": "N"
   },
   {
-    "market": "코스닥",
-    "name": "래블업",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "19000",
-    "manual_ipo_price_locked": "N"
-  },
-  {
     "market": "코스피",
     "name": "바로팜",
     "listing_date": "",
@@ -114,15 +105,6 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스피",
-    "name": "영광",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "17000",
     "manual_ipo_price_locked": "N"
   },
   {
@@ -1652,6 +1634,24 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "15000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "영광",
+    "listing_date": "2026-11-02",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "17000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "래블업",
+    "listing_date": "2026-11-03",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "19000",
     "manual_ipo_price_locked": "N"
   },
   {
