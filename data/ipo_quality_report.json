@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-29T11:08:34.527856+09:00",
+  "checked_at": "2026-10-30T02:19:24.369770+09:00",
   "refreshed": [],
   "failures": [],
   "issues": [
@@ -51,10 +51,7 @@
       "code": "",
       "name": "옵토닉스",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -102,8 +99,7 @@
       "code": "464500",
       "name": "아이언디바이스",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -111,8 +107,7 @@
       "code": "431190",
       "name": "케이쓰리아이",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(정정사항만 수록: 원본문 대조 필요)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -144,8 +139,7 @@
       "code": "462870",
       "name": "시프트업",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "구주물량 최신 공시 확인(기존주주 표 미발견)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     }
   ],
@@ -468,19 +462,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "52e93f7e956ea3304f32",
         "signature": "5d9a9ca2612385c47143",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-10-27",
-        "next_retry": "2026-10-28",
+        "last_attempt": "2026-10-30",
+        "next_retry": "2026-11-01",
         "history": [
-          {
-            "at": "2026-10-20",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-22",
             "outcome": "rejected",
@@ -511,6 +497,14 @@
           },
           {
             "at": "2026-10-27",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-30",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2388,20 +2382,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "9e917a9d1b3d2a6c8d9f",
         "signature": "6e85d54cd85dbee9f2a3",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-10-28",
-        "next_retry": "2026-10-30",
+        "last_attempt": "2026-10-30",
+        "next_retry": "2026-11-03",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "result_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-19",
             "outcome": "rejected",
@@ -2431,6 +2416,15 @@
           },
           {
             "at": "2026-10-28",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "result_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-30",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2446,19 +2440,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "d70623bef7d410f283ba",
         "signature": "081da0c1195cd2057302",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-10-28",
-        "next_retry": "2026-10-30",
+        "last_attempt": "2026-10-30",
+        "next_retry": "2026-11-03",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-19",
             "outcome": "rejected",
@@ -2485,6 +2471,14 @@
           },
           {
             "at": "2026-10-28",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-30",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2658,19 +2652,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "aa97c1ed51c846be4304",
         "signature": "9c20e3f6bd2d9d3e3eaa",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-10-28",
-        "next_retry": "2026-10-30",
+        "last_attempt": "2026-10-30",
+        "next_retry": "2026-11-03",
         "history": [
-          {
-            "at": "2026-10-18",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-20",
             "outcome": "rejected",
@@ -2697,6 +2683,14 @@
           },
           {
             "at": "2026-10-28",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-30",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
