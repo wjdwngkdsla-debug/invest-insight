@@ -1,30 +1,16 @@
 {
-  "checked_at": "2026-10-30T10:37:31.416287+09:00",
+  "checked_at": "2026-10-31T02:21:45.746972+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "옵토닉스"
+    "동원파츠"
   ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "00784184",
-      "code": "",
-      "name": "동원파츠",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
     {
       "corp_code": "01835829",
       "code": "",
       "name": "바로팜",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
         "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
@@ -33,10 +19,7 @@
       "code": "",
       "name": "넥스아이",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "자동 재검증 결과 보류(기존 값 유지)"
       ]
     },
     {
@@ -400,7 +383,7 @@
     }
   ],
   "repair_memory": {
-    "cases": 78,
+    "cases": 80,
     "evicted_cases": 0,
     "recheck_candidates": 34,
     "retries": [
@@ -652,12 +635,12 @@
         "corp_code": "00784184",
         "name": "동원파츠",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "6260e0447d5f77b90b3a",
-        "signature": "4b70a5ca7d709dc0f471",
+        "source_revision": "d5086ded5ea38cb80e2e",
+        "signature": "81d4d8f302a3b7948a96",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-10-29",
-        "next_retry": "2026-10-30",
+        "outcome": "verified",
+        "last_attempt": "2026-10-31",
+        "next_retry": "2026-11-01",
         "history": [
           {
             "at": "2026-10-02",
@@ -671,6 +654,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-10-31",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -678,12 +666,12 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "9367ea4919b3c9b9b8f4",
-        "signature": "3a9d4e0a8ef8a13db81d",
+        "source_revision": "aba99ae65471bbf88396",
+        "signature": "635a5e7832762bef51fc",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-10-29",
-        "next_retry": "2026-10-30",
+        "last_attempt": "2026-10-31",
+        "next_retry": "2026-11-01",
         "history": [
           {
             "at": "2026-09-29",
@@ -704,6 +692,14 @@
           },
           {
             "at": "2026-10-29",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-31",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -800,29 +796,6 @@
         "history": [
           {
             "at": "2026-09-30",
-            "outcome": "verified",
-            "reasons": []
-          }
-        ]
-      },
-      {
-        "corp_code": "01706509",
-        "name": "다비오",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "55f6a7287b418f0cf052",
-        "signature": "aa1da366c517fece17eb",
-        "consecutive_attempts": 2,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -963,18 +936,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "2a95b1d3cb3d09e3f25f",
         "signature": "6db2c62a7aa975b71ea4",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-28",
-        "next_retry": "2026-10-29",
+        "last_attempt": "2026-10-31",
+        "next_retry": "2026-11-02",
         "history": [
-          {
-            "at": "2026-10-16",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
-            ]
-          },
           {
             "at": "2026-10-18",
             "outcome": "unresolved",
@@ -998,6 +964,13 @@
           },
           {
             "at": "2026-10-28",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
+            ]
+          },
+          {
+            "at": "2026-10-31",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 미해석 행 확인 필요)"
@@ -1060,23 +1033,39 @@
         ]
       },
       {
+        "corp_code": "01706509",
+        "name": "다비오",
+        "parser_revision": "ba777e3d84cec182a159",
+        "source_revision": "55f6a7287b418f0cf052",
+        "signature": "aa1da366c517fece17eb",
+        "consecutive_attempts": 2,
+        "outcome": "verified",
+        "last_attempt": "2026-10-08",
+        "next_retry": "2026-10-09",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01077540",
         "name": "씨아이에스케미칼",
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ec369c3760521903526b",
         "signature": "b08d956faed60d24e0d9",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-29",
-        "next_retry": "2026-10-31",
+        "last_attempt": "2026-10-31",
+        "next_retry": "2026-11-04",
         "history": [
-          {
-            "at": "2026-10-20",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-10-22",
             "outcome": "unresolved",
@@ -1100,6 +1089,13 @@
           },
           {
             "at": "2026-10-29",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-10-31",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
