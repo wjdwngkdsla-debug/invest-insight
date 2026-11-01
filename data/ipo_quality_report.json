@@ -1,8 +1,10 @@
 {
-  "checked_at": "2026-11-01T01:29:31.171029+09:00",
+  "checked_at": "2026-11-01T10:03:40.031971+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "데스틴파워"
+    "제이앤티지",
+    "이노보테라퓨틱스",
+    "엔키화이트햇",
+    "인터엑스"
   ],
   "failures": [],
   "issues": [
@@ -768,6 +770,24 @@
         ]
       },
       {
+        "corp_code": "01403198",
+        "name": "제이앤티지",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "15eff8620d6988e07fba",
+        "signature": "087d578a470791ed1a31",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-01",
+        "next_retry": "2026-11-02",
+        "history": [
+          {
+            "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "00299109",
         "name": "에스에프씨",
         "parser_revision": "c793d4eb2e2492a7c7ac",
@@ -952,6 +972,60 @@
           },
           {
             "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01795859",
+        "name": "엔키화이트햇",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "27e01e8b140d2b087641",
+        "signature": "8c6407e9107f18b69051",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-01",
+        "next_retry": "2026-11-02",
+        "history": [
+          {
+            "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01783687",
+        "name": "이노보테라퓨틱스",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "281f6bdf62289a68ba5e",
+        "signature": "3a6af0b3c4d33a8af2a9",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-01",
+        "next_retry": "2026-11-02",
+        "history": [
+          {
+            "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01860700",
+        "name": "인터엑스",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "8e1c748b9de0ae644851",
+        "signature": "7d9b5329f8760d92d367",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-01",
+        "next_retry": "2026-11-02",
+        "history": [
+          {
+            "at": "2026-11-01",
             "outcome": "verified",
             "reasons": []
           }
