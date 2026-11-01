@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T09:55:55.469515+09:00",
+  "generatedAt": "2026-11-01T09:14:49.626151+09:00",
   "status": "live-cache",
   "note": "검색량은 네이버 검색어트렌드 상대지수, 거래대금은 KRX 일별 거래대금(억원), 수익률은 기간 첫 종가 대비 마지막 종가 등락률입니다.",
   "issues": [
@@ -27,10 +27,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.5
               },
@@ -49,6 +45,10 @@
               {
                 "date": "2026-10-29",
                 "value": 63.5
+              },
+              {
+                "date": "2026-10-30",
+                "value": 47.1
               }
             ],
             "tradingValueIndex": [
@@ -111,7 +111,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 66.5
+                "value": 68.2
               }
             ],
             "tradingValueIndex": [
@@ -213,8 +213,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 76
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -293,7 +293,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 37.3
+                "value": 38.2
               }
             ],
             "tradingValueIndex": [
@@ -584,7 +584,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 34
+                "value": 34.2
               }
             ],
             "tradingValueIndex": [
@@ -1097,10 +1097,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.4
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.4
               },
@@ -1119,6 +1115,10 @@
               {
                 "date": "2026-10-29",
                 "value": 3.3
+              },
+              {
+                "date": "2026-10-30",
+                "value": 2.9
               }
             ],
             "tradingValueIndex": [
@@ -1181,7 +1181,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3.8
+                "value": 3.9
               }
             ],
             "tradingValueIndex": [
@@ -1283,8 +1283,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 4.6
+                "date": "2026-10-31",
+                "value": 6
               }
             ],
             "tradingValueIndex": [
@@ -1363,7 +1363,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.1
+                "value": 2.2
               }
             ],
             "tradingValueIndex": [
@@ -2167,10 +2167,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0
               },
@@ -2193,6 +2189,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -2357,8 +2357,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.1
+                "date": "2026-10-31",
+                "value": 0.3
               }
             ],
             "tradingValueIndex": [
@@ -3241,10 +3241,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -3267,6 +3263,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.1
               }
             ],
             "tradingValueIndex": [
@@ -3431,8 +3431,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 1.2
+                "date": "2026-10-31",
+                "value": 1.9
               }
             ],
             "tradingValueIndex": [
@@ -4315,10 +4315,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -4341,6 +4337,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -4403,7 +4403,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -4585,7 +4585,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -4876,7 +4876,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -5406,10 +5406,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.5
               },
@@ -5428,6 +5424,10 @@
               {
                 "date": "2026-10-29",
                 "value": 63.5
+              },
+              {
+                "date": "2026-10-30",
+                "value": 47.1
               }
             ],
             "tradingValueIndex": [
@@ -5490,7 +5490,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 66.5
+                "value": 68.2
               }
             ],
             "tradingValueIndex": [
@@ -5592,8 +5592,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 76
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -5672,7 +5672,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 37.3
+                "value": 38.2
               }
             ],
             "tradingValueIndex": [
@@ -5963,7 +5963,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 34
+                "value": 34.2
               }
             ],
             "tradingValueIndex": [
@@ -6476,10 +6476,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -6502,6 +6498,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -6564,7 +6564,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -6746,7 +6746,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -7037,7 +7037,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -7550,10 +7550,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -7576,6 +7572,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.1
               }
             ],
             "tradingValueIndex": [
@@ -7638,7 +7638,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 1.1
+                "value": 1.2
               }
             ],
             "tradingValueIndex": [
@@ -7740,8 +7740,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 1.2
+                "date": "2026-10-31",
+                "value": 1.6
               }
             ],
             "tradingValueIndex": [
@@ -8624,10 +8624,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -8650,6 +8646,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.1
               }
             ],
             "tradingValueIndex": [
@@ -8712,7 +8712,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 0.8
+                "value": 0.9
               }
             ],
             "tradingValueIndex": [
@@ -8814,8 +8814,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.9
+                "date": "2026-10-31",
+                "value": 1.6
               }
             ],
             "tradingValueIndex": [
@@ -9698,10 +9698,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -9724,6 +9720,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.2
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -9888,8 +9888,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.4
+                "date": "2026-10-31",
+                "value": 0.7
               }
             ],
             "tradingValueIndex": [
@@ -10772,10 +10772,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0
               },
@@ -10798,6 +10794,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.2
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -10962,8 +10962,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.3
+                "date": "2026-10-31",
+                "value": 0.6
               }
             ],
             "tradingValueIndex": [
@@ -11863,10 +11863,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -11889,6 +11885,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -11951,7 +11951,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -12133,7 +12133,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -12424,7 +12424,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -12937,10 +12937,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.5
               },
@@ -12959,6 +12955,10 @@
               {
                 "date": "2026-10-29",
                 "value": 63.5
+              },
+              {
+                "date": "2026-10-30",
+                "value": 47.1
               }
             ],
             "tradingValueIndex": [
@@ -13021,7 +13021,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 66.5
+                "value": 68.2
               }
             ],
             "tradingValueIndex": [
@@ -13123,8 +13123,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 76
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -13203,7 +13203,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 37.3
+                "value": 38.2
               }
             ],
             "tradingValueIndex": [
@@ -13494,7 +13494,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 34
+                "value": 34.2
               }
             ],
             "tradingValueIndex": [
@@ -14007,10 +14007,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.4
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.4
               },
@@ -14029,6 +14025,10 @@
               {
                 "date": "2026-10-29",
                 "value": 3.3
+              },
+              {
+                "date": "2026-10-30",
+                "value": 2.9
               }
             ],
             "tradingValueIndex": [
@@ -14091,7 +14091,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3.8
+                "value": 3.9
               }
             ],
             "tradingValueIndex": [
@@ -14193,8 +14193,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 4.6
+                "date": "2026-10-31",
+                "value": 6
               }
             ],
             "tradingValueIndex": [
@@ -14273,7 +14273,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.1
+                "value": 2.2
               }
             ],
             "tradingValueIndex": [
@@ -15077,10 +15077,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -15102,6 +15098,10 @@
               },
               {
                 "date": "2026-10-30",
+                "value": 0.1
+              },
+              {
+                "date": "2026-10-31",
                 "value": 0.1
               }
             ],
@@ -15191,8 +15191,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.2
+                "date": "2026-10-31",
+                "value": 1.4
               }
             ],
             "tradingValueIndex": [],
@@ -15321,10 +15321,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 10.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 8.9
               },
@@ -15347,6 +15343,10 @@
               {
                 "date": "2026-10-30",
                 "value": 59.9
+              },
+              {
+                "date": "2026-10-31",
+                "value": 11.1
               }
             ],
             "tradingValueIndex": [
@@ -15409,7 +15409,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 42.5
+                "value": 43.7
               }
             ],
             "tradingValueIndex": [
@@ -15511,7 +15511,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -15591,7 +15591,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 42.5
+                "value": 43.7
               }
             ],
             "tradingValueIndex": [
@@ -15882,7 +15882,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 31.9
+                "value": 32
               }
             ],
             "tradingValueIndex": [
@@ -16395,10 +16395,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 7.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -16421,6 +16417,10 @@
               {
                 "date": "2026-10-30",
                 "value": 22.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.6
               }
             ],
             "tradingValueIndex": [
@@ -16483,7 +16483,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 16.7
+                "value": 17.5
               }
             ],
             "tradingValueIndex": [
@@ -16585,8 +16585,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 37.5
+                "date": "2026-10-31",
+                "value": 59.8
               }
             ],
             "tradingValueIndex": [
@@ -16665,7 +16665,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 16.7
+                "value": 17.5
               }
             ],
             "tradingValueIndex": [
@@ -16956,7 +16956,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 12.6
+                "value": 12.7
               }
             ],
             "tradingValueIndex": [
@@ -17469,10 +17469,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 2.6
-              },
-              {
                 "date": "2026-10-25",
                 "value": 2.1
               },
@@ -17495,6 +17491,10 @@
               {
                 "date": "2026-10-30",
                 "value": 9.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 3.1
               }
             ],
             "tradingValueIndex": [
@@ -17557,7 +17557,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 7.3
+                "value": 7.6
               }
             ],
             "tradingValueIndex": [
@@ -17659,8 +17659,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 16.5
+                "date": "2026-10-31",
+                "value": 28
               }
             ],
             "tradingValueIndex": [
@@ -17739,7 +17739,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 7.3
+                "value": 7.6
               }
             ],
             "tradingValueIndex": [
@@ -18030,7 +18030,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 4.4
+                "value": 4.5
               }
             ],
             "tradingValueIndex": [
@@ -18543,10 +18543,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 4.8
-              },
-              {
                 "date": "2026-10-25",
                 "value": 7.2
               },
@@ -18569,6 +18565,10 @@
               {
                 "date": "2026-10-30",
                 "value": 7.4
+              },
+              {
+                "date": "2026-10-31",
+                "value": 3
               }
             ],
             "tradingValueIndex": [
@@ -18631,7 +18631,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 6.7
+                "value": 7
               }
             ],
             "tradingValueIndex": [
@@ -18733,8 +18733,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 12.4
+                "date": "2026-10-31",
+                "value": 26.6
               }
             ],
             "tradingValueIndex": [
@@ -18813,7 +18813,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 6.7
+                "value": 7
               }
             ],
             "tradingValueIndex": [
@@ -19617,10 +19617,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 7.6
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.5
               },
@@ -19643,6 +19639,10 @@
               {
                 "date": "2026-10-30",
                 "value": 30.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 11.1
               }
             ],
             "tradingValueIndex": [
@@ -19705,7 +19705,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 22
+                "value": 23.3
               }
             ],
             "tradingValueIndex": [
@@ -19807,8 +19807,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 51.1
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -19887,7 +19887,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 22
+                "value": 23.3
               }
             ],
             "tradingValueIndex": [
@@ -20178,7 +20178,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 20.4
+                "value": 20.5
               }
             ],
             "tradingValueIndex": [
@@ -20708,10 +20708,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -20734,6 +20730,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.4
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.1
               }
             ],
             "tradingValueIndex": [
@@ -20898,8 +20898,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.7
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -21269,7 +21269,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 0.5
+                "value": 0.6
               }
             ],
             "tradingValueIndex": [
@@ -21782,10 +21782,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -21808,6 +21804,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -21870,7 +21870,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -22052,7 +22052,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -22343,7 +22343,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -22856,10 +22856,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0
               },
@@ -22881,6 +22877,10 @@
               },
               {
                 "date": "2026-10-30",
+                "value": 0
+              },
+              {
+                "date": "2026-10-31",
                 "value": 0
               }
             ],
@@ -22970,8 +22970,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0
+                "date": "2026-10-31",
+                "value": 1.2
               }
             ],
             "tradingValueIndex": [],
@@ -23100,10 +23100,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -23126,6 +23122,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -23188,7 +23188,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -23370,7 +23370,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -23661,7 +23661,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -24174,10 +24174,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.5
               },
@@ -24196,6 +24192,14 @@
               {
                 "date": "2026-10-29",
                 "value": 63.5
+              },
+              {
+                "date": "2026-10-30",
+                "value": 47.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.9
               }
             ],
             "tradingValueIndex": [
@@ -24258,7 +24262,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 66.5
+                "value": 68.2
               }
             ],
             "tradingValueIndex": [
@@ -24360,8 +24364,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 76
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -24440,7 +24444,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 37.3
+                "value": 38.2
               }
             ],
             "tradingValueIndex": [
@@ -24731,7 +24735,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 34
+                "value": 34.2
               }
             ],
             "tradingValueIndex": [
@@ -25244,10 +25248,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -25270,6 +25270,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -25434,8 +25438,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.2
+                "date": "2026-10-31",
+                "value": 0.5
               }
             ],
             "tradingValueIndex": [
@@ -26318,10 +26322,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0
               },
@@ -26344,6 +26344,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -26508,8 +26512,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.1
+                "date": "2026-10-31",
+                "value": 0.2
               }
             ],
             "tradingValueIndex": [
@@ -27409,10 +27413,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 2.7
               },
@@ -27435,6 +27435,10 @@
               {
                 "date": "2026-10-30",
                 "value": 9.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 2.4
               }
             ],
             "tradingValueIndex": [
@@ -27497,7 +27501,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 5.3
+                "value": 5.5
               }
             ],
             "tradingValueIndex": [
@@ -27599,8 +27603,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 16.3
+                "date": "2026-10-31",
+                "value": 21.7
               }
             ],
             "tradingValueIndex": [
@@ -27679,7 +27683,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 4.2
+                "value": 4.4
               }
             ],
             "tradingValueIndex": [
@@ -27970,7 +27974,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 5.8
+                "value": 5.9
               }
             ],
             "tradingValueIndex": [
@@ -28483,10 +28487,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 13.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 12.6
               },
@@ -28509,6 +28509,10 @@
               {
                 "date": "2026-10-30",
                 "value": 59.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 11
               }
             ],
             "tradingValueIndex": [
@@ -28571,7 +28575,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 38.3
+                "value": 39.4
               }
             ],
             "tradingValueIndex": [
@@ -28673,7 +28677,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -28753,7 +28757,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 30.4
+                "value": 31.3
               }
             ],
             "tradingValueIndex": [
@@ -29044,7 +29048,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 51.6
+                "value": 51.8
               }
             ],
             "tradingValueIndex": [
@@ -29557,10 +29561,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 5.6
-              },
-              {
                 "date": "2026-10-25",
                 "value": 7.7
               },
@@ -29583,6 +29583,10 @@
               {
                 "date": "2026-10-30",
                 "value": 19.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 5
               }
             ],
             "tradingValueIndex": [
@@ -29645,7 +29649,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 10.8
+                "value": 11.3
               }
             ],
             "tradingValueIndex": [
@@ -29747,8 +29751,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 32.3
+                "date": "2026-10-31",
+                "value": 45.6
               }
             ],
             "tradingValueIndex": [
@@ -29827,7 +29831,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 8.6
+                "value": 9
               }
             ],
             "tradingValueIndex": [
@@ -30118,7 +30122,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 11.2
+                "value": 11.4
               }
             ],
             "tradingValueIndex": [
@@ -30648,10 +30652,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 6.9
               },
@@ -30674,6 +30674,10 @@
               {
                 "date": "2026-10-30",
                 "value": 62
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.8
               }
             ],
             "tradingValueIndex": [
@@ -30736,7 +30740,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 87.6
+                "value": 90
               }
             ],
             "tradingValueIndex": [
@@ -30918,7 +30922,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 49.2
+                "value": 50.5
               }
             ],
             "tradingValueIndex": [
@@ -31209,7 +31213,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 49.6
+                "value": 49.9
               }
             ],
             "tradingValueIndex": [
@@ -31722,10 +31726,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.5
               },
@@ -31744,6 +31744,14 @@
               {
                 "date": "2026-10-29",
                 "value": 63.5
+              },
+              {
+                "date": "2026-10-30",
+                "value": 47.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.9
               }
             ],
             "tradingValueIndex": [
@@ -31806,7 +31814,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 66.5
+                "value": 68.2
               }
             ],
             "tradingValueIndex": [
@@ -31908,8 +31916,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 76
+                "date": "2026-10-31",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -31988,7 +31996,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 37.3
+                "value": 38.2
               }
             ],
             "tradingValueIndex": [
@@ -32279,7 +32287,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 34
+                "value": 34.2
               }
             ],
             "tradingValueIndex": [
@@ -32792,10 +32800,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -32818,6 +32822,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.1
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
               }
             ],
             "tradingValueIndex": [
@@ -32982,8 +32990,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.2
+                "date": "2026-10-31",
+                "value": 0.5
               }
             ],
             "tradingValueIndex": [
@@ -33883,10 +33891,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 3.6
-              },
-              {
                 "date": "2026-10-25",
                 "value": 3
               },
@@ -33909,6 +33913,10 @@
               {
                 "date": "2026-10-30",
                 "value": 17.3
+              },
+              {
+                "date": "2026-10-31",
+                "value": 3
               }
             ],
             "tradingValueIndex": [
@@ -33951,23 +33959,23 @@
             "searchIndex": [
               {
                 "date": "2026-09-21",
-                "value": 33.8
+                "value": 32.9
               },
               {
                 "date": "2026-09-28",
-                "value": 40.3
+                "value": 39.3
               },
               {
                 "date": "2026-10-05",
-                "value": 29.1
+                "value": 28.3
               },
               {
                 "date": "2026-10-12",
-                "value": 33.5
+                "value": 32.6
               },
               {
                 "date": "2026-10-19",
-                "value": 32.2
+                "value": 31.4
               },
               {
                 "date": "2026-10-26",
@@ -34073,8 +34081,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 36.1
+                "date": "2026-10-31",
+                "value": 32.1
               }
             ],
             "tradingValueIndex": [
@@ -34153,7 +34161,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 14.7
+                "value": 15.1
               }
             ],
             "tradingValueIndex": [
@@ -34444,7 +34452,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 11
+                "value": 11.1
               }
             ],
             "tradingValueIndex": [
@@ -34957,10 +34965,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 8.2
-              },
-              {
                 "date": "2026-10-25",
                 "value": 7
               },
@@ -34983,6 +34987,10 @@
               {
                 "date": "2026-10-30",
                 "value": 47.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.4
               }
             ],
             "tradingValueIndex": [
@@ -35025,27 +35033,27 @@
             "searchIndex": [
               {
                 "date": "2026-09-21",
-                "value": 54.2
+                "value": 52.8
               },
               {
                 "date": "2026-09-28",
-                "value": 79.1
+                "value": 77.1
               },
               {
                 "date": "2026-10-05",
-                "value": 57.6
+                "value": 56.1
               },
               {
                 "date": "2026-10-12",
-                "value": 83.7
+                "value": 81.6
               },
               {
                 "date": "2026-10-19",
-                "value": 80.1
+                "value": 78
               },
               {
                 "date": "2026-10-26",
-                "value": 95
+                "value": 95.2
               }
             ],
             "tradingValueIndex": [
@@ -35147,7 +35155,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -35227,7 +35235,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 39.9
+                "value": 41
               }
             ],
             "tradingValueIndex": [
@@ -35518,7 +35526,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 26
+                "value": 26.2
               }
             ],
             "tradingValueIndex": [
@@ -36031,10 +36039,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 9.4
-              },
-              {
                 "date": "2026-10-25",
                 "value": 8.2
               },
@@ -36057,6 +36061,10 @@
               {
                 "date": "2026-10-30",
                 "value": 42.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9
               }
             ],
             "tradingValueIndex": [
@@ -36099,23 +36107,23 @@
             "searchIndex": [
               {
                 "date": "2026-09-21",
-                "value": 62.9
+                "value": 61.3
               },
               {
                 "date": "2026-09-28",
-                "value": 81.5
+                "value": 79.4
               },
               {
                 "date": "2026-10-05",
-                "value": 50
+                "value": 48.7
               },
               {
                 "date": "2026-10-12",
-                "value": 81.7
+                "value": 79.6
               },
               {
                 "date": "2026-10-19",
-                "value": 68.4
+                "value": 66.6
               },
               {
                 "date": "2026-10-26",
@@ -36221,8 +36229,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 89.6
+                "date": "2026-10-31",
+                "value": 95.6
               }
             ],
             "tradingValueIndex": [
@@ -36301,7 +36309,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 42
+                "value": 43.1
               }
             ],
             "tradingValueIndex": [
@@ -36592,7 +36600,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 24.8
+                "value": 25
               }
             ],
             "tradingValueIndex": [
@@ -37105,10 +37113,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.9
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.6
               },
@@ -37131,6 +37135,10 @@
               {
                 "date": "2026-10-30",
                 "value": 3.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.8
               }
             ],
             "tradingValueIndex": [
@@ -37173,27 +37181,27 @@
             "searchIndex": [
               {
                 "date": "2026-09-21",
-                "value": 12.3
+                "value": 12
               },
               {
                 "date": "2026-09-28",
-                "value": 10.4
+                "value": 10.1
               },
               {
                 "date": "2026-10-05",
-                "value": 13
+                "value": 12.7
               },
               {
                 "date": "2026-10-12",
-                "value": 9.5
+                "value": 9.3
               },
               {
                 "date": "2026-10-19",
-                "value": 8.4
+                "value": 8.2
               },
               {
                 "date": "2026-10-26",
-                "value": 7.1
+                "value": 7.2
               }
             ],
             "tradingValueIndex": [
@@ -37295,8 +37303,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 7.2
+                "date": "2026-10-31",
+                "value": 8.8
               }
             ],
             "tradingValueIndex": [
@@ -37375,7 +37383,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3
+                "value": 3.1
               }
             ],
             "tradingValueIndex": [
@@ -38179,10 +38187,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 2.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 1.9
               },
@@ -38205,6 +38209,10 @@
               {
                 "date": "2026-10-30",
                 "value": 12.3
+              },
+              {
+                "date": "2026-10-31",
+                "value": 2.4
               }
             ],
             "tradingValueIndex": [
@@ -38247,27 +38255,27 @@
             "searchIndex": [
               {
                 "date": "2026-09-21",
-                "value": 22.1
+                "value": 21.5
               },
               {
                 "date": "2026-09-28",
-                "value": 30.2
+                "value": 29.4
               },
               {
                 "date": "2026-10-05",
-                "value": 20.7
+                "value": 20.1
               },
               {
                 "date": "2026-10-12",
-                "value": 27.8
+                "value": 27
               },
               {
                 "date": "2026-10-19",
-                "value": 25.2
+                "value": 24.5
               },
               {
                 "date": "2026-10-26",
-                "value": 24.7
+                "value": 24.8
               }
             ],
             "tradingValueIndex": [
@@ -38369,8 +38377,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 25.7
+                "date": "2026-10-31",
+                "value": 25.1
               }
             ],
             "tradingValueIndex": [
@@ -38449,7 +38457,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 10.4
+                "value": 10.7
               }
             ],
             "tradingValueIndex": [
@@ -39270,32 +39278,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 11.9
-              },
-              {
                 "date": "2026-10-25",
-                "value": 17.7
+                "value": 17.6
               },
               {
                 "date": "2026-10-26",
-                "value": 55.7
+                "value": 55.3
               },
               {
                 "date": "2026-10-27",
-                "value": 33.1
+                "value": 32.9
               },
               {
                 "date": "2026-10-28",
-                "value": 27.2
+                "value": 27
               },
               {
                 "date": "2026-10-29",
-                "value": 24.2
+                "value": 24
               },
               {
                 "date": "2026-10-30",
-                "value": 20.6
+                "value": 20.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.3
               }
             ],
             "tradingValueIndex": [
@@ -39358,7 +39366,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 28.7
+                "value": 29.8
               }
             ],
             "tradingValueIndex": [
@@ -39460,8 +39468,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 20.5
+                "date": "2026-10-31",
+                "value": 28.4
               }
             ],
             "tradingValueIndex": [
@@ -39540,7 +39548,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 20.5
+                "value": 21.3
               }
             ],
             "tradingValueIndex": [
@@ -39831,7 +39839,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 11
+                "value": 11.1
               }
             ],
             "tradingValueIndex": [
@@ -40344,28 +40352,28 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 11.6
-              },
-              {
                 "date": "2026-10-25",
-                "value": 11.1
+                "value": 11
               },
               {
                 "date": "2026-10-26",
-                "value": 59.1
+                "value": 58.7
               },
               {
                 "date": "2026-10-27",
-                "value": 49.1
+                "value": 48.8
               },
               {
                 "date": "2026-10-28",
-                "value": 49.9
+                "value": 49.6
               },
               {
                 "date": "2026-10-29",
-                "value": 90.3
+                "value": 89.6
+              },
+              {
+                "date": "2026-10-30",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -40428,7 +40436,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 62.3
+                "value": 66.2
               }
             ],
             "tradingValueIndex": [
@@ -40530,7 +40538,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -40610,7 +40618,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 44.5
+                "value": 47.3
               }
             ],
             "tradingValueIndex": [
@@ -40901,7 +40909,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 23.8
+                "value": 24.2
               }
             ],
             "tradingValueIndex": [
@@ -41414,28 +41422,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 15.3
-              },
-              {
                 "date": "2026-10-25",
-                "value": 13.7
+                "value": 13.6
               },
               {
                 "date": "2026-10-26",
-                "value": 91.1
+                "value": 90.4
               },
               {
                 "date": "2026-10-27",
-                "value": 100
+                "value": 99.3
               },
               {
                 "date": "2026-10-28",
-                "value": 93.1
+                "value": 92.4
               },
               {
                 "date": "2026-10-29",
-                "value": 73.2
+                "value": 72.6
+              },
+              {
+                "date": "2026-10-30",
+                "value": 71.2
+              },
+              {
+                "date": "2026-10-31",
+                "value": 14.2
               }
             ],
             "tradingValueIndex": [
@@ -41498,7 +41510,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 76.5
+                "value": 79.1
               }
             ],
             "tradingValueIndex": [
@@ -41600,8 +41612,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 71.2
+                "date": "2026-10-31",
+                "value": 64.6
               }
             ],
             "tradingValueIndex": [
@@ -41680,7 +41692,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 54.7
+                "value": 56.5
               }
             ],
             "tradingValueIndex": [
@@ -41971,7 +41983,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 31.9
+                "value": 32.1
               }
             ],
             "tradingValueIndex": [
@@ -42484,32 +42496,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 4.2
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.1
               },
               {
                 "date": "2026-10-26",
-                "value": 15
+                "value": 14.9
               },
               {
                 "date": "2026-10-27",
-                "value": 14.2
+                "value": 14.1
               },
               {
                 "date": "2026-10-28",
-                "value": 15.5
+                "value": 15.4
               },
               {
                 "date": "2026-10-29",
-                "value": 14.5
+                "value": 14.4
               },
               {
                 "date": "2026-10-30",
                 "value": 11.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 3.8
               }
             ],
             "tradingValueIndex": [
@@ -42572,7 +42584,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 12.7
+                "value": 13.4
               }
             ],
             "tradingValueIndex": [
@@ -42674,8 +42686,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 11.8
+                "date": "2026-10-31",
+                "value": 17.2
               }
             ],
             "tradingValueIndex": [
@@ -42754,7 +42766,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 9.1
+                "value": 9.5
               }
             ],
             "tradingValueIndex": [
@@ -43045,7 +43057,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 6.1
+                "value": 6.2
               }
             ],
             "tradingValueIndex": [
@@ -43558,32 +43570,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 22.7
-              },
-              {
                 "date": "2026-10-25",
-                "value": 24.9
+                "value": 24.7
               },
               {
                 "date": "2026-10-26",
-                "value": 71.7
+                "value": 71.1
               },
               {
                 "date": "2026-10-27",
-                "value": 63.7
+                "value": 63.3
               },
               {
                 "date": "2026-10-28",
-                "value": 66.9
+                "value": 66.5
               },
               {
                 "date": "2026-10-29",
-                "value": 63.8
+                "value": 63.3
               },
               {
                 "date": "2026-10-30",
-                "value": 54.1
+                "value": 53.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 13.9
               }
             ],
             "tradingValueIndex": [
@@ -43646,7 +43658,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 57.1
+                "value": 59.6
               }
             ],
             "tradingValueIndex": [
@@ -43748,8 +43760,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 53.7
+                "date": "2026-10-31",
+                "value": 62.9
               }
             ],
             "tradingValueIndex": [
@@ -43828,7 +43840,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 40.8
+                "value": 42.6
               }
             ],
             "tradingValueIndex": [
@@ -44119,7 +44131,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 25.5
+                "value": 25.7
               }
             ],
             "tradingValueIndex": [
@@ -44632,32 +44644,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 4.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 3.9
               },
               {
                 "date": "2026-10-26",
-                "value": 33.2
+                "value": 33
               },
               {
                 "date": "2026-10-27",
-                "value": 30.8
+                "value": 30.6
               },
               {
                 "date": "2026-10-28",
-                "value": 33.2
+                "value": 32.9
               },
               {
                 "date": "2026-10-29",
-                "value": 27.9
+                "value": 27.7
               },
               {
                 "date": "2026-10-30",
-                "value": 24.8
+                "value": 24.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 4.4
               }
             ],
             "tradingValueIndex": [
@@ -44720,7 +44732,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 26.7
+                "value": 27.5
               }
             ],
             "tradingValueIndex": [
@@ -44822,8 +44834,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 24.6
+                "date": "2026-10-31",
+                "value": 20.1
               }
             ],
             "tradingValueIndex": [
@@ -44902,7 +44914,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 19.1
+                "value": 19.7
               }
             ],
             "tradingValueIndex": [
@@ -45193,7 +45205,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 12.3
+                "value": 12.4
               }
             ],
             "tradingValueIndex": [
@@ -45706,10 +45718,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.6
               },
@@ -45732,6 +45740,10 @@
               {
                 "date": "2026-10-30",
                 "value": 2.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.7
               }
             ],
             "tradingValueIndex": [
@@ -45794,7 +45806,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.7
+                "value": 2.9
               }
             ],
             "tradingValueIndex": [
@@ -45896,8 +45908,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 2.7
+                "date": "2026-10-31",
+                "value": 3.2
               }
             ],
             "tradingValueIndex": [
@@ -45976,7 +45988,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 1.9
+                "value": 2
               }
             ],
             "tradingValueIndex": [
@@ -46797,32 +46809,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 11.9
-              },
-              {
                 "date": "2026-10-25",
-                "value": 17.7
+                "value": 17.6
               },
               {
                 "date": "2026-10-26",
-                "value": 55.7
+                "value": 55.3
               },
               {
                 "date": "2026-10-27",
-                "value": 33.1
+                "value": 32.9
               },
               {
                 "date": "2026-10-28",
-                "value": 27.2
+                "value": 27
               },
               {
                 "date": "2026-10-29",
-                "value": 24.2
+                "value": 24
               },
               {
                 "date": "2026-10-30",
-                "value": 20.6
+                "value": 20.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.3
               }
             ],
             "tradingValueIndex": [
@@ -46885,7 +46897,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 28.7
+                "value": 29.8
               }
             ],
             "tradingValueIndex": [
@@ -46987,8 +46999,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 20.5
+                "date": "2026-10-31",
+                "value": 28.4
               }
             ],
             "tradingValueIndex": [
@@ -47067,7 +47079,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 20.5
+                "value": 21.3
               }
             ],
             "tradingValueIndex": [
@@ -47358,7 +47370,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 11
+                "value": 11.1
               }
             ],
             "tradingValueIndex": [
@@ -47871,28 +47883,28 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 11.6
-              },
-              {
                 "date": "2026-10-25",
-                "value": 11.1
+                "value": 11
               },
               {
                 "date": "2026-10-26",
-                "value": 59.1
+                "value": 58.7
               },
               {
                 "date": "2026-10-27",
-                "value": 49.1
+                "value": 48.8
               },
               {
                 "date": "2026-10-28",
-                "value": 49.9
+                "value": 49.6
               },
               {
                 "date": "2026-10-29",
-                "value": 90.3
+                "value": 89.6
+              },
+              {
+                "date": "2026-10-30",
+                "value": 100
               }
             ],
             "tradingValueIndex": [
@@ -47955,7 +47967,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 62.3
+                "value": 66.2
               }
             ],
             "tradingValueIndex": [
@@ -48057,7 +48069,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -48137,7 +48149,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 44.5
+                "value": 47.3
               }
             ],
             "tradingValueIndex": [
@@ -48428,7 +48440,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 23.8
+                "value": 24.2
               }
             ],
             "tradingValueIndex": [
@@ -48941,28 +48953,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 15.3
-              },
-              {
                 "date": "2026-10-25",
-                "value": 13.7
+                "value": 13.6
               },
               {
                 "date": "2026-10-26",
-                "value": 91.1
+                "value": 90.4
               },
               {
                 "date": "2026-10-27",
-                "value": 100
+                "value": 99.3
               },
               {
                 "date": "2026-10-28",
-                "value": 93.1
+                "value": 92.4
               },
               {
                 "date": "2026-10-29",
-                "value": 73.2
+                "value": 72.6
+              },
+              {
+                "date": "2026-10-30",
+                "value": 71.2
+              },
+              {
+                "date": "2026-10-31",
+                "value": 14.2
               }
             ],
             "tradingValueIndex": [
@@ -49025,7 +49041,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 76.5
+                "value": 79.1
               }
             ],
             "tradingValueIndex": [
@@ -49127,8 +49143,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 71.2
+                "date": "2026-10-31",
+                "value": 64.6
               }
             ],
             "tradingValueIndex": [
@@ -49207,7 +49223,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 54.7
+                "value": 56.5
               }
             ],
             "tradingValueIndex": [
@@ -49498,7 +49514,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 31.9
+                "value": 32.1
               }
             ],
             "tradingValueIndex": [
@@ -50011,32 +50027,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 4.2
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.1
               },
               {
                 "date": "2026-10-26",
-                "value": 15
+                "value": 14.9
               },
               {
                 "date": "2026-10-27",
-                "value": 14.2
+                "value": 14.1
               },
               {
                 "date": "2026-10-28",
-                "value": 15.5
+                "value": 15.4
               },
               {
                 "date": "2026-10-29",
-                "value": 14.5
+                "value": 14.4
               },
               {
                 "date": "2026-10-30",
                 "value": 11.8
+              },
+              {
+                "date": "2026-10-31",
+                "value": 3.8
               }
             ],
             "tradingValueIndex": [
@@ -50099,7 +50115,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 12.7
+                "value": 13.4
               }
             ],
             "tradingValueIndex": [
@@ -50201,8 +50217,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 11.8
+                "date": "2026-10-31",
+                "value": 17.2
               }
             ],
             "tradingValueIndex": [
@@ -50281,7 +50297,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 9.1
+                "value": 9.5
               }
             ],
             "tradingValueIndex": [
@@ -50572,7 +50588,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 6.1
+                "value": 6.2
               }
             ],
             "tradingValueIndex": [
@@ -51085,32 +51101,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 22.7
-              },
-              {
                 "date": "2026-10-25",
-                "value": 24.9
+                "value": 24.7
               },
               {
                 "date": "2026-10-26",
-                "value": 71.7
+                "value": 71.1
               },
               {
                 "date": "2026-10-27",
-                "value": 63.7
+                "value": 63.3
               },
               {
                 "date": "2026-10-28",
-                "value": 66.9
+                "value": 66.5
               },
               {
                 "date": "2026-10-29",
-                "value": 63.8
+                "value": 63.3
               },
               {
                 "date": "2026-10-30",
-                "value": 54.1
+                "value": 53.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 13.9
               }
             ],
             "tradingValueIndex": [
@@ -51173,7 +51189,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 57.1
+                "value": 59.6
               }
             ],
             "tradingValueIndex": [
@@ -51275,8 +51291,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 53.7
+                "date": "2026-10-31",
+                "value": 62.9
               }
             ],
             "tradingValueIndex": [
@@ -51355,7 +51371,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 40.8
+                "value": 42.6
               }
             ],
             "tradingValueIndex": [
@@ -51646,7 +51662,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 25.5
+                "value": 25.7
               }
             ],
             "tradingValueIndex": [
@@ -52159,32 +52175,32 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 4.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 3.9
               },
               {
                 "date": "2026-10-26",
-                "value": 33.2
+                "value": 33
               },
               {
                 "date": "2026-10-27",
-                "value": 30.8
+                "value": 30.6
               },
               {
                 "date": "2026-10-28",
-                "value": 33.2
+                "value": 32.9
               },
               {
                 "date": "2026-10-29",
-                "value": 27.9
+                "value": 27.7
               },
               {
                 "date": "2026-10-30",
-                "value": 24.8
+                "value": 24.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 4.4
               }
             ],
             "tradingValueIndex": [
@@ -52247,7 +52263,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 26.7
+                "value": 27.5
               }
             ],
             "tradingValueIndex": [
@@ -52349,8 +52365,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 24.6
+                "date": "2026-10-31",
+                "value": 20.1
               }
             ],
             "tradingValueIndex": [
@@ -52429,7 +52445,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 19.1
+                "value": 19.7
               }
             ],
             "tradingValueIndex": [
@@ -52720,7 +52736,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 12.3
+                "value": 12.4
               }
             ],
             "tradingValueIndex": [
@@ -53233,10 +53249,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.6
               },
@@ -53259,6 +53271,10 @@
               {
                 "date": "2026-10-30",
                 "value": 2.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.7
               }
             ],
             "tradingValueIndex": [
@@ -53321,7 +53337,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.7
+                "value": 2.9
               }
             ],
             "tradingValueIndex": [
@@ -53423,8 +53439,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 2.7
+                "date": "2026-10-31",
+                "value": 3.2
               }
             ],
             "tradingValueIndex": [
@@ -53503,7 +53519,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 1.9
+                "value": 2
               }
             ],
             "tradingValueIndex": [
@@ -54324,10 +54340,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 5.9
-              },
-              {
                 "date": "2026-10-25",
                 "value": 4.7
               },
@@ -54350,6 +54362,10 @@
               {
                 "date": "2026-10-30",
                 "value": 24.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 5.6
               }
             ],
             "tradingValueIndex": [
@@ -54412,7 +54428,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 29.7
+                "value": 30.8
               }
             ],
             "tradingValueIndex": [
@@ -54514,8 +54530,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 32.5
+                "date": "2026-10-31",
+                "value": 45.1
               }
             ],
             "tradingValueIndex": [
@@ -54594,7 +54610,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 21.1
+                "value": 21.9
               }
             ],
             "tradingValueIndex": [
@@ -54885,7 +54901,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 16.7
+                "value": 16.9
               }
             ],
             "tradingValueIndex": [
@@ -55398,10 +55414,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 1.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 1
               },
@@ -55424,6 +55436,10 @@
               {
                 "date": "2026-10-30",
                 "value": 4.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 1.1
               }
             ],
             "tradingValueIndex": [
@@ -55486,7 +55502,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 5.6
+                "value": 5.8
               }
             ],
             "tradingValueIndex": [
@@ -55588,8 +55604,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 6.1
+                "date": "2026-10-31",
+                "value": 9.1
               }
             ],
             "tradingValueIndex": [
@@ -55668,7 +55684,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 4
+                "value": 4.2
               }
             ],
             "tradingValueIndex": [
@@ -56472,10 +56488,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 9
-              },
-              {
                 "date": "2026-10-25",
                 "value": 8.2
               },
@@ -56498,6 +56510,10 @@
               {
                 "date": "2026-10-30",
                 "value": 39.7
+              },
+              {
+                "date": "2026-10-31",
+                "value": 9.1
               }
             ],
             "tradingValueIndex": [
@@ -56560,7 +56576,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 44.4
+                "value": 46.3
               }
             ],
             "tradingValueIndex": [
@@ -56662,8 +56678,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 52.6
+                "date": "2026-10-31",
+                "value": 73.3
               }
             ],
             "tradingValueIndex": [
@@ -56742,7 +56758,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 31.6
+                "value": 32.9
               }
             ],
             "tradingValueIndex": [
@@ -57033,7 +57049,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 19.5
+                "value": 19.7
               }
             ],
             "tradingValueIndex": [
@@ -57546,10 +57562,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 3.9
-              },
-              {
                 "date": "2026-10-25",
                 "value": 3.4
               },
@@ -57572,6 +57584,10 @@
               {
                 "date": "2026-10-30",
                 "value": 13.4
+              },
+              {
+                "date": "2026-10-31",
+                "value": 2.5
               }
             ],
             "tradingValueIndex": [
@@ -57634,7 +57650,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 18.6
+                "value": 19.1
               }
             ],
             "tradingValueIndex": [
@@ -57736,8 +57752,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 17.7
+                "date": "2026-10-31",
+                "value": 19.6
               }
             ],
             "tradingValueIndex": [
@@ -57816,7 +57832,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 13.2
+                "value": 13.6
               }
             ],
             "tradingValueIndex": [
@@ -58620,10 +58636,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 10.9
-              },
-              {
                 "date": "2026-10-25",
                 "value": 8.8
               },
@@ -58646,6 +58658,10 @@
               {
                 "date": "2026-10-30",
                 "value": 75.5
+              },
+              {
+                "date": "2026-10-31",
+                "value": 12.5
               }
             ],
             "tradingValueIndex": [
@@ -58708,7 +58724,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 74.1
+                "value": 76.7
               }
             ],
             "tradingValueIndex": [
@@ -58810,7 +58826,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -58890,7 +58906,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 52.7
+                "value": 54.5
               }
             ],
             "tradingValueIndex": [
@@ -59181,7 +59197,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 30.8
+                "value": 31.1
               }
             ],
             "tradingValueIndex": [
@@ -59711,10 +59727,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.7
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.7
               },
@@ -59737,6 +59749,10 @@
               {
                 "date": "2026-10-30",
                 "value": 2.3
+              },
+              {
+                "date": "2026-10-31",
+                "value": 1
               }
             ],
             "tradingValueIndex": [
@@ -59799,7 +59815,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2
+                "value": 2.1
               }
             ],
             "tradingValueIndex": [
@@ -59901,8 +59917,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 3.6
+                "date": "2026-10-31",
+                "value": 8.6
               }
             ],
             "tradingValueIndex": [
@@ -59981,7 +59997,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 1.3
+                "value": 1.4
               }
             ],
             "tradingValueIndex": [
@@ -60785,10 +60801,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 12.3
-              },
-              {
                 "date": "2026-10-25",
                 "value": 10.9
               },
@@ -60811,6 +60823,10 @@
               {
                 "date": "2026-10-30",
                 "value": 64.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 11.7
               }
             ],
             "tradingValueIndex": [
@@ -60873,7 +60889,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 62.2
+                "value": 64.2
               }
             ],
             "tradingValueIndex": [
@@ -60975,7 +60991,7 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
+                "date": "2026-10-31",
                 "value": 100
               }
             ],
@@ -61055,7 +61071,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 41.3
+                "value": 42.6
               }
             ],
             "tradingValueIndex": [
@@ -61346,7 +61362,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 62
+                "value": 62.4
               }
             ],
             "tradingValueIndex": [
@@ -61859,10 +61875,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 6.1
-              },
-              {
                 "date": "2026-10-25",
                 "value": 7.8
               },
@@ -61885,6 +61897,10 @@
               {
                 "date": "2026-10-30",
                 "value": 6.3
+              },
+              {
+                "date": "2026-10-31",
+                "value": 6.1
               }
             ],
             "tradingValueIndex": [
@@ -61947,7 +61963,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 5.6
+                "value": 6.7
               }
             ],
             "tradingValueIndex": [
@@ -62049,8 +62065,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 9.8
+                "date": "2026-10-31",
+                "value": 51.8
               }
             ],
             "tradingValueIndex": [
@@ -62129,7 +62145,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3.7
+                "value": 4.4
               }
             ],
             "tradingValueIndex": [
@@ -62420,7 +62436,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 6.6
+                "value": 6.8
               }
             ],
             "tradingValueIndex": [
@@ -62933,10 +62949,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.8
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.5
               },
@@ -62959,6 +62971,10 @@
               {
                 "date": "2026-10-30",
                 "value": 4.3
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.7
               }
             ],
             "tradingValueIndex": [
@@ -63021,7 +63037,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3.2
+                "value": 3.3
               }
             ],
             "tradingValueIndex": [
@@ -63123,8 +63139,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 6.6
+                "date": "2026-10-31",
+                "value": 5.9
               }
             ],
             "tradingValueIndex": [
@@ -63203,7 +63219,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.1
+                "value": 2.2
               }
             ],
             "tradingValueIndex": [
@@ -64007,10 +64023,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 7.5
-              },
-              {
                 "date": "2026-10-25",
                 "value": 5.7
               },
@@ -64095,7 +64107,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 12.5
+                "value": 13.5
               }
             ],
             "tradingValueIndex": [
@@ -64197,8 +64209,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 30.8
+                "date": "2026-10-31",
+                "value": 51.2
               }
             ],
             "tradingValueIndex": [
@@ -64277,7 +64289,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 8.3
+                "value": 8.9
               }
             ],
             "tradingValueIndex": [
@@ -64568,7 +64580,7 @@
               },
               {
                 "date": "2026-10-01",
-                "value": 11.4
+                "value": 11.6
               }
             ],
             "tradingValueIndex": [
@@ -65081,10 +65093,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 0.2
-              },
-              {
                 "date": "2026-10-25",
                 "value": 0.1
               },
@@ -65107,6 +65115,10 @@
               {
                 "date": "2026-10-30",
                 "value": 0.4
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0.1
               }
             ],
             "tradingValueIndex": [
@@ -65271,8 +65283,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 0.7
+                "date": "2026-10-31",
+                "value": 0.9
               }
             ],
             "tradingValueIndex": [
@@ -66155,10 +66167,6 @@
           "week": {
             "searchIndex": [
               {
-                "date": "2026-10-24",
-                "value": 1.4
-              },
-              {
                 "date": "2026-10-25",
                 "value": 1
               },
@@ -66181,6 +66189,10 @@
               {
                 "date": "2026-10-30",
                 "value": 3.6
+              },
+              {
+                "date": "2026-10-31",
+                "value": 1.4
               }
             ],
             "tradingValueIndex": [
@@ -66243,7 +66255,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 3.4
+                "value": 3.6
               }
             ],
             "tradingValueIndex": [
@@ -66345,8 +66357,8 @@
           "day": {
             "searchIndex": [
               {
-                "date": "2026-10-30",
-                "value": 5.6
+                "date": "2026-10-31",
+                "value": 11.8
               }
             ],
             "tradingValueIndex": [
@@ -66425,7 +66437,7 @@
               },
               {
                 "date": "2026-10-26",
-                "value": 2.2
+                "value": 2.4
               }
             ],
             "tradingValueIndex": [
