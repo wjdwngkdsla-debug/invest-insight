@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03 12:16",
+  "updated": "2026-11-04 03:10",
   "items": [
     {
       "corp_code": "00104069",
@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -789,16 +789,16 @@
           }
         ]
       },
-      "quality_checked_at": "2026-10-31",
-      "quality_attempted_at": "2026-10-31",
+      "quality_checked_at": "2026-11-04",
+      "quality_attempted_at": "2026-11-04",
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "d5086ded5ea38cb80e2e",
-        "signature": "81d4d8f302a3b7948a96",
+        "source_revision": "63b693919b0542ade31e",
+        "signature": "ef3838f4c6ef5cf02edb",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-31",
-        "next_retry": "2026-11-01",
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
           {
             "at": "2026-10-02",
@@ -817,6 +817,15 @@
             "at": "2026-10-31",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -864,10 +873,14 @@
       ],
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-31",
+        "checked_at": "2026-11-04",
         "rcept_no": "20261030000114"
       },
-      "manual_commit_apply": {}
+      "manual_commit_apply": {},
+      "result_source_check": {
+        "status": "waiting",
+        "checked_at": "2026-11-04"
+      }
     },
     {
       "corp_code": "01835829",
@@ -1256,73 +1269,73 @@
       "corp_code": "00960234",
       "name": "영광와이케이엠씨",
       "first_filing_date": "20261008",
-      "last_rcept_no": "20261103000003",
+      "last_rcept_no": "20261103000312",
       "offering_attempt": 1,
       "holder_lockup": {
-        "rcept_no": "20261103000003",
+        "rcept_no": "20261103000312",
         "basis": "float_summary",
-        "table_index": 348,
+        "table_index": 171,
         "cumulative_rows": [
           {
             "period": "상장일",
-            "row_text": "상장일 유통가능 주식수 5,041,041 34.86%",
+            "row_text": "상장일 유통가능 주식수 5,041,041 34.81%",
             "cumulative_float": 5041041,
-            "float_pct": 34.86,
+            "float_pct": 34.81,
             "quantity_unit": "주"
           },
           {
             "period": "1개월",
-            "row_text": "상장 후 1개월 뒤 유통가능 주식수 6,823,894 47.19%",
+            "row_text": "상장 후 1개월 뒤 유통가능 주식수 6,823,894 47.12%",
             "cumulative_float": 6823894,
-            "float_pct": 47.19,
+            "float_pct": 47.12,
             "quantity_unit": "주"
           },
           {
             "period": "2개월",
-            "row_text": "상장 후 2개월 뒤 유통가능 주식수 7,510,755 51.94%",
+            "row_text": "상장 후 2개월 뒤 유통가능 주식수 7,510,755 51.86%",
             "cumulative_float": 7510755,
-            "float_pct": 51.94,
+            "float_pct": 51.86,
             "quantity_unit": "주"
           },
           {
             "period": "3개월",
-            "row_text": "상장 후 3개월 뒤 유통가능 주식수 7,650,395 52.91%",
+            "row_text": "상장 후 3개월 뒤 유통가능 주식수 7,650,395 52.82%",
             "cumulative_float": 7650395,
-            "float_pct": 52.91,
+            "float_pct": 52.82,
             "quantity_unit": "주"
           },
           {
             "period": "6개월",
-            "row_text": "상장 후 6개월 뒤 유통가능 주식수 7,813,434 54.04%",
-            "cumulative_float": 7813434,
-            "float_pct": 54.04,
+            "row_text": "상장 후 6개월 뒤 유통가능 주식수 7,836,434 54.11%",
+            "cumulative_float": 7836434,
+            "float_pct": 54.11,
             "quantity_unit": "주"
           },
           {
             "period": "12개월",
-            "row_text": "상장 후 12개월 뒤 유통가능 주식수 7,843,594 54.25%",
-            "cumulative_float": 7843594,
-            "float_pct": 54.25,
+            "row_text": "상장 후 12개월 뒤 유통가능 주식수 7,866,594 54.32%",
+            "cumulative_float": 7866594,
+            "float_pct": 54.32,
             "quantity_unit": "주"
           },
           {
             "period": "18개월",
-            "row_text": "상장 후 18개월 뒤 유통가능 주식수 7,983,594 55.21%",
-            "cumulative_float": 7983594,
-            "float_pct": 55.21,
+            "row_text": "상장 후 18개월 뒤 유통가능 주식수 8,006,594 55.28%",
+            "cumulative_float": 8006594,
+            "float_pct": 55.28,
             "quantity_unit": "주"
           },
           {
             "period": "30개월",
-            "row_text": "상장 후 30개월 뒤 유통가능 주식수 14,381,645 99.46%",
-            "cumulative_float": 14381645,
+            "row_text": "상장 후 30개월 뒤 유통가능 주식수 14,404,645 99.46%",
+            "cumulative_float": 14404645,
             "float_pct": 99.46,
             "quantity_unit": "주"
           }
         ],
         "date_basis": "listing_relative_or_explicit_date",
         "status": "verified",
-        "total": 9340604,
+        "total": 9363604,
         "coverage": "disclosed_periods_only",
         "rows": [
           {
@@ -1339,7 +1352,7 @@
           },
           {
             "period": "6개월",
-            "qty": 163039
+            "qty": 186039
           },
           {
             "period": "12개월",
@@ -1358,16 +1371,16 @@
         "quantity_unit": "주",
         "detail_advisory": {
           "status": "review",
-          "rcept_no": "20261103000003",
+          "rcept_no": "20261103000312",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 345,
-          "parsed_total": 9340604,
+          "table_index": 168,
+          "parsed_total": 9363604,
           "reported_totals": [
-            9418490
+            9441490
           ],
           "unresolved": [
             {
-              "label": "우리사주조합우리사주조합우리사주조합240,9251.91%240,9251.67%",
+              "label": "우리사주조합우리사주조합우리사주조합240,9251.91%240,9251.66%",
               "qty": 77886,
               "period_text": "-"
             }
@@ -1376,7 +1389,6 @@
       },
       "ipo_parse_version": 7,
       "withdrawn": false,
-      "commit_apply_missing": 7,
       "listing_date": "",
       "stock_code": "",
       "review_pending": false,
@@ -1430,7 +1442,41 @@
       "quality_refresh_error": {
         "checked_at": "2026-11-03",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
-      }
+      },
+      "final_price": 11000,
+      "demand_ratio": 1163.35,
+      "commit_apply": [
+        {
+          "period": "6개월",
+          "qty": 16851000,
+          "pct": 0.85,
+          "source": "dart_table"
+        },
+        {
+          "period": "3개월",
+          "qty": 11131000,
+          "pct": 0.56,
+          "source": "dart_table"
+        },
+        {
+          "period": "1개월",
+          "qty": 7513000,
+          "pct": 0.38,
+          "source": "dart_table"
+        },
+        {
+          "period": "15일",
+          "qty": 106630000,
+          "pct": 5.41,
+          "source": "dart_table"
+        },
+        {
+          "period": "미확약",
+          "qty": 1829566000,
+          "pct": 92.79,
+          "source": "dart_table"
+        }
+      ]
     },
     {
       "corp_code": "01658035",
@@ -1771,7 +1817,7 @@
       "review_pending": false,
       "management_status": "자동",
       "schedule_hidden": false,
-      "quality_attempted_at": "2026-09-30",
+      "quality_attempted_at": "2026-11-04",
       "listing_date_check": {
         "status": "missing",
         "current": "",
@@ -1781,20 +1827,32 @@
       "holder_overrides": {},
       "quality_offering_receipt": "20260921000209",
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "88ec927612b0bedec147",
-        "signature": "035319f2afc8069d8f05",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "758ce7539465f54ed930",
+        "signature": "c2d913cd00cc1a057239",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
           {
             "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
+      },
+      "quality_refresh_error": {
+        "checked_at": "2026-11-04",
+        "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       }
     },
     {
@@ -1943,7 +2001,7 @@
       "corp_code": "00618173",
       "name": "씨앤엠",
       "first_filing_date": "20261016",
-      "last_rcept_no": "20261016000412",
+      "last_rcept_no": "20261103000363",
       "offering_attempt": 1,
       "security_type": "equity",
       "band_low": 10000,
@@ -1959,9 +2017,9 @@
       "offer_shares": 2950000,
       "is_listing_ipo": true,
       "holder_lockup": {
-        "rcept_no": "20261016000412",
+        "rcept_no": "20261103000363",
         "basis": "float_summary",
-        "table_index": 412,
+        "table_index": 490,
         "cumulative_rows": [
           {
             "period": "상장일",
@@ -3340,60 +3398,60 @@
       "corp_code": "01795859",
       "name": "엔키화이트햇",
       "first_filing_date": "20261008",
-      "last_rcept_no": "20261027000363",
+      "last_rcept_no": "20261103000358",
       "offering_attempt": 1,
       "holder_lockup": {
-        "rcept_no": "20261027000363",
+        "rcept_no": "20261103000358",
         "basis": "float_summary",
-        "table_index": 361,
+        "table_index": 751,
         "cumulative_rows": [
           {
             "period": "상장일",
-            "row_text": "상장일 유통가능 4,021,887 37.95%",
-            "cumulative_float": 4021887,
-            "float_pct": 37.95,
+            "row_text": "상장일 유통가능 4,021,887 37.95% 4,057,981 35.72%",
+            "cumulative_float": 4057981,
+            "float_pct": 35.72,
             "quantity_unit": "주"
           },
           {
             "period": "1개월",
-            "row_text": "상장 후 1개월 뒤 유통가능 5,049,154 47.64%",
-            "cumulative_float": 5049154,
-            "float_pct": 47.64,
+            "row_text": "상장 후 1개월 뒤 유통가능 5,049,154 47.64% 5,085,248 44.76%",
+            "cumulative_float": 5085248,
+            "float_pct": 44.76,
             "quantity_unit": "주"
           },
           {
             "period": "3개월",
-            "row_text": "상장 후 3개월 뒤 유통가능 5,713,404 53.91%",
-            "cumulative_float": 5713404,
-            "float_pct": 53.91,
+            "row_text": "상장 후 3개월 뒤 유통가능 5,713,404 53.91% 5,925,698 52.16%",
+            "cumulative_float": 5925698,
+            "float_pct": 52.16,
             "quantity_unit": "주"
           },
           {
             "period": "1년",
-            "row_text": "상장 후 1년 뒤 유통가능 6,457,404 60.93%",
-            "cumulative_float": 6457404,
-            "float_pct": 60.93,
+            "row_text": "상장 후 1년 뒤 유통가능 6,457,404 60.93% 6,838,024 60.19%",
+            "cumulative_float": 6838024,
+            "float_pct": 60.19,
             "quantity_unit": "주"
           },
           {
             "period": "2년",
-            "row_text": "상장 후 2년 뒤 유통가능 6,474,404 61.09%",
-            "cumulative_float": 6474404,
-            "float_pct": 61.09,
+            "row_text": "상장 후 2년 뒤 유통가능 6,474,404 61.09% 6,954,100 61.21%",
+            "cumulative_float": 6954100,
+            "float_pct": 61.21,
             "quantity_unit": "주"
           },
           {
             "period": "3년",
-            "row_text": "상장 후 3년 뒤 유통가능 10,598,414 100.00%",
-            "cumulative_float": 10598414,
-            "float_pct": 100.0,
+            "row_text": "상장 후 3년 뒤 유통가능 10,598,414 100.00% 11,177,186 98.38%",
+            "cumulative_float": 11177186,
+            "float_pct": 98.38,
             "quantity_unit": "주"
           }
         ],
         "date_basis": "listing_relative_or_explicit_date",
         "status": "verified",
-        "total": 6576527,
-        "coverage": "full",
+        "total": 7119205,
+        "coverage": "disclosed_periods_only",
         "rows": [
           {
             "period": "1개월",
@@ -3401,28 +3459,28 @@
           },
           {
             "period": "3개월",
-            "qty": 664250
+            "qty": 840450
           },
           {
             "period": "1년",
-            "qty": 744000
+            "qty": 912326
           },
           {
             "period": "2년",
-            "qty": 17000
+            "qty": 116076
           },
           {
             "period": "3년",
-            "qty": 4124010
+            "qty": 4223086
           }
         ],
         "summary_kind": "cumulative",
         "quantity_unit": "주",
         "detail_advisory": {
           "status": "review",
-          "rcept_no": "20261027000363",
+          "rcept_no": "20261103000358",
           "reason": "보유기간·기산일 확인 필요",
-          "table_index": 359,
+          "table_index": 749,
           "parsed_total": 6559527,
           "reported_totals": [
             6576527
@@ -3900,24 +3958,17 @@
         "current": "",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-31",
-      "quality_attempted_at": "2026-10-31",
+      "quality_checked_at": "2026-11-04",
+      "quality_attempted_at": "2026-11-04",
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ec369c3760521903526b",
         "signature": "b08d956faed60d24e0d9",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-31",
-        "next_retry": "2026-11-04",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-11",
         "history": [
-          {
-            "at": "2026-10-22",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-10-24",
             "outcome": "unresolved",
@@ -3941,6 +3992,13 @@
           },
           {
             "at": "2026-10-31",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-11-04",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -4350,7 +4408,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4361,7 +4419,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4372,7 +4430,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-27",
@@ -4386,7 +4444,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4397,7 +4455,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4411,7 +4469,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4425,7 +4483,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-30",
@@ -9294,35 +9352,35 @@
           "qty": 184900059,
           "pct": 97.77,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         }
       ],
       "manual_commit_apply": {
@@ -9552,13 +9610,13 @@
         }
       },
       "security_type": "depositary_receipt",
-      "quality_attempted_at": "2026-11-02",
+      "quality_attempted_at": "2026-11-04",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-02",
+        "checked_at": "2026-11-04",
         "rcept_no": "20260804000371"
       },
-      "quality_checked_at": "2026-11-02",
+      "quality_checked_at": "2026-11-04",
       "listing_date_check": {
         "status": "missing",
         "current": "2026-08-18",
@@ -9568,23 +9626,18 @@
       "quality_offering_receipt": "20260728000402",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-02",
+        "checked_at": "2026-11-04",
         "rcept_no": "20260728000402"
       },
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 6,
+        "consecutive_attempts": 7,
         "outcome": "verified",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-03",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
-          {
-            "at": "2026-10-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-30",
             "outcome": "verified",
@@ -9602,6 +9655,11 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-04",
             "outcome": "verified",
             "reasons": []
           }
@@ -33738,54 +33796,6 @@
   ],
   "history": [
     {
-      "date": "2026-10-06",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-06",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-06",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-06",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-06",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-07",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
       "date": "2026-10-07",
       "name": "스탁키퍼",
       "type": "고정제외",
@@ -37659,6 +37669,54 @@
     },
     {
       "date": "2026-11-02",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-03",
       "name": "열매컴퍼니",
       "type": "고정제외",
       "field": "노출",

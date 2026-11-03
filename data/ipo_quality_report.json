@@ -1,21 +1,44 @@
 {
-  "checked_at": "2026-11-03T12:45:40.717452+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-04T03:16:02.392684+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스"
+  ],
   "failures": [],
   "issues": [
+    {
+      "corp_code": "00784184",
+      "code": "",
+      "name": "동원파츠",
+      "gaps": [
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
+      ]
+    },
     {
       "corp_code": "01835829",
       "code": "",
       "name": "바로팜",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
       "corp_code": "00960234",
       "code": "",
       "name": "영광와이케이엠씨",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    },
+    {
+      "corp_code": "01797635",
+      "code": "",
+      "name": "에이엘로봇",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
@@ -156,7 +179,8 @@
       "corp_code": "01795859",
       "name": "엔키화이트햇",
       "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요",
+        "공시된 기간까지 집계: 잔여 물량·해제일은 미추정"
       ]
     },
     {
@@ -385,7 +409,7 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 2,
+    "evicted_cases": 5,
     "recheck_candidates": 36,
     "retries": [
       {
@@ -489,12 +513,12 @@
         "corp_code": "00784184",
         "name": "동원파츠",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "d5086ded5ea38cb80e2e",
-        "signature": "81d4d8f302a3b7948a96",
+        "source_revision": "63b693919b0542ade31e",
+        "signature": "ef3838f4c6ef5cf02edb",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-31",
-        "next_retry": "2026-11-01",
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
           {
             "at": "2026-10-02",
@@ -513,6 +537,15 @@
             "at": "2026-10-31",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -657,18 +690,26 @@
       {
         "corp_code": "01797635",
         "name": "에이엘로봇",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "88ec927612b0bedec147",
-        "signature": "035319f2afc8069d8f05",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "758ce7539465f54ed930",
+        "signature": "c2d913cd00cc1a057239",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
           {
             "at": "2026-09-30",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -1004,18 +1045,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ec369c3760521903526b",
         "signature": "b08d956faed60d24e0d9",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "unresolved",
-        "last_attempt": "2026-10-31",
-        "next_retry": "2026-11-04",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-11",
         "history": [
-          {
-            "at": "2026-10-22",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-10-24",
             "outcome": "unresolved",
@@ -1039,6 +1073,13 @@
           },
           {
             "at": "2026-10-31",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-11-04",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -1734,16 +1775,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 6,
+        "consecutive_attempts": 7,
         "outcome": "verified",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-03",
+        "last_attempt": "2026-11-04",
+        "next_retry": "2026-11-05",
         "history": [
-          {
-            "at": "2026-10-28",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-30",
             "outcome": "verified",
@@ -1761,6 +1797,11 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-04",
             "outcome": "verified",
             "reasons": []
           }
