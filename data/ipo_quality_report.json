@@ -1,10 +1,8 @@
 {
-  "checked_at": "2026-11-04T10:56:45.707968+09:00",
+  "checked_at": "2026-11-05T03:25:27.550218+09:00",
   "refreshed": [
-    "영광와이케이엠씨",
-    "와이즈플래닛컴퍼니",
-    "글로벌테크놀로지",
-    "빅웨이브로보틱스"
+    "인제니아테라퓨틱스",
+    "에이엘로봇"
   ],
   "failures": [],
   "issues": [
@@ -31,14 +29,13 @@
       ]
     },
     {
-      "corp_code": "01797635",
+      "corp_code": "01863318",
       "code": "",
-      "name": "에이엘로봇",
+      "name": "넥스아이",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
@@ -404,7 +401,7 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 5,
+    "evicted_cases": 6,
     "recheck_candidates": 38,
     "retries": [
       {
@@ -462,10 +459,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "63b693919b0542ade31e",
         "signature": "ef3838f4c6ef5cf02edb",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-04",
-        "next_retry": "2026-11-05",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-07",
         "history": [
           {
             "at": "2026-10-02",
@@ -487,6 +484,15 @@
           },
           {
             "at": "2026-11-04",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "unresolved",
             "reasons": [
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
@@ -551,11 +557,11 @@
         "name": "넥스아이",
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "0cd51e6bd716950b82db",
-        "signature": "07d4f9276811eadcc6b8",
+        "signature": "48ccff5a3474f84a75af",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-31",
-        "next_retry": "2026-11-01",
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
           {
             "at": "2026-09-29",
@@ -574,6 +580,15 @@
             "at": "2026-10-31",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-05",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -643,12 +658,12 @@
         "corp_code": "01797635",
         "name": "에이엘로봇",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "758ce7539465f54ed930",
-        "signature": "c2d913cd00cc1a057239",
+        "source_revision": "c1526eb22325aaf41270",
+        "signature": "2c18b26668bfbf9fe183",
         "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-04",
-        "next_retry": "2026-11-05",
+        "outcome": "verified",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
           {
             "at": "2026-09-30",
@@ -662,6 +677,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-11-05",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1790,16 +1810,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 7,
+        "consecutive_attempts": 8,
         "outcome": "verified",
-        "last_attempt": "2026-11-04",
-        "next_retry": "2026-11-05",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
-          {
-            "at": "2026-10-30",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-31",
             "outcome": "verified",
@@ -1817,6 +1832,11 @@
           },
           {
             "at": "2026-11-04",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "verified",
             "reasons": []
           }
