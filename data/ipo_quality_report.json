@@ -1,31 +1,19 @@
 {
-  "checked_at": "2026-11-05T03:25:27.550218+09:00",
+  "checked_at": "2026-11-05T11:03:12.660750+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스",
-    "에이엘로봇"
+    "덕산넵코어스",
+    "브릴스",
+    "케이엠에프"
   ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "00784184",
-      "code": "",
-      "name": "동원파츠",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
     {
       "corp_code": "01835829",
       "code": "",
       "name": "바로팜",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
@@ -401,58 +389,9 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 6,
-    "recheck_candidates": 38,
+    "evicted_cases": 7,
+    "recheck_candidates": 39,
     "retries": [
-      {
-        "corp_code": "01378005",
-        "name": "이에스티",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "5341faa5c38b65573af3",
-        "signature": "33c4eb6ad10010ea9df0",
-        "consecutive_attempts": 1,
-        "outcome": "unresolved",
-        "last_attempt": "2026-10-27",
-        "next_retry": "2026-10-28",
-        "history": [
-          {
-            "at": "2026-10-07",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-21",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-23",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-24",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          },
-          {
-            "at": "2026-10-27",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          }
-        ]
-      },
       {
         "corp_code": "00784184",
         "name": "동원파츠",
@@ -506,18 +445,13 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "aba99ae65471bbf88396",
-        "signature": "635a5e7832762bef51fc",
-        "consecutive_attempts": 3,
+        "source_revision": "2b2ccd548f700da99a0c",
+        "signature": "dab90780b7005b5d5ccf",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-11-03",
-        "next_retry": "2026-11-07",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
-          {
-            "at": "2026-10-14",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-29",
             "outcome": "rejected",
@@ -544,6 +478,14 @@
           },
           {
             "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -901,16 +843,21 @@
       {
         "corp_code": "01880139",
         "name": "케이엠에프",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "797f12d209a020e544ce",
-        "signature": "77312b6c947cfd38de64",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "03dd0033a78458fba78d",
+        "signature": "4346db72c2adaedfbea2",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-03",
-        "next_retry": "2026-10-04",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
           {
             "at": "2026-10-03",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "verified",
             "reasons": []
           }
@@ -1092,6 +1039,55 @@
             "at": "2026-11-01",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01378005",
+        "name": "이에스티",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "5341faa5c38b65573af3",
+        "signature": "33c4eb6ad10010ea9df0",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-10-27",
+        "next_retry": "2026-10-28",
+        "history": [
+          {
+            "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-23",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-24",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-10-27",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -1583,16 +1579,21 @@
       {
         "corp_code": "01801026",
         "name": "브릴스",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "e16784b28eadaceea46d",
-        "signature": "58b61a0ad6d7711f5cf4",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "25fa8f533a4f3b968c7a",
+        "signature": "7b72cf787ee7c6f67ad4",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-01",
-        "next_retry": "2026-10-02",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
           {
             "at": "2026-10-01",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "verified",
             "reasons": []
           }
@@ -1601,16 +1602,21 @@
       {
         "corp_code": "00960623",
         "name": "덕산넵코어스",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "1dd8bcd340d9c674a4c3",
-        "signature": "e8d8a3cd7506e24634c4",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "2b16ef5fc02d26d16558",
+        "signature": "84abe3cdb95670f62baf",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-09-30",
-        "next_retry": "2026-10-01",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-06",
         "history": [
           {
             "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-05",
             "outcome": "verified",
             "reasons": []
           }
