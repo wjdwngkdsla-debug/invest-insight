@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -622,7 +622,8 @@
       ],
       "result_capital": {},
       "report_rcp": "20261105000006",
-      "result_parse_version": 4
+      "result_parse_version": 4,
+      "manual_commit_apply": {}
     },
     {
       "corp_code": "01863318",
@@ -4046,7 +4047,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4057,7 +4058,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-11-04",
@@ -4071,7 +4072,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-27",
@@ -4085,7 +4086,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -4096,7 +4097,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4110,7 +4111,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -4124,7 +4125,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": false,
+      "review_pending": true,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-30",
@@ -4388,7 +4389,8 @@
       "result_capital": {},
       "report_rcp": "20261027000044",
       "result_parse_version": 4,
-      "archived_at": "2026-11-05"
+      "archived_at": "2026-11-05",
+      "initial_shares": "13936200"
     },
     {
       "corp_code": "01956751",
@@ -34025,30 +34027,6 @@
       "new": "제외고정"
     },
     {
-      "date": "2026-10-08",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-08",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-08",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
       "date": "2026-10-09",
       "name": "엔키화이트햇",
       "type": "검토대기",
@@ -37991,6 +37969,30 @@
       "field": "상장일",
       "old": "미정",
       "new": "2026-11-04"
+    },
+    {
+      "date": "2026-11-05",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-05",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-05",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],

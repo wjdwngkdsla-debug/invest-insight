@@ -37,24 +37,6 @@
   },
   {
     "market": "코스닥",
-    "name": "동원파츠",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "26500",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스피",
-    "name": "바로팜",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "16400",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "씨아이에스케미칼",
     "listing_date": "",
     "code": "",
@@ -1676,9 +1658,27 @@
     "market": "코스닥",
     "name": "이에스티",
     "listing_date": "2026-11-04",
+    "code": "495910",
+    "shares": "13936200",
+    "manual_ipo_price": "12400",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "동원파츠",
+    "listing_date": "2026-11-10",
     "code": "",
     "shares": "",
-    "manual_ipo_price": "12400",
+    "manual_ipo_price": "26500",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스피",
+    "name": "바로팜",
+    "listing_date": "2026-11-11",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "16400",
     "manual_ipo_price_locked": "N"
   }
 ]
