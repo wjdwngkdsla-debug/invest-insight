@@ -1,9 +1,6 @@
 {
-  "checked_at": "2026-11-06T11:06:30.260667+09:00",
-  "refreshed": [
-    "딜리셔스",
-    "기도산업"
-  ],
+  "checked_at": "2026-11-07T03:11:46.146166+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -16,16 +13,6 @@
       ]
     },
     {
-      "corp_code": "01863318",
-      "code": "",
-      "name": "넥스아이",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
-    {
       "corp_code": "00960234",
       "code": "",
       "name": "영광와이케이엠씨",
@@ -33,6 +20,38 @@
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "공시 대기: 상장일 미정",
         "공시 대기: 개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "01658035",
+      "code": "",
+      "name": "옵토닉스",
+      "gaps": [
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "01025617",
+      "code": "",
+      "name": "하나에어로다이내믹스",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01705740",
+      "code": "",
+      "name": "엠비디",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
@@ -398,8 +417,8 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 9,
-    "recheck_candidates": 40,
+    "evicted_cases": 14,
+    "recheck_candidates": 38,
     "retries": [
       {
         "corp_code": "00784184",
@@ -597,11 +616,11 @@
         "name": "옵토닉스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "523d5ef54e5b06d0546c",
-        "signature": "c22fc07aea142e6a6b82",
+        "signature": "5557e127559f3c9ee9c0",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-30",
-        "next_retry": "2026-10-31",
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-07",
+        "next_retry": "2026-11-08",
         "history": [
           {
             "at": "2026-09-30",
@@ -620,6 +639,15 @@
             "at": "2026-10-30",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -657,13 +685,13 @@
       {
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "0143d1192082ca26ac74",
-        "signature": "9a8326476a7e7fc1a721",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "76ec088dfb0669bcc64c",
+        "signature": "4bbb52b541b671095203",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-07",
-        "next_retry": "2026-10-08",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-07",
+        "next_retry": "2026-11-08",
         "history": [
           {
             "at": "2026-09-27",
@@ -674,6 +702,14 @@
             "at": "2026-10-07",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -698,13 +734,13 @@
       {
         "corp_code": "01705740",
         "name": "엠비디",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "8cbd054b34519dc1976d",
-        "signature": "c6196ebcf88c9e4a65cc",
-        "consecutive_attempts": 2,
-        "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "08a4a959c66b556037da",
+        "signature": "155664ec577706d9002d",
+        "consecutive_attempts": 1,
+        "outcome": "rejected",
+        "last_attempt": "2026-11-07",
+        "next_retry": "2026-11-08",
         "history": [
           {
             "at": "2026-09-28",
@@ -715,6 +751,14 @@
             "at": "2026-10-08",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -1319,19 +1363,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "281fdc0ab425d14ddcc9",
         "signature": "707f6d5aa9dae8a390b5",
-        "consecutive_attempts": 3,
+        "consecutive_attempts": 4,
         "outcome": "rejected",
-        "last_attempt": "2026-11-03",
-        "next_retry": "2026-11-07",
+        "last_attempt": "2026-11-07",
+        "next_retry": "2026-11-14",
         "history": [
-          {
-            "at": "2026-10-27",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-30",
             "outcome": "rejected",
@@ -1358,6 +1394,14 @@
           },
           {
             "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-07",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
