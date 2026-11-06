@@ -1,7 +1,8 @@
 {
-  "checked_at": "2026-11-06T03:56:00.242182+09:00",
+  "checked_at": "2026-11-06T11:06:30.260667+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "딜리셔스",
+    "기도산업"
   ],
   "failures": [],
   "issues": [
@@ -398,7 +399,7 @@
   "repair_memory": {
     "cases": 80,
     "evicted_cases": 9,
-    "recheck_candidates": 39,
+    "recheck_candidates": 40,
     "retries": [
       {
         "corp_code": "00784184",
@@ -453,21 +454,13 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "2b2ccd548f700da99a0c",
-        "signature": "dab90780b7005b5d5ccf",
+        "source_revision": "05de3cf1da51c1d9a15d",
+        "signature": "e5ca0d85c0d97f7fb365",
         "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-06",
+        "last_attempt": "2026-11-06",
+        "next_retry": "2026-11-07",
         "history": [
-          {
-            "at": "2026-10-29",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-31",
             "outcome": "rejected",
@@ -499,6 +492,14 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-11-06",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -508,10 +509,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "0cd51e6bd716950b82db",
         "signature": "48ccff5a3474f84a75af",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-06",
+        "last_attempt": "2026-11-06",
+        "next_retry": "2026-11-08",
         "history": [
           {
             "at": "2026-09-29",
@@ -533,6 +534,15 @@
           },
           {
             "at": "2026-11-05",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-06",
             "outcome": "unresolved",
             "reasons": [
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
@@ -1812,16 +1822,21 @@
       {
         "corp_code": "00229085",
         "name": "기도산업",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "35811878c54440d1cf65",
-        "signature": "55a7e88b0fd52ac30912",
+        "signature": "226de4eb810695b2ef18",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-06",
+        "next_retry": "2026-11-07",
         "history": [
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-06",
             "outcome": "verified",
             "reasons": []
           }
@@ -1891,16 +1906,21 @@
       {
         "corp_code": "01461730",
         "name": "딜리셔스",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "dffc34feda1a13692908",
-        "signature": "51769bcf62826bf60fb0",
+        "signature": "19f5e137799e8183a4a5",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-06",
+        "next_retry": "2026-11-07",
         "history": [
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-06",
             "outcome": "verified",
             "reasons": []
           }
