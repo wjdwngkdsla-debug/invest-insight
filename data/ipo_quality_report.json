@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-07T11:05:13.582467+09:00",
+  "checked_at": "2026-11-08T01:46:19.454538+09:00",
   "refreshed": [
     "인제니아테라퓨틱스"
   ],
@@ -628,10 +628,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "523d5ef54e5b06d0546c",
         "signature": "5557e127559f3c9ee9c0",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-08",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-10",
         "history": [
           {
             "at": "2026-09-30",
@@ -653,6 +653,15 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "unresolved",
             "reasons": [
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
@@ -699,10 +708,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "76ec088dfb0669bcc64c",
         "signature": "4bbb52b541b671095203",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-08",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-10",
         "history": [
           {
             "at": "2026-09-27",
@@ -716,6 +725,14 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -748,10 +765,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "08a4a959c66b556037da",
         "signature": "155664ec577706d9002d",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-08",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-10",
         "history": [
           {
             "at": "2026-09-28",
@@ -765,6 +782,14 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1903,16 +1928,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 10,
+        "consecutive_attempts": 11,
         "outcome": "verified",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-08",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
-          {
-            "at": "2026-11-02",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-04",
             "outcome": "verified",
@@ -1930,6 +1950,11 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
