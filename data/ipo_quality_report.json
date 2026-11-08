@@ -1,11 +1,6 @@
 {
-  "checked_at": "2026-11-08T10:11:13.888803+09:00",
-  "refreshed": [
-    "니어스랩",
-    "해치텍",
-    "스카이랩스",
-    "다비오"
-  ],
+  "checked_at": "2026-11-09T02:21:30.701365+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -2574,19 +2569,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "abc52df2227e8728d36f",
         "signature": "14625a1272813bd6f7ff",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-10-21",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-25",
             "outcome": "rejected",
@@ -2613,6 +2600,14 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2843,19 +2838,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "7e0cfceef9c0c720ec15",
         "signature": "d1042c6717cf687db2bb",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-10-21",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-25",
             "outcome": "rejected",
@@ -2882,6 +2869,14 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2896,19 +2891,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "ef46c99776ffb7b48253",
         "signature": "fcb05521676170b7352a",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-10-21",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-25",
             "outcome": "rejected",
@@ -2935,6 +2922,14 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -2949,19 +2944,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "fd7961809c8a9bfca5ad",
         "signature": "81ba883d443568ba4496",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-02",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-10-21",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-25",
             "outcome": "rejected",
@@ -2988,6 +2975,14 @@
           },
           {
             "at": "2026-11-02",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
