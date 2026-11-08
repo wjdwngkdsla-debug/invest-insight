@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08 01:41",
+  "updated": "2026-11-08 10:01",
   "items": [
     {
       "corp_code": "00104069",
@@ -3134,22 +3134,22 @@
       },
       "security_type": "equity",
       "holder_overrides": {},
-      "quality_offering_receipt": "20260915000390",
+      "quality_offering_receipt": "20261030000682",
       "listing_date_check": {
         "status": "missing",
         "current": "",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-08",
-      "quality_attempted_at": "2026-10-08",
+      "quality_checked_at": "2026-11-08",
+      "quality_attempted_at": "2026-11-08",
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "55f6a7287b418f0cf052",
-        "signature": "aa1da366c517fece17eb",
-        "consecutive_attempts": 2,
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "e64ea4f5d5e50ab961c7",
+        "signature": "a59b96e483c774482317",
+        "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-28",
@@ -3158,6 +3158,11 @@
           },
           {
             "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -8804,12 +8809,12 @@
       },
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260825000417"
       },
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260831001467"
       },
       "listing_date_check": {
@@ -8817,16 +8822,16 @@
         "current": "2026-09-04",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-05",
-      "quality_attempted_at": "2026-10-05",
+      "quality_checked_at": "2026-11-08",
+      "quality_attempted_at": "2026-11-08",
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "a19ac9fefbc7dfb7aaaf",
-        "signature": "5beeb49a07e113d28575",
+        "signature": "a06bb6276891bf88f17e",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-27",
@@ -8835,6 +8840,11 @@
           },
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -8954,7 +8964,7 @@
       "content_url": "https://blog.naver.com/vericap/224387784202",
       "archived_at": "2026-08-26",
       "initial_shares": "5487150",
-      "quality_attempted_at": "2026-10-05",
+      "quality_attempted_at": "2026-11-08",
       "security_type": "equity",
       "holder_lockup": {
         "rcept_no": "20260810000669",
@@ -9097,7 +9107,7 @@
       },
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260818000023"
       },
       "listing_date_check": {
@@ -9105,21 +9115,21 @@
         "current": "2026-08-25",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-05",
+      "quality_checked_at": "2026-11-08",
       "quality_offering_receipt": "20260810000669",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260810000669"
       },
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "6a776db740493a42c181",
-        "signature": "13575e84a1647428230e",
-        "consecutive_attempts": 2,
+        "signature": "6e100b3d0cf7dd7baed1",
+        "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-26",
@@ -9142,6 +9152,11 @@
           },
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -9267,7 +9282,7 @@
       "content_url": "https://blog.naver.com/vericap/224381545395",
       "archived_at": "2026-08-25",
       "initial_shares": "5777556",
-      "quality_attempted_at": "2026-10-05",
+      "quality_attempted_at": "2026-11-08",
       "security_type": "equity",
       "holder_lockup": {
         "rcept_no": "20260811000064",
@@ -9378,7 +9393,7 @@
       },
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260818000030"
       },
       "listing_date_check": {
@@ -9386,26 +9401,31 @@
         "current": "2026-08-24",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-05",
+      "quality_checked_at": "2026-11-08",
       "holder_overrides": {},
       "quality_offering_receipt": "20260811000064",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-05",
+        "checked_at": "2026-11-08",
         "rcept_no": "20260811000064"
       },
       "result_capital": {},
       "quality_repair_state": {
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "f599918c851b8b6a9f4c",
-        "signature": "400e4763919b88353c3e",
+        "signature": "1f5a11e113963a592cb1",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -9687,35 +9707,35 @@
           "qty": 184900059,
           "pct": 97.77,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "rcept_no": "20260728000402"
+          "visible": true
         }
       ],
       "manual_commit_apply": {
@@ -34160,54 +34180,6 @@
       "new": "제외고정"
     },
     {
-      "date": "2026-10-11",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-11",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-11",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-11",
-      "name": "데이터젠",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-11",
-      "name": "스탁키퍼",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
-      "date": "2026-10-11",
-      "name": "열매컴퍼니",
-      "type": "고정제외",
-      "field": "노출",
-      "old": "게시/검토",
-      "new": "제외고정"
-    },
-    {
       "date": "2026-10-12",
       "name": "다비오",
       "type": "정정공시",
@@ -38134,6 +38106,54 @@
       "field": "노출",
       "old": "게시/검토",
       "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-08",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -38142,91 +38162,91 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": ""
     },
     "corp:02038432": {
       "name": "SimwonAmericaCorp.",
       "corp_code": "02038432",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": ""
     },
     "corp:02040710": {
       "name": "우리투자제1호기업인수목적",
       "corp_code": "02040710",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     },
     "corp:02041694": {
       "name": "신영해피투모로우제12호기업인수목적",
       "corp_code": "02041694",
-      "excluded_at": "2026-11-07",
+      "excluded_at": "2026-11-08",
       "memo": "자동 제외(스팩)"
     }
   }

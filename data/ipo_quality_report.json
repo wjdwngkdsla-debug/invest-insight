@@ -1,7 +1,10 @@
 {
-  "checked_at": "2026-11-08T01:46:19.454538+09:00",
+  "checked_at": "2026-11-08T10:11:13.888803+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "니어스랩",
+    "해치텍",
+    "스카이랩스",
+    "다비오"
   ],
   "failures": [],
   "issues": [
@@ -991,13 +994,13 @@
       {
         "corp_code": "01706509",
         "name": "다비오",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "55f6a7287b418f0cf052",
-        "signature": "aa1da366c517fece17eb",
-        "consecutive_attempts": 2,
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "e64ea4f5d5e50ab961c7",
+        "signature": "a59b96e483c774482317",
+        "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-28",
@@ -1006,6 +1009,11 @@
           },
           {
             "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -1824,13 +1832,13 @@
       {
         "corp_code": "01586923",
         "name": "스카이랩스",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "a19ac9fefbc7dfb7aaaf",
-        "signature": "5beeb49a07e113d28575",
+        "signature": "a06bb6276891bf88f17e",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-27",
@@ -1841,19 +1849,24 @@
             "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-08",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
       {
         "corp_code": "01947443",
         "name": "해치텍",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "6a776db740493a42c181",
-        "signature": "13575e84a1647428230e",
-        "consecutive_attempts": 2,
+        "signature": "6e100b3d0cf7dd7baed1",
+        "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-09-26",
@@ -1878,22 +1891,32 @@
             "at": "2026-10-05",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-08",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
       {
         "corp_code": "01588897",
         "name": "니어스랩",
-        "parser_revision": "ba777e3d84cec182a159",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "f599918c851b8b6a9f4c",
-        "signature": "400e4763919b88353c3e",
+        "signature": "1f5a11e113963a592cb1",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-05",
-        "next_retry": "2026-10-06",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
         "history": [
           {
             "at": "2026-10-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
