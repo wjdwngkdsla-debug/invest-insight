@@ -1,6 +1,8 @@
 {
-  "checked_at": "2026-11-09T02:21:30.701365+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-09T10:31:43.550367+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스"
+  ],
   "failures": [],
   "issues": [
     {
@@ -475,19 +477,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "05de3cf1da51c1d9a15d",
         "signature": "e5ca0d85c0d97f7fb365",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-11-01",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-11-03",
             "outcome": "rejected",
@@ -514,6 +508,14 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -577,16 +579,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "c5b736ec6ddbf2b6bef1",
         "signature": "fa6f7efc3ebec7f10d4b",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-10-24",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-03",
             "outcome": "rejected",
@@ -611,6 +608,15 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "unresolved",
             "reasons": [
               "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
@@ -1074,18 +1080,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "608c225fffd5ccc7e5a0",
         "signature": "48cbbe6b3fdb353cdbf3",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-07",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-10-29",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-10-31",
             "outcome": "unresolved",
@@ -1109,6 +1108,13 @@
           },
           {
             "at": "2026-11-07",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -1946,16 +1952,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 11,
+        "consecutive_attempts": 12,
         "outcome": "verified",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-10",
         "history": [
-          {
-            "at": "2026-11-04",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-05",
             "outcome": "verified",
@@ -1973,6 +1974,11 @@
           },
           {
             "at": "2026-11-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-09",
             "outcome": "verified",
             "reasons": []
           }
