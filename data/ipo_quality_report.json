@@ -1,8 +1,6 @@
 {
-  "checked_at": "2026-11-09T10:31:43.550367+09:00",
-  "refreshed": [
-    "인제니아테라퓨틱스"
-  ],
+  "checked_at": "2026-11-10T06:44:48.734588+09:00",
+  "refreshed": [],
   "failures": [],
   "issues": [
     {
@@ -12,16 +10,6 @@
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "00960234",
-      "code": "",
-      "name": "영광와이케이엠씨",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
@@ -35,9 +23,27 @@
       ]
     },
     {
+      "corp_code": "01797635",
+      "code": "",
+      "name": "에이엘로봇",
+      "gaps": [
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
+      ]
+    },
+    {
       "corp_code": "01025617",
       "code": "",
       "name": "하나에어로다이내믹스",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)"
+      ]
+    },
+    {
+      "corp_code": "00618173",
+      "code": "",
+      "name": "씨앤엠",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
@@ -49,6 +55,17 @@
       "corp_code": "01705740",
       "code": "",
       "name": "엠비디",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+      ]
+    },
+    {
+      "corp_code": "01403198",
+      "code": "",
+      "name": "제이앤티지",
       "gaps": [
         "자동 재검증 결과 보류(기존 값 유지)",
         "확정공모가",
@@ -419,8 +436,8 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 14,
-    "recheck_candidates": 41,
+    "evicted_cases": 18,
+    "recheck_candidates": 37,
     "retries": [
       {
         "corp_code": "00784184",
@@ -748,18 +765,26 @@
       {
         "corp_code": "00618173",
         "name": "씨앤엠",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "868035bd3d14d2eb7e4c",
-        "signature": "be07ce6c0f8684e86e55",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "f408d657d7731ee3ec1b",
+        "signature": "4018d73de6a59c0b62bb",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-10",
+        "next_retry": "2026-11-11",
         "history": [
           {
             "at": "2026-10-24",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-10",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -806,17 +831,25 @@
         "corp_code": "01403198",
         "name": "제이앤티지",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "15eff8620d6988e07fba",
-        "signature": "087d578a470791ed1a31",
+        "source_revision": "f0e1ee3c2936d7200f8f",
+        "signature": "6d384843043323688ec7",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-11-01",
-        "next_retry": "2026-11-02",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-10",
+        "next_retry": "2026-11-11",
         "history": [
           {
             "at": "2026-11-01",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-10",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -2791,19 +2824,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "d70623bef7d410f283ba",
         "signature": "081da0c1195cd2057302",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-03",
-        "next_retry": "2026-11-10",
+        "last_attempt": "2026-11-10",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-23",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-26",
             "outcome": "rejected",
@@ -2830,6 +2855,14 @@
           },
           {
             "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-10",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -3003,19 +3036,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "aa97c1ed51c846be4304",
         "signature": "9c20e3f6bd2d9d3e3eaa",
-        "consecutive_attempts": 4,
+        "consecutive_attempts": 5,
         "outcome": "rejected",
-        "last_attempt": "2026-11-03",
-        "next_retry": "2026-11-10",
+        "last_attempt": "2026-11-10",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-24",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-26",
             "outcome": "rejected",
@@ -3042,6 +3067,14 @@
           },
           {
             "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-10",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
