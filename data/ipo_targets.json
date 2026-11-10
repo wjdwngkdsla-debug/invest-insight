@@ -100,15 +100,6 @@
   },
   {
     "market": "코스닥",
-    "name": "영광와이케이엠씨",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "11000",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "옵토닉스",
     "listing_date": "",
     "code": "",
@@ -176,7 +167,7 @@
     "listing_date": "",
     "code": "",
     "shares": "",
-    "manual_ipo_price": "",
+    "manual_ipo_price": "5700",
     "manual_ipo_price_locked": "N"
   },
   {
@@ -1679,6 +1670,15 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "8000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "영광와이케이엠씨",
+    "listing_date": "2026-11-16",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "11000",
     "manual_ipo_price_locked": "N"
   }
 ]
