@@ -11,7 +11,10 @@ KeyError: 'result_source_check'로 죽었다(run 40461535751).
 import csv
 import json
 import unittest
+from datetime import datetime
 from pathlib import Path
+from unittest.mock import patch
+from zoneinfo import ZoneInfo
 
 from scripts.ipo_quality import quality_gaps, result_waiting
 from scripts.sheets_sync import _result_waiting_note, _split_gaps
@@ -36,6 +39,13 @@ def _holder_codes():
 
 
 class ReviewTabSmoke(unittest.TestCase):
+    def setUp(self):
+        # Fixed fixture dates must not expire as the scheduled batch gets older.
+        clock = patch("scripts.ipo_quality.datetime")
+        self.clock = clock.start()
+        self.addCleanup(clock.stop)
+        self.clock.now.return_value = datetime(2026, 10, 22, tzinfo=ZoneInfo("Asia/Seoul"))
+
     def test_저장된_모든_종목이_메모_생성을_통과한다(self):
         items = _items()
         self.assertTrue(items, "ipo_schedule.json이 비어 있으면 이 테스트가 무의미하다")
@@ -64,6 +74,18 @@ class ReviewTabSmoke(unittest.TestCase):
 
     def test_보고서가_나왔으면_메모가_없다(self):
         self.assertEqual(_result_waiting_note({"sub_end": "2026-10-01", "report_rcp": "1"}), "")
+
+    def test_waiting_note_expires_after_grace_period(self):
+        for source_check in (None, {"checked_at": "2026-10-21", "status": "waiting"}):
+            item = {"sub_end": "2026-10-20", "result_source_check": source_check}
+            for day, waiting in ((10, True), (11, False)):
+                with self.subTest(source_check=source_check, day=day):
+                    self.clock.now.return_value = datetime(2026, 11, day, tzinfo=ZoneInfo("Asia/Seoul"))
+                    self.assertEqual(bool(_result_waiting_note(item)), waiting)
+
+    def test_parse_failure_is_not_labeled_waiting(self):
+        item = {"sub_end": "2026-10-20", "result_source_check": {"status": "parse_incomplete"}}
+        self.assertEqual(_result_waiting_note(item), "")
 
 
 if __name__ == "__main__":
