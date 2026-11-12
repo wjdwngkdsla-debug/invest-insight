@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-12T09:11:27.279099+09:00",
+  "checked_at": "2026-11-12T12:09:46.070623+09:00",
   "refreshed": [
-    "엠비디",
-    "인제니아테라퓨틱스"
+    "마더스제약",
+    "제논"
   ],
   "failures": [],
   "issues": [
@@ -388,8 +388,8 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 21,
-    "recheck_candidates": 39,
+    "evicted_cases": 22,
+    "recheck_candidates": 40,
     "retries": [
       {
         "corp_code": "01863318",
@@ -790,16 +790,21 @@
       {
         "corp_code": "01950720",
         "name": "제논",
-        "parser_revision": "ba777e3d84cec182a159",
-        "source_revision": "b42cd74166cbed7cade0",
-        "signature": "10b2897201ee85e49639",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "fd285882aef949771b0a",
+        "signature": "14bcadb99c65ca2bc1d7",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-08",
-        "next_retry": "2026-10-09",
+        "last_attempt": "2026-11-12",
+        "next_retry": "2026-11-13",
         "history": [
           {
             "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-12",
             "outcome": "verified",
             "reasons": []
           }
@@ -883,6 +888,24 @@
         ]
       },
       {
+        "corp_code": "01136597",
+        "name": "마더스제약",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "65c636dfe85b4932fec2",
+        "signature": "ce9256e36f61cb1fcf6c",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-12",
+        "next_retry": "2026-11-13",
+        "history": [
+          {
+            "at": "2026-11-12",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01706509",
         "name": "다비오",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -932,20 +955,13 @@
         "corp_code": "01077540",
         "name": "씨아이에스케미칼",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "608c225fffd5ccc7e5a0",
-        "signature": "48cbbe6b3fdb353cdbf3",
-        "consecutive_attempts": 3,
+        "source_revision": "889dc2805b17b988d0aa",
+        "signature": "6e0299f3e96bfec6ebbc",
+        "consecutive_attempts": 1,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-09",
+        "last_attempt": "2026-11-12",
         "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-10-31",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-11-04",
             "outcome": "unresolved",
@@ -969,6 +985,13 @@
           },
           {
             "at": "2026-11-09",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-11-12",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -1016,21 +1039,13 @@
         "corp_code": "01835829",
         "name": "바로팜",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "05de3cf1da51c1d9a15d",
-        "signature": "e5ca0d85c0d97f7fb365",
-        "consecutive_attempts": 3,
+        "source_revision": "b8f537cbb1774de74bf3",
+        "signature": "d2f6f249bc236ba98b01",
+        "consecutive_attempts": 1,
         "outcome": "rejected",
-        "last_attempt": "2026-11-09",
+        "last_attempt": "2026-11-12",
         "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-11-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-11-05",
             "outcome": "rejected",
@@ -1057,6 +1072,14 @@
           },
           {
             "at": "2026-11-09",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-12",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",

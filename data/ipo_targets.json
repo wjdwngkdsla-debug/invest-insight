@@ -28,6 +28,15 @@
   },
   {
     "market": "코스닥",
+    "name": "마더스제약",
+    "listing_date": "",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
     "name": "씨아이에스케미칼",
     "listing_date": "",
     "code": "",
@@ -73,15 +82,6 @@
   },
   {
     "market": "코스닥",
-    "name": "에이엘로봇",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "17600",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "엔키화이트햇",
     "listing_date": "",
     "code": "",
@@ -95,16 +95,7 @@
     "listing_date": "",
     "code": "",
     "shares": "",
-    "manual_ipo_price": "",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
-    "name": "옵토닉스",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "12000",
+    "manual_ipo_price": "7000",
     "manual_ipo_price_locked": "N"
   },
   {
@@ -1649,8 +1640,8 @@
     "market": "코스닥",
     "name": "동원파츠",
     "listing_date": "2026-11-10",
-    "code": "",
-    "shares": "",
+    "code": "0162D0",
+    "shares": "9271015",
     "manual_ipo_price": "26500",
     "manual_ipo_price_locked": "N"
   },
@@ -1658,8 +1649,8 @@
     "market": "코스피",
     "name": "바로팜",
     "listing_date": "2026-11-11",
-    "code": "",
-    "shares": "",
+    "code": "0153R0",
+    "shares": "11965617",
     "manual_ipo_price": "16400",
     "manual_ipo_price_locked": "N"
   },
@@ -1679,6 +1670,24 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "11000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "옵토닉스",
+    "listing_date": "2026-11-17",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "12000",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "에이엘로봇",
+    "listing_date": "2026-11-18",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "17600",
     "manual_ipo_price_locked": "N"
   }
 ]
