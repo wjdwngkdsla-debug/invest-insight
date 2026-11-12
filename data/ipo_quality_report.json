@@ -1,76 +1,19 @@
 {
-  "checked_at": "2026-11-10T13:29:49.034622+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-12T09:11:27.279099+09:00",
+  "refreshed": [
+    "엠비디",
+    "인제니아테라퓨틱스"
+  ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "01835829",
-      "code": "",
-      "name": "바로팜",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "01658035",
-      "code": "",
-      "name": "옵토닉스",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
-    {
-      "corp_code": "01797635",
-      "code": "",
-      "name": "에이엘로봇",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
     {
       "corp_code": "01025617",
       "code": "",
       "name": "하나에어로다이내믹스",
       "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)"
-      ]
-    },
-    {
-      "corp_code": "00618173",
-      "code": "",
-      "name": "씨앤엠",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "01705740",
-      "code": "",
-      "name": "엠비디",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "01403198",
-      "code": "",
-      "name": "제이앤티지",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
+        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+        "공시 대기: 상장일 미정",
+        "공시 대기: 개인청약경쟁률"
       ]
     },
     {
@@ -87,6 +30,15 @@
       "name": "씨아이에스케미칼",
       "gaps": [
         "구주물량(유통가능 요약표 수량·비율 불일치)"
+      ]
+    },
+    {
+      "corp_code": "01835829",
+      "code": "0153R0",
+      "name": "바로팜",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
@@ -174,13 +126,6 @@
   ],
   "advisories": [
     {
-      "corp_code": "00784184",
-      "name": "동원파츠",
-      "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
-      ]
-    },
-    {
       "corp_code": "00960234",
       "name": "영광와이케이엠씨",
       "notes": [
@@ -206,6 +151,13 @@
     {
       "corp_code": "00208709",
       "name": "KTE",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "00784184",
+      "name": "동원파츠",
       "notes": [
         "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
       ]
@@ -436,111 +388,9 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 19,
+    "evicted_cases": 21,
     "recheck_candidates": 39,
     "retries": [
-      {
-        "corp_code": "00784184",
-        "name": "동원파츠",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "63b693919b0542ade31e",
-        "signature": "ef3838f4c6ef5cf02edb",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-07",
-        "history": [
-          {
-            "at": "2026-10-02",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-29",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-10-31",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-04",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          },
-          {
-            "at": "2026-11-05",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          }
-        ]
-      },
-      {
-        "corp_code": "01835829",
-        "name": "바로팜",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "05de3cf1da51c1d9a15d",
-        "signature": "e5ca0d85c0d97f7fb365",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-09",
-        "next_retry": "2026-11-13",
-        "history": [
-          {
-            "at": "2026-11-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-05",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-06",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-07",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-09",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          }
-        ]
-      },
       {
         "corp_code": "01863318",
         "name": "넥스아이",
@@ -736,12 +586,12 @@
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "76ec088dfb0669bcc64c",
-        "signature": "4bbb52b541b671095203",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-10",
+        "source_revision": "fa72d73064a9e5cfdc88",
+        "signature": "fd885836862eea878676",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-12",
+        "next_retry": "2026-11-13",
         "history": [
           {
             "at": "2026-09-27",
@@ -768,31 +618,14 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
-          }
-        ]
-      },
-      {
-        "corp_code": "00618173",
-        "name": "씨앤엠",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "f408d657d7731ee3ec1b",
-        "signature": "4018d73de6a59c0b62bb",
-        "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-10",
-        "next_retry": "2026-11-11",
-        "history": [
-          {
-            "at": "2026-10-24",
-            "outcome": "verified",
-            "reasons": []
           },
           {
-            "at": "2026-11-10",
-            "outcome": "rejected",
+            "at": "2026-11-12",
+            "outcome": "unresolved",
             "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
             ]
           }
         ]
@@ -801,12 +634,12 @@
         "corp_code": "01705740",
         "name": "엠비디",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "08a4a959c66b556037da",
-        "signature": "155664ec577706d9002d",
-        "consecutive_attempts": 2,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-10",
+        "source_revision": "6a030232f29a18c4194f",
+        "signature": "9a773a0734dec30814d2",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-12",
+        "next_retry": "2026-11-13",
         "history": [
           {
             "at": "2026-09-28",
@@ -833,32 +666,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
-          }
-        ]
-      },
-      {
-        "corp_code": "01403198",
-        "name": "제이앤티지",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "f0e1ee3c2936d7200f8f",
-        "signature": "6d384843043323688ec7",
-        "consecutive_attempts": 1,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-10",
-        "next_retry": "2026-11-11",
-        "history": [
-          {
-            "at": "2026-11-01",
-            "outcome": "verified",
-            "reasons": []
           },
           {
-            "at": "2026-11-10",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
+            "at": "2026-11-12",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -931,20 +743,13 @@
         "corp_code": "01938746",
         "name": "아델",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "2a95b1d3cb3d09e3f25f",
-        "signature": "6db2c62a7aa975b71ea4",
-        "consecutive_attempts": 4,
+        "source_revision": "f0fc6e6399d08cf195fe",
+        "signature": "bc9b92f92027a435bbfb",
+        "consecutive_attempts": 1,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-06",
+        "last_attempt": "2026-11-12",
         "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-10-26",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
-            ]
-          },
           {
             "at": "2026-10-28",
             "outcome": "unresolved",
@@ -968,6 +773,13 @@
           },
           {
             "at": "2026-11-06",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
+            ]
+          },
+          {
+            "at": "2026-11-12",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 미해석 행 확인 필요)"
@@ -1035,34 +847,6 @@
         ]
       },
       {
-        "corp_code": "01706509",
-        "name": "다비오",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "e64ea4f5d5e50ab961c7",
-        "signature": "a59b96e483c774482317",
-        "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-09",
-        "history": [
-          {
-            "at": "2026-09-28",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-08",
-            "outcome": "verified",
-            "reasons": []
-          }
-        ]
-      },
-      {
         "corp_code": "01795859",
         "name": "엔키화이트햇",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -1093,6 +877,34 @@
         "history": [
           {
             "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01706509",
+        "name": "다비오",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "e64ea4f5d5e50ab961c7",
+        "signature": "a59b96e483c774482317",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-08",
+        "next_retry": "2026-11-09",
+        "history": [
+          {
+            "at": "2026-09-28",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-08",
             "outcome": "verified",
             "reasons": []
           }
@@ -1197,6 +1009,108 @@
             "at": "2026-11-01",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01835829",
+        "name": "바로팜",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "05de3cf1da51c1d9a15d",
+        "signature": "e5ca0d85c0d97f7fb365",
+        "consecutive_attempts": 3,
+        "outcome": "rejected",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-13",
+        "history": [
+          {
+            "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-05",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-06",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-09",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          }
+        ]
+      },
+      {
+        "corp_code": "00784184",
+        "name": "동원파츠",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "63b693919b0542ade31e",
+        "signature": "ef3838f4c6ef5cf02edb",
+        "consecutive_attempts": 2,
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-05",
+        "next_retry": "2026-11-07",
+        "history": [
+          {
+            "at": "2026-10-02",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-10-29",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-10-31",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-05",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -1994,16 +1908,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 12,
+        "consecutive_attempts": 13,
         "outcome": "verified",
-        "last_attempt": "2026-11-09",
-        "next_retry": "2026-11-10",
+        "last_attempt": "2026-11-12",
+        "next_retry": "2026-11-13",
         "history": [
-          {
-            "at": "2026-11-05",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-06",
             "outcome": "verified",
@@ -2021,6 +1930,11 @@
           },
           {
             "at": "2026-11-09",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-12",
             "outcome": "verified",
             "reasons": []
           }
