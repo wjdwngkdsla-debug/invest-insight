@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14 10:57",
+  "updated": "2026-11-15 01:48",
   "items": [
     {
       "corp_code": "00104069",
@@ -35,7 +35,7 @@
       "commit_apply_missing": 4,
       "listing_date": "2026-09-10",
       "stock_code": "0197V0",
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "management_status": "제외고정",
       "management_hidden": true,
@@ -1796,24 +1796,17 @@
         "current": "",
         "candidates": []
       },
-      "quality_checked_at": "2026-11-13",
-      "quality_attempted_at": "2026-11-13",
+      "quality_checked_at": "2026-11-15",
+      "quality_attempted_at": "2026-11-15",
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "f0fc6e6399d08cf195fe",
         "signature": "bc9b92f92027a435bbfb",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-19",
         "history": [
-          {
-            "at": "2026-10-31",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
-            ]
-          },
           {
             "at": "2026-11-02",
             "outcome": "unresolved",
@@ -1837,6 +1830,13 @@
           },
           {
             "at": "2026-11-13",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 미해석 행 확인 필요)"
+            ]
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 미해석 행 확인 필요)"
@@ -2945,24 +2945,17 @@
         "current": "",
         "candidates": []
       },
-      "quality_checked_at": "2026-11-13",
-      "quality_attempted_at": "2026-11-13",
+      "quality_checked_at": "2026-11-15",
+      "quality_attempted_at": "2026-11-15",
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "889dc2805b17b988d0aa",
         "signature": "6e0299f3e96bfec6ebbc",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-19",
         "history": [
-          {
-            "at": "2026-11-06",
-            "outcome": "unresolved",
-            "reasons": [
-              "구주물량(유통가능 요약표 수량·비율 불일치)"
-            ]
-          },
           {
             "at": "2026-11-07",
             "outcome": "unresolved",
@@ -2986,6 +2979,13 @@
           },
           {
             "at": "2026-11-13",
+            "outcome": "unresolved",
+            "reasons": [
+              "구주물량(유통가능 요약표 수량·비율 불일치)"
+            ]
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "unresolved",
             "reasons": [
               "구주물량(유통가능 요약표 수량·비율 불일치)"
@@ -3636,7 +3636,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -3647,7 +3647,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-11-04",
@@ -3661,7 +3661,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-27",
@@ -3675,7 +3675,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7
     },
@@ -3686,7 +3686,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3700,7 +3700,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-09-22",
@@ -3714,7 +3714,7 @@
       "management_status": "제외고정",
       "management_hidden": true,
       "schedule_hidden": true,
-      "review_pending": true,
+      "review_pending": false,
       "review_reason": "스팩 자동 제외",
       "ipo_parse_version": 7,
       "listing_date": "2026-10-30",
@@ -4111,24 +4111,16 @@
         "candidates": []
       },
       "quality_checked_at": "2026-10-14",
-      "quality_attempted_at": "2026-11-13",
+      "quality_attempted_at": "2026-11-15",
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "b8f537cbb1774de74bf3",
         "signature": "d2f6f249bc236ba98b01",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-19",
         "history": [
-          {
-            "at": "2026-11-06",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-11-07",
             "outcome": "rejected",
@@ -4160,11 +4152,19 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-11-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
       "quality_refresh_error": {
-        "checked_at": "2026-11-13",
+        "checked_at": "2026-11-15",
         "message": "자동 반영 보류: application_source_check: 새 원문 파싱 미완료; 수요예측 신청표 최신 공시 파싱 확인"
       },
       "final_price": 16400,
@@ -10247,13 +10247,13 @@
         }
       },
       "security_type": "depositary_receipt",
-      "quality_attempted_at": "2026-11-14",
+      "quality_attempted_at": "2026-11-15",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-14",
+        "checked_at": "2026-11-15",
         "rcept_no": "20260804000371"
       },
-      "quality_checked_at": "2026-11-14",
+      "quality_checked_at": "2026-11-15",
       "listing_date_check": {
         "status": "missing",
         "current": "2026-08-18",
@@ -10263,23 +10263,18 @@
       "quality_offering_receipt": "20260728000402",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-14",
+        "checked_at": "2026-11-15",
         "rcept_no": "20260728000402"
       },
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 15,
+        "consecutive_attempts": 16,
         "outcome": "verified",
-        "last_attempt": "2026-11-14",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-11-08",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-09",
             "outcome": "verified",
@@ -10297,6 +10292,11 @@
           },
           {
             "at": "2026-11-14",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "verified",
             "reasons": []
           }
@@ -34735,54 +34735,6 @@
   "history": [
     {
       "date": "2026-10-15",
-      "name": "아이언디바이스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "39922"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "케이쓰리아이",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "55881"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "뱅크웨어글로벌",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "85900"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "뱅크웨어글로벌",
-      "type": "수기변경(검토필요)",
-      "field": "배정_6개월",
-      "old": "",
-      "new": "26390"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "피앤에스미캐닉스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "27992"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "피앤에스미캐닉스",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "313883"
-    },
-    {
-      "date": "2026-10-15",
       "name": "산일전기",
       "type": "수기변경(검토필요)",
       "field": "배정_15일",
@@ -38660,6 +38612,54 @@
       "field": "청약 종료",
       "old": "2026-11-25",
       "new": "2026-12-15"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     },
     {
       "date": "2026-11-14",
