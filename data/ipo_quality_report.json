@@ -1,6 +1,11 @@
 {
-  "checked_at": "2026-11-14T03:50:20.979815+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-14T11:03:05.194581+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스",
+    "엘리스그룹",
+    "엠에스바이오",
+    "디티에스"
+  ],
   "failures": [],
   "issues": [
     {
@@ -408,7 +413,7 @@
   "repair_memory": {
     "cases": 80,
     "evicted_cases": 27,
-    "recheck_candidates": 37,
+    "recheck_candidates": 40,
     "retries": [
       {
         "corp_code": "00960234",
@@ -1493,19 +1498,14 @@
       {
         "corp_code": "00534729",
         "name": "디티에스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9ad6b6680ef1b81ffe28",
-        "signature": "4e3971a8bdfea66d857f",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "ed7969960a072904ccf1",
+        "signature": "e0206484ab91755263c7",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-18",
-        "next_retry": "2026-10-19",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-09-29",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-10",
             "outcome": "rejected",
@@ -1531,28 +1531,25 @@
             "at": "2026-10-18",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
       {
         "corp_code": "01749559",
         "name": "엠에스바이오",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9280742e62996f5b98b8",
-        "signature": "2ed3ffd7556e56f11dcf",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "716f0ab2f2e32acad80e",
+        "signature": "e71ec292168697e61625",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-10-04",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-06",
             "outcome": "rejected",
@@ -1578,28 +1575,25 @@
             "at": "2026-10-16",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-14",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
       {
         "corp_code": "01754737",
         "name": "엘리스그룹",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "f49a0bd4cc40c5c2f8c8",
-        "signature": "bdffa65a03ca21a2df1e",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "6be51c4046984ca56607",
+        "signature": "ca016c4209cc93d8341b",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-10-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-05",
             "outcome": "rejected",
@@ -1623,6 +1617,11 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }
@@ -1984,16 +1983,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 14,
+        "consecutive_attempts": 15,
         "outcome": "verified",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-14",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-11-07",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-08",
             "outcome": "verified",
@@ -2011,6 +2005,11 @@
           },
           {
             "at": "2026-11-13",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }

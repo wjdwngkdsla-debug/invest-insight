@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14 03:18",
+  "updated": "2026-11-14 10:57",
   "items": [
     {
       "corp_code": "00104069",
@@ -6276,29 +6276,24 @@
         }
       },
       "security_type": "equity",
-      "quality_attempted_at": "2026-10-18",
+      "quality_attempted_at": "2026-11-14",
       "listing_date_check": {
         "status": "missing",
         "current": "2026-10-23",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-18",
+      "quality_checked_at": "2026-11-14",
       "holder_overrides": {},
       "quality_offering_receipt": "20261012000323",
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9ad6b6680ef1b81ffe28",
-        "signature": "4e3971a8bdfea66d857f",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "ed7969960a072904ccf1",
+        "signature": "e0206484ab91755263c7",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-18",
-        "next_retry": "2026-10-19",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-09-29",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-10",
             "outcome": "rejected",
@@ -6322,6 +6317,11 @@
           },
           {
             "at": "2026-10-18",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }
@@ -6369,12 +6369,12 @@
       "manual_commit_apply": {},
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-18",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261012000323"
       },
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-18",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261016000472"
       },
       "expected_listing_date": "2026-10-23",
@@ -6555,25 +6555,17 @@
         "current": "2026-10-22",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-16",
-      "quality_attempted_at": "2026-10-16",
+      "quality_checked_at": "2026-11-14",
+      "quality_attempted_at": "2026-11-14",
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "9280742e62996f5b98b8",
-        "signature": "2ed3ffd7556e56f11dcf",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "716f0ab2f2e32acad80e",
+        "signature": "e71ec292168697e61625",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-10-04",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-06",
             "outcome": "rejected",
@@ -6597,6 +6589,11 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }
@@ -6643,7 +6640,7 @@
       ],
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261007000328"
       },
       "manual_commit_apply": {},
@@ -6718,7 +6715,7 @@
       },
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261015000326"
       },
       "archived_at": "2026-10-23",
@@ -6834,25 +6831,17 @@
         "current": "2026-10-20",
         "candidates": []
       },
-      "quality_checked_at": "2026-10-16",
-      "quality_attempted_at": "2026-10-16",
+      "quality_checked_at": "2026-11-14",
+      "quality_attempted_at": "2026-11-14",
       "quality_repair_state": {
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "f49a0bd4cc40c5c2f8c8",
-        "signature": "bdffa65a03ca21a2df1e",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "6be51c4046984ca56607",
+        "signature": "ca016c4209cc93d8341b",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-16",
-        "next_retry": "2026-10-17",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-10-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-05",
             "outcome": "rejected",
@@ -6876,6 +6865,11 @@
           },
           {
             "at": "2026-10-16",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }
@@ -6922,7 +6916,7 @@
       ],
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261006000451"
       },
       "manual_commit_apply": {},
@@ -6975,7 +6969,7 @@
       "expected_listing_date": "2026-10-20",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-10-16",
+        "checked_at": "2026-11-14",
         "rcept_no": "20261013000356"
       },
       "archived_at": "2026-10-21",
@@ -9995,35 +9989,35 @@
           "qty": 184900059,
           "pct": 97.77,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "15일",
           "qty": 418407,
           "pct": 0.22,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "1개월",
           "qty": 3750000,
           "pct": 1.98,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "3개월",
           "qty": 45000,
           "pct": 0.02,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         },
         {
           "period": "6개월",
           "qty": 0,
           "pct": 0.0,
           "source": "dart_table",
-          "visible": true
+          "rcept_no": "20260728000402"
         }
       ],
       "manual_commit_apply": {
@@ -10253,13 +10247,13 @@
         }
       },
       "security_type": "depositary_receipt",
-      "quality_attempted_at": "2026-11-13",
+      "quality_attempted_at": "2026-11-14",
       "result_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-13",
+        "checked_at": "2026-11-14",
         "rcept_no": "20260804000371"
       },
-      "quality_checked_at": "2026-11-13",
+      "quality_checked_at": "2026-11-14",
       "listing_date_check": {
         "status": "missing",
         "current": "2026-08-18",
@@ -10269,23 +10263,18 @@
       "quality_offering_receipt": "20260728000402",
       "application_source_check": {
         "status": "verified",
-        "checked_at": "2026-11-13",
+        "checked_at": "2026-11-14",
         "rcept_no": "20260728000402"
       },
       "quality_repair_state": {
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 14,
+        "consecutive_attempts": 15,
         "outcome": "verified",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-14",
+        "last_attempt": "2026-11-14",
+        "next_retry": "2026-11-15",
         "history": [
-          {
-            "at": "2026-11-07",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-08",
             "outcome": "verified",
@@ -10303,6 +10292,11 @@
           },
           {
             "at": "2026-11-13",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-14",
             "outcome": "verified",
             "reasons": []
           }
@@ -34740,54 +34734,6 @@
   ],
   "history": [
     {
-      "date": "2026-10-16",
-      "name": "엠비디",
-      "type": "정정공시",
-      "field": "청약 시작",
-      "old": "2026-10-28",
-      "new": "2026-11-12"
-    },
-    {
-      "date": "2026-10-16",
-      "name": "엠비디",
-      "type": "정정공시",
-      "field": "청약 종료",
-      "old": "2026-10-29",
-      "new": "2026-11-13"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "엠에스바이오",
-      "type": "수기변경(검토필요)",
-      "field": "배정_미확약",
-      "old": "",
-      "new": "496314"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "엠에스바이오",
-      "type": "수기변경(검토필요)",
-      "field": "배정_15일",
-      "old": "",
-      "new": "720765"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "엠에스바이오",
-      "type": "수기변경(검토필요)",
-      "field": "배정_1개월",
-      "old": "",
-      "new": "996974"
-    },
-    {
-      "date": "2026-10-15",
-      "name": "엠에스바이오",
-      "type": "수기변경(검토필요)",
-      "field": "배정_3개월",
-      "old": "",
-      "new": "154660"
-    },
-    {
       "date": "2026-10-15",
       "name": "엠에스바이오",
       "type": "수기변경(검토필요)",
@@ -38738,6 +38684,54 @@
       "field": "청약 종료",
       "old": "2026-11-25",
       "new": "2026-12-15"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "데이터젠",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "스탁키퍼",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "열매컴퍼니",
+      "type": "고정제외",
+      "field": "노출",
+      "old": "게시/검토",
+      "new": "제외고정"
     }
   ],
   "seed_pending": [],
@@ -38746,91 +38740,91 @@
     "corp:00683283": {
       "name": "LS전선",
       "corp_code": "00683283",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:00104069": {
       "name": "케이디비생명보험",
       "corp_code": "00104069",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "운영자 삭제 요청 이관"
     },
     "corp:02030166": {
       "name": "엔에이치기업인수목적34호",
       "corp_code": "02030166",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032155": {
       "name": "케이비제34호기업인수목적",
       "corp_code": "02032155",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:02029258": {
       "name": "한국제17호기업인수목적",
       "corp_code": "02029258",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:02032951": {
       "name": "에스케이증권제14호기업인수목적",
       "corp_code": "02032951",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:02036869": {
       "name": "아이엠기업인수목적1호",
       "corp_code": "02036869",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:01965157": {
       "name": "한화플러스제6호기업인수목적",
       "corp_code": "01965157",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:01936340": {
       "name": "데이터젠",
       "corp_code": "01936340",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": ""
     },
     "corp:01760118": {
       "name": "스탁키퍼",
       "corp_code": "01760118",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": ""
     },
     "corp:01645448": {
       "name": "열매컴퍼니",
       "corp_code": "01645448",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": ""
     },
     "corp:01721933": {
       "name": "투게더아트",
       "corp_code": "01721933",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": ""
     },
     "corp:02038432": {
       "name": "SimwonAmericaCorp.",
       "corp_code": "02038432",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": ""
     },
     "corp:02040710": {
       "name": "우리투자제1호기업인수목적",
       "corp_code": "02040710",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     },
     "corp:02041694": {
       "name": "신영해피투모로우제12호기업인수목적",
       "corp_code": "02041694",
-      "excluded_at": "2026-11-13",
+      "excluded_at": "2026-11-14",
       "memo": "자동 제외(스팩)"
     }
   }
