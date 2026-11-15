@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-15T01:59:44.293579+09:00",
+  "checked_at": "2026-11-15T10:53:33.740746+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "크리에이츠"
   ],
   "failures": [],
   "issues": [
@@ -612,16 +612,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "0f77291788bf6f65249d",
         "signature": "a4e70ca455165f634a24",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-14",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-08",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-07",
             "outcome": "rejected",
@@ -651,6 +646,15 @@
               "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-15",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -660,10 +664,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "22f6cd89d28985da5d69",
         "signature": "d7eff45b9737bef23410",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-11-14",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-17",
         "history": [
           {
             "at": "2026-10-23",
@@ -672,6 +676,14 @@
           },
           {
             "at": "2026-11-14",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -686,19 +698,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "2f3c4c49bfd7baf8f4d5",
         "signature": "01d4e0e0bbb4bdf4fdc3",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-11-14",
-        "next_retry": "2026-11-15",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-15",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-17",
             "outcome": "rejected",
@@ -722,6 +726,14 @@
           },
           {
             "at": "2026-11-14",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1343,22 +1355,14 @@
       {
         "corp_code": "01540903",
         "name": "크리에이츠",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "ba60b26b8092aa67ea5c",
-        "signature": "ed8081dd01fb053fe6ba",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "ebe3d9f67fb78927064b",
+        "signature": "8165f787ad878a33ab68",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-11-15",
+        "next_retry": "2026-11-16",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-20",
             "outcome": "verified",
@@ -1382,6 +1386,11 @@
           },
           {
             "at": "2026-10-24",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-15",
             "outcome": "verified",
             "reasons": []
           }
