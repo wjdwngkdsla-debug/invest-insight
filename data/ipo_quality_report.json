@@ -1,6 +1,11 @@
 {
-  "checked_at": "2026-11-16T02:36:04.106882+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-16T11:01:24.398795+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스",
+    "인텔리빅스",
+    "에이엔에이치스트럭쳐",
+    "영광"
+  ],
   "failures": [],
   "issues": [
     {
@@ -408,7 +413,7 @@
   "repair_memory": {
     "cases": 80,
     "evicted_cases": 27,
-    "recheck_candidates": 40,
+    "recheck_candidates": 38,
     "retries": [
       {
         "corp_code": "00960234",
@@ -814,16 +819,21 @@
       {
         "corp_code": "01366675",
         "name": "에이엔에이치스트럭쳐",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "155a347eb9df0b00a021",
-        "signature": "02416720c603b40e8018",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "edee01ab827a4de08592",
+        "signature": "e60157793e566b183397",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-25",
+        "last_attempt": "2026-11-16",
+        "next_retry": "2026-11-17",
         "history": [
           {
             "at": "2026-10-24",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-16",
             "outcome": "verified",
             "reasons": []
           }
@@ -1306,18 +1316,13 @@
         "corp_code": "00579342",
         "name": "영광",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "a5890de02417fadf6ea6",
-        "signature": "6b1b67e4bee5ac784ada",
+        "source_revision": "4d560bfcb058b3954054",
+        "signature": "8ba82b43c8f9129fd96b",
         "consecutive_attempts": 1,
-        "outcome": "unresolved",
-        "last_attempt": "2026-10-26",
-        "next_retry": "2026-10-27",
+        "outcome": "verified",
+        "last_attempt": "2026-11-16",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-05",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-20",
             "outcome": "rejected",
@@ -1347,6 +1352,11 @@
               "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-16",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1397,22 +1407,14 @@
       {
         "corp_code": "01649408",
         "name": "인텔리빅스",
-        "parser_revision": "c793d4eb2e2492a7c7ac",
-        "source_revision": "8b9b0e408eaced79ed9f",
-        "signature": "7c5b9c2c403ef8482c55",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
-        "last_attempt": "2026-10-24",
-        "next_retry": "2026-10-26",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "cd7f00ca280207eaa528",
+        "signature": "d9ea694024b5406643a4",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-16",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-20",
             "outcome": "rejected",
@@ -1443,6 +1445,11 @@
               "상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-16",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1987,16 +1994,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 16,
+        "consecutive_attempts": 17,
         "outcome": "verified",
-        "last_attempt": "2026-11-15",
-        "next_retry": "2026-11-16",
+        "last_attempt": "2026-11-16",
+        "next_retry": "2026-11-17",
         "history": [
-          {
-            "at": "2026-11-09",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-12",
             "outcome": "verified",
@@ -2014,6 +2016,11 @@
           },
           {
             "at": "2026-11-15",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-16",
             "outcome": "verified",
             "reasons": []
           }
