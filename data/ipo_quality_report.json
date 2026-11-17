@@ -1,18 +1,10 @@
 {
-  "checked_at": "2026-11-17T05:50:34.753235+09:00",
-  "refreshed": [],
+  "checked_at": "2026-11-17T13:53:14.775947+09:00",
+  "refreshed": [
+    "인제니아테라퓨틱스"
+  ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "01705740",
-      "code": "",
-      "name": "엠비디",
-      "gaps": [
-        "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-        "공시 대기: 상장일 미정",
-        "공시 대기: 개인청약경쟁률"
-      ]
-    },
     {
       "corp_code": "00299109",
       "code": "",
@@ -145,14 +137,6 @@
   ],
   "advisories": [
     {
-      "corp_code": "00960234",
-      "name": "영광와이케이엠씨",
-      "notes": [
-        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요",
-        "공시된 기간까지 집계: 잔여 물량·해제일은 미추정"
-      ]
-    },
-    {
       "corp_code": "01658035",
       "name": "옵토닉스",
       "notes": [
@@ -172,6 +156,14 @@
       "name": "KTE",
       "notes": [
         "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요"
+      ]
+    },
+    {
+      "corp_code": "00960234",
+      "name": "영광와이케이엠씨",
+      "notes": [
+        "요약표 예정 일정 정상; 상세표 참고: 보유기간·기산일 확인 필요",
+        "공시된 기간까지 집계: 잔여 물량·해제일은 미추정"
       ]
     },
     {
@@ -411,59 +403,6 @@
     "recheck_candidates": 38,
     "retries": [
       {
-        "corp_code": "00960234",
-        "name": "영광와이케이엠씨",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "c5b736ec6ddbf2b6bef1",
-        "signature": "fa6f7efc3ebec7f10d4b",
-        "consecutive_attempts": 3,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-09",
-        "next_retry": "2026-11-13",
-        "history": [
-          {
-            "at": "2026-11-03",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-04",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-06",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          },
-          {
-            "at": "2026-11-07",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          },
-          {
-            "at": "2026-11-09",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          }
-        ]
-      },
-      {
         "corp_code": "01658035",
         "name": "옵토닉스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -662,10 +601,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "22f6cd89d28985da5d69",
         "signature": "d7eff45b9737bef23410",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-11-15",
-        "next_retry": "2026-11-17",
+        "last_attempt": "2026-11-17",
+        "next_retry": "2026-11-21",
         "history": [
           {
             "at": "2026-10-23",
@@ -687,6 +626,14 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-11-17",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -696,19 +643,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "2f3c4c49bfd7baf8f4d5",
         "signature": "01d4e0e0bbb4bdf4fdc3",
-        "consecutive_attempts": 2,
+        "consecutive_attempts": 3,
         "outcome": "rejected",
-        "last_attempt": "2026-11-15",
-        "next_retry": "2026-11-17",
+        "last_attempt": "2026-11-17",
+        "next_retry": "2026-11-21",
         "history": [
-          {
-            "at": "2026-10-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-20",
             "outcome": "rejected",
@@ -732,6 +671,14 @@
           },
           {
             "at": "2026-11-15",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1056,6 +1003,59 @@
             "at": "2026-11-13",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "00960234",
+        "name": "영광와이케이엠씨",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "c5b736ec6ddbf2b6bef1",
+        "signature": "fa6f7efc3ebec7f10d4b",
+        "consecutive_attempts": 3,
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-09",
+        "next_retry": "2026-11-13",
+        "history": [
+          {
+            "at": "2026-11-03",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-06",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-09",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -1989,16 +1989,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 17,
+        "consecutive_attempts": 18,
         "outcome": "verified",
-        "last_attempt": "2026-11-16",
-        "next_retry": "2026-11-17",
+        "last_attempt": "2026-11-17",
+        "next_retry": "2026-11-18",
         "history": [
-          {
-            "at": "2026-11-12",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-13",
             "outcome": "verified",
@@ -2016,6 +2011,11 @@
           },
           {
             "at": "2026-11-16",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-17",
             "outcome": "verified",
             "reasons": []
           }
@@ -2195,19 +2195,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "4aa5edf55d2f86c530f2",
         "signature": "a4212787e08ee720381b",
-        "consecutive_attempts": 5,
+        "consecutive_attempts": 6,
         "outcome": "rejected",
-        "last_attempt": "2026-11-10",
-        "next_retry": "2026-11-17",
+        "last_attempt": "2026-11-17",
+        "next_retry": "2026-11-24",
         "history": [
-          {
-            "at": "2026-10-26",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-28",
             "outcome": "rejected",
@@ -2234,6 +2226,14 @@
           },
           {
             "at": "2026-11-10",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-17",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
