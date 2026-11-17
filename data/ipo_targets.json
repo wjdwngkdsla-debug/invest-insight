@@ -91,15 +91,6 @@
   },
   {
     "market": "코스닥",
-    "name": "엠비디",
-    "listing_date": "",
-    "code": "",
-    "shares": "",
-    "manual_ipo_price": "7000",
-    "manual_ipo_price_locked": "N"
-  },
-  {
-    "market": "코스닥",
     "name": "유캐스트",
     "listing_date": "",
     "code": "",
@@ -1667,8 +1658,8 @@
     "market": "코스닥",
     "name": "영광와이케이엠씨",
     "listing_date": "2026-11-16",
-    "code": "",
-    "shares": "",
+    "code": "345290",
+    "shares": "14482531",
     "manual_ipo_price": "11000",
     "manual_ipo_price_locked": "N"
   },
@@ -1697,6 +1688,15 @@
     "code": "",
     "shares": "",
     "manual_ipo_price": "5700",
+    "manual_ipo_price_locked": "N"
+  },
+  {
+    "market": "코스닥",
+    "name": "엠비디",
+    "listing_date": "2026-11-24",
+    "code": "",
+    "shares": "",
+    "manual_ipo_price": "7000",
     "manual_ipo_price_locked": "N"
   }
 ]
