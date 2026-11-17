@@ -1,32 +1,13 @@
 {
-  "checked_at": "2026-11-17T13:53:14.775947+09:00",
+  "checked_at": "2026-11-18T04:56:25.487801+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "인제니아테라퓨틱스",
+    "유캐스트",
+    "엠디에스코리아",
+    "이나인페이"
   ],
   "failures": [],
   "issues": [
-    {
-      "corp_code": "00299109",
-      "code": "",
-      "name": "에스에프씨",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
-    {
-      "corp_code": "01705573",
-      "code": "",
-      "name": "유캐스트",
-      "gaps": [
-        "자동 재검증 결과 보류(기존 값 유지)",
-        "확정공모가",
-        "수요예측경쟁률",
-        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
-      ]
-    },
     {
       "corp_code": "01938746",
       "code": "",
@@ -596,66 +577,16 @@
         ]
       },
       {
-        "corp_code": "00299109",
-        "name": "에스에프씨",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "22f6cd89d28985da5d69",
-        "signature": "d7eff45b9737bef23410",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-17",
-        "next_retry": "2026-11-21",
-        "history": [
-          {
-            "at": "2026-10-23",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-14",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-15",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-17",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          }
-        ]
-      },
-      {
         "corp_code": "01705573",
         "name": "유캐스트",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "2f3c4c49bfd7baf8f4d5",
-        "signature": "01d4e0e0bbb4bdf4fdc3",
-        "consecutive_attempts": 3,
-        "outcome": "rejected",
-        "last_attempt": "2026-11-17",
-        "next_retry": "2026-11-21",
+        "source_revision": "26a1cf154b24a398fbbc",
+        "signature": "074c0b07f6a064e91e50",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-18",
+        "next_retry": "2026-11-19",
         "history": [
-          {
-            "at": "2026-10-20",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-10-22",
             "outcome": "verified",
@@ -684,6 +615,11 @@
               "application_source_check: 새 원문 파싱 미완료",
               "수요예측 신청표 최신 공시 파싱 확인"
             ]
+          },
+          {
+            "at": "2026-11-18",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -966,6 +902,24 @@
         ]
       },
       {
+        "corp_code": "00566418",
+        "name": "엠디에스코리아",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "cfed2e6bfc064cb4e63c",
+        "signature": "190c6f6acaf9c8cc3908",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-18",
+        "next_retry": "2026-11-19",
+        "history": [
+          {
+            "at": "2026-11-18",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
         "corp_code": "01950720",
         "name": "제논",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -1001,6 +955,24 @@
         "history": [
           {
             "at": "2026-11-13",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01044092",
+        "name": "이나인페이",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "4caf8645144d5f120242",
+        "signature": "28584d74e82885311ba6",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-18",
+        "next_retry": "2026-11-19",
+        "history": [
+          {
+            "at": "2026-11-18",
             "outcome": "verified",
             "reasons": []
           }
@@ -1989,16 +1961,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 18,
+        "consecutive_attempts": 19,
         "outcome": "verified",
-        "last_attempt": "2026-11-17",
-        "next_retry": "2026-11-18",
+        "last_attempt": "2026-11-18",
+        "next_retry": "2026-11-19",
         "history": [
-          {
-            "at": "2026-11-13",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-14",
             "outcome": "verified",
@@ -2016,6 +1983,11 @@
           },
           {
             "at": "2026-11-17",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-18",
             "outcome": "verified",
             "reasons": []
           }
