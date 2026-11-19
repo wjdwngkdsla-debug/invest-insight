@@ -1,7 +1,10 @@
 {
-  "checked_at": "2026-11-19T04:17:21.338999+09:00",
+  "checked_at": "2026-11-19T12:02:11.947882+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "데스틴파워",
+    "이노보테라퓨틱스",
+    "엔키화이트햇",
+    "인터엑스"
   ],
   "failures": [],
   "issues": [
@@ -384,46 +387,6 @@
     "recheck_candidates": 36,
     "retries": [
       {
-        "corp_code": "01797635",
-        "name": "에이엘로봇",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "8f2776fd306481f31768",
-        "signature": "084f233dcd6178b11c16",
-        "consecutive_attempts": 1,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-10",
-        "next_retry": "2026-11-11",
-        "history": [
-          {
-            "at": "2026-09-30",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-04",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-05",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-10",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          }
-        ]
-      },
-      {
         "corp_code": "01025617",
         "name": "하나에어로다이내믹스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -673,15 +636,20 @@
         "corp_code": "01795859",
         "name": "엔키화이트햇",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "27e01e8b140d2b087641",
-        "signature": "8c6407e9107f18b69051",
+        "source_revision": "e8c1b837a0a5bf1a0731",
+        "signature": "19dbb274e2457d646dd9",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-11-01",
-        "next_retry": "2026-11-02",
+        "last_attempt": "2026-11-19",
+        "next_retry": "2026-11-20",
         "history": [
           {
             "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-19",
             "outcome": "verified",
             "reasons": []
           }
@@ -691,15 +659,20 @@
         "corp_code": "01783687",
         "name": "이노보테라퓨틱스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "281f6bdf62289a68ba5e",
-        "signature": "3a6af0b3c4d33a8af2a9",
+        "source_revision": "d419874179d97d56a60e",
+        "signature": "f6ef936c248caf258bb7",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-11-01",
-        "next_retry": "2026-11-02",
+        "last_attempt": "2026-11-19",
+        "next_retry": "2026-11-20",
         "history": [
           {
             "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-19",
             "outcome": "verified",
             "reasons": []
           }
@@ -755,15 +728,20 @@
         "corp_code": "01860700",
         "name": "인터엑스",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "8e1c748b9de0ae644851",
-        "signature": "7d9b5329f8760d92d367",
+        "source_revision": "da8017b9a47b06f52bce",
+        "signature": "edeee079ce9a067a1f8b",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-11-01",
-        "next_retry": "2026-11-02",
+        "last_attempt": "2026-11-19",
+        "next_retry": "2026-11-20",
         "history": [
           {
             "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-19",
             "outcome": "verified",
             "reasons": []
           }
@@ -821,15 +799,20 @@
         "corp_code": "01135039",
         "name": "데스틴파워",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "8c15b30b23df414dc87d",
-        "signature": "7e75f623a09edcf0c5dc",
+        "source_revision": "9622c993d35473961371",
+        "signature": "34660b4e4783b8a98ac9",
         "consecutive_attempts": 1,
         "outcome": "verified",
-        "last_attempt": "2026-11-01",
-        "next_retry": "2026-11-02",
+        "last_attempt": "2026-11-19",
+        "next_retry": "2026-11-20",
         "history": [
           {
             "at": "2026-11-01",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-19",
             "outcome": "verified",
             "reasons": []
           }
@@ -932,6 +915,46 @@
             "at": "2026-11-18",
             "outcome": "verified",
             "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01797635",
+        "name": "에이엘로봇",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "8f2776fd306481f31768",
+        "signature": "084f233dcd6178b11c16",
+        "consecutive_attempts": 1,
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-10",
+        "next_retry": "2026-11-11",
+        "history": [
+          {
+            "at": "2026-09-30",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-04",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-10",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
