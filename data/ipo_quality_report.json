@@ -1,10 +1,7 @@
 {
-  "checked_at": "2026-11-20T12:21:14.640549+09:00",
+  "checked_at": "2026-11-21T03:59:56.345526+09:00",
   "refreshed": [
-    "와이즈플래닛컴퍼니",
-    "글로벌테크놀로지",
-    "빅웨이브로보틱스",
-    "덕산넵코어스"
+    "인제니아테라퓨틱스"
   ],
   "failures": [],
   "issues": [
@@ -16,6 +13,17 @@
         "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
         "공시 대기: 상장일 미정",
         "공시 대기: 개인청약경쟁률"
+      ]
+    },
+    {
+      "corp_code": "01880139",
+      "code": "",
+      "name": "케이엠에프",
+      "gaps": [
+        "자동 재검증 결과 보류(기존 값 유지)",
+        "확정공모가",
+        "수요예측경쟁률",
+        "확약신청(미확약, 15일, 1개월, 3개월, 6개월)"
       ]
     },
     {
@@ -382,8 +390,8 @@
   ],
   "repair_memory": {
     "cases": 80,
-    "evicted_cases": 30,
-    "recheck_candidates": 37,
+    "evicted_cases": 32,
+    "recheck_candidates": 36,
     "retries": [
       {
         "corp_code": "01025617",
@@ -495,19 +503,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "14bf610d566b5b4d5143",
         "signature": "048050d2e150b0aafc8a",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "unresolved",
-        "last_attempt": "2026-11-20",
-        "next_retry": "2026-11-21",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-23",
         "history": [
-          {
-            "at": "2026-11-14",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-11-15",
             "outcome": "rejected",
@@ -537,6 +537,15 @@
               "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-21",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
           }
         ]
       },
@@ -545,11 +554,11 @@
         "name": "케이엠에프",
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "03dd0033a78458fba78d",
-        "signature": "4346db72c2adaedfbea2",
+        "signature": "be7107ff8d982045ecae",
         "consecutive_attempts": 1,
-        "outcome": "verified",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-06",
+        "outcome": "rejected",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
         "history": [
           {
             "at": "2026-10-03",
@@ -560,6 +569,14 @@
             "at": "2026-11-05",
             "outcome": "verified",
             "reasons": []
+          },
+          {
+            "at": "2026-11-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
           }
         ]
       },
@@ -1409,19 +1426,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "281fdc0ab425d14ddcc9",
         "signature": "707f6d5aa9dae8a390b5",
-        "consecutive_attempts": 5,
+        "consecutive_attempts": 6,
         "outcome": "rejected",
-        "last_attempt": "2026-11-14",
-        "next_retry": "2026-11-21",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-28",
         "history": [
-          {
-            "at": "2026-10-31",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
           {
             "at": "2026-11-01",
             "outcome": "rejected",
@@ -1448,6 +1457,14 @@
           },
           {
             "at": "2026-11-14",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-21",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1969,16 +1986,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 21,
+        "consecutive_attempts": 22,
         "outcome": "verified",
-        "last_attempt": "2026-11-20",
-        "next_retry": "2026-11-21",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
         "history": [
-          {
-            "at": "2026-11-16",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-17",
             "outcome": "verified",
@@ -1996,6 +2008,11 @@
           },
           {
             "at": "2026-11-20",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-21",
             "outcome": "verified",
             "reasons": []
           }
