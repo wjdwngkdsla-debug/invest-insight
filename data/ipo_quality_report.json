@@ -1,7 +1,10 @@
 {
-  "checked_at": "2026-11-21T03:59:56.345526+09:00",
+  "checked_at": "2026-11-21T12:06:04.408670+09:00",
   "refreshed": [
-    "인제니아테라퓨틱스"
+    "피지티",
+    "브릴스",
+    "동원파츠",
+    "넥스아이"
   ],
   "failures": [],
   "issues": [
@@ -391,60 +394,8 @@
   "repair_memory": {
     "cases": 80,
     "evicted_cases": 32,
-    "recheck_candidates": 36,
+    "recheck_candidates": 35,
     "retries": [
-      {
-        "corp_code": "01025617",
-        "name": "하나에어로다이내믹스",
-        "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "fa72d73064a9e5cfdc88",
-        "signature": "fd885836862eea878676",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-13",
-        "next_retry": "2026-11-15",
-        "history": [
-          {
-            "at": "2026-10-07",
-            "outcome": "verified",
-            "reasons": []
-          },
-          {
-            "at": "2026-11-07",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-08",
-            "outcome": "rejected",
-            "reasons": [
-              "application_source_check: 새 원문 파싱 미완료",
-              "수요예측 신청표 최신 공시 파싱 확인"
-            ]
-          },
-          {
-            "at": "2026-11-12",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          },
-          {
-            "at": "2026-11-13",
-            "outcome": "unresolved",
-            "reasons": [
-              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
-              "공시 대기: 상장일 미정",
-              "공시 대기: 개인청약경쟁률"
-            ]
-          }
-        ]
-      },
       {
         "corp_code": "01705740",
         "name": "엠비디",
@@ -890,6 +841,76 @@
         ]
       },
       {
+        "corp_code": "01013612",
+        "name": "피지티",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "7badd3491d7280f94252",
+        "signature": "f8fbddad4a27d4380cae",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
+        "history": [
+          {
+            "at": "2026-11-21",
+            "outcome": "verified",
+            "reasons": []
+          }
+        ]
+      },
+      {
+        "corp_code": "01025617",
+        "name": "하나에어로다이내믹스",
+        "parser_revision": "04ff5cb7a92c8d234a1d",
+        "source_revision": "fa72d73064a9e5cfdc88",
+        "signature": "fd885836862eea878676",
+        "consecutive_attempts": 2,
+        "outcome": "unresolved",
+        "last_attempt": "2026-11-13",
+        "next_retry": "2026-11-15",
+        "history": [
+          {
+            "at": "2026-10-07",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-07",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-08",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-12",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          },
+          {
+            "at": "2026-11-13",
+            "outcome": "unresolved",
+            "reasons": [
+              "공시 대기: 확약배정(미확약, 15일, 1개월, 3개월, 6개월)",
+              "공시 대기: 상장일 미정",
+              "공시 대기: 개인청약경쟁률"
+            ]
+          }
+        ]
+      },
+      {
         "corp_code": "01797635",
         "name": "에이엘로봇",
         "parser_revision": "04ff5cb7a92c8d234a1d",
@@ -1035,18 +1056,13 @@
         "corp_code": "01863318",
         "name": "넥스아이",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "0cd51e6bd716950b82db",
-        "signature": "48ccff5a3474f84a75af",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-06",
-        "next_retry": "2026-11-08",
+        "source_revision": "363aa35f91b3748338f6",
+        "signature": "ce7fb7241fa8f9389a34",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
         "history": [
-          {
-            "at": "2026-09-29",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-29",
             "outcome": "rejected",
@@ -1077,6 +1093,11 @@
               "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-21",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1137,18 +1158,13 @@
         "corp_code": "00784184",
         "name": "동원파츠",
         "parser_revision": "04ff5cb7a92c8d234a1d",
-        "source_revision": "63b693919b0542ade31e",
-        "signature": "ef3838f4c6ef5cf02edb",
-        "consecutive_attempts": 2,
-        "outcome": "unresolved",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-07",
+        "source_revision": "920f0d63e5df91a066ae",
+        "signature": "c4d119ac5e68dc6c1ecc",
+        "consecutive_attempts": 1,
+        "outcome": "verified",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
         "history": [
-          {
-            "at": "2026-10-02",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-10-29",
             "outcome": "rejected",
@@ -1179,6 +1195,11 @@
               "공시 대기: 상장일 미정",
               "공시 대기: 개인청약경쟁률"
             ]
+          },
+          {
+            "at": "2026-11-21",
+            "outcome": "verified",
+            "reasons": []
           }
         ]
       },
@@ -1707,10 +1728,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "25fa8f533a4f3b968c7a",
         "signature": "7b72cf787ee7c6f67ad4",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-11-05",
-        "next_retry": "2026-11-06",
+        "last_attempt": "2026-11-21",
+        "next_retry": "2026-11-22",
         "history": [
           {
             "at": "2026-10-01",
@@ -1719,6 +1740,11 @@
           },
           {
             "at": "2026-11-05",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-21",
             "outcome": "verified",
             "reasons": []
           }
