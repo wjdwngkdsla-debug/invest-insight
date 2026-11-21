@@ -1,10 +1,9 @@
 {
-  "checked_at": "2026-11-21T12:06:04.408670+09:00",
+  "checked_at": "2026-11-22T02:54:50.197651+09:00",
   "refreshed": [
-    "피지티",
-    "브릴스",
-    "동원파츠",
-    "넥스아이"
+    "인제니아테라퓨틱스",
+    "니어스랩",
+    "해치텍"
   ],
   "failures": [],
   "issues": [
@@ -506,10 +505,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "03dd0033a78458fba78d",
         "signature": "be7107ff8d982045ecae",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "rejected",
-        "last_attempt": "2026-11-21",
-        "next_retry": "2026-11-22",
+        "last_attempt": "2026-11-22",
+        "next_retry": "2026-11-24",
         "history": [
           {
             "at": "2026-10-03",
@@ -523,6 +522,14 @@
           },
           {
             "at": "2026-11-21",
+            "outcome": "rejected",
+            "reasons": [
+              "application_source_check: 새 원문 파싱 미완료",
+              "수요예측 신청표 최신 공시 파싱 확인"
+            ]
+          },
+          {
+            "at": "2026-11-22",
             "outcome": "rejected",
             "reasons": [
               "application_source_check: 새 원문 파싱 미완료",
@@ -1924,18 +1931,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "6a776db740493a42c181",
         "signature": "6e100b3d0cf7dd7baed1",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-22",
+        "next_retry": "2026-11-23",
         "history": [
-          {
-            "at": "2026-09-26",
-            "outcome": "unresolved",
-            "reasons": [
-              "요약표·최초상장주식수 불일치(5,527,150/5,487,150)"
-            ]
-          },
           {
             "at": "2026-09-27",
             "outcome": "unresolved",
@@ -1955,6 +1955,11 @@
           },
           {
             "at": "2026-11-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-22",
             "outcome": "verified",
             "reasons": []
           }
@@ -1966,10 +1971,10 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "f599918c851b8b6a9f4c",
         "signature": "1f5a11e113963a592cb1",
-        "consecutive_attempts": 1,
+        "consecutive_attempts": 2,
         "outcome": "verified",
-        "last_attempt": "2026-11-08",
-        "next_retry": "2026-11-09",
+        "last_attempt": "2026-11-22",
+        "next_retry": "2026-11-23",
         "history": [
           {
             "at": "2026-10-05",
@@ -1978,6 +1983,11 @@
           },
           {
             "at": "2026-11-08",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-22",
             "outcome": "verified",
             "reasons": []
           }
@@ -2012,16 +2022,11 @@
         "parser_revision": "04ff5cb7a92c8d234a1d",
         "source_revision": "5f1c95c669c7eff0aca5",
         "signature": "9d4edf6f0a21c344b2e0",
-        "consecutive_attempts": 22,
+        "consecutive_attempts": 23,
         "outcome": "verified",
-        "last_attempt": "2026-11-21",
-        "next_retry": "2026-11-22",
+        "last_attempt": "2026-11-22",
+        "next_retry": "2026-11-23",
         "history": [
-          {
-            "at": "2026-11-17",
-            "outcome": "verified",
-            "reasons": []
-          },
           {
             "at": "2026-11-18",
             "outcome": "verified",
@@ -2039,6 +2044,11 @@
           },
           {
             "at": "2026-11-21",
+            "outcome": "verified",
+            "reasons": []
+          },
+          {
+            "at": "2026-11-22",
             "outcome": "verified",
             "reasons": []
           }
